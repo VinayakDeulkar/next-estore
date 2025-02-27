@@ -10,6 +10,7 @@ export const getVendorSlug = async ({ host }) => {
     );
     return response.data
 }
+
 export const getHomepageDetails = async ({ vendorSlug, vendors_id, area_id }) => {
     const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/homepage`,

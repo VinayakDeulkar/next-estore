@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
     title: name,
     description: slogan,
     icons: {
-      icon: [{ url: english_new_background, type: faviconType }], // Set the favicon as an image
+      icon: [{ url: english_new_background, type: faviconType }],
     },
     openGraph: {
       title: name,
