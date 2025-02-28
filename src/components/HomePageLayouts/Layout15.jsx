@@ -1,14 +1,12 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Grid,
-  Typography,
 } from "@mui/material";
-import React from "react";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
+import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import SquareCard from "../SquareCard/squareCard";
 
 const Layout15 = ({ categories }) => {
@@ -40,7 +38,7 @@ const Layout15 = ({ categories }) => {
             id="panel1a-header"
           >
             <TypographyConverter
-              sx={{fontSize: "20px", fontWeight: "500"}}
+              sx={{ fontSize: "20px", fontWeight: "500" }}
               arText={category?.category_name_ar}
               enText={category?.category_name}
             />
