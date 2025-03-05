@@ -14,8 +14,6 @@ const Homepage = () => {
 
   return (
     <>
-      <Navbar />
-
       <Grid container>
         <Grid item xs={false} sm={3} md={3}></Grid>
 

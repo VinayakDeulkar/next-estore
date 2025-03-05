@@ -52,24 +52,35 @@ const SquareCard = ({ product }) => {
           arText={product?.product_name_ar}
         />
         {product?.short_description != "" ? (
-          <TypographyConverter
-            sx={{
-              fontSize: "14px",
-              fontWeight: 300,
-              color: "#888888",
-              textAlign: "center",
-            }}
-            enText={product?.short_description
-              ?.replace(/(<([^>]+)>)/gi, "")
-              .replace(/\&nbsp;/gi, "")
-              .replace(/\s\s+/g, " ")
-              .replace(/&#39;/gi, "'")}
-            arText={product?.short_description_ar
-              ?.replace(/(<([^>]+)>)/gi, "")
-              .replace(/\&nbsp;/gi, "")
-              .replace(/\s\s+/g, " ")
-              .replace(/&#39;/gi, "'")}
-          />
+          <div>
+            <TypographyConverter
+              sx={{
+                fontSize: "14px",
+                fontWeight: 300,
+                color: "#888888",
+                textAlign: "center",
+                overflowWrap: "break-word",
+                wordBreak: "break-word",
+                whiteSpace: "pre-wrap",
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                width: "90%",
+                margin: "0 auto",
+              }}
+              enText={product?.short_description
+                ?.replace(/(<([^>]+)>)/gi, "")
+                .replace(/\&nbsp;/gi, "")
+                .replace(/\s\s+/g, " ")
+                .replace(/&#39;/gi, "'")}
+              arText={product?.short_description_ar
+                ?.replace(/(<([^>]+)>)/gi, "")
+                .replace(/\&nbsp;/gi, "")
+                .replace(/\s\s+/g, " ")
+                .replace(/&#39;/gi, "'")}
+            />
+          </div>
         ) : null}
         {product?.product_type != 0 ? (
           <div>

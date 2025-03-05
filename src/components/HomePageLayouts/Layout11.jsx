@@ -1,15 +1,12 @@
+import { Accordion, AccordionDetails, AccordionSummary, Grid } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Grid,
-} from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import SquareCard from "../SquareCard/squareCard";
+import HorizontalCard from "../HorizontalCard/horizontalCard";
 
-const Layout15 = ({ categories }) => {
+const Layout11 = ({ categories }) => {
+  console.log(categories, "categories in 11");
   const [expendedList, setExpendedList] = useState(
     categories.map((cate) => cate.category_id)
   );
@@ -45,8 +42,8 @@ const Layout15 = ({ categories }) => {
           <AccordionDetails>
             <Grid container spacing={6}>
               {category?.products?.map((product) => (
-                <Grid item xs={6}>
-                  <SquareCard product={product} key={product?.id} />
+                <Grid item xs={12}>
+                  <HorizontalCard />
                 </Grid>
               ))}
             </Grid>
@@ -57,4 +54,4 @@ const Layout15 = ({ categories }) => {
   );
 };
 
-export default Layout15;
+export default Layout11;
