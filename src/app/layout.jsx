@@ -1,11 +1,10 @@
-import localFont from "next/font/local";
-import "./globals.css";
-import { AppProvider } from "@/context/AppContext";
 import { getHomepageDetails, getVendorSlug } from "@/apis";
+import { AppProvider } from "@/context/AppContext";
+import "./globals.css";
 
-import "../assets/Fonts/SFTfont.css";
-import "../assets/Fonts/Orleen.css";
 import { headers } from "next/headers";
+import "../assets/Fonts/Orleen.css";
+import "../assets/Fonts/SFTfont.css";
 
 export async function generateMetadata({ params }) {
   const headersList = headers();
