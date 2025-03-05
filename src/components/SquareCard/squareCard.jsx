@@ -3,10 +3,10 @@ import React, { useContext } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import { AppContext } from "@/context/AppContext";
 import Link from "next/link";
+import styles from "./squareCard.module.css";
 
 const SquareCard = ({ product }) => {
   const language = useContext(AppContext);
-  console.log(product, "product");
   return (
     <Card
       sx={{
@@ -34,23 +34,31 @@ const SquareCard = ({ product }) => {
           "&:last-child": {
             paddingBottom: "0",
           },
+          display: "flex",
+          flexDirection: "column",
+          gap: "5px",
         }}
       >
         {product?.label ? (
           <TypographyConverter
-            sx={{ fontSize: "12px", fontWeight: 300 }}
+            sx={{ fontSize: "12px", fontWeight: 300, textAlign: "center" }}
             enText={product?.label}
             arText={product?.label_ar}
           />
         ) : null}
         <TypographyConverter
-          sx={{ fontSize: "16px", fontWeight: 400 }}
+          sx={{ fontSize: "16px", fontWeight: 400, textAlign: "center" }}
           enText={product?.product_name}
           arText={product?.product_name_ar}
         />
         {product?.short_description != "" ? (
           <TypographyConverter
-            sx={{ fontSize: "14px", fontWeight: 300, color: "#888888" }}
+            sx={{
+              fontSize: "14px",
+              fontWeight: 300,
+              color: "#888888",
+              textAlign: "center",
+            }}
             enText={product?.short_description
               ?.replace(/(<([^>]+)>)/gi, "")
               .replace(/\&nbsp;/gi, "")
@@ -67,12 +75,36 @@ const SquareCard = ({ product }) => {
           <div>
             {product?.product_status == 0 ? (
               <TypographyConverter
+                sx={{
+                  borderRadius: "30px",
+                  fontSize: language == "ltr" ? 12 : 15,
+                  padding: "0 15px",
+                  color: "#818181",
+                  border: "2px solid #818181",
+                  marginTop: "7px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "auto",
+                }}
                 enText={product?.status_label}
                 arText={product?.status_label_ar}
               />
             ) : product?.price_on_selection == 1 ? (
               <Link href={""}>
                 <TypographyConverter
+                  sx={{
+                    borderRadius: "30px",
+                    fontSize: language == "ltr" ? 12 : 15,
+                    padding: "0 15px",
+                    color: "#818181",
+                    border: "2px solid #818181",
+                    marginTop: "7px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "auto",
+                  }}
                   enText="Price On Selection"
                   arText="السعر حسب الاختيار"
                 />
@@ -80,6 +112,18 @@ const SquareCard = ({ product }) => {
             ) : product?.prodyct_type == 2 ? (
               <Link href={""}>
                 <TypographyConverter
+                  sx={{
+                    borderRadius: "30px",
+                    fontSize: language == "ltr" ? 12 : 15,
+                    padding: "0 15px",
+                    color: "#818181",
+                    border: "2px solid #818181",
+                    marginTop: "7px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "auto",
+                  }}
                   enText="Product Registration only"
                   arText="حجز المنتج فقط"
                 />
