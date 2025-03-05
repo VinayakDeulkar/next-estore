@@ -14,7 +14,7 @@ const Homepage = () => {
       <Grid container>
         <Grid item xs={false} sm={3} md={3}></Grid>
 
-        <Grid item xs={12} sm={6} md={6}>
+        <Grid item xs={12} sm={6} md={6} sx={{ position: "relative" }}>
           <HeaderBox />
           <HomePageLayouts homePageDetails={homePageDetails} />
         </Grid>

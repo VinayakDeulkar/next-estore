@@ -5,7 +5,7 @@ import Navbar from "../Navbar/navbar";
 const HeaderBox = () => {
   const [open, setOpen] = useState(true);
   return (
-    <Box>
+    <Box sx={{ position: "relative" }}>
       <Drawer
         open={open}
         onClose={() => setOpen(false)}
@@ -14,7 +14,13 @@ const HeaderBox = () => {
           width: "40vw",
         }}
       >
-        <Box>Hello</Box>
+        <Box
+          sx={{
+            width: "30vw",
+          }}
+        >
+          Hello
+        </Box>
       </Drawer>
       <Navbar />
     </Box>
