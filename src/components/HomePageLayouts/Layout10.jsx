@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Layout10 = () => {
-  return (
-    <div>Layout10</div>
-  )
-}
+  return <div>Layout10</div>;
+};
 
-export default Layout10
+export default Layout10;

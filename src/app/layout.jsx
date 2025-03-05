@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
   const headersList = headers();
   const host = headersList.get("host");
   const vendorSlugResponse = await getVendorSlug({
-    host: "estore.payzah.support/dev",
+    host: "estore.payzah.support/beta",
   });
   const { name, english_new_background, slogan } =
     vendorSlugResponse?.data?.vendor_data;
@@ -48,7 +48,7 @@ async function getData() {
   const headersList = headers();
   const host = headersList.get("host");
   const vendorSlugResponse = await getVendorSlug({
-    host: "estore.payzah.support/dev",
+    host: "estore.payzah.support/beta",
   });
   const homePageResponse = vendorSlugResponse?.status
     ? await getHomepageDetails({
@@ -65,9 +65,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <head>
-        <link rel="stylesheet" type="text/css" href="mystyle.css" />
-      </head>
+      <head></head>
       <body style={{ backgroundColor: "#F3F3F3" }}>
         <AppProvider
           vendorSlugResponse={vendorSlugResponse}

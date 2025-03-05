@@ -6,12 +6,12 @@ const HomePageLayouts = ({ homePageDetails }) => {
     switch (homePageDetails?.vendor_data?.home_page_type) {
       case "15":
         return <Layout15 categories={categories} />;
-        break;
 
       default:
         break;
     }
   };
+  console.log(homePageDetails?.vendor_data?.home_page_type, "homePageDetails");
   return <>{renderLayoutType(homePageDetails?.categories)}</>;
 };
 
