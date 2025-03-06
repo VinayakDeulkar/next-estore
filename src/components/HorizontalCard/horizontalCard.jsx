@@ -3,7 +3,6 @@ import React from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 
 const HorizontalCard = ({ product }) => {
-  console.log(product);
   return (
     <Card
       sx={{
@@ -12,7 +11,7 @@ const HorizontalCard = ({ product }) => {
         width: "100%",
         padding: "15px 20px",
         gap: "20px",
-        boxShadow: "none"
+        boxShadow: "none",
       }}
     >
       <CardMedia
