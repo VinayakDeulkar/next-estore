@@ -39,11 +39,11 @@ const Layout11 = ({ categories }) => {
               enText={category?.category_name}
             />
           </AccordionSummary>
-          <AccordionDetails>
-            <Grid container spacing={6}>
+          <AccordionDetails sx={{ padding: 0 }}>
+            <Grid container spacing={1}>
               {category?.products?.map((product) => (
                 <Grid item xs={12}>
-                  <HorizontalCard />
+                  <HorizontalCard product={product} key={product?.id}/>
                 </Grid>
               ))}
             </Grid>
