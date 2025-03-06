@@ -48,6 +48,7 @@ async function getData() {
   const host = headersList.get("host");
   const vendorSlugResponse = await getVendorSlug({
     host: "estore.payzah.support/dev",
+    // host: host,
   });
   const homePageResponse = vendorSlugResponse?.status
     ? await getHomepageDetails({

@@ -6,13 +6,25 @@ import { Carousel } from "react-responsive-carousel";
 
 const CarosouleImage = () => {
   const { homePageDetails } = useContext(AppContext);
-  console.log(homePageDetails, "homePageDetails");
+
   return (
-    <Box>
-      <Carousel autoPlay showThumbs={false} showStatus={false}>
+    <Box
+      sx={{
+        "& .carousel-root .carousel .control-arrow": {
+          display: "none",
+        },
+      }}
+    >
+      <Carousel
+        autoPlay
+        showThumbs={false}
+        showStatus={false}
+        showIndicators={false}
+        showArrows={false}
+      >
         {homePageDetails?.vendor_data?.banner_images?.map((image) => (
           <Box key={image?.id}>
-            <Image src={image?.image} width={1000} height={300} />
+            <Image src={image?.image} width={1000} height={1000} />
           </Box>
         ))}
       </Carousel>

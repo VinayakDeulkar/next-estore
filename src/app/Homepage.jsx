@@ -1,6 +1,7 @@
 "use client";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import CarosouleImage from "@/components/HomePage/CarosouleImage/CarosouleImage";
+import OrderType from "@/components/HomePage/OrderType/orderType";
 import VendorInfoBox from "@/components/HomePage/VendorInfoBox/vendorInfoBox";
 import HomePageLayouts from "@/components/HomePageLayouts";
 import { AppContext } from "@/context/AppContext";
@@ -20,6 +21,7 @@ const Homepage = () => {
         <Grid item xs={12} sm={6} md={6} sx={{ position: "relative" }}>
           <CarosouleImage />
           <VendorInfoBox />
+          <OrderType />
           <HomePageLayouts homePageDetails={homePageDetails} />
         </Grid>
 
