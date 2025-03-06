@@ -3,17 +3,13 @@ import React, { useState } from "react";
 import Navbar from "../Navbar/navbar";
 
 const HeaderBox = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+  const handleDrawar = () => {
+    setOpen(true);
+  };
   return (
     <Box sx={{ position: "relative" }}>
-      <Drawer
-        open={open}
-        onClose={() => setOpen(false)}
-        anchor="left"
-        sx={{
-          width: "40vw",
-        }}
-      >
+      <Drawer open={open} onClose={() => setOpen(false)} anchor="left">
         <Box
           sx={{
             width: "30vw",
@@ -22,7 +18,7 @@ const HeaderBox = () => {
           Hello
         </Box>
       </Drawer>
-      <Navbar />
+      <Navbar handleDrawar={handleDrawar} />
     </Box>
   );
 };
