@@ -11,6 +11,7 @@ const VendorInfoBox = () => {
       <Grid container>
         <Grid item md={3}>
           <Image
+            loading="lazy"
             width={110}
             height={110}
             style={{

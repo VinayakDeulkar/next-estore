@@ -8,7 +8,6 @@ import Image from "next/image";
 import TypographyConverter from "../TypographyConveter/TypographyConverter";
 const Navbar = ({ handleDrawar }) => {
   const { homePageDetails, language } = useContext(AppContext);
-  console.log(homePageDetails, "homePageDetails");
   return (
     <Box
       sx={{
@@ -61,6 +60,7 @@ const Navbar = ({ handleDrawar }) => {
             }}
           >
             <Image
+              loading="lazy"
               width={30}
               height={30}
               src={

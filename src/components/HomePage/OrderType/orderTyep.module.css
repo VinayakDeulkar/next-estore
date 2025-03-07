@@ -1,0 +1,62 @@
+.modeSelector_tabsNew {
+  position: relative;
+}
+
+.modeSelector_tabsNew:after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  top: 0;
+  transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.4s;
+  border-radius: 8px;
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--vendor-color);
+  height: 100%;
+  z-index: 0;
+}
+
+.modeSelector_tabsNew.left:after {
+  left: 0;
+}
+
+.modeSelector_tabsNew.right:after {
+  left: 50%;
+}
+
+.modeSelector_insidetabsNew {
+  display: inline-block;
+  width: 50%;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
+  transition: color 500ms;
+  font-weight: bold;
+  line-height: normal;
+  user-select: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  padding: 10px 8px;
+}
+
+html[dir="rtl"] .modeSelector_insidetabsNew {
+  font-size: 18px;
+}
+
+.modeSelector_tabsNew .modeSelector_insidetabsNew.active {
+  color: #ffffff;
+}
+
+.modeSelector_tabsNew.selector-full .modeSelector_insidetabsNew {
+  width: 100%;
+}
+
+.modeSelector_tabsNew.selector-full:after {
+  left: 0;
+}
+
+.selector_full.modeSelector_tabsNew:after {
+  width: 100%;
+}

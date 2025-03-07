@@ -24,7 +24,12 @@ const CarosouleImage = () => {
       >
         {homePageDetails?.vendor_data?.banner_images?.map((image) => (
           <Box key={image?.id}>
-            <Image src={image?.image} width={1000} height={1000} />
+            <Image
+              loading="lazy"
+              src={image?.image}
+              width={1000}
+              height={1000}
+            />
           </Box>
         ))}
       </Carousel>

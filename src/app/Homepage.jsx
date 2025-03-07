@@ -10,7 +10,6 @@ import { useContext } from "react";
 
 const Homepage = () => {
   const { vendorSlug, homePageDetails } = useContext(AppContext);
-  console.log(homePageDetails, "homePageDetails");
 
   return (
     <>
