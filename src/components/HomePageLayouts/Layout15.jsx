@@ -45,8 +45,8 @@ const Layout15 = ({ categories }) => {
           <AccordionDetails>
             <Grid container spacing={6}>
               {category?.products?.map((product) => (
-                <Grid item xs={6}>
-                  <SquareCard product={product} key={product?.id} />
+                <Grid item xs={6} key={product?.id}>
+                  <SquareCard product={product} />
                 </Grid>
               ))}
             </Grid>

@@ -48,7 +48,7 @@ export const AppProvider = ({
   const handleHomeAreaDetailsChange = (value) => setAreaDetails(value);
 
   useEffect(() => {
-    if (vendorSlug?.status) {
+    if ((vendorSlug?.status, homePageDetails?.data)) {
       handleHomePageDetailsChange({
         ...vendorSlug?.data,
         categories: ["10", "13", "16"].includes(
@@ -67,7 +67,7 @@ export const AppProvider = ({
         );
       }
     }
-  }, [vendorSlug]);
+  }, [vendorSlug, homePageDetails?.data]);
 
   const store = {
     language,

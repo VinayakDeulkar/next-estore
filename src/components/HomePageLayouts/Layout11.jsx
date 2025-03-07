@@ -1,4 +1,10 @@
-import { Accordion, AccordionDetails, AccordionSummary, Grid } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Grid,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React, { useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
@@ -20,10 +26,16 @@ const Layout11 = ({ categories }) => {
   };
 
   return (
-    <div>
+    <Box>
+      <Box>Hello</Box>
       {categories?.map((category) => (
         <Accordion
-          sx={{ mb: 2, borderRadius: "8px", padding: "0 20px" }}
+          sx={{
+            marginBottom: "25px",
+            borderRadius: "8px",
+            padding: "0 20px",
+            boxShadow: "none",
+          }}
           key={category?.category_id}
           expanded={expendedList.includes(category?.category_id)}
           onChange={() => handleAccordionClick(category?.category_id)}
@@ -42,15 +54,15 @@ const Layout11 = ({ categories }) => {
           <AccordionDetails sx={{ padding: 0 }}>
             <Grid container spacing={1}>
               {category?.products?.map((product) => (
-                <Grid item xs={12}>
-                  <HorizontalCard product={product} key={product?.id}/>
+                <Grid item xs={12} key={product?.id}>
+                  <HorizontalCard product={product} />
                 </Grid>
               ))}
             </Grid>
           </AccordionDetails>
         </Accordion>
       ))}
-    </div>
+    </Box>
   );
 };
 

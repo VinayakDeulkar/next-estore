@@ -29,6 +29,7 @@ const CarosouleImage = () => {
               src={image?.image}
               width={1000}
               height={1000}
+              alt="image?.image"
             />
           </Box>
         ))}
