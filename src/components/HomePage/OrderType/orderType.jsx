@@ -14,8 +14,8 @@ const OrderType = () => {
   console.log(homePageDetails, "homePageDetails");
 
   return (
-    <Box sx={{ padding: "10px" }}>
-      <Card sx={{ boxShadow: "none", padding: "10px 20px" }}>
+    <Box sx={{ padding: "10px 0" }}>
+      <Card sx={{ boxShadow: "none", padding: "10px", borderRadius: "8px" }}>
         <Box
           className={`${styles.modeSelector_tabsNew} ${
             homePageDetails?.vendor_data?.is_pickup === "1" &&
