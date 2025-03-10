@@ -30,7 +30,7 @@ const Homepage = () => {
               <OrderType />
             </>
           )}
-          <Box sx={{ padding: "10px" }}>
+          <Box>
             <HomePageLayouts homePageDetails={homePageDetails} />
           </Box>
         </Grid>

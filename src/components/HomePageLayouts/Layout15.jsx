@@ -5,11 +5,14 @@ import {
   AccordionSummary,
   Grid,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import SquareCard from "../SquareCard/squareCard";
+import { AppContext } from "@/context/AppContext";
+import "./layout.css"
 
 const Layout15 = ({ categories }) => {
+  const { language } = useContext(AppContext);
   const [expendedList, setExpendedList] = useState(
     categories.map((cate) => cate.category_id)
   );
@@ -26,12 +29,15 @@ const Layout15 = ({ categories }) => {
     <div>
       {categories?.map((category) => (
         <Accordion
-          sx={{ mb: 2, borderRadius: "8px", padding: "0 20px" }}
+          sx={{ mb: 2, borderRadius: "8px" }}
           key={category?.category_id}
           expanded={expendedList.includes(category?.category_id)}
           onChange={() => handleAccordionClick(category?.category_id)}
         >
           <AccordionSummary
+            sx={{
+              padding: "0 20px",
+            }}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
@@ -42,8 +48,8 @@ const Layout15 = ({ categories }) => {
               enText={category?.category_name}
             />
           </AccordionSummary>
-          <AccordionDetails>
-            <Grid container spacing={6}>
+          <AccordionDetails sx={{ padding: "0 20px 20px"}}>
+            <Grid container className="gridContainer">
               {category?.products?.map((product) => (
                 <Grid item xs={6} key={product?.id}>
                   <SquareCard product={product} />

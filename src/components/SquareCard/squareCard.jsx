@@ -41,7 +41,19 @@ const SquareCard = ({ product }) => {
       >
         {product?.label ? (
           <TypographyConverter
-            sx={{ fontSize: "12px", fontWeight: 300, textAlign: "center" }}
+            sx={{
+              fontSize: "12px",
+              fontWeight: 300,
+              backgroundColor: product?.label_color,
+              color: "#fff",
+              // position: "absolute",
+              left: 0,
+              width: "100px",
+              textAlign: "center",
+              marginLeft: "40px",
+              borderTopLeftRadius: "8px",
+              borderTopRightRadius: "8px",
+            }}
             enText={product?.label}
             arText={product?.label_ar}
           />

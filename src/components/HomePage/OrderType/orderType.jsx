@@ -11,7 +11,6 @@ const OrderType = () => {
     areaDetails,
     handleHomeAreaDetailsChange,
   } = useContext(AppContext);
-  console.log(homePageDetails, "homePageDetails");
 
   return (
     <Box sx={{ padding: "10px 0" }}>

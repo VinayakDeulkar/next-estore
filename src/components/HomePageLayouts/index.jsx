@@ -3,6 +3,7 @@ import Layout15 from "./Layout15";
 import Layout11 from "./Layout11";
 
 const HomePageLayouts = ({ homePageDetails }) => {
+  console.log(homePageDetails?.vendor_data?.home_page_type, "homePageDetails?.vendor_data?.home_page_type")
 
   const renderLayoutType = (categories) => {
     switch (homePageDetails?.vendor_data?.home_page_type) {

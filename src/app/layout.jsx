@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
   const headersList = headers();
   const host = headersList.get("host");
   const vendorSlugResponse = await getVendorSlug({
-    host: "estore.payzah.support/dev",
+    host: "estore.payzah.support/beta",
   });
   const { name, english_new_background, slogan } =
     vendorSlugResponse?.data?.vendor_data;
@@ -47,7 +47,7 @@ async function getData() {
   const headersList = headers();
   const host = headersList.get("host");
   const vendorSlugResponse = await getVendorSlug({
-    host: "estore.payzah.support/dev",
+    host: "estore.payzah.support/beta",
     // host: host,
   });
   const homePageResponse = vendorSlugResponse?.status
