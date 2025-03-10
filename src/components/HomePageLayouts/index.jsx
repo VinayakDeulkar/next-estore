@@ -1,6 +1,7 @@
 import React from "react";
 import Layout15 from "./Layout15";
 import Layout11 from "./Layout11";
+import "../custom.css"
 
 const HomePageLayouts = ({ homePageDetails }) => {
   console.log(homePageDetails?.vendor_data?.home_page_type, "homePageDetails?.vendor_data?.home_page_type")

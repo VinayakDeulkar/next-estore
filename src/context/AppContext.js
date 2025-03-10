@@ -45,7 +45,10 @@ export const AppProvider = ({
     branch_lat: "",
     branch_lng: "",
   });
-  const handleHomeAreaDetailsChange = (value) => setAreaDetails(value);
+  const handleAreaDetailsChange = (value) => setAreaDetails(value);
+
+  const [cart, setCart] = useState({});
+  const handleCartChange = (value) => setCart(value);
 
   useEffect(() => {
     if ((vendorSlug?.status, homePageDetails?.data)) {
@@ -77,7 +80,9 @@ export const AppProvider = ({
     homePageDetails,
     handleHomePageDetailsChange,
     areaDetails,
-    handleHomeAreaDetailsChange,
+    handleAreaDetailsChange,
+    cart,
+    handleCartChange
   };
 
   return <AppContext.Provider value={store}>{children}</AppContext.Provider>;

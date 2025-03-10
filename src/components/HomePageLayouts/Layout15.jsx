@@ -25,6 +25,8 @@ const Layout15 = ({ categories }) => {
     }
   };
 
+  console.log(categories, "categories")
+
   return (
     <div>
       {categories?.map((category) => (
