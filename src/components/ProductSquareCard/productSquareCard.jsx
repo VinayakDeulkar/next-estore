@@ -3,9 +3,10 @@ import React, { useContext, useEffect, useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import { AppContext } from "@/context/AppContext";
 import Link from "next/link";
-import "./squareCard.css"
+import "./productSquareCard.css"
+import Spinner from "../common/Spinner/spinner";
 
-const SquareCard = ({ product }) => {
+const ProductSquareCard = ({ product }) => {
   const { language, cart, handleCartChange, homePageDetails } = useContext(AppContext);
   const [inCart, setInCart] = useState(0);
   const [spinLoader, setSpinLoader] = useState(false);
@@ -20,7 +21,7 @@ const SquareCard = ({ product }) => {
       } else if (n == -1 && inCart == 1) {
         const response = await removeCartItem({
           vendorSlug: vendorSlug,
-          vendors_id: homePageDetails?.vendor?.vendors_id,
+          vendors_id: homePageDetails?.vendor_data?.vendors_id,
           area_id: areaDetails?.area_id,
           user_string: localStorage.getItem("userID"),
           item_id: temp[0]?.item_id,
@@ -39,7 +40,7 @@ const SquareCard = ({ product }) => {
           if (temp?.length === 0 || !temp?.length) {
             const response = await addToCartApi({
               vendorSlug: vendorSlug,
-              vendors_id: homePageDetails?.vendor?.vendors_id,
+              vendors_id: homePageDetails?.vendor_data?.vendors_id,
               area_id: areaDetails?.area_id,
               itemId: item?.id,
               user_string: localStorage.getItem("userID"),
@@ -52,7 +53,7 @@ const SquareCard = ({ product }) => {
               if (response.status == false) {
                 notify(response.message, response.message_ar, language);
               }
-              if (homePageDetails?.vendor?.fb_pixel_code != "") {
+              if (homePageDetails?.vendor_data?.fb_pixel_code != "") {
                 ReactPixel.track("AddToCart", {
                   content_name: item?.product_name,
                   content_category: item?.category_name,
@@ -76,29 +77,29 @@ const SquareCard = ({ product }) => {
 
                 if (vendorSlug == "mijana-restaurant-and-café") {
                   triggerAddToCart({
-                    fb_pixel_code: homePageDetails?.vendor?.fb_pixel_code,
+                    fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
                     fb_access_token:
                       "EAAGZA8GMZAs1IBAC9mDImnZCTAdafRzN769x6ZCIRMExueSZBZBfnDkIzGrsP4gZBMZCCwXaSvKNggZBEKdEk3582JWiwecrnZAEHFzfCaYKSNRbltxMm2cSvUrgZBUDpVNZCQAOVWUuzO4m7nbvQn1Wqb94IBbVSexSbwWzAf6TYV80HQF1ZAZAzGcXKB",
-                    support_mail: homePageDetails?.vendor?.support_mail,
+                    support_mail: homePageDetails?.vendor_data?.support_mail,
                     item: item,
                   });
                 }
 
                 // dynamic for all vendors
                 if (
-                  homePageDetails?.vendor?.fb_access_token &&
-                  homePageDetails?.vendor?.fb_access_token != ""
+                  homePageDetails?.vendor_data?.fb_access_token &&
+                  homePageDetails?.vendor_data?.fb_access_token != ""
                 ) {
                   triggerAddToCart({
-                    fb_pixel_code: homePageDetails?.vendor?.fb_pixel_code,
-                    fb_access_token: homePageDetails?.vendor?.fb_access_token,
-                    support_mail: homePageDetails?.vendor?.support_mail,
+                    fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
+                    fb_access_token: homePageDetails?.vendor_data?.fb_access_token,
+                    support_mail: homePageDetails?.vendor_data?.support_mail,
                     item: item,
                   });
                 }
               }
 
-              if (homePageDetails?.vendor?.snap_pixel_code != "")
+              if (homePageDetails?.vendor_data?.snap_pixel_code != "")
                 SnapPixel.track("ADD_CART", {
                   content_name: item?.product_name,
                   item_category: item?.category_name,
@@ -108,7 +109,7 @@ const SquareCard = ({ product }) => {
                   currency: "KWD",
                 });
 
-              if (homePageDetails?.vendor?.vendors_id === "132") {
+              if (homePageDetails?.vendor_data?.vendors_id === "132") {
                 TiktokPixel.track("AddToCart", {
                   content_type: "product",
                   quantity: 1,
@@ -120,8 +121,8 @@ const SquareCard = ({ product }) => {
               }
 
               if (
-                homePageDetails?.vendor?.google_tag_code != "" &&
-                !/^GTM/.test(homePageDetails?.vendor?.google_tag_code)
+                homePageDetails?.vendor_data?.google_tag_code != "" &&
+                !/^GTM/.test(homePageDetails?.vendor_data?.google_tag_code)
               )
                 addCartTag({
                   item_id: item?.id,
@@ -139,8 +140,8 @@ const SquareCard = ({ product }) => {
                 (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
                 (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
                 n == 1 &&
-                (homePageDetails?.vendor?.international_delivery === "3" ||
-                  homePageDetails?.vendor?.international_delivery === "" ||
+                (homePageDetails?.vendor_data?.international_delivery === "3" ||
+                  homePageDetails?.vendor_data?.international_delivery === "" ||
                   internationalDelivery.country_name.toLowerCase() === "kuwait")
               ) {
                 history.push(`/area`);
@@ -149,7 +150,7 @@ const SquareCard = ({ product }) => {
           } else {
             const response = await updateCartQauntity({
               vendorSlug: vendorSlug,
-              vendors_id: homePageDetails?.vendor?.vendors_id,
+              vendors_id: homePageDetails?.vendor_data?.vendors_id,
               area_id: areaDetails?.area_id,
               user_string: localStorage.getItem("userID"),
               quantity: inCart + n,
@@ -161,7 +162,7 @@ const SquareCard = ({ product }) => {
               if (response.status == false) {
                 notify(response.message, response.message_ar, language);
               }
-              if (homePageDetails?.vendor?.fb_pixel_code != "" && n == 1) {
+              if (homePageDetails?.vendor_data?.fb_pixel_code != "" && n == 1) {
                 ReactPixel.track("AddToCart", {
                   content_name: item?.product_name,
                   content_category: item?.category_name,
@@ -185,28 +186,28 @@ const SquareCard = ({ product }) => {
                 }
                 if (vendorSlug == "mijana-restaurant-and-café") {
                   triggerAddToCart({
-                    fb_pixel_code: homePageDetails?.vendor?.fb_pixel_code,
+                    fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
                     fb_access_token:
                       "EAAGZA8GMZAs1IBAC9mDImnZCTAdafRzN769x6ZCIRMExueSZBZBfnDkIzGrsP4gZBMZCCwXaSvKNggZBEKdEk3582JWiwecrnZAEHFzfCaYKSNRbltxMm2cSvUrgZBUDpVNZCQAOVWUuzO4m7nbvQn1Wqb94IBbVSexSbwWzAf6TYV80HQF1ZAZAzGcXKB",
-                    support_mail: homePageDetails?.vendor?.support_mail,
+                    support_mail: homePageDetails?.vendor_data?.support_mail,
                     item: item,
                   });
                 }
 
                 //dynamic for all vendors
                 if (
-                  homePageDetails?.vendor?.fb_access_token &&
-                  homePageDetails?.vendor?.fb_access_token != ""
+                  homePageDetails?.vendor_data?.fb_access_token &&
+                  homePageDetails?.vendor_data?.fb_access_token != ""
                 ) {
                   triggerAddToCart({
-                    fb_pixel_code: homePageDetails?.vendor?.fb_pixel_code,
-                    fb_access_token: homePageDetails?.vendor?.fb_access_token,
-                    support_mail: homePageDetails?.vendor?.support_mail,
+                    fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
+                    fb_access_token: homePageDetails?.vendor_data?.fb_access_token,
+                    support_mail: homePageDetails?.vendor_data?.support_mail,
                     item: item,
                   });
                 }
               }
-              if (homePageDetails?.vendor?.snap_pixel_code != "" && n == 1)
+              if (homePageDetails?.vendor_data?.snap_pixel_code != "" && n == 1)
                 SnapPixel.track("ADD_CART", {
                   content_name: item?.product_name,
                   item_category: item?.category_name,
@@ -216,7 +217,7 @@ const SquareCard = ({ product }) => {
                   currency: "KWD",
                 });
 
-              if (homePageDetails?.vendor?.vendors_id === "132" && n == 1) {
+              if (homePageDetails?.vendor_data?.vendors_id === "132" && n == 1) {
                 TiktokPixel.track("AddToCart", {
                   content_type: "product",
                   quantity: 1,
@@ -228,8 +229,8 @@ const SquareCard = ({ product }) => {
               }
 
               if (
-                homePageDetails?.vendor?.google_tag_code != "" &&
-                !/^GTM/.test(homePageDetails?.vendor?.google_tag_code) &&
+                homePageDetails?.vendor_data?.google_tag_code != "" &&
+                !/^GTM/.test(homePageDetails?.vendor_data?.google_tag_code) &&
                 n == 1
               )
                 addCartTag({
@@ -247,8 +248,8 @@ const SquareCard = ({ product }) => {
                 (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
                 (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
                 n == 1 &&
-                (homePageDetails?.vendor?.international_delivery === "3" ||
-                  homePageDetails?.vendor?.international_delivery === "" ||
+                (homePageDetails?.vendor_data?.international_delivery === "3" ||
+                homePageDetails?.vendor_data?.international_delivery === "" ||
                   internationalDelivery.country_name.toLowerCase() === "kuwait")
               ) {
                 history.push(`/area`);
@@ -307,7 +308,7 @@ const SquareCard = ({ product }) => {
               fontSize: "13px",
               padding: "3px 0",
               fontWeight: 300,
-              backgroundColor: /* product?.label_color */ "rgb(242, 28, 28)",
+              backgroundColor: product?.label_color || "rgb(242, 28, 28)",
               color: "#fff",
               position: "absolute",
               top: 0,
@@ -330,7 +331,7 @@ const SquareCard = ({ product }) => {
           },
           display: "flex",
           flexDirection: "column",
-          gap: "5px",
+          gap: "7px",
         }}
       >
         <TypographyConverter
@@ -376,11 +377,10 @@ const SquareCard = ({ product }) => {
                 className="buy-get-img"
                 style={{
                   borderRadius: "30px",
-                  fontSize: language == "ltr" ? 12 : 15,
+                  fontSize: language == "ltr" ? 13 : 15,
                   padding: "0 15px",
                   color: "#818181",
                   border: "2px solid #818181",
-                  minWidth: "155px",
                 }}
               >
                 <div>
@@ -394,14 +394,13 @@ const SquareCard = ({ product }) => {
             ) : product?.price_on_selection == 1 ? (
               <Link
                 to={`/product=${product?.product_slug}`}
-                className="buy-get-img "
+                className="buy-get-img"
                 style={{
                   borderRadius: "30px",
-                  fontSize: language == "ltr" ? 12 : 15,
+                  fontSize: language == "ltr" ? 13 : 15,
                   padding: "0 15px",
                   color: "#818181",
                   border: "2px solid #818181",
-                  minWidth: "155px",
                 }}
               >
                 {language === "ltr"
@@ -414,11 +413,10 @@ const SquareCard = ({ product }) => {
                 className="buy-get-img "
                 style={{
                   borderRadius: "30px",
-                  fontSize: language == "ltr" ? 12 : 15,
+                  fontSize: language == "ltr" ? 13 : 15,
                   padding: "0 15px",
                   color: "#818181",
                   border: "2px solid #818181",
-                  minWidth: "155px",
                 }}
               >
                 {language === "ltr"
@@ -434,20 +432,23 @@ const SquareCard = ({ product }) => {
                   flexDirection: "row",
                   flexWrap: "nowrap",
                   cursor: "pointer",
+                  gap: "5px"
                 }}
               >
                 <div
                   onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
                   className="product-price"
-                  style={{ alignItems: "center" }}
+                  style={{ alignItems: "center",  fontWeight: "600",  }}
                 >
                   <span
                     style={{
-                      fontSize: language == "ltr" ? 15 : 18,
-                      paddingTop: inCart == 0 ? 4 : 0,
+                      fontSize: language == "ltr" ? "15px" : "18px",
+                      paddingTop: inCart == 0 ? 2 : 0,
+                      display: "flex",
+                      alignItems: "center"
                     }}
                   >
-                    <span style={{ fontSize: 15 }}>
+                    <span style={{ fontSize: "15px" }}>
                       {product?.product_price
                         ? parseFloat(product?.product_price).toFixed(3)
                         : 0}
@@ -492,7 +493,7 @@ const SquareCard = ({ product }) => {
                           <Spinner
                             height="16px"
                             size="2.5px"
-                            color={homePageDetails.vendor.vendor_color}
+                            color={homePageDetails?.vendor_data?.vendor_color}
                           />
                         ) : (
                           inCart
@@ -510,17 +511,24 @@ const SquareCard = ({ product }) => {
                   <span
                     onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
                     style={{
-                      backgroundColor: homePageDetails?.vendor?.vendor_color,
+                      backgroundColor: homePageDetails?.vendor_data?.vendor_color,
+                      borderRadius: "50%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginLeft: "6px",
+                      width: "25px",
+                      height: "25px",
+                      boxSizing: "content-box"
                     }}
-                    className="cart-image-div"
                   >
                     {spinLoader ? (
-                      <div style={{ padding: "0 2px" }}>
+                      <div style={{ padding: "0 2px", display: "flex", justifyContent: "center", alignItems: "center" }}>
                         <Spinner height="14px" size="2px" />
                       </div>
                     ) : (
                       <img
-                        src={"pictures/Logo.png"}
+                        src={"images/Logo.png"}
                         className="cart-image-add"
                       ></img>
                     )}
@@ -545,7 +553,6 @@ const SquareCard = ({ product }) => {
                   borderRadius: "30px",
                   fontSize: language == "ltr" ? 12 : 15,
                   padding: "0 15px",
-                  minWidth: "155px",
                 }}
               >
                 <span>
@@ -562,4 +569,4 @@ const SquareCard = ({ product }) => {
   );
 };
 
-export default SquareCard;
+export default ProductSquareCard;

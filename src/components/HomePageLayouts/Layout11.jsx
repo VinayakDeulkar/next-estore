@@ -8,7 +8,6 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React, { useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
-import SquareCard from "../SquareCard/squareCard";
 import HorizontalCard from "../HorizontalCard/horizontalCard";
 
 const Layout11 = ({ categories }) => {

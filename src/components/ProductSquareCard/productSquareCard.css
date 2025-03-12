@@ -1,0 +1,20 @@
+.buy-get-img {
+  letter-spacing: -0.1px;
+  text-align: center;
+  line-height: 1.23;
+  justify-content: center;
+  min-height: 32px;
+  cursor: pointer;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-direction: row;
+  position: relative;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 600;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: all 0.2s ease-in 0s;
+  user-select: none;
+}

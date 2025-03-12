@@ -7,9 +7,9 @@ import {
 } from "@mui/material";
 import { useContext, useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
-import SquareCard from "../SquareCard/squareCard";
 import { AppContext } from "@/context/AppContext";
 import "./layout.css"
+import ProductSquareCard from "../ProductSquareCard/productSquareCard";
 
 const Layout15 = ({ categories }) => {
   const { language } = useContext(AppContext);
@@ -54,7 +54,7 @@ const Layout15 = ({ categories }) => {
             <Grid container className="gridContainer">
               {category?.products?.map((product) => (
                 <Grid item xs={6} key={product?.id}>
-                  <SquareCard product={product} />
+                  <ProductSquareCard product={product} />
                 </Grid>
               ))}
             </Grid>
