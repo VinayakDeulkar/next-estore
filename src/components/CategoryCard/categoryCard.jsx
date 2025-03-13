@@ -1,8 +1,15 @@
 import { Card, CardContent, CardMedia } from "@mui/material";
 import React from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import { useRouter } from "next/navigation";
 
 const CategoryCard = ({ category }) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/products?id=${category?.category_slug}`);
+  }
+
   return (
     <Card
       sx={{
@@ -10,6 +17,7 @@ const CategoryCard = ({ category }) => {
         boxShadow: "none",
         width: "100%",
       }}
+      onClick={handleCardClick}
     >
       <CardMedia
         component="img"
