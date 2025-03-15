@@ -90,7 +90,7 @@ const HorizontalCard = ({ product }) => {
           <div>
             {product?.offer_applied == 1 ? (
               <TypographyConverter
-                sx={{ fontSize: "15px", color: item?.color }}
+                sx={{ fontSize: "15px", color: product?.color }}
                 enText={product?.offer_msg}
                 arText={product?.offer_msg_ar}
               />

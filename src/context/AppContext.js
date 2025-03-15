@@ -1,6 +1,7 @@
 "use client";
 import moment from "moment";
 import { createContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export const AppContext = createContext();
 
@@ -15,11 +16,27 @@ export const AppProvider = ({
     setLanguage(lng);
   };
 
-  const [vendorSlug, setVendorSlug] = useState(vendorSlugResponse);
+  const [vendorSlug, setVendorSlug] = useState();
   const handleVendorSlugChange = (value) => setVendorSlug(value);
 
-  const [homePageDetails, setHomePageDetails] = useState(homePageResponse);
+  const [homePageDetails, setHomePageDetails] = useState();
   const handleHomePageDetailsChange = (value) => setHomePageDetails(value);
+  useEffect(() => {
+    if (vendorSlugResponse) {
+      Cookies.set("ecom_url_slug", vendorSlugResponse?.data?.ecom_url_slug);
+      Cookies.set(
+        "vendors_id",
+        vendorSlugResponse?.data?.vendor_data?.vendors_id
+      );
+      setVendorSlug(vendorSlugResponse);
+    }
+  }, [vendorSlugResponse]);
+
+  useEffect(() => {
+    if (homePageResponse) {
+      setHomePageDetails(homePageResponse);
+    }
+  }, [homePageResponse]);
 
   const [areaDetails, setAreaDetails] = useState({
     type: "delivery",
@@ -82,7 +99,7 @@ export const AppProvider = ({
     areaDetails,
     handleAreaDetailsChange,
     cart,
-    handleCartChange
+    handleCartChange,
   };
 
   return <AppContext.Provider value={store}>{children}</AppContext.Provider>;

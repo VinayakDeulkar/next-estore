@@ -1,3 +1,4 @@
+"use client";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import Image from "next/image";
@@ -21,6 +22,11 @@ const CarosouleImage = () => {
         showStatus={false}
         showIndicators={false}
         showArrows={false}
+        infiniteLoop
+        interval={3000}
+        transitionTime={700}
+        emulateTouch
+        stopOnHover
       >
         {homePageDetails?.vendor_data?.banner_images?.map((image) => (
           <Box key={image?.id}>

@@ -5,6 +5,7 @@ import "./globals.css";
 import { headers } from "next/headers";
 import "../assets/Fonts/Orleen.css";
 import "../assets/Fonts/SFTfont.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export async function generateMetadata({ params }) {
   const headersList = headers();

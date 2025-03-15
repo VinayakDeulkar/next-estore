@@ -8,7 +8,7 @@ import {
 import { useContext, useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import { AppContext } from "@/context/AppContext";
-import "./layout.css"
+import "./layout.css";
 import ProductSquareCard from "../ProductSquareCard/productSquareCard";
 
 const Layout15 = ({ categories }) => {
@@ -24,8 +24,6 @@ const Layout15 = ({ categories }) => {
       setExpendedList([...expendedList, category_id]);
     }
   };
-
-  console.log(categories, "categories")
 
   return (
     <div>
@@ -50,7 +48,7 @@ const Layout15 = ({ categories }) => {
               enText={category?.category_name}
             />
           </AccordionSummary>
-          <AccordionDetails sx={{ padding: "0 20px 20px"}}>
+          <AccordionDetails sx={{ padding: "0 20px 20px" }}>
             <Grid container className="gridContainer">
               {category?.products?.map((product) => (
                 <Grid item xs={6} key={product?.id}>

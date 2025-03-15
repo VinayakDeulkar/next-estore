@@ -6,6 +6,7 @@ import { AppContext } from "@/context/AppContext";
 import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
 import TypographyConverter from "../TypographyConveter/TypographyConverter";
+import GridLayout from "../GridLayout/gridLayout";
 const Navbar = ({ handleDrawar }) => {
   const { homePageDetails, language } = useContext(AppContext);
   return (
@@ -21,16 +22,8 @@ const Navbar = ({ handleDrawar }) => {
         color: "blue",
       }}
     >
-      <Grid container>
-        <Grid item xs={false} sm={3} md={3}></Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={6}
-          sx={{ position: "relative" }}
-          container
-        >
+      <GridLayout margin="0">
+        <Grid container>
           <Grid
             item
             xs={4}
@@ -107,8 +100,7 @@ const Navbar = ({ handleDrawar }) => {
             </Button>
           </Grid>
         </Grid>
-        <Grid item xs={false} sm={3} md={3}></Grid>
-      </Grid>
+      </GridLayout>
     </Box>
   );
 };

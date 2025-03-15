@@ -1,16 +1,12 @@
+"use client";
 import { AppContext } from "@/context/AppContext";
 import { Box, Card, Tab, Tabs } from "@mui/material";
 import React, { useContext } from "react";
 import styles from "./orderTyep.module.css";
-import { useState } from "react";
 
 const OrderType = () => {
-  const {
-    language,
-    homePageDetails,
-    areaDetails,
-    handleHomeAreaDetailsChange,
-  } = useContext(AppContext);
+  const { language, homePageDetails, areaDetails, handleAreaDetailsChange } =
+    useContext(AppContext);
 
   return (
     <Box sx={{ padding: "10px 0" }}>
@@ -32,7 +28,7 @@ const OrderType = () => {
               }`}
               onClick={(e) => {
                 e.preventDefault();
-                handleHomeAreaDetailsChange({
+                handleAreaDetailsChange?.({
                   ...areaDetails,
                   type: "delivery",
                 });
@@ -48,7 +44,8 @@ const OrderType = () => {
               } `}
               onClick={(e) => {
                 e.preventDefault();
-                handleHomeAreaDetailsChange({
+
+                handleAreaDetailsChange({
                   ...areaDetails,
                   type: "pickup",
                 });

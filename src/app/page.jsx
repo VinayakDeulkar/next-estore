@@ -1,11 +1,7 @@
-import { getHomepageDetails, getVendorSlug } from '@/apis';
-import React from 'react'
-import Homepage from './homepage';
+import Homepage from "./homepage";
 
 const Page = async () => {
-  return (
-    <Homepage />
-  )
-}
+  return <Homepage />;
+};
 
-export default Page
+export default Page;
