@@ -34,19 +34,21 @@ const ProductCarousel = ({ product, addedVariaton }) => {
                   ?.image
               : product?.image
           }`}
+          alt={product?.image}
         />
       </Box>
 
       {product?.product_images?.length != 0 &&
       !product?.productvariationPrice?.[addedVariaton.toString()]?.image
         ? product?.product_images?.map((i, k) => (
-            <Box>
+            <Box key={k}>
               <Image
                 loading="lazy"
                 className="img"
                 src={`${i}`}
                 width={1000}
                 height={1000}
+                alt={i}
               />
             </Box>
           ))
