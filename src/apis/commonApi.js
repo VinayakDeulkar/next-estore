@@ -46,3 +46,24 @@ export const getProductDetails = async ({
   );
   return response.data;
 };
+
+export const getCategoryProduct = async ({
+  category,
+  vendor_slug,
+  vendor_id,
+  area_id,
+  page,
+}) => {
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/category-product`,
+    JSON.stringify({
+      token: process.env.NEXT_PUBLIC_APP_TOKEN,
+      category: category,
+      vendor_slug: vendor_slug,
+      vendor_id: vendor_id,
+      area_id: area_id,
+      page: page,
+    })
+  );
+  return response.data;
+};
