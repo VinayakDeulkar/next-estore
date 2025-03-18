@@ -6,6 +6,7 @@ import moment from "moment";
 import Link from "next/link";
 
 const HorizontalCard = ({ product }) => {
+  console.log('first')
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =
     useContext(AppContext);
   const [inCart, setInCart] = useState(0);

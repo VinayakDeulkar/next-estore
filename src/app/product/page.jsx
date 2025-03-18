@@ -51,6 +51,7 @@ async function getData(id, vendor_id, vendor_slug) {
   });
   return productDetails;
 }
+
 const Page = async ({ searchParams }) => {
   const { id } = searchParams;
   const { vendor_id, vendor_slug } = await getContextValues();

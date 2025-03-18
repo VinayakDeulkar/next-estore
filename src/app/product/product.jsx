@@ -1,5 +1,4 @@
 "use client";
-
 import BackButton from "@/components/common/BackButton/BackButton";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
@@ -17,23 +16,30 @@ const Product = (props) => {
   return (
     <Box>
       <HeaderBox />
-      <GridLayout>
-        <Box
-          sx={{
-            "& .carousel-root .carousel .control-arrow": {
-              display: "none",
-            },
-            position: "relative",
-          }}
-        >
-          <BackButton variant="dark" />
+      <Grid container sx={{ marginTop: "50px" }}>
+        <Grid item xs={6}>
           <ProductCarousel
             product={props?.data}
             addedVariaton={addedVariaton}
           />
+        </Grid>
+        <Grid item xs={6}>
+          <BackButton variant="dark" />
           <ProductDetails product={props?.data} />
-        </Box>
-      </GridLayout>
+        </Grid>
+      </Grid>
+      {/* <Box
+        sx={{
+          "& .carousel-root .carousel .control-arrow": {
+            display: "none",
+          },
+          position: "relative",
+        }}
+      >
+        <BackButton variant="dark" />
+        <ProductCarousel product={props?.data} addedVariaton={addedVariaton} />
+        <ProductDetails product={props?.data} />
+      </Box> */}
     </Box>
   );
 };

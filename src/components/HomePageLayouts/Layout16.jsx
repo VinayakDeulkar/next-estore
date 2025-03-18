@@ -1,10 +1,8 @@
-"use client"
-import { Box, Grid } from "@mui/material";
 import React from "react";
 import CategoryCard from "../CategoryCard/categoryCard";
-import "./layout.css"
+import { Box, Grid } from "@mui/material";
 
-const Layout13 = ({ categories }) => {
+const Layout16 = ({ categories }) => {
   return (
     <Box
       sx={{
@@ -25,4 +23,4 @@ const Layout13 = ({ categories }) => {
   );
 };
 
-export default Layout13;
+export default Layout16;

@@ -3,13 +3,20 @@ import React, { useContext, useEffect, useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import { AppContext } from "@/context/AppContext";
 import Link from "next/link";
-import "./productSquareCard.css"
+import "./productSquareCard.css";
 import Spinner from "../common/Spinner/spinner";
+import { useRouter } from "next/navigation";
 
-const ProductSquareCard = ({ product }) => {
-  const { language, cart, handleCartChange, homePageDetails } = useContext(AppContext);
+const ProductSquareCard = ({ product, imgHeight }) => {
+  const { language, cart, handleCartChange, homePageDetails } =
+    useContext(AppContext);
   const [inCart, setInCart] = useState(0);
   const [spinLoader, setSpinLoader] = useState(false);
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/product?id=${product?.product_slug}`);
+  };
 
   const onAddToCartClick = async (event, n) => {
     if (!spinLoader) {
@@ -92,7 +99,8 @@ const ProductSquareCard = ({ product }) => {
                 ) {
                   triggerAddToCart({
                     fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
-                    fb_access_token: homePageDetails?.vendor_data?.fb_access_token,
+                    fb_access_token:
+                      homePageDetails?.vendor_data?.fb_access_token,
                     support_mail: homePageDetails?.vendor_data?.support_mail,
                     item: item,
                   });
@@ -201,7 +209,8 @@ const ProductSquareCard = ({ product }) => {
                 ) {
                   triggerAddToCart({
                     fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
-                    fb_access_token: homePageDetails?.vendor_data?.fb_access_token,
+                    fb_access_token:
+                      homePageDetails?.vendor_data?.fb_access_token,
                     support_mail: homePageDetails?.vendor_data?.support_mail,
                     item: item,
                   });
@@ -217,7 +226,10 @@ const ProductSquareCard = ({ product }) => {
                   currency: "KWD",
                 });
 
-              if (homePageDetails?.vendor_data?.vendors_id === "132" && n == 1) {
+              if (
+                homePageDetails?.vendor_data?.vendors_id === "132" &&
+                n == 1
+              ) {
                 TiktokPixel.track("AddToCart", {
                   content_type: "product",
                   quantity: 1,
@@ -249,7 +261,7 @@ const ProductSquareCard = ({ product }) => {
                 (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
                 n == 1 &&
                 (homePageDetails?.vendor_data?.international_delivery === "3" ||
-                homePageDetails?.vendor_data?.international_delivery === "" ||
+                  homePageDetails?.vendor_data?.international_delivery === "" ||
                   internationalDelivery.country_name.toLowerCase() === "kuwait")
               ) {
                 history.push(`/area`);
@@ -287,6 +299,7 @@ const ProductSquareCard = ({ product }) => {
         boxShadow: "none",
         width: "100%",
       }}
+      onClick={handleCardClick}
     >
       <div style={{ position: "relative" }}>
         <CardMedia
@@ -296,7 +309,7 @@ const ProductSquareCard = ({ product }) => {
           alt={product?.product_name}
           style={{
             maxWidth: "100%",
-            height: "200px",
+            height: imgHeight ? imgHeight : "200px",
             objectFit: "cover",
             borderRadius: "8px",
             marginBottom: "10px",
@@ -432,20 +445,20 @@ const ProductSquareCard = ({ product }) => {
                   flexDirection: "row",
                   flexWrap: "nowrap",
                   cursor: "pointer",
-                  gap: "5px"
+                  gap: "5px",
                 }}
               >
                 <div
                   onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
                   className="product-price"
-                  style={{ alignItems: "center",  fontWeight: "600",  }}
+                  style={{ alignItems: "center", fontWeight: "600" }}
                 >
                   <span
                     style={{
                       fontSize: language == "ltr" ? "15px" : "18px",
                       paddingTop: inCart == 0 ? 2 : 0,
                       display: "flex",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
                     <span style={{ fontSize: "15px" }}>
@@ -511,7 +524,8 @@ const ProductSquareCard = ({ product }) => {
                   <span
                     onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
                     style={{
-                      backgroundColor: homePageDetails?.vendor_data?.vendor_color,
+                      backgroundColor:
+                        homePageDetails?.vendor_data?.vendor_color,
                       borderRadius: "50%",
                       display: "flex",
                       justifyContent: "center",
@@ -519,11 +533,18 @@ const ProductSquareCard = ({ product }) => {
                       marginLeft: "6px",
                       width: "25px",
                       height: "25px",
-                      boxSizing: "content-box"
+                      boxSizing: "content-box",
                     }}
                   >
                     {spinLoader ? (
-                      <div style={{ padding: "0 2px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                      <div
+                        style={{
+                          padding: "0 2px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
                         <Spinner height="14px" size="2px" />
                       </div>
                     ) : (
