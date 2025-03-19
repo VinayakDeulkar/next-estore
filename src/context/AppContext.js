@@ -134,7 +134,11 @@ export const AppProvider = ({
     addressString: "",
     addressType: "1",
   });
-  const handleDeliveryAddress = (value) => setAddressDetails(value);
+  const handleAddressDetailsChange = (value) => setAddressDetails(value);
+
+  const [openArea, setOpenArea] = useState({ open: false, goHome: false });
+  const handleOpenAreaChange = (value) => setOpenArea(value);
+
   const resetUserDetails = () => {
     setAreaDetails({
       type:
@@ -247,6 +251,10 @@ export const AppProvider = ({
     internationalDelivery,
     handleInternationalDeliveryChange,
     resetUserDetails,
+    openArea,
+    handleOpenAreaChange,
+    addressDetails,
+    handleAddressDetailsChange
   };
 
   return (
