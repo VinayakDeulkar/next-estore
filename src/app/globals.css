@@ -26,3 +26,39 @@ body {
     text-wrap: balance;
   }
 }
+
+
+
+.contact-details-bottom-button {
+  position: absolute;
+  bottom: 20px;
+  height: 45px;
+  width: 100%;
+  left: 0;
+  padding-left: 36px;
+  padding-right: 36px;
+  /* display: grid;
+  grid-template-columns: 30% calc(70% - 12px); */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+.contact-details-next-button {
+  border-radius: 40px;
+  font-size: 16px;
+  border: 1.5px solid var(--vendor-color);
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  font-weight: 600;
+  background-color: var(--vendor-color);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  /* width: 206px; */
+}

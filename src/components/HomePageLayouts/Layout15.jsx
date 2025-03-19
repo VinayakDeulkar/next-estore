@@ -14,7 +14,7 @@ import ProductSquareCard from "../ProductSquareCard/productSquareCard";
 const Layout15 = ({ categories }) => {
   const { language } = useContext(AppContext);
   const [expendedList, setExpendedList] = useState(
-    categories.map((cate) => cate.category_id)
+    categories?.map((cate) => cate.category_id)
   );
 
   const handleAccordionClick = (category_id) => {

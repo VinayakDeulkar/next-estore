@@ -1,0 +1,11 @@
+
+.titleDiv {
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: -5px;
+    margin-bottom: 30px;
+  }
+  
+  html[dir="rtl"] .titleDiv {
+    font-size: 17px;
+  }
