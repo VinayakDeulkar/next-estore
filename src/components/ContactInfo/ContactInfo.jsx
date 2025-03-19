@@ -81,212 +81,210 @@ const ContactInfo = ({
       />
 
       <div style={{ marginTop: "30px" }}>
-        <form action="javascript/void" autoComplete="on">
-          <div style={{ position: "relative" }}>
-            {homePageDetails?.vendor_data?.checkout_method === "2" ||
-            showNameEmailFields ? (
-              <>
-                <div className="customerInputsFlex">
-                  <div className="form__group formSemi">
-                    <div className="inputFlag">
-                      <div
-                        style={
-                          homePageDetails?.vendor_data?.checkout_method ===
-                            "2" && showNameEmailFields
-                            ? {
-                                backgroundColor: "#EAEAEA",
-                                borderRadius: "10px",
-                                height: "44px",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                              }
-                            : {}
-                        }
-                      >
-                        <ReactFlagsSelect
-                          selected={contactDetails?.phoneCode}
-                          searchable={true}
-                          showSelectedLabel={false}
-                          customLabels={telecount}
-                          disabled={
-                            homePageDetails?.vendor_data?.checkout_method ===
-                              "2" && showNameEmailFields
-                          }
-                          onSelect={(code) => {
-                            handleContactDetailsChange({
-                              ...contactDetails,
-                              phoneCode: code,
-                              phone: contactDetails?.phone?.substring(
-                                0,
-                                code == "KW" ? 8 : 12
-                              ),
-                            });
-                          }}
-                        ></ReactFlagsSelect>
-                      </div>
-                    </div>
-                    <input
-                      type="tel"
-                      className="form__field hideBorder"
-                      placeholder=""
-                      name="phone"
-                      id="phone"
-                      required="true"
-                      disabled={
+        <div style={{ position: "relative" }}>
+          {homePageDetails?.vendor_data?.checkout_method === "2" ||
+          showNameEmailFields ? (
+            <>
+              <div className="customerInputsFlex">
+                <div className="form__group formSemi">
+                  <div className="inputFlag">
+                    <div
+                      style={
                         homePageDetails?.vendor_data?.checkout_method === "2" &&
                         showNameEmailFields
+                          ? {
+                              backgroundColor: "#EAEAEA",
+                              borderRadius: "10px",
+                              height: "44px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }
+                          : {}
                       }
-                      value={contactDetails?.phone}
-                      autoComplete="tel"
-                      onChange={(e) => {
-                        const newValue = modifyValue(e.target.value);
-                        if (
-                          (contactDetails.phoneCode === "KW" &&
-                            newValue.length <= 8) ||
-                          (contactDetails.phoneCode !== "KW" &&
-                            newValue.length <= 10)
-                        ) {
+                    >
+                      <ReactFlagsSelect
+                        selected={contactDetails?.phoneCode}
+                        searchable={true}
+                        showSelectedLabel={false}
+                        customLabels={telecount}
+                        disabled={
+                          homePageDetails?.vendor_data?.checkout_method ===
+                            "2" && showNameEmailFields
+                        }
+                        onSelect={(code) => {
                           handleContactDetailsChange({
                             ...contactDetails,
-                            phone: newValue,
+                            phoneCode: code,
+                            phone: contactDetails?.phone?.substring(
+                              0,
+                              code == "KW" ? 8 : 12
+                            ),
                           });
-                        }
-                      }}
-                    />
-                    {homePageDetails?.vendor_data?.checkout_method === "2" &&
-                    showNameEmailFields ? (
-                      <div
-                        style={{
-                          position: "absolute",
-                          right: "10px",
-                          top: "25px",
-                          display: "flex",
-                          alignItems: "center",
-                          color: "#fff",
-                          padding: "5px 7px",
-                          backgroundColor: "#4CAF50",
-                          borderRadius: "50px",
-                          fontSize: "12px",
-                          gap: "5px",
                         }}
-                      >
-                        <span>✔</span>
-                      </div>
-                    ) : null}
-                    <label
-                      htmlFor="phone"
-                      className="form__label phoneLabel dataFilled"
-                    >
-                      {language == "ltr" ? "Phone Number" : "رقم الهاتف"}
-                    </label>
+                      ></ReactFlagsSelect>
+                    </div>
                   </div>
-                </div>
-                {errorContactDetails.phoneError && (
-                  <label className="error-text">
-                    {language == "ltr"
-                      ? errorContactDetails.phoneErrorMessage
-                      : errorContactDetails.phoneErrorMessagear}
-                  </label>
-                )}
-              </>
-            ) : null}
-            {showNameEmailFields ? (
-              <>
-                <div className="customerInputsFlex">
-                  <div className="form__group formSemi">
-                    <input
-                      type="text"
-                      className="form__field hideBorder"
-                      placeholder=""
-                      id="name"
-                      name="name"
-                      required="true"
-                      autoComplete
-                      value={contactDetails.name}
-                      onChange={(e) => {
+                  <input
+                    type="tel"
+                    className="form__field hideBorder"
+                    placeholder=""
+                    name="phone"
+                    id="phone"
+                    required="true"
+                    disabled={
+                      homePageDetails?.vendor_data?.checkout_method === "2" &&
+                      showNameEmailFields
+                    }
+                    value={contactDetails?.phone}
+                    autoComplete="tel"
+                    onChange={(e) => {
+                      const newValue = modifyValue(e.target.value);
+                      if (
+                        (contactDetails.phoneCode === "KW" &&
+                          newValue.length <= 8) ||
+                        (contactDetails.phoneCode !== "KW" &&
+                          newValue.length <= 10)
+                      ) {
                         handleContactDetailsChange({
                           ...contactDetails,
-                          name: e.target.value,
+                          phone: newValue,
                         });
-                      }}
-                    />
-                    <label htmlFor="name" className="form__label">
-                      {language == "ltr" ? "Full Name" : "الاسم الكامل"}
-                    </label>
-                  </div>
-                </div>
-                {errorContactDetails.nameError && (
-                  <label className="error-text">
-                    {language == "ltr"
-                      ? errorContactDetails.nameErrorMessage
-                      : errorContactDetails.nameErrorMessagear}
-                  </label>
-                )}
-              </>
-            ) : null}
-
-            {homePageDetails?.vendor_data?.checkout_method === "1" ||
-            showNameEmailFields ? (
-              <>
-                <div className="customerInputsFlex">
-                  <div className="form__group formSemi">
-                    <input
-                      type="email"
-                      className="form__field hideBorder"
-                      placeholder=""
-                      id="email"
-                      name="email"
-                      required="true"
-                      autoComplete
-                      disabled={
-                        homePageDetails?.vendor_data?.checkout_method === "1" &&
-                        showNameEmailFields
                       }
-                      value={contactDetails.email}
-                      onChange={(e) => {
-                        handleContactDetailsChange({
-                          ...contactDetails,
-                          email: e.target.value,
-                        });
+                    }}
+                  />
+                  {homePageDetails?.vendor_data?.checkout_method === "2" &&
+                  showNameEmailFields ? (
+                    <div
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "25px",
+                        display: "flex",
+                        alignItems: "center",
+                        color: "#fff",
+                        padding: "5px 7px",
+                        backgroundColor: "#4CAF50",
+                        borderRadius: "50px",
+                        fontSize: "12px",
+                        gap: "5px",
                       }}
-                    />
-                    {homePageDetails?.vendor_data?.checkout_method === "1" &&
-                    showNameEmailFields ? (
-                      <div
-                        style={{
-                          position: "absolute",
-                          right: "10px",
-                          top: "25px",
-                          display: "flex",
-                          alignItems: "center",
-                          color: "#fff",
-                          padding: "5px 7px",
-                          backgroundColor: "#4CAF50",
-                          borderRadius: "50px",
-                          fontSize: "12px",
-                          gap: "5px",
-                        }}
-                      >
-                        <span>✔</span>
-                      </div>
-                    ) : null}
-                    <label htmlFor="email" className="form__label">
-                      {language == "ltr" ? "Email" : "البريد الإلكتروني"}
-                    </label>
-                  </div>
-                </div>
-                {errorContactDetails.emailError && (
-                  <label className="error-text">
-                    {language == "ltr"
-                      ? errorContactDetails.emailErrorMessage
-                      : errorContactDetails.emailErrorMessagear}
+                    >
+                      <span>✔</span>
+                    </div>
+                  ) : null}
+                  <label
+                    htmlFor="phone"
+                    className="form__label phoneLabel dataFilled"
+                  >
+                    {language == "ltr" ? "Phone Number" : "رقم الهاتف"}
                   </label>
-                )}
-              </>
-            ) : null}
-          </div>
-        </form>
+                </div>
+              </div>
+              {errorContactDetails.phoneError && (
+                <label className="error-text">
+                  {language == "ltr"
+                    ? errorContactDetails.phoneErrorMessage
+                    : errorContactDetails.phoneErrorMessagear}
+                </label>
+              )}
+            </>
+          ) : null}
+          {showNameEmailFields ? (
+            <>
+              <div className="customerInputsFlex">
+                <div className="form__group formSemi">
+                  <input
+                    type="text"
+                    className="form__field hideBorder"
+                    placeholder=""
+                    id="name"
+                    name="name"
+                    required="true"
+                    autoComplete
+                    value={contactDetails.name}
+                    onChange={(e) => {
+                      handleContactDetailsChange({
+                        ...contactDetails,
+                        name: e.target.value,
+                      });
+                    }}
+                  />
+                  <label htmlFor="name" className="form__label">
+                    {language == "ltr" ? "Full Name" : "الاسم الكامل"}
+                  </label>
+                </div>
+              </div>
+              {errorContactDetails.nameError && (
+                <label className="error-text">
+                  {language == "ltr"
+                    ? errorContactDetails.nameErrorMessage
+                    : errorContactDetails.nameErrorMessagear}
+                </label>
+              )}
+            </>
+          ) : null}
+
+          {homePageDetails?.vendor_data?.checkout_method === "1" ||
+          showNameEmailFields ? (
+            <>
+              <div className="customerInputsFlex">
+                <div className="form__group formSemi">
+                  <input
+                    type="email"
+                    className="form__field hideBorder"
+                    placeholder=""
+                    id="email"
+                    name="email"
+                    required="true"
+                    autoComplete
+                    disabled={
+                      homePageDetails?.vendor_data?.checkout_method === "1" &&
+                      showNameEmailFields
+                    }
+                    value={contactDetails.email}
+                    onChange={(e) => {
+                      handleContactDetailsChange({
+                        ...contactDetails,
+                        email: e.target.value,
+                      });
+                    }}
+                  />
+                  {homePageDetails?.vendor_data?.checkout_method === "1" &&
+                  showNameEmailFields ? (
+                    <div
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "25px",
+                        display: "flex",
+                        alignItems: "center",
+                        color: "#fff",
+                        padding: "5px 7px",
+                        backgroundColor: "#4CAF50",
+                        borderRadius: "50px",
+                        fontSize: "12px",
+                        gap: "5px",
+                      }}
+                    >
+                      <span>✔</span>
+                    </div>
+                  ) : null}
+                  <label htmlFor="email" className="form__label">
+                    {language == "ltr" ? "Email" : "البريد الإلكتروني"}
+                  </label>
+                </div>
+              </div>
+              {errorContactDetails.emailError && (
+                <label className="error-text">
+                  {language == "ltr"
+                    ? errorContactDetails.emailErrorMessage
+                    : errorContactDetails.emailErrorMessagear}
+                </label>
+              )}
+            </>
+          ) : null}
+        </div>
       </div>
 
       <div className="blueBox" style={{ marginTop: "20px" }}>

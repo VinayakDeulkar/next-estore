@@ -184,3 +184,15 @@ html[dir="rtl"] .form__field:-webkit-autofill ~ .form__label.phoneLabel {
   align-items: center;
   gap: 10px;
 }
+
+.error-text {
+  margin-bottom: 0rem;
+  font-weight: 400;
+  color: #ff0000;
+  line-height: 1em;
+  font-size: 12px !important;
+}
+
+html[dir="rtl"] .error-text {
+  font-size: 15px !important;
+}
