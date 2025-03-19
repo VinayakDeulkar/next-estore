@@ -20,11 +20,15 @@
     "next": "14.2.24",
     "notistack": "^3.0.2",
     "react": "^18",
+    "react-datepicker": "^8.2.1",
     "react-dom": "^18",
+    "react-facebook-pixel": "^1.0.4",
     "react-flags-select": "^2.4.0",
     "react-otp-input": "^3.1.1",
     "react-responsive-carousel": "^3.2.23",
-    "sharp": "^0.33.5"
+    "react-snapchat-pixel": "^1.1.1",
+    "sharp": "^0.33.5",
+    "tiktok-pixel": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "^8",

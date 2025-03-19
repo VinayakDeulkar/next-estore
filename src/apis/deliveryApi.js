@@ -49,3 +49,29 @@ export const getScheduleTime = async ({ vendors_id, area_id, vendorSlug }) => {
   );
   return response.data;
 };
+
+export const updateDeliveryCharges = async (
+  vendorSlug,
+  vendors_id,
+  area_id,
+  delivery_charge,
+  successPromocode
+) => {
+  try {
+    const response = await axios.post(
+      `${NEXT_PUBLIC_API_URL}/update-cart-delivery-charge`,
+      JSON.stringify({
+        token: process.env.REACT_APP_TOKEN,
+        vendor_slug: vendorSlug,
+        vendor_id: vendors_id,
+        deliveryCharge: delivery_charge,
+        area_id: area_id,
+        user_string: localStorage.getItem("userID"),
+        successPromocode: successPromocode,
+      })
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

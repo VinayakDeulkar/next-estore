@@ -28,7 +28,12 @@ export const nameValidation = (value, setErrorContactDetails) => {
   }
 };
 
-export const phoneValidation = (value, isCompulsory, setErrorContactDetails,contactDetails) => {
+export const phoneValidation = (
+  value,
+  isCompulsory,
+  setErrorContactDetails,
+  contactDetails
+) => {
   let pattern = /^[0-9]+$/;
   let kwpattern = /^[124965]\d+$/;
   if (value === "" && isCompulsory) {
@@ -78,7 +83,11 @@ export const phoneValidation = (value, isCompulsory, setErrorContactDetails,cont
   }
 };
 
-export const emailValidation = (value, isCompulsory, setErrorContactDetails) => {
+export const emailValidation = (
+  value,
+  isCompulsory,
+  setErrorContactDetails
+) => {
   let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (value === "" && isCompulsory) {
     setErrorContactDetails((errorContactDetails) => ({
@@ -106,3 +115,7 @@ export const emailValidation = (value, isCompulsory, setErrorContactDetails) => 
     return false;
   }
 };
+
+export function addCartTag(obj) {
+  window.gtag("event", "add_to_cart", obj);
+}
