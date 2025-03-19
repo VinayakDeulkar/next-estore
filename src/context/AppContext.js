@@ -141,6 +141,20 @@ export const AppProvider = ({
   const [openArea, setOpenArea] = useState({ open: false, goHome: false });
   const handleOpenAreaChange = (value) => setOpenArea(value);
 
+  useEffect(() => {
+    if (!localStorage.getItem("userID")) {
+      let result = "";
+      let characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+      let charactersLength = characters.length;
+      for (var i = 0; i < 10; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      localStorage.setItem("userID", result);
+    }
+  }, []);
+
   const resetUserDetails = () => {
     setAreaDetails({
       type:
@@ -214,16 +228,19 @@ export const AppProvider = ({
   };
 
   useEffect(() => {
-    if ((vendorSlug?.status, homePageDetails?.data)) {
+    if (vendorSlug?.status && homePageDetails?.data) {
+      console.log(homePageDetails, "homePageDetails");
+      const categoriesData = ["10", "13", "16"].includes(
+        vendorSlug?.data?.vendor_data?.home_page_type
+      )
+        ? homePageDetails?.data?.categories
+        : homePageDetails?.data?.categories?.filter(
+            (category) => category?.products?.length != 0
+          );
+      console.log(categoriesData, "categoriesData");
       handleHomePageDetailsChange({
         ...vendorSlug?.data,
-        categories: ["10", "13", "16"].includes(
-          vendorSlug?.data?.vendor_data?.home_page_type
-        )
-          ? homePageDetails?.data?.categories
-          : homePageDetails?.data?.categories?.filter(
-              (category) => category?.products?.length != 0
-            ),
+        categories: categoriesData,
       });
 
       if (document) {

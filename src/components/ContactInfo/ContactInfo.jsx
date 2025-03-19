@@ -4,6 +4,7 @@ import "./contactInfo.css";
 import { AppContext } from "@/context/AppContext";
 import { telecount } from "@/constants/constants";
 import Title from "../common/Title/Title";
+import { useRouter } from "next/navigation";
 
 const ContactInfo = ({
   errorContactDetails,
@@ -20,6 +21,7 @@ const ContactInfo = ({
     internationalDelivery,
     handleInternationalDeliveryChange,
   } = useContext(AppContext);
+  const router = useRouter();
 
   useEffect(() => {
     if (internationalDelivery && internationalDelivery.country_code) {
@@ -353,6 +355,7 @@ const ContactInfo = ({
           }}
           onClick={() => {
             handleUserDetailsChange({ ...userDetails, is_guest: true });
+            router.push("/contact-details");
           }}
         >
           {language === "ltr" ? "Continue as Guest" : "الاستمرار كضيف"}

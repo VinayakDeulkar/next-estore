@@ -173,7 +173,6 @@ const DeliveryAddress = () => {
       if (showMap && markerPosition?.lat) {
         if (!areaDetails?.area && !areaDetails?.branch) {
           setOpenArea((prev) => ({ open: true, goHome: false }));
-          // router.push(`/area`);
         } else {
           let block =
             homePageDetails?.vendor_data?.enable_address_types?.includes(
@@ -292,8 +291,9 @@ const DeliveryAddress = () => {
             ? false
             : streetValidation(addressDetails.street);
         let addressName = addressNameValidation(addressDetails.addressName);
-        let areaName = areaNameValidation(areaDetails.area);
         let house = houseValidation(addressDetails.house);
+        console.log(addressDetails, "inside homePageDetails?.vendor_data");
+
         if (
           !block &&
           !street &&
@@ -477,6 +477,21 @@ const DeliveryAddress = () => {
           ) : (
             <InternationalAddress internationalError={internationalError} />
           )}
+          <div
+            className={`contact-details-bottom-button contact-details-mobile-button ${
+              homePageDetails?.vendor_data?.home_page_type === "18" &&
+              "fashion-theme"
+            }`}
+          >
+            <Box
+              className="contact-details-next-button"
+              onClick={() => {
+                handleNext();
+              }}
+            >
+              {language === "ltr" ? "Next" : "متابعة"}
+            </Box>
+          </div>
         </Box>
       </GridLayout>
     </Box>

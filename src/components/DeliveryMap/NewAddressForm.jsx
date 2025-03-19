@@ -9,6 +9,7 @@ import CommonHeader from "../common/CommonHeader/CommonHeader";
 import NewAddressFormField from "./NewAddressFormField";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "./deliverymap.css";
+import "@/components/ContactInfo/contactInfo.css";
 import AreaModal from "../AreaModal/areaModal";
 const NewAddressForm = ({
   areaDetails,

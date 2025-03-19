@@ -9,13 +9,13 @@ const GridLayout = ({
   sx,
 }) => {
   return (
-    <Grid container sx={{ marginTop: margin ,...sx }}>
-      <Grid item xs={false} sm={3} md={3}></Grid>
+    <Grid container sx={{ marginTop: margin, ...sx }}>
+      <Grid item xs={false} sm={3.5} md={3.5}></Grid>
       <Grid
         item
         xs={12}
-        sm={6}
-        md={6}
+        sm={5}
+        md={5}
         sx={{
           position: "relative",
           backgroundColor: backgroundColor,
@@ -24,7 +24,7 @@ const GridLayout = ({
       >
         {children}
       </Grid>
-      <Grid item xs={false} sm={3} md={3}></Grid>
+      <Grid item xs={false} sm={3.5} md={3.5}></Grid>
     </Grid>
   );
 };

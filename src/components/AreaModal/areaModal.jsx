@@ -296,6 +296,7 @@ const AreaModal = ({ showAreaModal, handleClose }) => {
                             display: "flex",
                             justifyContent: "space-between",
                             alignItems: "center",
+                            borderBottom: "1px solid #e5e7eb",
                           }}
                           onClick={() => {
                             handleCityClick(city);
