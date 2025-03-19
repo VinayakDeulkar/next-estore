@@ -28,6 +28,30 @@ export const getHomepageDetails = async ({
   return response.data;
 };
 
+export const getDeliveryPickupList = async ({ vendors_id, vendorSlug }) => {
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/delivery-pickup-list`,
+    JSON.stringify({
+      token: process.env.NEXT_PUBLIC_APP_TOKEN,
+      vendor_id: vendors_id,
+      vendor_slug: vendorSlug,
+    })
+  );
+  return response.data;
+};
+
+export const getEstorebraches = async ({ vendors_id, vendorSlug }) => {
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/branches`,
+    JSON.stringify({
+      token: process.env.NEXT_PUBLIC_APP_TOKEN,
+      vendor_id: vendors_id,
+      vendor_slug: vendorSlug,
+    })
+  );
+  return response.data;
+};
+
 export const getProductDetails = async ({
   product_id,
   vendor_slug,

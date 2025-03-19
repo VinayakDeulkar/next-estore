@@ -6,7 +6,6 @@ import moment from "moment";
 import Link from "next/link";
 
 const HorizontalCard = ({ product }) => {
-  console.log('first')
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =
     useContext(AppContext);
   const [inCart, setInCart] = useState(0);
@@ -385,7 +384,7 @@ const HorizontalCard = ({ product }) => {
               justifyContent: "space-between",
               alignItems: "flex-start",
               width: "95%",
-              marginTop: "10px"
+              marginTop: "10px",
             }}
           >
             {product?.offer_applied == 1 && (
@@ -400,7 +399,7 @@ const HorizontalCard = ({ product }) => {
                   border: "none",
                   padding: 0,
                   fontSize: language == "ltr" ? 15 : 18,
-                  fontWeight: "600"
+                  fontWeight: "600",
                 }}
               >
                 {language === "ltr"
@@ -418,7 +417,7 @@ const HorizontalCard = ({ product }) => {
                   paddingLeft: "0",
                   color: "red",
                   fontSize: language == "ltr" ? 15 : 18,
-                  fontWeight: "600"
+                  fontWeight: "600",
                 }}
                 className={`cost-bubble price-bubble big-add-cart ${
                   product?.offer_applied == 1 ? "small-padding" : ""
@@ -437,7 +436,7 @@ const HorizontalCard = ({ product }) => {
                   paddingRight: "0",
                   paddingLeft: "0",
                   fontSize: language == "ltr" ? 15 : 18,
-                  fontWeight: "600"
+                  fontWeight: "600",
                 }}
                 className="cost-bubble price-bubble big-add-cart"
               >
@@ -457,7 +456,7 @@ const HorizontalCard = ({ product }) => {
                   color: "#818181",
                   border: "2px solid #818181",
                   minWidth: "155px",
-                  fontWeight: "600"
+                  fontWeight: "600",
                 }}
               >
                 {language === "ltr"
@@ -481,7 +480,7 @@ const HorizontalCard = ({ product }) => {
                     margin: 0,
                     paddingRight: 0,
                     paddingLeft: 0,
-                    fontWeight: "600"
+                    fontWeight: "600",
                   }}
                 >
                   <span>
@@ -572,7 +571,7 @@ const HorizontalCard = ({ product }) => {
                           maxHeight: 17,
                           minHeight: 17,
                           margin: 0,
-                          fontWeight: "600"
+                          fontWeight: "600",
                         }}
                       >
                         <span>
@@ -590,7 +589,7 @@ const HorizontalCard = ({ product }) => {
                       display: "flex",
                       alignItems: "center",
                       paddingBottom: 3,
-                      fontWeight: "600"
+                      fontWeight: "600",
                     }}
                   >
                     <span>

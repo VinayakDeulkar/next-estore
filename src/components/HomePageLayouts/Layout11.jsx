@@ -24,7 +24,6 @@ const Layout11 = ({ categories }) => {
       setExpendedList([...expendedList, category_id]);
     }
   };
-  console.log(categories, "categories");
   return (
     <Box>
       <Box

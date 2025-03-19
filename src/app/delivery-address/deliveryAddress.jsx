@@ -1,10 +1,13 @@
 "use client";
-import { GetUserDetails, saveUserAddress } from "@/apis";
+import { GetUserDetails, getVendorCountries, saveUserAddress } from "@/apis";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
+import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
+import { mapArea } from "@/constants/areaConstant";
 import { tele } from "@/constants/constants";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -23,6 +26,7 @@ const DeliveryAddress = () => {
     handleUserDetailsChange,
     internationalDelivery,
     handleInternationalDeliveryChange,
+    vendorSlug,
   } = useContext(AppContext);
   const [countryDropDown, setCountryDropDown] = useState();
   const [countryArray, setCountryArray] = useState();
@@ -59,12 +63,6 @@ const DeliveryAddress = () => {
     delivery_address1: false,
     delivery_address2: false,
   });
-
-  //   useEffect(() => {
-  //     if (!localStorage.getItem("contactInfo")) {
-  //       router.push(`/`);
-  //     }
-  //   }, []);
 
   const blockValidation = (value) => {
     if (value == "") {
@@ -242,8 +240,8 @@ const DeliveryAddress = () => {
                   language: language,
                 });
                 if (response?.status) {
-                  setUserDetails({ ...response?.data });
-                  setAddressDetails((k) => ({
+                  handleUserDetailsChange({ ...response?.data });
+                  handleAddressDetailsChange((k) => ({
                     ...k,
                     addressName: addressDetails.addressName,
                     id: addResponse.data,
@@ -368,9 +366,9 @@ const DeliveryAddress = () => {
         const response = await getVendorCountries({
           vendor_id: homePageDetails?.vendor_data?.vendors_id,
           ecom_vendor_id: homePageDetails?.vendor_data?.ecommerce_vendor_id,
-          vendor_slug: vendorSlug,
+          vendor_slug: vendorSlug?.data?.ecom_url_slug,
         });
-        if (response.status) {
+        if (response?.status) {
           let countryArray = [];
           response.data.map((ele) => {
             countryArray.push(ele.abbr);
@@ -379,7 +377,7 @@ const DeliveryAddress = () => {
             (ele) => ele.abbr === internationalDelivery.delivery_country_code
           );
           if (currentCountry && currentCountry.length > 0) {
-            setInternationalDelivery({
+            handleInternationalDeliveryChange({
               ...internationalDelivery,
               delivery_country_code: currentCountry[0].abbr,
               country_id: currentCountry[0].country_id,
@@ -392,7 +390,7 @@ const DeliveryAddress = () => {
         }
       })();
     }
-  }, []);
+  }, [homePageDetails]);
 
   useEffect(() => {
     if (areaDetails?.area) {
@@ -447,7 +445,39 @@ const DeliveryAddress = () => {
         padding={"20px"}
         sx={{ height: "calc(100vh - 50px)" }}
       >
-        <Box></Box>
+        <Box>
+          {homePageDetails?.vendor_data?.international_delivery === "3" ||
+          homePageDetails?.vendor_data?.international_delivery === "" ||
+          internationalDelivery.delivery_country_code.toUpperCase() === "KW" ||
+          areaDetails.area_id !== "" ? (
+            <>
+              {showMap ? (
+                <DeliveryMapContainer
+                  selectedArea={areaDetails?.area}
+                  // handleMapChanges={handleMapChanges}
+                  markerPosition={markerPosition}
+                  setMarkerPosition={setMarkerPosition}
+                  selectedBounds={selectedBounds}
+                  setSelectedBounds={setSelectedBounds}
+                  triggerClick={handleMapLoad}
+                />
+              ) : (
+                <NewAddressForm
+                  areaDetails={areaDetails}
+                  blockValidation={blockValidation}
+                  streetValidation={streetValidation}
+                  houseValidation={houseValidation}
+                  // handleMapChanges={handleMapChanges}
+                  addressNameValidation={addressNameValidation}
+                  errorState={errorState}
+                  setMarkerPosition={setMarkerPosition}
+                />
+              )}
+            </>
+          ) : (
+            <InternationalAddress internationalError={internationalError} />
+          )}
+        </Box>
       </GridLayout>
     </Box>
   );

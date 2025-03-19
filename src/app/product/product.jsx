@@ -10,7 +10,6 @@ import { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 
 const Product = (props) => {
-  console.log(props, "props");
   const [addedVariaton, setAddedVariation] = useState([]);
 
   return (

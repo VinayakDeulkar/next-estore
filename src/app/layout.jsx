@@ -1,4 +1,9 @@
-import { getHomepageDetails, getVendorSlug } from "@/apis";
+import {
+  getDeliveryPickupList,
+  getEstorebraches,
+  getHomepageDetails,
+  getVendorSlug,
+} from "@/apis";
 import { AppProvider } from "@/context/AppContext";
 import "./globals.css";
 
@@ -51,26 +56,52 @@ async function getData() {
     host: "estore.payzah.support/dev",
     // host: host,
   });
-  const homePageResponse = vendorSlugResponse?.status
-    ? await getHomepageDetails({
+  const [homePageResponse, deliveryResponse, estoreBranchesResponse] =
+    await Promise.all([
+      getHomepageDetails({
         vendorSlug: vendorSlugResponse?.data?.ecom_url_slug,
         vendors_id: vendorSlugResponse?.data?.vendor_data?.vendors_id,
         area_id: "",
-      })
-    : {};
-  return { vendorSlugResponse, homePageResponse };
+      }),
+      getDeliveryPickupList({
+        vendorSlug: vendorSlugResponse?.data?.ecom_url_slug,
+        vendors_id: vendorSlugResponse?.data?.vendor_data?.vendors_id,
+      }),
+      getEstorebraches({
+        vendorSlug: vendorSlugResponse?.data?.ecom_url_slug,
+        vendors_id: vendorSlugResponse?.data?.vendor_data?.vendors_id,
+      }),
+    ]);
+  return {
+    vendorSlugResponse,
+    homePageResponse,
+    deliveryResponse,
+    estoreBranchesResponse,
+  };
 }
 
 export default async function RootLayout({ children }) {
-  const { vendorSlugResponse, homePageResponse } = await getData();
+  const {
+    vendorSlugResponse,
+    homePageResponse,
+    deliveryResponse,
+    estoreBranchesResponse,
+  } = await getData();
 
   return (
     <html lang="en">
       <head></head>
-      <body style={{ backgroundColor: "#F3F3F3", fontFamily: "SFT Schrifted Sans TRIAL Var" }}>
+      <body
+        style={{
+          backgroundColor: "#F3F3F3",
+          fontFamily: "SFT Schrifted Sans TRIAL Var",
+        }}
+      >
         <AppProvider
           vendorSlugResponse={vendorSlugResponse}
           homePageResponse={homePageResponse}
+          deliveryResponse={deliveryResponse}
+          estoreBranchesResponse={estoreBranchesResponse}
         >
           {children}
         </AppProvider>

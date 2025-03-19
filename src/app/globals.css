@@ -16,7 +16,7 @@
 }
 
 body {
-  color: var(--foreground);
+  color: #000;
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -26,8 +26,6 @@ body {
     text-wrap: balance;
   }
 }
-
-
 
 .contact-details-bottom-button {
   position: absolute;
@@ -61,4 +59,7 @@ body {
   width: 100%;
   text-align: center;
   /* width: 206px; */
+}
+input {
+  width: 100%;
 }

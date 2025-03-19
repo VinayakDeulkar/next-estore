@@ -9,6 +9,8 @@ export const AppContext = createContext();
 export const AppProvider = ({
   vendorSlugResponse,
   homePageResponse,
+  deliveryResponse,
+  estoreBranchesResponse,
   children,
 }) => {
   const [language, setLanguage] = useState("ltr");
@@ -233,6 +235,60 @@ export const AppProvider = ({
     }
   }, [vendorSlug, homePageDetails?.data]);
 
+  useEffect(() => {
+    if (deliveryResponse?.status) {
+      setAreaDetails((areaDetails) => ({
+        ...areaDetails,
+        data: { ...areaDetails.data, ...deliveryResponse.data },
+      }));
+    }
+    if (estoreBranchesResponse?.status) {
+      if (
+        estoreBranchesResponse.data ||
+        estoreBranchesResponse.data?.length != 0
+      ) {
+        // map to check if the store is open for 24hrs or not and changing the values of start and end time to show 24hrs
+        let b = estoreBranchesResponse.data.map((l, q) => {
+          let diff = Math.abs(
+            moment(l.office_start_time, "HH:mm:ss").diff(
+              moment(l.office_end_time, "HH:mm:ss"),
+              "minutes"
+            )
+          );
+          return {
+            ...l,
+            office_end_time:
+              diff == 1 || diff == 1439 ? "23:59:59" : l.office_end_time,
+            office_start_time:
+              diff == 1 || diff == 1439 ? "00:00:00" : l.office_start_time,
+          };
+        });
+        let autoBranch = {};
+        if (
+          estoreBranchesResponse.data.length == 1 &&
+          vendorSlug === "alawael-bilingual-school"
+        ) {
+          const value = getBranchForAlawael();
+          autoBranch = value;
+        }
+        setAreaDetails((areaDetails) => ({
+          ...areaDetails,
+          data: { ...areaDetails.data, branch: b },
+          ...autoBranch,
+        }));
+      }
+    }
+  }, [deliveryResponse, estoreBranchesResponse]);
+  const getBranchForAlawael = async () => {
+    // return await getBranch(
+    //   estoreBranchesResponse.data[0]?.name,
+    //   estoreBranchesResponse.data[0]?.arabic_name,
+    //   estoreBranchesResponse.data[0]?.id,
+    //   estoreBranchesResponse.data[0]?.area_ids[0] ?? 1,
+    //   estoreBranchesResponse
+    // );
+  };
+
   const store = {
     language,
     handleLanguageChange,
@@ -254,7 +310,7 @@ export const AppProvider = ({
     openArea,
     handleOpenAreaChange,
     addressDetails,
-    handleAddressDetailsChange
+    handleAddressDetailsChange,
   };
 
   return (

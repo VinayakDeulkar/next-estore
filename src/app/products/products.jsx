@@ -25,8 +25,6 @@ const Products = (props) => {
   const [productsData, setProductsData] = useState([]);
   const { homePageDetails } = useContext(AppContext);
 
-  console.log(props?.data, "props?.data");
-
   useEffect(() => {
     setProductsData([...props?.data]);
   }, []);
@@ -97,11 +95,7 @@ const Products = (props) => {
       {homePageDetails?.vendor_data?.home_page_type === "10" ? (
         <Grid container spacing={1}>
           {productsData?.map((product) => (
-            <Grid
-              item
-              xs={12}
-              key={product?.id}
-            >
+            <Grid item xs={12} key={product?.id}>
               <HorizontalCard product={product} />
             </Grid>
           ))}
