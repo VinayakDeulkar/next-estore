@@ -818,3 +818,60 @@ html[dir="rtl"] .delivery-order-header .delivery-order-title {
   transform: translateY(1px);
 }
 
+.orderHistoryMain {
+  margin-top: 15px;
+}
+
+.monthText {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+html[dir="rtl"] .monthText {
+  font-size: 19px;
+}
+
+.historycard {
+  border: 1px solid #e1e1e1;
+  border-radius: 9px;
+  padding: 15px 20px;
+  margin-top: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+.historyRow {
+  width: 100%;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.orderNumber {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+html[dir="rtl"] .orderNumber {
+  font-size: 18px;
+}
+
+.orderStatusDiv {
+  /* height: 25px; */
+  padding: 2px 5px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+html[dir="rtl"] .orderStatusDiv {
+  font-size: 13px;
+}
+
+.full-width-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e1e1e1;
+  margin: 10px 0;
+}

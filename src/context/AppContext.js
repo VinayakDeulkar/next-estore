@@ -229,7 +229,6 @@ export const AppProvider = ({
 
   useEffect(() => {
     if (vendorSlug?.status && homePageDetails?.data) {
-      console.log(homePageDetails, "homePageDetails");
       const categoriesData = ["10", "13", "16"].includes(
         vendorSlug?.data?.vendor_data?.home_page_type
       )
@@ -237,7 +236,6 @@ export const AppProvider = ({
         : homePageDetails?.data?.categories?.filter(
             (category) => category?.products?.length != 0
           );
-      console.log(categoriesData, "categoriesData");
       handleHomePageDetailsChange({
         ...vendorSlug?.data,
         categories: categoriesData,
