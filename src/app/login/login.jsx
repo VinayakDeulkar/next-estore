@@ -334,7 +334,7 @@ const Login = () => {
           <CommonHeader
             englishHeader={showNameEmailFields ? "Profile" : "Login"}
             arabicHeader={showNameEmailFields ? "حساب تعريفي" : "تسجيل الدخول"}
-            fontWeight={600}
+            fontWeight={400}
           />
           {openOtpPage ? (
             <OtpVerification

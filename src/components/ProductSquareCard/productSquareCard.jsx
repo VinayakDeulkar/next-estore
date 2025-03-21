@@ -451,7 +451,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 <div
                   onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
                   className="product-price"
-                  style={{ alignItems: "center", fontWeight: "600" }}
+                  style={{ alignItems: "center", fontWeight: "400" }}
                 >
                   <span
                     style={{

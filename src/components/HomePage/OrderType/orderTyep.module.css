@@ -5,7 +5,7 @@
 .modeSelector_tabsNew:after {
   content: "";
   position: absolute;
-  width: 50%;
+  width: 25%;
   top: 0;
   transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.4s;
   border-radius: 8px;
@@ -16,11 +16,11 @@
 }
 
 .modeSelector_tabsNew.left:after {
-  left: 0;
+  left: 12.5%;
 }
 
 .modeSelector_tabsNew.right:after {
-  left: 50%;
+  left: 62.5%;
 }
 
 .modeSelector_insidetabsNew {

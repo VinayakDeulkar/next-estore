@@ -29,14 +29,22 @@ const Layout15 = ({ categories }) => {
     <div>
       {categories?.map((category) => (
         <Accordion
-          sx={{ mb: 2, borderRadius: "8px" }}
+          sx={{
+            mb: 2,
+            borderRadius: "10px !important",
+            boxShadow: "none",
+            border: "1px solid #e8e6e6",
+          }}
           key={category?.category_id}
           expanded={expendedList.includes(category?.category_id)}
           onChange={() => handleAccordionClick(category?.category_id)}
         >
           <AccordionSummary
             sx={{
-              padding: "0 20px",
+              padding: "0 40px",
+              "&.Mui-expanded .MuiTypography-root": {
+                margin: "20px 0",
+              },
             }}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -48,10 +56,10 @@ const Layout15 = ({ categories }) => {
               enText={category?.category_name}
             />
           </AccordionSummary>
-          <AccordionDetails sx={{ padding: "0 20px 20px" }}>
-            <Grid container className="gridContainer">
+          <AccordionDetails sx={{ padding: "0 40px 20px" }}>
+            <Grid container spacing={"20px"}>
               {category?.products?.map((product) => (
-                <Grid item xs={6} key={product?.id}>
+                <Grid item xs={6} md={4} lg={3} xl={3} key={product?.id}>
                   <ProductSquareCard product={product} />
                 </Grid>
               ))}

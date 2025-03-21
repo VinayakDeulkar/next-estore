@@ -9,8 +9,19 @@ const OrderType = () => {
     useContext(AppContext);
 
   return (
-    <Box sx={{ padding: "10px 0" }}>
-      <Card sx={{ boxShadow: "none", padding: "10px", borderRadius: "8px" }}>
+    <Box
+      sx={{
+        padding: "10px 0",
+      }}
+    >
+      <Card
+        sx={{
+          boxShadow: "none",
+          padding: "15px",
+          borderRadius: "10px",
+          border: " 1px solid #e6e6e6",
+        }}
+      >
         <Box
           className={`${styles.modeSelector_tabsNew} ${
             homePageDetails?.vendor_data?.is_pickup === "1" &&

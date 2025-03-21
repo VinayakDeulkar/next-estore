@@ -37,7 +37,7 @@
 .delivery-selected-address-area {
   font-size: 14px;
   color: #000;
-  font-weight: 600;
+  font-weight: 300;
 }
 
 html[dir="rtl"] .delivery-selected-address-area {
@@ -113,7 +113,7 @@ html[dir="rtl"] .delivery-selected-address .right-arrow {
   } */
 .delivery-type-text {
   color: #000;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   margin-top: 10px;
 }
@@ -149,7 +149,7 @@ html[dir="rtl"] .delivery-type-text {
   height: 20px;
   display: flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0 7px;
   position: absolute;
   top: 17px;
@@ -183,7 +183,7 @@ html[dir="rtl"] .delivery-address-form input:not(:focus):valid ~ .label-name {
   height: 20px;
   display: flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0 7px;
   position: absolute;
   top: 17px;
@@ -303,7 +303,7 @@ html[dir="rtl"] .delivery-details-text {
 .custom-placeholder::placeholder {
   color: #b3b3b3 !important;
   font-size: 14px !important;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 html[dir="rtl"] .custom-placeholder::placeholder {

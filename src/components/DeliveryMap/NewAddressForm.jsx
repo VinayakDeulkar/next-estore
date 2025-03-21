@@ -55,7 +55,7 @@ const NewAddressForm = ({
       <CommonHeader
         englishHeader={"Add your delivery details"}
         arabicHeader={"أضف تفاصيل التسليم الخاصة بك"}
-        fontWeight={500}
+        fontWeight={400}
       />
       <div className="delivery-address-address-select">
         <div className="delivery-address-type-select nav nav-tabs">
@@ -308,7 +308,7 @@ const NewAddressForm = ({
               className="delivery-selected-address-area"
               style={
                 areaDetails?.area === ""
-                  ? { color: "#B3B3B3", fontWeight: "500" }
+                  ? { color: "#B3B3B3", fontWeight: "300" }
                   : {}
               }
             >

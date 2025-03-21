@@ -137,13 +137,13 @@ const Review = () => {
               <CommonHeader
                 englishHeader="Delivery Info"
                 arabicHeader="معلومات التسليم"
-                fontWeight={600}
+                fontWeight={400}
               />
             ) : (
               <CommonHeader
                 englishHeader="Pickup Info"
                 arabicHeader="معلومات الالتقاط"
-                fontWeight={600}
+                fontWeight={400}
               />
             )}
             {areaDetails.type == "delivery" &&

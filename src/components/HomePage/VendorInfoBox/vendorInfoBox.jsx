@@ -7,15 +7,15 @@ import TypographyConverter from "../../common/TypographyConveter/TypographyConve
 const VendorInfoBox = () => {
   const { homePageDetails, language } = useContext(AppContext);
   return (
-    <Box sx={{ padding: "20px" }}>
+    <Box sx={{ padding: "40px 20px" }}>
       <Grid container>
-        <Grid item md={3}>
+        <Grid item lg={1.8} sx={3}>
           <Image
             loading="lazy"
             width={110}
             height={110}
             style={{
-              borderRadius: "20px",
+              borderRadius: "10px",
             }}
             src={
               language == "ltr"
@@ -29,10 +29,15 @@ const VendorInfoBox = () => {
             }
           />
         </Grid>
-        <Grid item md={9} sx={{ display: "flex", alignItems: "center" }}>
+        <Grid
+          item
+          sm={9}
+          lg={10.2}
+          sx={{ display: "flex", alignItems: "center" }}
+        >
           <Box sx={{ paddingLeft: "10px" }}>
             <TypographyConverter
-              sx={{ color: "#000", textAlign: "start" }}
+              sx={{ color: "#000", textAlign: "start", fontSize: "28px" }}
               enText={homePageDetails?.vendor_data?.name}
               arText={homePageDetails?.vendor_data?.name_ar}
             />

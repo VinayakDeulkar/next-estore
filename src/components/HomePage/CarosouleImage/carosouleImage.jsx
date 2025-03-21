@@ -30,11 +30,15 @@ const CarosouleImage = () => {
       >
         {homePageDetails?.vendor_data?.banner_images?.map((image) => (
           <Box key={image?.id}>
-            <Image
+            <img
               loading="lazy"
               src={image?.image}
-              width={1000}
-              height={1000}
+              style={{
+                width: "100%",
+                height: "500px",
+              }}
+              // width={1000}
+              // height={500}
               alt="image?.image"
             />
           </Box>

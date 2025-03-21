@@ -103,7 +103,7 @@ const OrderHistory = () => {
           <CommonHeader
             englishHeader="My Orders"
             arabicHeader="مشترياتي"
-            fontWeight={600}
+            fontWeight={400}
           />
           {orderData ? (
             Object.keys(orderData)?.map((order, i) => (

@@ -18,16 +18,19 @@ const Homepage = () => {
         container
         sx={{
           marginTop: "50px",
+          backgroundColor: "#fff",
         }}
       >
-        <Grid item xs={false} sm={3} md={3}></Grid>
+        <Grid item xs={false} sm={2} md={2}></Grid>
 
-        <Grid item xs={12} sm={6} md={6} sx={{ position: "relative" }}>
+        <Grid item xs={12} sm={8} md={8} sx={{ position: "relative" }}>
           {homePageDetails?.vendor_data && (
             <>
               <CarosouleImage />
               <VendorInfoBox />
-              <OrderType />
+              {/* <Box sx={{ marginBottom: "20px" }}>
+                <OrderType />
+              </Box> */}
             </>
           )}
           <Box>
@@ -35,7 +38,7 @@ const Homepage = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={false} sm={3} md={3}></Grid>
+        <Grid item xs={false} sm={2} md={2}></Grid>
       </Grid>
     </>
   );

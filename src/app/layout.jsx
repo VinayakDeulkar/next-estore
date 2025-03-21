@@ -93,7 +93,6 @@ export default async function RootLayout({ children }) {
       <head></head>
       <body
         style={{
-          backgroundColor: "#F3F3F3",
           fontFamily: "SFT Schrifted Sans TRIAL Var",
         }}
       >

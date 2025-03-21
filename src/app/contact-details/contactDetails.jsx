@@ -117,7 +117,7 @@ const ContactDetails = () => {
           <CommonHeader
             englishHeader={"Contact Details"}
             arabicHeader={"ارقام التواصل"}
-            fontWeight={600}
+            fontWeight={400}
           />
           {stepper === 0 ? (
             <NewContactDetails

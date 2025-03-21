@@ -1,11 +1,11 @@
 .gridContainer {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 40px !important;
-  }
-  
-  .gridContainer .MuiGrid-item {
-    flex: 1 1 calc(50% - 20px) !important; 
-    max-width: calc(50% - 20px) !important; 
-    padding: 0 !important;
-  }
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 40px !important;
+}
+
+.gridContainer > .MuiGrid-item {
+  flex: 1 1 calc(50% - 20px) !important;
+  max-width: calc(50% - 20px) !important;
+  padding: 0 !important;
+}
