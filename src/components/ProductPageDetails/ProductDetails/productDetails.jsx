@@ -2,9 +2,12 @@
 import TypographyConverter from "@/components/common/TypographyConveter/TypographyConverter";
 import { AppContext } from "@/context/AppContext";
 import { Box, Card, CardContent } from "@mui/material";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import React, { useContext, useEffect, useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const ProductDetails = ({
   product,
@@ -383,7 +386,7 @@ const ProductDetails = ({
       setSpinLoader(true);
       const response = await addToCartApi({
         vendorSlug: vendorSlug,
-        vendors_id: details?.vendor?.vendors_id,
+        vendors_id: homePageDetails?.vendor_data?.vendors_id,
         area_id: areaDetails?.area_id,
         itemId: product?.id,
         user_string: localStorage.getItem("userID"),
@@ -397,7 +400,7 @@ const ProductDetails = ({
           notify(response.message, response.message_ar, language);
         }
         localStorage.setItem("cartTime", new Date());
-        if (details?.vendor?.fb_pixel_code != "") {
+        if (homePageDetails?.vendor_data?.fb_pixel_code != "") {
           ReactPixel.track("AddToCart", {
             content_name: product?.name,
             content_category: product?.category_name,
@@ -412,10 +415,10 @@ const ProductDetails = ({
 
           if (vendorSlug == "mijana-restaurant-and-café") {
             triggerAddToCart({
-              fb_pixel_code: details?.vendor?.fb_pixel_code,
+              fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
               fb_access_token:
                 "EAAGZA8GMZAs1IBAC9mDImnZCTAdafRzN769x6ZCIRMExueSZBZBfnDkIzGrsP4gZBMZCCwXaSvKNggZBEKdEk3582JWiwecrnZAEHFzfCaYKSNRbltxMm2cSvUrgZBUDpVNZCQAOVWUuzO4m7nbvQn1Wqb94IBbVSexSbwWzAf6TYV80HQF1ZAZAzGcXKB",
-              support_mail: details?.vendor?.support_mail,
+              support_mail: homePageDetails?.vendor_data?.support_mail,
               item: product,
             });
           }
@@ -424,25 +427,25 @@ const ProductDetails = ({
               fb_pixel_code: "546180060531909",
               fb_access_token:
                 "EAAVDp1efPkMBOZBE2DPWrA7he9iJFn9EZBUpd4k3cRjpApcbNMLJgbdmelpI1uApMyxEYoorwBD5ZBDGPL5NWMxXGrKpoAHHxG9NtBMrppMm8YHLRmFgiYVL37nu7PUaO3WPfz4U4K75jIH7eErUZCSRAeJJyQpc88THHEBQGMozZBM9894dBoOe06gklfRtqZCgZDZD",
-              support_mail: details?.vendor_data?.support_mail,
+              support_mail: homePageDetails?.vendor_data?.support_mail,
             });
           }
 
           // dynamic for all vendors
           if (
-            details?.vendor?.fb_access_token &&
-            details?.vendor?.fb_access_token != ""
+            homePageDetails?.vendor_data?.fb_access_token &&
+            homePageDetails?.vendor_data?.fb_access_token != ""
           ) {
             triggerAddToCart({
-              fb_pixel_code: details?.vendor?.fb_pixel_code,
-              fb_access_token: details?.vendor?.fb_access_token,
-              support_mail: details?.vendor?.support_mail,
+              fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
+              fb_access_token: homePageDetails?.vendor_data?.fb_access_token,
+              support_mail: homePageDetails?.vendor_data?.support_mail,
               item: product,
             });
           }
         }
 
-        if (details?.vendor?.snap_pixel_code != "")
+        if (homePageDetails?.vendor_data?.snap_pixel_code != "")
           SnapPixel.track("ADD_CART", {
             content_name: product?.name,
             item_category: product?.category_name,
@@ -452,7 +455,7 @@ const ProductDetails = ({
             currency: "KWD",
           });
 
-        if (details?.vendor?.vendors_id === "132") {
+        if (homePageDetails?.vendor_data?.vendors_id === "132") {
           TiktokPixel.track("AddToCart", {
             content_type: "product",
             quantity: prodNumber,
@@ -464,8 +467,8 @@ const ProductDetails = ({
         }
 
         if (
-          details?.vendor?.google_tag_code != "" &&
-          !/^GTM/.test(details?.vendor?.google_tag_code)
+          homePageDetails?.vendor_data?.google_tag_code != "" &&
+          !/^GTM/.test(homePageDetails?.vendor_data?.google_tag_code)
         )
           addCartTag({
             item_id: product?.id,
@@ -481,10 +484,10 @@ const ProductDetails = ({
         if (
           (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
           (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
-          details?.vendor?.home_page_type != "18" &&
+          homePageDetails?.vendor_data?.home_page_type != "18" &&
           (internationalDelivery.delivery_country_code.toLowerCase() === "kw" ||
-            details.vendor.international_delivery === "3" ||
-            details.vendor.international_delivery === "")
+            homePageDetails?.vendor_data?.international_delivery === "3" ||
+            homePageDetails?.vendor_data?.international_delivery === "")
         ) {
           setOpenArea((prev) => ({ open: true, goHome: true }));
 
@@ -500,7 +503,7 @@ const ProductDetails = ({
         setSpinLoader(true);
         const response = await updateCartQauntity({
           vendorSlug: vendorSlug,
-          vendors_id: details?.vendor?.vendors_id,
+          vendors_id: homePageDetails?.vendor_data?.vendors_id,
           area_id: areaDetails?.area_id,
           user_string: localStorage.getItem("userID"),
           quantity: inCart + prodNumber,
@@ -513,7 +516,7 @@ const ProductDetails = ({
             notify(response.message, response.message_ar, language);
           }
 
-          if (details?.vendor?.fb_pixel_code != "") {
+          if (homePageDetails?.vendor_data?.fb_pixel_code != "") {
             ReactPixel.track("AddToCart", {
               content_name: product?.name,
               content_category: product?.category_name,
@@ -524,10 +527,10 @@ const ProductDetails = ({
             });
             if (vendorSlug == "mijana-restaurant-and-café") {
               triggerAddToCart({
-                fb_pixel_code: details?.vendor?.fb_pixel_code,
+                fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
                 fb_access_token:
                   "EAAGZA8GMZAs1IBAC9mDImnZCTAdafRzN769x6ZCIRMExueSZBZBfnDkIzGrsP4gZBMZCCwXaSvKNggZBEKdEk3582JWiwecrnZAEHFzfCaYKSNRbltxMm2cSvUrgZBUDpVNZCQAOVWUuzO4m7nbvQn1Wqb94IBbVSexSbwWzAf6TYV80HQF1ZAZAzGcXKB",
-                support_mail: details?.vendor?.support_mail,
+                support_mail: homePageDetails?.vendor_data?.support_mail,
                 item: product,
               });
             }
@@ -536,25 +539,25 @@ const ProductDetails = ({
                 fb_pixel_code: "546180060531909",
                 fb_access_token:
                   "EAAVDp1efPkMBOZBE2DPWrA7he9iJFn9EZBUpd4k3cRjpApcbNMLJgbdmelpI1uApMyxEYoorwBD5ZBDGPL5NWMxXGrKpoAHHxG9NtBMrppMm8YHLRmFgiYVL37nu7PUaO3WPfz4U4K75jIH7eErUZCSRAeJJyQpc88THHEBQGMozZBM9894dBoOe06gklfRtqZCgZDZD",
-                support_mail: details?.vendor_data?.support_mail,
+                support_mail: homePageDetails?.vendor_data?.support_mail,
               });
             }
 
             // dynamic for all vendors
             if (
-              details?.vendor?.fb_access_token &&
-              details?.vendor?.fb_access_token != ""
+              homePageDetails?.vendor_data?.fb_access_token &&
+              homePageDetails?.vendor_data?.fb_access_token != ""
             ) {
               triggerAddToCart({
-                fb_pixel_code: details?.vendor?.fb_pixel_code,
-                fb_access_token: details?.vendor?.fb_access_token,
-                support_mail: details?.vendor?.support_mail,
+                fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
+                fb_access_token: homePageDetails?.vendor_data?.fb_access_token,
+                support_mail: homePageDetails?.vendor_data?.support_mail,
                 item: product,
               });
             }
           }
 
-          if (details?.vendor?.snap_pixel_code != "")
+          if (homePageDetails?.vendor_data?.snap_pixel_code != "")
             SnapPixel.track("ADD_CART", {
               content_name: product?.name,
               item_category: product?.category_name,
@@ -564,7 +567,7 @@ const ProductDetails = ({
               currency: "KWD",
             });
 
-          if (details?.vendor?.vendors_id === "132") {
+          if (homePageDetails?.vendor_data?.vendors_id === "132") {
             TiktokPixel.track("AddToCart", {
               content_type: "product",
               quantity: prodNumber,
@@ -576,8 +579,8 @@ const ProductDetails = ({
           }
 
           if (
-            details?.vendor?.google_tag_code != "" &&
-            !/^GTM/.test(details?.vendor?.google_tag_code)
+            homePageDetails?.vendor_data?.google_tag_code != "" &&
+            !/^GTM/.test(homePageDetails?.vendor_data?.google_tag_code)
           )
             addCartTag({
               item_id: product?.id,
@@ -593,9 +596,9 @@ const ProductDetails = ({
           if (
             (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
             (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
-            details?.vendor?.home_page_type != "18" &&
-            (details?.vendor?.international_delivery === "3" ||
-              details?.vendor?.international_delivery === "" ||
+            homePageDetails?.vendor_data?.home_page_type != "18" &&
+            (homePageDetails?.vendor_data?.international_delivery === "3" ||
+              homePageDetails?.vendor_data?.international_delivery === "" ||
               internationalDelivery.country_name.toLowerCase() === "kuwait")
           ) {
             setOpenArea((prev) => ({ open: true, goHome: true }));
@@ -947,7 +950,7 @@ const ProductDetails = ({
                           }`}
                           onClick={() => onClearAll(k)}
                           style={{
-                            color: details?.vendor?.vendor_color,
+                            color: homePageDetails?.vendor_data?.vendor_color,
                             fontSize: 14,
                             cursor: "pointer",
                           }}
@@ -1061,11 +1064,11 @@ const ProductDetails = ({
                   <div className="count-control-div">
                     <div className="control-button-div">
                       <button className="control-button" onClick={onMinus}>
-                        <i className="fa fa-minus"></i>
+                        <RemoveIcon />
                       </button>
                       <p className="quantity-text">{prodNumber}</p>
                       <button className="control-button" onClick={onPlus}>
-                        <i className="fa fa-plus"></i>
+                        <AddIcon />
                       </button>
                     </div>
                   </div>
@@ -1093,14 +1096,15 @@ const ProductDetails = ({
             !showRegister ? (
               <div
                 className={`bottom-button ${
-                  details?.vendor?.home_page_type == "18"
+                  homePageDetails?.vendor_data?.home_page_type == "18"
                     ? "bottom-button-full"
                     : "bottom-button-half"
                 }`}
               >
                 <Link
+                  href={``}
                   className={`text-center checkout-button ${
-                    details?.vendor?.home_page_type == "18"
+                    homePageDetails?.vendor_data?.home_page_type == "18"
                       ? "fashion-checkout-page"
                       : ""
                   }`}
@@ -1143,14 +1147,15 @@ const ProductDetails = ({
           ) : (
             <div
               className={`bottom-button ${
-                details?.vendor?.home_page_type == "18"
+                homePageDetails?.vendor_data?.home_page_type == "18"
                   ? "bottom-button-full"
                   : "bottom-button-half"
               }`}
             >
               <Link
+                href={``}
                 className={`text-center checkout-button ${
-                  details?.vendor?.home_page_type == "18"
+                  homePageDetails?.vendor_data?.home_page_type == "18"
                     ? "fashion-checkout-page"
                     : ""
                 }`}
