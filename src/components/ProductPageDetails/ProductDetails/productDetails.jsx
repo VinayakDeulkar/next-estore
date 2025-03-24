@@ -8,10 +8,10 @@ import { useSnackbar } from "notistack";
 import React, { useContext, useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from '@mui/icons-material/Remove';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const ProductDetails = ({
   product,
-  loading,
   addon,
   productvariation,
   productvariationPrice,
@@ -29,6 +29,7 @@ const ProductDetails = ({
     handleOpenAreaChange,
     internationalDelivery,
   } = useContext(AppContext);
+  const loading = false;
   const [showRegister, setShowRegister] = useState(false);
   const [note, setNote] = useState("");
   const [price, setPrice] = useState("");
@@ -693,7 +694,7 @@ const ProductDetails = ({
                   : product?.category_name_ar}
                 {navigator.share && (
                   <button className="sharewith" onClick={() => onShareClick()}>
-                    <i className="fa fa-arrow-up" aria-hidden="true"></i>{" "}
+                    <ArrowUpwardIcon sx={{fontSize: "15px"}} />
                     {language === "ltr" ? "Share this page" : "شارك هذا الرابط"}
                   </button>
                 )}

@@ -24,10 +24,9 @@ const ProductCarousel = ({ product, addedVariaton }) => {
       stopOnHover
     >
       <Box className="product-owl-img">
-        <Image
+        <img
           loading="lazy"
-          width={1000}
-          height={1000}
+          className="carouselClass"
           src={`${
             product?.productvariationPrice?.[addedVariaton.toString()]?.image
               ? product?.productvariationPrice?.[addedVariaton.toString()]

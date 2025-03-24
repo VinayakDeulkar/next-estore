@@ -405,8 +405,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 </div>
               </p>
             ) : product?.price_on_selection == 1 ? (
-              <Link
-                to={`/product=${product?.product_slug}`}
+              <div
                 className="buy-get-img"
                 style={{
                   borderRadius: "30px",
@@ -419,10 +418,9 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 {language === "ltr"
                   ? "Price On Selection"
                   : "السعر حسب الاختيار"}
-              </Link>
+              </div>
             ) : product?.prodyct_type == 2 ? (
-              <Link
-                to={`/product=${product?.product_slug}`}
+              <div
                 className="buy-get-img "
                 style={{
                   borderRadius: "30px",
@@ -435,7 +433,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 {language === "ltr"
                   ? "Product Registration only"
                   : "حجز المنتج فقط"}
-              </Link>
+              </div>
             ) : (
               <div
                 style={{

@@ -731,7 +731,7 @@ html[dir="rtl"] .delivery-order-header .delivery-order-title {
 .bottom-button {
   position: fixed;
   display: flex;
-  width: 33.3%;
+  width: 50%;
   justify-content: space-between;
   z-index: 3000;
   bottom: 0;
@@ -877,8 +877,39 @@ html[dir="rtl"] .orderStatusDiv {
   margin: 10px 0;
 }
 
+.details-container {
+  background-color: #f5f5f9;
+}
+
 .details-container .order-details-div {
   background-color: white;
+}
+
+.details-container .product-outer-div {
+  padding-left: 10px;
+  background-color: white;
+}
+
+.details-container .product-outer-div .product-inner-div,
+.branch-call-div,
+.details-container .branch-inner-div {
+  padding: 16px;
+  background-color: white;
+}
+
+.details-container .product-outer-div .product-inner-div .product-category {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: -0.2px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -moz-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  color: #616161;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .details-container
@@ -913,10 +944,26 @@ html[dir="rtl"] .orderStatusDiv {
   border: none;
   font-size: 14px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 html[dir="rtl"] .sharewith {
   float: left;
+}
+
+.details-container .product-outer-div .item-count-div .count-control-div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .details-container .product-outer-div .product-inner-div .product-price-div {
@@ -1262,4 +1309,8 @@ html[dir="rtl"] .max-tab span {
   -o-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s;
+}
+
+.carouselClass {
+  height: 100vh;
 }

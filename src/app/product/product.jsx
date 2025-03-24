@@ -20,24 +20,28 @@ const Product = (props) => {
     <Box>
       <HeaderBox />
       <Grid container sx={{ marginTop: "50px" }}>
+        <Grid item xs={3}></Grid>
         <Grid item xs={6}>
-          <ProductCarousel
-            product={props?.data}
-            addedVariaton={addedVariaton}
-          />
+          <Grid item>
+            <ProductCarousel
+              product={props?.data}
+              addedVariaton={addedVariaton}
+            />
+          </Grid>
+          <Grid item>
+            {/* <BackButton variant="dark" /> */}
+            <ProductDetails
+              product={props?.data}
+              loading={loading}
+              addon={props?.addons}
+              productvariation={props?.productvariation}
+              productvariationPrice={props?.productvariationPrice}
+              addedVariaton={addedVariaton}
+              setAddedVariation={setAddedVariation}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          {/* <BackButton variant="dark" /> */}
-          <ProductDetails
-            product={props?.data}
-            loading={loading}
-            addon={props?.addons}
-            productvariation={props?.productvariation}
-            productvariationPrice={props?.productvariationPrice}
-            addedVariaton={addedVariaton}
-            setAddedVariation={setAddedVariation}
-          />
-        </Grid>
+        <Grid item xs={3}></Grid>
       </Grid>
     </Box>
   );
