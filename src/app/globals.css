@@ -1311,6 +1311,10 @@ html[dir="rtl"] .max-tab span {
   transition: all 0.2s;
 }
 
-.carouselClass {
+.horizontalProductLayoutClass {
   height: 100vh;
+}
+
+.verticalProductLayoutClass {
+  height: 500px;
 }

@@ -15,20 +15,47 @@ const Product = (props) => {
   const [product, setProduct] = useState({});
   const [addedVariaton, setAddedVariation] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [productLayout, setProductLayout] = useState(1);
 
   return (
     <Box>
       <HeaderBox />
-      <Grid container sx={{ marginTop: "50px" }}>
-        <Grid item xs={3}></Grid>
-        <Grid item xs={6}>
-          <Grid item>
+      {productLayout === 1 ? (
+        <Grid container sx={{ marginTop: "50px" }}>
+          <Grid item xs={3}></Grid>
+          <Grid item xs={6}>
+            <Grid item>
+              <ProductCarousel
+                product={props?.data}
+                addedVariaton={addedVariaton}
+                productLayout={productLayout}
+              />
+            </Grid>
+            <Grid item>
+              {/* <BackButton variant="dark" /> */}
+              <ProductDetails
+                product={props?.data}
+                loading={loading}
+                addon={props?.addons}
+                productvariation={props?.productvariation}
+                productvariationPrice={props?.productvariationPrice}
+                addedVariaton={addedVariaton}
+                setAddedVariation={setAddedVariation}
+              />
+            </Grid>
+          </Grid>
+          <Grid item xs={3}></Grid>
+        </Grid>
+      ) : (
+        <Grid container sx={{ marginTop: "50px" }}>
+          <Grid item xs={6}>
             <ProductCarousel
               product={props?.data}
               addedVariaton={addedVariaton}
+              productLayout={productLayout}
             />
           </Grid>
-          <Grid item>
+          <Grid item xs={6}>
             {/* <BackButton variant="dark" /> */}
             <ProductDetails
               product={props?.data}
@@ -41,8 +68,7 @@ const Product = (props) => {
             />
           </Grid>
         </Grid>
-        <Grid item xs={3}></Grid>
-      </Grid>
+      )}
     </Box>
   );
 };

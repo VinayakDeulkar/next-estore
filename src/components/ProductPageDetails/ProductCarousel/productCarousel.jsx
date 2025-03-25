@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 
-const ProductCarousel = ({ product, addedVariaton }) => {
+const ProductCarousel = ({ product, addedVariaton, productLayout }) => {
   return (
     <Carousel
       autoPlay={product?.product_images?.length}
@@ -26,7 +26,7 @@ const ProductCarousel = ({ product, addedVariaton }) => {
       <Box className="product-owl-img">
         <img
           loading="lazy"
-          className="carouselClass"
+          className={`${productLayout === 1 ? "verticalProductLayoutClass" : "horizontalProductLayoutClass"}`}
           src={`${
             product?.productvariationPrice?.[addedVariaton.toString()]?.image
               ? product?.productvariationPrice?.[addedVariaton.toString()]
@@ -41,13 +41,11 @@ const ProductCarousel = ({ product, addedVariaton }) => {
       !product?.productvariationPrice?.[addedVariaton.toString()]?.image
         ? product?.product_images?.map((i, k) => (
             <Box key={k}>
-              <Image
+              <img
                 loading="lazy"
-                className="img"
                 src={`${i}`}
-                width={1000}
-                height={1000}
                 alt={i}
+                className={`${productLayout === 1 ? "verticalProductLayoutClass" : "horizontalProductLayoutClass"}`}
               />
             </Box>
           ))
