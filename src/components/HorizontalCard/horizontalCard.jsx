@@ -4,6 +4,7 @@ import TypographyConverter from "../common/TypographyConveter/typographyConverte
 import { AppContext } from "@/context/AppContext";
 import moment from "moment";
 import Link from "next/link";
+import ReactPixel from 'react-facebook-pixel';
 
 const HorizontalCard = ({ product }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =

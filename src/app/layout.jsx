@@ -1,6 +1,6 @@
 import {
   getDeliveryPickupList,
-  getEstorebraches,
+  getEstorebranches,
   getHomepageDetails,
   getVendorSlug,
 } from "@/apis";
@@ -67,7 +67,7 @@ async function getData() {
         vendorSlug: vendorSlugResponse?.data?.ecom_url_slug,
         vendors_id: vendorSlugResponse?.data?.vendor_data?.vendors_id,
       }),
-      getEstorebraches({
+      getEstorebranches({
         vendorSlug: vendorSlugResponse?.data?.ecom_url_slug,
         vendors_id: vendorSlugResponse?.data?.vendor_data?.vendors_id,
       }),

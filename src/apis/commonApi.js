@@ -40,7 +40,7 @@ export const getDeliveryPickupList = async ({ vendors_id, vendorSlug }) => {
   return response.data;
 };
 
-export const getEstorebraches = async ({ vendors_id, vendorSlug }) => {
+export const getEstorebranches = async ({ vendors_id, vendorSlug }) => {
   const response = await axios.post(
     `${process.env.NEXT_PUBLIC_API_URL}/branches`,
     JSON.stringify({

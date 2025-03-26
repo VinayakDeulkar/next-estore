@@ -7,8 +7,13 @@ import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import React, { useContext, useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from '@mui/icons-material/Remove';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import RemoveIcon from "@mui/icons-material/Remove";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import QuantityError from "@/components/QuantityError/quantityError";
+import Spinner from "@/components/common/Spinner/spinner";
+import { addToCartApi, updateCartQauntity } from "@/apis";
+import { addCartTag } from "@/constants/function";
+import ReactPixel from 'react-facebook-pixel';
 
 const ProductDetails = ({
   product,
@@ -29,7 +34,6 @@ const ProductDetails = ({
     handleOpenAreaChange,
     internationalDelivery,
   } = useContext(AppContext);
-  const loading = false;
   const [showRegister, setShowRegister] = useState(false);
   const [note, setNote] = useState("");
   const [price, setPrice] = useState("");
@@ -186,16 +190,18 @@ const ProductDetails = ({
   };
 
   const onShareClick = () => {
-    navigator
-      .share({
-        url: window.location.href,
-      })
-      .then(() => {
-        console.log("Sharing successfull");
-      })
-      .catch(() => {
-        console.log("Sharing failed");
-      });
+    if (typeof window !== "undefined" && navigator.share) {
+      navigator
+        .share({
+          url: window.location.href,
+        })
+        .then(() => {
+          console.log("Sharing successfull");
+        })
+        .catch(() => {
+          console.log("Sharing failed");
+        });
+    }
   };
 
   const onSelectChecked = (event, price, max, key) => {
@@ -396,6 +402,7 @@ const ProductDetails = ({
         variation_ids: addedVariaton,
         product_notes: note,
       });
+      console.log(response, "---- response")
       if (response?.status) {
         if (response.status == false) {
           notify(response.message, response.message_ar, language);
@@ -481,7 +488,8 @@ const ProductDetails = ({
             quantity: prodNumber,
           });
         setSpinLoader(false);
-        setCart(response.data);
+        handleCartChange(response?.data);
+        router.push(`/review`);
         if (
           (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
           (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
@@ -490,13 +498,13 @@ const ProductDetails = ({
             homePageDetails?.vendor_data?.international_delivery === "3" ||
             homePageDetails?.vendor_data?.international_delivery === "")
         ) {
-          setOpenArea((prev) => ({ open: true, goHome: true }));
+          handleOpenAreaChange((prev) => ({ open: true, goHome: true }));
 
           // history.push(`/area`, {
           //   from: "prdetails",
           // });
         } else {
-          history.goBack();
+          router.back();
         }
       }
     } else {
@@ -593,7 +601,7 @@ const ProductDetails = ({
               quantity: prodNumber,
             });
           setSpinLoader(false);
-          setCart(response.data);
+          handleCartChange(response?.data);
           if (
             (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
             (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
@@ -602,12 +610,12 @@ const ProductDetails = ({
               homePageDetails?.vendor_data?.international_delivery === "" ||
               internationalDelivery.country_name.toLowerCase() === "kuwait")
           ) {
-            setOpenArea((prev) => ({ open: true, goHome: true }));
+            handleOpenAreaChange((prev) => ({ open: true, goHome: true }));
             // history.push(`/area`, {
             //   from: "prdetails",
             // });
           } else {
-            history.goBack();
+            router.back();
           }
         }
       } else {
@@ -692,9 +700,9 @@ const ProductDetails = ({
                 {language === "ltr"
                   ? product.category_name
                   : product?.category_name_ar}
-                {navigator.share && (
+                {typeof window !== "undefined" && navigator.share && (
                   <button className="sharewith" onClick={() => onShareClick()}>
-                    <ArrowUpwardIcon sx={{fontSize: "15px"}} />
+                    <ArrowUpwardIcon sx={{ fontSize: "15px" }} />
                     {language === "ltr" ? "Share this page" : "شارك هذا الرابط"}
                   </button>
                 )}
@@ -726,7 +734,7 @@ const ProductDetails = ({
                     {language === "ltr" ? "Price" : "السعر"}
                   </p>
                   <p className="product-price">
-                    {loading == false &&
+                    {product &&
                       parseFloat(
                         product?.price_after_discount.split(",").join("")
                       ) != parseFloat(product?.base_price) &&
@@ -742,7 +750,7 @@ const ProductDetails = ({
                         </>
                       )}
                     <span>
-                      {loading == false ? (
+                      {product ? (
                         <>
                           <span>{product.price_after_discount}</span>{" "}
                           {language === "rtl" ? "د.ك" : "KD"}
@@ -1119,7 +1127,7 @@ const ProductDetails = ({
                       e.preventDefault();
                       areaDetails?.branchForArea?.id
                         ? setShowRegister(true)
-                        : setOpenArea((prev) => ({ open: true, goHome: true }));
+                        : handleOpenAreaChange((prev) => ({ open: true, goHome: true }));
                       // : history.push(`/area`, {
                       //     from: "prdetails",
                       //   });

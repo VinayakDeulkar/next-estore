@@ -11,7 +11,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ModalClosed from "@/components/common/ModalClosed/ModalClosed";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
-import { ReactPixel } from "react-snapchat-pixel";
+import ReactPixel from 'react-facebook-pixel';
 
 const Review = () => {
   const {

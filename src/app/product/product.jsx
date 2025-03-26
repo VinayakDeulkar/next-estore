@@ -14,7 +14,6 @@ const Product = (props) => {
   const { homePageDetails, areaDetails } = useContext(AppContext);
   const [product, setProduct] = useState({});
   const [addedVariaton, setAddedVariation] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [productLayout, setProductLayout] = useState(1);
 
   return (
@@ -35,7 +34,6 @@ const Product = (props) => {
               {/* <BackButton variant="dark" /> */}
               <ProductDetails
                 product={props?.data}
-                loading={loading}
                 addon={props?.addons}
                 productvariation={props?.productvariation}
                 productvariationPrice={props?.productvariationPrice}

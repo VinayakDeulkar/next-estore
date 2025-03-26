@@ -47,7 +47,7 @@ export const AppProvider = ({
     area: "",
     branch: "",
     branch_id: "",
-    area_id: "",
+    area_id: estoreBranchesResponse?.data[0]?.area_ids[0] || "1",
     branchForArea: {},
     deliveryTiming: "",
     pickupTiming: "",

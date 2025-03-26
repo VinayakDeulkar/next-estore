@@ -749,9 +749,9 @@ html[dir="rtl"] .delivery-order-header .delivery-order-title {
   background-color: var(--vendor-color-light);
 }
 
-.bottom-button .checkout-button:hover {
+/* .bottom-button .checkout-button:hover {
   background-color: var(--vendor-hover-color);
-}
+} */
 
 .bottom-button .checkout-button {
   width: 100%;
