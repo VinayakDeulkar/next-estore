@@ -13,7 +13,7 @@ import QuantityError from "@/components/QuantityError/quantityError";
 import Spinner from "@/components/common/Spinner/spinner";
 import { addToCartApi, updateCartQauntity } from "@/apis";
 import { addCartTag } from "@/constants/function";
-import ReactPixel from 'react-facebook-pixel';
+import ReactPixel from "react-facebook-pixel";
 
 const ProductDetails = ({
   product,
@@ -402,10 +402,10 @@ const ProductDetails = ({
         variation_ids: addedVariaton,
         product_notes: note,
       });
-      console.log(response, "---- response")
+      console.log(response, "---- response");
       if (response?.status) {
-        if (response.status == false) {
-          notify(response.message, response.message_ar, language);
+        if (response?.status == false) {
+          notify(response?.message, response?.message_ar, language);
         }
         localStorage.setItem("cartTime", new Date());
         if (homePageDetails?.vendor_data?.fb_pixel_code != "") {
@@ -489,7 +489,7 @@ const ProductDetails = ({
           });
         setSpinLoader(false);
         handleCartChange(response?.data);
-        router.push(`/review`);
+        router.push(`review`);
         if (
           (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
           (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
@@ -602,6 +602,8 @@ const ProductDetails = ({
             });
           setSpinLoader(false);
           handleCartChange(response?.data);
+          router.push(`review`);
+
           if (
             (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
             (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
@@ -826,6 +828,8 @@ const ProductDetails = ({
                         color: checkIsDisabled(variationChecked[k][t].value, k)
                           ? "#ced4da"
                           : "black",
+                        paddingTop: "0.5rem",
+                        paddingBottom: "0.5rem",
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center" }}>
@@ -985,6 +989,8 @@ const ProductDetails = ({
                           language == "ltr" ? "26px" : "16px"
                         }`,
                         position: "relative",
+                        paddingTop: "0.5rem",
+                        paddingBottom: "0.5rem",
                       }}
                       className="delivery-timming-order addon-hover pt-2 pb-2"
                     >
@@ -1127,7 +1133,10 @@ const ProductDetails = ({
                       e.preventDefault();
                       areaDetails?.branchForArea?.id
                         ? setShowRegister(true)
-                        : handleOpenAreaChange((prev) => ({ open: true, goHome: true }));
+                        : handleOpenAreaChange((prev) => ({
+                            open: true,
+                            goHome: true,
+                          }));
                       // : history.push(`/area`, {
                       //     from: "prdetails",
                       //   });

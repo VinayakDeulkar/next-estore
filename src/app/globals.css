@@ -1318,3 +1318,7 @@ html[dir="rtl"] .max-tab span {
 .verticalProductLayoutClass {
   height: 500px;
 }
+
+label {
+  display: inline-block;
+}
