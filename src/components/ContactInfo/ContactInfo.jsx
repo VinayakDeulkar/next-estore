@@ -35,7 +35,6 @@ const ContactInfo = ({
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("contactInfo"))) {
       const contactInfo = JSON.parse(localStorage.getItem("contactInfo"));
-
       handleContactDetailsChange({
         ...contactDetails,
         phoneCode: contactInfo.code,

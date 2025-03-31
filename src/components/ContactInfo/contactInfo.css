@@ -24,6 +24,11 @@
   color: transparent;
 }
 
+.sentImg {
+  height: 23px;
+  width: 23px;
+}
+
 .form__field:placeholder-shown ~ .form__label {
   font-size: 14px;
   cursor: text;

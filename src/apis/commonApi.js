@@ -91,3 +91,35 @@ export const getCategoryProduct = async ({
   );
   return response.data;
 };
+
+
+export const emptyUserCart = async ({ vendorSlug, vendor_id, user_string }) => {
+  try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/empty-cart`,
+          JSON.stringify({
+              token: process.env.NEXT_PUBLIC_APP_TOKEN,
+              vendor_id: vendor_id,
+              vendor_slug: vendorSlug,
+              user_string: user_string,
+          }))
+      return response.data
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+export const getUserCart = async ({ vendorSlug, vendor_id, user_string, area_id }) => {
+  try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/get-user-cart`,
+          JSON.stringify({
+              token: process.env.NEXT_PUBLIC_APP_TOKEN,
+              vendor_id: vendor_id,
+              vendor_slug: vendorSlug,
+              area_id: area_id,
+              user_string: user_string
+          }))
+      return response.data
+  } catch (error) {
+      console.log(error)
+  }
+}

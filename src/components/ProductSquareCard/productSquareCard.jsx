@@ -1,14 +1,14 @@
-import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import { addToCartApi } from "@/apis";
 import { AppContext } from "@/context/AppContext";
-import Link from "next/link";
-import "./productSquareCard.css";
-import Spinner from "../common/Spinner/spinner";
+import { Box, Card, CardContent, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import Spinner from "../common/Spinner/spinner";
+import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import "./productSquareCard.css";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
-  const { language, cart, handleCartChange, homePageDetails } =
+  const { language, cart, handleCartChange, homePageDetails, areaDetails } =
     useContext(AppContext);
   const [inCart, setInCart] = useState(0);
   const [spinLoader, setSpinLoader] = useState(false);
@@ -22,12 +22,17 @@ const ProductSquareCard = ({ product, imgHeight }) => {
     if (!spinLoader) {
       event.preventDefault();
       setSpinLoader(true);
-      const temp = cart?.cartItems?.filter((k, i) => item?.id == k?.product_id);
-      if (item?.add_ons_count?.cnt != 0 || item?.variation_count?.cnt != 0) {
-        history.push(`/product=${item?.product_slug}`);
+      const temp = cart?.cartItems?.filter(
+        (k, i) => product?.id == k?.product_id
+      );
+      if (
+        product?.add_ons_count?.cnt != 0 ||
+        product?.variation_count?.cnt != 0
+      ) {
+        history.push(`/product=${product?.product_slug}`);
       } else if (n == -1 && inCart == 1) {
         const response = await removeCartItem({
-          vendorSlug: vendorSlug,
+          vendorSlug: homePageDetails?.ecom_url_slug,
           vendors_id: homePageDetails?.vendor_data?.vendors_id,
           area_id: areaDetails?.area_id,
           user_string: localStorage.getItem("userID"),
@@ -43,13 +48,13 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           }
         }
       } else {
-        if (inCart + n <= Number(item?.quantity)) {
+        if (inCart + n <= Number(product?.quantity)) {
           if (temp?.length === 0 || !temp?.length) {
             const response = await addToCartApi({
-              vendorSlug: vendorSlug,
+              vendorSlug: homePageDetails?.ecom_url_slug,
               vendors_id: homePageDetails?.vendor_data?.vendors_id,
               area_id: areaDetails?.area_id,
-              itemId: item?.id,
+              itemId: product?.id,
               user_string: localStorage.getItem("userID"),
               quantity: inCart + n,
               branch_id: 87,
@@ -62,11 +67,11 @@ const ProductSquareCard = ({ product, imgHeight }) => {
               }
               if (homePageDetails?.vendor_data?.fb_pixel_code != "") {
                 ReactPixel.track("AddToCart", {
-                  content_name: item?.product_name,
-                  content_category: item?.category_name,
-                  content_ids: [item?.id],
+                  content_name: product?.product_name,
+                  content_category: product?.category_name,
+                  content_ids: [product?.id],
                   content_type: "product",
-                  value: item?.product_price,
+                  value: product?.product_price,
                   currency: "KWD",
                 });
                 const time = Date.now();
@@ -88,7 +93,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                     fb_access_token:
                       "EAAGZA8GMZAs1IBAC9mDImnZCTAdafRzN769x6ZCIRMExueSZBZBfnDkIzGrsP4gZBMZCCwXaSvKNggZBEKdEk3582JWiwecrnZAEHFzfCaYKSNRbltxMm2cSvUrgZBUDpVNZCQAOVWUuzO4m7nbvQn1Wqb94IBbVSexSbwWzAf6TYV80HQF1ZAZAzGcXKB",
                     support_mail: homePageDetails?.vendor_data?.support_mail,
-                    item: item,
+                    item: product,
                   });
                 }
 
@@ -102,18 +107,18 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                     fb_access_token:
                       homePageDetails?.vendor_data?.fb_access_token,
                     support_mail: homePageDetails?.vendor_data?.support_mail,
-                    item: item,
+                    item: product,
                   });
                 }
               }
 
               if (homePageDetails?.vendor_data?.snap_pixel_code != "")
                 SnapPixel.track("ADD_CART", {
-                  content_name: item?.product_name,
-                  item_category: item?.category_name,
-                  item_ids: [item?.id],
+                  content_name: product?.product_name,
+                  item_category: product?.category_name,
+                  item_ids: [product?.id],
                   content_type: "product",
-                  price: item?.product_price,
+                  price: product?.product_price,
                   currency: "KWD",
                 });
 
@@ -121,10 +126,10 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 TiktokPixel.track("AddToCart", {
                   content_type: "product",
                   quantity: 1,
-                  content_name: item?.product_name,
-                  content_id: item?.id,
+                  content_name: product?.product_name,
+                  content_id: product?.id,
                   currency: "KWD",
-                  value: item?.product_price,
+                  value: product?.product_price,
                 });
               }
 
@@ -133,31 +138,31 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 !/^GTM/.test(homePageDetails?.vendor_data?.google_tag_code)
               )
                 addCartTag({
-                  item_id: item?.id,
-                  item_name: item?.product_name,
+                  item_id: product?.id,
+                  item_name: product?.product_name,
                   currency: "KWD",
-                  discount: item?.discount_value,
-                  item_category: item?.category_name,
-                  price: item?.product_price,
+                  discount: product?.discount_value,
+                  item_category: product?.category_name,
+                  price: product?.product_price,
                   quantity: n,
                 });
 
               setSpinLoader(false);
               handleCartChange(response.data);
-              if (
-                (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
-                (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
-                n == 1 &&
-                (homePageDetails?.vendor_data?.international_delivery === "3" ||
-                  homePageDetails?.vendor_data?.international_delivery === "" ||
-                  internationalDelivery.country_name.toLowerCase() === "kuwait")
-              ) {
-                history.push(`/area`);
-              }
+              // if (
+              //   (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
+              //   (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
+              //   n == 1 &&
+              //   (homePageDetails?.vendor_data?.international_delivery === "3" ||
+              //     homePageDetails?.vendor_data?.international_delivery === "" ||
+              //     internationalDelivery.country_name.toLowerCase() === "kuwait")
+              // ) {
+              //   history.push(`/area`);
+              // }
             }
           } else {
             const response = await updateCartQauntity({
-              vendorSlug: vendorSlug,
+              vendorSlug: homePageDetails?.ecom_url_slug,
               vendors_id: homePageDetails?.vendor_data?.vendors_id,
               area_id: areaDetails?.area_id,
               user_string: localStorage.getItem("userID"),
@@ -172,11 +177,11 @@ const ProductSquareCard = ({ product, imgHeight }) => {
               }
               if (homePageDetails?.vendor_data?.fb_pixel_code != "" && n == 1) {
                 ReactPixel.track("AddToCart", {
-                  content_name: item?.product_name,
-                  content_category: item?.category_name,
-                  content_ids: [item?.id],
+                  content_name: product?.product_name,
+                  content_category: product?.category_name,
+                  content_ids: [product?.id],
                   content_type: "product",
-                  value: item?.product_price,
+                  value: product?.product_price,
                   currency: "KWD",
                 });
 
@@ -198,7 +203,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                     fb_access_token:
                       "EAAGZA8GMZAs1IBAC9mDImnZCTAdafRzN769x6ZCIRMExueSZBZBfnDkIzGrsP4gZBMZCCwXaSvKNggZBEKdEk3582JWiwecrnZAEHFzfCaYKSNRbltxMm2cSvUrgZBUDpVNZCQAOVWUuzO4m7nbvQn1Wqb94IBbVSexSbwWzAf6TYV80HQF1ZAZAzGcXKB",
                     support_mail: homePageDetails?.vendor_data?.support_mail,
-                    item: item,
+                    item: product,
                   });
                 }
 
@@ -212,17 +217,17 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                     fb_access_token:
                       homePageDetails?.vendor_data?.fb_access_token,
                     support_mail: homePageDetails?.vendor_data?.support_mail,
-                    item: item,
+                    item: product,
                   });
                 }
               }
               if (homePageDetails?.vendor_data?.snap_pixel_code != "" && n == 1)
                 SnapPixel.track("ADD_CART", {
-                  content_name: item?.product_name,
-                  item_category: item?.category_name,
-                  item_ids: [item?.id],
+                  content_name: product?.product_name,
+                  item_category: product?.category_name,
+                  item_ids: [product?.id],
                   content_type: "product",
-                  price: item?.product_price,
+                  price: product?.product_price,
                   currency: "KWD",
                 });
 
@@ -233,10 +238,10 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 TiktokPixel.track("AddToCart", {
                   content_type: "product",
                   quantity: 1,
-                  content_name: item?.product_name,
-                  content_id: item?.id,
+                  content_name: product?.product_name,
+                  content_id: product?.id,
                   currency: "KWD",
-                  value: item?.product_price,
+                  value: product?.product_price,
                 });
               }
 
@@ -246,26 +251,26 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 n == 1
               )
                 addCartTag({
-                  item_id: item?.id,
-                  item_name: item?.product_name,
+                  item_id: product?.id,
+                  item_name: product?.product_name,
                   currency: "KWD",
-                  discount: item?.discount_value,
-                  item_category: item?.category_name,
-                  price: item?.product_price,
+                  discount: product?.discount_value,
+                  item_category: product?.category_name,
+                  price: product?.product_price,
                   quantity: n,
                 });
               setSpinLoader(false);
               handleCartChange(response.data);
-              if (
-                (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
-                (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
-                n == 1 &&
-                (homePageDetails?.vendor_data?.international_delivery === "3" ||
-                  homePageDetails?.vendor_data?.international_delivery === "" ||
-                  internationalDelivery.country_name.toLowerCase() === "kuwait")
-              ) {
-                history.push(`/area`);
-              }
+              // if (
+              //   (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
+              //   (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
+              //   n == 1 &&
+              //   (homePageDetails?.vendor_data?.international_delivery === "3" ||
+              //     homePageDetails?.vendor_data?.international_delivery === "" ||
+              //     internationalDelivery.country_name.toLowerCase() === "kuwait")
+              // ) {
+              //   history.push(`/area`);
+              // }
             }
           }
         } else {
@@ -277,7 +282,9 @@ const ProductSquareCard = ({ product, imgHeight }) => {
 
   useEffect(() => {
     if (cart?.cartItems) {
-      const temp = cart?.cartItems?.filter((k, i) => item?.id == k?.product_id);
+      const temp = cart?.cartItems?.filter(
+        (k, i) => product?.id == k?.product_id
+      );
       if (temp.length == 0) {
         setInCart(0);
       } else {
@@ -485,7 +492,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 {product?.product_status ==
                 0 ? null : product?.price_on_selection == 1 ? null : inCart !=
                   0 ? (
-                  <Link
+                  <Box
                     onClick={(e) => e.preventDefault()}
                     className="product-price "
                   >
@@ -496,7 +503,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                       >
                         <i className="fa fa-minus"></i>
                       </button>
-                      <Link
+                      <Box
                         onClick={(e) => e.preventDefault()}
                         className="quantity-text"
                       >
@@ -509,7 +516,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                         ) : (
                           inCart
                         )}
-                      </Link>
+                      </Box>
                       <button
                         className="control-button"
                         onClick={(e) => onAddToCartClick(e, 1)}
@@ -517,10 +524,15 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                         <i className="fa fa-plus"></i>
                       </button>
                     </div>
-                  </Link>
+                  </Box>
                 ) : (
                   <span
-                    onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (inCart == 0) {
+                        onAddToCartClick(e, 1);
+                      }
+                    }}
                     style={{
                       backgroundColor:
                         homePageDetails?.vendor_data?.vendor_color,

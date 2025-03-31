@@ -3,6 +3,7 @@ import moment from "moment";
 import { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { SnackbarProvider } from "notistack";
+import { emptyUserCart, getUserCart } from "@/apis";
 
 export const AppContext = createContext();
 
@@ -142,7 +143,7 @@ export const AppProvider = ({
   const handleOpenAreaChange = (value) => setOpenArea(value);
 
   useEffect(() => {
-    if (!localStorage.getItem("userID")) {
+    if (window && !localStorage.getItem("userID")) {
       let result = "";
       let characters = "abcdefghijklmnopqrstuvwxyz0123456789";
       let charactersLength = characters.length;
@@ -154,6 +155,22 @@ export const AppProvider = ({
       localStorage.setItem("userID", result);
     }
   }, []);
+  useEffect(() => {
+    if (window && localStorage.getItem("cartTime")) {
+      let prevTime = Date.parse(localStorage.getItem("cartTime"));
+      let nowTime = new Date();
+      let diff = Math.abs(prevTime - nowTime) / 3600000;
+      if (diff > 2) {
+        if (localStorage.getItem("userID")) {
+          handleEmptyCart();
+        }
+      } else {
+        if (localStorage.getItem("userID")) {
+          handleUserCart();
+        }
+      }
+    }
+  }, [homePageDetails?.data]);
 
   const resetUserDetails = () => {
     setAreaDetails({
@@ -294,6 +311,34 @@ export const AppProvider = ({
       }
     }
   }, [deliveryResponse, estoreBranchesResponse]);
+
+  const handleEmptyCart = async () => {
+    const response = await emptyUserCart({
+      vendorSlug: vendorSlugResponse?.data?.ecom_url_slug,
+      vendor_id: vendorSlugResponse?.data?.vendor_data?.vendors_id,
+      user_string: localStorage.getItem("userID"),
+    });
+    if (response?.status) {
+      if (!response.data?.cartCount == 0) {
+        setCart(response.data);
+      }
+    }
+  };
+
+  const handleUserCart = async () => {
+    const response = await getUserCart({
+      vendorSlug: vendorSlugResponse?.data?.ecom_url_slug,
+      vendor_id: vendorSlugResponse?.data?.vendor_data?.vendors_id,
+      user_string: localStorage.getItem("userID"),
+      area_id: areaDetails?.area_id,
+    });
+    console.log(response, "handleUserCart");
+    if (response?.status) {
+      if (!response.data?.cartCount == 0) {
+        setCart(response.data);
+      }
+    }
+  };
   const getBranchForAlawael = async () => {
     // return await getBranch(
     //   estoreBranchesResponse.data[0]?.name,

@@ -489,7 +489,7 @@ const ProductDetails = ({
           });
         setSpinLoader(false);
         handleCartChange(response?.data);
-        router.push(`review`);
+        router.push(`desk-checkout`);
         if (
           (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
           (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
@@ -602,7 +602,7 @@ const ProductDetails = ({
             });
           setSpinLoader(false);
           handleCartChange(response?.data);
-          router.push(`review`);
+          router.push(`desk-checkout`);
 
           if (
             (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
