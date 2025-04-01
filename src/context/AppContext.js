@@ -3,7 +3,8 @@ import moment from "moment";
 import { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { SnackbarProvider } from "notistack";
-import { emptyUserCart, getUserCart } from "@/apis";
+import { emptyUserCart, getUserCart, GetUserDetails } from "@/apis";
+import { tele } from "@/constants/constants";
 
 export const AppContext = createContext();
 
@@ -311,6 +312,49 @@ export const AppProvider = ({
       }
     }
   }, [deliveryResponse, estoreBranchesResponse]);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") &&
+      localStorage.getItem("contactInfo") &&
+      vendorSlugResponse?.data?.vendor_data
+    ) {
+      if (
+        localStorage.getItem("token") &&
+        localStorage.getItem("contactInfo")
+      ) {
+        (async () => {
+          const contactInfo = JSON.parse(localStorage.getItem("contactInfo"));
+          const response = await GetUserDetails({
+            vendor_id: vendorSlugResponse?.data?.vendor_data?.vendors_id,
+            sendSMS: false,
+            country_code: `+${tele[contactInfo.code]}`,
+            phone_number: contactInfo.phone,
+            jwt_token: localStorage.getItem("token"),
+            user_id: localStorage.getItem("id"),
+            language: language,
+          });
+          if (response?.status) {
+            setUserDetails({ ...response?.data });
+            setContactDetails({
+              ...contactDetails,
+              name: response?.data?.name,
+              email: response?.data?.email,
+              phone: contactInfo.phone,
+              phoneCode: contactInfo.code,
+            });
+          } else {
+            localStorage.removeItem("token");
+            localStorage.removeItem("contactInfo");
+            resetUserDetails();
+          }
+        })();
+      } else {
+        localStorage.removeItem("token");
+        localStorage.removeItem("contactInfo");
+      }
+    }
+  }, [localStorage.getItem("token"), vendorSlugResponse?.data?.vendor_data]);
 
   const handleEmptyCart = async () => {
     const response = await emptyUserCart({

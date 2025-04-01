@@ -1,14 +1,14 @@
-import React from "react";
-import styles from "./navbar.module.css";
-import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
-import { useContext } from "react";
+import CartIcon from "@/assets/icons/addressIcons/CartIcon";
 import { AppContext } from "@/context/AppContext";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Badge, Box, Grid, IconButton } from "@mui/material";
 import Image from "next/image";
-import TypographyConverter from "../TypographyConveter/TypographyConverter";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 import GridLayout from "../GridLayout/gridLayout";
 const Navbar = ({ handleDrawar }) => {
-  const { homePageDetails, language } = useContext(AppContext);
+  const { homePageDetails, language, cart } = useContext(AppContext);
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -81,7 +81,7 @@ const Navbar = ({ handleDrawar }) => {
               padding: "8px",
             }}
           >
-            <Button
+            {/* <Button
               variant="outlined"
               sx={{ borderRadius: "30px", borderColor: "#fff" }}
             >
@@ -95,9 +95,18 @@ const Navbar = ({ handleDrawar }) => {
                       : "SFT Schrifted Sans TRIAL Var",
                 }}
               >
-                {language === "ltr" ? "عربي" : "color"}
+                {language === "ltr" ? "عربي" : "English"}
               </Typography>
-            </Button>
+            </Button> */}
+            {cart?.cartCount && (
+              <Badge
+                color="success"
+                badgeContent={cart?.cartCount}
+                onClick={() => router.push("/desk-checkout")}
+              >
+                <CartIcon />
+              </Badge>
+            )}
           </Grid>
         </Grid>
       </GridLayout>
