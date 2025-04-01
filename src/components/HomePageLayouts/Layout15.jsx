@@ -12,6 +12,7 @@ import "./layout.css";
 import ProductSquareCard from "../ProductSquareCard/productSquareCard";
 
 const Layout15 = ({ categories }) => {
+  console.log(categories, "categories")
   const { language } = useContext(AppContext);
   const [expendedList, setExpendedList] = useState(
     categories?.map((cate) => cate.category_id)

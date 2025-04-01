@@ -402,7 +402,6 @@ const ProductDetails = ({
         variation_ids: addedVariaton,
         product_notes: note,
       });
-      console.log(response, "---- response");
       if (response?.status) {
         if (response?.status == false) {
           notify(response?.message, response?.message_ar, language);
@@ -603,7 +602,6 @@ const ProductDetails = ({
           setSpinLoader(false);
           handleCartChange(response?.data);
           router.push(`desk-checkout`);
-
           if (
             (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
             (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&

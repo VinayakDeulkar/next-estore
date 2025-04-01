@@ -342,7 +342,7 @@ const ContactInfo = ({
           style={{
             fontSize: language === "ltr" ? "13px" : "14px",
             marginTop: "30px",
-            position: "absolute",
+            // position: "absolute",
             bottom: "100px",
             fontWeight: 500,
             textDecoration: "underline",

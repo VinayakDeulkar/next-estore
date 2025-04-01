@@ -5,9 +5,13 @@ import "../custom.css";
 import Layout13 from "./Layout13";
 import Layout16 from "./Layout16";
 import Layout12 from "./Layout12";
+import Layout14 from "./Layout14";
 
 const HomePageLayouts = ({ homePageDetails }) => {
-  console.log(homePageDetails, "homePageDetails?.vendor_data");
+  console.log(
+    homePageDetails?.vendor_data?.home_page_type,
+    "homePageDetails?.vendor_data?.home_page_type"
+  );
   const renderLayoutType = (categories) => {
     switch (homePageDetails?.vendor_data?.home_page_type) {
       case "11":
@@ -20,6 +24,9 @@ const HomePageLayouts = ({ homePageDetails }) => {
       case "13":
       case "16":
         return <Layout13 categories={categories} />;
+
+      case "14":
+        return <Layout14 categories={categories} />;
 
       case "15":
         return <Layout15 categories={categories} />;
