@@ -81,6 +81,7 @@ const DeskCheckout = () => {
   });
   const [showDeliveryAddress, setShowDeliveryAddress] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectAddress, setSelectAddress] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const [successPromocode, setSuccessPromocode] = useState();
@@ -89,6 +90,9 @@ const DeskCheckout = () => {
       setShowNameEmailFields(true);
       setShowGuestUser(false);
       setShowDeliveryAddress(true);
+      if (userDetails?.address.length) {
+        setSelectAddress(true);
+      }
     }
   }, [userDetails?.name]);
 
@@ -452,15 +456,19 @@ const DeskCheckout = () => {
           )}
           {showDeliveryAddress && (
             <>
-              <NewAddressForm
-                areaDetails={areaDetails}
-                blockValidation={blockValidation}
-                streetValidation={streetValidation}
-                houseValidation={houseValidation}
-                addressNameValidation={addressNameValidation}
-                errorState={errorState}
-                setMarkerPosition={setMarkerPosition}
-              />
+              {selectAddress ? (
+                <></>
+              ) : (
+                <NewAddressForm
+                  areaDetails={areaDetails}
+                  blockValidation={blockValidation}
+                  streetValidation={streetValidation}
+                  houseValidation={houseValidation}
+                  addressNameValidation={addressNameValidation}
+                  errorState={errorState}
+                  setMarkerPosition={setMarkerPosition}
+                />
+              )}
             </>
           )}
 

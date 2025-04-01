@@ -1,6 +1,8 @@
+import VendorInfoBox from "@/components/HomePage/VendorInfoBox/vendorInfoBox";
 import { Box, Drawer } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../Navbar/navbar";
+import RestSideDrawerContent from "@/components/SideBar/RestSideDrawerContent";
 
 const HeaderBox = () => {
   const [open, setOpen] = useState(false);
@@ -15,7 +17,8 @@ const HeaderBox = () => {
             width: "30vw",
           }}
         >
-          Hello
+          <VendorInfoBox />
+          <RestSideDrawerContent setBurger={setOpen} />
         </Box>
       </Drawer>
       <Navbar handleDrawar={handleDrawar} />
