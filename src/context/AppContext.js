@@ -356,7 +356,7 @@ export const AppProvider = ({
         localStorage.removeItem("contactInfo");
       }
     }
-  }, [localStorage.getItem("token"), vendorSlugResponse?.data?.vendor_data]);
+  }, [localStorage?.getItem("token"), vendorSlugResponse?.data?.vendor_data]);
 
   const handleEmptyCart = async () => {
     const response = await emptyUserCart({
@@ -378,7 +378,6 @@ export const AppProvider = ({
       user_string: localStorage.getItem("userID"),
       area_id: areaDetails?.area_id,
     });
-    console.log(response, "handleUserCart");
     if (response?.status) {
       if (!response.data?.cartCount == 0) {
         setCart(response.data);
@@ -417,6 +416,8 @@ export const AppProvider = ({
     handleOpenAreaChange,
     addressDetails,
     handleAddressDetailsChange,
+    payment,
+    setPayment,
   };
 
   return (

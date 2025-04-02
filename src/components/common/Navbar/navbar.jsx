@@ -102,7 +102,13 @@ const Navbar = ({ handleDrawar }) => {
               <Badge
                 color="success"
                 badgeContent={cart?.cartCount}
-                onClick={() => router.push("/desk-checkout")}
+                onClick={() => {
+                  if (window.innerWidth < 991) {
+                    router.push("/review");
+                  } else {
+                    router.push("/desk-checkout");
+                  }
+                }}
               >
                 <CartIcon />
               </Badge>

@@ -292,7 +292,6 @@ const DeliveryAddress = () => {
             : streetValidation(addressDetails.street);
         let addressName = addressNameValidation(addressDetails.addressName);
         let house = houseValidation(addressDetails.house);
-        console.log(addressDetails, "inside homePageDetails?.vendor_data");
 
         if (
           !block &&

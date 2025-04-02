@@ -8,10 +8,6 @@ import Layout12 from "./Layout12";
 import Layout14 from "./Layout14";
 
 const HomePageLayouts = ({ homePageDetails }) => {
-  console.log(
-    homePageDetails?.vendor_data?.home_page_type,
-    "homePageDetails?.vendor_data?.home_page_type"
-  );
   const renderLayoutType = (categories) => {
     switch (homePageDetails?.vendor_data?.home_page_type) {
       case "11":

@@ -8,7 +8,6 @@ import ThreeDots from "@/SVGs/ThreeDots";
 import { IconButton } from "@mui/material";
 
 const Card = ({ icon, info, symbol, onEdit, onDelete, cardClick, user }) => {
-  console.log(symbol, "symbol");
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
   const { language } = useContext(AppContext);
@@ -59,7 +58,6 @@ const Card = ({ icon, info, symbol, onEdit, onDelete, cardClick, user }) => {
               sx={{ height: "100%", width: "100%" }}
               onClick={(e) => {
                 e.stopPropagation();
-                console.log("first");
                 setIsExpanded(!isExpanded);
               }}
             >

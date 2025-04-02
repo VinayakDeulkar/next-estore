@@ -139,7 +139,7 @@ const Login = () => {
               ) {
                 router.push("/delivery-address");
               } else {
-                router.push("/");
+                router.push("/checkout");
               }
             } else {
               router.push("/");

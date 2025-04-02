@@ -11,7 +11,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ModalClosed from "@/components/common/ModalClosed/ModalClosed";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
-import ReactPixel from 'react-facebook-pixel';
+import ReactPixel from "react-facebook-pixel";
 
 const Review = () => {
   const {
@@ -75,6 +75,17 @@ const Review = () => {
               localStorage.getItem("contactInfo") &&
               contactDetails.name &&
               contactDetails.phone
+            ) &&
+            (homePageDetails?.vendor_data?.checkout_method === "2" ||
+              homePageDetails?.vendor_data?.checkout_method === "1")
+          ) {
+            localStorage.setItem("newPath", "review");
+            router.push(`/login`);
+          } else if (
+            !(
+              localStorage.getItem("contactInfo") &&
+              contactDetails.name &&
+              contactDetails.phone
             )
           ) {
             localStorage.setItem("newPath", "review");
@@ -84,7 +95,18 @@ const Review = () => {
             router.push(`/delivery-address`);
           }
         } else {
-          if (!localStorage.getItem("contactInfo")) {
+          if (
+            !(
+              localStorage.getItem("contactInfo") &&
+              contactDetails.name &&
+              contactDetails.phone
+            ) &&
+            (homePageDetails?.vendor_data?.checkout_method === "2" ||
+              homePageDetails?.vendor_data?.checkout_method === "1")
+          ) {
+            localStorage.setItem("newPath", "review");
+            router.push(`/login`);
+          } else if (!localStorage.getItem("contactInfo")) {
             localStorage.setItem("newPath", "review");
             router.push(`/contact-details`);
           } else if (userDetails?.address?.length == 0) {
