@@ -4,7 +4,10 @@ import CommonHeader from "@/components/common/CommonHeader/CommonHeader";
 import Spinner from "@/components/common/Spinner/spinner";
 import NewDeliveryCompany from "@/components/NewDeliveryCompany/newDeliveryCompany";
 import BuyerDetails from "@/components/NewOrderDetailsPage/Components/BuyerDetails";
+import NewAmountDetails from "@/components/NewOrderDetailsPage/Components/NewAmountDetails";
 import NewDeliveryDetails from "@/components/NewOrderDetailsPage/Components/NewDeliveryDetails";
+import NewPaymentSelector from "@/components/NewOrderDetailsPage/Components/NewPaymentSelector";
+import NewPromocode from "@/components/NewOrderDetailsPage/Components/NewPromocode";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
 import { mapArea } from "@/constants/areaConstant";
 import { AppContext } from "@/context/AppContext";
@@ -38,6 +41,11 @@ const CheckOut = () => {
   const [notServing, setNotServing] = useState(0);
   const [deliveryKm, setDeliveryKm] = useState();
   const [deliveryCharge, setDeliveryCharge] = useState(0);
+  const [showAddress, setShowAddress] = useState(false);
+  const [successPromocode, setSuccessPromocode] = useState("");
+  const [companyData, setCompanyData] = useState();
+  const [width, setWidth] = useState(0);
+  const [promocode, setPromocode] = useState("");
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey:
@@ -292,7 +300,7 @@ const CheckOut = () => {
           }
         }}
       >
-        <BackComponent />
+        {/* <BackComponent /> */}
       </div>
       <CommonHeader
         englishHeader="Checkout"
@@ -356,7 +364,7 @@ const CheckOut = () => {
         cart={cart}
         areaDetails={areaDetails}
         language={language}
-        details={details}
+        details={homePageDetails}
         payment={payment}
         onConfirmOrder={() => {
           if (

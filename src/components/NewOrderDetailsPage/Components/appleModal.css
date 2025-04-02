@@ -1,0 +1,73 @@
+.appleCard {
+  width: 400px;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 15px 30px 25px;
+}
+
+.backButtonDiv {
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+}
+
+.payByText {
+  font-size: 14px;
+  font-weight: 300;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.applebutton {
+  height: 70px;
+  width: 150px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px 0;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.applebutton > div {
+  width: 100%;
+}
+
+.flexDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-made.appleModalWidth .modal-content-made {
+  width: 400px;
+}
+.modal-made.appleModalWidth {
+  padding-top: 35vh;
+  z-index: 7;
+}
+
+@media screen and (max-width: 600px) {
+  .appleCard {
+    width: 350px;
+  }
+  .modal-made.appleModalWidth .modal-content-made {
+    width: 350px;
+  }
+  .modal-made.appleModalWidth {
+    padding-top: 35vh;
+  }
+}
