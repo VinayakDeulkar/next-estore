@@ -5,21 +5,27 @@ import {
   updateUserDetails,
   verifyUserOTP,
 } from "@/apis";
+import AddressSection from "@/components/AddressSection/addressSection";
+import Card from "@/components/common/AddressCard/AddressCard";
 import CommonHeader from "@/components/common/CommonHeader/CommonHeader";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import ContactInfo from "@/components/ContactInfo/ContactInfo";
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
+import DeskCheckoutSection from "@/components/DeskCheckoutSection/deskCheckoutSection";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
 import OtpVerification from "@/components/OtpVerification/OtpVerification";
 import { tele } from "@/constants/constants";
 import {
   emailValidation,
+  getAddressType,
   nameValidation,
   phoneValidation,
 } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
+import ThreeDots from "@/SVGs/ThreeDots";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Box, Grid } from "@mui/material";
+import moment from "moment";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
@@ -84,13 +90,13 @@ const DeskCheckout = () => {
   const [selectAddress, setSelectAddress] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-  const [successPromocode, setSuccessPromocode] = useState();
+
   useEffect(() => {
     if (userDetails?.name) {
       setShowNameEmailFields(true);
       setShowGuestUser(false);
       setShowDeliveryAddress(true);
-      if (userDetails?.address.length) {
+      if (userDetails?.address?.length) {
         setSelectAddress(true);
       }
     }
@@ -178,7 +184,6 @@ const DeskCheckout = () => {
           }
         } else {
           enqueueSnackbar({ variant: "error", message: userReponse?.message });
-
           localStorage.removeItem("token");
           localStorage.removeItem("contactInfo");
           resetUserDetails();
@@ -330,7 +335,6 @@ const DeskCheckout = () => {
 
           if (response?.data?.is_otp_sent) {
             localStorage.setItem("id", response?.data?.id);
-
             enqueueSnackbar({ variant: "success", message: response?.message });
             setOtpSent(true);
             setOpenOtpPage(true);
@@ -421,7 +425,9 @@ const DeskCheckout = () => {
       return false;
     }
   };
+
   const handleDeliveryAddressNext = () => {};
+
   return (
     <Box sx={{ height: "100vh" }}>
       <HeaderBox />
@@ -454,10 +460,11 @@ const DeskCheckout = () => {
               showGuestUser={showGuestUser}
             />
           )}
+
           {showDeliveryAddress && (
-            <>
+            <div style={{marginTop: "50px"}}>
               {selectAddress ? (
-                <></>
+                <AddressSection />
               ) : (
                 <NewAddressForm
                   areaDetails={areaDetails}
@@ -469,8 +476,8 @@ const DeskCheckout = () => {
                   setMarkerPosition={setMarkerPosition}
                 />
               )}
-            </>
-          )}
+            </div>
+          )}  
 
           {showDeliveryAddress && (
             <div
@@ -490,6 +497,7 @@ const DeskCheckout = () => {
               </Box>
             </div>
           )}
+
           {!showDeliveryAddress && (
             <div
               className={`contact-details-bottom-button contact-details-mobile-button ${
@@ -509,70 +517,10 @@ const DeskCheckout = () => {
             </div>
           )}
         </Grid>
+
         <Grid item md={6} sx={{ padding: "0 20px" }}>
           <Box>
-            <div>
-              {areaDetails.type == "delivery" &&
-                (homePageDetails?.vendor_data?.international_delivery === "3" ||
-                  homePageDetails?.vendor_data?.international_delivery ===
-                    "") && (
-                  <>
-                    <Link href={`/timing`} className="deliveryInfoMainDIv">
-                      <div className="buyer-details-firstDiv">
-                        <div className="checkoutPageText">
-                          {areaDetails?.now == 1
-                            ? language === "ltr"
-                              ? `${
-                                  !areaDetails?.customDelivery
-                                    ? "Delivery Within"
-                                    : ""
-                                } ${areaDetails?.deliveryTiming}`
-                              : `${
-                                  !areaDetails?.customDelivery
-                                    ? "التوصيل سيكون خلال"
-                                    : ""
-                                } ${areaDetails?.ar_deliveryTiming}`
-                            : moment(areaDetails?.laterDeliveryTiming)
-                                .locale("en")
-                                .format("DD") +
-                              " " +
-                              moment(areaDetails?.laterDeliveryTiming)
-                                .locale(language == "ltr" ? "en" : "ar-sa")
-                                .format("MMMM") +
-                              moment(areaDetails?.laterDeliveryTiming)
-                                .locale("en")
-                                .format(", yyyy hh:mm ") +
-                              moment(areaDetails?.laterDeliveryTiming)
-                                .locale(language == "ltr" ? "en" : "ar-sa")
-                                .format("A")}
-                        </div>
-                      </div>
-                      <div className="buyer-details-secondDiv">
-                        <ArrowForwardIosIcon sx={{ fontSize: "14px" }} />
-                      </div>
-                    </Link>
-                  </>
-                )}
-              <div
-                className="checkoutPageText"
-                style={{ marginTop: "5px", marginBottom: "10px" }}
-              >
-                {language === "ltr" ? "Items Details" : "تفاصيل عربة التسوق"}
-              </div>
-              <NewOrderProductList
-                setSuccessPromocode={setSuccessPromocode}
-                successPromocode={successPromocode}
-              />
-              <div className="newreview-details-div">
-                <p className="newreview-text">
-                  {language === "ltr" ? "Sub Total" : "الإجمالي"}
-                </p>
-                <p className="newreview-text">
-                  <span>{parseFloat(cart?.subTotal).toFixed(3)}</span>{" "}
-                  {language === "rtl" ? "د.ك" : "KD"}
-                </p>
-              </div>
-            </div>
+            <DeskCheckoutSection />
           </Box>
         </Grid>
       </Grid>

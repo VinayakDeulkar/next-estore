@@ -15,6 +15,8 @@ export const AppProvider = ({
   estoreBranchesResponse,
   children,
 }) => {
+  const [payment, setPayment] = useState(1);
+
   const [language, setLanguage] = useState("ltr");
   const handleLanguageChange = (lng) => {
     localStorage.setItem("language", lng);

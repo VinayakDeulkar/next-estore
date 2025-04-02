@@ -1,0 +1,109 @@
+.cardMain {
+  border: 1px solid #e1e1e1;
+  padding: 15px 22px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 85% 15%;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  transition: all 0.3s ease-in-out;
+  /* max-width: 350px; */
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.firstCardDiv {
+  display: flex;
+  align-items: center;
+}
+
+.firstCardDiv,
+.secondCardDiv {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.firstCardDiv.hidden,
+.secondCardDiv.hidden {
+  opacity: 0;
+  transform: translateX(-20px);
+  pointer-events: none;
+}
+
+.thirdCardDiv {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.actions {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%) translateX(100%);
+  display: flex;
+  gap: 15px;
+  opacity: 0;
+  transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.actions.show {
+  left: 40px;
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+}
+
+.btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+html[dir="rtl"] .btn {
+  font-size: 17px;
+}
+
+.headingText {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+html[dir="rtl"] .headingText {
+  font-size: 20px;
+}
+
+.descText {
+  color: #838383;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 7px;
+}
+
+html[dir="rtl"] .descText {
+  font-size: 15px;
+}
+
+.areaText {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 1px 0 3px 0;
+}
+
+html[dir="rtl"] .areaText {
+  font-size: 19px;
+}
+
+.secondText {
+  color: #838383;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+html[dir="rtl"] .secondText {
+  font-size: 18px;
+}

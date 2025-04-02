@@ -1,3 +1,11 @@
+import ApparentIcon from "@/SVGs/ApparentIcon";
+import BoxSvg from "@/SVGs/BoxSvg";
+import GovernmentIcon from "@/SVGs/GovernmentIcon";
+import HomeIcon from "@/SVGs/HomeIcon";
+import MosqueIcon from "@/SVGs/MosqueIcon";
+import OfficeIcons from "@/SVGs/OfficeIcons";
+import SchoolIcon from "@/SVGs/SchoolIcon";
+
 export const nameValidation = (value, setErrorContactDetails) => {
   let pattern =
     /^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]*$/;
@@ -119,3 +127,28 @@ export const emailValidation = (
 export function addCartTag(obj) {
   window.gtag("event", "add_to_cart", obj);
 }
+
+export const getAddressType = (addressType, color, height, isPickup) => {
+  if (isPickup) {
+    return <BoxSvg />;
+  }
+  switch (addressType) {
+    case "1":
+      return <HomeIcon color={color} height={height} />;
+
+    case "2":
+      return <ApparentIcon color={color} height={height} />;
+
+    case "3":
+      return <OfficeIcons color={color} height={height} />;
+    case "4":
+      return <SchoolIcon color={color} height={height} />;
+    case "5":
+      return <MosqueIcon color={color} height={height} />;
+    case "6":
+      return <GovernmentIcon color={color} height={height} />;
+
+    default:
+      break;
+  }
+};
