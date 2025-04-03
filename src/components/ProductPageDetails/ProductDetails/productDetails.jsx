@@ -392,7 +392,7 @@ const ProductDetails = ({
     if (temp.length == 0) {
       setSpinLoader(true);
       const response = await addToCartApi({
-        vendorSlug: vendorSlug,
+        vendorSlug: vendorSlug?.data?.ecom_url_slug,
         vendors_id: homePageDetails?.vendor_data?.vendors_id,
         area_id: areaDetails?.area_id,
         itemId: product?.id,
@@ -510,7 +510,7 @@ const ProductDetails = ({
       if (Number(inCart + prodNumber) <= Number(product.quantity)) {
         setSpinLoader(true);
         const response = await updateCartQauntity({
-          vendorSlug: vendorSlug,
+          vendorSlug: vendorSlug?.data?.ecom_url_slug,
           vendors_id: homePageDetails?.vendor_data?.vendors_id,
           area_id: areaDetails?.area_id,
           user_string: localStorage.getItem("userID"),

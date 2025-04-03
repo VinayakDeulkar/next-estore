@@ -16,6 +16,7 @@ export const AppProvider = ({
   children,
 }) => {
   const [payment, setPayment] = useState(1);
+  const handleSetPaymentChange = (value) => setPayment(value);
 
   const [language, setLanguage] = useState("ltr");
   const handleLanguageChange = (lng) => {
@@ -417,7 +418,7 @@ export const AppProvider = ({
     addressDetails,
     handleAddressDetailsChange,
     payment,
-    setPayment,
+    handleSetPaymentChange,
   };
 
   return (

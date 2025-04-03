@@ -7,7 +7,7 @@ import Link from "next/link";
 import ReactPixel from 'react-facebook-pixel';
 
 const HorizontalCard = ({ product }) => {
-  const { language, cart, handleCartChange, homePageDetails, areaDetails } =
+  const { language, cart, handleCartChange, homePageDetails, areaDetails, vendorSlug } =
     useContext(AppContext);
   const [inCart, setInCart] = useState(0);
   const [spinLoader, setSpinLoader] = useState(false);
@@ -25,7 +25,7 @@ const HorizontalCard = ({ product }) => {
     } else if (n == -1 && inCart == 1) {
       setSpinLoader(true);
       const response = await removeCartItem({
-        vendorSlug: vendorSlug,
+        vendorSlug: vendorSlug?.data?.ecom_url_slug,
         vendors_id: homePageDetails?.vendor_data?.vendors_id,
         area_id: areaDetails?.area_id,
         user_string: localStorage.getItem("userID"),
@@ -45,7 +45,7 @@ const HorizontalCard = ({ product }) => {
         if (temp?.length === 0 || !temp?.length) {
           setSpinLoader(true);
           const response = await addToCartApi({
-            vendorSlug: vendorSlug,
+            vendorSlug: vendorSlug?.data?.ecom_url_slug,
             vendors_id: homePageDetails?.vendor_data?.vendors_id,
             area_id: areaDetails?.area_id,
             itemId: product?.id,
@@ -155,7 +155,7 @@ const HorizontalCard = ({ product }) => {
         } else {
           setSpinLoader(true);
           const response = await updateCartQauntity({
-            vendorSlug: vendorSlug,
+            vendorSlug: vendorSlug?.data?.ecom_url_slug,
             vendors_id: homePageDetails?.vendor_data?.vendors_id,
             area_id: areaDetails?.area_id,
             user_string: localStorage.getItem("userID"),

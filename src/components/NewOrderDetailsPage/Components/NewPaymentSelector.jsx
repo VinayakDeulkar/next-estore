@@ -1,10 +1,12 @@
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
+import "../checkOrderDetails.css";
 
-const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
+const NewPaymentSelector = ({ payment, handleSetPaymentChange, setWidth, width }) => {
   const { homePageDetails, language, internationalDelivery } =
     useContext(AppContext);
+
   const resizer = () => {
     setWidth((i) => document.getElementById("slider-width")?.offsetWidth);
   };
@@ -22,7 +24,7 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
 
   useEffect(() => {
     if (isSafari && homePageDetails?.vendor_data?.is_apple_pay?.length > 0) {
-      setPayment(4);
+      handleSetPaymentChange(4);
     }
   }, [isSafari]);
 
@@ -71,14 +73,14 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
         }}
       >
         <div
-          className="checkout-page-text"
+          className="checkoutPageText"
           style={{ marginTop: "25px", marginBottom: "5px" }}
         >
           {language === "ltr" ? "Payment Method" : "طريقة الدفع"}
         </div>
         <div style={{ marginTop: "10px" }}>
           <img
-            src="pictures/PaymentProviderImage.png"
+            src="images/PaymentProviderImage.png"
             style={{ height: "23px" }}
           />
         </div>
@@ -89,12 +91,11 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
           getMethodsCount() ? "fourbuttons" : ""
         }`}
       >
-        {console.log(getMethodsCount())}
         {homePageDetails?.vendor_data?.is_apple_pay?.length > 0 && isSafari ? (
           <Box
             onClick={(e) => {
               e.preventDefault();
-              setPayment(4);
+              handleSetPaymentChange(4);
             }}
             className={`intro-flex payment-details-holder  ${
               payment == 4 ? "active" : ""
@@ -110,7 +111,7 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
                   height: "30px",
                   objectFit: "contain",
                 }}
-                src={"pictures/newApplePayButton.png"}
+                src={"images/newApplePayButton.png"}
                 className="img-fluid"
               ></img>
             </span>
@@ -123,7 +124,7 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
           id="slider-width"
           onClick={(e) => {
             e.preventDefault();
-            setPayment(1);
+            handleSetPaymentChange(1);
           }}
           className={`intro-flex payment-details-holder  ${
             payment == 1 ? "active" : ""
@@ -135,7 +136,7 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
           <span className="del-ic" style={{ padding: 0 }}>
             <img
               style={{ width: 38, height: 28 }}
-              src={"pictures/knet icon mini.png"}
+              src={"images/knet icon mini.png"}
               className="img-fluid"
             ></img>
           </span>
@@ -147,7 +148,7 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
           <Box
             onClick={(e) => {
               e.preventDefault();
-              setPayment(2);
+              handleSetPaymentChange(2);
             }}
             className={`intro-flex payment-details-holder  ${
               payment == 2 ? "active" : ""
@@ -163,7 +164,7 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
                   height: "30px",
                   objectFit: "contain",
                 }}
-                src={"pictures/visa.png"}
+                src={"images/visa.png"}
                 className="img-fluid"
               ></img>{" "}
               <img
@@ -172,7 +173,7 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
                   height: "30px",
                   objectFit: "contain",
                 }}
-                src={"pictures/master.png"}
+                src={"images/master.png"}
                 className="img-fluid"
               ></img>
             </span>
@@ -189,7 +190,7 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
           <Box
             onClick={(e) => {
               e.preventDefault();
-              setPayment(3);
+              handleSetPaymentChange(3);
             }}
             className={`intro-flex payment-details-holder  ${
               payment == 3 ? "active" : ""
@@ -201,7 +202,7 @@ const NewPaymentSelector = ({ payment, setPayment, setWidth, width }) => {
             <span className="del-ic" style={{ padding: 0 }}>
               <img
                 style={{ width: "auto", height: 30, width: 35 }}
-                src={"pictures/icons8-money-64.png"}
+                src={"images/icons8-money-64.png"}
                 className="img-fluid"
               ></img>
             </span>

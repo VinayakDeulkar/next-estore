@@ -1,13 +1,10 @@
-import React from "react";
+import { AppContext } from "@/context/AppContext";
+import React, { useContext } from "react";
 
-const NewAmountDetails = ({
-  cart,
-  language,
-  areaDetails,
-  details,
-  payment,
-  onConfirmOrder,
-}) => {
+const NewAmountDetails = ({ onConfirmOrder }) => {
+  const { cart, language, areaDetails, homePageDetails, payment } =
+    useContext(AppContext);
+
   return (
     <div className="acmount-mainDIv">
       <div className="pt-2" style={{ marginBottom: "40px" }}>
@@ -38,7 +35,7 @@ const NewAmountDetails = ({
         ) : null}
 
         {areaDetails?.type == "delivery" &&
-        details.vendor_data.vendors_id != "1250" ? (
+        homePageDetails?.vendor_data?.vendors_id != "1250" ? (
           <div className="amount-sub-div">
             <div className="amount-sub-label">
               {language == "ltr" ? "Delivery Charges" : "رسوم التوصيل"}
@@ -113,16 +110,16 @@ const NewAmountDetails = ({
       </div>
       <button
         className={`pay-now-button ${
-          details?.vendor?.home_page_type === "18" && "fashion-theme-pay-button"
+          homePageDetails?.vendor_data?.home_page_type === "18" && "fashion-theme-pay-button"
         }`}
         onClick={(e) => {
           e.preventDefault();
           if (
             parseFloat(cart?.subTotal) >=
-            (details?.vendor?.minimum_charge != "" ||
+            (homePageDetails?.vendor_data?.minimum_charge != "" ||
             (areaDetails?.minimum != "" && areaDetails?.minimum)
-              ? details?.vendor?.minimum_charge != ""
-                ? parseFloat(details?.vendor?.minimum_charge)
+              ? homePageDetails?.vendor_data?.minimum_charge != ""
+                ? parseFloat(homePageDetails?.vendor_data?.minimum_charge)
                 : parseFloat(areaDetails?.minimum)
               : 0)
           )
@@ -130,10 +127,10 @@ const NewAmountDetails = ({
         }}
       >
         {parseFloat(cart?.subTotal) >=
-        (details?.vendor?.minimum_charge != "" ||
+        (homePageDetails?.vendor_data?.minimum_charge != "" ||
         (areaDetails?.minimum != "" && areaDetails?.minimum)
-          ? details?.vendor?.minimum_charge != ""
-            ? parseFloat(details?.vendor?.minimum_charge)
+          ? homePageDetails?.vendor_data?.minimum_charge != ""
+            ? parseFloat(homePageDetails?.vendor_data?.minimum_charge)
             : parseFloat(areaDetails?.minimum)
           : 0)
           ? language == "ltr"
@@ -145,18 +142,18 @@ const NewAmountDetails = ({
             : "شراء"
           : language == "ltr"
           ? `Minimum Order is ${
-              details?.vendor?.minimum_charge != ""
-                ? details?.vendor?.minimum_charge
-                  ? parseFloat(details?.vendor?.minimum_charge).toFixed(3)
+            homePageDetails?.vendor_data?.minimum_charge != ""
+                ? homePageDetails?.vendor_data?.minimum_charge
+                  ? parseFloat(homePageDetails?.vendor_data?.minimum_charge).toFixed(3)
                   : 0
                 : areaDetails?.minimum
                 ? parseFloat(areaDetails?.minimum).toFixed(3)
                 : 0
             } KD`
           : `الحد الأدنى للطلب هو ${
-              details?.vendor?.minimum_charge != ""
-                ? details?.vendor?.minimum_charge
-                  ? parseFloat(details?.vendor?.minimum_charge).toFixed(3)
+            homePageDetails?.vendor_data?.minimum_charge != ""
+                ? homePageDetails?.vendor_data?.minimum_charge
+                  ? parseFloat(homePageDetails?.vendor_data?.minimum_charge).toFixed(3)
                   : 0
                 : areaDetails?.minimum
                 ? parseFloat(areaDetails?.minimum).toFixed(3)

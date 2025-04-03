@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { LanguageContext } from '../../../App';
+import { useRouter } from 'next/router';
+import { AppContext } from '@/context/AppContext';
 
 const DeliveryNotServing = () => {
-    const history = useHistory();
-    const { language } = useContext(LanguageContext);
+    const router = useRouter();
+    const { language } = useContext(AppContext);
     const goBack = () => {
-        history.push('/info')
+        router.push('/')
     }
 
     return (

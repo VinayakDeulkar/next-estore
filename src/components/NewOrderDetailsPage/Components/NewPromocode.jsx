@@ -12,7 +12,7 @@ const NewPromocode = ({
   afterPromocode,
   deliveryCharge,
 }) => {
-  const { language, homePageDetails, vendorSlug, setCart, areaDetails } =
+  const { language, homePageDetails, vendorSlug, handleCartChange, areaDetails } =
     useContext(AppContext);
   const [apiCalled, setApiCalled] = useState(false);
 
@@ -24,7 +24,7 @@ const NewPromocode = ({
           .post(
             `${process.env.NEXT_PUBLIC_API_URL}/apply-promocode`,
             JSON.stringify({
-              token: process.env.REACT_APP_TOKEN,
+              token: process.env.NEXT_PUBLIC_APP_TOKEN,
               user_string: localStorage.getItem("userID"),
               vendor_slug: vendorSlug?.data?.ecom_url_slug,
               vendor_id: homePageDetails?.vendor_data?.vendors_id,
@@ -37,7 +37,7 @@ const NewPromocode = ({
             if (res.data.status) {
               setApply((apply) => res.data.status);
               setSuccessPromocode((pro) => res.data.result.promo_code);
-              setCart((cart) => res.data.result);
+              handleCartChange((cart) => res.data.result);
               setApiCalled(false);
             } else {
               setApply((apply) => res.data.status);
@@ -50,7 +50,7 @@ const NewPromocode = ({
   };
   return (
     <div className="promocode-mainDiv">
-      <div className="delivery-addres-heading-checkout">
+      <div className="checkoutPageText">
         {language === "ltr" ? "Promotion Code" : "الرمز الترويجي"}
       </div>
       <div

@@ -7,6 +7,7 @@ import { AppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
 import { addCartTag } from "@/constants/function";
 import { updateDeliveryCharges } from "@/apis";
+import { useSnackbar } from "notistack";
 
 const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   const {
@@ -19,9 +20,13 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   const [showQuantityError, setShowQuantityError] = useState(false);
   const router = useRouter();
   const [spinLoader, setSpinLoader] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const notify = (message, message_ar, language) =>
-    toast.success(language == "ltr" ? message : message_ar);
+    enqueueSnackbar({
+      variant: "success",
+      message: language == "ltr" ? message : message_ar,
+    });
 
   const onMinusQuantityClick = (e) => {
     e.stopPropagation();
@@ -36,7 +41,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
             JSON.stringify({
               token: process.env.NEXT_PUBLIC_APP_TOKEN,
               vendor_id: homePageDetails?.vendor_data?.vendors_id,
-              vendor_slug: vendorSlug,
+              vendor_slug: vendorSlug?.data?.ecom_url_slug,
               area_id: areaDetails?.area_id,
               item_id: product?.item_id,
               user_string: localStorage.getItem("userID"),
@@ -72,7 +77,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
             JSON.stringify({
               token: process.env.NEXT_PUBLIC_APP_TOKEN,
               vendor_id: homePageDetails?.vendor_data?.vendors_id,
-              vendor_slug: vendorSlug,
+              vendor_slug: vendorSlug?.data?.ecom_url_slug,
               area_id: areaDetails?.area_id,
               item_id: product?.item_id,
               user_string: localStorage.getItem("userID"),
@@ -162,14 +167,14 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
           item_id: product?.item_id,
           area_id: areaDetails?.area_id,
           user_string: localStorage.getItem("userID"),
-          vendor_slug: vendorSlug,
+          vendor_slug: vendorSlug?.data?.ecom_url_slug,
           promocode: successPromocode,
         })
       )
       .then((res) => {
         if (res.data.data.cartCount == 0) {
           setCart({});
-          history.push(`/`);
+          router.push(`/`);
           setSpinLoader(false);
         } else {
           setCart(res.data.data);
@@ -186,7 +191,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
     if (deliveryCharge) {
       setSpinLoader(true);
       const response = await updateDeliveryCharges(
-        vendorSlug,
+        vendorSlug?.data?.ecom_url_slug,
         homePageDetails?.vendor_data?.vendors_id,
         areaDetails?.area_id,
         deliveryCharge,
@@ -197,7 +202,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
         setCart(response.data);
       } else {
         setSpinLoader(false);
-        history.push("/");
+        router.push("/");
       }
     }
   };
@@ -206,7 +211,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
     <div
       className="cart-card-product-div"
       onClick={() => {
-        history.push(`/product=${product.product_slug}`);
+        router.push(`/product?=${product.product_slug}`);
       }}
     >
       <div className="cart-card-product-mainDiv">
@@ -214,7 +219,8 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
           <img
             src={product?.product_img}
             className={`product-detail-image  ${
-              homePageDetails?.vendor_data?.home_page_type === "18" && "fashion-theme-border"
+              homePageDetails?.vendor_data?.home_page_type === "18" &&
+              "fashion-theme-border"
             }`} /*  alt={product.english_name} */
           />
         </div>
