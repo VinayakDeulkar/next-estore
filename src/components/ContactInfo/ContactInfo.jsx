@@ -5,7 +5,7 @@ import { AppContext } from "@/context/AppContext";
 import { telecount } from "@/constants/constants";
 import Title from "../common/Title/Title";
 import { useRouter } from "next/navigation";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 const ContactInfo = ({
   errorContactDetails,
   showNameEmailFields,
@@ -260,15 +260,17 @@ const ContactInfo = ({
                         top: "25px",
                         display: "flex",
                         alignItems: "center",
-                        color: "#fff",
+                        // color: "#fff",
                         padding: "5px 7px",
-                        backgroundColor: "#4CAF50",
-                        borderRadius: "50px",
-                        fontSize: "12px",
-                        gap: "5px",
+                        // backgroundColor: "#4CAF50",
+                        // borderRadius: "50px",
+                        // fontSize: "12px",
+                        // gap: "5px",
                       }}
                     >
-                      <span>✔</span>
+                      <CheckCircleIcon
+                        sx={{ fill: "#4CAF50", fontSize: "20px" }}
+                      />
                     </div>
                   ) : null}
                   <label htmlFor="email" className="form__label">

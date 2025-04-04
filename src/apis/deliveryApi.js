@@ -59,7 +59,7 @@ export const updateDeliveryCharges = async (
 ) => {
   try {
     const response = await axios.post(
-      `${NEXT_PUBLIC_API_URL}/update-cart-delivery-charge`,
+      `${process.env.NEXT_PUBLIC_API_URL}/update-cart-delivery-charge`,
       JSON.stringify({
         token: process.env.NEXT_PUBLIC_APP_TOKEN,
         vendor_slug: vendorSlug,
@@ -97,7 +97,7 @@ export const getDeliveryCompanies = async ({
 }) => {
   try {
     const response = await axios.post(
-      `${NEXT_PUBLIC_DELIVERY_URL}/get-estimated-delivery-time`,
+      `${process.env.NEXT_PUBLIC_DELIVERY_URL}/get-estimated-delivery-time`,
       JSON.stringify({
         token: process.env.NEXT_PUBLIC_APP_TOKEN,
         vendor_id: vendor_id,

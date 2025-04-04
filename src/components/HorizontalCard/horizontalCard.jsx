@@ -4,11 +4,17 @@ import TypographyConverter from "../common/TypographyConveter/typographyConverte
 import { AppContext } from "@/context/AppContext";
 import moment from "moment";
 import Link from "next/link";
-import ReactPixel from 'react-facebook-pixel';
+import ReactPixel from "react-facebook-pixel";
 
 const HorizontalCard = ({ product }) => {
-  const { language, cart, handleCartChange, homePageDetails, areaDetails, vendorSlug } =
-    useContext(AppContext);
+  const {
+    language,
+    cart,
+    handleCartChange,
+    homePageDetails,
+    areaDetails,
+    vendorSlug,
+  } = useContext(AppContext);
   const [inCart, setInCart] = useState(0);
   const [spinLoader, setSpinLoader] = useState(false);
 
@@ -34,10 +40,10 @@ const HorizontalCard = ({ product }) => {
       if (response?.status) {
         if (response.data.cartCount == 0) {
           setSpinLoader(false);
-          setCart((cart) => {});
+          handleCartChange((cart) => {});
         } else {
           setSpinLoader(false);
-          setCart(response.data);
+          handleCartChange(response.data);
         }
       }
     } else {
@@ -138,7 +144,7 @@ const HorizontalCard = ({ product }) => {
               });
 
             setSpinLoader(false);
-            setCart(response.data);
+            handleCartChange(response.data);
             if (
               (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
               (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
@@ -249,7 +255,7 @@ const HorizontalCard = ({ product }) => {
                 quantity: n,
               });
             setSpinLoader(false);
-            setCart(response.data);
+            handleCartChange(response.data);
             if (
               (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
               (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
