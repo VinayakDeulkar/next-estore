@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import Spinner from "../common/Spinner/spinner";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import "./productSquareCard.css";
-import { ReactPixel } from "react-snapchat-pixel";
+import ReactPixel from "react-facebook-pixel";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =
