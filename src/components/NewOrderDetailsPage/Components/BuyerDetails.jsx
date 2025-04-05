@@ -1,10 +1,10 @@
+import UserIcon from "@/SVGs/UserIcon";
+import AddressCard from "@/components/common/AddressCard/AddressCard";
+import { telecount } from "@/constants/constants";
 import { AppContext } from "@/context/AppContext";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import ReactFlagsSelect from "react-flags-select";
-import { useRouter } from "next/navigation";
-import { telecount } from "@/constants/constants";
-import UserIcon from "@/SVGs/UserIcon";
-import DeliveryAddressCard from "@/components/DeliveryAddressCard/deliveryAddressCard";
 const BuyerDetails = () => {
   const router = useRouter();
   const { contactDetails, handleContactDetailsChange, userDetails } =
@@ -37,7 +37,7 @@ const BuyerDetails = () => {
 
   return (
     <>
-      <DeliveryAddressCard
+      <AddressCard
         cardClick={() =>
           userDetails?.is_guest
             ? router.push("/contact-details")

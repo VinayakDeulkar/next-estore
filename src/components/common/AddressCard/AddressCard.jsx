@@ -6,8 +6,17 @@ import EditPencilIcon from "@/SVGs/EditPencilIcon";
 import DeleteCrossIcon from "@/SVGs/DeleteCrossIcon";
 import ThreeDots from "@/SVGs/ThreeDots";
 import { IconButton } from "@mui/material";
+import { tele } from "@/constants/constants";
 
-const Card = ({ icon, info, symbol, onEdit, onDelete, cardClick, user }) => {
+const AddressCard = ({
+  icon,
+  info,
+  symbol,
+  onEdit,
+  onDelete,
+  cardClick,
+  user,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
   const { language } = useContext(AppContext);
@@ -125,4 +134,4 @@ const Card = ({ icon, info, symbol, onEdit, onDelete, cardClick, user }) => {
   );
 };
 
-export default Card;
+export default AddressCard;

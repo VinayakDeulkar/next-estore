@@ -1,0 +1,118 @@
+.saved-address-heading {
+  color: #837f7f;
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+html[dir="rtl"] .saved-address-heading {
+  font-size: 22px;
+}
+
+.addressData {
+  padding: 7px 0;
+}
+
+
+.addressCard-addressNameDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.address-card-addressname {
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+html[dir="rtl"] .address-card-addressname {
+  font-size: 22px;
+}
+
+.addressCard-dataHolder {
+  display: grid;
+  grid-template-columns: 25px auto 30px;
+  gap: 25px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.addressText {
+  color: #9f9f9f;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+}
+
+html[dir="rtl"] .addressText {
+  font-size: 17px;
+}
+
+.addressCard-specialDirections {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  color: #909090;
+}
+
+html[dir="rtl"] .addressCard-specialDirections {
+  font-size: 16px;
+}
+
+.savedAddressArrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.savedAddressArrow .fa-right-arrow {
+  font-size: 20px;
+  color: #000;
+  font-weight: 500;
+}
+
+html[dir="rtl"] .fa-right-arrow {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.savedAddressArrow .fa-edit {
+  color: var(--vendor-color);
+  font-size: 18px;
+}
+
+.savedAddressArrow .fa-trash-o {
+  color: var(--vendor-color);
+  font-size: 16px;
+}
+
+.arrow-right {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-top: 2px solid #000;
+  border-right: 2px solid #000;
+  transform: rotate(45deg);
+  background-color: transparent;
+}
+
+.arrow-left {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-top: 2px solid #000;
+  border-left: 2px solid #000;
+  transform: rotate(-45deg);
+  background-color: transparent;
+}
