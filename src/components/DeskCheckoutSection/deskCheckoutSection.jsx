@@ -14,6 +14,8 @@ import ModalClosed from "../common/ModalClosed/ModalClosed";
 import CheckoutModal from "../NewOrderDetailsPage/Components/CheckoutModal";
 import { getDeliveryCompanies, updateDeliveryCharges } from "@/apis";
 import { tele } from "@/constants/constants";
+import { useRouter } from "next/navigation";
+import { useJsApiLoader } from "@react-google-maps/api";
 
 const DeskCheckoutSection = () => {
   const {
@@ -39,12 +41,158 @@ const DeskCheckoutSection = () => {
   const [note, setNote] = useState(false);
   const [loading, setLoading] = useState(false);
   const [deliveryKm, setDeliveryKm] = useState();
+  const router = useRouter();
+
+  const checkAllCondition = () => {
+    if (!cart?.cartCount) {
+      router.push(`/`);
+    }
+  };
 
   useEffect(() => {
     if (cart && cart.deliveryCharge) {
       setDeliveryCharge(cart.deliveryCharge);
     }
   }, [cart]);
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey:
+      "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg", // Replace with your Google Maps API key
+  });
+
+  useEffect(() => {
+    (async () => {
+      const check = checkAllCondition();
+      if (
+        check &&
+        areaDetails?.type == "delivery" &&
+        areaDetails?.data?.branch &&
+        (internationalDelivery.delivery_country_code.toLowerCase() === "kw" ||
+          homePageDetails?.vendor_data?.international_delivery === "3" ||
+          homePageDetails?.vendor_data?.international_delivery === "")
+      ) {
+        // let selectedArea = areaDetails?.area;
+        if (areaDetails?.area == "Mutlaa") {
+          const branch_latlng = areaDetails?.data?.branch?.filter(
+            (branch) => branch.id == areaDetails?.branchForArea.id
+          );
+          if (window.google && window.google.maps) {
+            const origin = new window.google.maps.LatLng(
+              String(branch_latlng[0].lat),
+              String(branch_latlng[0].lng)
+            );
+            const destination = new window.google.maps.LatLng(
+              String(addressDetails.lat),
+              String(addressDetails.lng)
+            );
+            const service = new window.google.maps.DistanceMatrixService();
+            const request = {
+              origins: [origin],
+              destinations: [destination],
+              travelMode: "DRIVING",
+              unitSystem: window.google.maps.UnitSystem.METRIC, // Specify metric units for kilometers
+            };
+
+            service.getDistanceMatrix(request, (response, status) => {
+              if (
+                status === "OK" &&
+                response.rows[0].elements[0].status === "OK"
+              ) {
+                const distanceInMeters =
+                  response.rows[0].elements[0].distance.value;
+                const distanceInKilometers = distanceInMeters / 1000;
+                setDeliveryKm(distanceInKilometers);
+              } else {
+                console.error("Error:", status);
+              }
+            });
+          }
+        } else {
+          let selectedAra = mapArea.find(
+            (ele) =>
+              ele.area_name == areaDetails.area ||
+              ele.area_name_ar == areaDetails.area_ar
+          );
+          const selectedArea = selectedAra.area_map;
+          // if (areaDetails?.area.includes("Al")) {
+          //   let newArea = areaDetails.area
+          //     .split(" ")
+          //     .filter((ele, i) => i !== 0)
+          //     .join(" ");
+          //   selectedArea = newArea;
+          // }
+          const encodedPlaceName = encodeURIComponent(
+            `street ${addressDetails.street} ,block ${addressDetails.block} ,${selectedArea}, Kuwait`
+          );
+          const respones = await axios.get(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`
+          );
+          if (respones.status === 200) {
+            let getSelectedAreaDetails = [];
+            if (respones?.data?.results.length == 1) {
+              getSelectedAreaDetails.push(respones?.data?.results[0]);
+            } else {
+              respones?.data?.results.map((ele) =>
+                ele.address_components.map((element) => {
+                  if (
+                    element.short_name.toLowerCase() ==
+                      selectedArea.toLowerCase() ||
+                    element.long_name.toLowerCase() ==
+                      selectedArea.toLowerCase()
+                  ) {
+                    getSelectedAreaDetails.push(ele);
+                  }
+                })
+              );
+            }
+
+            let lat = getSelectedAreaDetails[0]?.geometry?.location?.lat;
+            let lng = getSelectedAreaDetails[0]?.geometry?.location?.lng;
+            // if (lat && lng) {
+            // setAddressDetails((a) => ({
+            //   ...a,
+            //   lat: lat,
+            //   lng: lng,
+            // }));
+            const branch_latlng = areaDetails?.data?.branch?.filter(
+              (branch) => branch.id == areaDetails?.branchForArea.id
+            );
+            if (window.google && window.google.maps) {
+              const origin = new window.google.maps.LatLng(
+                String(branch_latlng[0].lat),
+                String(branch_latlng[0].lng)
+              );
+              const destination = new window.google.maps.LatLng(
+                String(addressDetails.lat),
+                String(addressDetails.lng)
+              );
+              const service = new window.google.maps.DistanceMatrixService();
+              const request = {
+                origins: [origin],
+                destinations: [destination],
+                travelMode: "DRIVING",
+                unitSystem: window.google.maps.UnitSystem.METRIC, // Specify metric units for kilometers
+              };
+
+              service.getDistanceMatrix(request, (response, status) => {
+                if (
+                  status === "OK" &&
+                  response.rows[0].elements[0].status === "OK"
+                ) {
+                  const distanceInMeters =
+                    response.rows[0].elements[0].distance.value;
+                  const distanceInKilometers = distanceInMeters / 1000;
+                  setDeliveryKm(distanceInKilometers);
+                } else {
+                  console.error("Error:", status);
+                }
+              });
+            }
+          }
+        }
+      }
+    })();
+  }, [window, window.google, window.google?.maps, areaDetails?.area]);
 
   useEffect(() => {
     (async () => {
@@ -372,7 +520,7 @@ const DeskCheckoutSection = () => {
     }
   };
 
-  return (
+  return checkAllCondition() ? (
     <div>
       {areaDetails.type == "delivery" &&
         (homePageDetails?.vendor_data?.international_delivery === "3" ||
@@ -483,6 +631,8 @@ const DeskCheckoutSection = () => {
         </div>
       )}
     </div>
+  ) : (
+    <></>
   );
 };
 
