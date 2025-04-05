@@ -30,7 +30,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
         product?.add_ons_count?.cnt != 0 ||
         product?.variation_count?.cnt != 0
       ) {
-        history.push(`/product=${product?.product_slug}`);
+        router.push(`/product?id=${product?.product_slug}`);
       } else if (n == -1 && inCart == 1) {
         const response = await removeCartItem({
           vendorSlug: homePageDetails?.ecom_url_slug,
@@ -79,7 +79,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 const sec = Math.round(time / 1000);
                 // static for mijana vendor
 
-                if (vendorSlug == "butters") {
+                if (homePageDetails?.ecom_url_slug == "butters") {
                   triggerAddToCart({
                     fb_pixel_code: "546180060531909",
                     fb_access_token:
@@ -88,7 +88,9 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                   });
                 }
 
-                if (vendorSlug == "mijana-restaurant-and-café") {
+                if (
+                  homePageDetails?.ecom_url_slug == "mijana-restaurant-and-café"
+                ) {
                   triggerAddToCart({
                     fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
                     fb_access_token:
@@ -190,7 +192,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 const sec = Math.round(time / 1000);
                 //static for mijana
 
-                if (vendorSlug == "butters") {
+                if (homePageDetails?.ecom_url_slug == "butters") {
                   triggerAddToCart({
                     fb_pixel_code: "546180060531909",
                     fb_access_token:
@@ -198,7 +200,9 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                     support_mail: homePageDetails?.vendor_data?.support_mail,
                   });
                 }
-                if (vendorSlug == "mijana-restaurant-and-café") {
+                if (
+                  homePageDetails?.ecom_url_slug == "mijana-restaurant-and-café"
+                ) {
                   triggerAddToCart({
                     fb_pixel_code: homePageDetails?.vendor_data?.fb_pixel_code,
                     fb_access_token:

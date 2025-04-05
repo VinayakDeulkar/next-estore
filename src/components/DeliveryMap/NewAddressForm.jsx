@@ -250,7 +250,7 @@ const NewAddressForm = ({
         </div>
       </div>
 
-      {!userDetails?.is_guest ? null : (
+      {userDetails?.is_guest ? null : (
         <div
           className="delivery-address-form-div1"
           style={{ marginBottom: "20px" }}
@@ -355,7 +355,7 @@ const NewAddressForm = ({
           // handleMapChanges={handleMapChanges}
         />
       </div>
-      {userDetails?.is_guest ? (
+      {!userDetails?.is_guest ? (
         <div
           className="blueBox"
           style={{ marginTop: "25px", marginBottom: "40px" }}

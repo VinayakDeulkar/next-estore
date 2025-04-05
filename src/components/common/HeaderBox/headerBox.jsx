@@ -14,7 +14,7 @@ const HeaderBox = () => {
       <Drawer open={open} onClose={() => setOpen(false)} anchor="left">
         <Box
           sx={{
-            width: "30vw",
+            width: window.innerWidth < 991 ? "90vw" : "30vw",
           }}
         >
           <VendorInfoBox />

@@ -2,6 +2,7 @@
 import { GetUserDetails, getVendorCountries, saveUserAddress } from "@/apis";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
+import DeliveryMapContainer from "@/components/DeliveryMap/DeliveryMapContainer";
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
 import { mapArea } from "@/constants/areaConstant";
 import { tele } from "@/constants/constants";
@@ -9,6 +10,7 @@ import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useSnackbar } from "notistack";
 import React, { useContext, useEffect, useState } from "react";
 
 const DeliveryAddress = () => {
@@ -63,6 +65,7 @@ const DeliveryAddress = () => {
     delivery_address1: false,
     delivery_address2: false,
   });
+  const { enqueueSnackbar } = useSnackbar();
 
   const blockValidation = (value) => {
     if (value == "") {
@@ -264,14 +267,20 @@ const DeliveryAddress = () => {
                     router.push("/");
                   }
                 } else {
-                  toast.error(response?.message);
+                  enqueueSnackbar({
+                    variant: "error",
+                    message: response?.message,
+                  });
                   localStorage.removeItem("token");
                   localStorage.removeItem("contactInfo");
                   resetUserDetails();
                   router.push("/");
                 }
               } else {
-                toast.error(addResponse?.message);
+                enqueueSnackbar({
+                  variant: "error",
+                  message: addResponse?.message,
+                });
               }
             }
           }
@@ -433,7 +442,7 @@ const DeliveryAddress = () => {
 
   const handleMapLoad = () => {
     const forClick = document.getElementById("forClickOnly");
-    forClick.click();
+    forClick?.click();
   };
 
   return (

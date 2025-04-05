@@ -23,7 +23,6 @@ const ProductDetails = ({
   addedVariaton,
   setAddedVariation,
 }) => {
-  console.log(product, "product");
   const {
     language,
     homePageDetails,

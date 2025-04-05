@@ -16,6 +16,8 @@ import { getDeliveryCompanies, updateDeliveryCharges } from "@/apis";
 import { tele } from "@/constants/constants";
 import { useRouter } from "next/navigation";
 import { useJsApiLoader } from "@react-google-maps/api";
+import { checkoutTag } from "@/constants/checkouttag";
+import ReactPixel from "react-facebook-pixel";
 
 const DeskCheckoutSection = () => {
   const {
