@@ -8,16 +8,15 @@ import TypographyConverter from "../common/TypographyConveter/TypographyConverte
 const RestSideDrawerContent = ({ setBurger }) => {
   const {
     language,
-    setUserDetails,
+    handleUserDetailsChange,
     setContactDetails,
     setAddressDetails,
     setAreaDetails,
-    setCart,
+    handleCartChange,
     homePageDetails,
   } = useContext(AppContext);
   const router = useRouter();
   const contactInfo = JSON.parse(localStorage.getItem("contactInfo") || "{}");
-  console.log(homePageDetails, "homePageDetails");
   const sectionsArray = [
     {
       englishType:
@@ -137,7 +136,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
           branch_lat: "",
           branch_lng: "",
         });
-        setCart({});
+        handleCartChange({});
         setAddressDetails({
           block: "",
           street: "",
@@ -163,7 +162,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
           license: "",
         });
         setPayment(1);
-        setUserDetails({
+        handleUserDetailsChange({
           id: "",
           email: "",
           firstname: "",
@@ -199,7 +198,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
         break;
 
       case "Login":
-        setUserDetails((prev) => ({ ...prev, is_guest: false }));
+        handleUserDetailsChange((prev) => ({ ...prev, is_guest: false }));
         setBurger(false);
         router.push("/contact-details");
         break;

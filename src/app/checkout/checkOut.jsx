@@ -15,7 +15,7 @@ import { useJsApiLoader } from "@react-google-maps/api";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-
+import "../../components/NewOrderDetailsPage/checkOrderDetails.css";
 const CheckOut = () => {
   const {
     vendorSlug,
@@ -23,14 +23,14 @@ const CheckOut = () => {
     userDetails,
     language,
     cart,
-    setCart,
+    handleCartChange,
     addressDetails,
     setAddressDetails,
     contactDetails,
     areaDetails,
     payment,
-    setPayment,
     internationalDelivery,
+    handleSetPaymentChange,
   } = useContext(AppContext);
   const router = useRouter();
 
@@ -345,7 +345,7 @@ const CheckOut = () => {
       )}
       {companyData && <NewDeliveryCompany companyData={companyData} />}
       <NewPaymentSelector
-        setPayment={setPayment}
+        handleSetPaymentChange={handleSetPaymentChange}
         payment={payment}
         setWidth={setWidth}
         width={width}

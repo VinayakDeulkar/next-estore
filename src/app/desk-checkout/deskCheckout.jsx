@@ -429,7 +429,7 @@ const DeskCheckout = () => {
   const handleDeliveryAddressNext = () => {};
 
   return (
-    <Box sx={{ height: "100vh" }}>
+    <Box sx={{ height: "100vh", padding: "20px" }}>
       <HeaderBox />
       <Grid container sx={{ padding: "0 10%", marginTop: "50px" }}>
         <Grid item md={6} sx={{ padding: "0 20px" }}>
@@ -462,7 +462,7 @@ const DeskCheckout = () => {
           )}
 
           {showDeliveryAddress && (
-            <div style={{marginTop: "50px"}}>
+            <div style={{ marginTop: "50px" }}>
               {selectAddress ? (
                 <AddressSection />
               ) : (
@@ -477,7 +477,7 @@ const DeskCheckout = () => {
                 />
               )}
             </div>
-          )}  
+          )}
 
           {showDeliveryAddress && (
             <div

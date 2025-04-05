@@ -15,7 +15,8 @@ export async function generateMetadata({ searchParams }) {
   });
 
   const { name, short_description, image } = productDetails?.data;
-  const faviconType = image.endsWith(".png") ? "image/png" : "image/jpeg";
+  console.log(image, "imageimage");
+  const faviconType = image?.endsWith(".png") ? "image/png" : "image/jpeg";
   return {
     title: name,
     description: short_description,

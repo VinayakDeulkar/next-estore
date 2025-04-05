@@ -8,6 +8,11 @@ import { useRouter } from "next/navigation";
 import { addCartTag } from "@/constants/function";
 import { updateDeliveryCharges } from "@/apis";
 import { useSnackbar } from "notistack";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { IconButton } from "@mui/material";
+import Spinner from "../common/Spinner/spinner";
 
 const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   const {
@@ -51,11 +56,12 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
             })
           )
           .then((res) => {
+            console.log(res, "res");
             localStorage.setItem("cartTime", new Date());
             if (res.data.status == false) {
               notify(res.data.message, res.data.message_ar, language);
             }
-            setCart(res.data.data);
+            handleCartChange(res.data.data);
             if (deliveryCharge) {
               getDeliveryCharge();
             }
@@ -135,7 +141,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
                 quantity: 1,
               });
 
-            setCart(res.data.data);
+            handleCartChange(res.data.data);
             if (deliveryCharge) {
               getDeliveryCharge();
             }
@@ -173,11 +179,11 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
       )
       .then((res) => {
         if (res.data.data.cartCount == 0) {
-          setCart({});
+          handleCartChange({});
           router.push(`/`);
           setSpinLoader(false);
         } else {
-          setCart(res.data.data);
+          handleCartChange(res.data.data);
           if (deliveryCharge) {
             getDeliveryCharge();
           }
@@ -188,6 +194,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   };
 
   const getDeliveryCharge = async () => {
+    console.log(deliveryCharge, "deliveryCharge");
     if (deliveryCharge) {
       setSpinLoader(true);
       const response = await updateDeliveryCharges(
@@ -197,9 +204,9 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
         deliveryCharge,
         successPromocode
       );
-      if (response.status) {
+      if (response?.status) {
         setSpinLoader(false);
-        setCart(response.data);
+        handleCartChange(response.data);
       } else {
         setSpinLoader(false);
         router.push("/");
@@ -262,29 +269,34 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
             style={{ width: "100%" }}
           >
             <div className="cart-card-product-quantity">
-              <div
-                className="cart-card-quantity-button"
-                onClick={(e) => onMinusQuantityClick(e)}
-              >
-                -
-              </div>
+              <IconButton onClick={(e) => onMinusQuantityClick(e)}>
+                {product.quantity == 1 ? (
+                  <DeleteOutlineOutlinedIcon
+                    sx={{ fontSize: "18px", color: "black" }}
+                  />
+                ) : (
+                  <RemoveCircleOutlineIcon
+                    sx={{ fontSize: "18px", color: "black" }}
+                  />
+                )}
+              </IconButton>
+
               <div className="cart-card-price-div">
                 {spinLoader ? (
                   <Spinner
                     height="16px"
                     size="2.5px"
-                    color={details.vendor.vendor_color}
+                    color={homePageDetails?.vendor_data.vendor_color}
                   />
                 ) : (
                   product.quantity
                 )}
               </div>
-              <div
-                className="cart-card-quantity-button"
-                onClick={(e) => onAddQuantityClick(e)}
-              >
-                +
-              </div>
+              <IconButton onClick={(e) => onAddQuantityClick(e)}>
+                <AddCircleOutlineIcon
+                  sx={{ fontSize: "18px", color: "black" }}
+                />
+              </IconButton>
             </div>
 
             <div className="cart-card-price-maindiv">
