@@ -7,6 +7,10 @@ import Spinner from "../common/Spinner/spinner";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import "./productSquareCard.css";
 import ReactPixel from "react-facebook-pixel";
+import AddToCartIcon from "@/SVGs/AddToCartIcon";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =
@@ -360,10 +364,49 @@ const ProductSquareCard = ({ product, imgHeight }) => {
         }}
       >
         <TypographyConverter
-          sx={{ fontSize: "16px", fontWeight: 400, textAlign: "center" }}
+          sx={{ fontSize: "16px", fontWeight: 400 }}
           enText={product?.product_name}
           arText={product?.product_name_ar}
         />
+        <div
+          onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
+          className="product-price"
+          style={{ alignItems: "center", fontWeight: "400" }}
+        >
+          <span
+            style={{
+              fontSize: language == "ltr" ? "14px" : "17px",
+              paddingTop: inCart == 0 ? 2 : 0,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <span style={{ fontSize: language == "ltr" ? "14px" : "17px" }}>
+              {product?.product_price
+                ? parseFloat(product?.product_price).toFixed(3)
+                : 0}
+              &nbsp;
+            </span>
+            {language === "rtl" ? "د.ك" : "KD"}
+          </span>
+          {product?.quantity != 0 && product?.discount_applied == 1 && (
+            <del
+              style={{
+                fontSize: language == "ltr" ? 11 : 14,
+                display: "flex",
+              }}
+              className="product-price-del"
+            >
+              <span style={{ fontSize: language == "ltr" ? 11 : 14 }}>
+                {product?.base_price
+                  ? parseFloat(product?.base_price).toFixed(3)
+                  : 0}
+                &nbsp;
+              </span>
+              {language === "rtl" ? "د.ك" : "KD"}
+            </del>
+          )}
+        </div>
         {product?.short_description != "" ? (
           <div>
             <TypographyConverter
@@ -371,7 +414,6 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 fontSize: "14px",
                 fontWeight: 300,
                 color: "#888888",
-                textAlign: "center",
                 overflowWrap: "break-word",
                 wordBreak: "break-word",
                 whiteSpace: "pre-wrap",
@@ -379,7 +421,6 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 display: "-webkit-box",
                 WebkitLineClamp: 2,
                 WebkitBoxOrient: "vertical",
-                width: "90%",
                 margin: "0 auto",
               }}
               enText={product?.short_description
@@ -451,82 +492,89 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 style={{
                   display: "flex",
                   alignItems: inCart != 0 ? "center" : "flex-start",
-                  justifyContent: "center",
                   flexDirection: "row",
                   flexWrap: "nowrap",
                   cursor: "pointer",
                   gap: "5px",
                 }}
               >
-                <div
-                  onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
-                  className="product-price"
-                  style={{ alignItems: "center", fontWeight: "400" }}
-                >
-                  <span
-                    style={{
-                      fontSize: language == "ltr" ? "15px" : "18px",
-                      paddingTop: inCart == 0 ? 2 : 0,
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span style={{ fontSize: "15px" }}>
-                      {product?.product_price
-                        ? parseFloat(product?.product_price).toFixed(3)
-                        : 0}
-                      &nbsp;
-                    </span>
-                    {language === "rtl" ? "د.ك" : "KD"}
-                  </span>
-                  {product?.quantity != 0 && product?.discount_applied == 1 && (
-                    <del
-                      style={{ fontSize: language == "ltr" ? 12 : 15 }}
-                      className="product-price-del"
-                    >
-                      <span style={{ fontSize: 12 }}>
-                        {product?.base_price
-                          ? parseFloat(product?.base_price).toFixed(3)
-                          : 0}
-                        &nbsp;
-                      </span>
-                      {language === "rtl" ? "د.ك" : "KD"}
-                    </del>
-                  )}
-                </div>
                 {product?.product_status ==
                 0 ? null : product?.price_on_selection == 1 ? null : inCart !=
                   0 ? (
                   <Box
                     onClick={(e) => e.preventDefault()}
-                    className="product-price "
+                    className="product-price"
+                    style={{
+                      border: `1px solid ${homePageDetails?.vendor_data?.vendor_color}`,
+                      display: "flex",
+                      alignItems: "center",
+                      borderRadius: "20px",
+                    }}
                   >
-                    <div className="controlbuttondiv">
+                    <div
+                      className="controlbuttondiv"
+                      style={{
+                        minWidth: "112px",
+                        height: "29px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "20px",
+                      }}
+                    >
                       <button
                         className="control-button"
                         onClick={(e) => onAddToCartClick(e, -1)}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          borderRight: `1px solid ${homePageDetails?.vendor_data?.vendor_color}`,
+                          padding: "7px",
+                        }}
                       >
-                        <i className="fa fa-minus"></i>
+                        {inCart == 1 ? (
+                          <DeleteOutlineOutlinedIcon
+                            sx={{ fontSize: "16px" }}
+                          />
+                        ) : (
+                          <RemoveIcon sx={{ fontSize: "17px" }} />
+                        )}
                       </button>
                       <Box
                         onClick={(e) => e.preventDefault()}
                         className="quantity-text"
                       >
                         {spinLoader ? (
-                          <Spinner
-                            height="16px"
-                            size="2.5px"
-                            color={homePageDetails?.vendor_data?.vendor_color}
-                          />
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Spinner
+                              height="14px"
+                              size="2px"
+                              color={homePageDetails?.vendor_data?.vendor_color}
+                            />
+                          </div>
                         ) : (
-                          inCart
+                          <div style={{ fontSize: "15px" }}>{inCart}</div>
                         )}
                       </Box>
                       <button
                         className="control-button"
                         onClick={(e) => onAddToCartClick(e, 1)}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          padding: "7px",
+                          borderLeft: `1px solid ${homePageDetails?.vendor_data?.vendor_color}`,
+                        }}
                       >
-                        <i className="fa fa-plus"></i>
+                        <AddIcon sx={{ fontSize: "17px" }} />
                       </button>
                     </div>
                   </Box>
@@ -541,32 +589,44 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                     style={{
                       backgroundColor:
                         homePageDetails?.vendor_data?.vendor_color,
-                      borderRadius: "50%",
                       display: "flex",
-                      justifyContent: "center",
                       alignItems: "center",
-                      marginLeft: "6px",
-                      width: "25px",
-                      height: "25px",
-                      boxSizing: "content-box",
+                      borderRadius: "20px",
                     }}
                   >
                     {spinLoader ? (
                       <div
                         style={{
-                          padding: "0 2px",
+                          padding: "7px 15px",
+                          minWidth: "112px",
                           display: "flex",
-                          justifyContent: "center",
                           alignItems: "center",
+                          justifyContent: "center",
                         }}
                       >
                         <Spinner height="14px" size="2px" />
                       </div>
                     ) : (
-                      <img
-                        src={"images/Logo.png"}
-                        className="cart-image-add"
-                      ></img>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "7px",
+                          padding: "7px 15px",
+                        }}
+                      >
+                        <AddToCartIcon />
+                        <div
+                          style={{
+                            color: "#fff",
+                            fontSize: language === "ltr" ? "12px" : "15px",
+                          }}
+                        >
+                          {language === "ltr"
+                            ? "Add to Bag"
+                            : "أضف إلى الحقيبة"}
+                        </div>
+                      </div>
                     )}
                   </span>
                 )}
