@@ -78,6 +78,7 @@ function CheckoutModal({ popup, setPopup }) {
                   style={{
                     padding: language == "ltr" ? "0 5px 0 0" : "0 0 0 5px",
                   }}
+                  key={f?.english_name}
                 >
                   {language == "ltr" ? f?.english_name : f?.arabic_name}
                 </li>

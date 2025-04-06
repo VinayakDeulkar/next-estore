@@ -14,10 +14,13 @@ import {
 import React, { useContext } from "react";
 import "./newOrderStatus.css";
 import CommonDeliveryStatus from "@/components/OrderPage/CommonDeliveryStatus";
+import DeliveryMapStatus from "@/components/OrderPage/DeliveryMapStatus";
+import { useRouter } from "next/navigation";
 
 const OrderPage = (props) => {
-  const { vendorSlug, language } = useContext(AppContext);
+  const { language, homePageDetails } = useContext(AppContext);
   const orderDetails = props.data;
+  const router = useRouter();
   const accordianArray = [
     {
       english: "Order Details",
@@ -36,20 +39,20 @@ const OrderPage = (props) => {
     },
   ];
   return (
-    <Box>
+    <Box sx={{ height: "100vh" }}>
       <Navbar />
-      <GridLayout>
+      <GridLayout sx={{ height: "calc(100vh - 70px)", padding: "20px" }}>
         {orderDetails && <CommonDeliveryStatus orderDetails={orderDetails} />}
-        {/* {orderDetails ? (
+        {orderDetails ? (
           <DeliveryMapStatus
             location_coordinates={orderDetails?.location_coordinates}
             customer_details={orderDetails?.customer_details}
             payment_status={orderDetails?.payment_status}
           />
-        ) : null} */}
+        ) : null}
         {orderDetails &&
           accordianArray?.map((element) => (
-            <Accordion>
+            <Accordion key={element.english}>
               <AccordionSummary
                 aria-controls="panel1-content"
                 id="panel1-header"
@@ -59,6 +62,35 @@ const OrderPage = (props) => {
               <AccordionDetails>{element?.component}</AccordionDetails>
             </Accordion>
           ))}
+        <div className="order-status-reorder-button-div">
+          <div
+            className={`pay-now-button ${
+              homePageDetails?.vendor_data?.home_page_type === "18" &&
+              "fashion-theme-pay-button"
+            }`}
+            onClick={async () => {
+              if (orderDetails?.payment_status === "1") {
+                router.push("/");
+              } else if (orderDetails?.has_register_item && cart) {
+                router.push("/checkout");
+              } else {
+                router.push("/");
+              }
+            }}
+          >
+            {orderDetails?.payment_status === "1"
+              ? language === "ltr"
+                ? "Browse More"
+                : "تسوّق"
+              : orderDetails?.has_register_item && cart
+              ? language == "ltr"
+                ? "Checkout"
+                : "متابعة الطلب"
+              : language === "ltr"
+              ? "Try again"
+              : "حاول مرة أُخرى"}
+          </div>
+        </div>
       </GridLayout>
     </Box>
   );

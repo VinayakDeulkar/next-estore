@@ -270,7 +270,7 @@ const AreaModal = ({ showAreaModal, handleClose }) => {
         <Box mt="20px">
           {area?.length != 0
             ? area?.map((gov, k) => (
-                <Accordion>
+                <Accordion key={k}>
                   <AccordionSummary
                     aria-controls="panel1-content"
                     id="panel1-header"
@@ -301,6 +301,7 @@ const AreaModal = ({ showAreaModal, handleClose }) => {
                           onClick={() => {
                             handleCityClick(city);
                           }}
+                          key={j}
                         >
                           <Box>
                             {language === "ltr"

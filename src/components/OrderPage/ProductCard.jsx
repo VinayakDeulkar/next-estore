@@ -26,7 +26,7 @@ const ProductCard = ({ product, isLast }) => {
                   : product.arabic_name}
               </div>
               {product?.addOns?.map((i) => (
-                <div className="order-status-product-notes">
+                <div className="order-status-product-notes" key={i?.item}>
                   {language == "ltr" ? i?.item : i?.item_ar}
                 </div>
               ))}

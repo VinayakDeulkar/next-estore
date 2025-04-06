@@ -13,9 +13,8 @@ const NewOrderProductList = ({
       {cart &&
         cart.cartItems &&
         cart.cartItems.map((product, index) => (
-          <div style={{ margin: "5px 10px" }}>
+          <div style={{ margin: "5px 10px" }} key={index}>
             <NewCartCard
-              key={index}
               product={product}
               isLast={index === cart.cartItems.length - 1}
               setSuccessPromocode={setSuccessPromocode}

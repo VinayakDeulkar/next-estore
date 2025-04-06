@@ -815,6 +815,7 @@ const ProductDetails = ({
                         e.nativeEvent.stopPropagation();
                         onVariationChecked(e, k);
                       }}
+                      key={t}
                       for={m.value + k}
                       className="delivery-timming-order addon-hover pt-2 pb-2"
                       style={{
@@ -901,7 +902,7 @@ const ProductDetails = ({
         {product?.is_addons == 1 &&
           product?.prodyct_type != 3 &&
           addons.map((l, k) => (
-            <div className="details-container pt-2">
+            <div className="details-container pt-2" key={k}>
               <div className="product-outer-div" style={{ padding: 0 }}>
                 <div
                   className="product-inner-div"
@@ -980,6 +981,7 @@ const ProductDetails = ({
                             onChecked(e, m.price, l.max_selection, k);
                           else onSelectChecked(e, m.price, l.max_selection, k);
                       }}
+                      key={t}
                       for={m.value + k}
                       style={{
                         padding: `0 ${language == "ltr" ? "16px" : "26px"} 0 ${
