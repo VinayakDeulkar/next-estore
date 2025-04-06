@@ -5,8 +5,15 @@ import {
   getScheduleTime,
   GetUserDetails,
 } from "@/apis";
+import BackComponent from "@/components/BackComponent";
+import AddressCard from "@/components/common/AddressCard/AddressCard";
+import CommonHeader from "@/components/common/CommonHeader/CommonHeader";
+import GridLayout from "@/components/common/GridLayout/gridLayout";
+import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import Spinner from "@/components/common/Spinner/spinner";
 import Divider from "@/components/Divider/Divider";
+import { tele, telecount } from "@/constants/constants";
+import { getAddressType } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
 import Pointer from "@/SVGs/Pointer";
 import RightArrow from "@/SVGs/RightArrow";
@@ -18,13 +25,6 @@ import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 import ReactFlagsSelect from "react-flags-select";
 import "./addressSection.css";
-import { tele, telecount } from "@/constants/constants";
-import { getAddressType } from "@/constants/function";
-import BackComponent from "@/components/BackComponent";
-import CommonHeader from "@/components/common/CommonHeader/CommonHeader";
-import GridLayout from "@/components/common/GridLayout/gridLayout";
-import Navbar from "@/components/common/Navbar/navbar";
-import AddressCard from "@/components/common/AddressCard/AddressCard";
 
 const UserInfo = ({ type }) => {
   const {
@@ -505,7 +505,7 @@ const UserInfo = ({ type }) => {
 
   return (
     <GridLayout>
-      <Navbar />
+      <HeaderBox />
       <div>
         <div
           className="holder-container"

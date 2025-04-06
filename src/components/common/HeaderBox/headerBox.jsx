@@ -1,9 +1,9 @@
 import VendorInfoBox from "@/components/HomePage/VendorInfoBox/vendorInfoBox";
-import { Box, Drawer } from "@mui/material";
+import RestSideDrawerContent from "@/components/SideBar/RestSideDrawerContent";
+import { Box, Drawer, IconButton } from "@mui/material";
 import { useState } from "react";
 import Navbar from "../Navbar/navbar";
-import RestSideDrawerContent from "@/components/SideBar/RestSideDrawerContent";
-
+import ClearIcon from "@mui/icons-material/Clear";
 const HeaderBox = () => {
   const [open, setOpen] = useState(false);
   const handleDrawar = () => {
@@ -12,6 +12,23 @@ const HeaderBox = () => {
   return (
     <Box sx={{ position: "relative" }}>
       <Drawer open={open} onClose={() => setOpen(false)} anchor="left">
+        <Box
+          sx={{
+            position: "absolute",
+            display: "flex",
+            justifyContent: "end",
+            padding: "20px",
+            right: "20px",
+          }}
+        >
+          <IconButton onClick={() => setOpen(false)}>
+            <ClearIcon
+              sx={{
+                fill: "#000",
+              }}
+            />
+          </IconButton>
+        </Box>
         <Box
           sx={{
             width: window.innerWidth < 991 ? "90vw" : "30vw",

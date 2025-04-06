@@ -201,7 +201,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
       case "Login":
         handleUserDetailsChange((prev) => ({ ...prev, is_guest: false }));
         setBurger(false);
-        router.push("/contact-details");
+        router.push("/login");
         break;
       case "Home":
       case "Reserve":

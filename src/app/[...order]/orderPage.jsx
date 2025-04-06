@@ -1,6 +1,5 @@
 "use client";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
-import Navbar from "@/components/common/Navbar/navbar";
 import AccordianContactStore from "@/components/OrderPage/AccordianContactStore";
 import AccordianPaymentDetails from "@/components/OrderPage/AccordianPaymentDetails";
 import { AccrodianOrderDetails } from "@/components/OrderPage/AccrodianOrderDetails";
@@ -16,6 +15,7 @@ import "./newOrderStatus.css";
 import CommonDeliveryStatus from "@/components/OrderPage/CommonDeliveryStatus";
 import DeliveryMapStatus from "@/components/OrderPage/DeliveryMapStatus";
 import { useRouter } from "next/navigation";
+import HeaderBox from "@/components/common/HeaderBox/headerBox";
 
 const OrderPage = (props) => {
   const { language, homePageDetails } = useContext(AppContext);
@@ -40,7 +40,7 @@ const OrderPage = (props) => {
   ];
   return (
     <Box sx={{ height: "100vh" }}>
-      <Navbar />
+      <HeaderBox />
       <GridLayout sx={{ height: "calc(100vh - 70px)", padding: "20px" }}>
         {orderDetails && <CommonDeliveryStatus orderDetails={orderDetails} />}
         {orderDetails ? (

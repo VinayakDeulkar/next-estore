@@ -1,0 +1,129 @@
+.trackOrder-backdrop {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.49);
+}
+
+.trackOrder-whitebox {
+  width: 100%;
+  height: 100vh;
+  padding: 0px 0px;
+  position: relative;
+}
+
+.tracker-order-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-tracker-image {
+  margin: 26px 0;
+}
+
+.tracker-order-center:last-child {
+  margin-bottom: 0px;
+}
+
+.trackorder-image {
+  width: 100px;
+  height: 100px;
+}
+
+.order-tracker-text {
+  color: #000;
+  text-align: center;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  height: 41px;
+}
+
+html[dir="rtl"] .order-tracker-text {
+  font-size: 36px;
+}
+
+.shipment-tracker-text {
+  color: #a3a2a2;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 46px;
+}
+
+.track-divider-line {
+  border-bottom: 0.25px solid #ccc;
+  width: 286.998px;
+  margin-bottom: 30px;
+}
+
+html[dir="rtl"] .shipment-tracker-text {
+  font-size: 20px;
+}
+
+.order-tracker-input-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.order-tracker-input-field {
+  border-radius: 8px;
+  padding: 13px 15px;
+  border: 1.5px solid #000;
+  font-size: 14px;
+  background: #fbfbfb;
+  width: 241px;
+  height: 45px;
+  margin-bottom: 26px;
+}
+
+.order-tracker-input-field::placeholder {
+  color: #a3a2a2;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 200;
+  line-height: normal;
+}
+
+html[dir="rtl"] .order-tracker-input-field,
+html[dir="rtl"] .order-tracker-input-field::placeholder {
+  font-size: 18px;
+}
+
+.order-tracker-input-button {
+  height: 45px;
+  border-radius: 37px;
+  border: 1.5px solid var(--vendor-color);
+  cursor: pointer;
+  background: var(--vendor-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 107px;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 605;
+  line-height: normal;
+}
+
+html[dir="rtl"] .order-tracker-input-button {
+  font-size: 20px;
+}
+
+.trackOrder-cross {
+  position: absolute;
+  right: 25px;
+  top: 26px;
+}
