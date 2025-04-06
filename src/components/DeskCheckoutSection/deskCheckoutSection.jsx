@@ -18,8 +18,10 @@ import { useRouter } from "next/navigation";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { checkoutTag } from "@/constants/checkouttag";
 import ReactPixel from "react-facebook-pixel";
+import { mapArea } from "@/constants/areaConstant";
+import axios from "axios";
 
-const DeskCheckoutSection = () => {
+const DeskCheckoutSection = ({ showPaymentMethod }) => {
   const {
     homePageDetails,
     areaDetails,
@@ -31,6 +33,9 @@ const DeskCheckoutSection = () => {
     addressDetails,
     contactDetails,
     handleAreaDetailsChange,
+    internationalDelivery,
+    vendorSlug,
+    userDetails,
   } = useContext(AppContext);
   const [successPromocode, setSuccessPromocode] = useState();
   const [deliveryCharge, setDeliveryCharge] = useState(0);
@@ -46,9 +51,7 @@ const DeskCheckoutSection = () => {
   const router = useRouter();
 
   const checkAllCondition = () => {
-    if (!cart?.cartCount) {
-      router.push(`/`);
-    }
+    return cart?.cartCount;
   };
 
   useEffect(() => {
@@ -150,23 +153,18 @@ const DeskCheckoutSection = () => {
 
             let lat = getSelectedAreaDetails[0]?.geometry?.location?.lat;
             let lng = getSelectedAreaDetails[0]?.geometry?.location?.lng;
-            // if (lat && lng) {
-            // setAddressDetails((a) => ({
-            //   ...a,
-            //   lat: lat,
-            //   lng: lng,
-            // }));
+
             const branch_latlng = areaDetails?.data?.branch?.filter(
               (branch) => branch.id == areaDetails?.branchForArea.id
             );
             if (window.google && window.google.maps) {
               const origin = new window.google.maps.LatLng(
-                String(branch_latlng[0].lat),
-                String(branch_latlng[0].lng)
+                String(branch_latlng[0]?.lat),
+                String(branch_latlng[0]?.lng)
               );
               const destination = new window.google.maps.LatLng(
-                String(addressDetails.lat),
-                String(addressDetails.lng)
+                String(addressDetails?.lat),
+                String(addressDetails?.lng)
               );
               const service = new window.google.maps.DistanceMatrixService();
               const request = {
@@ -363,7 +361,6 @@ const DeskCheckoutSection = () => {
           address_string: addressDetails.addressString,
           estimated_date: companyData?.estimated_date || 0,
           estimated_time: companyData?.estimated_time || 0,
-          // third_part_delivery_charge: companyData?.delivery_charge || 0,
           delivery_charge: deliveryCharge || "",
           ecom_delivery_co_id: companyData?.ecom_delivery_co_id || 0,
           branch_lat: getBranchCordinates().lat,
@@ -521,7 +518,6 @@ const DeskCheckoutSection = () => {
     } else {
     }
   };
-
   return checkAllCondition() ? (
     <div>
       {areaDetails.type == "delivery" &&
@@ -573,37 +569,43 @@ const DeskCheckoutSection = () => {
         successPromocode={successPromocode}
         deliveryCharge={deliveryCharge}
       />
-      {companyData && <NewDeliveryCompany companyData={companyData} />}
-      <NewPaymentSelector
-        handleSetPaymentChange={handleSetPaymentChange}
-        payment={payment}
-        setWidth={setWidth}
-        width={width}
-      />
-      {cart?.show_promocode == 1 ? (
-        <NewPromocode
-          promocode={promocode}
-          setPromocode={setPromocode}
-          setApply={setApply}
-          apply={apply}
-          setSuccessPromocode={setSuccessPromocode}
-          deliveryCharge={deliveryCharge}
-        />
-      ) : null}
-      <NewAmountDetails
-        onConfirmOrder={() => {
-          if (
-            internationalDelivery.delivery_country_code.toLowerCase() ===
-              "kw" ||
-            homePageDetails?.vendor_data?.international_delivery === "3" ||
-            homePageDetails?.vendor_data?.international_delivery === ""
-          ) {
-            onConfirmOrder(payment);
-          } else {
-            submitInternational(payment);
-          }
-        }}
-      />
+      {showPaymentMethod ? (
+        <>
+          {companyData && <NewDeliveryCompany companyData={companyData} />}
+          <NewPaymentSelector
+            handleSetPaymentChange={handleSetPaymentChange}
+            payment={payment}
+            setWidth={setWidth}
+            width={width}
+          />
+          {cart?.show_promocode == 1 ? (
+            <NewPromocode
+              promocode={promocode}
+              setPromocode={setPromocode}
+              setApply={setApply}
+              apply={apply}
+              setSuccessPromocode={setSuccessPromocode}
+              deliveryCharge={deliveryCharge}
+            />
+          ) : null}
+          <NewAmountDetails
+            onConfirmOrder={() => {
+              if (
+                internationalDelivery.delivery_country_code.toLowerCase() ===
+                  "kw" ||
+                homePageDetails?.vendor_data?.international_delivery === "3" ||
+                homePageDetails?.vendor_data?.international_delivery === ""
+              ) {
+                onConfirmOrder(payment);
+              } else {
+                submitInternational(payment);
+              }
+            }}
+          />
+        </>
+      ) : (
+        <></>
+      )}
       {popup?.show_popup == 1 && (
         <CheckoutModal popup={popup} setPopup={setPopup}></CheckoutModal>
       )}

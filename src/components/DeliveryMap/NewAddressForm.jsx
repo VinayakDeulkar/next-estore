@@ -20,6 +20,7 @@ const NewAddressForm = ({
   addressNameValidation,
   handleMapChanges,
   setMarkerPosition,
+  setShowMap,
 }) => {
   const {
     language,
@@ -293,7 +294,7 @@ const NewAddressForm = ({
       )}
 
       <div
-        /* to="/area" */ className="delivery-address-form-div1"
+        className="delivery-address-form-div1"
         onClick={() => setShowAreaModal(!showAreaModal)}
       >
         <div style={{ position: "relative", width: "100%" }}>
@@ -331,6 +332,7 @@ const NewAddressForm = ({
           showAreaModal={showAreaModal}
           handleClose={() => {
             setShowAreaModal(false);
+            setShowMap?.();
           }}
         />
 

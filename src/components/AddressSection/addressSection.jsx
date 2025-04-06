@@ -25,7 +25,7 @@ const AddressSection = () => {
     handleAreaDetailsChange,
     handleUserDetailsChange,
     resetUserDetails,
-    addressDetails
+    addressDetails,
   } = useContext(AppContext);
   const { enqueueSnackbar } = useSnackbar();
   const [addressData, setAddressData] = useState([]);
@@ -444,17 +444,6 @@ const AddressSection = () => {
       } else {
       }
     }
-    // if (type === "checkout") {
-    //   history.push("/checkout");
-    //   onClick();
-    // } else {
-    //   if (localStorage.getItem("newPath") == "review") {
-    //     localStorage.removeItem("newPath");
-    //     history.push("/checkout");
-    //   } else {
-    //     history.push("/");
-    //   }
-    // }
   };
 
   return (
@@ -499,7 +488,7 @@ const AddressSection = () => {
         ${address?.flat ? address?.flat : ""}`,
                 special_directions: address?.special_directions,
               }}
-                symbol={<ThreeDots/>}
+              symbol={<ThreeDots />}
               onEdit={() => {
                 updateAddress(address?.id);
               }}

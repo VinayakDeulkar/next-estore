@@ -1,6 +1,7 @@
-import React, { Suspense, useContext, useEffect, useState } from "react";
-import "./deliverymap.css";
 import { AppContext } from "@/context/AppContext";
+import React, { Suspense, useContext, useEffect, useState } from "react";
+import Spinner from "../common/Spinner/spinner";
+import "./deliverymap.css";
 
 const NewMapAddress = React.lazy(() => import("./NewMapAddress"));
 
@@ -13,7 +14,8 @@ const DeliveryMapContainer = ({
   setSelectedBounds,
   triggerClick,
 }) => {
-  const { addressDetails, areaDetails, language } = useContext(AppContext);
+  const { addressDetails, areaDetails, language, homePageDetails } =
+    useContext(AppContext);
 
   const [mapBounds, setMapBounds] = useState(true);
   useEffect(() => {
@@ -40,15 +42,39 @@ const DeliveryMapContainer = ({
         return "";
     }
   };
+
   return (
     <div
       style={{
         position: "relative",
-        margin: "0 -36px",
-        padding: "20px 30px",
+        ...(window.innerWidth < 600
+          ? { margin: "0 -36px", padding: "20px 30px" }
+          : {}),
       }}
     >
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div
+            style={{
+              width: "100%",
+              height: "70vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: "10",
+              boxShadow: "none",
+              borderRadius: "20px",
+            }}
+            className="order-spinner-background"
+          >
+            <Spinner
+              height="50px"
+              color={homePageDetails?.vendor_data?.vendor_color}
+              size="6px"
+            />
+          </div>
+        }
+      >
         <NewMapAddress
           center={{ lat: addressDetails?.lat, lng: addressDetails?.lng }}
           currentCenter={{
@@ -72,24 +98,29 @@ const DeliveryMapContainer = ({
           >
             {language === "ltr" ? areaDetails?.area : areaDetails?.ar_area}
           </div>
-          <div
-            style={{
-              color: "#636363",
-              fontSize: language === "ltr" ? "14px" : "15px",
-            }}
-          >
-            {language == "ltr" ? "Street" : "شارع "} {addressDetails?.street}
-            {", "}
-            {language == "ltr" ? "Block" : "قطعة "} {addressDetails?.block}
-            {addressDetails?.avenue ? (
-              <>
-                {", "}
-                {language == "ltr" ? "Avenue" : "جادة"} {addressDetails?.avenue}
-              </>
-            ) : null}
-            {", "}
-            {houseLabel()} {addressDetails?.house}
-          </div>
+          {addressDetails?.block ? (
+            <div
+              style={{
+                color: "#636363",
+                fontSize: language === "ltr" ? "14px" : "15px",
+              }}
+            >
+              {language == "ltr" ? "Street" : "شارع "} {addressDetails?.street}
+              {", "}
+              {language == "ltr" ? "Block" : "قطعة "} {addressDetails?.block}
+              {addressDetails?.avenue ? (
+                <>
+                  {", "}
+                  {language == "ltr" ? "Avenue" : "جادة"}{" "}
+                  {addressDetails?.avenue}
+                </>
+              ) : null}
+              {", "}
+              {houseLabel()} {addressDetails?.house}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <button id="forClickOnly" style={{ visibility: "hidden" }}></button>
       </Suspense>

@@ -10,6 +10,7 @@ const ContactInfo = ({
   errorContactDetails,
   showNameEmailFields,
   showGuestUser,
+  stopRedirect = false,
 }) => {
   const {
     language,
@@ -260,12 +261,7 @@ const ContactInfo = ({
                         top: "25px",
                         display: "flex",
                         alignItems: "center",
-                        // color: "#fff",
                         padding: "5px 7px",
-                        // backgroundColor: "#4CAF50",
-                        // borderRadius: "50px",
-                        // fontSize: "12px",
-                        // gap: "5px",
                       }}
                     >
                       <CheckCircleIcon
@@ -301,6 +297,7 @@ const ContactInfo = ({
             className="sentImg"
           />
         )}
+
         <div>
           <div
             style={{
@@ -356,7 +353,9 @@ const ContactInfo = ({
           }}
           onClick={() => {
             handleUserDetailsChange({ ...userDetails, is_guest: true });
-            router.push("/contact-details");
+            if (!stopRedirect) {
+              router.push("/contact-details");
+            }
           }}
         >
           {language === "ltr" ? "Continue as Guest" : "الاستمرار كضيف"}

@@ -36,6 +36,10 @@ export const AppProvider = ({
         "vendors_id",
         vendorSlugResponse?.data?.vendor_data?.vendors_id
       );
+      Cookies.set(
+        "ecommerce_vendor_id",
+        vendorSlugResponse?.data?.vendor_data?.venecommerce_vendor_iddors_id
+      );
       setVendorSlug(vendorSlugResponse);
     }
   }, [vendorSlugResponse]);

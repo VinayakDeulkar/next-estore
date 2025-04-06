@@ -1,9 +1,15 @@
 import { AppContext } from "@/context/AppContext";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  useLoadScript,
+} from "@react-google-maps/api";
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import { useSnackbar } from "notistack";
+import Spinner from "../common/Spinner/spinner";
 
 const NewMapAddress = ({
   center,
@@ -22,7 +28,7 @@ const NewMapAddress = ({
   } = useContext(AppContext);
   const mapContainerStyle = {
     width: "100%",
-    height: "70vh",
+    height: "60vh",
     borderRadius: "20px",
   };
 
@@ -36,7 +42,6 @@ const NewMapAddress = ({
     (async () => {
       if (selectedArea) {
         const encodedPlaceName = encodeURIComponent(`${selectedArea}, Kuwait`);
-
         const respones = await axios.get(
           `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`
         );
@@ -148,32 +153,54 @@ const NewMapAddress = ({
       }));
     }
   };
-  return (
-    <LoadScript googleMapsApiKey="AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg">
-      <GoogleMap
-        className={`map-border`}
-        mapContainerStyle={mapContainerStyle}
-        center={center}
-        zoom={4}
-        options={{
-          disableDefaultUI: true,
-          zoomControl: true,
-          restriction: {
-            latLngBounds: selectedBounds,
-          },
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
+  });
+  useEffect(() => {}, [markerPosition]);
+
+  if (!isLoaded)
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "70vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: "10",
+          boxShadow: "none",
+          borderRadius: "20px",
         }}
-        onClick={handleMapClick}
-        onLoad={(map) => (mapRef.current = map)}
+        className="order-spinner-background"
       >
-        {markerPosition && (
-          <Marker
-            position={markerPosition}
-            draggable
-            onDragEnd={handleMarker}
-          />
-        )}
-      </GoogleMap>
-    </LoadScript>
+        <Spinner
+          height="50px"
+          color={homePageDetails?.vendor_data?.vendor_color}
+          size="6px"
+        />
+      </div>
+    );
+  return (
+    <GoogleMap
+      className={`map-border`}
+      mapContainerStyle={mapContainerStyle}
+      center={center}
+      zoom={4}
+      options={{
+        disableDefaultUI: true,
+        zoomControl: true,
+        restriction: {
+          latLngBounds: selectedBounds,
+          // strictBounds: true,
+        },
+      }}
+      onClick={handleMapClick}
+      onLoad={(map) => (mapRef.current = map)}
+    >
+      {markerPosition && (
+        <Marker position={markerPosition} draggable onDragEnd={handleMarker} />
+      )}
+    </GoogleMap>
   );
 };
 

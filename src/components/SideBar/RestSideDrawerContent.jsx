@@ -9,11 +9,12 @@ const RestSideDrawerContent = ({ setBurger }) => {
   const {
     language,
     handleUserDetailsChange,
-    setContactDetails,
-    setAddressDetails,
-    setAreaDetails,
+    handleContactDetailsChange,
+    handleAddressDetailsChange,
+    handleAreaDetailsChange,
     handleCartChange,
     homePageDetails,
+    handleSetPaymentChange,
   } = useContext(AppContext);
   const router = useRouter();
   const contactInfo = JSON.parse(localStorage.getItem("contactInfo") || "{}");
@@ -109,7 +110,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
         break;
       case "Logout":
         setBurger(false);
-        setAreaDetails({
+        handleAreaDetailsChange({
           type:
             window.location.host.replace(/^www\./, "") !== "shop.playon.today"
               ? "delivery"
@@ -137,7 +138,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
           branch_lng: "",
         });
         handleCartChange({});
-        setAddressDetails({
+        handleAddressDetailsChange({
           block: "",
           street: "",
           avenue: "",
@@ -152,7 +153,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
           addressString: "",
           addressType: "1",
         });
-        setContactDetails({
+        handleContactDetailsChange({
           name: "",
           phoneCode: "KW",
           phone: "",
@@ -161,7 +162,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
           color: "",
           license: "",
         });
-        setPayment(1);
+        handleSetPaymentChange(1);
         handleUserDetailsChange({
           id: "",
           email: "",

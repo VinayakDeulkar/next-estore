@@ -38,6 +38,7 @@ const CheckOut = () => {
     internationalDelivery,
     handleSetPaymentChange,
     handleAreaDetailsChange,
+    handleOpenAreaChange,
   } = useContext(AppContext);
   const router = useRouter();
 
@@ -81,7 +82,7 @@ const CheckOut = () => {
       !areaDetails?.area &&
       !areaDetails?.branch
     ) {
-      setOpenArea((prev) => ({ open: true, goHome: false }));
+      handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
       // history.push(`/area`);
     } else if (
       internationalDelivery.delivery_country_code.toLowerCase() !== "kw" &&

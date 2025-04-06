@@ -14,6 +14,7 @@ const HorizontalCard = ({ product }) => {
     homePageDetails,
     areaDetails,
     vendorSlug,
+    handleOpenAreaChange,
   } = useContext(AppContext);
   const [inCart, setInCart] = useState(0);
   const [spinLoader, setSpinLoader] = useState(false);
@@ -154,7 +155,7 @@ const HorizontalCard = ({ product }) => {
                 homePageDetails?.vendor_data?.international_delivery === "" ||
                 internationalDelivery.country_name.toLowerCase() === "kuwait")
             ) {
-              setOpenArea((prev) => ({ open: true, goHome: false }));
+              handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
               // history.push(`/area`);
             }
           }
@@ -264,7 +265,7 @@ const HorizontalCard = ({ product }) => {
                 homePageDetails?.vendor_data?.international_delivery === "" ||
                 internationalDelivery.country_name.toLowerCase() === "kuwait")
             ) {
-              setOpenArea((prev) => ({ open: true, goHome: false }));
+              handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
 
               // history.push(`/area`);
             }

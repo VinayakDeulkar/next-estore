@@ -68,7 +68,7 @@ const ContactDetails = () => {
           localStorage.setItem("contactInfo", JSON.stringify(data));
         }
         if (areaDetails?.type === "pickup") {
-          if (vendorSlug === "alawael-bilingual-school") {
+          if (vendorSlug?.data?.ecom_url_slug === "alawael-bilingual-school") {
             router.push("/checkout");
           } else {
             setStepper(1);

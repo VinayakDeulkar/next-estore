@@ -175,7 +175,7 @@ const DeliveryAddress = () => {
     ) {
       if (showMap && markerPosition?.lat) {
         if (!areaDetails?.area && !areaDetails?.branch) {
-          setOpenArea((prev) => ({ open: true, goHome: false }));
+          handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
         } else {
           let block =
             homePageDetails?.vendor_data?.enable_address_types?.includes(
@@ -462,7 +462,6 @@ const DeliveryAddress = () => {
               {showMap ? (
                 <DeliveryMapContainer
                   selectedArea={areaDetails?.area}
-                  // handleMapChanges={handleMapChanges}
                   markerPosition={markerPosition}
                   setMarkerPosition={setMarkerPosition}
                   selectedBounds={selectedBounds}
@@ -475,7 +474,6 @@ const DeliveryAddress = () => {
                   blockValidation={blockValidation}
                   streetValidation={streetValidation}
                   houseValidation={houseValidation}
-                  // handleMapChanges={handleMapChanges}
                   addressNameValidation={addressNameValidation}
                   errorState={errorState}
                   setMarkerPosition={setMarkerPosition}
