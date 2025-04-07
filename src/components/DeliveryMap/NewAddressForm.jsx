@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import { AppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
 import HomeIcon from "@/assets/icons/addressIcons/HomeIcon";
@@ -11,6 +10,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "./deliverymap.css";
 import "@/components/ContactInfo/contactInfo.css";
 import AreaModal from "../AreaModal/areaModal";
+
 const NewAddressForm = ({
   areaDetails,
   errorState,

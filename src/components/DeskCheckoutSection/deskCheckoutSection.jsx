@@ -264,7 +264,7 @@ const DeskCheckoutSection = ({ showPaymentMethod }) => {
         handleCartChange(response.data);
       } else {
         setLoading(false);
-        history.push("/");
+        router.push("/");
       }
     }
   };

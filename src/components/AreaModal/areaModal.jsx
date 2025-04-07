@@ -16,6 +16,7 @@ import "./areaModal.css";
 import { changeArea, getScheduleTime } from "@/apis";
 import { useSnackbar } from "notistack";
 import moment from "moment";
+import CheckoutModal from "../NewOrderDetailsPage/Components/CheckoutModal";
 
 const AreaModal = ({ showAreaModal, handleClose }) => {
   const {
@@ -32,6 +33,7 @@ const AreaModal = ({ showAreaModal, handleClose }) => {
   const [active, setActive] = useState("");
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const [popup, setPopup] = useState({ show_popup: 0 });
 
   useEffect(() => {
     if (areaSearch == "") {
@@ -211,11 +213,7 @@ const AreaModal = ({ showAreaModal, handleClose }) => {
         }
       } else {
         setLoading(false);
-
-        enqueueSnackbar({
-          variant: "error",
-          message: "something wents wrong!!",
-        });
+        setPopup((pop) => areaResponse?.data?.show_popup);
         setMarkerPosition({ lat: "", lng: "" });
       }
     } catch (error) {
@@ -243,93 +241,96 @@ const AreaModal = ({ showAreaModal, handleClose }) => {
     }
   };
   return (
-    <Dialog open={showAreaModal} onClose={handleClose} maxWidth="sm">
-      <Box
-        sx={{ height: "calc(100vh - 50px)", padding: "20px", width: "560px" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div
-          className={`delivery-area-search  ${
-            homePageDetails?.vendor_data?.home_page_type === "18" &&
-            "fashion-theme-border"
-          }`}
+    <>
+      <Dialog open={showAreaModal} onClose={handleClose} maxWidth="sm">
+        <Box
+          sx={{ height: "calc(100vh - 50px)", padding: "20px", width: "560px" }}
+          onClick={(e) => e.stopPropagation()}
         >
-          <SearchOutlined color={homePageDetails?.vendor_data?.vendor_color} />
-          <input
-            onChange={(e) => areaSearchChange(e)}
-            onFocus={moveup}
-            type="search"
-            id="deliverySearch"
-            placeholder={
-              language === "ltr" ? "Search in cities" : "بحث بأسماء المناطق"
-            }
-            className="delivery-area-search-input"
-            value={areaSearch}
-          ></input>
-        </div>
-        <Box mt="20px">
-          {area?.length != 0
-            ? area?.map((gov, k) => (
-                <Accordion key={k}>
-                  <AccordionSummary
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                    onClick={() => {
-                      setGovernarateActive({
-                        ...governarateActive,
-                        [k]: !governarateActive[k],
-                      });
-                    }}
-                  >
-                    {language === "ltr"
-                      ? gov?.governarate_name
-                      : gov?.governarate_name_ar}
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    {gov?.area
-                      ?.sort((prevCity, nextCity) =>
-                        prevCity?.area_name.localeCompare(nextCity?.area_name)
-                      )
-                      .map((city, j) => (
-                        <ListItem
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            borderBottom: "1px solid #e5e7eb",
-                          }}
-                          onClick={() => {
-                            handleCityClick(city);
-                          }}
-                          key={j}
-                        >
-                          <Box>
-                            {language === "ltr"
-                              ? city?.area_name
-                              : city?.area_name_ar}
-                          </Box>
-                          {city?.availability_status != 1 && (
+          <div
+            className={`delivery-area-search  ${
+              homePageDetails?.vendor_data?.home_page_type === "18" &&
+              "fashion-theme-border"
+            }`}
+          >
+            <SearchOutlined
+              color={homePageDetails?.vendor_data?.vendor_color}
+            />
+            <input
+              onChange={(e) => areaSearchChange(e)}
+              onFocus={moveup}
+              type="search"
+              id="deliverySearch"
+              placeholder={
+                language === "ltr" ? "Search in cities" : "بحث بأسماء المناطق"
+              }
+              className="delivery-area-search-input"
+              value={areaSearch}
+            ></input>
+          </div>
+          <Box mt="20px">
+            {area?.length != 0
+              ? area?.map((gov, k) => (
+                  <Accordion key={k}>
+                    <AccordionSummary
+                      aria-controls="panel1-content"
+                      id="panel1-header"
+                      onClick={() => {
+                        setGovernarateActive({
+                          ...governarateActive,
+                          [k]: !governarateActive[k],
+                        });
+                      }}
+                    >
+                      {language === "ltr"
+                        ? gov?.governarate_name
+                        : gov?.governarate_name_ar}
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      {gov?.area
+                        ?.sort((prevCity, nextCity) =>
+                          prevCity?.area_name.localeCompare(nextCity?.area_name)
+                        )
+                        .map((city, j) => (
+                          <ListItem
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              borderBottom: "1px solid #e5e7eb",
+                            }}
+                            onClick={() => {
+                              handleCityClick(city);
+                            }}
+                            key={j}
+                          >
                             <Box>
                               {language === "ltr"
-                                ? "STORE IS BUSY"
-                                : "المتجر مشغول "}
+                                ? city?.area_name
+                                : city?.area_name_ar}
                             </Box>
-                          )}
-                        </ListItem>
-                      ))}
-                  </AccordionDetails>
-                </Accordion>
-              ))
-            : null}
-        </Box>
-        <Backdrop
-          sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
-          open={loading}
-          onClick={() => setLoading(false)}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
-        {/* <div className=" accordion-container delivery-area-governarate">
+                            {city?.availability_status != 1 && (
+                              <Box>
+                                {language === "ltr"
+                                  ? "STORE IS BUSY"
+                                  : "المتجر مشغول "}
+                              </Box>
+                            )}
+                          </ListItem>
+                        ))}
+                    </AccordionDetails>
+                  </Accordion>
+                ))
+              : null}
+          </Box>
+          <Backdrop
+            sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
+            open={loading}
+            onClick={() => setLoading(false)}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+          {/* <div className=" accordion-container delivery-area-governarate">
           {area?.length != 0
             ? area?.map((gov, k) => (
                 <Box key={k}>
@@ -419,8 +420,12 @@ const AreaModal = ({ showAreaModal, handleClose }) => {
                 <SearchNone searchText={areaSearch}></SearchNone>
               )}
         </div> */}
-      </Box>
-    </Dialog>
+        </Box>
+      </Dialog>
+      {popup?.show_popup == 1 && (
+        <CheckoutModal popup={popup} setPopup={setPopup}></CheckoutModal>
+      )}
+    </>
   );
 };
 

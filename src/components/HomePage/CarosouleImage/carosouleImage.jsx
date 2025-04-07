@@ -35,7 +35,7 @@ const CarosouleImage = () => {
               src={image?.image}
               style={{
                 width: "100%",
-                height: "500px",
+                height: "700px",
               }}
               // width={1000}
               // height={500}

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { useRouter } from 'next/router';
 import { AppContext } from '@/context/AppContext';
+import { useRouter } from 'next/navigation';
 
 const DeliveryNotServing = () => {
     const router = useRouter();

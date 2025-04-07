@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function CheckoutModal({ popup, setPopup }) {
   const {
@@ -19,7 +19,7 @@ function CheckoutModal({ popup, setPopup }) {
       .post(
         `${process.env.NEXT_PUBLIC_API_URL}/reset-cart-data`,
         JSON.stringify({
-          token: process.env.REACT_APP_TOKEN,
+          token: process.env.NEXT_PUBLIC_APP_TOKEN,
           vendor_id: homePageDetails?.vendor_data?.vendors_id,
           area_id: areaDetails?.area_id,
           vendor_slug: vendorSlug?.data?.ecom_url_slug,
@@ -29,7 +29,7 @@ function CheckoutModal({ popup, setPopup }) {
       .then((res) => {
         if (!res.data.data.cart?.cartCount) {
           handleCartChange((g) => {});
-          history.push("/");
+          router.push("/");
         } else handleCartChange((g) => res.data.data.cart);
       })
       .catch((e) => console.log(e))
