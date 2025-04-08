@@ -208,6 +208,7 @@ const DeskCheckout = () => {
               setShowDeliveryAddress(true);
             } else {
               setShowNameEmailFields(true);
+              setShowGuestUser(false);
             }
           } else {
             setShowNameEmailFields(true);
@@ -569,7 +570,6 @@ const DeskCheckout = () => {
           ) {
             if (userDetails?.is_guest) {
               // setShowPaymentMethod(true);
-              console.log("first");
               getDistanceMatrix();
               getEstimatedDeliveryTime();
             } else {
@@ -750,345 +750,216 @@ const DeskCheckout = () => {
     }
   }, [areaDetails?.area]);
 
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey:
-      "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg", // Replace with your Google Maps API key
-  });
-  const getDistanceMatrix = async () => {
-    const check = cart?.cartCount;
-    if (
-      check &&
-      areaDetails?.type == "delivery" &&
-      areaDetails?.data?.branch &&
-      (internationalDelivery.delivery_country_code.toLowerCase() === "kw" ||
-        homePageDetails?.vendor_data?.international_delivery === "3" ||
-        homePageDetails?.vendor_data?.international_delivery === "")
-    ) {
-      if (areaDetails?.area == "Mutlaa") {
-        const branch_latlng = areaDetails?.data?.branch?.filter(
-          (branch) => branch.id == areaDetails?.branchForArea.id
-        );
-        if (window.google && window.google.maps) {
-          const origin = new window.google.maps.LatLng(
-            String(branch_latlng[0].lat),
-            String(branch_latlng[0].lng)
-          );
-          const destination = new window.google.maps.LatLng(
-            String(addressDetails.lat),
-            String(addressDetails.lng)
-          );
-          const service = new window.google.maps.DistanceMatrixService();
-          const request = {
-            origins: [origin],
-            destinations: [destination],
-            travelMode: "DRIVING",
-            unitSystem: window.google.maps.UnitSystem.METRIC,
-          };
+  // const { isLoaded } = useJsApiLoader({
+  //   googleMapsApiKey:
+  //     "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg", // Replace with your Google Maps API key
+  // });
 
-          service.getDistanceMatrix(request, (response, status) => {
-            if (
-              status === "OK" &&
-              response.rows[0].elements[0].status === "OK"
-            ) {
-              const distanceInMeters =
-                response.rows[0].elements[0].distance.value;
-              const distanceInKilometers = distanceInMeters / 1000;
-              setDeliveryKm(distanceInKilometers);
-            } else {
-              console.error("Error:", status);
-            }
-          });
-        }
-      } else {
-        let selectedAra = mapArea.find(
-          (ele) =>
-            ele.area_name == areaDetails.area ||
-            ele.area_name_ar == areaDetails.area_ar
-        );
+  // const getDistanceMatrix = async () => {
+  //   const check = cart?.cartCount;
+  //   if (
+  //     check &&
+  //     areaDetails?.type == "delivery" &&
+  //     areaDetails?.data?.branch &&
+  //     (internationalDelivery.delivery_country_code.toLowerCase() === "kw" ||
+  //       homePageDetails?.vendor_data?.international_delivery === "3" ||
+  //       homePageDetails?.vendor_data?.international_delivery === "")
+  //   ) {
+  //     if (areaDetails?.area == "Mutlaa") {
+  //       const branch_latlng = areaDetails?.data?.branch?.filter(
+  //         (branch) => branch.id == areaDetails?.branchForArea.id
+  //       );
+  //       if (window.google && window.google.maps) {
+  //         const origin = new window.google.maps.LatLng(
+  //           String(branch_latlng[0].lat),
+  //           String(branch_latlng[0].lng)
+  //         );
+  //         const destination = new window.google.maps.LatLng(
+  //           String(addressDetails.lat),
+  //           String(addressDetails.lng)
+  //         );
+  //         const service = new window.google.maps.DistanceMatrixService();
+  //         const request = {
+  //           origins: [origin],
+  //           destinations: [destination],
+  //           travelMode: "DRIVING",
+  //           unitSystem: window.google.maps.UnitSystem.METRIC,
+  //         };
 
-        const selectedArea = selectedAra.area_map;
-        const encodedPlaceName = encodeURIComponent(
-          `street ${addressDetails.street} ,block ${addressDetails.block} ,${selectedArea}, Kuwait`
-        );
-        const branch_latlng = areaDetails?.data?.branch?.filter(
-          (branch) => branch.id == areaDetails?.branchForArea.id
-        );
-        const dataResponse = await getDrivingDistance(
-          { lat: branch_latlng[0]?.lat, lng: branch_latlng[0]?.lng },
-          { lat: addressDetails?.lat, lng: addressDetails?.lng }
-        );
-        console.log(dataResponse, "dataResponse");
-        // const respones = await axios.get(
-        //   `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`
-        // );
-        // if (respones.status === 200) {
-        //   let getSelectedAreaDetails = [];
-        //   if (respones?.data?.results.length == 1) {
-        //     getSelectedAreaDetails.push(respones?.data?.results[0]);
-        //   } else {
-        //     respones?.data?.results.map((ele) =>
-        //       ele.address_components.map((element) => {
-        //         if (
-        //           element.short_name.toLowerCase() ==
-        //             selectedArea.toLowerCase() ||
-        //           element.long_name.toLowerCase() == selectedArea.toLowerCase()
-        //         ) {
-        //           getSelectedAreaDetails.push(ele);
-        //         }
-        //       })
-        //     );
-        //   }
+  //         service.getDistanceMatrix(request, (response, status) => {
+  //           if (
+  //             status === "OK" &&
+  //             response.rows[0].elements[0].status === "OK"
+  //           ) {
+  //             const distanceInMeters =
+  //               response.rows[0].elements[0].distance.value;
+  //             const distanceInKilometers = distanceInMeters / 1000;
+  //             setDeliveryKm(distanceInKilometers);
+  //           } else {
+  //             console.error("Error:", status);
+  //           }
+  //         });
+  //       }
+  //     } else {
+  //       let selectedAra = mapArea.find(
+  //         (ele) =>
+  //           ele.area_name == areaDetails.area ||
+  //           ele.area_name_ar == areaDetails.area_ar
+  //       );
 
-        //   let lat = getSelectedAreaDetails[0]?.geometry?.location?.lat;
-        //   let lng = getSelectedAreaDetails[0]?.geometry?.location?.lng;
+  //       const selectedArea = selectedAra.area_map;
+  //       const encodedPlaceName = encodeURIComponent(
+  //         `street ${addressDetails.street} ,block ${addressDetails.block} ,${selectedArea}, Kuwait`
+  //       );
+  //       const branch_latlng = areaDetails?.data?.branch?.filter(
+  //         (branch) => branch.id == areaDetails?.branchForArea.id
+  //       );
+  //       const dataResponse = await getDrivingDistance(
+  //         { lat: branch_latlng[0]?.lat, lng: branch_latlng[0]?.lng },
+  //         { lat: addressDetails?.lat, lng: addressDetails?.lng }
+  //       );
+  //       console.log(dataResponse, "dataResponse");
+  //       // const respones = await axios.get(
+  //       //   `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`
+  //       // );
+  //       // if (respones.status === 200) {
+  //       //   let getSelectedAreaDetails = [];
+  //       //   if (respones?.data?.results.length == 1) {
+  //       //     getSelectedAreaDetails.push(respones?.data?.results[0]);
+  //       //   } else {
+  //       //     respones?.data?.results.map((ele) =>
+  //       //       ele.address_components.map((element) => {
+  //       //         if (
+  //       //           element.short_name.toLowerCase() ==
+  //       //             selectedArea.toLowerCase() ||
+  //       //           element.long_name.toLowerCase() == selectedArea.toLowerCase()
+  //       //         ) {
+  //       //           getSelectedAreaDetails.push(ele);
+  //       //         }
+  //       //       })
+  //       //     );
+  //       //   }
 
-        //   const branch_latlng = areaDetails?.data?.branch?.filter(
-        //     (branch) => branch.id == areaDetails?.branchForArea.id
-        //   );
-        //   if (window.google && window.google.maps) {
-        //     const origin = new window.google.maps.LatLng(
-        //       String(branch_latlng[0]?.lat),
-        //       String(branch_latlng[0]?.lng)
-        //     );
-        //     const destination = new window.google.maps.LatLng(
-        //       String(addressDetails?.lat),
-        //       String(addressDetails?.lng)
-        //     );
-        //     const service = new window.google.maps.DistanceMatrixService();
-        //     const request = {
-        //       origins: [origin],
-        //       destinations: [destination],
-        //       travelMode: "DRIVING",
-        //       unitSystem: window.google.maps.UnitSystem.METRIC,
-        //     };
-        //     console.log(request, "request");
+  //       //   let lat = getSelectedAreaDetails[0]?.geometry?.location?.lat;
+  //       //   let lng = getSelectedAreaDetails[0]?.geometry?.location?.lng;
 
-        //     service.getDistanceMatrix(request, (response, status) => {
-        //       console.log(response, "response");
-        //       if (
-        //         status === "OK" &&
-        //         response.rows[0].elements[0].status === "OK"
-        //       ) {
-        //         const distanceInMeters =
-        //           response.rows[0].elements[0].distance.value;
-        //         const distanceInKilometers = distanceInMeters / 1000;
-        //         setDeliveryKm(distanceInKilometers);
-        //       } else {
-        //         console.error("Error:", status);
-        //       }
-        //     });
-        //   }
-        // }
-      }
-    }
-  };
+  //       //   const branch_latlng = areaDetails?.data?.branch?.filter(
+  //       //     (branch) => branch.id == areaDetails?.branchForArea.id
+  //       //   );
+  //       //   if (window.google && window.google.maps) {
+  //       //     const origin = new window.google.maps.LatLng(
+  //       //       String(branch_latlng[0]?.lat),
+  //       //       String(branch_latlng[0]?.lng)
+  //       //     );
+  //       //     const destination = new window.google.maps.LatLng(
+  //       //       String(addressDetails?.lat),
+  //       //       String(addressDetails?.lng)
+  //       //     );
+  //       //     const service = new window.google.maps.DistanceMatrixService();
+  //       //     const request = {
+  //       //       origins: [origin],
+  //       //       destinations: [destination],
+  //       //       travelMode: "DRIVING",
+  //       //       unitSystem: window.google.maps.UnitSystem.METRIC,
+  //       //     };
+  //       //     console.log(request, "request");
 
-  const getEstimatedDeliveryTime = async () => {
-    if (cart && cart.deliveryCharge) {
-      setDeliveryCharge(cart.deliveryCharge);
-    }
-    if (
-      deliveryKm &&
-      areaDetails?.type == "delivery" &&
-      areaDetails?.area != "Mutlaa"
-    ) {
-      setLoading(true);
-      const response = await getDeliveryCompanies({
-        vendor_id: homePageDetails?.vendor_data?.vendors_id,
-        product: cart.cartItems,
-        distance: deliveryKm,
-        area_id: areaDetails?.area_id,
-        block_id: addressDetails.block,
-        ecommerce_vendor_id: homePageDetails?.vendor_data?.ecommerce_vendor_id,
-        branch_id: areaDetails?.branchForArea.id,
-        destination: {
-          latitude: Number(addressDetails.lat),
-          longitude: Number(addressDetails.lng),
-        },
-        block: addressDetails.block,
-        street: addressDetails.street,
-        avenue: addressDetails.avenue,
-        house_no: addressDetails.house,
-        floor_no: addressDetails.floor,
-        flat_no: addressDetails.flat,
-        time: areaDetails?.now,
-        schedule_time: areaDetails?.deliveryTiming,
-        preorder_on: moment(areaDetails?.laterDeliveryTiming)
-          .locale("en")
-          .format("YYYY-MM-DD HH:mm:ss"),
-      });
-      if (response?.status) {
-        if (response.is_activated === "1") {
-          if (response.data.is_serving === 0) {
-            setNotServing(1);
-            setLoading(false);
-          } else {
-            setCompanyData(response.data);
-            setDeliveryCharge(response.data.delivery_charge);
-            if (response.data.delivery_charge) {
-              getDeliveryCharge(response.data.delivery_charge);
-            }
-            setShowPaymentMethod(true);
-            setLoading(false);
-          }
-        } else {
-          setShowPaymentMethod(true);
-          setLoading(false);
-        }
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    }
-  };
+  //       //     service.getDistanceMatrix(request, (response, status) => {
+  //       //       console.log(response, "response");
+  //       //       if (
+  //       //         status === "OK" &&
+  //       //         response.rows[0].elements[0].status === "OK"
+  //       //       ) {
+  //       //         const distanceInMeters =
+  //       //           response.rows[0].elements[0].distance.value;
+  //       //         const distanceInKilometers = distanceInMeters / 1000;
+  //       //         setDeliveryKm(distanceInKilometers);
+  //       //       } else {
+  //       //         console.error("Error:", status);
+  //       //       }
+  //       //     });
+  //       //   }
+  //       // }
+  //     }
+  //   }
+  // };
 
-  const getDeliveryCharge = async (delivery_charge) => {
-    if (delivery_charge) {
-      const response = await updateDeliveryCharges(
-        vendorSlug?.data?.ecom_url_slug,
-        homePageDetails?.vendor_data?.vendors_id,
-        areaDetails?.area_id,
-        delivery_charge
-      );
-      if (response && response.status) {
-        setLoading(false);
-        handleCartChange(response.data);
-      } else {
-        setLoading(false);
-        router.push("/");
-      }
-    }
-  };
+  // const getEstimatedDeliveryTime = async () => {
+  //   if (cart && cart.deliveryCharge) {
+  //     setDeliveryCharge(cart.deliveryCharge);
+  //   }
+  //   if (
+  //     deliveryKm &&
+  //     areaDetails?.type == "delivery" &&
+  //     areaDetails?.area != "Mutlaa"
+  //   ) {
+  //     setLoading(true);
+  //     const response = await getDeliveryCompanies({
+  //       vendor_id: homePageDetails?.vendor_data?.vendors_id,
+  //       product: cart.cartItems,
+  //       distance: deliveryKm,
+  //       area_id: areaDetails?.area_id,
+  //       block_id: addressDetails.block,
+  //       ecommerce_vendor_id: homePageDetails?.vendor_data?.ecommerce_vendor_id,
+  //       branch_id: areaDetails?.branchForArea.id,
+  //       destination: {
+  //         latitude: Number(addressDetails.lat),
+  //         longitude: Number(addressDetails.lng),
+  //       },
+  //       block: addressDetails.block,
+  //       street: addressDetails.street,
+  //       avenue: addressDetails.avenue,
+  //       house_no: addressDetails.house,
+  //       floor_no: addressDetails.floor,
+  //       flat_no: addressDetails.flat,
+  //       time: areaDetails?.now,
+  //       schedule_time: areaDetails?.deliveryTiming,
+  //       preorder_on: moment(areaDetails?.laterDeliveryTiming)
+  //         .locale("en")
+  //         .format("YYYY-MM-DD HH:mm:ss"),
+  //     });
+  //     if (response?.status) {
+  //       if (response.is_activated === "1") {
+  //         if (response.data.is_serving === 0) {
+  //           setNotServing(1);
+  //           setLoading(false);
+  //         } else {
+  //           setCompanyData(response.data);
+  //           setDeliveryCharge(response.data.delivery_charge);
+  //           if (response.data.delivery_charge) {
+  //             getDeliveryCharge(response.data.delivery_charge);
+  //           }
+  //           setShowPaymentMethod(true);
+  //           setLoading(false);
+  //         }
+  //       } else {
+  //         setShowPaymentMethod(true);
+  //         setLoading(false);
+  //       }
+  //       setLoading(false);
+  //     } else {
+  //       setLoading(false);
+  //     }
+  //   }
+  // };
 
-  const checkAreaAvailability = async () => {
-    const changeAreaResponse = await changeArea({
-      vendors_id: homePageDetails?.vendor_data?.vendors_id,
-      area_id: areaDetails?.area_id,
-      vendorSlug: vendorSlug?.data?.ecom_url_slug,
-      user_string: localStorage.getItem("userID"),
-    });
-
-    if (changeAreaResponse.status === true) {
-      if (changeAreaResponse.data.show_popup === 0) {
-        const timeResponse = await getScheduleTime({
-          vendors_id: homePageDetails?.vendor_data?.vendors_id,
-          area_id: areaDetails?.area_id,
-          vendorSlug: vendorSlug?.data?.ecom_url_slug,
-        });
-
-        if (timeResponse.status) {
-          let selectedBranch = timeResponse.data.branch;
-          let activeBranch = areaDetails?.data?.branch?.filter(
-            (branch) => branch?.id == selectedBranch?.id
-          )[0];
-          let estimationTime =
-            timeResponse.data?.delivery_details?.delivery_expected_type != 6
-              ? timeResponse.data?.delivery_details?.delivery_expected_time
-              : 0;
-          if (
-            timeResponse.data.time == 1 &&
-            addedAddress[0].availability_status == 1
-          ) {
-            handleAreaDetailsChange((k) => ({
-              ...k,
-              area: addedAddress[0].area_name,
-              minimum: addedAddress[0].minimum_charge,
-              shopOpen: timeResponse.data.time,
-              now: timeResponse.data.time,
-              branch: "",
-              ar_branch: "",
-              ar_area: addedAddress[0].area_name_ar,
-              area_id: addedAddress[0].area_id,
-              deliveryTiming: timeResponse.data.schedule_time,
-              ar_deliveryTiming: timeResponse.data.schedule_time_ar,
-              customDelivery:
-                timeResponse.data?.delivery_details?.delivery_expected_type ==
-                6,
-
-              getDeliveryTiming: moment()
-                .add(estimationTime, "minutes")
-                .toDate(),
-              laterDeliveryTiming: moment()
-                .add(estimationTime, "minutes")
-                .toDate(),
-              branchForArea: {
-                ...timeResponse.data.branch,
-                end:
-                  activeBranch?.office_end_time >
-                  activeBranch?.office_start_time
-                    ? moment(activeBranch?.office_end_time, "HH:mm:ss")
-                    : moment(activeBranch?.office_end_time, "HH:mm:ss").add(
-                        1,
-                        "days"
-                      ),
-                start: moment(activeBranch?.office_start_time, "HH:mm:ss"),
-              },
-            }));
-          } else {
-            handleAreaDetailsChange((l) => ({
-              ...l,
-              area: addedAddress[0].area_name,
-              minimum: addedAddress[0].minimum_charge,
-              shopOpen:
-                addedAddress[0].availability_status == 1
-                  ? timeResponse.data.time
-                  : 2,
-              now:
-                addedAddress[0].availability_status == 1
-                  ? timeResponse.data.time
-                  : 2,
-              ar_area: addedAddress[0].area_name_ar,
-              area_id: addedAddress[0].area_id,
-              branch: "",
-              ar_branch: "",
-              deliveryTiming: timeResponse?.data?.schedule_time,
-              ar_deliveryTiming: timeResponse?.data?.schedule_time_ar,
-              customDelivery:
-                timeResponse.data?.delivery_details?.delivery_expected_type ==
-                6,
-              getDeliveryTiming:
-                addedAddress[0].availability_status == 1 ||
-                timeResponse.data.time == 2
-                  ? moment(
-                      timeResponse.data.preorder_on,
-                      "YYYY-MM-DD HH:mm:ss"
-                    ).toDate()
-                  : moment().add(estimationTime, "minutes").toDate(),
-              laterDeliveryTiming:
-                addedAddress[0].availability_status == 1 ||
-                timeResponse.data.time == 2
-                  ? moment(
-                      timeResponse.data.preorder_on,
-                      "YYYY-MM-DD HH:mm:ss"
-                    ).toDate()
-                  : moment().add(estimationTime, "minutes").toDate(),
-              branchForArea: {
-                ...timeResponse.data.branch,
-                end:
-                  activeBranch?.office_end_time >
-                  activeBranch?.office_start_time
-                    ? moment(activeBranch?.office_end_time, "HH:mm:ss")
-                    : moment(activeBranch?.office_end_time, "HH:mm:ss").add(
-                        1,
-                        "days"
-                      ),
-                start: moment(activeBranch?.office_start_time, "HH:mm:ss"),
-              },
-            }));
-          }
-        }
-        setLoading(false);
-        setShowPaymentMethod(true);
-      } else {
-        setPopup((pop) => changeAreaResponse?.data?.show_popup);
-      }
-    } else {
-      enqueueSnackbar({
-        variant: "error",
-        message: changeAreaResponse?.message,
-      });
-    }
-  };
+  // const getDeliveryCharge = async (delivery_charge) => {
+  //   if (delivery_charge) {
+  //     const response = await updateDeliveryCharges(
+  //       vendorSlug?.data?.ecom_url_slug,
+  //       homePageDetails?.vendor_data?.vendors_id,
+  //       areaDetails?.area_id,
+  //       delivery_charge
+  //     );
+  //     if (response && response.status) {
+  //       setLoading(false);
+  //       handleCartChange(response.data);
+  //     } else {
+  //       setLoading(false);
+  //       router.push("/");
+  //     }
+  //   }
+  // };
 
   return (
     <Box sx={{ height: "100vh", padding: "20px" }}>
@@ -1120,30 +991,31 @@ const DeskCheckout = () => {
             fontWeight={400}
           />
           {stepper === 0 ? (
-            userDetails?.is_guest ? (
-              <NewContactDetails
-                errorContactDetails={errorContactDetails}
-                setErrorContactDetails={setErrorContactDetails}
-              />
-            ) : !openOtpPage ? (
-              <ContactInfo
-                errorContactDetails={errorContactDetails}
-                showNameEmailFields={showNameEmailFields}
-                showGuestUser={showGuestUser}
-                stopRedirect={true}
-              />
-            ) : null
+            <>
+              {userDetails?.is_guest ? (
+                <NewContactDetails
+                  errorContactDetails={errorContactDetails}
+                  setErrorContactDetails={setErrorContactDetails}
+                />
+              ) : openOtpPage ? (
+                <OtpVerification
+                  openOtpPage={openOtpPage}
+                  setOpenOtpPage={setOpenOtpPage}
+                  otpSent={otpSent}
+                  setOtpSent={setOtpSent}
+                  otp={otp}
+                  setOtp={setOtp}
+                />
+              ) : (
+                <ContactInfo
+                  errorContactDetails={errorContactDetails}
+                  showNameEmailFields={showNameEmailFields}
+                  showGuestUser={showGuestUser}
+                  stopRedirect={true}
+                />
+              )}
+            </>
           ) : null}
-          {openOtpPage ? (
-            <OtpVerification
-              openOtpPage={openOtpPage}
-              setOpenOtpPage={setOpenOtpPage}
-              otpSent={otpSent}
-              setOtpSent={setOtpSent}
-              otp={otp}
-              setOtp={setOtp}
-            />
-          ) : null}{" "}
           {stepper === 1 ? <PickupContainer pickupError={pickupError} /> : null}
           {showDeliveryAddress && (
             <div style={{ marginTop: "50px" }}>
