@@ -28,7 +28,7 @@ export const AppProvider = ({
   const handleVendorSlugChange = (value) => setVendorSlug(value);
 
   const [homePageDetails, setHomePageDetails] = useState();
-  const handleHomePageDetailsChange = (value) => setHomePageDetails(value);
+  const handleHomePageDetailsChange = (value) => setHomePageDetails({...value, estoreLayout: "2"});
   useEffect(() => {
     if (vendorSlugResponse) {
       Cookies.set("ecom_url_slug", vendorSlugResponse?.data?.ecom_url_slug);

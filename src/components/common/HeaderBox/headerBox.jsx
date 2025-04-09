@@ -4,7 +4,7 @@ import { Box, Drawer, IconButton } from "@mui/material";
 import { useState } from "react";
 import Navbar from "../Navbar/navbar";
 import ClearIcon from "@mui/icons-material/Clear";
-const HeaderBox = () => {
+const HeaderBox = ({}) => {
   const [open, setOpen] = useState(false);
   const handleDrawar = () => {
     setOpen(true);

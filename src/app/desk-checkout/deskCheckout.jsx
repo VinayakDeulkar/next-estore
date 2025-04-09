@@ -961,6 +961,10 @@ const DeskCheckout = () => {
   //   }
   // };
 
+  const handleAddressClick = () => {
+
+  }
+
   return (
     <Box sx={{ height: "100vh", padding: "20px" }}>
       <HeaderBox />
@@ -1073,7 +1077,11 @@ const DeskCheckout = () => {
               <Box
                 className="contact-details-next-button"
                 onClick={() => {
-                  handleDeliveryAddressNext();
+                  if(!selectAddress) {
+                    handleAddressClick();
+                  } else {
+                    handleDeliveryAddressNext();
+                  }
                 }}
               >
                 {language === "ltr" ? "Next" : "متابعة"}

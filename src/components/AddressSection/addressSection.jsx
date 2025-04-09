@@ -32,7 +32,7 @@ const AddressSection = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const getAddressData = () => {
+  const getAddressData = async () => {
     if (userDetails?.address) {
       const addresslist = userDetails?.address?.map((ele) => {
         return {
@@ -55,8 +55,172 @@ const AddressSection = () => {
         };
       });
       setAddressData(addresslist);
+
+      addresslist?.map(async (element) => {
+        if (element?.is_primary === "1") {
+          handleAddressDetailsChange((prev) => ({
+            ...prev,
+            id: element?.id,
+            area_id: element?.area_id,
+            block: element?.block,
+            street: element?.street,
+            avenue: element?.avenue,
+            house: element?.house,
+            floor: element?.floor_number ?? element?.floor,
+            flat: element?.flat_number ?? element?.flat,
+            lat: element?.latitude ?? element?.lat,
+            lng: element?.longitude ?? element?.lng,
+            fixedLat: element?.latitude ?? element?.lat,
+            fixedLng: element?.longitude ?? element?.lng,
+            addressType: element?.addressType,
+            addressName: element?.addressName,
+            special_directions: element?.special_directions,
+          }));
+          const addedAddress = [];
+          areaDetails?.data?.governarate?.forEach((address) => {
+            const foundAddress = address?.area?.find(
+              (area) => area?.area_id == element?.area_id
+            );
+            if (foundAddress) {
+              addedAddress.push(foundAddress);
+            }
+          });
+
+          const changeAreaResponse = await changeArea({
+            vendors_id: homePageDetails?.vendor_data?.vendors_id,
+            area_id: element?.area_id,
+            vendorSlug: vendorSlug?.data?.ecom_url_slug,
+            user_string: localStorage.getItem("userID"),
+          });
+          if (changeAreaResponse.status === true) {
+            if (changeAreaResponse.data.show_popup === 0) {
+              const timeResponse = await getScheduleTime({
+                vendors_id: homePageDetails?.vendor_data?.vendors_id,
+                area_id: element?.area_id,
+                vendorSlug: vendorSlug?.data?.ecom_url_slug,
+              });
+              if (timeResponse.status) {
+                let selectedBranch = timeResponse.data.branch;
+                let activeBranch = areaDetails?.data?.branch?.filter(
+                  (branch) => branch?.id == selectedBranch?.id
+                )[0];
+                let estimationTime =
+                  timeResponse.data?.delivery_details?.delivery_expected_type !=
+                  6
+                    ? timeResponse.data?.delivery_details
+                        ?.delivery_expected_time
+                    : 0;
+                if (
+                  timeResponse.data.time == 1 &&
+                  addedAddress[0].availability_status == 1
+                ) {
+                  handleAreaDetailsChange((k) => ({
+                    ...k,
+                    area: addedAddress[0].area_name,
+                    minimum: addedAddress[0].minimum_charge,
+                    shopOpen: timeResponse.data.time,
+                    now: timeResponse.data.time,
+                    branch: "",
+                    ar_branch: "",
+                    ar_area: addedAddress[0].area_name_ar,
+                    area_id: addedAddress[0].area_id,
+                    deliveryTiming: timeResponse.data.schedule_time,
+                    ar_deliveryTiming: timeResponse.data.schedule_time_ar,
+                    customDelivery:
+                      timeResponse.data?.delivery_details
+                        ?.delivery_expected_type == 6,
+                    getDeliveryTiming: moment()
+                      .add(estimationTime, "minutes")
+                      .toDate(),
+                    laterDeliveryTiming: moment()
+                      .add(estimationTime, "minutes")
+                      .toDate(),
+                    branchForArea: {
+                      ...timeResponse.data.branch,
+                      end:
+                        activeBranch?.office_end_time >
+                        activeBranch?.office_start_time
+                          ? moment(activeBranch?.office_end_time, "HH:mm:ss")
+                          : moment(
+                              activeBranch?.office_end_time,
+                              "HH:mm:ss"
+                            ).add(1, "days"),
+                      start: moment(
+                        activeBranch?.office_start_time,
+                        "HH:mm:ss"
+                      ),
+                    },
+                  }));
+                } else {
+                  handleAreaDetailsChange((l) => ({
+                    ...l,
+                    area: addedAddress[0].area_name,
+                    minimum: addedAddress[0].minimum_charge,
+                    shopOpen:
+                      addedAddress[0].availability_status == 1
+                        ? timeResponse.data.time
+                        : 2,
+                    now:
+                      addedAddress[0].availability_status == 1
+                        ? timeResponse.data.time
+                        : 2,
+                    ar_area: addedAddress[0].area_name_ar,
+                    area_id: addedAddress[0].area_id,
+                    branch: "",
+                    ar_branch: "",
+                    deliveryTiming: timeResponse?.data?.schedule_time,
+                    ar_deliveryTiming: timeResponse?.data?.schedule_time_ar,
+                    customDelivery:
+                      timeResponse.data?.delivery_details
+                        ?.delivery_expected_type == 6,
+                    getDeliveryTiming:
+                      addedAddress[0].availability_status == 1 ||
+                      timeResponse.data.time == 2
+                        ? moment(
+                            timeResponse.data.preorder_on,
+                            "YYYY-MM-DD HH:mm:ss"
+                          ).toDate()
+                        : moment().add(estimationTime, "minutes").toDate(),
+                    laterDeliveryTiming:
+                      addedAddress[0].availability_status == 1 ||
+                      timeResponse.data.time == 2
+                        ? moment(
+                            timeResponse.data.preorder_on,
+                            "YYYY-MM-DD HH:mm:ss"
+                          ).toDate()
+                        : moment().add(estimationTime, "minutes").toDate(),
+                    branchForArea: {
+                      ...timeResponse.data.branch,
+                      end:
+                        activeBranch?.office_end_time >
+                        activeBranch?.office_start_time
+                          ? moment(activeBranch?.office_end_time, "HH:mm:ss")
+                          : moment(
+                              activeBranch?.office_end_time,
+                              "HH:mm:ss"
+                            ).add(1, "days"),
+                      start: moment(
+                        activeBranch?.office_start_time,
+                        "HH:mm:ss"
+                      ),
+                    },
+                  }));
+                }
+              } else {
+              }
+            } else {
+            }
+          }
+        }
+      });
     }
   };
+
+  useEffect(() => {
+    console.log(areaDetails, "areaDetails")
+    console.log(addressDetails, "addressDetails")
+  }, [addressDetails, areaDetails])
+  
 
   useEffect(() => {
     getAddressData();
