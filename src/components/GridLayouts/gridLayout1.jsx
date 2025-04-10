@@ -6,10 +6,15 @@ const GridLayout1 = ({ children }) => {
 
   return (
     <Grid container>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12} sm={4} sx={{ height: "100%", overflowY: "auto" }}>
         {child1}
       </Grid>
-      <Grid item xs={12} sm={8}>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        sx={{ height: "100vh", position: "sticky", top: 0 }}
+      >
         {child2}
       </Grid>
     </Grid>

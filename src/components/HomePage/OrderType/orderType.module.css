@@ -1,0 +1,17 @@
+.dividerLine {
+    border-bottom: 1px solid #D3D3D3;
+    margin: 10px 0 0 0;
+}
+
+.orderTypeMainDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.orderTypeSecondDiv {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

@@ -1,12 +1,24 @@
 "use client";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
-import Image from "next/image";
 import { useContext } from "react";
 import { Carousel } from "react-responsive-carousel";
 
-const CarosouleImage = () => {
+const CarouselImage = () => {
   const { homePageDetails } = useContext(AppContext);
+
+  const carouselHeight = () => {
+    switch (homePageDetails?.estoreLayout) {
+      case "1":
+        return "100vh";
+
+      case "2":
+        return "700px";
+
+      default:
+        break;
+    }
+  };
 
   return (
     <Box
@@ -35,10 +47,8 @@ const CarosouleImage = () => {
               src={image?.image}
               style={{
                 width: "100%",
-                height: "700px",
+                height: carouselHeight(),
               }}
-              // width={1000}
-              // height={500}
               alt="image?.image"
             />
           </Box>
@@ -48,4 +58,4 @@ const CarosouleImage = () => {
   );
 };
 
-export default CarosouleImage;
+export default CarouselImage;

@@ -1340,3 +1340,59 @@ label {
 .product-price-del {
   color: Red;
 }
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .active {
+  display: block;
+}
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .active {
+  display: block;
+}
+
+.tab-content .tab-pane .delivery-select .delivery-detail-selected,
+.checkout-step-two .delivery-details .delivery-select {
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  gap: 30px;
+  font-weight: 500;
+  line-height: 1.33 !important;
+}
+
+.tab-content .tab-pane .delivery-select .delivery-detail-selected a {
+  margin-bottom: 0;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.tab-content .tab-pane .delivery-select .delivery-detail-selected a span,
+.tab-content .tab-pane .delivery-select .delivery-detail-selected a i {
+  font-size: 15px;
+  color: var(--vendor-color);
+  text-decoration: none;
+}
+
+.tab-content
+  .tab-pane
+  .delivery-select
+  .delivery-detail-selected
+  a
+  .right-arrow {
+  margin-right: 5px;
+  margin-left: 20px;
+  font-size: 27px;
+  line-height: 0;
+}

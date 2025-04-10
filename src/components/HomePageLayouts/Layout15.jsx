@@ -12,7 +12,7 @@ import "./layout.css";
 import ProductSquareCard from "../ProductSquareCard/productSquareCard";
 
 const Layout15 = ({ categories }) => {
-  const { language } = useContext(AppContext);
+  const { language, homePageDetails } = useContext(AppContext);
   const [expendedList, setExpendedList] = useState(
     categories?.map((cate) => cate.category_id)
   );
@@ -22,6 +22,19 @@ const Layout15 = ({ categories }) => {
       setExpendedList(expendedList.filter((id) => id !== category_id));
     } else {
       setExpendedList([...expendedList, category_id]);
+    }
+  };
+
+  const sizes = () => {
+    switch (homePageDetails?.estoreLayout) {
+      case "1":
+        return { xs: 6 };
+
+      case "2":
+        return { xs: 6, md: 4, lg: 3, xl: 3 };
+
+      default:
+        break;
     }
   };
 
@@ -40,26 +53,20 @@ const Layout15 = ({ categories }) => {
           onChange={() => handleAccordionClick(category?.category_id)}
         >
           <AccordionSummary
-            sx={{
-              padding: "0 40px",
-              "&.Mui-expanded .MuiTypography-root": {
-                margin: "20px 0",
-              },
-            }}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
             <TypographyConverter
-              sx={{ fontSize: "20px", fontWeight: "500" }}
+              sx={{ fontSize: "22px", fontWeight: "500" }}
               arText={category?.category_name_ar}
               enText={category?.category_name}
             />
           </AccordionSummary>
-          <AccordionDetails sx={{ padding: "0 40px 20px" }}>
+          <AccordionDetails sx={{ padding: "0 20px 25px" }}>
             <Grid container spacing={"20px"}>
               {category?.products?.map((product) => (
-                <Grid item xs={6} md={4} lg={3} xl={3} key={product?.id}>
+                <Grid item {...sizes()} key={product?.id}>
                   <ProductSquareCard product={product} />
                 </Grid>
               ))}
