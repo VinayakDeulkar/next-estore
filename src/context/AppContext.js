@@ -28,7 +28,8 @@ export const AppProvider = ({
   const handleVendorSlugChange = (value) => setVendorSlug(value);
 
   const [homePageDetails, setHomePageDetails] = useState();
-  const handleHomePageDetailsChange = (value) => setHomePageDetails({...value, estoreLayout: "2"});
+  const handleHomePageDetailsChange = (value) =>
+    setHomePageDetails({ ...value, estoreLayout: "2" });
   useEffect(() => {
     if (vendorSlugResponse) {
       Cookies.set("ecom_url_slug", vendorSlugResponse?.data?.ecom_url_slug);
@@ -38,7 +39,7 @@ export const AppProvider = ({
       );
       Cookies.set(
         "ecommerce_vendor_id",
-        vendorSlugResponse?.data?.vendor_data?.venecommerce_vendor_iddors_id
+        vendorSlugResponse?.data?.vendor_data?.ecommerce_vendor_id
       );
       setVendorSlug(vendorSlugResponse);
     }
@@ -126,7 +127,6 @@ export const AppProvider = ({
     delivery_expected_time: "",
     delivery_expected_type: "",
   });
-
   const handleInternationalDeliveryChange = (value) =>
     setInternationalDelivery(value);
 
@@ -163,6 +163,7 @@ export const AppProvider = ({
       localStorage.setItem("userID", result);
     }
   }, []);
+
   useEffect(() => {
     if (window && localStorage.getItem("cartTime")) {
       let prevTime = Date.parse(localStorage.getItem("cartTime"));
@@ -287,7 +288,6 @@ export const AppProvider = ({
         estoreBranchesResponse.data ||
         estoreBranchesResponse.data?.length != 0
       ) {
-        // map to check if the store is open for 24hrs or not and changing the values of start and end time to show 24hrs
         let b = estoreBranchesResponse.data.map((l, q) => {
           let diff = Math.abs(
             moment(l.office_start_time, "HH:mm:ss").diff(

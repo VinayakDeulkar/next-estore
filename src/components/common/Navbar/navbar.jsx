@@ -92,7 +92,7 @@ const Navbar = ({ handleDrawar }) => {
                 if (window.innerWidth < 991) {
                   router.push("/review");
                 } else {
-                  router.push("/desk-checkout");
+                  router.push("/checkout-desktop");
                 }
               }}
             >
