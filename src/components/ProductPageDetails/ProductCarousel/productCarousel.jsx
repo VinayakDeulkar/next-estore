@@ -10,7 +10,7 @@ const ProductCarousel = ({ product, addedVariaton }) => {
   const productImgStyle = () => {
     switch (homePageDetails?.productLayout) {
       case "1":
-        return { height: "100vh" };
+        return { height: "auto" };
 
       case "2":
         return { height: "500px" };

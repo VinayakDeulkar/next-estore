@@ -244,7 +244,11 @@ const AreaModal = ({ showAreaModal, handleClose }) => {
     <>
       <Dialog open={showAreaModal} onClose={handleClose} maxWidth="sm">
         <Box
-          sx={{ height: "calc(100vh - 50px)", padding: "20px", width: "560px" }}
+          sx={{
+            height: "calc(100vh - 50px)",
+            padding: "20px",
+            width: window.innerWidth > 600 ? "560px" : "auto",
+          }}
           onClick={(e) => e.stopPropagation()}
         >
           <div

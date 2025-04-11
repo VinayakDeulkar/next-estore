@@ -609,7 +609,6 @@ const AddressSection = () => {
       }
     }
   };
-
   return (
     <div>
       <Title enText={"Delivery Address"} arText={"عنوان التسليم"} />

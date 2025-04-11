@@ -23,10 +23,12 @@ const EstoreLayout1 = () => {
       ) : (
         <></>
       )} */}
+      {window.innerWidth < 600 ? <HeaderBox /> : null}
       <GridLayout1>
         <div>
-          <HeaderBox />
           <div style={{ width: "100%" }}>
+            {window.innerWidth > 600 ? <HeaderBox /> : null}
+
             <div style={{ padding: "25px 25px 0" }}>
               <VerticalVendorInfo />
             </div>

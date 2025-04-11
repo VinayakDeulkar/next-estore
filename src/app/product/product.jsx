@@ -4,6 +4,7 @@ import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import HorizontalProductGrid from "@/components/GridLayouts/horizontalProductGrid";
 import VerticalProductGrid from "@/components/GridLayouts/verticalProductGrid";
+import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
 import ProductCarousel from "@/components/ProductPageDetails/ProductCarousel/productCarousel";
 import ProductDetails from "@/components/ProductPageDetails/ProductDetails/ProductDetails";
 import { AppContext } from "@/context/AppContext";
@@ -22,15 +23,38 @@ const Product = (props) => {
       case "1":
         return (
           <>
-            <HorizontalProductGrid>
-              <div>
+            <Grid
+              container
+              sx={{
+                height: "calc(100vh - 50px)",
+                overflow: "hidden",
+                position: "relative",
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                sx={{
+                  position: "relative",
+                  overflow: "scroll",
+                  height: "calc(100vh - 50px)",
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "sticky",
+                    top: "20px",
+                    left: "80px",
+                    zIndex: "100",
+                  }}
+                >
+                  <BackButton variant="dark" />
+                </Box>
                 <ProductCarousel
                   product={props?.data}
                   addedVariaton={addedVariaton}
                 />
-              </div>
-              <div>
-                <BackButton variant="dark" />
                 <ProductDetails
                   product={props?.data}
                   addon={props?.addons}
@@ -39,8 +63,13 @@ const Product = (props) => {
                   addedVariaton={addedVariaton}
                   setAddedVariation={setAddedVariation}
                 />
-              </div>
-            </HorizontalProductGrid>
+              </Grid>
+              {window.innerWidth > 600 ? (
+                <Grid item xs={12} sm={8}>
+                  <CarouselImage />
+                </Grid>
+              ) : null}
+            </Grid>
           </>
         );
 
@@ -73,55 +102,6 @@ const Product = (props) => {
   return (
     <Box>
       <HeaderBox />
-      {/* {productLayout === 1 ? (
-        <Grid container sx={{ marginTop: "50px" }}>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={6}>
-            <Grid item>
-              <ProductCarousel
-                product={props?.data}
-                addedVariaton={addedVariaton}
-                productLayout={productLayout}
-              />
-            </Grid>
-            <Grid item>
-              <BackButton variant="dark" />
-              <ProductDetails
-                product={props?.data}
-                addon={props?.addons}
-                productvariation={props?.productvariation}
-                productvariationPrice={props?.productvariationPrice}
-                addedVariaton={addedVariaton}
-                setAddedVariation={setAddedVariation}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={3}></Grid>
-        </Grid>
-      ) : (
-        <Grid container sx={{ marginTop: "50px" }}>
-          <Grid item xs={6}>
-            <ProductCarousel
-              product={props?.data}
-              addedVariaton={addedVariaton}
-              productLayout={productLayout}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <BackButton variant="dark" />
-            <ProductDetails
-              product={props?.data}
-              loading={loading}
-              addon={props?.addons}
-              productvariation={props?.productvariation}
-              productvariationPrice={props?.productvariationPrice}
-              addedVariaton={addedVariaton}
-              setAddedVariation={setAddedVariation}
-            />
-          </Grid>
-        </Grid>
-      )} */}
-
       {renderProductLayout()}
     </Box>
   );

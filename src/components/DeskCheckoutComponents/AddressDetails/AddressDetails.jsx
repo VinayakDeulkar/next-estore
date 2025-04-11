@@ -1,7 +1,11 @@
 import AddressSection from "@/components/AddressSection/addressSection";
+import DeliveryMapContainer from "@/components/DeliveryMap/DeliveryMapContainer";
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
+import { mapArea } from "@/constants/areaConstant";
+import { tele } from "@/constants/constants";
 import { AppContext } from "@/context/AppContext";
-import { Box } from "@mui/material";
+import { Box, Dialog } from "@mui/material";
+import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 
 const AddressDetails = ({
@@ -25,7 +29,12 @@ const AddressDetails = ({
   const [markerPosition, setMarkerPosition] = useState(null);
   const [showAddressForm, setShowAddressForm] = useState(true);
   const [showMap, setShowMap] = useState(false);
-
+  const [selectedBounds, setSelectedBounds] = useState({
+    north: 30.0978,
+    south: 28.5244,
+    east: 48.4161,
+    west: 46.5682,
+  });
   const [errorState, setErrorState] = useState({
     blockError: false,
     blockErrorMessage: "",
@@ -50,6 +59,50 @@ const AddressDetails = ({
       triggerPaymentMethod();
     }
   }, [selectAddress]);
+
+  useEffect(() => {
+    if (areaDetails?.area) {
+      (async () => {
+        if (areaDetails?.area == "Mutlaa") {
+          setSelectedBounds({
+            north: 29.5761,
+            south: 29.38842,
+            east: 47.66437,
+            west: 47.538132,
+          });
+        } else {
+          const selectedAra = mapArea.find(
+            (ele) =>
+              ele.area_name == areaDetails?.area ||
+              ele.area_name_ar == areaDetails?.ar_area
+          );
+          const encodedPlaceName = encodeURIComponent(
+            selectedAra.area_map + " Kuwait"
+          );
+          const respones = await axios.get(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`
+          );
+
+          if (respones.status === 200) {
+            setSelectedBounds({
+              north: Number(
+                respones?.data?.results[0]?.geometry?.viewport?.northeast.lat
+              ),
+              south: Number(
+                respones?.data?.results[0]?.geometry?.viewport?.southwest.lat
+              ),
+              east: Number(
+                respones?.data?.results[0]?.geometry?.viewport?.northeast.lng
+              ),
+              west: Number(
+                respones?.data?.results[0]?.geometry?.viewport?.southwest.lng
+              ),
+            });
+          }
+        }
+      })();
+    }
+  }, [areaDetails?.area]);
 
   const blockValidation = (value) => {
     if (value == "") {
@@ -205,8 +258,9 @@ const AddressDetails = ({
             !areaName
           ) {
             if (userDetails?.is_guest) {
-              getDistanceMatrix();
-              getEstimatedDeliveryTime();
+              // getDistanceMatrix();
+              // getEstimatedDeliveryTime();
+              triggerPaymentMethod();
             } else {
               setLoading(true);
               const addResponse = await saveUserAddress({
@@ -264,10 +318,10 @@ const AddressDetails = ({
                     lng: addressDetails.lng,
                     is_primary: addressDetails.is_primary,
                   }));
-                  getDistanceMatrix();
-                  getEstimatedDeliveryTime();
+                  // getDistanceMatrix();
+                  // getEstimatedDeliveryTime();
                   // setLoading(false);
-                  // triggerPaymentMethod();
+                  triggerPaymentMethod();
                 } else {
                   enqueueSnackbar({
                     variant: "error",
@@ -317,10 +371,13 @@ const AddressDetails = ({
       handleInternationalDelivery();
     }
   };
-
+  const handleMapLoad = () => {
+    const forClick = document.getElementById("forClickOnly");
+    forClick?.click();
+  };
   return (
     <Box>
-      {selectAddress ? (
+      {!showAddressForm ? (
         <AddressSection />
       ) : (
         <NewAddressForm
@@ -334,7 +391,30 @@ const AddressDetails = ({
           setShowMap={() => setShowMap(true)}
         />
       )}
-      {showAddressForm ? (
+      <Dialog open={showMap} onClose={() => setShowMap(false)} maxWidth="lg">
+        <Box height={"80vh"} width="40vw" sx={{ padding: "20px" }}>
+          <DeliveryMapContainer
+            selectedArea={areaDetails?.area}
+            markerPosition={markerPosition}
+            setMarkerPosition={setMarkerPosition}
+            selectedBounds={selectedBounds}
+            setSelectedBounds={setSelectedBounds}
+            triggerClick={handleMapLoad}
+          />
+          <Box
+            className="contact-details-next-button"
+            onClick={() => {
+              if (markerPosition?.lat) {
+                setShowMap(false);
+              }
+            }}
+            style={!markerPosition?.lat ? { backgroundColor: "grey" } : {}}
+          >
+            {language === "ltr" ? "Save" : "يحفظ"}
+          </Box>
+        </Box>
+      </Dialog>
+      {showAddressForm && !showPaymentMethod ? (
         <Box
           className="contact-details-next-button"
           onClick={() => {

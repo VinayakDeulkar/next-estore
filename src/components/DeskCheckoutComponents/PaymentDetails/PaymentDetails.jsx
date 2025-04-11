@@ -11,8 +11,9 @@ import TiktokPixel from "tiktok-pixel";
 import ReactPixel from "react-facebook-pixel";
 import { checkoutTag } from "@/constants/checkouttag";
 import { saveOrderDetails } from "@/apis/submitOrderApi";
+import { tele } from "@/constants/constants";
 
-const PaymentDetails = () => {
+const PaymentDetails = ({ deliveryKm }) => {
   const {
     vendorSlug,
     homePageDetails,
@@ -36,6 +37,14 @@ const PaymentDetails = () => {
   const [apply, setApply] = useState("");
   const [deliveryCharge, setDeliveryCharge] = useState(0);
 
+  const getBranchCordinates = () => {
+    const branchlatlng = areaDetails.data.branch.filter(
+      (branch) => branch.id === areaDetails.branchForArea.id
+    );
+    if (branchlatlng[0]?.lat && branchlatlng[0]?.lng) {
+      return { lat: branchlatlng[0].lat, lng: branchlatlng[0].lng };
+    }
+  };
   const submitFunc = async (method) => {
     axios
       .post(

@@ -4,6 +4,7 @@ import moment from "moment";
 import { AppContext } from "@/context/AppContext";
 import CheckMark from "@/SVGs/CheckMark";
 import OrderCancelIcon from "@/SVGs/OrderCancelIcon";
+import MainTitle from "../common/MainTitle/mainTitle";
 
 const CommonDeliveryStatus = ({ orderDetails }) => {
   const { language, areaDetails, vendorSlug, homePageDetails } =
@@ -141,21 +142,26 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
                 : {}
             }
           >
-            {orderDetails?.has_register_item
-              ? language === "ltr"
-                ? "Product Registered"
-                : "المنتج مسجل"
-              : orderDetails?.payment_status === "1"
-              ? orderDetails?.current_status?.name
-                ? language === "ltr"
+            <MainTitle
+              enText={
+                orderDetails?.has_register_item
+                  ? "Product Registered"
+                  : orderDetails?.payment_status === "1"
                   ? orderDetails?.current_status?.name
-                  : orderDetails?.current_status?.arabic_name
-                : language === "ltr"
-                ? "Order Placed"
-                : "تم استلام الطلب"
-              : language === "ltr"
-              ? "Order Not Placed"
-              : "لم يتم تقديم الطلب"}
+                    ? orderDetails?.current_status?.name
+                    : "Order Placed"
+                  : "Order Not Placed"
+              }
+              arText={
+                orderDetails?.has_register_item
+                  ? "المنتج مسجل"
+                  : orderDetails?.payment_status === "1"
+                  ? orderDetails?.current_status?.name
+                    ? orderDetails?.current_status?.arabic_name
+                    : "تم استلام الطلب"
+                  : "لم يتم تقديم الطلب"
+              }
+            />
           </div>
           {orderDetails?.payment_status === "1" && (
             <>

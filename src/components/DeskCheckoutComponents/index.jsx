@@ -9,6 +9,7 @@ const DeskCheckoutComponents = () => {
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [showAddressComponents, setShowAddressComponents] = useState(false);
   const [selectAddress, setSelectAddress] = useState(false);
+  const [deliveryKm, setDeliveryKm] = useState();
 
   const triggerDeliveryAddress = () => {
     setShowAddressComponents(true);
@@ -34,9 +35,10 @@ const DeskCheckoutComponents = () => {
           showPaymentMethod={showPaymentMethod}
           triggerPaymentMethod={triggerPaymentMethod}
           selectAddress={selectAddress}
+          setDeliveryKm={setDeliveryKm}
         />
       ) : null}
-      {showPaymentMethod ? <PaymentDetails /> : null}
+      {showPaymentMethod ? <PaymentDetails deliveryKm={deliveryKm} /> : null}
     </Box>
   );
 };

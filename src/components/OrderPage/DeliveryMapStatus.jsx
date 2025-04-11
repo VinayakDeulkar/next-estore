@@ -6,6 +6,7 @@ import { tele, telecount } from "@/constants/constants";
 import { getAddressType } from "@/constants/function";
 import DeliveryMapLocation from "./DeliveryMapLocation";
 import OrderDeliveryAddress from "./OrderDeliveryAddress";
+import Title from "../common/Title/Title";
 
 const DeliveryMapStatus = ({
   location_coordinates,
@@ -71,7 +72,7 @@ const DeliveryMapStatus = ({
     }
     return null;
   };
-
+  console.log(customer_details, "customer_details");
   return (
     <div>
       {location_coordinates?.branch_lat &&
@@ -89,21 +90,14 @@ const DeliveryMapStatus = ({
         className="orderStatus-userData"
         style={{ border: "none", marginTop: "0" }}
       >
-        <div
-          className={
-            customer_details?.self_pickup == 1
-              ? "common-delivery-status-order-number-grey"
-              : "orderStatus-userData-deliverText"
+        <Title
+          enText={
+            customer_details?.self_pickup == 1 ? "Pickup From" : "Delivered To"
           }
-        >
-          {customer_details?.self_pickup == 1
-            ? language === "ltr"
-              ? "Pickup From"
-              : "تلتقط من"
-            : language === "ltr"
-            ? "Delivered To"
-            : "تفاصيل الاستلام"}
-        </div>
+          arText={
+            customer_details?.self_pickup == 1 ? "تلتقط من" : "تفاصيل الاستلام"
+          }
+        />
         {customer_details.is_international_delivery === "1" ? (
           <OrderDeliveryAddress customer_details={customer_details} />
         ) : (

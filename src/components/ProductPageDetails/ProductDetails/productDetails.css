@@ -1,0 +1,18 @@
+.details-container .product-outer-div .product-inner-div .product-name {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.41;
+  letter-spacing: -0.4px;
+  color: black;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin-bottom: 0;
+}
+.product-name-offer {
+  font-size: 16px;
+  font-weight: 400;
+}
+.product-name-price {
+  font-size: 16px;
+  font-weight: 400;
+}

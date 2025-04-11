@@ -6,6 +6,10 @@ import { useRouter } from "next/navigation";
 import { Box } from "@mui/material";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
+import GridLayout1 from "@/components/GridLayouts/gridLayout1";
+import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
+import MainTitle from "@/components/common/MainTitle/mainTitle";
+import Title from "@/components/common/Title/Title";
 
 const TrackOrder = () => {
   const [trackingNumber, setTrackingNumber] = useState();
@@ -19,12 +23,12 @@ const TrackOrder = () => {
   return (
     <Box>
       <HeaderBox />
-      <GridLayout>
+      <GridLayout1>
         <div className="trackOrder-whitebox">
           <div style={{ padding: "30px 20px" }}>
-            <div className="tracker-order-center order-tracker-text">
-              {language === "ltr" ? "Orders Tracker" : "تعقب الطلبات"}
-            </div>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <MainTitle enText={"Orders Tracker"} arText={"تعقب الطلبات"} />
+            </Box>
             <div className="tracker-order-center order-tracker-image">
               <img
                 src="images/delivery-packed-image.jpg"
@@ -33,9 +37,12 @@ const TrackOrder = () => {
             </div>
 
             <div className="tracker-order-center shipment-tracker-text">
-              {language === "ltr"
-                ? "Track shipments and orders by entering the tracking number."
-                : "تتبع الشحنات والطلبات عن طريق إدخال رقم التتبع."}
+              <Title
+                enText={
+                  "Track shipments and orders by entering the tracking number."
+                }
+                arText={"تتبع الشحنات والطلبات عن طريق إدخال رقم التتبع."}
+              />
             </div>
             <div className="tracker-order-center">
               <div className="track-divider-line"></div>
@@ -64,7 +71,8 @@ const TrackOrder = () => {
             </div>
           </div>
         </div>
-      </GridLayout>
+        <CarouselImage />
+      </GridLayout1>
     </Box>
   );
 };

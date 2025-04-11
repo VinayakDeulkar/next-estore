@@ -1,19 +1,19 @@
 "use client";
-import TypographyConverter from "@/components/common/TypographyConveter/TypographyConverter";
+import { addToCartApi, updateCartQauntity } from "@/apis";
+import QuantityError from "@/components/QuantityError/quantityError";
+import Spinner from "@/components/common/Spinner/spinner";
+import { addCartTag } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
-import { Box, Card, CardContent } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Box } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
-import React, { useContext, useEffect, useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import QuantityError from "@/components/QuantityError/quantityError";
-import Spinner from "@/components/common/Spinner/spinner";
-import { addToCartApi, updateCartQauntity } from "@/apis";
-import { addCartTag } from "@/constants/function";
+import { useContext, useEffect, useState } from "react";
 import ReactPixel from "react-facebook-pixel";
+import "./productDetails.css";
 
 const ProductDetails = ({
   product,
@@ -687,7 +687,7 @@ const ProductDetails = ({
               </h3>
               {product?.offer_applied == 1 ? (
                 <h3
-                  className="product-name"
+                  className="product-name-offer"
                   style={{ color: product?.offer_color }}
                 >
                   {language === "ltr"
@@ -729,7 +729,7 @@ const ProductDetails = ({
             <div className="product-outer-div">
               <div className="product-inner-div">
                 <div className="product-price-div">
-                  <p className="product-name">
+                  <p className="product-name-price">
                     {language === "ltr" ? "Price" : "السعر"}
                   </p>
                   <p className="product-price">
