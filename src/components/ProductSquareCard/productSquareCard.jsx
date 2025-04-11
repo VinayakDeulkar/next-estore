@@ -1,4 +1,4 @@
-import { addToCartApi } from "@/apis";
+import { addToCartApi, removeCartItem } from "@/apis";
 import { AppContext } from "@/context/AppContext";
 import { Box, Card, CardContent, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";

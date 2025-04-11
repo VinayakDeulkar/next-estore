@@ -10,7 +10,7 @@ const HeaderBox = ({}) => {
     setOpen(true);
   };
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box sx={{ position: "sticky" }}>
       <Drawer open={open} onClose={() => setOpen(false)} anchor="left">
         <Box
           sx={{

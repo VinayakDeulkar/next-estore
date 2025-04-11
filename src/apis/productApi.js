@@ -60,3 +60,28 @@ export const updateCartQauntity = async ({
   );
   return response.data;
 };
+
+export const removeCartItem = async ({
+  vendorSlug,
+  vendors_id,
+  area_id,
+  user_string,
+  item_id,
+}) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/remove-cart-items`,
+      JSON.stringify({
+        token: process.env.NEXT_PUBLIC_APP_TOKEN,
+        vendor_id: vendors_id,
+        vendor_slug: vendorSlug,
+        item_id: item_id,
+        area_id: area_id,
+        user_string: user_string,
+      })
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

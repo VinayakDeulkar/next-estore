@@ -6,30 +6,33 @@ import CarouselImage from "../HomePage/CarosouleImage/carosouleImage";
 import OrderType from "../HomePage/OrderType/orderType";
 import { AppContext } from "@/context/AppContext";
 import HomePageLayouts from "../HomePageLayouts";
+import { Box } from "@mui/material";
 
 const EstoreLayout1 = () => {
   const { homePageDetails } = useContext(AppContext);
 
   return (
-    <GridLayout1>
-      <div>
-        <div style={{ width: "100%" }}>
-          <HeaderBox />
-          <div style={{ padding: "25px 25px 0" }}>
-            <VerticalVendorInfo />
-          </div>
-          <div style={{ padding: "25px 20px 0" }}>
-            <OrderType />
-          </div>
-          <div style={{ padding: "13px 20px 0" }}>
-            <HomePageLayouts homePageDetails={homePageDetails} />
+    <Box>
+      <HeaderBox />
+      <GridLayout1>
+        <div>
+          <div style={{ width: "100%" }}>
+            <div style={{ padding: "25px 25px 0" }}>
+              <VerticalVendorInfo />
+            </div>
+            <div style={{ padding: "25px 20px 0" }}>
+              <OrderType />
+            </div>
+            <div style={{ padding: "13px 20px 0" }}>
+              <HomePageLayouts homePageDetails={homePageDetails} />
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <CarouselImage />
-      </div>
-    </GridLayout1>
+        <div>
+          <CarouselImage />
+        </div>
+      </GridLayout1>
+    </Box>
   );
 };
 

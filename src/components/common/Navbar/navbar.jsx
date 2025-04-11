@@ -1,4 +1,5 @@
 import CartIcon from "@/assets/icons/addressIcons/CartIcon";
+import GridLayout1 from "@/components/GridLayouts/gridLayout1";
 import GridLayout2 from "@/components/GridLayouts/gridLayout2";
 import { AppContext } from "@/context/AppContext";
 import MenuIcon from "@mui/icons-material/Menu";

@@ -5,6 +5,7 @@ import { AppContext } from "@/context/AppContext";
 import moment from "moment";
 import Link from "next/link";
 import ReactPixel from "react-facebook-pixel";
+import { removeCartItem } from "@/apis";
 
 const HorizontalCard = ({ product }) => {
   const {
