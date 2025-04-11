@@ -10,7 +10,6 @@ import { useContext } from "react";
 const Navbar = ({ handleDrawar }) => {
   const { homePageDetails, language, cart } = useContext(AppContext);
   const router = useRouter();
-  console.log(homePageDetails, "in Nav");
 
   const renderGridNav = () => {
     switch (homePageDetails?.estoreLayout) {
@@ -18,7 +17,15 @@ const Navbar = ({ handleDrawar }) => {
         return <>{navChidren()}</>;
 
       case "2":
-        return <GridLayout2>{navChidren()}</GridLayout2>;
+        return (
+          <>
+            {window.innerWidth > 600 ? (
+              <GridLayout2>{navChidren()}</GridLayout2>
+            ) : (
+              <div>{navChidren()}</div>
+            )}
+          </>
+        );
 
       default:
         break;
@@ -27,7 +34,15 @@ const Navbar = ({ handleDrawar }) => {
 
   const navChidren = () => {
     return (
-      <Grid container>
+      <Grid
+        container
+        sx={{
+          backgroundColor:
+            window.innerWidth > 600
+              ? homePageDetails?.vendor_data?.vendor_color
+              : "#f8f9fa",
+        }}
+      >
         <Grid
           item
           xs={4}
@@ -41,7 +56,7 @@ const Navbar = ({ handleDrawar }) => {
           }}
         >
           <IconButton color="#fff" onClick={handleDrawar}>
-            <MenuIcon sx={{ color: "#fff" }} />
+            <MenuIcon sx={{color: window.innerWidth > 600 ? "#fff" : "#000" }} />
           </IconButton>
         </Grid>
         <Grid

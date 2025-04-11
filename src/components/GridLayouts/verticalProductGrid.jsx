@@ -1,9 +1,16 @@
-import React from 'react'
+import { Grid } from "@mui/material";
+import React from "react";
 
-const VerticalProductGrid = () => {
+const VerticalProductGrid = ({ children }) => {
   return (
-    <div>VerticalProductGrid</div>
-  )
-}
+    <Grid container>
+      <Grid item xs={3}></Grid>
+      <Grid item xs={6}>
+        {children}
+      </Grid>
+      <Grid item xs={3}></Grid>
+    </Grid>
+  );
+};
 
-export default VerticalProductGrid
+export default VerticalProductGrid;

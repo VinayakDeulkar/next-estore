@@ -29,7 +29,7 @@ export const AppProvider = ({
 
   const [homePageDetails, setHomePageDetails] = useState();
   const handleHomePageDetailsChange = (value) =>
-    setHomePageDetails({ ...value, estoreLayout: "1" });
+    setHomePageDetails({ ...value, estoreLayout: "1", productLayout: "1" });
   useEffect(() => {
     if (vendorSlugResponse) {
       Cookies.set("ecom_url_slug", vendorSlugResponse?.data?.ecom_url_slug);
