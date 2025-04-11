@@ -1,9 +1,23 @@
-import React from 'react'
+import { Grid } from "@mui/material";
+import React from "react";
 
-const HorizontalProductGrid = () => {
+const HorizontalProductGrid = ({ children }) => {
+  const [child1, child2] = React.Children.toArray(children);
+
   return (
-    <div>HorizontalProductGrid</div>
-  )
-}
+    <Grid container style={{ height: "calc(100vh - 80px)", overflow: "hidden" }}>
+      <Grid item xs={6}>
+        {child1}
+      </Grid>
+      <Grid
+        item
+        xs={6}
+        sx={{ height: "calc(100vh - 120px)", overflow: "scroll" }}
+      >
+        {child2}
+      </Grid>
+    </Grid>
+  );
+};
 
-export default HorizontalProductGrid
+export default HorizontalProductGrid;

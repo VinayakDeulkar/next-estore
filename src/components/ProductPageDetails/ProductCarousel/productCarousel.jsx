@@ -1,9 +1,25 @@
+import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import { Carousel } from "react-responsive-carousel";
 
-const ProductCarousel = ({ product, addedVariaton, productLayout }) => {
+const ProductCarousel = ({ product, addedVariaton }) => {
+  const { homePageDetails } = useContext(AppContext);
+
+  const productImgStyle = () => {
+    switch (homePageDetails?.productLayout) {
+      case "1":
+        return { height: "100vh" };
+
+      case "2":
+        return { height: "500px" };
+
+      default:
+        break;
+    }
+  };
+
   return (
     <Carousel
       autoPlay={product?.product_images?.length}
@@ -26,7 +42,7 @@ const ProductCarousel = ({ product, addedVariaton, productLayout }) => {
       <Box className="product-owl-img">
         <img
           loading="lazy"
-          className={`${productLayout === 1 ? "verticalProductLayoutClass" : "horizontalProductLayoutClass"}`}
+          style={productImgStyle()}
           src={`${
             product?.productvariationPrice?.[addedVariaton.toString()]?.image
               ? product?.productvariationPrice?.[addedVariaton.toString()]
@@ -45,7 +61,7 @@ const ProductCarousel = ({ product, addedVariaton, productLayout }) => {
                 loading="lazy"
                 src={`${i}`}
                 alt={i}
-                className={`${productLayout === 1 ? "verticalProductLayoutClass" : "horizontalProductLayoutClass"}`}
+                style={productImgStyle()}
               />
             </Box>
           ))

@@ -6,16 +6,26 @@ import CarouselImage from "../HomePage/CarosouleImage/carosouleImage";
 import OrderType from "../HomePage/OrderType/orderType";
 import { AppContext } from "@/context/AppContext";
 import HomePageLayouts from "../HomePageLayouts";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 const EstoreLayout1 = () => {
   const { homePageDetails } = useContext(AppContext);
 
   return (
     <Box>
-      <HeaderBox />
+      {/* {window.innerWidth > 600 ? (
+        <Grid container>
+          <Grid item xs={0} sm={4}>
+            <HeaderBox />
+          </Grid>
+          <Grid item xs={0} sx={{display: "none"}}></Grid>
+        </Grid>
+      ) : (
+        <></>
+      )} */}
       <GridLayout1>
         <div>
+          <HeaderBox />
           <div style={{ width: "100%" }}>
             <div style={{ padding: "25px 25px 0" }}>
               <VerticalVendorInfo />

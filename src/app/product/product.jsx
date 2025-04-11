@@ -2,6 +2,8 @@
 import BackButton from "@/components/common/BackButton/BackButton";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
+import HorizontalProductGrid from "@/components/GridLayouts/horizontalProductGrid";
+import VerticalProductGrid from "@/components/GridLayouts/verticalProductGrid";
 import ProductCarousel from "@/components/ProductPageDetails/ProductCarousel/productCarousel";
 import ProductDetails from "@/components/ProductPageDetails/ProductDetails/ProductDetails";
 import { AppContext } from "@/context/AppContext";
@@ -14,12 +16,64 @@ const Product = (props) => {
   const { homePageDetails, areaDetails } = useContext(AppContext);
   const [product, setProduct] = useState({});
   const [addedVariaton, setAddedVariation] = useState([]);
-  const [productLayout, setProductLayout] = useState(1);
+
+  const renderProductLayout = () => {
+    switch (homePageDetails?.productLayout) {
+      case "1":
+        return (
+          <>
+            <HorizontalProductGrid>
+              <div>
+                <ProductCarousel
+                  product={props?.data}
+                  addedVariaton={addedVariaton}
+                />
+              </div>
+              <div>
+                <BackButton variant="dark" />
+                <ProductDetails
+                  product={props?.data}
+                  addon={props?.addons}
+                  productvariation={props?.productvariation}
+                  productvariationPrice={props?.productvariationPrice}
+                  addedVariaton={addedVariaton}
+                  setAddedVariation={setAddedVariation}
+                />
+              </div>
+            </HorizontalProductGrid>
+          </>
+        );
+
+      case "2":
+        return (
+          <>
+            <VerticalProductGrid>
+              <BackButton variant="dark" />
+              <ProductCarousel
+                product={props?.data}
+                addedVariaton={addedVariaton}
+              />
+              <ProductDetails
+                product={props?.data}
+                addon={props?.addons}
+                productvariation={props?.productvariation}
+                productvariationPrice={props?.productvariationPrice}
+                addedVariaton={addedVariaton}
+                setAddedVariation={setAddedVariation}
+              />
+            </VerticalProductGrid>
+          </>
+        );
+
+      default:
+        break;
+    }
+  };
 
   return (
     <Box>
       <HeaderBox />
-      {productLayout === 1 ? (
+      {/* {productLayout === 1 ? (
         <Grid container sx={{ marginTop: "50px" }}>
           <Grid item xs={3}></Grid>
           <Grid item xs={6}>
@@ -31,7 +85,7 @@ const Product = (props) => {
               />
             </Grid>
             <Grid item>
-              {/* <BackButton variant="dark" /> */}
+              <BackButton variant="dark" />
               <ProductDetails
                 product={props?.data}
                 addon={props?.addons}
@@ -54,7 +108,7 @@ const Product = (props) => {
             />
           </Grid>
           <Grid item xs={6}>
-            {/* <BackButton variant="dark" /> */}
+            <BackButton variant="dark" />
             <ProductDetails
               product={props?.data}
               loading={loading}
@@ -66,7 +120,9 @@ const Product = (props) => {
             />
           </Grid>
         </Grid>
-      )}
+      )} */}
+
+      {renderProductLayout()}
     </Box>
   );
 };
