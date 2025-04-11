@@ -5,7 +5,7 @@ import NewPromocode from "@/components/NewOrderDetailsPage/Components/NewPromoco
 import { AppContext } from "@/context/AppContext";
 import axios from "axios";
 import moment from "moment";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import snapchatPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
 import ReactPixel from "react-facebook-pixel";
@@ -29,6 +29,12 @@ const PaymentDetails = () => {
   const [companyData, setCompanyData] = useState();
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState({ show_popup: 0 });
+  const [width, setWidth] = useState(0);
+
+  const [successPromocode, setSuccessPromocode] = useState("");
+  const [promocode, setPromocode] = useState("");
+  const [apply, setApply] = useState("");
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
 
   const submitFunc = async (method) => {
     axios

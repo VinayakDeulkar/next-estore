@@ -160,7 +160,7 @@ html[dir="rtl"] .delivery-type-text {
 .delivery-address-form input:focus {
   border: none;
   box-shadow: none;
-  border: 1px solid #e1e1e1;
+  border: 1px solid #000;
 }
 
 .delivery-address-form input:focus ~ .label-name,
@@ -202,7 +202,9 @@ html[dir="rtl"] .delivery-address-form input:not(:focus):valid ~ .label-name {
   height: 43px;
   width: 100%;
 }
-
+.delivery-address-form-div1 .form-control:focus {
+  border: 1px solid #000;
+}
 .delivery-address-form-div1 .delivery-selected-address {
   border: 1px solid #e1e1e1;
   border-radius: 9px;
@@ -222,7 +224,7 @@ html[dir="rtl"] .delivery-address-form input:not(:focus):valid ~ .label-name {
 .delivery-address-form-div .form-control:focus {
   outline: none;
   box-shadow: none;
-  border: 1px solid #e1e1e1;
+  border: 1px solid #000;
 }
 
 html[dir="rtl"] .delivery-address-form-div1 .label-name {

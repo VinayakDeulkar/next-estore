@@ -21,7 +21,11 @@ import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 
-const UserDetails = ({ triggerDeliveryAddress, showAddressComponents }) => {
+const UserDetails = ({
+  triggerDeliveryAddress,
+  showAddressComponents,
+  setSelectAddress,
+}) => {
   const {
     language,
     vendorSlug,
@@ -50,7 +54,7 @@ const UserDetails = ({ triggerDeliveryAddress, showAddressComponents }) => {
       setShowGuestUser(false);
       triggerDeliveryAddress();
       if (userDetails?.address?.length) {
-        // setSelectAddress(true);
+        setSelectAddress(true);
       }
     }
   }, [userDetails?.name]);

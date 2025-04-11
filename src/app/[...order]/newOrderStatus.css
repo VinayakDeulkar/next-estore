@@ -188,7 +188,7 @@ html[dir="rtl"] .order-status-price-div .order-status-product-discount {
   background-color: #eaf9fa;
   font-size: 16px;
   border-radius: 8px;
-  font-weight: 700;
+  font-weight: 500;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
@@ -372,7 +372,6 @@ html[dir="rtl"] .pickupRangeTime {
   .pickupRangeTime {
     max-width: 300px;
   }
-
 }
 
 .common-delivery-status-image {
@@ -554,7 +553,9 @@ html[dir="rtl"] .contact-store-phonenumber {
   border-top: none;
 }
 
-.orderStatusPaymentDIv .payment-details-headDIv .delivery-payment-details-heading {
+.orderStatusPaymentDIv
+  .payment-details-headDIv
+  .delivery-payment-details-heading {
   font-size: 20px;
   height: 25px;
   font-weight: 500;
@@ -572,7 +573,7 @@ html[dir="rtl"] .contact-store-phonenumber {
   font-size: 20px;
   outline: none;
   border: 1px solid var(--vendor-color);
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 87px;
   cursor: pointer;
 }

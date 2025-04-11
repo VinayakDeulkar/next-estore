@@ -25,6 +25,7 @@ import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 import ReactFlagsSelect from "react-flags-select";
 import "./addressSection.css";
+import Title from "@/components/common/Title/Title";
 
 const UserInfo = ({ type }) => {
   const {
@@ -547,10 +548,9 @@ const UserInfo = ({ type }) => {
             />
 
             <div style={{ marginTop: "40px" }}>
-              <CommonHeader
-                englishHeader={"Saved Delivery Addresses"}
-                arabicHeader={"عناوين التسليم المحفوظة"}
-                fontWeight={500}
+              <Title
+                enText={"Saved Delivery Addresses"}
+                arText={"عناوين التسليم المحفوظة"}
               />
             </div>
 

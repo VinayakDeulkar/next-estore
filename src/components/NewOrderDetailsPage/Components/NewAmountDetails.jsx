@@ -1,3 +1,5 @@
+import SubTitle from "@/components/common/SubTitle/subTitle";
+import Title from "@/components/common/Title/Title";
 import { AppContext } from "@/context/AppContext";
 import React, { useContext } from "react";
 
@@ -9,9 +11,8 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
     <div className="acmount-mainDIv">
       <div className="pt-2" style={{ marginBottom: "40px" }}>
         <div className="amount-sub-div">
-          <div className="amount-sub-label">
-            {language == "ltr" ? "Sub Total" : "الإجمالي"}
-          </div>
+          <SubTitle enText={"Sub Total"} arText={"الإجمالي"} />
+
           <div className="amount-sub-amount">
             <span>
               {cart?.subTotal ? parseFloat(cart?.subTotal).toFixed(3) : 0}
@@ -37,9 +38,7 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
         {areaDetails?.type == "delivery" &&
         homePageDetails?.vendor_data?.vendors_id != "1250" ? (
           <div className="amount-sub-div">
-            <div className="amount-sub-label">
-              {language == "ltr" ? "Delivery Charges" : "رسوم التوصيل"}
-            </div>
+            <SubTitle enText={"Delivery Charges"} arText={"رسوم التوصيل"} />
             <div className="amount-sub-amount">
               <span>
                 {cart?.deliveryCharge
@@ -82,10 +81,7 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
           </div>
         ) : null}
         <div className="amount-sub-div">
-          <div className="amount-sub-label-total">
-            {language == "ltr" ? "Total" : "المجموع"}
-          </div>
-
+          <Title enText={"Total"} arText={"المجموع"} />
           <div className="amount-sub-amount-total">
             <span>
               {
@@ -110,7 +106,8 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
       </div>
       <button
         className={`pay-now-button ${
-          homePageDetails?.vendor_data?.home_page_type === "18" && "fashion-theme-pay-button"
+          homePageDetails?.vendor_data?.home_page_type === "18" &&
+          "fashion-theme-pay-button"
         }`}
         onClick={(e) => {
           e.preventDefault();
@@ -142,18 +139,22 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
             : "شراء"
           : language == "ltr"
           ? `Minimum Order is ${
-            homePageDetails?.vendor_data?.minimum_charge != ""
+              homePageDetails?.vendor_data?.minimum_charge != ""
                 ? homePageDetails?.vendor_data?.minimum_charge
-                  ? parseFloat(homePageDetails?.vendor_data?.minimum_charge).toFixed(3)
+                  ? parseFloat(
+                      homePageDetails?.vendor_data?.minimum_charge
+                    ).toFixed(3)
                   : 0
                 : areaDetails?.minimum
                 ? parseFloat(areaDetails?.minimum).toFixed(3)
                 : 0
             } KD`
           : `الحد الأدنى للطلب هو ${
-            homePageDetails?.vendor_data?.minimum_charge != ""
+              homePageDetails?.vendor_data?.minimum_charge != ""
                 ? homePageDetails?.vendor_data?.minimum_charge
-                  ? parseFloat(homePageDetails?.vendor_data?.minimum_charge).toFixed(3)
+                  ? parseFloat(
+                      homePageDetails?.vendor_data?.minimum_charge
+                    ).toFixed(3)
                   : 0
                 : areaDetails?.minimum
                 ? parseFloat(areaDetails?.minimum).toFixed(3)

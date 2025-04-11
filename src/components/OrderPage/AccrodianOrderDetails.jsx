@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
 import ProductCard from "./ProductCard";
+import SubTitle from "../common/SubTitle/subTitle";
+import Title from "../common/Title/Title";
 
 export const AccrodianOrderDetails = ({ orderDetails }) => {
   const { language, homePageDetails } = useContext(AppContext);
@@ -15,9 +17,7 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
           />
         ))}
       <div className="details-common-mainDIv" style={{ padding: "0 10px" }}>
-        <div className="details-common-seconddiv">
-          {language === "ltr" ? "Sub Total" : "الإجمالي"}
-        </div>
+        <SubTitle enText={"Sub Total"} arText={"الإجمالي"} />
         <div className="details-common-seconddiv">
           <span>
             {orderDetails?.subTotal
@@ -30,9 +30,7 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
       {orderDetails?.delivery_charge &&
       orderDetails?.customer_details?.self_pickup !== "1" ? (
         <div className="details-common-mainDIv" style={{ padding: "0 10px" }}>
-          <div className="details-common-seconddiv">
-            {language === "ltr" ? "Delivery Charges" : "رسوم التوصيل"}
-          </div>
+          <SubTitle enText={"Delivery Charges"} arText={"رسوم التوصيل"} />
           <div className="details-common-seconddiv">
             <span>
               {orderDetails?.delivery_charge
@@ -67,7 +65,7 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
           "fashion-theme-border"
         }`}
       >
-        <div>{language === "ltr" ? "Total Payment" : "المبلغ الإجمالي"}</div>
+        <Title enText={"Total Payment"} arText={"المبلغ الإجمالي"} />
         <div>
           <span>{parseFloat(orderDetails?.total_amount ?? 0).toFixed(3)}</span>{" "}
           {language === "rtl" ? "د.ك" : "KD"}

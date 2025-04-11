@@ -295,7 +295,7 @@ const ContactInfo = ({
           <div
             style={{
               fontSize: language === "ltr" ? "13px" : "14px",
-              fontWeight: 500,
+              fontWeight: 400,
             }}
           >
             {showNameEmailFields

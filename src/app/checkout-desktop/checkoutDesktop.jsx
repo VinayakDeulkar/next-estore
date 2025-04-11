@@ -19,7 +19,6 @@ const CheckoutDesktop = () => {
         sx={{
           height: "calc(100vh - 80px)",
           padding: "20px",
-
           width: "100%",
         }}
       >
@@ -31,6 +30,7 @@ const CheckoutDesktop = () => {
           xs={0}
           sm={4}
           sx={{ height: "calc(100vh - 120px)", overflow: "scroll" }}
+          className="checkoutScroll"
         >
           <MainTitle enText={"Checkout"} arText={"تفاصيل الطلب"} />
           <DeskCheckoutComponents />

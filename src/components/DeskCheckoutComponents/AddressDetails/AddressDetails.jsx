@@ -2,9 +2,13 @@ import AddressSection from "@/components/AddressSection/addressSection";
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-const AddressDetails = ({ triggerPaymentMethod, showPaymentMethod }) => {
+const AddressDetails = ({
+  triggerPaymentMethod,
+  showPaymentMethod,
+  selectAddress,
+}) => {
   const {
     language,
     areaDetails,
@@ -18,8 +22,8 @@ const AddressDetails = ({ triggerPaymentMethod, showPaymentMethod }) => {
     handleOpenAreaChange,
     handleAddressDetailsChange,
   } = useContext(AppContext);
-  const [selectAddress, setSelectAddress] = useState(false);
   const [markerPosition, setMarkerPosition] = useState(null);
+  const [showAddressForm, setShowAddressForm] = useState(true);
   const [showMap, setShowMap] = useState(false);
 
   const [errorState, setErrorState] = useState({
@@ -39,6 +43,14 @@ const AddressDetails = ({ triggerPaymentMethod, showPaymentMethod }) => {
     areaNameErrorMessage: "",
     areaNameErrorMessagear: "",
   });
+
+  useEffect(() => {
+    if (selectAddress) {
+      setShowAddressForm(false);
+      triggerPaymentMethod();
+    }
+  }, [selectAddress]);
+
   const blockValidation = (value) => {
     if (value == "") {
       setErrorState((errorState) => ({
@@ -305,6 +317,7 @@ const AddressDetails = ({ triggerPaymentMethod, showPaymentMethod }) => {
       handleInternationalDelivery();
     }
   };
+
   return (
     <Box>
       {selectAddress ? (
@@ -321,15 +334,11 @@ const AddressDetails = ({ triggerPaymentMethod, showPaymentMethod }) => {
           setShowMap={() => setShowMap(true)}
         />
       )}
-      {!showPaymentMethod ? (
+      {showAddressForm ? (
         <Box
           className="contact-details-next-button"
           onClick={() => {
-            if (!selectAddress) {
-              handleAddressClick();
-            } else {
-              handleDeliveryAddressNext();
-            }
+            handleDeliveryAddressNext();
           }}
         >
           {language === "ltr" ? "Next" : "متابعة"}

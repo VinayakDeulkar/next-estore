@@ -8,6 +8,8 @@ import PaymentDetails from "./PaymentDetails/PaymentDetails";
 const DeskCheckoutComponents = () => {
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [showAddressComponents, setShowAddressComponents] = useState(false);
+  const [selectAddress, setSelectAddress] = useState(false);
+
   const triggerDeliveryAddress = () => {
     setShowAddressComponents(true);
   };
@@ -17,7 +19,6 @@ const DeskCheckoutComponents = () => {
   return (
     <Box
       sx={{
-        overflow: "scroll",
         display: "flex",
         flexDirection: "column",
         gap: "15px",
@@ -26,11 +27,13 @@ const DeskCheckoutComponents = () => {
       <UserDetails
         triggerDeliveryAddress={triggerDeliveryAddress}
         showAddressComponents={showAddressComponents}
+        setSelectAddress={setSelectAddress}
       />
       {showAddressComponents ? (
         <AddressDetails
           showPaymentMethod={showPaymentMethod}
           triggerPaymentMethod={triggerPaymentMethod}
+          selectAddress={selectAddress}
         />
       ) : null}
       {showPaymentMethod ? <PaymentDetails /> : null}

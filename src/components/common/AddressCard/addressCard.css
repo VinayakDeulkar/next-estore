@@ -11,6 +11,7 @@
   /* max-width: 350px; */
   margin-top: 10px;
   cursor: pointer;
+  min-height: 105px;
 }
 
 .firstCardDiv {
@@ -70,7 +71,7 @@ html[dir="rtl"] .btn {
 
 .headingText {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 html[dir="rtl"] .headingText {
@@ -90,7 +91,7 @@ html[dir="rtl"] .descText {
 
 .areaText {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   margin: 1px 0 3px 0;
 }
 
@@ -100,7 +101,7 @@ html[dir="rtl"] .areaText {
 
 .secondText {
   color: #838383;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 14px;
 }
 

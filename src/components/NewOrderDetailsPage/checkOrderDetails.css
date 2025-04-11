@@ -71,7 +71,7 @@ html[dir="rtl"] .cart-cart-product-notes {
   color: #000;
   font-size: 14px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: normal;
   display: flex;
   align-items: end;
@@ -121,7 +121,7 @@ html[dir="rtl"] .cart-card-quantity-button {
 }
 
 .cart-card-price-div {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -231,7 +231,7 @@ html[dir="rtl"] .delivery-company-delivery-text {
 
 .payment-details-mainDiv {
   position: relative;
-  padding: 28px 0;
+  padding: 10px 0;
   display: flex;
   justify-content: space-around;
   gap: 10px;
@@ -347,7 +347,7 @@ html[dir="rtl"] .promocode-text.collapsed .right-arrow {
 .promocode-input-div .apply-button {
   padding: 10px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 300;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -406,14 +406,14 @@ html[dir="rtl"] .amount-sub-label-total {
 
 .amount-sub-amount {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 300;
   display: flex;
   gap: 10px;
 }
 
 .amount-sub-amount-total {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
   display: flex;
   gap: 10px;
 }
@@ -438,7 +438,7 @@ html[dir="rtl"] .amount-sub-amount {
   font-size: 20px;
   outline: none;
   border: 1px solid var(--vendor-color);
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 87px;
   cursor: pointer;
 }
@@ -616,7 +616,7 @@ html[dir="rtl"] .delivery-address-details-secondDiv .right-arrow {
 
 .promocode-mainDiv {
   border-top: 0.25px solid #ccc;
-  padding-top: 28px;
+  padding-top: 20px;
 }
 
 .payment-details-headDIv,

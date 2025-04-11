@@ -13,6 +13,7 @@ import AddressCard from "../common/AddressCard/AddressCard";
 import { getAddressType } from "@/constants/function";
 import ThreeDots from "@/SVGs/ThreeDots";
 import CommonHeader from "../common/CommonHeader/CommonHeader";
+import Title from "../common/Title/Title";
 
 const AddressSection = () => {
   const {
@@ -217,10 +218,9 @@ const AddressSection = () => {
   };
 
   useEffect(() => {
-    console.log(areaDetails, "areaDetails")
-    console.log(addressDetails, "addressDetails")
-  }, [addressDetails, areaDetails])
-  
+    console.log(areaDetails, "areaDetails");
+    console.log(addressDetails, "addressDetails");
+  }, [addressDetails, areaDetails]);
 
   useEffect(() => {
     getAddressData();
@@ -612,11 +612,7 @@ const AddressSection = () => {
 
   return (
     <div>
-      <CommonHeader
-        englishHeader={"Delivery Address"}
-        arabicHeader={"عنوان التسليم"}
-        fontWeight={500}
-      />
+      <Title enText={"Delivery Address"} arText={"عنوان التسليم"} />
       {addressData?.map((address, i) => (
         <div key={i}>
           <div>

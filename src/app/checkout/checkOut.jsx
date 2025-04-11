@@ -21,6 +21,7 @@ import GridLayout from "@/components/common/GridLayout/gridLayout";
 import { checkoutTag } from "@/constants/checkouttag";
 import { tele } from "@/constants/constants";
 import ReactPixel from "react-facebook-pixel";
+import MainTitle from "@/components/common/MainTitle/mainTitle";
 
 const CheckOut = () => {
   const {
@@ -51,9 +52,9 @@ const CheckOut = () => {
   const [deliveryCharge, setDeliveryCharge] = useState(0);
   const [showAddress, setShowAddress] = useState(false);
   const [successPromocode, setSuccessPromocode] = useState("");
+  const [promocode, setPromocode] = useState("");
   const [companyData, setCompanyData] = useState();
   const [width, setWidth] = useState(0);
-  const [promocode, setPromocode] = useState("");
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey:
@@ -502,11 +503,8 @@ const CheckOut = () => {
               }
             }}
           ></div>
-          <CommonHeader
-            englishHeader="Checkout"
-            arabicHeader="تفاصيل الطلب"
-            fontWeight={600}
-          />
+          <MainTitle enText={"Checkout"} arText={"تفاصيل الطلب"} />
+
           <div
             className="checkout-page-text"
             style={{ marginTop: "5px", marginBottom: "10px" }}

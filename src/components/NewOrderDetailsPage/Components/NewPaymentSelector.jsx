@@ -2,8 +2,15 @@ import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import "../checkOrderDetails.css";
+import Title from "@/components/common/Title/Title";
+import SubTitle from "@/components/common/SubTitle/subTitle";
 
-const NewPaymentSelector = ({ payment, handleSetPaymentChange, setWidth, width }) => {
+const NewPaymentSelector = ({
+  payment,
+  handleSetPaymentChange,
+  setWidth,
+  width,
+}) => {
   const { homePageDetails, language, internationalDelivery } =
     useContext(AppContext);
 
@@ -72,13 +79,8 @@ const NewPaymentSelector = ({ payment, handleSetPaymentChange, setWidth, width }
           alignItems: "center",
         }}
       >
-        <div
-          className="checkoutPageText"
-          style={{ marginTop: "25px", marginBottom: "5px" }}
-        >
-          {language === "ltr" ? "Payment Method" : "طريقة الدفع"}
-        </div>
-        <div style={{ marginTop: "10px" }}>
+        <Title enText={"Payment Method"} arText={"طريقة الدفع"} />
+        <div>
           <img
             src="images/PaymentProviderImage.png"
             style={{ height: "23px" }}
@@ -115,9 +117,7 @@ const NewPaymentSelector = ({ payment, handleSetPaymentChange, setWidth, width }
                 className="img-fluid"
               ></img>
             </span>
-            <div className="payButtonText">
-              {language === "ltr" ? "Apple Pay" : "أبل الدفع"}
-            </div>
+            <Title enText={"Apple Pay"} arText={"أبل الدفع"} />
           </Box>
         ) : null}
         <Box
@@ -140,9 +140,7 @@ const NewPaymentSelector = ({ payment, handleSetPaymentChange, setWidth, width }
               className="img-fluid"
             ></img>
           </span>
-          <div className="payButtonText">
-            {language === "ltr" ? "K-NET" : "كي نت"}
-          </div>
+          <Title enText={"K-NET"} arText={"كي نت"} />
         </Box>
         {homePageDetails?.vendor_data?.is_credit_card != 0 ? (
           <Box
@@ -177,9 +175,7 @@ const NewPaymentSelector = ({ payment, handleSetPaymentChange, setWidth, width }
                 className="img-fluid"
               ></img>
             </span>
-            <div className="payButtonText">
-              {language === "ltr" ? "Credit" : "ائتمان"}
-            </div>
+            <Title enText={"Credit"} arText={"ائتمان"} />
           </Box>
         ) : null}
         {homePageDetails?.vendor_data?.is_cod == 1 &&
@@ -206,9 +202,7 @@ const NewPaymentSelector = ({ payment, handleSetPaymentChange, setWidth, width }
                 className="img-fluid"
               ></img>
             </span>
-            <div className="payButtonText">
-              {language === "ltr" ? "Cash" : "نقدي"}
-            </div>
+            <Title enText={"Cash"} arText={"نقدي"} />
           </Box>
         ) : null}
       </div>

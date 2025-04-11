@@ -10,7 +10,7 @@ const CarouselImage = () => {
   const carouselHeight = () => {
     switch (homePageDetails?.estoreLayout) {
       case "1":
-        return window.innerWidth > 991 ? "100vh" : "40vh";
+        return window.innerWidth > 600 ? "100vh" : "40vh";
 
       case "2":
         return "700px";

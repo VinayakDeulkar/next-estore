@@ -56,7 +56,9 @@ const Navbar = ({ handleDrawar }) => {
           }}
         >
           <IconButton color="#fff" onClick={handleDrawar}>
-            <MenuIcon sx={{color: window.innerWidth > 600 ? "#fff" : "#000" }} />
+            <MenuIcon
+              sx={{ color: window.innerWidth > 600 ? "#fff" : "#000" }}
+            />
           </IconButton>
         </Grid>
         <Grid
@@ -105,7 +107,7 @@ const Navbar = ({ handleDrawar }) => {
               color="success"
               badgeContent={cart?.cartCount}
               onClick={() => {
-                if (window.innerWidth < 991) {
+                if (window.innerWidth < 600) {
                   router.push("/review");
                 } else {
                   router.push("/checkout-desktop");

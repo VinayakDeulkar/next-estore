@@ -12,6 +12,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ModalClosed from "@/components/common/ModalClosed/ModalClosed";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
 import ReactPixel from "react-facebook-pixel";
+import SubTitle from "@/components/common/SubTitle/subTitle";
 
 const Review = () => {
   const {
@@ -220,9 +221,8 @@ const Review = () => {
               successPromocode={successPromocode}
             />
             <div className="newreview-details-div">
-              <p className="newreview-text">
-                {language === "ltr" ? "Sub Total" : "الإجمالي"}
-              </p>
+              <SubTitle enText={"Sub Total"} arText={"الإجمالي"} />
+
               <p className="newreview-text">
                 <span>{parseFloat(cart?.subTotal).toFixed(3)}</span>{" "}
                 {language === "rtl" ? "د.ك" : "KD"}
