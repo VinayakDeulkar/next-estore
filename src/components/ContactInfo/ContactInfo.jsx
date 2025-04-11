@@ -6,6 +6,7 @@ import { telecount } from "@/constants/constants";
 import Title from "../common/Title/Title";
 import { useRouter } from "next/navigation";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import SubTitle from "../common/SubTitle/subTitle";
 const ContactInfo = ({
   errorContactDetails,
   showNameEmailFields,
@@ -64,26 +65,16 @@ const ContactInfo = ({
   };
 
   return (
-    <div>
-      <Title
-        englishTitle={
-          showNameEmailFields
-            ? "Complete your profile details"
-            : homePageDetails?.vendor_data?.checkout_method === "1"
-            ? "Enter your email to login"
-            : "Enter your phone number to login"
-        }
-        arabicTitle={
-          showNameEmailFields
-            ? "أكمل تفاصيل ملفك الشخصي"
-            : homePageDetails?.vendor_data?.checkout_method === "1"
-            ? "أدخل بريدك الإلكتروني لتسجيل الدخول"
-            : "أدخل رقم هاتفك لتسجيل الدخول"
-        }
-      />
-
-      <div style={{ marginTop: "30px" }}>
-        <div style={{ position: "relative" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+      <div>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+          }}
+        >
           {homePageDetails?.vendor_data?.checkout_method === "2" ||
           showNameEmailFields ? (
             <>
@@ -161,7 +152,7 @@ const ContactInfo = ({
                       style={{
                         position: "absolute",
                         right: "10px",
-                        top: "25px",
+                        top: "10px",
                         display: "flex",
                         alignItems: "center",
                         color: "#fff",
@@ -172,7 +163,9 @@ const ContactInfo = ({
                         gap: "5px",
                       }}
                     >
-                      <span>✔</span>
+                      <CheckCircleIcon
+                        sx={{ fill: "#4CAF50", fontSize: "20px" }}
+                      />
                     </div>
                   ) : null}
                   <label
@@ -258,7 +251,7 @@ const ContactInfo = ({
                       style={{
                         position: "absolute",
                         right: "10px",
-                        top: "25px",
+                        top: "10px",
                         display: "flex",
                         alignItems: "center",
                         padding: "5px 7px",

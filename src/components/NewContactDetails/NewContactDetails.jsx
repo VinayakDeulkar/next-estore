@@ -52,8 +52,11 @@ const NewContactDetails = ({ errorContactDetails }) => {
   };
   return (
     <div style={{ position: "relative" }}>
-      <div className="contact-details-form-maindiv">
-        <>
+      <div
+        className="contact-details-form-maindiv"
+        style={{ display: "flex", flexDirection: "column", gap: "25px" }}
+      >
+        <div>
           <div className="customerInputsFlex">
             <div className="form__group formSemi">
               <div className="inputFlag">
@@ -115,8 +118,8 @@ const NewContactDetails = ({ errorContactDetails }) => {
                 : errorContactDetails.phoneErrorMessagear}
             </label>
           )}
-        </>
-        <>
+        </div>
+        <div>
           <div className="customerInputsFlex">
             <div className="form__group formSemi">
               <input
@@ -147,7 +150,7 @@ const NewContactDetails = ({ errorContactDetails }) => {
                 : errorContactDetails.nameErrorMessagear}
             </label>
           )}
-        </>
+        </div>
         <div className="customerInputsFlex">
           <div className="form__group formSemi">
             <input

@@ -1,7 +1,7 @@
 "use client";
-import CommonHeader from "@/components/common/CommonHeader/CommonHeader";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
+import MainTitle from "@/components/common/MainTitle/mainTitle";
 import NewContactDetails from "@/components/NewContactDetails/NewContactDetails";
 import PickupContainer from "@/components/PickupContainer/PickupContainer";
 import {
@@ -10,9 +10,9 @@ import {
   phoneValidation,
 } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
-import { Box, colors } from "@mui/material";
+import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 const ContactDetails = () => {
   const router = useRouter();
@@ -114,11 +114,7 @@ const ContactDetails = () => {
         sx={{ height: "calc(100vh - 50px)", color: "#000" }}
       >
         <Box>
-          <CommonHeader
-            englishHeader={"Contact Details"}
-            arabicHeader={"ارقام التواصل"}
-            fontWeight={400}
-          />
+          <MainTitle enText={"Contact Details"} arText={"ارقام التواصل"} />
           {stepper === 0 ? (
             <NewContactDetails
               errorContactDetails={errorContactDetails}

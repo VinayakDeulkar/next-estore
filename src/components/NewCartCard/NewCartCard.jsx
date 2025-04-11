@@ -13,6 +13,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { IconButton } from "@mui/material";
 import Spinner from "../common/Spinner/spinner";
+import Title from "../common/Title/Title";
 
 const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   const {
@@ -166,9 +167,9 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
     setSpinLoader(true);
     axios
       .post(
-        `${API_URL}/remove-cart-items`,
+        `${process.env.NEXT_PUBLIC_API_URL}/remove-cart-items`,
         JSON.stringify({
-          token: process.env.REACT_APP_TOKEN,
+          token: process.env.NEXT_PUBLIC_APP_TOKEN,
           vendor_id: homePageDetails?.vendor_data?.vendors_id,
           item_id: product?.item_id,
           area_id: areaDetails?.area_id,
@@ -239,9 +240,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
           }}
         >
           <div style={{ width: "100%" }}>
-            <div className="cart-cart-product-name">
-              {language === "ltr" ? product.english_name : product.arabic_name}
-            </div>
+            <Title enText={product.english_name} arText={product.arabic_name} />
             <div>
               {product?.addOns?.map((i) => (
                 <div className="cart-cart-product-notes" key={i?.item}>

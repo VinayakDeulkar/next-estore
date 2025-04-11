@@ -10,6 +10,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "./deliverymap.css";
 import "@/components/ContactInfo/contactInfo.css";
 import AreaModal from "../AreaModal/areaModal";
+import Title from "../common/Title/Title";
 
 const NewAddressForm = ({
   areaDetails,
@@ -53,10 +54,9 @@ const NewAddressForm = ({
 
   return (
     <div>
-      <CommonHeader
-        englishHeader={"Add your delivery details"}
-        arabicHeader={"أضف تفاصيل التسليم الخاصة بك"}
-        fontWeight={400}
+      <Title
+        enText={"Add your delivery details"}
+        arText={"أضف تفاصيل التسليم الخاصة بك"}
       />
       <div className="delivery-address-address-select">
         <div className="delivery-address-type-select nav nav-tabs">

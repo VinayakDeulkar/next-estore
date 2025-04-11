@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
 import "./title.css";
+import { Box } from "@mui/material";
 
 const Title = ({ enText, arText }) => {
   const { language } = useContext(AppContext);
