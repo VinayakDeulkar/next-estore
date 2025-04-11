@@ -1,15 +1,15 @@
-import React, { useContext } from 'react'
-import { AppContext } from '@/context/AppContext'
-import './title.css'
+import React, { useContext } from "react";
+import { AppContext } from "@/context/AppContext";
+import "./title.css";
 
-const Title = ({ englishTitle, arabicTitle }) => {
-    const { language } = useContext(AppContext)
+const Title = ({ enText, arText }) => {
+  const { language } = useContext(AppContext);
 
-    return (
-        <div className='titleDiv'>
-            {language === "ltr" ? englishTitle : arabicTitle}
-        </div>
-    )
-}
+  return (
+    <Box sx={{ fontSize: "16px", fontWeight: "400" }}>
+      {language === "ltr" ? enText : arText}
+    </Box>
+  );
+};
 
-export default Title
+export default Title;
