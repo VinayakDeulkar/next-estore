@@ -1,0 +1,56 @@
+.text-field-input {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border: 1px solid #aeaeae;
+  outline: 0;
+  font-size: 14px;
+  color: #000;
+  padding: 4px 10px;
+  font-weight: 400;
+  background: transparent;
+  transition: border-color 0.2s;
+  border-radius: 10px;
+  height: 44px;
+}
+
+.text-field-input input:focus {
+  border: 1.5px solid #000;
+}
+
+.text-field-label {
+  font-size: 14px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  padding: 0 7px;
+  position: absolute;
+  top: 32px;
+  user-select: none;
+  transition: 0.2s ease all;
+}
+.text-field-input input:focus ~ .text-field-label,
+.text-field-input input:not(:focus):valid ~ .text-field-label {
+  top: -20px;
+  bottom: 0;
+  left: 0;
+}
+
+.text-field-input:required,
+.text-field-input:invalid {
+  box-shadow: none;
+}
+
+.text-field-input:focus ~ .text-field-label,
+.text-field-input:autofill ~ .text-field-label,
+.text-field-input:-webkit-autofill ~ .text-field-label {
+  position: absolute;
+  top: 0px;
+  display: block;
+  transition: 0.2s;
+  font-size: 11px;
+  color: #000;
+  font-weight: 400;
+  left: 0;
+}

@@ -37,7 +37,9 @@ const Navbar = ({ handleDrawar }) => {
       <Grid
         container
         sx={{
-          backgroundColor: homePageDetails?.vendor_data?.vendor_color,
+          background:
+            "linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.19))",
+          position: "sticky",
         }}
       >
         <Grid
@@ -56,7 +58,7 @@ const Navbar = ({ handleDrawar }) => {
             <MenuIcon sx={{ color: "#fff" }} />
           </IconButton>
         </Grid>
-        <Grid
+        {/* <Grid
           item
           xs={4}
           sm={4}
@@ -112,7 +114,7 @@ const Navbar = ({ handleDrawar }) => {
               <CartIcon />
             </Badge>
           )}
-        </Grid>
+        </Grid> */}
       </Grid>
     );
   };

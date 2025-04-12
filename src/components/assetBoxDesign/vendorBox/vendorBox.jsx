@@ -1,0 +1,68 @@
+import { AppContext } from "@/context/AppContext";
+import { Box } from "@mui/material";
+import Image from "next/image";
+import { useContext } from "react";
+import HeadLine from "../Headline/headLine";
+import SubHeadline from "../SubHeadline/subHeadline";
+
+const VendorBox = () => {
+  const { homePageDetails, language } = useContext(AppContext);
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+        padding: "20px",
+      }}
+    >
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Image
+          loading="lazy"
+          width={110}
+          height={110}
+          style={{
+            borderRadius: "13.75px",
+            border: "1.5px solid #9191913D",
+          }}
+          src={
+            language == "ltr"
+              ? homePageDetails?.vendor_data?.english_new_background
+              : homePageDetails?.vendor_data?.arabic_new_background
+          }
+          alt={
+            language == "ltr"
+              ? homePageDetails?.vendor_data?.name
+              : homePageDetails?.vendor_data?.name_ar
+          }
+        />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+      >
+        <Box sx={{ fontSize: "32px", fontWeight: "500" }}>
+          {language === "ltr"
+            ? homePageDetails?.vendor_data?.name
+            : homePageDetails?.vendor_data?.name_ar}
+        </Box>
+
+        {homePageDetails?.vendor_data?.slogan ? (
+          <Box sx={{ color: "#8D8D8D" }}>
+            <SubHeadline
+              enText={homePageDetails?.vendor_data?.slogan}
+              arText={homePageDetails?.vendor_data?.slogan_ar}
+            />
+          </Box>
+        ) : null}
+      </Box>
+    </Box>
+  );
+};
+
+export default VendorBox;

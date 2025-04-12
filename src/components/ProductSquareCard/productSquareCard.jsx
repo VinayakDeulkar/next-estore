@@ -11,6 +11,10 @@ import AddToCartIcon from "@/SVGs/AddToCartIcon";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSquare";
+import SubTitle from "../common/SubTitle/subTitle";
+import NormalText from "../assetBoxDesign/NormalText/normalText";
+import SmallButtonRounded from "../assetBoxDesign/SmallButtonRounded/smallButtonRounded";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =
@@ -363,8 +367,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           gap: "7px",
         }}
       >
-        <TypographyConverter
-          sx={{ fontSize: "16px", fontWeight: 400 }}
+        <SubTitle
           enText={product?.product_name}
           arText={product?.product_name_ar}
         />
@@ -373,22 +376,6 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           className="product-price"
           style={{ alignItems: "center", fontWeight: "400" }}
         >
-          <span
-            style={{
-              fontSize: language == "ltr" ? "14px" : "17px",
-              paddingTop: inCart == 0 ? 2 : 0,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <span style={{ fontSize: language == "ltr" ? "14px" : "17px" }}>
-              {product?.product_price
-                ? parseFloat(product?.product_price).toFixed(3)
-                : 0}
-              &nbsp;
-            </span>
-            {language === "rtl" ? "د.ك" : "KD"}
-          </span>
           {product?.quantity != 0 && product?.discount_applied == 1 && (
             <del
               style={{
@@ -408,21 +395,8 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           )}
         </div>
         {product?.short_description != "" ? (
-          <div>
-            <TypographyConverter
-              sx={{
-                fontSize: "14px",
-                fontWeight: 300,
-                color: "#888888",
-                overflowWrap: "break-word",
-                wordBreak: "break-word",
-                whiteSpace: "pre-wrap",
-                overflow: "hidden",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-                margin: "0 auto",
-              }}
+          <div style={{ color: "#888888" }}>
+            <NormalText
               enText={product?.short_description
                 ?.replace(/(<([^>]+)>)/gi, "")
                 .replace(/\&nbsp;/gi, "")
@@ -579,56 +553,25 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                     </div>
                   </Box>
                 ) : (
-                  <span
-                    onClick={(e) => {
+                  <SmallButtonSquare
+                    handleClick={(e) => {
                       e.stopPropagation();
                       if (inCart == 0) {
                         onAddToCartClick(e, 1);
                       }
                     }}
-                    style={{
-                      backgroundColor:
-                        homePageDetails?.vendor_data?.vendor_color,
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "20px",
-                    }}
-                  >
-                    {spinLoader ? (
-                      <div
-                        style={{
-                          padding: "7px 15px",
-                          minWidth: "112px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Spinner height="14px" size="2px" />
-                      </div>
-                    ) : (
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "7px",
-                          padding: "7px 15px",
-                        }}
-                      >
-                        <AddToCartIcon />
-                        <div
-                          style={{
-                            color: "#fff",
-                            fontSize: language === "ltr" ? "12px" : "15px",
-                          }}
-                        >
-                          {language === "ltr"
-                            ? "Add to Bag"
-                            : "أضف إلى الحقيبة"}
-                        </div>
-                      </div>
-                    )}
-                  </span>
+                    varient={"dark"}
+                    arText={`${
+                      product?.product_price
+                        ? parseFloat(product?.product_price).toFixed(3)
+                        : 0
+                    } د.ك`}
+                    enText={`${
+                      product?.product_price
+                        ? parseFloat(product?.product_price).toFixed(3)
+                        : 0
+                    } KD`}
+                  />
                 )}
               </div>
             )}
@@ -649,6 +592,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                   borderRadius: "30px",
                   fontSize: language == "ltr" ? 12 : 15,
                   padding: "0 15px",
+                  fontWeight: "400",
                 }}
               >
                 <span>

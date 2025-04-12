@@ -10,7 +10,7 @@ const CarouselImage = () => {
   const carouselHeight = () => {
     switch (homePageDetails?.estoreLayout) {
       case "1":
-        return window.innerWidth > 600 ? "100vh" : "40vh";
+        return window.innerWidth > 600 ? "calc(100vh - 20px)" : "310.77px";
 
       case "2":
         return "700px";
@@ -25,6 +25,7 @@ const CarouselImage = () => {
       sx={{
         "& .carousel-root .carousel .control-arrow": {
           display: "none",
+          borderRadius: "13.81px",
         },
       }}
     >
@@ -39,15 +40,18 @@ const CarouselImage = () => {
         transitionTime={700}
         emulateTouch
         stopOnHover
+        className="carouselImage"
       >
         {homePageDetails?.vendor_data?.banner_images?.map((image) => (
-          <Box key={image?.id}>
+          <Box key={image?.id} sx={{ borderRadius: "13.81px" }}>
             <img
               loading="lazy"
               src={image?.image}
               style={{
                 width: "100%",
                 height: carouselHeight(),
+                borderRadius: "13.81px",
+                border: "1.5px solid #9191913D",
               }}
               alt="image?.image"
             />

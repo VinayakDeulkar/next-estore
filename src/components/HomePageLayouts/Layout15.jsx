@@ -10,6 +10,7 @@ import TypographyConverter from "../common/TypographyConveter/typographyConverte
 import { AppContext } from "@/context/AppContext";
 import "./layout.css";
 import ProductSquareCard from "../ProductSquareCard/productSquareCard";
+import HeadLine from "../assetBoxDesign/Headline/headLine";
 
 const Layout15 = ({ categories }) => {
   const { language, homePageDetails } = useContext(AppContext);
@@ -46,24 +47,26 @@ const Layout15 = ({ categories }) => {
             mb: 2,
             borderRadius: "10px !important",
             boxShadow: "none",
-            border: "1px solid #e8e6e6",
+            padding: 0,
           }}
           key={category?.category_id}
           expanded={expendedList.includes(category?.category_id)}
           onChange={() => handleAccordionClick(category?.category_id)}
         >
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={
+              <ExpandMoreIcon sx={{ fontSize: "36px", fill: "#000" }} />
+            }
             aria-controls="panel1a-content"
             id="panel1a-header"
+            sx={{ padding: 0 }}
           >
-            <TypographyConverter
-              sx={{ fontSize: "22px", fontWeight: "500" }}
+            <HeadLine
               arText={category?.category_name_ar}
               enText={category?.category_name}
             />
           </AccordionSummary>
-          <AccordionDetails sx={{ padding: "0 20px 25px" }}>
+          <AccordionDetails sx={{ padding: 0 }}>
             <Grid container spacing={"20px"}>
               {category?.products?.map((product) => (
                 <Grid item {...sizes()} key={product?.id}>

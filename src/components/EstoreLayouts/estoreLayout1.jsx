@@ -13,16 +13,6 @@ const EstoreLayout1 = () => {
 
   return (
     <Box>
-      {/* {window.innerWidth > 600 ? (
-        <Grid container>
-          <Grid item xs={0} sm={4}>
-            <HeaderBox />
-          </Grid>
-          <Grid item xs={0} sx={{display: "none"}}></Grid>
-        </Grid>
-      ) : (
-        <></>
-      )} */}
       {window.innerWidth < 600 ? <HeaderBox /> : null}
       <GridLayout1>
         <div>

@@ -10,6 +10,7 @@ import { useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import HorizontalCard from "../HorizontalCard/horizontalCard";
 import { useRouter } from "next/navigation";
+import HeadLine from "../assetBoxDesign/Headline/headLine";
 
 const Layout11 = ({ categories }) => {
   const router = useRouter();
@@ -41,15 +42,13 @@ const Layout11 = ({ categories }) => {
           <Box
             key={category?.category_id}
             sx={{
-              border: "1px #8a8a8a solid",
               padding: "8px",
               borderRadius: "8px",
               whiteSpace: "nowrap",
               fontWeight: 600,
             }}
           >
-            <TypographyConverter
-              sx={{ color: "black" }}
+            <HeadLine
               enText={category?.category_name}
               arText={category?.category_name_ar}
             />

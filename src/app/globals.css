@@ -20,6 +20,8 @@ body {
   /* background: var(--background); */
   background: #fff;
   font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  overflow: hidden;
 }
 
 @layer utilities {
@@ -1405,4 +1407,7 @@ label {
 .checkoutScroll {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+.carouselImage {
+  border-radius: 13.81px;
 }
