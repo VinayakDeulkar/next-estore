@@ -15,7 +15,15 @@ const Homepage = () => {
   const estoreLayout = () => {
     switch (homePageDetails?.estoreLayout) {
       case "1":
-        return <EstoreLayout1 />;
+        return (
+          <EstoreLayout1>
+            <Box>
+              {window?.innerWidth < 600 ? <CarouselImage /> : null}
+              <VendorBox />
+              <HomePageLayouts homePageDetails={homePageDetails} />
+            </Box>
+          </EstoreLayout1>
+        );
 
       case "2":
         return <EstoreLayout2 />;
@@ -25,31 +33,7 @@ const Homepage = () => {
     }
   };
 
-  return (
-    <Box sx={{ height: "100vh", overflow: "hidden" }}>
-      <Grid container>
-        <Grid
-          item
-          sm={12}
-          md={12}
-          lg={4}
-          sx={{ height: "100vh", overflow: "scroll" }}
-        >
-          <HeaderBox />
-          <Box sx={{ position: "relative", padding: "20px" }}>
-            {window?.innerWidth < 600 ? <CarouselImage /> : null}
-            <VendorBox />
-            <HomePageLayouts homePageDetails={homePageDetails} />
-          </Box>
-        </Grid>
-        {window?.innerWidth > 600 ? (
-          <Grid item sm={12} md={12} lg={8} sx={{ padding: "10px" }}>
-            <CarouselImage />
-          </Grid>
-        ) : null}
-      </Grid>
-    </Box>
-  );
+  return estoreLayout();
 };
 
 export default Homepage;

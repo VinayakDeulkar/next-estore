@@ -39,7 +39,6 @@ const Navbar = ({ handleDrawar }) => {
         container
         sx={{
           background: "#fff",
-          // "linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0.9))",
         }}
       >
         <Grid
