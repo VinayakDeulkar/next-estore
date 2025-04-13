@@ -2,6 +2,7 @@ import CartIcon from "@/assets/icons/addressIcons/CartIcon";
 import GridLayout1 from "@/components/GridLayouts/gridLayout1";
 import GridLayout2 from "@/components/GridLayouts/gridLayout2";
 import { AppContext } from "@/context/AppContext";
+import BurgerIcon from "@/SVGs/BurgerIcon";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Badge, Box, Grid, IconButton } from "@mui/material";
 import Image from "next/image";
@@ -37,9 +38,8 @@ const Navbar = ({ handleDrawar }) => {
       <Grid
         container
         sx={{
-          background:
-            "linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.19))",
-          position: "sticky",
+          background: "#fff",
+          // "linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0.9))",
         }}
       >
         <Grid
@@ -52,10 +52,21 @@ const Navbar = ({ handleDrawar }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "start",
+            padding: "0 12px",
           }}
         >
           <IconButton color="#fff" onClick={handleDrawar}>
-            <MenuIcon sx={{ color: "#fff" }} />
+            <Box
+              sx={{
+                height: "20px",
+                width: "20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <BurgerIcon />
+            </Box>
           </IconButton>
         </Grid>
         {/* <Grid
@@ -128,6 +139,7 @@ const Navbar = ({ handleDrawar }) => {
         left: 0,
         zIndex: 999,
         color: "blue",
+        position: "sticky",
       }}
     >
       {renderGridNav()}
