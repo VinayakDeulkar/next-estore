@@ -15,6 +15,7 @@ import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSq
 import SubTitle from "../common/SubTitle/subTitle";
 import NormalText from "../assetBoxDesign/NormalText/normalText";
 import SmallButtonRounded from "../assetBoxDesign/SmallButtonRounded/smallButtonRounded";
+import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =
@@ -475,82 +476,13 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 {product?.product_status ==
                 0 ? null : product?.price_on_selection == 1 ? null : inCart !=
                   0 ? (
-                  <Box
-                    onClick={(e) => e.preventDefault()}
-                    className="product-price"
-                    style={{
-                      border: `1px solid ${homePageDetails?.vendor_data?.vendor_color}`,
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "20px",
-                    }}
-                  >
-                    <div
-                      className="controlbuttondiv"
-                      style={{
-                        minWidth: "112px",
-                        height: "29px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "20px",
-                      }}
-                    >
-                      <button
-                        className="control-button"
-                        onClick={(e) => onAddToCartClick(e, -1)}
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          borderRight: `1px solid ${homePageDetails?.vendor_data?.vendor_color}`,
-                          padding: "7px",
-                        }}
-                      >
-                        {inCart == 1 ? (
-                          <DeleteOutlineOutlinedIcon
-                            sx={{ fontSize: "16px" }}
-                          />
-                        ) : (
-                          <RemoveIcon sx={{ fontSize: "17px" }} />
-                        )}
-                      </button>
-                      <Box
-                        onClick={(e) => e.preventDefault()}
-                        className="quantity-text"
-                      >
-                        {spinLoader ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Spinner
-                              height="14px"
-                              size="2px"
-                              color={homePageDetails?.vendor_data?.vendor_color}
-                            />
-                          </div>
-                        ) : (
-                          <div style={{ fontSize: "15px" }}>{inCart}</div>
-                        )}
-                      </Box>
-                      <button
-                        className="control-button"
-                        onClick={(e) => onAddToCartClick(e, 1)}
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          padding: "7px",
-                          borderLeft: `1px solid ${homePageDetails?.vendor_data?.vendor_color}`,
-                        }}
-                      >
-                        <AddIcon sx={{ fontSize: "17px" }} />
-                      </button>
-                    </div>
+                  <Box onClick={(e) => e.preventDefault()}>
+                    <MultipleItems
+                      loading={spinLoader}
+                      count={inCart}
+                      removeClick={(e) => onAddToCartClick(e, -1)}
+                      addClick={(e) => onAddToCartClick(e, 1)}
+                    />
                   </Box>
                 ) : (
                   <SmallButtonSquare
