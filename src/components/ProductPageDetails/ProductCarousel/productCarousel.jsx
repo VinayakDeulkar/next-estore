@@ -1,25 +1,7 @@
-import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
-import Image from "next/image";
-import React, { useContext } from "react";
 import { Carousel } from "react-responsive-carousel";
 
 const ProductCarousel = ({ product, addedVariaton }) => {
-  const { homePageDetails } = useContext(AppContext);
-
-  const productImgStyle = () => {
-    switch (homePageDetails?.productLayout) {
-      case "1":
-        return { height: "auto" };
-
-      case "2":
-        return { height: "500px" };
-
-      default:
-        break;
-    }
-  };
-
   return (
     <Carousel
       autoPlay={product?.product_images?.length}
@@ -38,11 +20,16 @@ const ProductCarousel = ({ product, addedVariaton }) => {
       transitionTime={700}
       emulateTouch
       stopOnHover
+      className="carouselImage"
     >
       <Box className="product-owl-img">
         <img
           loading="lazy"
-          style={productImgStyle()}
+          style={{
+            height: "100%",
+            borderRadius: "13.81px",
+            border: "1.5px solid #9191913D",
+          }}
           src={`${
             product?.productvariationPrice?.[addedVariaton.toString()]?.image
               ? product?.productvariationPrice?.[addedVariaton.toString()]
@@ -58,10 +45,13 @@ const ProductCarousel = ({ product, addedVariaton }) => {
         ? product?.product_images?.map((i, k) => (
             <Box key={k}>
               <img
-                loading="lazy"
                 src={`${i}`}
                 alt={i}
-                style={productImgStyle()}
+                style={{
+                  height: "100%",
+                  borderRadius: "13.81px",
+                  border: "1.5px solid #9191913D",
+                }}
               />
             </Box>
           ))

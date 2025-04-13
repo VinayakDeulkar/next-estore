@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import React, { useContext } from "react";
 
 const SmallButtonRounded = ({ enText, arText, handleClick, varient }) => {
-  const { language } = useContext(AppContext);
+  const { language, homePageDetails } = useContext(AppContext);
 
   return (
     <Box
@@ -11,7 +11,10 @@ const SmallButtonRounded = ({ enText, arText, handleClick, varient }) => {
       sx={{
         width: "106px",
         borderRadius: "20px",
-        backgroundColor: varient === "dark" ? "#000" : "#fff",
+        backgroundColor:
+          varient === "dark"
+            ? homePageDetails?.vendor_data?.vendor_color
+            : "#fff",
         padding: "8px",
         height: "35px",
         color: varient === "dark" ? "#fff" : "#000",

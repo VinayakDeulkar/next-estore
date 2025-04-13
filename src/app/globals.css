@@ -791,7 +791,7 @@ html[dir="rtl"] .delivery-order-header .delivery-order-title {
   position: relative;
   font-stretch: normal;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   -webkit-text-decoration: none;
   text-decoration: none;
   -ms-touch-action: manipulation;

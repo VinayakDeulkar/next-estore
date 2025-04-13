@@ -1,11 +1,20 @@
 import SubTitle from "@/components/common/SubTitle/subTitle";
 import { Box } from "@mui/material";
 
-const OptionBox = ({ enText, arText, handleClick, amount, selected }) => {
+const OptionBox = ({
+  enText,
+  arText,
+  handleClick,
+  amount,
+  selected,
+  disabled,
+}) => {
   return (
     <Box
       component="button"
-      onClick={() => handleClick?.()}
+      onClick={(e) => {
+        if (!disabled) handleClick?.(e);
+      }}
       sx={{
         display: "flex",
         alignItems: "center",
@@ -13,7 +22,7 @@ const OptionBox = ({ enText, arText, handleClick, amount, selected }) => {
         padding: "10px",
         border: "1.5px solid #AEAEAE",
         height: "40px",
-        backgroundColor: selected ? "#F2F2F2" : "#fff",
+        backgroundColor: selected ? "#F2F2F2" : disabled ? "#ced4da" : "#fff",
         width: "100%",
         borderRadius: "6.38px",
       }}

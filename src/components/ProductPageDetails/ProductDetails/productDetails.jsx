@@ -14,6 +14,12 @@ import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 import ReactPixel from "react-facebook-pixel";
 import "./productDetails.css";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
+import OptionBox from "@/components/assetBoxDesign/OptionBox/optionBox";
+import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
+import TextInputField from "@/components/assetBoxDesign/TextField/textInputField";
 
 const ProductDetails = ({
   product,
@@ -203,14 +209,14 @@ const ProductDetails = ({
     }
   };
 
-  const onSelectChecked = (event, price, max, key) => {
-    if (event?.target?.value) {
+  const onSelectChecked = (value, price, max, key) => {
+    if (value) {
       let temps = checked;
       let test = isRequired;
       let add = addedAddons;
       let addonsp = addonsPrice;
       temps[key].forEach((fruite) => {
-        if (fruite.value == event.target.value) {
+        if (fruite.value == value) {
           if (fruite.isChecked == true) {
             if (addons?.[key]?.is_required == 1) {
               test[key] = false;
@@ -240,8 +246,8 @@ const ProductDetails = ({
     }
   };
 
-  const onVariationChecked = (event, key) => {
-    if (event?.target?.value) {
+  const onVariationChecked = (value, key) => {
+    if (value) {
       let temps = variationChecked;
       let test = variationRequired;
       let add = addedVariaton;
@@ -252,7 +258,7 @@ const ProductDetails = ({
           parseFloat(productvariationPrice?.[getKey(add)]?.price);
       }
       temps[key].forEach((fruite) => {
-        if (fruite.value == event.target.value) {
+        if (fruite.value == value) {
           if (fruite.isChecked == true) {
             test[key] = false;
             fruite.isChecked = !fruite.isChecked;
@@ -497,10 +503,6 @@ const ProductDetails = ({
             homePageDetails?.vendor_data?.international_delivery === "")
         ) {
           handleOpenAreaChange((prev) => ({ open: true, goHome: true }));
-
-          // history.push(`/area`, {
-          //   from: "prdetails",
-          // });
         } else {
           router.back();
         }
@@ -679,435 +681,353 @@ const ProductDetails = ({
   return (
     <Box>
       <div style={showRegister ? { height: "10vh", overflow: "hidden" } : {}}>
-        <div className="details-container pt-2">
-          <div className="product-outer-div">
-            <div className="product-inner-div">
-              <h3 className="product-name">
-                {language === "ltr" ? product?.name : product?.name_ar}
-              </h3>
-              {product?.offer_applied == 1 ? (
-                <h3
-                  className="product-name-offer"
-                  style={{ color: product?.offer_color }}
-                >
-                  {language === "ltr"
-                    ? product?.offer_msg
-                    : product?.offer_msg_ar}
-                </h3>
-              ) : null}
-              <p className="product-category mt-3">
-                {language === "ltr"
-                  ? product.category_name
-                  : product?.category_name_ar}
-                {typeof window !== "undefined" && navigator.share && (
-                  <button className="sharewith" onClick={() => onShareClick()}>
-                    <ArrowUpwardIcon sx={{ fontSize: "15px" }} />
-                    {language === "ltr" ? "Share this page" : "شارك هذا الرابط"}
-                  </button>
-                )}
-              </p>
-              {(product?.variation_id != "" &&
-                productvariationPrice?.[addedVariaton.toString()]?.sku) ||
-              (product?.sku != "" && product?.sku) ? (
-                <pre className="product-category mt-2 mb-0">
-                  {" "}
-                  <span className="sharewith">
-                    SKU{" "}
-                    {product?.variation_id != ""
-                      ? productvariationPrice?.[addedVariaton.toString()]?.sku
-                        ? productvariationPrice?.[addedVariaton.toString()]?.sku
-                        : product?.sku
-                      : product?.sku}
-                  </span>
-                </pre>
-              ) : null}
-            </div>
-          </div>
-        </div>
-        {product?.base_price != "" && product?.prodyct_type != 3 ? (
-          <div className="details-container pt-2">
-            <div className="product-outer-div">
-              <div className="product-inner-div">
-                <div className="product-price-div">
-                  <p className="product-name-price">
-                    {language === "ltr" ? "Price" : "السعر"}
-                  </p>
-                  <p className="product-price">
-                    {product &&
-                      parseFloat(
-                        product?.price_after_discount.split(",").join("")
-                      ) != parseFloat(product?.base_price) &&
-                      product?.base_price != "" && (
-                        <>
-                          <del>
-                            <span>
-                              {parseFloat(product.base_price).toFixed(3)}{" "}
-                            </span>{" "}
-                            {language === "rtl" ? "د.ك" : "KD"}
-                          </del>
-                          <br></br>
-                        </>
-                      )}
-                    <span>
-                      {product ? (
-                        <>
-                          <span>{product.price_after_discount}</span>{" "}
-                          {language === "rtl" ? "د.ك" : "KD"}
-                        </>
-                      ) : null}{" "}
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : null}
-        {product?.short_description && (
-          <div className="details-container pt-2">
-            <div className="product-outer-div">
-              <div className="product-inner-div">
-                <div className="product-price-div">
-                  <p className="product-name">
-                    {language == "ltr" ? "Description" : "وصف"}
-                  </p>
-                </div>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      language == "ltr"
-                        ? product?.short_description
-                        : product?.short_description_ar,
-                  }}
-                  className="product-category product-short-description"
-                  style={{ fontWeight: "200 !important", marginTop: "10px" }}
-                ></p>
-              </div>
-            </div>
-          </div>
-        )}
-        {product?.is_addons != 1 &&
-          product?.prodyct_type != 3 &&
-          product?.variation_id != "" &&
-          variation.map((l, k) => (
-            <div className="details-container pt-2">
-              <div className="product-outer-div" style={{ padding: 0 }}>
-                <div
-                  className="product-inner-div"
-                  style={{ padding: "16px 0" }}
-                >
-                  <div
-                    className="product-price-div"
-                    style={{
-                      padding: `0 ${language == "ltr" ? "16px" : "26px"} 4px ${
-                        language == "ltr" ? "26px" : "16px"
-                      }`,
-                    }}
-                  >
-                    <p className="product-name">
-                      {language == "ltr" ? l[0]?.name : l[0]?.name_ar}
-                    </p>
-                  </div>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <HeadLine enText={product?.name} arText={product?.name_ar} />
+          {product?.offer_applied == 1 ? (
+            <NormalText
+              enText={product?.offer_msg}
+              arText={product?.offer_msg_ar}
+              color={product?.offer_color}
+            />
+          ) : null}
+          <SubHeadline
+            enText={product.category_name}
+            arText={product?.category_name_ar}
+          />
 
-                  {variationChecked[k]?.map((m, t) => (
-                    <label
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        e.nativeEvent.stopPropagation();
-                        onVariationChecked(e, k);
-                      }}
-                      key={t}
-                      for={m.value + k}
-                      className="delivery-timming-order addon-hover pt-2 pb-2"
-                      style={{
-                        padding: `0 ${language == "ltr" ? "16px" : "26px"} 0 ${
-                          language == "ltr" ? "26px" : "16px"
-                        }`,
-                        position: "relative",
-                        color: checkIsDisabled(variationChecked[k][t].value, k)
-                          ? "#ced4da"
-                          : "black",
-                        paddingTop: "0.5rem",
-                        paddingBottom: "0.5rem",
-                      }}
-                    >
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <div className="addons-style">
-                          {" "}
-                          <input
-                            type="checkbox"
-                            name="Extra"
-                            value={m.value}
-                            id={m.value + k}
-                            disabled={checkIsDisabled(
-                              variationChecked[k][t].value,
-                              k
-                            )}
-                            checked={variationChecked[k][t].isChecked}
-                            className="add-ons Extra child_1191"
-                            style={{
-                              marginTop: "6px",
-                              visibility: "hidden",
-                            }}
-                          ></input>{" "}
-                        </div>
-                        <div className="addon-child">
-                          {language == "ltr" ? m?.english_name : m?.arabic_name}
-                        </div>
-                        <div className="addon-child-price">
-                          <span>
-                            {m.disabled == 0 ? (
-                              <p style={{ color: "red" }}>
-                                {language == "ltr"
-                                  ? "Currently unavailble"
-                                  : "غير متاح حاليا"}
-                              </p>
-                            ) : variation.length == 1 &&
-                              productvariationPrice?.[m.value.toString()]
-                                ?.price != "" &&
-                              productvariationPrice?.[m.value.toString()]
-                                ?.price != "0" ? (
-                              <>
-                                <span>
-                                  +{" "}
-                                  {parseFloat(
-                                    productvariationPrice?.[m.value.toString()]
-                                      ?.price
-                                  ).toFixed(3)}{" "}
-                                </span>
-                                {language === "rtl" ? "د.ك" : "KD"}
-                              </>
-                            ) : null}
-                          </span>
-                        </div>
-                      </div>
-                      <span
-                        className={`checkmark-radio-l ${
-                          variationChecked[k][t].isChecked ? "checked" : ""
-                        }`}
-                        style={{
-                          borderColor: checkIsDisabled(
-                            variationChecked[k][t].value,
-                            k
-                          )
-                            ? "#ced4da"
-                            : "black",
-                        }}
-                      ></span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        {product?.is_addons == 1 &&
-          product?.prodyct_type != 3 &&
-          addons.map((l, k) => (
-            <div className="details-container pt-2" key={k}>
-              <div className="product-outer-div" style={{ padding: 0 }}>
-                <div
-                  className="product-inner-div"
-                  style={{ padding: "16px 0" }}
+          {(product?.variation_id != "" &&
+            productvariationPrice?.[addedVariaton.toString()]?.sku) ||
+          (product?.sku != "" && product?.sku) ? (
+            <NormalText
+              enText={`SKU
+              ${
+                product?.variation_id != ""
+                  ? productvariationPrice?.[addedVariaton.toString()]?.sku
+                    ? productvariationPrice?.[addedVariaton.toString()]?.sku
+                    : product?.sku
+                  : product?.sku
+              }`}
+              arText={`SKU
+                ${
+                  product?.variation_id != ""
+                    ? productvariationPrice?.[addedVariaton.toString()]?.sku
+                      ? productvariationPrice?.[addedVariaton.toString()]?.sku
+                      : product?.sku
+                    : product?.sku
+                }`}
+            />
+          ) : null}
+
+          {product?.base_price != "" && product?.prodyct_type != 3 ? (
+            <Box
+              sx={{
+                display: "flex",
+                gap: "8px",
+                alignItems: "end",
+                justifyContent: "start",
+                fontSize: "14px",
+                fontWeight: 500,
+              }}
+            >
+              {product &&
+                parseFloat(product?.price_after_discount.split(",").join("")) !=
+                  parseFloat(product?.base_price) &&
+                product?.base_price != "" && (
+                  <>
+                    <del>
+                      <span>{parseFloat(product.base_price).toFixed(3)} </span>{" "}
+                      {language === "rtl" ? "د.ك" : "KD"}
+                    </del>
+                    <br></br>
+                  </>
+                )}
+              <span>
+                {product ? (
+                  <>
+                    <span>{product.price_after_discount}</span>{" "}
+                    {language === "rtl" ? "د.ك" : "KD"}
+                  </>
+                ) : null}{" "}
+              </span>
+            </Box>
+          ) : null}
+          {product?.short_description ? (
+            <p
+              dangerouslySetInnerHTML={{
+                __html:
+                  language == "ltr"
+                    ? product?.short_description
+                    : product?.short_description_ar,
+              }}
+              style={{
+                fontWeight: "300",
+                fontSize: "14px",
+                color: "rgba(141, 141, 141, 1)",
+              }}
+            ></p>
+          ) : null}
+          {product?.is_addons != 1 &&
+            product?.prodyct_type != 3 &&
+            product?.variation_id != "" &&
+            variation.map((variant, variantIndex) => (
+              <Box
+                sx={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                key={variantIndex}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "end",
+                  }}
                 >
-                  <div
-                    className="product-price-div"
-                    style={{
-                      padding: `0 ${language == "ltr" ? "16px" : "26px"} 4px ${
-                        language == "ltr" ? "26px" : "16px"
-                      }`,
+                  <Box sx={{ fontSize: "16px", fontWeight: 500 }}>
+                    {language == "ltr" ? variant[0]?.name : variant[0]?.name_ar}
+                  </Box>
+                </Box>
+                <Box
+                  sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
+                >
+                  {variationChecked[variantIndex]?.map(
+                    (variantOption, variantOptionIndex) => (
+                      <OptionBox
+                        key={variantOptionIndex}
+                        enText={variantOption?.english_name}
+                        arText={variantOption?.arabic_name}
+                        disabled={checkIsDisabled(
+                          variationChecked[variantIndex][variantOptionIndex]
+                            .value,
+                          variantIndex
+                        )}
+                        amount={
+                          productvariationPrice?.[
+                            variantOption.value.toString()
+                          ]?.price
+                        }
+                        selected={
+                          variationChecked[variantIndex][variantOptionIndex]
+                            .isChecked
+                        }
+                        handleClick={(e) => {
+                          e.stopPropagation();
+                          e.nativeEvent.stopPropagation();
+                          onVariationChecked(
+                            variantOption?.value,
+                            variantIndex
+                          );
+                        }}
+                      />
+                    )
+                  )}
+                </Box>
+              </Box>
+            ))}
+          {product?.is_addons == 1 &&
+            product?.prodyct_type != 3 &&
+            addons.map((addon, addonIndex) => (
+              <div className="details-container pt-2" key={addonIndex}>
+                <Box
+                  key={addonIndex}
+                  sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "end",
                     }}
                   >
-                    <p
-                      className="product-name"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      {language == "ltr" ? l?.english_name : l?.arabic_name}{" "}
+                    <Box sx={{ fontSize: "16px", fontWeight: 500 }}>
+                      {language == "ltr"
+                        ? addon?.english_name
+                        : addon?.arabic_name}
                       <span
                         className="max-tab"
                         style={{
                           margin: "0",
                           marginLeft: language == "ltr" ? "10px" : "0",
                           marginRight: language == "ltr" ? "0" : "10px",
+                          fontSize: "14px",
+                          fontWeight: 500,
                         }}
                       >
                         {language == "ltr" ? "Max" : "الحد الأقصى"}
-                        <span>&nbsp;{l.max_selection}</span>
+                        <span>&nbsp;{addon.max_selection}</span>
                       </span>
-                    </p>
-                    <p
-                      style={{
-                        display: "flex",
-                        justifyContent: checked[k]?.some(
-                          (check, k) => check.isChecked
-                        )
-                          ? "space-between"
-                          : "end",
-                        alignItems: "center",
-                      }}
-                    >
+                    </Box>
+                    <Box>
                       {product?.quantity &&
                         product?.product_status != 0 &&
-                        l?.is_required == 1 && (
-                          <p className="required-text">
-                            {language == "ltr" ? "Required" : "مطلوب"}
-                          </p>
+                        addon?.is_required == 1 && (
+                          <NormalText enText={"Required"} arText={"مطلوب"} />
                         )}
-                      {checked[k]?.some((check, k) => check.isChecked) && (
-                        <p
-                          className={`product-name ${
-                            language == "ltr" ? "float-right" : "float-left"
-                          }`}
-                          onClick={() => onClearAll(k)}
-                          style={{
-                            color: homePageDetails?.vendor_data?.vendor_color,
-                            fontSize: 14,
-                            cursor: "pointer",
-                          }}
-                        >
-                          {language == "ltr" ? "Clear All" : "مسح الإختيار"}
-                        </p>
+                      {checked[addonIndex]?.some(
+                        (check, k) => check.isChecked
+                      ) && (
+                        <SmallButtonRounded
+                          enText={"Clear All"}
+                          arText={"مسح الإختيار"}
+                          varient={"dark"}
+                          handleClick={() => onClearAll(addonIndex)}
+                        />
                       )}
-                    </p>
-                  </div>
-                  {checked[k]?.map((m, t) => (
-                    <label
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        e.nativeEvent.stopPropagation();
-                        if (m?.disabled == 0 && m.label == "")
-                          if (l?.max_selection != 1)
-                            onChecked(e, m.price, l.max_selection, k);
-                          else onSelectChecked(e, m.price, l.max_selection, k);
-                      }}
-                      key={t}
-                      for={m.value + k}
-                      style={{
-                        padding: `0 ${language == "ltr" ? "16px" : "26px"} 0 ${
-                          language == "ltr" ? "26px" : "16px"
-                        }`,
-                        position: "relative",
-                        paddingTop: "0.5rem",
-                        paddingBottom: "0.5rem",
-                      }}
-                      className="delivery-timming-order addon-hover pt-2 pb-2"
-                    >
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <div className="addons-style">
-                          {" "}
-                          <input
-                            type="checkbox"
-                            name="Extra"
-                            value={m.value}
-                            id={m.value + k}
-                            checked={checked[k][t].isChecked}
-                            className="add-ons Extra child_1191"
-                            style={{ marginTop: "6px", visibility: "hidden" }}
-                            data-id="1194"
-                            data-item-price="1"
-                            data-item-className="Extra"
-                          ></input>
-                        </div>
-                        <div className="addon-child">
-                          {language == "ltr" ? m?.english_name : m?.arabic_name}
-                        </div>
-                        <div className="addon-child-price">
-                          <span>
-                            {m.disabled == 1 || m.label != "" ? (
-                              <p style={{ color: "red" }}>
-                                {language == "ltr" ? m?.label : m?.label_ar}
-                              </p>
-                            ) : m.price != "" && m.price != 0 ? (
-                              <>
-                                <span>+ {parseFloat(m.price).toFixed(3)} </span>
-                                {language === "rtl" ? "د.ك" : "KD"}
-                              </>
-                            ) : null}
-                          </span>
-                        </div>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                    }}
+                  >
+                    {checked[addonIndex]?.map(
+                      (addonsOption, addonsOptionIndex) => (
+                        <OptionBox
+                          enText={addonsOption?.english_name}
+                          arText={addonsOption?.arabic_name}
+                          selected={
+                            checked[addonIndex][addonsOptionIndex].isChecked
+                          }
+                          amount={addonsOption.price}
+                          disabled={
+                            addonsOption.disabled == 1 ||
+                            addonsOption.label != ""
+                          }
+                          handleClick={(e) => {
+                            e.stopPropagation();
+                            e.nativeEvent.stopPropagation();
+                            if (
+                              addonsOption?.disabled == 0 &&
+                              addonsOption.label == ""
+                            ) {
+                              if (addon?.max_selection != 1)
+                                onChecked(
+                                  addonsOption?.value,
+                                  addonsOption.price,
+                                  addon.max_selection,
+                                  addonIndex
+                                );
+                              else
+                                onSelectChecked(
+                                  addonsOption?.value,
+                                  addonsOption.price,
+                                  addon.max_selection,
+                                  addonIndex
+                                );
+                            }
+                          }}
+                        />
+                      )
+                    )}
+                  </Box>
+                </Box>
+              </div>
+            ))}
+          {product?.prodyct_type != 3 ? (
+            <TextInputField
+              label={"Add a note (Optional)"}
+              arLabel={"أضف ملاحظة (اختياري)"}
+              handleChange={(e) => onNoteChange(e)}
+              value={note}
+            />
+          ) : null}
+          {product?.prodyct_type != 3 ? (
+            <div className="details-container pt-2">
+              <div className="product-outer-div">
+                <div
+                  className="product-inner-div item-count-div"
+                  style={{ paddingBottom: showQuantity ? "16px" : "20%" }}
+                >
+                  {product?.quantity &&
+                  product?.product_status != 0 &&
+                  isRequired?.every((l) => l == true) ? (
+                    <div className="count-control-div">
+                      <div className="control-button-div">
+                        <button className="control-button" onClick={onMinus}>
+                          <RemoveIcon />
+                        </button>
+                        <p className="quantity-text">{prodNumber}</p>
+                        <button className="control-button" onClick={onPlus}>
+                          <AddIcon />
+                        </button>
                       </div>
-                      <span
-                        className={`checkmark-radio-l ${
-                          checked[k][t].isChecked
-                            ? l?.max_selection != 1
-                              ? "checkedBox"
-                              : "checked"
-                            : ""
-                        }`}
-                      ></span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        {product?.prodyct_type != 3 ? (
-          <div className="details-container pt-2">
-            <div className="product-outer-div">
-              <div className="product-inner-div margin-bottom-div">
-                <div className="product-notes-div">
-                  <label className="label-note">
-                    {language == "ltr"
-                      ? "Add a note (Optional)"
-                      : "أضف ملاحظة (اختياري)"}
-                  </label>
-                  <input
-                    type="text"
-                    id="add_note"
-                    value={note}
-                    onChange={(e) => onNoteChange(e)}
-                    aria-label=""
-                    placeholder=""
-                  ></input>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : null}
-        {product?.prodyct_type != 3 ? (
-          <div className="details-container pt-2">
-            <div className="product-outer-div">
-              <div
-                className="product-inner-div item-count-div"
-                style={{ paddingBottom: showQuantity ? "16px" : "20%" }}
-              >
-                {product?.quantity &&
-                product?.product_status != 0 &&
-                isRequired?.every((l) => l == true) ? (
-                  <div className="count-control-div">
-                    <div className="control-button-div">
-                      <button className="control-button" onClick={onMinus}>
-                        <RemoveIcon />
-                      </button>
-                      <p className="quantity-text">{prodNumber}</p>
-                      <button className="control-button" onClick={onPlus}>
-                        <AddIcon />
-                      </button>
                     </div>
-                  </div>
-                ) : null}
+                  ) : null}
+                </div>
               </div>
             </div>
-          </div>
-        ) : null}
-        {showQuantity ? <QuantityError errorMsg={errorMsg} /> : null}
-        {showRegister ? (
-          <ProductRegistrationModal
-            showRegister={showRegister}
-            handleClose={() => setShowRegister(false)}
-            product={product}
-            addon={addon}
-            addedAddons={addedAddons}
-            addedVariaton={addedVariaton}
-            productvariation={productvariation}
-            prodNumber={prodNumber}
-            note={note}
-          />
-        ) : null}
-        {product?.prodyct_type != 3 ? (
-          product?.prodyct_type == 2 ? (
-            !showRegister ? (
+          ) : null}
+          {showQuantity ? <QuantityError errorMsg={errorMsg} /> : null}
+          {showRegister ? (
+            <ProductRegistrationModal
+              showRegister={showRegister}
+              handleClose={() => setShowRegister(false)}
+              product={product}
+              addon={addon}
+              addedAddons={addedAddons}
+              addedVariaton={addedVariaton}
+              productvariation={productvariation}
+              prodNumber={prodNumber}
+              note={note}
+            />
+          ) : null}
+          {product?.prodyct_type != 3 ? (
+            product?.prodyct_type == 2 ? (
+              !showRegister ? (
+                <div
+                  className={`bottom-button ${
+                    homePageDetails?.vendor_data?.home_page_type == "18"
+                      ? "bottom-button-full"
+                      : "bottom-button-half"
+                  }`}
+                >
+                  <Link
+                    href={``}
+                    className={`text-center checkout-button ${
+                      homePageDetails?.vendor_data?.home_page_type == "18"
+                        ? "fashion-checkout-page"
+                        : ""
+                    }`}
+                    onClick={(e) => {
+                      if (
+                        product?.quantity &&
+                        product?.product_status != 0 &&
+                        isRequired?.every((l) => l == true) &&
+                        variationRequired?.every((l) => l == true)
+                      ) {
+                        e.preventDefault();
+                        areaDetails?.branchForArea?.id
+                          ? setShowRegister(true)
+                          : handleOpenAreaChange((prev) => ({
+                              open: true,
+                              goHome: true,
+                            }));
+                        // : history.push(`/area`, {
+                        //     from: "prdetails",
+                        //   });
+                      } else {
+                        e.preventDefault();
+                      }
+                    }}
+                  >
+                    {product?.quantity &&
+                    product?.product_status != 0 &&
+                    isRequired?.every((l) => l == true) &&
+                    variationRequired?.every((l) => l == true)
+                      ? language === "ltr"
+                        ? "Register"
+                        : "يسجل"
+                      : product?.product_status != 0
+                      ? language === "ltr"
+                        ? "Select Required Addons"
+                        : "حدد الإضافات المطلوبة"
+                      : language === "ltr"
+                      ? "Product Not Available"
+                      : "المنتج غير متوفر"}
+                  </Link>
+                </div>
+              ) : null
+            ) : (
               <div
                 className={`bottom-button ${
                   homePageDetails?.vendor_data?.home_page_type == "18"
@@ -1122,113 +1042,62 @@ const ProductDetails = ({
                       ? "fashion-checkout-page"
                       : ""
                   }`}
-                  onClick={(e) => {
-                    if (
-                      product?.quantity &&
-                      product?.product_status != 0 &&
-                      isRequired?.every((l) => l == true) &&
-                      variationRequired?.every((l) => l == true)
-                    ) {
-                      e.preventDefault();
-                      areaDetails?.branchForArea?.id
-                        ? setShowRegister(true)
-                        : handleOpenAreaChange((prev) => ({
-                            open: true,
-                            goHome: true,
-                          }));
-                      // : history.push(`/area`, {
-                      //     from: "prdetails",
-                      //   });
-                    } else {
-                      e.preventDefault();
-                    }
-                  }}
+                  onClick={(e) => checkApplication(e)}
                 >
-                  {product?.quantity &&
-                  product?.product_status != 0 &&
-                  isRequired?.every((l) => l == true) &&
-                  variationRequired?.every((l) => l == true)
-                    ? language === "ltr"
-                      ? "Register"
-                      : "يسجل"
-                    : product?.product_status != 0
-                    ? language === "ltr"
-                      ? "Select Required Addons"
-                      : "حدد الإضافات المطلوبة"
-                    : language === "ltr"
-                    ? "Product Not Available"
-                    : "المنتج غير متوفر"}
-                </Link>
-              </div>
-            ) : null
-          ) : (
-            <div
-              className={`bottom-button ${
-                homePageDetails?.vendor_data?.home_page_type == "18"
-                  ? "bottom-button-full"
-                  : "bottom-button-half"
-              }`}
-            >
-              <Link
-                href={``}
-                className={`text-center checkout-button ${
-                  homePageDetails?.vendor_data?.home_page_type == "18"
-                    ? "fashion-checkout-page"
-                    : ""
-                }`}
-                onClick={(e) => checkApplication(e)}
-              >
-                {product?.quantity && product?.product_status != 0 ? (
-                  isRequired?.every((l) => l == true) &&
-                  variationRequired?.every((l) => l == true) ? (
-                    productvariation?.length == 0 ||
-                    (productvariationPrice?.[getKey(addedVariaton)] &&
-                      (productvariationPrice?.[getKey(addedVariaton)]
-                        ?.quantity > 0 ||
-                        productvariationPrice?.[getKey(addedVariaton)]
-                          ?.quantity == null)) ? (
-                      spinLoader ? (
-                        <Spinner height="16px" size="2.5px" />
-                      ) : (
-                        <>
-                          {`${language === "ltr" ? "Add to Order" : "إضافة "}`}
-                          <span className="span-s">
-                            &nbsp;&nbsp;
-                            {parseFloat(
-                              (price + addonsPrice + variationPrice) *
-                                prodNumber
-                            )?.toFixed(3)}
-                            &nbsp;
-                          </span>
-                          {`
+                  {product?.quantity && product?.product_status != 0 ? (
+                    isRequired?.every((l) => l == true) &&
+                    variationRequired?.every((l) => l == true) ? (
+                      productvariation?.length == 0 ||
+                      (productvariationPrice?.[getKey(addedVariaton)] &&
+                        (productvariationPrice?.[getKey(addedVariaton)]
+                          ?.quantity > 0 ||
+                          productvariationPrice?.[getKey(addedVariaton)]
+                            ?.quantity == null)) ? (
+                        spinLoader ? (
+                          <Spinner height="16px" size="2.5px" />
+                        ) : (
+                          <>
+                            {`${
+                              language === "ltr" ? "Add to Order" : "إضافة "
+                            }`}
+                            <span className="span-s">
+                              &nbsp;&nbsp;
+                              {parseFloat(
+                                (price + addonsPrice + variationPrice) *
+                                  prodNumber
+                              )?.toFixed(3)}
+                              &nbsp;
+                            </span>
+                            {`
               ${language === "rtl" ? "د.ك" : "KD"}`}
-                        </>
+                          </>
+                        )
+                      ) : (
+                        `${
+                          language === "ltr"
+                            ? "Variation Out of Stock"
+                            : "إنتهت الكمية المعروضة"
+                        }`
                       )
                     ) : (
                       `${
                         language === "ltr"
-                          ? "Variation Out of Stock"
-                          : "إنتهت الكمية المعروضة"
+                          ? "Select Required Addons"
+                          : "حدد الإضافات المطلوبة"
                       }`
                     )
                   ) : (
                     `${
                       language === "ltr"
-                        ? "Select Required Addons"
-                        : "حدد الإضافات المطلوبة"
+                        ? product?.status_label
+                        : product?.status_label_ar
                     }`
-                  )
-                ) : (
-                  `${
-                    language === "ltr"
-                      ? product?.status_label
-                      : product?.status_label_ar
-                  }`
-                )}
-              </Link>
-            </div>
-          )
-        ) : null}
+                  )}
+                </Link>
+              </div>
+            )
+          ) : null}
+        </Box>
       </div>
     </Box>
   );
