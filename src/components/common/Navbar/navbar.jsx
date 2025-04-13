@@ -38,7 +38,8 @@ const Navbar = ({ handleDrawar }) => {
       <Grid
         container
         sx={{
-          background: "#fff",
+          backgroundColor: "#fff",
+          // backdropFilter: "blur(10px)",
         }}
       >
         <Grid

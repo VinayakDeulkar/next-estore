@@ -17,7 +17,11 @@ function BranchDetails({ branchId }) {
   return (
     <Dialog open={branchId} onClose={() => router.push("/branches")}>
       <Box
-        sx={{ height: "calc(100vh - 50px)", padding: "20px", width: "560px" }}
+        sx={{
+          height: "calc(100vh - 50px)",
+          padding: "20px",
+          width: window.innerWidth > 600 ? "560px" : "auto",
+        }}
       >
         <DialogTitle>
           {language === "ltr" ? branch?.address : branch?.arabic_address}

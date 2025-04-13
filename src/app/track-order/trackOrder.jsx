@@ -1,15 +1,17 @@
 "use client";
-import React, { useContext, useState } from "react";
-import "./trackorder.css";
-import { AppContext } from "@/context/AppContext";
-import { useRouter } from "next/navigation";
-import { Box } from "@mui/material";
-import GridLayout from "@/components/common/GridLayout/gridLayout";
-import HeaderBox from "@/components/common/HeaderBox/headerBox";
-import GridLayout1 from "@/components/GridLayouts/gridLayout1";
-import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
-import MainTitle from "@/components/common/MainTitle/mainTitle";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import TextInputField from "@/components/assetBoxDesign/TextField/textInputField";
 import Title from "@/components/common/Title/Title";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
+import { AppContext } from "@/context/AppContext";
+import { Box } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import "./trackorder.css";
+import SubTitle from "@/components/common/SubTitle/subTitle";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
+import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
+import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
 
 const TrackOrder = () => {
   const [trackingNumber, setTrackingNumber] = useState();
@@ -22,12 +24,11 @@ const TrackOrder = () => {
   };
   return (
     <Box>
-      <HeaderBox />
-      <GridLayout1>
+      <EstoreLayout1>
         <div className="trackOrder-whitebox">
-          <div style={{ padding: "30px 20px" }}>
+          <div>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <MainTitle enText={"Orders Tracker"} arText={"تعقب الطلبات"} />
+              <HeadLine enText={"Orders Tracker"} arText={"تعقب الطلبات"} />
             </Box>
             <div className="tracker-order-center order-tracker-image">
               <img
@@ -36,43 +37,38 @@ const TrackOrder = () => {
               />
             </div>
 
-            <div className="tracker-order-center shipment-tracker-text">
-              <Title
+            <div style={{ textAlign: "center", marginBottom: "20px" }}>
+              <NormalText
                 enText={
                   "Track shipments and orders by entering the tracking number."
                 }
                 arText={"تتبع الشحنات والطلبات عن طريق إدخال رقم التتبع."}
+                color="#a3a2a2"
               />
             </div>
             <div className="tracker-order-center">
               <div className="track-divider-line"></div>
             </div>
-            <div className="tracker-order-center">
-              <input
-                type="text"
-                onChange={(e) => {
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <TextInputField
+                handleChange={(e) => {
                   setTrackingNumber(e.target.value);
                 }}
-                className="order-tracker-input-field"
-                placeholder={
-                  language === "ltr"
-                    ? "Tracking Number Goes Here"
-                    : "ضع رقم الطلب هنا لتتبعه"
-                }
+                label={"Tracking Number Goes Here"}
+                arLabel={"ضع رقم الطلب هنا لتتبعه"}
               />
-            </div>
-            <div className="tracker-order-center order-tracker-input-div">
-              <button
-                className="order-tracker-input-button"
-                onClick={handleSubmit}
-              >
-                {language === "ltr" ? "Track" : "تتبع الطلب"}
-              </button>
-            </div>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <SmallButtonRounded
+                  handleClick={handleSubmit}
+                  enText={"Track"}
+                  arText={"تتبع الطلب"}
+                  varient={"dark"}
+                />
+              </Box>
+            </Box>
           </div>
         </div>
-        <CarouselImage />
-      </GridLayout1>
+      </EstoreLayout1>
     </Box>
   );
 };

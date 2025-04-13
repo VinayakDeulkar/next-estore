@@ -6,7 +6,9 @@ import {
   verifyUserOTP,
 } from "@/apis";
 import ContactInfo from "@/components/ContactInfo/ContactInfo";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import OtpVerification from "@/components/OtpVerification/OtpVerification";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 import CommonHeader from "@/components/common/CommonHeader/CommonHeader";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
@@ -324,17 +326,19 @@ const Login = () => {
 
   return (
     <Box>
-      <HeaderBox />
-      <GridLayout
-        backgroundColor={"#fff"}
-        padding={"20px"}
-        sx={{ height: "calc(100vh - 50px)" }}
-      >
-        <Box>
-          <CommonHeader
-            englishHeader={showNameEmailFields ? "Profile" : "Login"}
-            arabicHeader={showNameEmailFields ? "حساب تعريفي" : "تسجيل الدخول"}
-            fontWeight={400}
+      <EstoreLayout1>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            position: "relative",
+            height: "calc(100vh - 50px)",
+          }}
+        >
+          <HeadLine
+            arText={showNameEmailFields ? "حساب تعريفي" : "تسجيل الدخول"}
+            enText={showNameEmailFields ? "Profile" : "Login"}
           />
           {openOtpPage ? (
             <OtpVerification
@@ -368,7 +372,7 @@ const Login = () => {
             </Box>
           </div>
         </Box>
-      </GridLayout>
+      </EstoreLayout1>
     </Box>
   );
 };

@@ -20,6 +20,7 @@ import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import OptionBox from "@/components/assetBoxDesign/OptionBox/optionBox";
 import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
 import TextInputField from "@/components/assetBoxDesign/TextField/textInputField";
+import MultipleItems from "@/components/assetBoxDesign/MultipleItems/multipleItems";
 
 const ProductDetails = ({
   product,
@@ -941,17 +942,11 @@ const ProductDetails = ({
                   {product?.quantity &&
                   product?.product_status != 0 &&
                   isRequired?.every((l) => l == true) ? (
-                    <div className="count-control-div">
-                      <div className="control-button-div">
-                        <button className="control-button" onClick={onMinus}>
-                          <RemoveIcon />
-                        </button>
-                        <p className="quantity-text">{prodNumber}</p>
-                        <button className="control-button" onClick={onPlus}>
-                          <AddIcon />
-                        </button>
-                      </div>
-                    </div>
+                    <MultipleItems
+                      count={prodNumber}
+                      removeClick={onMinus}
+                      addClick={onPlus}
+                    />
                   ) : null}
                 </div>
               </div>

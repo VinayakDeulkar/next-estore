@@ -1,205 +1,203 @@
-
 .branch-list-container .branch-list {
-    padding: 16px 0;
-  }
-  
-  .branch-list-container .branch-list .branch-list-item:hover {
-    background-color: #f5f5f5;
-  }
-  
-  .branch-list-container .branch-list .branch-list-item {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -moz-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: 16px;
-    cursor: pointer;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-property: all;
-    transition-duration: 0.5s;
-    border-bottom: 1px solid #f6f7fb;
-  }
-  
-  .branch-list-container .branch-list .branch-list-item:last-child {
-    border-bottom: none;
-  }
-  
-  .branch-list-container .branch-list .branch-list-item .branch-details {
-    width: 90%;
-  }
-  
-  .branch-list-container
-    .branch-list
-    .branch-list-item
-    .branch-details
-    .branch-name {
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.33;
-    color: black;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    text-align: start;
-  }
-  
-  .branch-list-container
-    .branch-list
-    .branch-list-item
-    .branch-details
-    .branch-address {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.23;
-    padding-top: 4px;
-    color: #8f8f94;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    text-align: start;
-  }
-  
-  .branch-list-container .branch-list .branch-list-item .branch-info {
-    color: black;
-    width: 18px;
-    height: 18px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    border-radius: 50px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    border: 1px solid;
-  }
-  
-  .branch-list-container .branch-list .branch-list-item .branch-info span {
-    color: black;
-    font-size: 10px;
-  }
-  
-  .branch-call-div .branch-call-flex {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: space-evenly;
-  }
-  
-  .branch-call-div .branch-call-flex .branch-call {
-    border: 1px solid #dbdbdb;
-    color: #dbdbdb;
-  }
-  
-  .branch-call-div .branch-call-flex .branch-call {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -moz-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    /* margin-right: 8px; */
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    color: #000000;
-    border: 1px solid black;
-    background-color: #ffffff;
-    font-size: 13px;
-    -webkit-letter-spacing: -0.1px;
-    -moz-letter-spacing: -0.1px;
-    -ms-letter-spacing: -0.1px;
-    letter-spacing: -0.1px;
-    line-height: 1.23;
-    padding: 8px 16px;
-    min-height: 32px;
-    margin-right: 8px;
-    cursor: pointer;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: -moz-box;
-    display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -moz-box-align: center;
-    align-items: center;
-    position: relative;
-    font-stretch: normal;
-    font-style: normal;
-    font-weight: 600;
-    -webkit-text-decoration: none;
-    text-decoration: none;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    -webkit-transition: all 0.2s ease-in;
-    -o-transition: all 0.2s ease-in;
-    -moz-transition: all 0.2s ease-in;
-    transition: all 0.2s ease-in;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-  
-  .details-container .branch-inner-div .branch-big-text {
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.33;
-    color: #000000;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-all;
-    word-break: break-word;
-  }
-  
-  .details-container .branch-inner-div .branch-big-text span {
-    color: var(--vendor-color);
-  }
-  
-  .details-container .branch-text-flex {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -moz-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-  }
-  
-  .details-container .branch-inner-div .branch-small-text {
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.33;
-    color: #000000;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-all;
-    word-break: break-word;
-  }
-  
+  padding: 16px 0;
+}
+
+.branch-list-container .branch-list .branch-list-item:hover {
+  background-color: #f5f5f5;
+}
+
+.branch-list-container .branch-list .branch-list-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 16px 0;
+  cursor: pointer;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: all;
+  transition-duration: 0.5s;
+  border-bottom: 1px solid #f6f7fb;
+}
+
+.branch-list-container .branch-list .branch-list-item:last-child {
+  border-bottom: none;
+}
+
+.branch-list-container .branch-list .branch-list-item .branch-details {
+  width: 90%;
+}
+
+.branch-list-container
+  .branch-list
+  .branch-list-item
+  .branch-details
+  .branch-name {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.33;
+  color: black;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-align: start;
+}
+
+.branch-list-container
+  .branch-list
+  .branch-list-item
+  .branch-details
+  .branch-address {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.23;
+  padding-top: 4px;
+  color: #8f8f94;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-align: start;
+}
+
+.branch-list-container .branch-list .branch-list-item .branch-info {
+  color: black;
+  width: 18px;
+  height: 18px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border: 1px solid;
+}
+
+.branch-list-container .branch-list .branch-list-item .branch-info span {
+  color: black;
+  font-size: 10px;
+}
+
+.branch-call-div .branch-call-flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.branch-call-div .branch-call-flex .branch-call {
+  border: 1px solid #dbdbdb;
+  color: #dbdbdb;
+}
+
+.branch-call-div .branch-call-flex .branch-call {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  /* margin-right: 8px; */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #000000;
+  border: 1px solid black;
+  background-color: #ffffff;
+  font-size: 13px;
+  -webkit-letter-spacing: -0.1px;
+  -moz-letter-spacing: -0.1px;
+  -ms-letter-spacing: -0.1px;
+  letter-spacing: -0.1px;
+  line-height: 1.23;
+  padding: 8px 16px;
+  min-height: 32px;
+  margin-right: 8px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: -moz-box;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -moz-box-align: center;
+  align-items: center;
+  position: relative;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 600;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  -webkit-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.details-container .branch-inner-div .branch-big-text {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.33;
+  color: #000000;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  word-break: break-word;
+}
+
+.details-container .branch-inner-div .branch-big-text span {
+  color: var(--vendor-color);
+}
+
+.details-container .branch-text-flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.details-container .branch-inner-div .branch-small-text {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.33;
+  color: #000000;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  word-break: break-word;
+}

@@ -36,8 +36,6 @@ body {
   height: 45px;
   width: 100%;
   left: 0;
-  padding-left: 36px;
-  padding-right: 36px;
   /* display: grid;
   grid-template-columns: 30% calc(70% - 12px); */
   display: flex;
@@ -157,8 +155,6 @@ html[dir="rtl"] .newreview-button-div {
   height: 45px;
   width: 100%;
   left: 0;
-  padding-left: 36px;
-  padding-right: 36px;
   /* display: grid;
   grid-template-columns: 30% calc(70% - 12px); */
   display: flex;

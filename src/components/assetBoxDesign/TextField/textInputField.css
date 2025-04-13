@@ -14,10 +14,6 @@
   height: 44px;
 }
 
-.text-field-input input:focus {
-  border: 1.5px solid #000;
-}
-
 .text-field-label {
   font-size: 14px;
   height: 20px;
@@ -30,16 +26,12 @@
   user-select: none;
   transition: 0.2s ease all;
 }
-.text-field-input input:focus ~ .text-field-label,
-.text-field-input input:not(:focus):valid ~ .text-field-label {
-  top: -20px;
+
+.text-field-input:focus ~ .text-field-label,
+.text-field-input:not(:focus):valid ~ .text-field-label {
+  top: -10px;
   bottom: 0;
   left: 0;
-}
-
-.text-field-input:required,
-.text-field-input:invalid {
-  box-shadow: none;
 }
 
 .text-field-input:focus ~ .text-field-label,
@@ -53,4 +45,8 @@
   color: #000;
   font-weight: 400;
   left: 0;
+}
+
+.text-field-input:focus {
+  border: 1.5px solid #000 !important;
 }

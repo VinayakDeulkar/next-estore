@@ -1,7 +1,9 @@
 "use client";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import MainTitle from "@/components/common/MainTitle/mainTitle";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import NewContactDetails from "@/components/NewContactDetails/NewContactDetails";
 import PickupContainer from "@/components/PickupContainer/PickupContainer";
 import {
@@ -107,14 +109,17 @@ const ContactDetails = () => {
   };
   return (
     <Box>
-      <HeaderBox />
-      <GridLayout
-        backgroundColor={"#fff"}
-        padding={"20px"}
-        sx={{ height: "calc(100vh - 50px)", color: "#000" }}
-      >
-        <Box>
-          <MainTitle enText={"Contact Details"} arText={"ارقام التواصل"} />
+      <EstoreLayout1>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            position: "relative",
+            height: "calc(100vh - 50px)",
+          }}
+        >
+          <HeadLine enText={"Contact Details"} arText={"ارقام التواصل"} />
           {stepper === 0 ? (
             <NewContactDetails
               errorContactDetails={errorContactDetails}
@@ -138,7 +143,7 @@ const ContactDetails = () => {
             </Box>
           </div>
         </Box>
-      </GridLayout>
+      </EstoreLayout1>
     </Box>
   );
 };
