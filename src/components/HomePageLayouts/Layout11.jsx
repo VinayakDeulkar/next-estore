@@ -30,7 +30,6 @@ const Layout11 = ({ categories }) => {
       <Box
         sx={{
           gap: "8px",
-          padding: "10px",
           display: "flex",
           flexWrap: "nowrap",
           overflowX: "scroll",

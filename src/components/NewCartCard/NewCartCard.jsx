@@ -14,6 +14,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import { IconButton } from "@mui/material";
 import Spinner from "../common/Spinner/spinner";
 import Title from "../common/Title/Title";
+import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
 
 const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   const {
@@ -36,6 +37,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
 
   const onMinusQuantityClick = (e) => {
     e.stopPropagation();
+    console.log("first");
     if (!spinLoader) {
       let prod = parseInt(product?.quantity);
       if (prod == 1) onRemoveClick();
@@ -219,7 +221,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
     <div
       className="cart-card-product-div"
       onClick={() => {
-        router.push(`/product?=${product.product_slug}`);
+        router.push(`/product?id=${product.product_slug}`);
       }}
     >
       <div className="cart-card-product-mainDiv">
@@ -267,36 +269,12 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
             className="cart-cart-product-quantity-div"
             style={{ width: "100%" }}
           >
-            <div className="cart-card-product-quantity">
-              <IconButton onClick={(e) => onMinusQuantityClick(e)}>
-                {product.quantity == 1 ? (
-                  <DeleteOutlineOutlinedIcon
-                    sx={{ fontSize: "18px", color: "black" }}
-                  />
-                ) : (
-                  <RemoveCircleOutlineIcon
-                    sx={{ fontSize: "18px", color: "black" }}
-                  />
-                )}
-              </IconButton>
-
-              <div className="cart-card-price-div">
-                {spinLoader ? (
-                  <Spinner
-                    height="16px"
-                    size="2.5px"
-                    color={homePageDetails?.vendor_data.vendor_color}
-                  />
-                ) : (
-                  product.quantity
-                )}
-              </div>
-              <IconButton onClick={(e) => onAddQuantityClick(e)}>
-                <AddCircleOutlineIcon
-                  sx={{ fontSize: "18px", color: "black" }}
-                />
-              </IconButton>
-            </div>
+            <MultipleItems
+              loading={spinLoader}
+              count={product.quantity}
+              addClick={(e) => onAddQuantityClick(e)}
+              removeClick={(e) => onMinusQuantityClick(e)}
+            />
 
             <div className="cart-card-price-maindiv">
               <div>

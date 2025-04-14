@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 
-function BranchList() {
+function BranchList({ setBranchId }) {
   const [branchs, setBranchs] = useState([]);
   const { language, vendorSlug, areaDetails } = useContext(AppContext);
-  const router = useRouter();
   useEffect(() => {
     if (areaDetails.data.branch) {
       setBranchs(areaDetails.data.branch);
@@ -21,7 +19,7 @@ function BranchList() {
             <li className="branch-list-item" key={i}>
               <Box
                 component="a"
-                onClick={() => router.push(`/branches?branch=${i}`)}
+                onClick={() => setBranchId(i)}
                 className="branch-details"
               >
                 <h2 className="branch-name">
@@ -35,7 +33,7 @@ function BranchList() {
               </Box>
               <Box
                 component="a"
-                onClick={() => router.push(`/branches?branch=${i}`)}
+                onClick={() => setBranchId(i)}
                 className={
                   vendorSlug?.data?.ecom_url_slug === "cube-aroma"
                     ? ""

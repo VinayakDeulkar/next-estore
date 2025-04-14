@@ -20,7 +20,7 @@ const AddToCartIcon = () => {
       <path
         d="M3.64299 5.02829C3.64299 7.53924 7.40405 7.53924 7.40405 5.02829"
         stroke="white"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
     </svg>
   );

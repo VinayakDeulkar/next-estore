@@ -1,26 +1,33 @@
+import { AppContext } from "@/context/AppContext";
+import { Box, DialogTitle, SwipeableDrawer } from "@mui/material";
 import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
-import { AppContext } from "@/context/AppContext";
 import MapContainer from "./MapContainer";
-import { Box, Dialog, DialogTitle } from "@mui/material";
-import { useRouter } from "next/navigation";
 
-function BranchDetails({ branchId }) {
+const drawerBleeding = 56;
+function BranchDetails({ branchId, setBranchId }) {
   const { areaDetails, language } = useContext(AppContext);
   const [branch, setBranch] = useState({});
-  const router = useRouter();
+
+  const container =
+    window !== undefined ? () => window?.document?.body : undefined;
   useEffect(() => {
     if (areaDetails.data.branch) {
       setBranch(areaDetails.data.branch[branchId]);
     }
-  }, [areaDetails.data.branch]);
+  }, [areaDetails.data.branch, branchId]);
   return (
-    <Dialog open={branchId} onClose={() => router.push("/branches")}>
+    <SwipeableDrawer
+      container={container}
+      anchor="bottom"
+      open={branchId !== ""}
+      onClose={() => setBranchId("")}
+      swipeAreaWidth={drawerBleeding}
+      disableSwipeToOpen={true}
+    >
       <Box
         sx={{
-          height: "calc(100vh - 50px)",
           padding: "20px",
-          width: window.innerWidth > 600 ? "560px" : "auto",
         }}
       >
         <DialogTitle>
@@ -99,7 +106,7 @@ function BranchDetails({ branchId }) {
           ) : null}
         </React.Fragment>
       </Box>
-    </Dialog>
+    </SwipeableDrawer>
   );
 }
 

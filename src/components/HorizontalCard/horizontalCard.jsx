@@ -1,11 +1,15 @@
-import { Card, CardContent, CardMedia } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Grid } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import { AppContext } from "@/context/AppContext";
 import moment from "moment";
-import Link from "next/link";
 import ReactPixel from "react-facebook-pixel";
-import { removeCartItem } from "@/apis";
+import { addToCartApi, removeCartItem, updateCartQauntity } from "@/apis";
+import { useRouter } from "next/navigation";
+import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSquare";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import NormalText from "../assetBoxDesign/NormalText/normalText";
+import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
 
 const HorizontalCard = ({ product }) => {
   const {
@@ -19,6 +23,7 @@ const HorizontalCard = ({ product }) => {
   } = useContext(AppContext);
   const [inCart, setInCart] = useState(0);
   const [spinLoader, setSpinLoader] = useState(false);
+  const router = useRouter();
 
   const onAddToCartClick = async (event, n) => {
     event.preventDefault();
@@ -29,7 +34,7 @@ const HorizontalCard = ({ product }) => {
       product?.add_ons_count?.cnt != 0 ||
       product?.variation_count?.cnt != 0
     ) {
-      history.push(`/product=${product?.product_slug}`);
+      router.push(`/product?id=${product?.product_slug}`);
     } else if (n == -1 && inCart == 1) {
       setSpinLoader(true);
       const response = await removeCartItem({
@@ -157,7 +162,7 @@ const HorizontalCard = ({ product }) => {
                 internationalDelivery.country_name.toLowerCase() === "kuwait")
             ) {
               handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
-              // history.push(`/area`);
+              // router.push(`/area`);
             }
           }
         } else {
@@ -268,7 +273,7 @@ const HorizontalCard = ({ product }) => {
             ) {
               handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
 
-              // history.push(`/area`);
+              // router.push(`/area`);
             }
           }
         }
@@ -300,344 +305,265 @@ const HorizontalCard = ({ product }) => {
       sx={{
         display: "flex",
         width: "100%",
-        padding: "15px 20px",
+        padding: "15px 0px",
         gap: "20px",
         boxShadow: "none",
       }}
     >
-      <div style={{ position: "relative" }}>
-        <CardMedia
-          component="img"
-          height="200"
-          image={product?.image}
-          alt={product?.product_name}
-          style={{
-            width: "100px",
-            height: "100px",
-            objectFit: "cover",
-            borderRadius: "8px",
-          }}
-        />
-        {product?.label ? (
-          <TypographyConverter
+      <Grid container spacing={2}>
+        <Grid item sm={4} xs={4}>
+          <div style={{ position: "relative" }}>
+            <CardMedia
+              component="img"
+              image={product?.image}
+              alt={product?.product_name}
+              style={{
+                width: "100%",
+                height: "150px",
+                objectFit: "cover",
+                borderRadius: "8px",
+              }}
+            />
+            {product?.label ? (
+              <TypographyConverter
+                sx={{
+                  fontSize: "12px",
+                  fontWeight: 300,
+                  backgroundColor: product?.label_color || "rgb(242, 28, 28)",
+                  color: "#fff",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  textAlign: "center",
+                  borderTopLeftRadius: "8px",
+                  borderTopRightRadius: "8px",
+                }}
+                enText={product?.label}
+                arText={product?.label_ar}
+              />
+            ) : null}
+          </div>
+        </Grid>
+        <Grid item sm={8} xs={8}>
+          <CardContent
             sx={{
-              fontSize: "12px",
-              fontWeight: 300,
-              backgroundColor: product?.label_color || "rgb(242, 28, 28)",
-              color: "#fff",
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              textAlign: "center",
-              borderTopLeftRadius: "8px",
-              borderTopRightRadius: "8px",
-            }}
-            enText={product?.label}
-            arText={product?.label_ar}
-          />
-        ) : null}
-      </div>
-      <CardContent
-        sx={{
-          padding: "0",
-          "&:last-child": {
-            paddingBottom: "0",
-          },
-        }}
-      >
-        <TypographyConverter
-          sx={{ fontSize: "16px", fontWeight: 400, top: "0" }}
-          enText={product?.product_name}
-          arText={product?.product_name_ar}
-        />
-        {product?.short_description != "" ? (
-          <TypographyConverter
-            sx={{
-              fontSize: "14px",
-              fontWeight: 300,
-              color: "#888888",
-              overflowWrap: "break-word",
-              wordBreak: "break-word",
-              whiteSpace: "pre-wrap",
-              overflow: "hidden",
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              width: "100%",
-              margin: "0 auto",
-              marginTop: "2px",
-            }}
-            enText={product?.short_description
-              ?.replace(/(<([^>]+)>)/gi, "")
-              .replace(/\&nbsp;/gi, "")
-              .replace(/\s\s+/g, " ")
-              .replace(/&#39;/gi, "'")}
-            arText={product?.short_description_ar
-              ?.replace(/(<([^>]+)>)/gi, "")
-              .replace(/\&nbsp;/gi, "")
-              .replace(/\s\s+/g, " ")
-              .replace(/&#39;/gi, "'")}
-          />
-        ) : null}
-        {(areaDetails?.branchForArea?.start > moment() ||
-          moment() > areaDetails?.branchForArea?.end ||
-          !areaDetails?.data?.branch?.filter(
-            (k) => k?.id == areaDetails?.branchForArea?.id
-          )[0]?.on_shop_close_purchase !== "1") &&
-        product?.product_type != 0 ? (
-          <div
-            className="product-cost-div"
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              width: "95%",
-              marginTop: "10px",
+              padding: "0",
+              "&:last-child": {
+                paddingBottom: "0",
+              },
             }}
           >
-            {product?.offer_applied == 1 && (
-              <Link
-                // onClick={(e) => e.preventDefault()}
-                href={``}
-                className={`cost-bubble ${
-                  product?.product_status == 0 ? "small-padding" : ""
-                }`}
-                style={{
-                  color: product?.color,
-                  border: "none",
-                  padding: 0,
-                  fontSize: language == "ltr" ? 15 : 18,
-                  fontWeight: "600",
-                }}
-              >
-                {language === "ltr"
-                  ? product?.offer_msg
-                  : product?.offer_msg_ar}
-              </Link>
-            )}
-            {product?.product_status == 0 ? (
-              <Link
-                // onClick={(e) => e.preventDefault()}
-                href={``}
-                style={{
-                  border: "none",
-                  paddingRight: "0",
-                  paddingLeft: "0",
-                  color: "red",
-                  fontSize: language == "ltr" ? 15 : 18,
-                  fontWeight: "600",
-                }}
-                className={`cost-bubble price-bubble big-add-cart ${
-                  product?.offer_applied == 1 ? "small-padding" : ""
-                }`}
-              >
-                {language === "ltr"
-                  ? product?.status_label
-                  : product?.status_label_ar}
-              </Link>
-            ) : product?.price_on_selection == 1 ? (
-              <Link
-                // to={`/product=${product?.product_slug}`}
-                href={``}
-                style={{
-                  border: "none",
-                  paddingRight: "0",
-                  paddingLeft: "0",
-                  fontSize: language == "ltr" ? 15 : 18,
-                  fontWeight: "600",
-                }}
-                className="cost-bubble price-bubble big-add-cart"
-              >
-                {language === "ltr"
-                  ? "Price On Selection"
-                  : "السعر حسب الاختيار"}
-              </Link>
-            ) : product?.prodyct_type == 2 ? (
-              <Link
-                // to={`/product=${product?.product_slug}`}
-                href={``}
-                className="buy-get-img "
-                style={{
-                  borderRadius: "30px",
-                  fontSize: language == "ltr" ? 12 : 15,
-                  padding: "0 15px",
-                  color: "#818181",
-                  border: "2px solid #818181",
-                  minWidth: "155px",
-                  fontWeight: "600",
-                }}
-              >
-                {language === "ltr"
-                  ? "Product Registration only"
-                  : "حجز المنتج فقط"}
-              </Link>
-            ) : inCart != 0 ? (
+            <SubHeadline
+              enText={product?.product_name}
+              arText={product?.product_name_ar}
+            />
+            {product?.short_description != "" ? (
+              <NormalText
+                color="#888888"
+                enText={product?.short_description
+                  ?.replace(/(<([^>]+)>)/gi, "")
+                  .replace(/\&nbsp;/gi, "")
+                  .replace(/\s\s+/g, " ")
+                  .replace(/&#39;/gi, "'")}
+                arText={product?.short_description_ar
+                  ?.replace(/(<([^>]+)>)/gi, "")
+                  .replace(/\&nbsp;/gi, "")
+                  .replace(/\s\s+/g, " ")
+                  .replace(/&#39;/gi, "'")}
+              />
+            ) : null}
+            {(areaDetails?.branchForArea?.start > moment() ||
+              moment() > areaDetails?.branchForArea?.end ||
+              !areaDetails?.data?.branch?.filter(
+                (k) => k?.id == areaDetails?.branchForArea?.id
+              )[0]?.on_shop_close_purchase !== "1") &&
+            product?.product_type != 0 ? (
               <div
+                className="product-cost-div"
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  gap: "20px",
                 }}
-                className="price-bubble add-bubble"
               >
-                <span
-                  className="cost-bubble"
-                  style={{
-                    border: "none",
-                    margin: 0,
-                    paddingRight: 0,
-                    paddingLeft: 0,
-                    fontWeight: "600",
-                  }}
-                >
-                  <span>
-                    {product?.product_price
-                      ? parseFloat(product?.product_price).toFixed(3)
-                      : 0}
-                    &nbsp;
-                  </span>
-                  {language === "rtl" ? "د.ك" : "KD"}
-                </span>
-                <Link
-                  // onClick={(e) => e.preventDefault()}
-                  href={``}
-                  className="cost-bubble price-bubble big-add-cart"
-                  style={{
-                    marginTop: 0,
-                    padding: "0 4px",
-                    border: "none",
-                    paddingLeft: 0,
-                    paddingRight: 0,
-                  }}
-                >
-                  <div className="controlbuttondiv">
-                    <button
-                      className="control-button"
-                      onClick={(e) => onAddToCartClick(e, -1)}
-                    >
-                      <i className="fa fa-minus"></i>
-                    </button>
-                    <Link
-                      // onClick={(e) => e.preventDefault()}
-                      href={``}
-                      className="quantity-text"
-                    >
-                      {spinLoader ? (
-                        <Spinner
-                          height="16px"
-                          size="2.5px"
-                          color={homePageDetails?.vendor_data?.vendor_color}
-                        />
-                      ) : (
-                        inCart
-                      )}
-                    </Link>
-
-                    <button
-                      className="control-button"
-                      onClick={(e) => onAddToCartClick(e, 1)}
-                    >
-                      <i className="fa fa-plus"></i>
-                    </button>
-                  </div>
-                </Link>
-              </div>
-            ) : (
-              <Link
-                // onClick={(e) => onAddToCartClick(e, 1)}
-                href={``}
-                style={{
-                  border: "none",
-                  paddingLeft: 0,
-                  paddingRight: 0,
-                  display: "flex",
-                  alignItems: "flex-end",
-                }}
-                className="cost-bubble price-bubble big-add-cart"
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                  }}
-                >
-                  {product?.product_status == 1 &&
-                  product?.discount_applied == 1 ? (
-                    <del style={{ color: "red" }}>
-                      <span
-                        className="cost-bubble"
-                        style={{
-                          border: "none",
-                          color: "red",
-                          paddingRight: 0,
-                          paddingLeft: 0,
-                          padding: 0,
-                          fontSize: language == "ltr" ? 12 : 15,
-                          maxHeight: 17,
-                          minHeight: 17,
-                          margin: 0,
-                          fontWeight: "600",
-                        }}
-                      >
-                        <span>
-                          {product?.base_price
-                            ? parseFloat(product?.base_price).toFixed(3)
-                            : 0}
-                          &nbsp;
-                        </span>
-                        {language === "rtl" ? "د.ك" : "KD"}
-                      </span>
-                    </del>
-                  ) : null}
+                {product?.offer_applied == 1 && (
+                  <Box
+                    className={`cost-bubble ${
+                      product?.product_status == 0 ? "small-padding" : ""
+                    }`}
+                    sx={{
+                      color: product?.color,
+                      border: "none",
+                      padding: 0,
+                      fontSize: 14,
+                      fontWeight: "300",
+                    }}
+                  >
+                    {language === "ltr"
+                      ? product?.offer_msg
+                      : product?.offer_msg_ar}
+                  </Box>
+                )}
+                {product?.product_status == 0 ? (
+                  <Box
+                    href={``}
+                    sx={{
+                      border: "none",
+                      paddingRight: "0",
+                      paddingLeft: "0",
+                      color: "red",
+                      fontSize: language == "ltr" ? 14 : 18,
+                      fontWeight: "400",
+                    }}
+                    className={`cost-bubble price-bubble big-add-cart ${
+                      product?.offer_applied == 1 ? "small-padding" : ""
+                    }`}
+                  >
+                    {language === "ltr"
+                      ? product?.status_label
+                      : product?.status_label_ar}
+                  </Box>
+                ) : product?.price_on_selection == 1 ? (
+                  <Box
+                    href={``}
+                    sx={{
+                      border: "none",
+                      paddingRight: "0",
+                      paddingLeft: "0",
+                      fontSize: language == "ltr" ? 16 : 18,
+                      fontWeight: "400",
+                    }}
+                    className="cost-bubble price-bubble big-add-cart"
+                  >
+                    {language === "ltr"
+                      ? "Price On Selection"
+                      : "السعر حسب الاختيار"}
+                  </Box>
+                ) : product?.prodyct_type == 2 ? (
+                  <Box
+                    href={``}
+                    className="buy-get-img "
+                    sx={{
+                      borderRadius: "30px",
+                      fontSize: language == "ltr" ? 14 : 15,
+                      padding: "0 15px",
+                      color: "#818181",
+                      border: "2px solid #818181",
+                      minWidth: "155px",
+                      fontWeight: "300",
+                    }}
+                  >
+                    {language === "ltr"
+                      ? "Product Registration only"
+                      : "حجز المنتج فقط"}
+                  </Box>
+                ) : inCart != 0 ? (
                   <div
                     style={{
                       display: "flex",
-                      alignItems: "center",
-                      paddingBottom: 3,
-                      fontWeight: "600",
+                      flexDirection: "column",
+                      justifyContent: "start",
                     }}
+                    className="price-bubble add-bubble"
                   >
-                    <span>
-                      {product?.product_price
-                        ? parseFloat(product?.product_price).toFixed(3)
-                        : 0}
-                      &nbsp;
+                    <span
+                      className="cost-bubble"
+                      style={{
+                        border: "none",
+                        margin: 0,
+                        paddingRight: 0,
+                        paddingLeft: 0,
+                        fontWeight: "400",
+                      }}
+                    >
+                      <span>
+                        {product?.product_price
+                          ? parseFloat(product?.product_price).toFixed(3)
+                          : 0}
+                        &nbsp;
+                      </span>
+                      {language === "rtl" ? "د.ك" : "KD"}
                     </span>
-                    {language === "rtl" ? "د.ك" : "KD"}
+                    <Box sx={{ display: "flex", justifyContent: "start" }}>
+                      <MultipleItems
+                        loading={spinLoader}
+                        removeClick={(e) => onAddToCartClick(e, -1)}
+                        addClick={(e) => onAddToCartClick(e, 1)}
+                        count={inCart}
+                      />
+                    </Box>
                   </div>
-                </div>
-                <span
-                  style={{
-                    backgroundColor: homePageDetails?.vendor_data?.vendor_color,
-                    borderRadius: "50%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginLeft: "6px",
-                    width: "25px",
-                    height: "25px",
-                    boxSizing: "content-box",
-                  }}
-                  className="cart-image-div"
-                >
-                  {spinLoader ? (
-                    <Spinner height="14px" size="2px" />
-                  ) : (
-                    <img
-                      src={"images/Logo.png"}
-                      className="cart-image-add"
-                    ></img>
-                  )}
-                </span>
-              </Link>
-            )}
-          </div>
-        ) : null}
-      </CardContent>
+                ) : (
+                  <Box
+                    // onClick={(e) => onAddToCartClick(e, 1)}
+                    href={``}
+                    sx={{
+                      border: "none",
+                      paddingLeft: 0,
+                      paddingRight: 0,
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                    }}
+                    className="cost-bubble price-bubble big-add-cart"
+                  >
+                    <div>
+                      {product?.product_status == 1 &&
+                      product?.discount_applied == 1 ? (
+                        <del style={{ color: "red" }}>
+                          <span
+                            className="cost-bubble"
+                            style={{
+                              border: "none",
+                              color: "red",
+                              paddingRight: 0,
+                              paddingLeft: 0,
+                              padding: 0,
+                              fontSize: language == "ltr" ? 12 : 15,
+                              maxHeight: 17,
+                              minHeight: 17,
+                              margin: 0,
+                              fontWeight: "400",
+                            }}
+                          >
+                            <span>
+                              {product?.base_price
+                                ? parseFloat(product?.base_price).toFixed(3)
+                                : 0}
+                              &nbsp;
+                            </span>
+                            {language === "rtl" ? "د.ك" : "KD"}
+                          </span>
+                        </del>
+                      ) : null}
+                    </div>
+                    <SmallButtonSquare
+                      handleClick={(e) => {
+                        e.stopPropagation();
+                        if (inCart == 0) {
+                          onAddToCartClick(e, 1);
+                        }
+                      }}
+                      varient={"dark"}
+                      arText={`${
+                        product?.product_price
+                          ? parseFloat(product?.product_price).toFixed(3)
+                          : 0
+                      } د.ك`}
+                      enText={`${
+                        product?.product_price
+                          ? parseFloat(product?.product_price).toFixed(3)
+                          : 0
+                      } KD`}
+                    />
+                  </Box>
+                )}
+              </div>
+            ) : null}
+          </CardContent>
+        </Grid>
+      </Grid>
     </Card>
   );
 };

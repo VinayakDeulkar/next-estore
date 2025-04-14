@@ -14,6 +14,7 @@ import GridLayout from "@/components/common/GridLayout/gridLayout";
 import SingleProductCard from "@/components/SingleProductCard/singleProductCard";
 import { AppContext } from "@/context/AppContext";
 import HorizontalCard from "@/components/HorizontalCard/horizontalCard";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 
 const Products = (props) => {
   const [page, setPage] = useState(0);
@@ -27,7 +28,7 @@ const Products = (props) => {
 
   useEffect(() => {
     setProductsData([...props?.data]);
-  }, []);
+  }, [props?.data]);
 
   useEffect(() => {
     if (category) {
@@ -71,9 +72,8 @@ const Products = (props) => {
     setPage(0);
     history.goBack();
   };
-
   return (
-    <GridLayout backgroundColor={"#fff"} padding={"20px"}>
+    <EstoreLayout1>
       {homePageDetails?.vendor_data?.home_page_type === "13" ? (
         <Grid container className="gridContainer">
           {productsData?.map((product) => (
@@ -101,7 +101,7 @@ const Products = (props) => {
           ))}
         </Grid>
       ) : null}
-    </GridLayout>
+    </EstoreLayout1>
   );
 };
 

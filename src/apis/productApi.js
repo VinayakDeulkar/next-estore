@@ -70,7 +70,7 @@ export const removeCartItem = async ({
 }) => {
   try {
     const response = await axios.post(
-      `${API_URL}/remove-cart-items`,
+      `${process.env.NEXT_PUBLIC_API_URL}/remove-cart-items`,
       JSON.stringify({
         token: process.env.NEXT_PUBLIC_APP_TOKEN,
         vendor_id: vendors_id,

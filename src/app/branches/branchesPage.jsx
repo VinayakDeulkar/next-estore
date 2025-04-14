@@ -4,13 +4,11 @@ import BranchList from "@/components/BranchesComponent/BranchList";
 import BackButton from "@/components/common/BackButton/BackButton";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import { Box } from "@mui/material";
-import { useRouter, useSearchParams } from "next/navigation";
 import "./branchPage.css";
+import { useState } from "react";
 
 const BranchesPage = () => {
-  const searchParams = useSearchParams();
-  const branchId = searchParams.get("branch");
-  const router = useRouter();
+  const [branchId, setBranchId] = useState("");
   return (
     <EstoreLayout1>
       <Box
@@ -25,13 +23,9 @@ const BranchesPage = () => {
           <BackButton />
         </Box>
         <Box>
-          <BranchList />
+          <BranchList setBranchId={setBranchId} />
         </Box>
-        {branchId ? (
-          <Box>
-            <BranchDetails branchId={branchId} />
-          </Box>
-        ) : null}
+        <BranchDetails branchId={branchId} setBranchId={setBranchId} />
       </Box>
     </EstoreLayout1>
   );

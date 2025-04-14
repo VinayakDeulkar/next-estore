@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { Box, Grid } from "@mui/material";
 import React from "react";
 import CategoryCard from "../CategoryCard/categoryCard";
-import "./layout.css"
+import "./layout.css";
 
 const Layout13 = ({ categories }) => {
   return (
@@ -11,7 +11,6 @@ const Layout13 = ({ categories }) => {
         backgroundColor: "#fff",
         width: "100%",
         borderRadius: "8px",
-        padding: "20px",
       }}
     >
       <Grid container className="gridContainer">
