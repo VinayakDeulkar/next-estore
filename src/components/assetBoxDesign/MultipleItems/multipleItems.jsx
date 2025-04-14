@@ -19,13 +19,13 @@ const MultipleItems = ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        gap: "10px",
+        gap: "15px",
       }}
     >
       <IconButton
         sx={{
-          height: "25px",
-          width: "25px",
+          height: "30px",
+          width: "30px",
           borderRadius: "50%",
           backgroundColor: "#D9D9D9",
           display: "flex",
@@ -34,7 +34,7 @@ const MultipleItems = ({
         }}
         onClick={removeClick}
       >
-        <RemoveIcon sx={{ fontSize: "14px", color: "#000" }} />
+        <RemoveIcon sx={{ fontSize: "15px", color: "#000" }} />
       </IconButton>
       {loading ? (
         <div
@@ -45,7 +45,7 @@ const MultipleItems = ({
           }}
         >
           <Spinner
-            height="14px"
+            height="15px"
             size="2px"
             color={homePageDetails?.vendor_data?.vendor_color}
           />
@@ -56,7 +56,7 @@ const MultipleItems = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            fontSize: "14px",
+            fontSize: "15px",
             fontWeight: "500",
           }}
         >
@@ -65,8 +65,8 @@ const MultipleItems = ({
       )}
       <IconButton
         sx={{
-          height: "25px",
-          width: "25px",
+          height: "30px",
+          width: "30px",
           borderRadius: "50%",
           backgroundColor: "#D9D9D9",
           display: "flex",
@@ -75,7 +75,7 @@ const MultipleItems = ({
         }}
         onClick={addClick}
       >
-        <AddIcon sx={{ fontSize: "14px", color: "#000" }} />
+        <AddIcon sx={{ fontSize: "15px", color: "#000" }} />
       </IconButton>
     </div>
   );
