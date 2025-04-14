@@ -18,7 +18,11 @@ const Homepage = () => {
         return (
           <EstoreLayout1>
             <Box>
-              {window?.innerWidth < 600 ? <CarouselImage /> : null}
+              {window?.innerWidth < 600 ? (
+                <Box sx={{ direction: "ltr" }}>
+                  <CarouselImage />
+                </Box>
+              ) : null}
               <VendorBox />
               <HomePageLayouts homePageDetails={homePageDetails} />
             </Box>

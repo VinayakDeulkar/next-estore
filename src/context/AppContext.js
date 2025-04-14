@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { SnackbarProvider } from "notistack";
 import { emptyUserCart, getUserCart, GetUserDetails } from "@/apis";
 import { tele } from "@/constants/constants";
+import { Box } from "@mui/material";
 
 export const AppContext = createContext();
 
@@ -427,7 +428,14 @@ export const AppProvider = ({
 
   return (
     <AppContext.Provider value={store}>
-      <SnackbarProvider>{children}</SnackbarProvider>
+      <Box
+        sx={{
+          fontFamily:
+            language === "ltr" ? "SFT Schrifted Sans TRIAL Var" : "Orleen",
+        }}
+      >
+        <SnackbarProvider>{children}</SnackbarProvider>
+      </Box>
     </AppContext.Provider>
   );
 };

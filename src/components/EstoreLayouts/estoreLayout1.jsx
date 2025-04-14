@@ -20,7 +20,13 @@ const EstoreLayout1 = ({ children }) => {
           </Box>
         </Grid>
         {window?.innerWidth > 600 ? (
-          <Grid item sm={12} md={12} lg={8} sx={{ padding: "10px" }}>
+          <Grid
+            item
+            sm={12}
+            md={12}
+            lg={8}
+            sx={{ padding: "10px", direction: "ltr" }}
+          >
             <CarouselImage />
           </Grid>
         ) : null}

@@ -1,4 +1,5 @@
 import CartIcon from "@/assets/icons/addressIcons/CartIcon";
+import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
 import GridLayout1 from "@/components/GridLayouts/gridLayout1";
 import GridLayout2 from "@/components/GridLayouts/gridLayout2";
 import { AppContext } from "@/context/AppContext";
@@ -9,7 +10,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 const Navbar = ({ handleDrawar }) => {
-  const { homePageDetails, language, cart } = useContext(AppContext);
+  const { homePageDetails, language, cart, handleLanguageChange } =
+    useContext(AppContext);
   const router = useRouter();
 
   const renderGridNav = () => {
@@ -69,7 +71,7 @@ const Navbar = ({ handleDrawar }) => {
             </Box>
           </IconButton>
         </Grid>
-        {/* <Grid
+        <Grid
           item
           xs={4}
           sm={4}
@@ -80,23 +82,7 @@ const Navbar = ({ handleDrawar }) => {
             alignItems: "center",
             justifyContent: "center",
           }}
-        >
-          <Image
-            loading="lazy"
-            width={30}
-            height={30}
-            src={
-              language == "ltr"
-                ? homePageDetails?.vendor_data?.english_new_background
-                : homePageDetails?.vendor_data?.arabic_new_background
-            }
-            alt={
-              language == "ltr"
-                ? homePageDetails?.vendor_data?.name
-                : homePageDetails?.vendor_data?.name_ar
-            }
-          />
-        </Grid>
+        ></Grid>
         <Grid
           item
           xs={4}
@@ -110,22 +96,27 @@ const Navbar = ({ handleDrawar }) => {
             padding: "8px",
           }}
         >
-          {cart?.cartCount && (
-            <Badge
-              color="success"
-              badgeContent={cart?.cartCount}
-              onClick={() => {
-                if (window.innerWidth < 600) {
-                  router.push("/review");
-                } else {
-                  router.push("/checkout-desktop");
-                }
-              }}
-            >
-              <CartIcon />
-            </Badge>
-          )}
-        </Grid> */}
+          <Box
+            sx={{
+              fontFamily:
+                language === "rtl" ? "SFT Schrifted Sans TRIAL Var" : "Orleen",
+              color: "#000",
+            }}
+            component={"button"}
+            onClick={() => {
+              document
+                .getElementsByTagName("html")[0]
+                .setAttribute("dir", language.split("").reverse().join(""));
+              sessionStorage.setItem(
+                "language",
+                language.split("").reverse().join("")
+              );
+              handleLanguageChange(language.split("").reverse().join(""));
+            }}
+          >
+            {language === "rtl" ? "English" : "عربي"}
+          </Box>
+        </Grid>
       </Grid>
     );
   };
