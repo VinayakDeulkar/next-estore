@@ -1,12 +1,7 @@
-import CartIcon from "@/assets/icons/addressIcons/CartIcon";
-import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
-import GridLayout1 from "@/components/GridLayouts/gridLayout1";
 import GridLayout2 from "@/components/GridLayouts/gridLayout2";
 import { AppContext } from "@/context/AppContext";
 import BurgerIcon from "@/SVGs/BurgerIcon";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Badge, Box, Grid, IconButton } from "@mui/material";
-import Image from "next/image";
+import { Box, Grid, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 const Navbar = ({ handleDrawar }) => {
