@@ -43,6 +43,7 @@ const Products = (props) => {
       setHasSubCategories(1);
       setSubCategoryData([...props?.data]);
     } else {
+      setHasSubCategories(0);
       setProductsData([...props?.data]);
     }
   }, [props?.data]);
@@ -91,7 +92,8 @@ const Products = (props) => {
   };
 
   const categoryProducts = () => {
-    if (true) {
+    console.log("In category product");
+    if (hasSubCategories) {
       return (
         <Grid container spacing={"20px"}>
           {subCategoryData?.map((cat) => (
@@ -162,9 +164,8 @@ const Products = (props) => {
         />
       </div>
       <>
-        {hasSubCategories ? (
-          subCategoryData?.length
-        ) : productsData?.length ? (
+        {(hasSubCategories && subCategoryData?.length) ||
+        (!hasSubCategories && productsData?.length) ? (
           <>{categoryProducts()}</>
         ) : (
           <HeadLine
