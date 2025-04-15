@@ -29,7 +29,11 @@ const Products = (props) => {
   const [productsData, setProductsData] = useState([]);
   const { homePageDetails } = useContext(AppContext);
 
-  console.log(props, "props");
+  console.log(productsData, "productsData------");
+  console.log(
+    homePageDetails?.vendor_data?.home_page_type,
+    "homePageDetails?.vendor_data?.home_page_type"
+  );
 
   useEffect(() => {
     setProductsData([...props?.data]);
@@ -104,13 +108,17 @@ const Products = (props) => {
         );
 
       case "16":
-        <Grid container sx={{ gap: "50px", padding: "25px 100px" }}>
-          {productsData?.map((product) => (
-            <Grid item xs={12} key={product?.id}>
-              <ProductSquareCard product={product} imgHeight={"250px"} />
-            </Grid>
-          ))}
-        </Grid>;
+        <>
+          {console.log(productsData,"In 16")}
+          <Grid container /* sx={{ gap: "50px", padding: "25px 100px" }} */>
+            {productsData?.map((product) => (
+              <Grid item xs={12} key={product?.id}>
+                <ProductSquareCard product={product} imgHeight={"250px"} />
+              </Grid>
+            ))}
+          </Grid>
+          ;
+        </>;
     }
   };
 

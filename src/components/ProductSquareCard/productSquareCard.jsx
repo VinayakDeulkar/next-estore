@@ -23,6 +23,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
   const [inCart, setInCart] = useState(0);
   const [spinLoader, setSpinLoader] = useState(false);
   const router = useRouter();
+  console.log(product, "product in productSquareCard")
 
   const handleCardClick = () => {
     router.push(`/product?id=${product?.product_slug}`);
