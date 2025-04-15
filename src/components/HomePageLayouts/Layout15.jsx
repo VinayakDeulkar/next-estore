@@ -11,12 +11,14 @@ import { AppContext } from "@/context/AppContext";
 import "./layout.css";
 import ProductSquareCard from "../ProductSquareCard/productSquareCard";
 import HeadLine from "../assetBoxDesign/Headline/headLine";
+import CategoryCard from "../CategoryCard/categoryCard";
 
 const Layout15 = ({ categories }) => {
   const { language, homePageDetails } = useContext(AppContext);
   const [expendedList, setExpendedList] = useState(
     categories?.map((cate) => cate.category_id)
   );
+  console.log(homePageDetails, "homePageDetails");
 
   const handleAccordionClick = (category_id) => {
     if (expendedList.includes(category_id)) {
@@ -66,15 +68,25 @@ const Layout15 = ({ categories }) => {
               enText={category?.category_name}
             />
           </AccordionSummary>
-          <AccordionDetails sx={{ padding: 0 }}>
+          {category?.is_subcategory ? (
             <Grid container spacing={"20px"}>
               {category?.products?.map((product) => (
-                <Grid item {...sizes()} key={product?.id}>
-                  <ProductSquareCard product={product} />
+                <Grid item {...sizes()} key={product?.category_id}>
+                  <CategoryCard category={product} />
                 </Grid>
               ))}
             </Grid>
-          </AccordionDetails>
+          ) : (
+            <AccordionDetails sx={{ padding: 0 }}>
+              <Grid container spacing={"20px"}>
+                {category?.products?.map((product) => (
+                  <Grid item {...sizes()} key={product?.id}>
+                    <ProductSquareCard product={product} />
+                  </Grid>
+                ))}
+              </Grid>
+            </AccordionDetails>
+          )}
         </Accordion>
       ))}
     </div>

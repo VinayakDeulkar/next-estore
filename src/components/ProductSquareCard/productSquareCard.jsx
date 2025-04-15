@@ -396,7 +396,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           )}
         </div>
         {product?.short_description != "" ? (
-          <div style={{ color: "#888888" }}>
+          <div className="product-description">
             <NormalText
               enText={product?.short_description
                 ?.replace(/(<([^>]+)>)/gi, "")
@@ -408,6 +408,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 .replace(/\&nbsp;/gi, "")
                 .replace(/\s\s+/g, " ")
                 .replace(/&#39;/gi, "'")}
+              color={"#8D8D8D"}
             />
           </div>
         ) : null}

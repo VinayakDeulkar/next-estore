@@ -44,3 +44,11 @@ html[dir="rtl"] .commonbackHolder {
 html[dir="rtl"] .commonbackHeading {
   font-size: 22px;
 }
+
+.light {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.dark {
+  background: rgba(73, 71, 71, 0.07);
+}

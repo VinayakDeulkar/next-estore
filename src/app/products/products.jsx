@@ -1,6 +1,6 @@
 "use client";
 import ProductSquareCard from "@/components/ProductSquareCard/productSquareCard";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import React, {
   useCallback,
@@ -15,6 +15,9 @@ import SingleProductCard from "@/components/SingleProductCard/singleProductCard"
 import { AppContext } from "@/context/AppContext";
 import HorizontalCard from "@/components/HorizontalCard/horizontalCard";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
+import BackButton from "@/components/common/BackButton/BackButton";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 
 const Products = (props) => {
   const [page, setPage] = useState(0);
@@ -25,6 +28,8 @@ const Products = (props) => {
   const [hasMore, setHasMore] = useState(0);
   const [productsData, setProductsData] = useState([]);
   const { homePageDetails } = useContext(AppContext);
+
+  console.log(props, "props");
 
   useEffect(() => {
     setProductsData([...props?.data]);
@@ -37,10 +42,10 @@ const Products = (props) => {
   }, [category]);
 
   const getCategoryName = () => {
-    const filterCategory = details?.categories.filter(
+    const filterCategory = homePageDetails?.categories?.filter(
       (ele) => ele.category_slug == category
     );
-    if (filterCategory.length) {
+    if (filterCategory?.length) {
       return {
         eng: filterCategory[0].category_name,
         ar: filterCategory[0].category_name_ar,
@@ -72,35 +77,62 @@ const Products = (props) => {
     setPage(0);
     history.goBack();
   };
-  return (
-    <EstoreLayout1>
-      {homePageDetails?.vendor_data?.home_page_type === "13" ? (
-        <Grid container className="gridContainer">
-          {productsData?.map((product) => (
-            <Grid item xs={6} key={product?.id}>
-              <ProductSquareCard product={product} />
-            </Grid>
-          ))}
-        </Grid>
-      ) : null}
-      {homePageDetails?.vendor_data?.home_page_type === "16" ? (
+
+  const categoryProducts = () => {
+    switch (homePageDetails?.vendor_data?.home_page_type) {
+      case "10":
+        return (
+          <Grid container spacing={1}>
+            {productsData?.map((product) => (
+              <Grid item xs={12} key={product?.id}>
+                <HorizontalCard product={product} />
+              </Grid>
+            ))}
+          </Grid>
+        );
+
+      case "13":
+      case "15":
+        return (
+          <Grid container className="gridContainer">
+            {productsData?.map((product) => (
+              <Grid item xs={6} key={product?.id}>
+                <ProductSquareCard product={product} />
+              </Grid>
+            ))}
+          </Grid>
+        );
+
+      case "16":
         <Grid container sx={{ gap: "50px", padding: "25px 100px" }}>
           {productsData?.map((product) => (
             <Grid item xs={12} key={product?.id}>
               <ProductSquareCard product={product} imgHeight={"250px"} />
             </Grid>
           ))}
-        </Grid>
-      ) : null}
-      {homePageDetails?.vendor_data?.home_page_type === "10" ? (
-        <Grid container spacing={1}>
-          {productsData?.map((product) => (
-            <Grid item xs={12} key={product?.id}>
-              <HorizontalCard product={product} />
-            </Grid>
-          ))}
-        </Grid>
-      ) : null}
+        </Grid>;
+    }
+  };
+
+  return (
+    <EstoreLayout1>
+      <div>
+        <BackButton variant="dark" />
+        <SubHeadline
+          enText={productsData?.[0]?.category_name}
+          arText={productsData?.[0]?.category_name_ar}
+        />
+      </div>
+      <>
+        {productsData?.length ? (
+          <>{categoryProducts()}</>
+        ) : (
+          <HeadLine
+            enText={"Products are unavailable"}
+            arText={"المنتجات غير متوفرة"}
+          />
+        )}
+      </>
     </EstoreLayout1>
   );
 };

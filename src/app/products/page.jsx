@@ -20,7 +20,7 @@ const Page = async ({ searchParams, query }) => {
   const keysExceptId = Object.keys(searchParamsObj).filter(
     (key) => key !== "id"
   );
-  let category = searchParams.id;
+  let category = searchParams?.id;
   if (keysExceptId.length) {
     keysExceptId.forEach((ele) => (category = `${category}&${ele}`));
   }
