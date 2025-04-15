@@ -26,7 +26,7 @@ const Page = async ({ searchParams, query }) => {
   }
 
   const props = await getData(category, vendor_id, vendor_slug);
-  return <Products {...props} />;
+  return <Products {...{ ...props, category }} />;
 };
 
 export default Page;

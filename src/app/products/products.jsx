@@ -18,6 +18,7 @@ import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import BackButton from "@/components/common/BackButton/BackButton";
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import CategoryCard from "@/components/CategoryCard/categoryCard";
 
 const Products = (props) => {
   const [page, setPage] = useState(0);
@@ -27,16 +28,23 @@ const Products = (props) => {
   const [isPageLoading, setIsPageLoading] = useState(false);
   const [hasMore, setHasMore] = useState(0);
   const [productsData, setProductsData] = useState([]);
+  const [subCategoryData, setSubCategoryData] = useState([]);
+  const [hasSubCategories, setHasSubCategories] = useState(0);
   const { homePageDetails } = useContext(AppContext);
 
-  console.log(productsData, "productsData------");
+  console.log(props, "props------");
   console.log(
     homePageDetails?.vendor_data?.home_page_type,
     "homePageDetails?.vendor_data?.home_page_type"
   );
 
   useEffect(() => {
-    setProductsData([...props?.data]);
+    if (props?.is_subcategory) {
+      setHasSubCategories(1);
+      setSubCategoryData([...props?.data]);
+    } else {
+      setProductsData([...props?.data]);
+    }
   }, [props?.data]);
 
   useEffect(() => {
@@ -47,7 +55,7 @@ const Products = (props) => {
 
   const getCategoryName = () => {
     const filterCategory = homePageDetails?.categories?.filter(
-      (ele) => ele.category_slug == category
+      (ele) => ele.category_slug == props?.category
     );
     if (filterCategory?.length) {
       return {
@@ -83,42 +91,56 @@ const Products = (props) => {
   };
 
   const categoryProducts = () => {
-    switch (homePageDetails?.vendor_data?.home_page_type) {
-      case "10":
-        return (
-          <Grid container spacing={1}>
-            {productsData?.map((product) => (
-              <Grid item xs={12} key={product?.id}>
-                <HorizontalCard product={product} />
-              </Grid>
-            ))}
-          </Grid>
-        );
+    if (true) {
+      return (
+        <Grid container spacing={"20px"}>
+          {subCategoryData?.map((cat) => (
+            <Grid item xs={6} key={cat?.category_id}>
+              <CategoryCard category={cat} />
+            </Grid>
+          ))}
+        </Grid>
+      );
+    } else {
+      switch (homePageDetails?.vendor_data?.home_page_type) {
+        case "10":
+          return (
+            <Grid container spacing={1}>
+              {productsData?.map((product) => (
+                <Grid item xs={12} key={product?.id}>
+                  <HorizontalCard product={product} />
+                </Grid>
+              ))}
+            </Grid>
+          );
 
-      case "13":
-      case "15":
-        return (
-          <Grid container className="gridContainer">
-            {productsData?.map((product) => (
-              <Grid item xs={6} key={product?.id}>
-                <ProductSquareCard product={product} />
-              </Grid>
-            ))}
-          </Grid>
-        );
+        case "13":
+        case "15":
+          return (
+            <Grid container className="gridContainer">
+              {productsData?.map((product) => (
+                <Grid item xs={6} key={product?.id}>
+                  <ProductSquareCard product={product} />
+                </Grid>
+              ))}
+            </Grid>
+          );
 
-      case "16":
-        <>
-          {console.log(productsData,"In 16")}
-          <Grid container /* sx={{ gap: "50px", padding: "25px 100px" }} */>
-            {productsData?.map((product) => (
-              <Grid item xs={12} key={product?.id}>
-                <ProductSquareCard product={product} imgHeight={"250px"} />
-              </Grid>
-            ))}
-          </Grid>
-          ;
-        </>;
+        case "16":
+          <>
+            {console.log(productsData, "In 16")}
+            <Grid container sx={{ gap: "50px", padding: "25px 100px" }}>
+              {productsData?.map((product) => (
+                <Grid item xs={12} key={product?.id}>
+                  <ProductSquareCard product={product} imgHeight={"250px"} />
+                </Grid>
+              ))}
+            </Grid>
+          </>;
+
+        default:
+          break;
+      }
     }
   };
 
@@ -127,12 +149,22 @@ const Products = (props) => {
       <div>
         <BackButton variant="dark" />
         <SubHeadline
-          enText={productsData?.[0]?.category_name}
-          arText={productsData?.[0]?.category_name_ar}
+          enText={
+            hasSubCategories
+              ? getCategoryName().eng
+              : productsData?.[0]?.category_name
+          }
+          arText={
+            hasSubCategories
+              ? getCategoryName().ar
+              : productsData?.[0]?.category_name_ar
+          }
         />
       </div>
       <>
-        {productsData?.length ? (
+        {hasSubCategories ? (
+          subCategoryData?.length
+        ) : productsData?.length ? (
           <>{categoryProducts()}</>
         ) : (
           <HeadLine
