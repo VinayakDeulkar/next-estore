@@ -311,15 +311,15 @@ const HorizontalCard = ({ product }) => {
       }}
     >
       <Grid container spacing={2}>
-        <Grid item sm={4} xs={4}>
+        <Grid item xs={3.5}>
           <div style={{ position: "relative" }}>
             <CardMedia
               component="img"
               image={product?.image}
               alt={product?.product_name}
               style={{
-                width: "100%",
-                height: "150px",
+                width: "125px",
+                height: "125px",
                 objectFit: "cover",
                 borderRadius: "8px",
               }}
@@ -345,7 +345,7 @@ const HorizontalCard = ({ product }) => {
             ) : null}
           </div>
         </Grid>
-        <Grid item sm={8} xs={8}>
+        <Grid item xs={8.5}>
           <CardContent
             sx={{
               padding: "0",
@@ -359,19 +359,21 @@ const HorizontalCard = ({ product }) => {
               arText={product?.product_name_ar}
             />
             {product?.short_description != "" ? (
-              <NormalText
-                color="#888888"
-                enText={product?.short_description
-                  ?.replace(/(<([^>]+)>)/gi, "")
-                  .replace(/\&nbsp;/gi, "")
-                  .replace(/\s\s+/g, " ")
-                  .replace(/&#39;/gi, "'")}
-                arText={product?.short_description_ar
-                  ?.replace(/(<([^>]+)>)/gi, "")
-                  .replace(/\&nbsp;/gi, "")
-                  .replace(/\s\s+/g, " ")
-                  .replace(/&#39;/gi, "'")}
-              />
+              <div className="product-description">
+                <NormalText
+                  color={"#888888"}
+                  enText={product?.short_description
+                    ?.replace(/(<([^>]+)>)/gi, "")
+                    .replace(/\&nbsp;/gi, "")
+                    .replace(/\s\s+/g, " ")
+                    .replace(/&#39;/gi, "'")}
+                  arText={product?.short_description_ar
+                    ?.replace(/(<([^>]+)>)/gi, "")
+                    .replace(/\&nbsp;/gi, "")
+                    .replace(/\s\s+/g, " ")
+                    .replace(/&#39;/gi, "'")}
+                />
+              </div>
             ) : null}
             {(areaDetails?.branchForArea?.start > moment() ||
               moment() > areaDetails?.branchForArea?.end ||
@@ -384,7 +386,7 @@ const HorizontalCard = ({ product }) => {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "20px",
+                  gap: "5px",
                 }}
               >
                 {product?.offer_applied == 1 && (
@@ -504,7 +506,7 @@ const HorizontalCard = ({ product }) => {
                       paddingRight: 0,
                       display: "flex",
                       flexDirection: "column",
-                      gap: "10px",
+                      gap: "5px",
                     }}
                     className="cost-bubble price-bubble big-add-cart"
                   >
@@ -525,6 +527,8 @@ const HorizontalCard = ({ product }) => {
                               minHeight: 17,
                               margin: 0,
                               fontWeight: "400",
+                              display: "flex",
+                              alignItems: "center"
                             }}
                           >
                             <span>

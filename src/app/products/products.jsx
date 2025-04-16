@@ -32,13 +32,8 @@ const Products = (props) => {
   const [hasSubCategories, setHasSubCategories] = useState(0);
   const { homePageDetails } = useContext(AppContext);
 
-  console.log(props, "props------");
-  console.log(
-    homePageDetails?.vendor_data?.home_page_type,
-    "homePageDetails?.vendor_data?.home_page_type"
-  );
-
   useEffect(() => {
+    console.log(props, "props------")
     if (props?.is_subcategory) {
       setHasSubCategories(1);
       setSubCategoryData([...props?.data]);
@@ -92,7 +87,6 @@ const Products = (props) => {
   };
 
   const categoryProducts = () => {
-    console.log("In category product");
     if (hasSubCategories) {
       return (
         <Grid container spacing={"20px"}>
@@ -106,6 +100,7 @@ const Products = (props) => {
     } else {
       switch (homePageDetails?.vendor_data?.home_page_type) {
         case "10":
+        case "11":
           return (
             <Grid container spacing={1}>
               {productsData?.map((product) => (
@@ -116,6 +111,7 @@ const Products = (props) => {
             </Grid>
           );
 
+        case "12":
         case "13":
         case "15":
           return (
@@ -130,7 +126,6 @@ const Products = (props) => {
 
         case "16":
           <>
-            {console.log(productsData, "In 16")}
             <Grid container sx={{ gap: "50px", padding: "25px 100px" }}>
               {productsData?.map((product) => (
                 <Grid item xs={12} key={product?.id}>

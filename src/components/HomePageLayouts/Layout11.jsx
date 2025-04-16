@@ -11,6 +11,8 @@ import TypographyConverter from "../common/TypographyConveter/typographyConverte
 import HorizontalCard from "../HorizontalCard/horizontalCard";
 import { useRouter } from "next/navigation";
 import HeadLine from "../assetBoxDesign/Headline/headLine";
+import CategoryCard from "../CategoryCard/categoryCard";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 const Layout11 = ({ categories }) => {
   const router = useRouter();
@@ -47,7 +49,7 @@ const Layout11 = ({ categories }) => {
               fontWeight: 600,
             }}
           >
-            <HeadLine
+            <SubHeadline
               enText={category?.category_name}
               arText={category?.category_name_ar}
             />
@@ -57,42 +59,47 @@ const Layout11 = ({ categories }) => {
       {categories?.map((category) => (
         <Accordion
           sx={{
-            marginBottom: "25px",
-            borderRadius: "8px",
-            padding: "0 20px",
+            mb: 2,
+            borderRadius: "10px !important",
             boxShadow: "none",
+            padding: 0,
           }}
           key={category?.category_id}
           expanded={expendedList.includes(category?.category_id)}
           onChange={() => handleAccordionClick(category?.category_id)}
         >
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={
+              <ExpandMoreIcon sx={{ fontSize: "36px", fill: "#000" }} />
+            }
             aria-controls="panel1a-content"
             id="panel1a-header"
+            sx={{ padding: 0 }}
           >
-            <TypographyConverter
-              sx={{ fontSize: "20px", fontWeight: "500" }}
+            <HeadLine
               arText={category?.category_name_ar}
               enText={category?.category_name}
             />
           </AccordionSummary>
-          <AccordionDetails sx={{ padding: 0 }}>
-            <Grid container spacing={1}>
+          {category?.is_subcategory ? (
+            <Grid container spacing={4}>
               {category?.products?.map((product) => (
-                <Grid
-                  item
-                  xs={12}
-                  key={product?.id}
-                  onClick={() =>
-                    router.push(`/product?id=${product?.product_slug}`)
-                  }
-                >
-                  <HorizontalCard product={product} />
+                <Grid item xs={12} key={product?.category_id}>
+                  <CategoryCard category={product} />
                 </Grid>
               ))}
             </Grid>
-          </AccordionDetails>
+          ) : (
+            <AccordionDetails sx={{ padding: 0 }}>
+              <Grid container spacing={1}>
+                {category?.products?.map((product) => (
+                  <Grid item xs={12} key={product?.id}>
+                    <HorizontalCard product={product} />
+                  </Grid>
+                ))}
+              </Grid>
+            </AccordionDetails>
+          )}
         </Accordion>
       ))}
     </Box>
