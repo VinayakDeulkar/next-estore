@@ -494,7 +494,7 @@ const ProductDetails = ({
           });
         setSpinLoader(false);
         handleCartChange(response?.data);
-        router.push(`/checkout-desktop`);
+        router.push(`/checkout`);
         if (
           (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
           (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
@@ -603,7 +603,7 @@ const ProductDetails = ({
             });
           setSpinLoader(false);
           handleCartChange(response?.data);
-          router.push(`/checkout-desktop`);
+          router.push(`/checkout`);
           if (
             (areaDetails?.type != "delivery" || areaDetails?.area == "") &&
             (areaDetails?.type != "pickup" || areaDetails?.branch == "") &&
