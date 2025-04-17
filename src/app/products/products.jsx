@@ -19,6 +19,8 @@ import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import BackButton from "@/components/common/BackButton/BackButton";
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 import CategoryCard from "@/components/CategoryCard/categoryCard";
+import Notes from "@/components/assetBoxDesign/Notes/notes";
+import NotificationAlerts from "@/components/assetBoxDesign/NotificationAlerts/notificationAlerts";
 
 const Products = (props) => {
   const [page, setPage] = useState(0);
@@ -29,16 +31,15 @@ const Products = (props) => {
   const [hasMore, setHasMore] = useState(0);
   const [productsData, setProductsData] = useState([]);
   const [subCategoryData, setSubCategoryData] = useState([]);
-  const [hasSubCategories, setHasSubCategories] = useState(0);
+  const [hasSubCategories, setHasSubCategories] = useState(false);
   const { homePageDetails } = useContext(AppContext);
 
   useEffect(() => {
-    console.log(props, "props------");
-    if (props?.is_subcategory) {
-      setHasSubCategories(1);
+    if (props?.is_subcategory === 1) {
+      setHasSubCategories(true);
       setSubCategoryData([...props?.data]);
     } else {
-      setHasSubCategories(0);
+      setHasSubCategories(false);
       setProductsData([...props?.data]);
     }
   }, [props?.data]);
@@ -145,27 +146,27 @@ const Products = (props) => {
     <EstoreLayout1>
       <div>
         <Box sx={{ position: "relative", height: "74px" }}>
-          <BackButton variant="dark" />
+          <BackButton
+            variant="dark"
+            arabic_title={
+              hasSubCategories
+                ? getCategoryName().ar
+                : productsData?.[0]?.category_name_ar
+            }
+            english_title={
+              hasSubCategories
+                ? getCategoryName().eng
+                : productsData?.[0]?.category_name
+            }
+          />
         </Box>
-        <SubHeadline
-          enText={
-            hasSubCategories
-              ? getCategoryName().eng
-              : productsData?.[0]?.category_name
-          }
-          arText={
-            hasSubCategories
-              ? getCategoryName().ar
-              : productsData?.[0]?.category_name_ar
-          }
-        />
 
         <>
           {(hasSubCategories && subCategoryData?.length) ||
           (!hasSubCategories && productsData?.length) ? (
             <>{categoryProducts()}</>
           ) : (
-            <HeadLine
+            <SubHeadline
               enText={"Products are unavailable"}
               arText={"المنتجات غير متوفرة"}
             />

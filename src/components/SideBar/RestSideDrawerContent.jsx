@@ -227,7 +227,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
               key={i}
               className="restSide-div"
               onClick={() => navigateFunction(section)}
-              sx={{ fontSize: "20px" }}
+              sx={{ fontSize: "20px", cursor: "pointer" }}
             >
               {language === "ltr" ? section.englishType : section.arabicType}
             </ListItem>

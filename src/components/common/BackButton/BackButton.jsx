@@ -1,12 +1,10 @@
-import { AppContext } from "@/context/AppContext";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import styles from "./backButton.module.css";
-import React, { useContext } from "react";
-import { Box } from "@mui/material";
 
 const BackButton = ({ clickButton, arabic_title, english_title, variant }) => {
   const router = useRouter();
-  const { homePageDetails, language } = useContext(AppContext);
 
   return (
     <Box className={styles.commonbackMainBox}>
@@ -33,9 +31,7 @@ const BackButton = ({ clickButton, arabic_title, english_title, variant }) => {
         </Box>
       </Box>
       {arabic_title != "" && english_title != "" ? (
-        <Box className={styles.commonbackHeading}>
-          {language === "ltr" ? english_title : arabic_title}
-        </Box>
+        <HeadLine arText={arabic_title} enText={english_title} />
       ) : null}
     </Box>
   );

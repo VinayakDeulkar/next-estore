@@ -26,6 +26,7 @@ const Page = async ({ searchParams, query }) => {
   }
 
   const props = await getData(category, vendor_id, vendor_slug);
+  console.log(props, "propspropspropsprops");
   return <Products {...{ ...props, category }} />;
 };
 

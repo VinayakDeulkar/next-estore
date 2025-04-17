@@ -3,7 +3,6 @@
   margin: 16px 0;
   align-items: center;
   justify-content: center;
-  padding: 0 16px;
   position: relative;
   min-height: 42px;
   position: absolute;
@@ -21,7 +20,7 @@
   padding: 9px 10px;
   cursor: pointer;
   position: absolute;
-  left: 16px;
+  left: 0;
   background-color: #00000061;
 }
 
@@ -32,7 +31,7 @@ html[dir="rtl"] .commonbackHolder {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
   left: auto;
-  right: 16px;
+  right: 0;
 }
 
 .commonbackHeading {

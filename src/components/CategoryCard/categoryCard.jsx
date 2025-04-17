@@ -6,6 +6,7 @@ import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import { AppContext } from "@/context/AppContext";
 
 const CategoryCard = ({ category }) => {
+  console.log(category, "category");
   const { homePageDetails } = useContext(AppContext);
   const router = useRouter();
 
@@ -23,7 +24,7 @@ const CategoryCard = ({ category }) => {
               boxShadow: "none",
               width: "100%",
               display: "flex",
-              gap: "18px"
+              gap: "18px",
             }}
             onClick={handleCardClick}
           >
@@ -49,6 +50,7 @@ const CategoryCard = ({ category }) => {
           </Card>
         );
 
+      case "12":
       case "10":
       case "13":
       case "15":
@@ -74,7 +76,14 @@ const CategoryCard = ({ category }) => {
                 marginBottom: "10px",
               }}
             />
-            <CardContent sx={{ padding: "0", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <CardContent
+              sx={{
+                padding: "0",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <SubHeadline
                 enText={category?.category_name}
                 arText={category?.category_name_ar}
