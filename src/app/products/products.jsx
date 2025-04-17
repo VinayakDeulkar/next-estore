@@ -166,10 +166,20 @@ const Products = (props) => {
           (!hasSubCategories && productsData?.length) ? (
             <>{categoryProducts()}</>
           ) : (
-            <SubHeadline
-              enText={"Products are unavailable"}
-              arText={"المنتجات غير متوفرة"}
-            />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "calc(100vh - 400px)",
+              }}
+            >
+              <SubHeadline
+                enText={"Products are unavailable"}
+                arText={"المنتجات غير متوفرة"}
+                color="#8D8D8D"
+              />
+            </Box>
           )}
         </>
       </div>

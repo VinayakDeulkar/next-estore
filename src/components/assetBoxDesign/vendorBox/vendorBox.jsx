@@ -57,6 +57,7 @@ const VendorBox = () => {
             <SubHeadline
               enText={homePageDetails?.vendor_data?.slogan}
               arText={homePageDetails?.vendor_data?.slogan_ar}
+              color="#8D8D8D"
             />
           </Box>
         ) : null}
