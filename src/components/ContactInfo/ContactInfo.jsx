@@ -7,6 +7,7 @@ import Title from "../common/Title/Title";
 import { useRouter } from "next/navigation";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import SubTitle from "../common/SubTitle/subTitle";
+import TextInputField from "../assetBoxDesign/TextField/textInputField";
 const ContactInfo = ({
   errorContactDetails,
   showNameEmailFields,
@@ -187,29 +188,17 @@ const ContactInfo = ({
           ) : null}
           {showNameEmailFields ? (
             <>
-              <div className="customerInputsFlex">
-                <div className="form__group formSemi">
-                  <input
-                    type="text"
-                    className="form__field hideBorder"
-                    placeholder=""
-                    id="name"
-                    name="name"
-                    required="true"
-                    autoComplete
-                    value={contactDetails.name}
-                    onChange={(e) => {
-                      handleContactDetailsChange({
-                        ...contactDetails,
-                        name: e.target.value,
-                      });
-                    }}
-                  />
-                  <label htmlFor="name" className="form__label">
-                    {language == "ltr" ? "Full Name" : "الاسم الكامل"}
-                  </label>
-                </div>
-              </div>
+              <TextInputField
+                name="fullName"
+                label={"Full Name"}
+                arLabel={"الاسم الكامل"}
+                handleChange={(e) =>
+                  handleContactDetailsChange({
+                    ...contactDetails,
+                    name: e.target.value,
+                  })
+                }
+              />
               {errorContactDetails.nameError && (
                 <label className="error-text">
                   {language == "ltr"
@@ -225,20 +214,11 @@ const ContactInfo = ({
             <>
               <div className="customerInputsFlex">
                 <div className="form__group formSemi">
-                  <input
-                    type="email"
-                    className="form__field hideBorder"
-                    placeholder=""
-                    id="email"
-                    name="email"
-                    required="true"
-                    autoComplete
-                    disabled={
-                      homePageDetails?.vendor_data?.checkout_method === "1" &&
-                      showNameEmailFields
-                    }
-                    value={contactDetails.email}
-                    onChange={(e) => {
+                  <TextInputField
+                    name={"email"}
+                    label={"Email"}
+                    arLabel={"البريد الإلكتروني"}
+                    handleChange={(e) => {
                       handleContactDetailsChange({
                         ...contactDetails,
                         email: e.target.value,
@@ -262,9 +242,6 @@ const ContactInfo = ({
                       />
                     </div>
                   ) : null}
-                  <label htmlFor="email" className="form__label">
-                    {language == "ltr" ? "Email" : "البريد الإلكتروني"}
-                  </label>
                 </div>
               </div>
               {errorContactDetails.emailError && (

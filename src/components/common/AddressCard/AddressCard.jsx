@@ -7,6 +7,9 @@ import DeleteCrossIcon from "@/SVGs/DeleteCrossIcon";
 import ThreeDots from "@/SVGs/ThreeDots";
 import { IconButton } from "@mui/material";
 import { tele } from "@/constants/constants";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import SubTitle from "../SubTitle/subTitle";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 
 const AddressCard = ({
   icon,
@@ -35,8 +38,10 @@ const AddressCard = ({
           {icon}
         </div>
         <div className={`secondCardDiv ${isExpanded ? "hidden" : ""}`}>
-          <div className="headingText">{info?.name}</div>
-          {info?.area ? <div className="areaText">{info?.area}</div> : null}
+          <SubHeadline enText={info?.name} arText={info?.name} />
+          {info?.area ? (
+            <SubHeadline enText={info?.area} arText={info?.area} />
+          ) : null}
           {info?.flag ? (
             <div
               className="secondText"

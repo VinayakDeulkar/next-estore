@@ -33,7 +33,7 @@ const Products = (props) => {
   const { homePageDetails } = useContext(AppContext);
 
   useEffect(() => {
-    console.log(props, "props------")
+    console.log(props, "props------");
     if (props?.is_subcategory) {
       setHasSubCategories(1);
       setSubCategoryData([...props?.data]);
@@ -144,7 +144,9 @@ const Products = (props) => {
   return (
     <EstoreLayout1>
       <div>
-        <BackButton variant="dark" />
+        <Box sx={{ position: "relative", height: "74px" }}>
+          <BackButton variant="dark" />
+        </Box>
         <SubHeadline
           enText={
             hasSubCategories
@@ -157,18 +159,19 @@ const Products = (props) => {
               : productsData?.[0]?.category_name_ar
           }
         />
+
+        <>
+          {(hasSubCategories && subCategoryData?.length) ||
+          (!hasSubCategories && productsData?.length) ? (
+            <>{categoryProducts()}</>
+          ) : (
+            <HeadLine
+              enText={"Products are unavailable"}
+              arText={"المنتجات غير متوفرة"}
+            />
+          )}
+        </>
       </div>
-      <>
-        {(hasSubCategories && subCategoryData?.length) ||
-        (!hasSubCategories && productsData?.length) ? (
-          <>{categoryProducts()}</>
-        ) : (
-          <HeadLine
-            enText={"Products are unavailable"}
-            arText={"المنتجات غير متوفرة"}
-          />
-        )}
-      </>
     </EstoreLayout1>
   );
 };

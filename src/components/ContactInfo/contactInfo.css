@@ -30,7 +30,7 @@
 .form__field:placeholder-shown ~ .form__label {
   font-size: 14px;
   cursor: text;
-  font-weight: 300;
+  font-weight: 400;
   top: 12px;
   left: 11px;
 }
@@ -80,7 +80,7 @@ html[dir="rtl"] .form__field:-webkit-autofill ~ .form__label {
   font-family: inherit;
   width: 100%;
   border: 0;
-  border: 1px solid #e1e1e1;
+  border: 1px solid #aeaeae;
   outline: 0;
   font-size: 14px;
   color: #000;

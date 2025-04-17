@@ -1,8 +1,11 @@
 "use client";
 import OrderHistoryIcon from "@/SVGs/OrderHistoryIcon";
 import { getUserOrderDetails } from "@/apis";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import CommonHeader from "@/components/common/CommonHeader/CommonHeader";
-import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
@@ -94,29 +97,20 @@ const OrderHistory = () => {
 
   return (
     <Box>
-      <HeaderBox />
-      <GridLayout
-        backgroundColor={"#fff"}
-        padding={"20px"}
-        sx={{ height: "calc(100vh - 50px)" }}
-      >
+      <EstoreLayout1>
         <Box>
-          <CommonHeader
-            englishHeader="My Orders"
-            arabicHeader="مشترياتي"
-            fontWeight={400}
-          />
+          <HeadLine enText="My Orders" arText="مشترياتي" />
           {orderData ? (
             Object.keys(orderData)?.map((order, i) => (
               <div className="orderHistoryMain" key={i}>
-                <div className="monthText">
-                  {language === "ltr"
-                    ? order
-                    : convertMonthToArabic(
-                        order.split(" ")[0],
-                        order.split(" ")[1]
-                      )}
-                </div>
+                <SubHeadline
+                  enText={order}
+                  arText={convertMonthToArabic(
+                    order.split(" ")[0],
+                    order.split(" ")[1]
+                  )}
+                />
+
                 <div className="historycard">
                   {orderData[order]?.map((ele, i) => (
                     <React.Fragment key={ele?.order_number}>
@@ -140,9 +134,11 @@ const OrderHistory = () => {
                                 alignItems: "center",
                               }}
                             >
-                              <div className="orderNumber">
-                                {ele?.order_number}
-                              </div>
+                              <NormalText
+                                enText={ele?.order_number}
+                                arText={ele?.order_number}
+                              />
+
                               <div
                                 className="orderStatusDiv"
                                 style={{
@@ -172,7 +168,7 @@ const OrderHistory = () => {
                                 <div
                                   style={{
                                     color: "#838383",
-                                    fontWeight: "500",
+                                    fontWeight: "300",
                                     fontSize:
                                       language === "ltr" ? "12px" : "16px",
                                     display: "flex",
@@ -188,7 +184,7 @@ const OrderHistory = () => {
                                 </div>
                                 <div
                                   style={{
-                                    fontWeight: "500",
+                                    fontWeight: "300",
                                     fontSize:
                                       language === "ltr" ? "12px" : "15px",
                                   }}
@@ -207,7 +203,7 @@ const OrderHistory = () => {
 
                               <div
                                 style={{
-                                  fontWeight: "500",
+                                  fontWeight: "400",
                                   fontSize:
                                     language === "ltr" ? "13px" : "17px",
                                 }}
@@ -239,7 +235,7 @@ const OrderHistory = () => {
             </div>
           )}
         </Box>
-      </GridLayout>
+      </EstoreLayout1>
     </Box>
   );
 };

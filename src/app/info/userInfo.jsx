@@ -5,13 +5,13 @@ import {
   getScheduleTime,
   GetUserDetails,
 } from "@/apis";
-import BackComponent from "@/components/BackComponent";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import AddressCard from "@/components/common/AddressCard/AddressCard";
-import CommonHeader from "@/components/common/CommonHeader/CommonHeader";
-import GridLayout from "@/components/common/GridLayout/gridLayout";
-import HeaderBox from "@/components/common/HeaderBox/headerBox";
+import BackButton from "@/components/common/BackButton/BackButton";
 import Spinner from "@/components/common/Spinner/spinner";
 import Divider from "@/components/Divider/Divider";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import { tele, telecount } from "@/constants/constants";
 import { getAddressType } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
@@ -19,13 +19,13 @@ import Pointer from "@/SVGs/Pointer";
 import RightArrow from "@/SVGs/RightArrow";
 import ThreeDots from "@/SVGs/ThreeDots";
 import UserIcon from "@/SVGs/UserIcon";
+import { Box } from "@mui/material";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 import ReactFlagsSelect from "react-flags-select";
 import "./addressSection.css";
-import Title from "@/components/common/Title/Title";
 
 const UserInfo = ({ type }) => {
   const {
@@ -505,27 +505,17 @@ const UserInfo = ({ type }) => {
   };
 
   return (
-    <GridLayout>
-      <HeaderBox />
+    <EstoreLayout1>
       <div>
         <div
           className="holder-container"
           style={{ position: "relative", minHeight: "calc(100vh - 53px)" }}
         >
-          <div
-            onClick={(e) => {
-              e.preventDefault();
-              router.back();
-            }}
-          >
-            <BackComponent />
-          </div>
+          <Box sx={{ position: "relative", height: "74px" }}>
+            <BackButton />
+          </Box>
           <>
-            <CommonHeader
-              englishHeader={"My Personal Info"}
-              arabicHeader={"معلوماتي الشخصية"}
-              fontWeight={500}
-            />
+            <HeadLine enText={"My Personal Info"} arText={"معلوماتي الشخصية"} />
 
             <AddressCard
               icon={<UserIcon />}
@@ -548,7 +538,7 @@ const UserInfo = ({ type }) => {
             />
 
             <div style={{ marginTop: "40px" }}>
-              <Title
+              <SubHeadline
                 enText={"Saved Delivery Addresses"}
                 arText={"عناوين التسليم المحفوظة"}
               />
@@ -680,7 +670,7 @@ const UserInfo = ({ type }) => {
           </div>
         )}
       </div>
-    </GridLayout>
+    </EstoreLayout1>
   );
 };
 

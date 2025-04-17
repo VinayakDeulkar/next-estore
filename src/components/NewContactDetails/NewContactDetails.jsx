@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import ReactFlagsSelect from "react-flags-select";
 import { AppContext } from "@/context/AppContext";
 import { telecount } from "@/constants/constants";
+import TextInputField from "../assetBoxDesign/TextField/textInputField";
 
 const NewContactDetails = ({ errorContactDetails }) => {
   const {
@@ -120,29 +121,17 @@ const NewContactDetails = ({ errorContactDetails }) => {
           )}
         </div>
         <div>
-          <div className="customerInputsFlex">
-            <div className="form__group formSemi">
-              <input
-                type="text"
-                className="form__field hideBorder"
-                placeholder=""
-                id="name"
-                name="name"
-                required="true"
-                autoComplete
-                value={contactDetails.name}
-                onChange={(e) => {
-                  handleContactDetailsChange({
-                    ...contactDetails,
-                    name: e.target.value,
-                  });
-                }}
-              />
-              <label htmlFor="name" className="form__label">
-                {language == "ltr" ? "Full Name" : "الاسم الكامل"}
-              </label>
-            </div>
-          </div>
+          <TextInputField
+            name={"name"}
+            label={"Full Name"}
+            arLabel={"الاسم الكامل"}
+            handleChange={(e) => {
+              handleContactDetailsChange({
+                ...contactDetails,
+                name: e.target.value,
+              });
+            }}
+          />
           {errorContactDetails.nameError && (
             <label className="error-text">
               {language == "ltr"
@@ -151,30 +140,18 @@ const NewContactDetails = ({ errorContactDetails }) => {
             </label>
           )}
         </div>
-        <div className="customerInputsFlex">
-          <div className="form__group formSemi">
-            <input
-              type="email"
-              className="form__field hideBorder"
-              placeholder=""
-              id="email"
-              name="email"
-              required="true"
-              autoComplete
-              value={contactDetails.email}
-              onChange={(e) => {
-                handleContactDetailsChange({
-                  ...contactDetails,
-                  email: e.target.value,
-                });
-              }}
-            />
 
-            <label htmlFor="email" className="form__label">
-              {language == "ltr" ? "Email" : "البريد الإلكتروني"}
-            </label>
-          </div>
-        </div>
+        <TextInputField
+          name={"email"}
+          label={"Email"}
+          arLabel={"البريد الإلكتروني"}
+          handleChange={(e) => {
+            handleContactDetailsChange({
+              ...contactDetails,
+              email: e.target.value,
+            });
+          }}
+        />
         {errorContactDetails.emailError && (
           <label className="error-text">
             {language == "ltr"

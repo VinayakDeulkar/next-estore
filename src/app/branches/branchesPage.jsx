@@ -15,11 +15,10 @@ const BranchesPage = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "50px",
           position: "relative",
         }}
       >
-        <Box sx={{ position: "relative" }}>
+        <Box sx={{ position: "relative", height: "74px" }}>
           <BackButton />
         </Box>
         <Box>

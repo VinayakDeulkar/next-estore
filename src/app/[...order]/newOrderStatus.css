@@ -408,37 +408,6 @@ html[dir="rtl"] .order-details-vendorName {
   border-radius: 19px;
 }
 
-.showFlag-only {
-  width: 25px;
-}
-
-.showFlag-only .ReactFlagsSelect-module_selectValue__152eS {
-  padding: 0 !important;
-  margin: 0;
-}
-
-.showFlag-only.ReactFlagsSelect-module_flagsSelect__2pfa2 {
-  padding-bottom: 0 !important;
-}
-
-.showFlag-only .ReactFlagsSelect-module_selectBtn__19wW7 {
-  width: auto !important;
-}
-
-.showFlag-only .ReactFlagsSelect-module_disabledBtn__3A4GF {
-  background-color: #fff !important;
-}
-
-.showFlag-only .ReactFlagsSelect-module_selectBtn__19wW7 {
-  border: none !important;
-  padding: 0 0 !important;
-  height: 30px !important;
-}
-
-.showFlag-only .ReactFlagsSelect-module_selectBtn__19wW7:after {
-  display: none;
-}
-
 .reorder-modal {
   height: 100vh;
   width: 100%;
