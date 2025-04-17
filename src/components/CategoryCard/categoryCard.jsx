@@ -54,6 +54,7 @@ const CategoryCard = ({ category }) => {
       case "10":
       case "13":
       case "15":
+      case "16":
         return (
           <Card
             sx={{

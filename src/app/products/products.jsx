@@ -126,15 +126,17 @@ const Products = (props) => {
           );
 
         case "16":
-          <>
-            <Grid container sx={{ gap: "50px", padding: "25px 100px" }}>
-              {productsData?.map((product) => (
-                <Grid item xs={12} key={product?.id}>
-                  <ProductSquareCard product={product} imgHeight={"250px"} />
-                </Grid>
-              ))}
-            </Grid>
-          </>;
+          return (
+            <>
+              <Grid container sx={{ gap: "50px", padding: "25px 100px" }}>
+                {productsData?.map((product) => (
+                  <Grid item xs={12} key={product?.id}>
+                    <ProductSquareCard product={product} imgHeight={"250px"} />
+                  </Grid>
+                ))}
+              </Grid>
+            </>
+          );
 
         default:
           break;
