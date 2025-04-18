@@ -102,6 +102,7 @@ const Products = (props) => {
       switch (homePageDetails?.vendor_data?.home_page_type) {
         case "10":
         case "11":
+        case "14":
           return (
             <Grid container spacing={1}>
               {productsData?.map((product) => (
@@ -128,7 +129,7 @@ const Products = (props) => {
         case "16":
           return (
             <>
-              <Grid container sx={{ gap: "50px", padding: "25px 100px" }}>
+              <Grid container sx={{ gap: "50px", padding: "25px 80px" }}>
                 {productsData?.map((product) => (
                   <Grid item xs={12} key={product?.id}>
                     <ProductSquareCard product={product} imgHeight={"250px"} />

@@ -152,3 +152,26 @@ export const getAddressType = (addressType, color, height, isPickup) => {
       break;
   }
 };
+
+export const varientColor = (varient, vendor_color) => {
+  switch (varient) {
+    case "dark":
+      return "#fff";
+
+    case "outline":
+      return vendor_color;
+
+    default:
+      break;
+  }
+};
+
+export const varientBackgroundColor = (varient, vendor_color) => {
+  switch (varient) {
+    case "dark":
+      return vendor_color;
+
+    default:
+      break;
+  }
+};
