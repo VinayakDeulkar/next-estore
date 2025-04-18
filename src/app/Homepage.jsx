@@ -11,7 +11,6 @@ import { useContext } from "react";
 
 const Homepage = () => {
   const { homePageDetails } = useContext(AppContext);
-  console.log(homePageDetails?.vendor_data?.home_page_type, "homePageDetails?.vendor_data?.home_page_type");
 
   const estoreLayout = () => {
     switch (homePageDetails?.estoreLayout) {

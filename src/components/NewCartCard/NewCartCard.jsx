@@ -37,7 +37,6 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
 
   const onMinusQuantityClick = (e) => {
     e.stopPropagation();
-    console.log("first");
     if (!spinLoader) {
       let prod = parseInt(product?.quantity);
       if (prod == 1) onRemoveClick();
@@ -59,7 +58,6 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
             })
           )
           .then((res) => {
-            console.log(res, "res");
             localStorage.setItem("cartTime", new Date());
             if (res.data.status == false) {
               notify(res.data.message, res.data.message_ar, language);

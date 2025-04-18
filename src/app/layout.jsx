@@ -26,19 +26,16 @@ export async function generateMetadata({ params }) {
   return {
     title: name,
     description: slogan,
-    icons: {
-      icon: [{ url: english_new_background, type: faviconType }],
-    },
+    icons: [
+      {
+        url: `${english_new_background}?v=${Date.now()}`, // Prevent caching
+        type: "image/jpeg",
+      },
+    ],
     openGraph: {
       title: name,
       description: slogan,
-      images: [
-        {
-          url: english_new_background,
-          width: 800,
-          height: 600,
-        },
-      ],
+      images: [english_new_background],
     },
     twitter: {
       card: "summary_large_image",

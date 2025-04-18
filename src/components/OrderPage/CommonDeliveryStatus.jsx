@@ -12,7 +12,6 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
   const [imagePath, setTmagePath] = useState(
     "61dabb82cfb5bea3434fe8ff75fe3af2.gif"
   );
-  console.log(imagePath, "imagePath");
 
   const calculateTimeLeft = (deliveryTime) => {
     // Parse the delivery time using moment.js

@@ -25,7 +25,6 @@ const GoogleMapComponent = () => {
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
       setMarker({ lat, lng });
-      console.log("Selected coordinates:", { lat, lng });
     }
   }, []);
 

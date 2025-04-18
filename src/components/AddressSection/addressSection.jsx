@@ -217,10 +217,7 @@ const AddressSection = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(areaDetails, "areaDetails");
-    console.log(addressDetails, "addressDetails");
-  }, [addressDetails, areaDetails]);
+  useEffect(() => {}, [addressDetails, areaDetails]);
 
   useEffect(() => {
     getAddressData();

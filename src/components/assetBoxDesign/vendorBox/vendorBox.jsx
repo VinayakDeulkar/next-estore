@@ -2,7 +2,6 @@ import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import Image from "next/image";
 import { useContext } from "react";
-import HeadLine from "../Headline/headLine";
 import SubHeadline from "../SubHeadline/subHeadline";
 
 const VendorBox = () => {
@@ -12,7 +11,7 @@ const VendorBox = () => {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "column",
+        flexDirection: window.innerWidth > 600 ? "column" : "row",
         gap: "20px",
         padding: "20px",
       }}
@@ -43,7 +42,7 @@ const VendorBox = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          textAlign: "center",
+          textAlign: window.innerWidth > 600 ? "center" : "start",
         }}
       >
         <Box sx={{ fontSize: "32px", fontWeight: "500" }}>

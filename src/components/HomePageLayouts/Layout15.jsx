@@ -18,7 +18,6 @@ const Layout15 = ({ categories }) => {
   const [expendedList, setExpendedList] = useState(
     categories?.map((cate) => cate.category_id)
   );
-  console.log(homePageDetails, "homePageDetails");
 
   const handleAccordionClick = (category_id) => {
     if (expendedList.includes(category_id)) {

@@ -150,7 +150,8 @@ export const AppProvider = ({
 
   const [openArea, setOpenArea] = useState({ open: false, goHome: false });
   const handleOpenAreaChange = (value) => setOpenArea(value);
-
+  const [search, setSearch] = useState("");
+  const handleSearchProduct = (value) => setSearch(value);
   useEffect(() => {
     if (window && !localStorage.getItem("userID")) {
       let result = "";
@@ -424,6 +425,8 @@ export const AppProvider = ({
     handleAddressDetailsChange,
     payment,
     handleSetPaymentChange,
+    search,
+    handleSearchProduct,
   };
 
   return (
