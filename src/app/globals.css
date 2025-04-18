@@ -1421,7 +1421,6 @@ label {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  margin: 0 auto;
 }
 .inputFlag .ReactFlagsSelect-module_selectBtn__19wW7 {
   border: 1px solid #aeaeae;

@@ -35,10 +35,20 @@ const HomePageLayouts = ({ homePageDetails }) => {
     [isPageLoading, hasMore]
   );
 
+  const [categoryopen, setcategoryopen] = useState(false);
+  const [categorynow, setcategorynow] = useState("");
+
   const renderLayoutType = (categories) => {
     switch (homePageDetails?.vendor_data?.home_page_type) {
       case "11":
-        return <Layout11 categories={categories} />;
+        return (
+          <Layout11
+            categories={categories}
+            setcategoryopen={setcategoryopen}
+            setcategorynow={setcategorynow}
+            categorynow={categorynow}
+          />
+        );
 
       case "12":
         return <Layout12 categories={categories} />;

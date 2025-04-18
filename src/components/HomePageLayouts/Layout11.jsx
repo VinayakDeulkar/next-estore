@@ -13,8 +13,15 @@ import { useRouter } from "next/navigation";
 import HeadLine from "../assetBoxDesign/Headline/headLine";
 import CategoryCard from "../CategoryCard/categoryCard";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSquare";
+import $ from "jquery";
 
-const Layout11 = ({ categories }) => {
+const Layout11 = ({
+  categories,
+  setcategoryopen,
+  setcategorynow,
+  categorynow,
+}) => {
   const router = useRouter();
   const [expendedList, setExpendedList] = useState(
     categories.map((cate) => cate.category_id)
@@ -27,6 +34,31 @@ const Layout11 = ({ categories }) => {
       setExpendedList([...expendedList, category_id]);
     }
   };
+
+  const onCategorySelect = (category, k) => {
+    setcategorynow(() => category?.category_name);
+    $("#categoryflex").animate(
+      {
+        scrollLeft:
+          $(`#cathort${k}`).position().left +
+          $(`#cathort${k}`).width() / 2 +
+          $("#categoryflex").scrollLeft() -
+          $("#categoryflex").width() / 2,
+      },
+      "slow"
+    );
+    const element = $(`#category${k}`);
+    if (element.length) {
+      $("html, body").animate(
+        {
+          scrollTop:
+            element.offset().top - (window.screen.width < 991 ? 107 : 59),
+        },
+        "slow"
+      );
+    }
+  };
+
   return (
     <Box>
       <Box
@@ -37,26 +69,28 @@ const Layout11 = ({ categories }) => {
           overflowX: "scroll",
           position: "sticky",
           background: "#fff",
+          marginBottom: "20px",
         }}
       >
-        {categories?.map((category) => (
-          <Box
-            key={category?.category_id}
-            sx={{
-              padding: "8px",
-              borderRadius: "8px",
-              whiteSpace: "nowrap",
-              fontWeight: 600,
-            }}
-          >
-            <SubHeadline
-              enText={category?.category_name}
-              arText={category?.category_name_ar}
-            />
+        {categories?.map((category, i) => (
+          <Box key={category?.category_id} sx={{ marginBottom: "10px" }}>
+            <div
+              id={`cathort${i}`}
+              onClick={() => onCategorySelect(category, i)}
+            >
+              <SmallButtonSquare
+                enText={category?.category_name}
+                arText={category?.category_name_ar}
+                varient={`${
+                  category?.category_name == categorynow ? "dark" : "outline"
+                }`}
+                width="auto"
+              />
+            </div>
           </Box>
         ))}
       </Box>
-      {categories?.map((category) => (
+      {categories?.map((category, i) => (
         <Accordion
           sx={{
             mb: 2,
@@ -76,10 +110,12 @@ const Layout11 = ({ categories }) => {
             id="panel1a-header"
             sx={{ padding: 0 }}
           >
-            <HeadLine
-              arText={category?.category_name_ar}
-              enText={category?.category_name}
-            />
+            <div id={`category${i}`} onClick={() => setcategoryopen(true)}>
+              <HeadLine
+                arText={category?.category_name_ar}
+                enText={category?.category_name}
+              />
+            </div>
           </AccordionSummary>
           {category?.is_subcategory ? (
             <Grid container spacing={4}>

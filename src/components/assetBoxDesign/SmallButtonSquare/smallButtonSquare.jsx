@@ -1,28 +1,43 @@
+import { varientBackgroundColor, varientColor } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import React, { useContext } from "react";
 
-const SmallButtonSquare = ({ enText, arText, handleClick, varient }) => {
+const SmallButtonSquare = ({
+  enText,
+  arText,
+  handleClick,
+  varient,
+  width = "106px",
+}) => {
   const { language, homePageDetails } = useContext(AppContext);
 
   return (
     <Box
       component="button"
       sx={{
-        width: "106px",
-        borderRadius: "9px",
-        backgroundColor:
-          varient === "dark"
-            ? homePageDetails?.vendor_data?.vendor_color
-            : "#fff",
+        width: width,
+        borderRadius: "8px",
+        backgroundColor: varientBackgroundColor(
+          varient,
+          homePageDetails?.vendor_data?.vendor_color
+        ),
         padding: "8px",
         height: "35px",
-        color: varient === "dark" ? "#fff" : "#000",
+        color: varientColor(
+          varient,
+          homePageDetails?.vendor_data?.vendor_color
+        ),
         fontWeight: "500",
         fontSize: "16px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        whiteSpace: "nowrap",
+        border:
+          varient === "outline"
+            ? `1px solid ${homePageDetails?.vendor_data?.vendor_color}`
+            : null,
       }}
       onClick={handleClick}
     >
