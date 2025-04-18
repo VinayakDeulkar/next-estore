@@ -6,8 +6,7 @@ import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import { AppContext } from "@/context/AppContext";
 
 const CategoryCard = ({ category }) => {
-  console.log(category, "category");
-  const { homePageDetails } = useContext(AppContext);
+  const { homePageDetails, layout14ToggleView } = useContext(AppContext);
   const router = useRouter();
 
   const handleCardClick = () => {
@@ -17,6 +16,7 @@ const CategoryCard = ({ category }) => {
   const rendorCategoryCard = () => {
     switch (homePageDetails?.vendor_data?.home_page_type) {
       case "11":
+      case layout14ToggleView ? "14" : null:
         return (
           <Card
             sx={{
@@ -53,9 +53,9 @@ const CategoryCard = ({ category }) => {
       case "10":
       case "12":
       case "13":
-      case "14":
       case "15":
       case "16":
+      case !layout14ToggleView ? "14" : null:
         return (
           <Card
             sx={{
@@ -93,6 +93,9 @@ const CategoryCard = ({ category }) => {
             </CardContent>
           </Card>
         );
+
+      default:
+        break;
     }
   };
 

@@ -401,6 +401,9 @@ export const AppProvider = ({
     // );
   };
 
+  const [layout14ToggleView, setLayout14ToggleView] = useState(false);
+  const handleSetLayout14ToggleViewChange = (value) => setLayout14ToggleView(value);
+
   const store = {
     language,
     handleLanguageChange,
@@ -427,6 +430,8 @@ export const AppProvider = ({
     handleSetPaymentChange,
     search,
     handleSearchProduct,
+    layout14ToggleView,
+    handleSetLayout14ToggleViewChange
   };
 
   return (

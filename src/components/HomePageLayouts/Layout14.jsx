@@ -14,9 +14,10 @@ import {
 import HeadLine from "../assetBoxDesign/Headline/headLine";
 import HorizontalCard from "../HorizontalCard/horizontalCard";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { AppContext } from "@/context/AppContext";
 
 const Layout14 = ({ categories }) => {
-  const [toggleView, setToggleView] = useState(false);
+  const { language, layout14ToggleView, handleSetLayout14ToggleViewChange } = useContext(AppContext);
 
   const boxView = () => {
     return (
@@ -60,10 +61,45 @@ const Layout14 = ({ categories }) => {
               id="panel1a-header"
               sx={{ padding: 0 }}
             >
-              <HeadLine
-                arText={category?.category_name_ar}
-                enText={category?.category_name}
-              />
+              <div style={{display: "flex", justifyContent: "space-between", alignItems: "center",width: "100%"}}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "15px",
+                  }}
+                >
+                  <img
+                    src={category?.category_image}
+                    alt={category?.category_name}
+                    style={{
+                      height: "75px",
+                      width: "75px",
+                      borderRadius: "8px",
+                    }}
+                  />
+                  <div style={{ fontSize: "22px", fontWeight: "500" }}>
+                    {language === "ltr"
+                      ? category?.category_name
+                      : category?.category_name_ar}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "500",
+                    border: "1px solid #000",
+                    padding: "0 18px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "15px",
+                  }}
+                >
+                  {category?.products?.length}
+                </div>
+              </div>
             </AccordionSummary>
             {category?.is_subcategory ? (
               <Grid container spacing={4}>
@@ -108,13 +144,13 @@ const Layout14 = ({ categories }) => {
             gap: "5px",
             cursor: "pointer",
           }}
-          onClick={() => setToggleView(!toggleView)}
+          onClick={() => handleSetLayout14ToggleViewChange(!layout14ToggleView)}
         >
           <NormalText enText={"Change View"} arText={"تغيير العرض"} />
-          {toggleView ? <WindowIcon /> : <ListIcon sx={{ fontSize: 30 }} />}
+          {layout14ToggleView ? <WindowIcon /> : <ListIcon sx={{ fontSize: 30 }} />}
         </div>
       </div>
-      {toggleView ? listView() : boxView()}
+      {layout14ToggleView ? listView() : boxView()}
     </>
   );
 };
