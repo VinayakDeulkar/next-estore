@@ -13,6 +13,9 @@ import ModalClosed from "@/components/common/ModalClosed/ModalClosed";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
 import ReactPixel from "react-facebook-pixel";
 import SubTitle from "@/components/common/SubTitle/subTitle";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 
 const Review = () => {
   const {
@@ -148,26 +151,13 @@ const Review = () => {
 
   return (
     <Box>
-      <HeaderBox />
-      <GridLayout
-        backgroundColor={"#fff"}
-        padding={"20px"}
-        sx={{ height: "calc(100vh - 50px)" }}
-      >
+      <EstoreLayout1>
         <Box>
           <div>
             {areaDetails.type == "delivery" ? (
-              <CommonHeader
-                englishHeader="Delivery Info"
-                arabicHeader="معلومات التسليم"
-                fontWeight={400}
-              />
+              <HeadLine enText={"Delivery Info"} arText={"معلومات التسليم"} />
             ) : (
-              <CommonHeader
-                englishHeader="Pickup Info"
-                arabicHeader="معلومات الالتقاط"
-                fontWeight={400}
-              />
+              <HeadLine enText={"Pickup Info"} arText={"معلومات الالتقاط"} />
             )}
             {areaDetails.type == "delivery" &&
               (homePageDetails?.vendor_data?.international_delivery === "3" ||
@@ -221,7 +211,7 @@ const Review = () => {
               successPromocode={successPromocode}
             />
             <div className="newreview-details-div">
-              <SubTitle enText={"Sub Total"} arText={"الإجمالي"} />
+              <SubHeadline enText={"Sub Total"} arText={"الإجمالي"} />
 
               <p className="newreview-text">
                 <span>{parseFloat(cart?.subTotal).toFixed(3)}</span>{" "}
@@ -300,7 +290,7 @@ const Review = () => {
             <ModalClosed note={popup} setNote={setPopup}></ModalClosed>
           ) : null}
         </Box>
-      </GridLayout>
+      </EstoreLayout1>
     </Box>
   );
 };

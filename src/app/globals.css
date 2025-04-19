@@ -139,14 +139,14 @@ html[dir="rtl"] .checkoutPageText {
 
 .newreview-button-div {
   position: absolute;
-  width: 100%;
+  width: calc(100% - 40px);
   bottom: 0;
-  left: 0;
+  left: 20px;
   background-color: rgba(73, 71, 71, 0.07);
 }
 
 html[dir="rtl"] .newreview-button-div {
-  right: 0;
+  right: 20px;
 }
 
 .contact-details-bottom-button {

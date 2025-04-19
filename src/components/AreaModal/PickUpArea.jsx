@@ -1,10 +1,22 @@
 import { AppContext } from "@/context/AppContext";
 import { SearchOutlined } from "@mui/icons-material";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import {
+  Backdrop,
+  Box,
+  CircularProgress,
+  IconButton,
+  ListItem,
+} from "@mui/material";
 import moment from "moment";
 import { useRouter } from "next/navigation";
-import React, { useContext, useEffect, useState } from "react";
-
-const PickUpArea = () => {
+import { useContext, useEffect, useState } from "react";
+import NormalText from "../assetBoxDesign/NormalText/normalText";
+import Notes from "../assetBoxDesign/Notes/notes";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import axios from "axios";
+import CheckoutModal from "../NewOrderDetailsPage/Components/CheckoutModal";
+const PickUpArea = ({ handleClose }) => {
   const {
     homePageDetails,
     language,
@@ -44,7 +56,7 @@ const PickUpArea = () => {
     setActive((a) => eng);
     axios
       .post(
-        `${API_URL}/change-area`,
+        `${process.env.NEXT_PUBLIC_API_URL}/change-area`,
         JSON.stringify({
           token: process.env.NEXT_PUBLIC_APP_TOKEN,
           vendor_id: homePageDetails?.vendor_data?.vendors_id,
@@ -137,15 +149,7 @@ const PickUpArea = () => {
               },
             }));
           }
-          setOpenArea((prev) => ({ open: false, goHome: false }));
-          if (openArea.goHome) {
-            router.push("/");
-          }
-          // if (router?.location?.state?.from == "prdetails") {
-          //   router.goBack();
-          // } else {
-          //   router.push(`/`);
-          // }
+          handleClose();
         } else {
           setLoading(false);
           setPopupDetails((pop) => ({
@@ -215,6 +219,66 @@ const PickUpArea = () => {
           value={branchSearch}
         ></input>
       </div>
+      <Box>
+        {branchs?.length != 0
+          ? branchs?.map((branch, i) => (
+              <ListItem
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "20px 0",
+                }}
+              >
+                <div
+                  onClick={(e) => {
+                    if (branch?.availability_status == 1) {
+                      e.preventDefault();
+                      onBranchSelect(
+                        branch?.name,
+                        branch?.arabic_name,
+                        branch?.id,
+                        branch?.area_ids?.length == 0 ? 1 : branch?.area_ids[0]
+                      );
+                    }
+                  }}
+                  className="branch-details"
+                >
+                  <Box component={"a"}>
+                    <SubHeadline
+                      enText={branch?.name}
+                      arText={branch?.arabic_name}
+                    />
+                    <NormalText
+                      enText={branch?.address}
+                      arText={branch?.arabic_address}
+                    />
+
+                    {branch?.availability_status != 1 && (
+                      <Notes
+                        enText={"STORE IS BUSY"}
+                        arText={"المتجر مشغول "}
+                        color={"#ce1414"}
+                      />
+                    )}
+                  </Box>
+                </div>
+                <IconButton onClick={() => router.push(`/branches`)}>
+                  <InfoOutlinedIcon sx={{ color: "#000" }} />
+                </IconButton>
+              </ListItem>
+            ))
+          : branchSearch != "" && (
+              <SearchNone searchText={branchSearch}></SearchNone>
+            )}
+      </Box>
+      <Backdrop
+        sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
+        open={loading}
+        onClick={() => setLoading(false)}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };

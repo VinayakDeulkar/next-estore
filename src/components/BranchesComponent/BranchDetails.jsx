@@ -9,8 +9,6 @@ function BranchDetails({ branchId, setBranchId }) {
   const { areaDetails, language } = useContext(AppContext);
   const [branch, setBranch] = useState({});
 
-  const container =
-    window !== undefined ? () => window?.document?.body : undefined;
   useEffect(() => {
     if (areaDetails.data.branch) {
       setBranch(areaDetails.data.branch[branchId]);
@@ -18,12 +16,27 @@ function BranchDetails({ branchId, setBranchId }) {
   }, [areaDetails.data.branch, branchId]);
   return (
     <SwipeableDrawer
-      container={container}
       anchor="bottom"
       open={branchId !== ""}
       onClose={() => setBranchId("")}
       swipeAreaWidth={drawerBleeding}
       disableSwipeToOpen={true}
+      PaperProps={{
+        sx: {
+          width: "100%",
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          borderTopLeftRadius: 12,
+          borderTopRightRadius: 12,
+          backgroundColor: "#f5f5f5",
+        },
+      }}
+      container={
+        typeof window !== "undefined"
+          ? () => document.getElementById("drawer-container")
+          : undefined
+      }
     >
       <Box
         sx={{

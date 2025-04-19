@@ -1,6 +1,7 @@
 import { AppContext } from "@/context/AppContext";
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 function BranchList({ setBranchId }) {
   const [branchs, setBranchs] = useState([]);
@@ -41,9 +42,9 @@ function BranchList({ setBranchId }) {
                 }
               >
                 {vendorSlug?.data?.ecom_url_slug === "cube-aroma" ? (
-                  <span style={{ color: "black" }}>
-                    <i className="fa fa-angle-right right-arrow"></i>
-                  </span>
+                  <IconButton>
+                    <InfoOutlinedIcon sx={{ color: "#000" }} />
+                  </IconButton>
                 ) : (
                   <span>i</span>
                 )}

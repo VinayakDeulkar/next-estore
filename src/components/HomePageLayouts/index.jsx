@@ -10,10 +10,12 @@ import { AppContext } from "@/context/AppContext";
 import SearchNone from "../SeachBar/searchNone";
 import SearchProductList from "../SeachBar/searchProductList";
 import OrderType from "../HomePage/OrderType/orderType";
+import ReviewBar from "../ReviewBar/reviewBar";
+import { Box } from "@mui/material";
 
 const HomePageLayouts = ({ homePageDetails }) => {
   const [searchItems, setSearchItems] = useState([]);
-  const { search } = useContext(AppContext);
+  const { search, cart } = useContext(AppContext);
   const [searchLoading, setSearchLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(0);
@@ -70,7 +72,7 @@ const HomePageLayouts = ({ homePageDetails }) => {
   };
 
   return (
-    <>
+    <Box sx={{ position: "relative" }}>
       <SearchBar
         setSearchLoading={setSearchLoading}
         searchItems={searchItems}
@@ -114,7 +116,8 @@ const HomePageLayouts = ({ homePageDetails }) => {
       ) : (
         renderLayoutType(homePageDetails?.categories)
       )}
-    </>
+      {cart?.cartCount ? <ReviewBar /> : null}
+    </Box>
   );
 };
 

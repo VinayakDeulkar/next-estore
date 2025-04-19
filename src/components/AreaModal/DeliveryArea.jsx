@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import CheckoutModal from "../NewOrderDetailsPage/Components/CheckoutModal";
 
-const DeliveryArea = ({ setMarkerPosition }) => {
+const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
   const {
     homePageDetails,
     language,

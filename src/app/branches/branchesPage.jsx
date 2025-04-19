@@ -24,6 +24,10 @@ const BranchesPage = () => {
         <Box>
           <BranchList setBranchId={setBranchId} />
         </Box>
+        <div
+          id="drawer-container"
+          style={{ position: "relative", height: "100%" }}
+        ></div>
         <BranchDetails branchId={branchId} setBranchId={setBranchId} />
       </Box>
     </EstoreLayout1>

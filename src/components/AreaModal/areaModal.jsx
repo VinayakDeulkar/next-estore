@@ -13,10 +13,11 @@ const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition }) => {
       <Dialog
         open={showAreaModal}
         onClose={handleClose}
-        maxWidth="sm"
+        maxWidth="md"
         sx={{
           "& .MuiDialog-container > .MuiPaper-root": {
             borderRadius: "16px", // Change this value as needed
+            minWidth: "400px",
           },
         }}
       >
@@ -33,9 +34,12 @@ const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition }) => {
         >
           <ModeSelector />
           {areaDetails?.type === "pickup" ? (
-            <PickUpArea />
+            <PickUpArea handleClose={handleClose} />
           ) : (
-            <DeliveryArea setMarkerPosition={setMarkerPosition} />
+            <DeliveryArea
+              setMarkerPosition={setMarkerPosition}
+              handleClose={handleClose}
+            />
           )}
         </Box>
       </Dialog>
