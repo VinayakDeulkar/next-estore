@@ -152,7 +152,7 @@ const Review = () => {
   return (
     <Box>
       <EstoreLayout1>
-        <Box>
+        <Box sx={{ position: "relative", height: "calc(100vh - 56px)" }}>
           <div>
             {areaDetails.type == "delivery" ? (
               <HeadLine enText={"Delivery Info"} arText={"معلومات التسليم"} />

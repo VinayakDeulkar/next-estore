@@ -1,18 +1,14 @@
 "use client";
-import { LoadScript } from "@react-google-maps/api";
-import "../../components/NewOrderDetailsPage/checkOrderDetails.css";
 import MobileCheckOut from "@/components/MobileCheckout/mobileCheckOut";
-import React from "react";
+import { useJsApiLoader } from "@react-google-maps/api";
+import "../../components/NewOrderDetailsPage/checkOrderDetails.css";
 
 const CheckOut = () => {
-  return (
-    <LoadScript
-      googleMapsApiKey={"AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg"}
-      libraries={["places"]}
-    >
-      <MobileCheckOut />
-    </LoadScript>
-  );
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey:
+      "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg", // Replace with your Google Maps API key
+  });
+  return <MobileCheckOut />;
 };
 
 export default CheckOut;

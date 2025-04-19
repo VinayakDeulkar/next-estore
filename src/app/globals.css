@@ -554,7 +554,7 @@ html[dir="rtl"] .delivery-order-header .delivery-order-title {
   -moz-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding: 0px 16px;
+  padding: 0px;
   margin-top: 0px;
   display: -webkit-box;
   display: -webkit-flex;

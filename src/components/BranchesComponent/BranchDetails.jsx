@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import MapContainer from "./MapContainer";
 
 const drawerBleeding = 56;
-function BranchDetails({ branchId, setBranchId }) {
+function BranchDetails({ branchId, setBranchId, isLoaded }) {
   const { areaDetails, language } = useContext(AppContext);
   const [branch, setBranch] = useState({});
 
@@ -17,7 +17,7 @@ function BranchDetails({ branchId, setBranchId }) {
   return (
     <SwipeableDrawer
       anchor="bottom"
-      open={branchId !== ""}
+      open={branchId !== "" && branch}
       onClose={() => setBranchId("")}
       swipeAreaWidth={drawerBleeding}
       disableSwipeToOpen={true}
@@ -49,7 +49,7 @@ function BranchDetails({ branchId, setBranchId }) {
         <React.Fragment>
           {branch?.office_end_time ? (
             <>
-              <MapContainer branch={branch}></MapContainer>
+              <MapContainer branch={branch} isLoaded={isLoaded}></MapContainer>
               <div className="branch-call-div">
                 <div className="branch-call-flex">
                   <a

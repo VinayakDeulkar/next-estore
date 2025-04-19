@@ -13,6 +13,8 @@ import NewPromocode from "../NewOrderDetailsPage/Components/NewPromocode";
 import NewAmountDetails from "../NewOrderDetailsPage/Components/NewAmountDetails";
 import Spinner from "../common/Spinner/spinner";
 import { useRouter } from "next/navigation";
+import { mapArea } from "@/constants/areaConstant";
+import axios from "axios";
 
 const MobileCheckOut = () => {
   const {
@@ -152,7 +154,7 @@ const MobileCheckOut = () => {
             `street ${addressDetails.street} ,block ${addressDetails.block} ,${selectedArea}, Kuwait`
           );
           const respones = await axios.get(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg`
           );
           if (respones.status === 200) {
             let getSelectedAreaDetails = [];

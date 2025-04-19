@@ -8,6 +8,8 @@ import moment from "moment";
 import { AppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import OptionBox from "../assetBoxDesign/OptionBox/optionBox";
+import { Box } from "@mui/material";
 registerLocale("ar", es);
 
 function DeliveryTimeSelect() {
@@ -64,49 +66,36 @@ function DeliveryTimeSelect() {
   return (
     <>
       <div className="delivery-schedular-box">
-        <div className="delivery-schedular">
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           {areaDetails?.shopOpen == 1 && (
-            <label className="schedule-order" onClick={() => setNow(1)}>
-              <input
-                type="radio"
-                name="time"
-                id="scheduled"
-                className="schedule-input deliver_period"
-                value={1}
-                checked={now == 1}
-              ></input>
-              <span className="order-schedule-check"></span>
-              <p className="para-text">
-                {areaDetails?.type == "delivery"
-                  ? language === "ltr"
-                    ? `${
-                        !areaDetails?.customDelivery ? "Delivery Within" : ""
-                      } ${areaDetails?.deliveryTiming}`
-                    : `${
-                        !areaDetails?.customDelivery ? "التوصيل سيكون خلال" : ""
-                      } ${areaDetails?.ar_deliveryTiming}`
-                  : language === "ltr"
-                  ? `${areaDetails?.deliveryTiming}`
-                  : `${areaDetails?.ar_deliveryTiming}`}
-              </p>
-            </label>
+            <OptionBox
+              handleClick={() => setNow(1)}
+              enText={
+                areaDetails?.type == "delivery"
+                  ? `${!areaDetails?.customDelivery ? "Delivery Within" : ""} ${
+                      areaDetails?.deliveryTiming
+                    }`
+                  : areaDetails?.deliveryTiming
+              }
+              arText={
+                areaDetails?.type == "delivery"
+                  ? `${
+                      !areaDetails?.customDelivery ? "التوصيل سيكون خلال" : ""
+                    } ${areaDetails?.ar_deliveryTiming}`
+                  : areaDetails?.ar_deliveryTiming
+              }
+              selected={now == 1}
+            />
           )}
           {homePageDetails?.vendor_data?.allow_schedule_order == 1 && (
-            <>
-              <label className="schedule-order" onClick={() => setNow(2)}>
-                <input
-                  type="radio"
-                  name="time"
-                  id="scheduled"
-                  className="schedule-input deliver_period"
-                  value={2}
-                  checked={now == 2}
-                ></input>
-                <span className="order-schedule-check"></span>
-                <p className="para-text">
-                  {language === "ltr" ? "Schedule Order" : "حدد موعد التوصيل"}
-                </p>
-              </label>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <OptionBox
+                handleClick={() => setNow(2)}
+                enText={"Schedule Order"}
+                arText={"حدد موعد التوصيل"}
+                selected={now == 2}
+              />
+
               {now == 2 && (
                 <DatePicker
                   className="form-control"
@@ -114,7 +103,9 @@ function DeliveryTimeSelect() {
                   showTimeSelect
                   minDate={onlyOne}
                   disabled={
-                    homePageDetails?.vendor_data?.allow_schedule_order == 1 ? false : true
+                    homePageDetails?.vendor_data?.allow_schedule_order == 1
+                      ? false
+                      : true
                   }
                   minTime={
                     timeInput.getDate() == onlyOne.getDate()
@@ -144,9 +135,9 @@ function DeliveryTimeSelect() {
                   }
                 />
               )}
-            </>
+            </Box>
           )}
-        </div>
+        </Box>
       </div>
       <div
         className={`bottom-button ${
@@ -154,6 +145,12 @@ function DeliveryTimeSelect() {
             ? "bottom-button-full"
             : "bottom-button-half"
         }`}
+        style={{
+          position: "absolute",
+          bottom: "20px",
+          left: "0px",
+          padding: "0 20px",
+        }}
       >
         <Link
           href={``}

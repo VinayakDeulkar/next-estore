@@ -28,18 +28,20 @@ const OptionBox = ({
       }}
     >
       <SubTitle enText={enText} arText={arText} />
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          fontSize: "14px",
-          fontWeight: "400",
-        }}
-      >
-        <Box>{parseFloat(amount).toFixed(3)}</Box>
-        <SubTitle enText={"KD"} arText={"د.ك"} />
-      </Box>
+      {amount ? (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            fontSize: "14px",
+            fontWeight: "400",
+          }}
+        >
+          <Box>{parseFloat(amount).toFixed(3)}</Box>
+          <SubTitle enText={"KD"} arText={"د.ك"} />
+        </Box>
+      ) : null}
     </Box>
   );
 };
