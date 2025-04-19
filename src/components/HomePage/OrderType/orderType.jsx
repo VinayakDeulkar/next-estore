@@ -1,239 +1,163 @@
 "use client";
-import { AppContext } from "@/context/AppContext";
-import React, { useContext } from "react";
-import styles from "./orderType.module.css";
+import AreaModal from "@/components/AreaModal/areaModal";
+import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
 import ModeSelector from "@/components/common/ModeSelector/modeSelector";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { AppContext } from "@/context/AppContext";
+import { KeyboardArrowDown } from "@mui/icons-material";
+import { Box, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import styles from "./orderType.module.css";
 
 const OrderType = () => {
-  const {
-    language,
-    homePageDetails,
-    areaDetails,
-    handleAreaDetailsChange,
-    userDetails,
-  } = useContext(AppContext);
+  const { homePageDetails, areaDetails } = useContext(AppContext);
   const router = useRouter();
+  const [showAreaModal, setShowAreaModal] = useState(false);
+
+  const getBoxValue = () => {
+    if (areaDetails?.type === "delivery") {
+      return (
+        <NormalText
+          enText={
+            areaDetails?.area === ""
+              ? "Select Your Delivery Location"
+              : areaDetails.area
+          }
+          arText={
+            areaDetails?.area === ""
+              ? "حدد موقع التسليم الخاص بك"
+              : areaDetails?.ar_area
+          }
+        />
+      );
+    } else if (
+      homePageDetails?.vendor_data?.is_pickup == 1 &&
+      areaDetails.type === "pickup"
+    ) {
+      return (
+        <NormalText
+          enText={
+            areaDetails?.branch != "" ? areaDetails?.branch : "Select Branch"
+          }
+          arText={
+            areaDetails?.branch != "" ? areaDetails?.ar_branch : "حدد الفرع"
+          }
+        />
+      );
+    }
+  };
+  const getTimeValue = () => {
+    if (areaDetails?.now == 1) {
+      return {
+        enText: `${!areaDetails?.customDelivery ? "Delivery Within" : ""} ${
+          areaDetails?.deliveryTiming
+        }`,
+        arText: `${!areaDetails?.customDelivery ? "التوصيل سيكون خلال" : ""} ${
+          areaDetails?.ar_deliveryTiming
+        }`,
+      };
+    } else {
+      return {
+        enText:
+          moment(areaDetails?.laterDeliveryTiming).locale("en").format("DD") +
+          " " +
+          moment(areaDetails?.laterDeliveryTiming).locale("en").format("MMMM") +
+          moment(areaDetails?.laterDeliveryTiming)
+            .locale("en")
+            .format(", yyyy hh:mm ") +
+          moment(areaDetails?.laterDeliveryTiming).locale("en").format("A"),
+        arText:
+          moment(areaDetails?.laterDeliveryTiming).locale("en").format("DD") +
+          " " +
+          moment(areaDetails?.laterDeliveryTiming)
+            .locale("ar-sa")
+            .format("MMMM") +
+          moment(areaDetails?.laterDeliveryTiming)
+            .locale("en")
+            .format(", yyyy hh:mm ") +
+          moment(areaDetails?.laterDeliveryTiming).locale("ar-sa").format("A"),
+      };
+    }
+  };
 
   return (
     <div className={styles.mainDiv}>
       <ModeSelector />
-      <div className={styles.dividerLine}></div>
-      <div className="tab-content">
-        <div
-          role="tabpanel"
-          className={`tab-pane ${
-            areaDetails.type === "delivery" ? "active" : ""
-          }`}
-          id="delivery"
+      <Box
+        sx={{
+          padding: "20px 10px",
+          width: "100%",
+          border: 0,
+          border: "1px solid #aeaeae",
+          outline: 0,
+          fontSize: "14px",
+          color: "#000",
+          padding: "4px 10px",
+          fontWeight: 400,
+          background: "transparent",
+          transition: "border-color 0.2s",
+          borderRadius: "10px",
+          height: "44px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+        component="button"
+        onClick={() => {
+          setShowAreaModal(true);
+        }}
+      >
+        {getBoxValue()}
+        <IconButton>
+          <KeyboardArrowDown
+            sx={{
+              fontSize: 26,
+              color: "#000",
+            }}
+          />
+        </IconButton>
+      </Box>
+      {areaDetails?.area != "" ? (
+        <Box
+          component={"button"}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!areaDetails?.customDelivery) router.push("/timing");
+          }}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-          <div
-            className="delivery-select"
-            // onClick={() => {
-            //   if (userDetails?.status == "1" && userDetails?.address?.length) {
-            //     router.push("/info");
-            //   } else {
-            //     setOpenArea((prev) => ({ open: true, goHome: false }));
-            //   }
-            // }}
+          <NormalText enText={"Delivery Time"} arText={"وقت التوصيل"} />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
-            <div className="delivery-detail-selected">
-              <div>{language === "ltr" ? "Area" : "منطقة"}</div>
-              <div>
-                <span
-                  style={{ color: homePageDetails?.vendor_data?.vendor_color }}
-                >
-                  {areaDetails?.area != ""
-                    ? language === "ltr"
-                      ? "Kuwait"
-                      : ""
-                    : ""}
-                  {areaDetails?.area != "" ? ", " : ""}
-                  {language === "ltr"
-                    ? areaDetails?.area != ""
-                      ? areaDetails?.area
-                      : "Select Your Delivery Location"
-                    : areaDetails?.area != ""
-                    ? areaDetails?.ar_area
-                    : "حدد موقع التسليم الخاص بك"}
-                </span>
-                <KeyboardArrowRight
-                  sx={{
-                    fontSize: 26,
-                    margin: "-1px -8px 0 5px",
-                    color: homePageDetails?.vendor_data?.vendor_color,
-                  }}
-                />
-              </div>
-            </div>
-            {areaDetails?.area != "" ? (
-              <div
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  if (!areaDetails?.customDelivery) router.push("/timing");
-                }}
-                className="delivery-detail-selected"
-              >
-                <div
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
-                  {language === "ltr" ? "Delivery Time" : "وقت التوصيل"}
-                </div>
-                <div
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
-                  <span
-                    style={{
-                      color: homePageDetails?.vendor_data?.vendor_color,
-                    }}
-                  >
-                    {areaDetails?.now == 1
-                      ? language === "ltr"
-                        ? `${
-                            !areaDetails?.customDelivery
-                              ? "Delivery Within"
-                              : ""
-                          } ${areaDetails?.deliveryTiming}`
-                        : `${
-                            !areaDetails?.customDelivery
-                              ? "التوصيل سيكون خلال"
-                              : ""
-                          } ${areaDetails?.ar_deliveryTiming}`
-                      : moment(areaDetails?.laterDeliveryTiming)
-                          .locale("en")
-                          .format("DD") +
-                        " " +
-                        moment(areaDetails?.laterDeliveryTiming)
-                          .locale(language == "ltr" ? "en" : "ar-sa")
-                          .format("MMMM") +
-                        moment(areaDetails?.laterDeliveryTiming)
-                          .locale("en")
-                          .format(", yyyy hh:mm ") +
-                        moment(areaDetails?.laterDeliveryTiming)
-                          .locale(language == "ltr" ? "en" : "ar-sa")
-                          .format("A")}
-                  </span>
-                  <KeyboardArrowRight
-                    sx={{
-                      fontSize: 26,
-                      margin: "-1px -8px 0 5px",
-                      color: homePageDetails?.vendor_data?.vendor_color,
-                    }}
-                  />
-                </div>
-              </div>
-            ) : null}
-          </div>
-        </div>
-        {homePageDetails?.vendor_data?.is_pickup == 1 && (
-          <div
-            role="tabpanel"
-            className={`tab-pane ${
-              areaDetails.type === "pickup" ? "active" : ""
-            }`}
-            id="pickup"
-          >
-            <div
-              className="delivery-select"
-              // onClick={() => {
-              //   setOpenArea((prev) => ({ open: true, goHome: false }));
-              // }}
-            >
-              <div className="delivery-detail-selected">
-                <div>{language === "ltr" ? "Branch" : "أفرعنا"}</div>
-                <div>
-                  <span
-                    style={{
-                      color: homePageDetails?.vendor_data?.vendor_color,
-                    }}
-                  >
-                    {language === "ltr"
-                      ? areaDetails?.branch != ""
-                        ? areaDetails?.branch
-                        : "Select Branch"
-                      : areaDetails?.branch != ""
-                      ? areaDetails?.ar_branch
-                      : "حدد الفرع"}
-                  </span>
-                  <KeyboardArrowRight
-                    sx={{
-                      fontSize: 26,
-                      margin: "-1px -8px 0 5px",
-                      color: homePageDetails?.vendor_data?.vendor_color,
-                    }}
-                  />
-                </div>
-              </div>
-
-              {homePageDetails?.ecom_url_slug ===
-              "alawael-bilingual-school" ? null : (
-                <>
-                  {areaDetails?.branch != "" ? (
-                    <div
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        router.push("/timing");
-                      }}
-                      className="delivery-detail-selected"
-                    >
-                      <div
-                        onClick={(e) => {
-                          e.preventDefault();
-                        }}
-                      >
-                        {language === "ltr" ? "Pickup Time" : "وقت الإستلام"}
-                      </div>
-                      <div
-                        onClick={(e) => {
-                          e.preventDefault();
-                        }}
-                      >
-                        <span
-                          style={{
-                            color: homePageDetails?.vendor_data?.vendor_color,
-                          }}
-                        >
-                          {areaDetails?.now == 1
-                            ? language === "ltr"
-                              ? `${areaDetails?.deliveryTiming}`
-                              : `${areaDetails?.ar_deliveryTiming}`
-                            : moment(areaDetails?.laterDeliveryTiming)
-                                .locale("en")
-                                .format("DD") +
-                              " " +
-                              moment(areaDetails?.laterDeliveryTiming)
-                                .locale(language == "ltr" ? "en" : "ar-sa")
-                                .format("MMMM") +
-                              moment(areaDetails?.laterDeliveryTiming)
-                                .locale("en")
-                                .format(", yyyy hh:mm ") +
-                              moment(areaDetails?.laterDeliveryTiming)
-                                .locale(language == "ltr" ? "en" : "ar-sa")
-                                .format("A")}
-                        </span>
-                        <KeyboardArrowRight
-                          sx={{
-                            fontSize: 26,
-                            margin: "-1px -8px 0 5px",
-                            color: homePageDetails?.vendor_data?.vendor_color,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ) : null}
-                </>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
+            <NormalText
+              enText={getTimeValue().enText}
+              arText={getTimeValue().arText}
+            />
+            <KeyboardArrowDown
+              sx={{
+                fontSize: 26,
+                color: "#000",
+              }}
+            />
+          </Box>
+        </Box>
+      ) : null}
+      <AreaModal
+        showAreaModal={showAreaModal}
+        handleClose={() => {
+          setShowAreaModal(false);
+        }}
+      />
     </div>
   );
 };

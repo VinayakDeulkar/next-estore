@@ -84,7 +84,6 @@ export default async function RootLayout({ children }) {
     deliveryResponse,
     estoreBranchesResponse,
   } = await getData();
-
   return (
     <html lang="en">
       <head></head>
