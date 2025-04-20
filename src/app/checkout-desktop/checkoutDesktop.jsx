@@ -1,6 +1,7 @@
 "use client";
 import DeskCheckoutComponents from "@/components/DeskCheckoutComponents";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import MainTitle from "@/components/common/MainTitle/mainTitle";
 import Title from "@/components/common/Title/Title";
@@ -39,7 +40,7 @@ const CheckoutDesktop = () => {
           {/* For Aligment */}
         </Grid>
         <Grid item xs={0} sm={3.5}>
-          <Title enText="Items Details" arText="تفاصيل عربة التسوق" />
+          <SubHeadline enText="Items Details" arText="تفاصيل عربة التسوق" />
           <NewOrderProductList />
         </Grid>
         <Grid item xs={0} sm={2}>

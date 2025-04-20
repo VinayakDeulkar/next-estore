@@ -4,16 +4,15 @@ import {
   deleteUserAddress,
   getScheduleTime,
 } from "@/apis";
+import { getAddressType } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
+import ThreeDots from "@/SVGs/ThreeDots";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import AddressCard from "../common/AddressCard/AddressCard";
-import { getAddressType } from "@/constants/function";
-import ThreeDots from "@/SVGs/ThreeDots";
-import CommonHeader from "../common/CommonHeader/CommonHeader";
-import Title from "../common/Title/Title";
 
 const AddressSection = () => {
   const {
@@ -608,7 +607,7 @@ const AddressSection = () => {
   };
   return (
     <div>
-      <Title enText={"Delivery Address"} arText={"عنوان التسليم"} />
+      <SubHeadline enText={"Delivery Address"} arText={"عنوان التسليم"} />
       {addressData?.map((address, i) => (
         <div key={i}>
           <div>

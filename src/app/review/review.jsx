@@ -201,12 +201,8 @@ const Review = () => {
                   </Link>
                 </>
               )}
-            <div
-              className="checkoutPageText"
-              style={{ marginTop: "5px", marginBottom: "10px" }}
-            >
-              {language === "ltr" ? "Items Details" : "تفاصيل عربة التسوق"}
-            </div>
+
+            <SubHeadline enText="Items Details" arText="تفاصيل عربة التسوق" />
             <NewOrderProductList
               setSuccessPromocode={setSuccessPromocode}
               successPromocode={successPromocode}

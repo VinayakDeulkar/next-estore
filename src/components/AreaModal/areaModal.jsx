@@ -1,6 +1,6 @@
 import { AppContext } from "@/context/AppContext";
 import { Box, Dialog } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ModeSelector from "../common/ModeSelector/modeSelector";
 import "./areaModal.css";
 import DeliveryArea from "./DeliveryArea";
@@ -8,6 +8,8 @@ import PickUpArea from "./PickUpArea";
 
 const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition }) => {
   const { areaDetails } = useContext(AppContext);
+  useEffect(() => {}, [areaDetails]);
+
   return (
     <>
       <Dialog

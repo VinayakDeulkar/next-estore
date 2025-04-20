@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { getAddressType } from "@/constants/function";
 import ClockIcon from "@/SVGs/ClockIcon";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 
 const NewDeliveryDetails = ({
   addressDetails,
@@ -64,13 +65,16 @@ const NewDeliveryDetails = ({
         className="checkout-page-text"
         style={{ marginTop: "25px", marginBottom: "5px" }}
       >
-        {areaDetails?.type == "delivery"
-          ? language === "ltr"
-            ? "Delivery Address"
-            : "عنوان التسليم"
-          : language === "ltr"
-          ? "Pick Up Details"
-          : "التقط التفاصيل"}
+        <SubHeadline
+          enText={
+            areaDetails?.type == "delivery"
+              ? "Delivery Address"
+              : "Pick Up Details"
+          }
+          arText={
+            areaDetails?.type == "delivery" ? "عنوان التسليم" : "التقط التفاصيل"
+          }
+        />
       </div>
       <div
         onClick={() => {

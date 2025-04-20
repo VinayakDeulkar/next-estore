@@ -1,9 +1,9 @@
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
+import Title from "@/components/common/Title/Title";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../checkOrderDetails.css";
-import Title from "@/components/common/Title/Title";
-import SubTitle from "@/components/common/SubTitle/subTitle";
 
 const NewPaymentSelector = ({
   payment,
@@ -77,9 +77,10 @@ const NewPaymentSelector = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          marginTop: "25px",
         }}
       >
-        <Title enText={"Payment Method"} arText={"طريقة الدفع"} />
+        <SubHeadline enText={"Payment Method"} arText={"طريقة الدفع"} />
         <div>
           <img
             src="images/PaymentProviderImage.png"

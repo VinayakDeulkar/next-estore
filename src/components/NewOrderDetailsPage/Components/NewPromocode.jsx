@@ -1,3 +1,4 @@
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import { AppContext } from "@/context/AppContext";
 import CrossIcon from "@/SVGs/CrossIcon";
 import axios from "axios";
@@ -12,8 +13,13 @@ const NewPromocode = ({
   afterPromocode,
   deliveryCharge,
 }) => {
-  const { language, homePageDetails, vendorSlug, handleCartChange, areaDetails } =
-    useContext(AppContext);
+  const {
+    language,
+    homePageDetails,
+    vendorSlug,
+    handleCartChange,
+    areaDetails,
+  } = useContext(AppContext);
   const [apiCalled, setApiCalled] = useState(false);
 
   const onApplyClick = () => {
@@ -50,9 +56,7 @@ const NewPromocode = ({
   };
   return (
     <div className="promocode-mainDiv">
-      <div className="checkoutPageText">
-        {language === "ltr" ? "Promotion Code" : "الرمز الترويجي"}
-      </div>
+      <SubHeadline enText={"Promotion Code"} arText={"الرمز الترويجي"} />
       <div
         className={`promocode-input-div ${
           homePageDetails?.vendor_data?.home_page_type === "18" &&

@@ -1,3 +1,4 @@
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import SubTitle from "@/components/common/SubTitle/subTitle";
 import Title from "@/components/common/Title/Title";
 import { AppContext } from "@/context/AppContext";

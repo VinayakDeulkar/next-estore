@@ -21,6 +21,7 @@ import SnapPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
 import ReactPixel from "react-facebook-pixel";
 import AreaModal from "../AreaModal/areaModal";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 const MobileCheckOut = () => {
   const {
@@ -514,12 +515,7 @@ const MobileCheckOut = () => {
             ></div>
             <MainTitle enText={"Checkout"} arText={"تفاصيل الطلب"} />
 
-            <div
-              className="checkout-page-text"
-              style={{ marginTop: "5px", marginBottom: "10px" }}
-            >
-              {language === "ltr" ? "Items Details" : "تفاصيل عربة التسوق"}
-            </div>
+            <SubHeadline enText="Items Details" arText="تفاصيل عربة التسوق" />
             <NewOrderProductList
               setSuccessPromocode={setSuccessPromocode}
               successPromocode={successPromocode}
@@ -529,13 +525,16 @@ const MobileCheckOut = () => {
               className="checkout-page-text"
               style={{ marginTop: "25px", marginBottom: "5px" }}
             >
-              {areaDetails?.type === "delivery"
-                ? language === "ltr"
-                  ? "Delivery For"
-                  : "التسليم ل"
-                : language === "ltr"
-                ? "Pickup For"
-                : "بيك اب ل"}
+              <SubHeadline
+                enText={
+                  areaDetails?.type === "delivery"
+                    ? "Delivery For"
+                    : "Pickup For"
+                }
+                arText={
+                  areaDetails?.type === "delivery" ? "التسليم ل" : "بيك اب ل"
+                }
+              />
             </div>
             <BuyerDetails />
             {internationalDelivery.delivery_country_code.toLowerCase() ===

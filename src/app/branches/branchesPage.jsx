@@ -21,6 +21,7 @@ const BranchesPage = () => {
           display: "flex",
           flexDirection: "column",
           position: "relative",
+          height: "calc(100vh - 56px)",
         }}
       >
         <Box sx={{ position: "relative", height: "74px" }}>
@@ -29,10 +30,7 @@ const BranchesPage = () => {
         <Box>
           <BranchList setBranchId={setBranchId} />
         </Box>
-        <div
-          id="drawer-container"
-          style={{ position: "relative", height: "100%" }}
-        ></div>
+
         <BranchDetails
           branchId={branchId}
           setBranchId={setBranchId}
