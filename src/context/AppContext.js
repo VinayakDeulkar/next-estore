@@ -148,7 +148,7 @@ export const AppProvider = ({
   });
   const handleAddressDetailsChange = (value) => setAddressDetails(value);
 
-  const [openArea, setOpenArea] = useState({ open: false, goHome: false });
+  const [openArea, setOpenArea] = useState({ open: false, route: "/" });
   const handleOpenAreaChange = (value) => setOpenArea(value);
   const [search, setSearch] = useState("");
   const handleSearchProduct = (value) => setSearch(value);
@@ -402,7 +402,8 @@ export const AppProvider = ({
   };
 
   const [layout14ToggleView, setLayout14ToggleView] = useState(false);
-  const handleSetLayout14ToggleViewChange = (value) => setLayout14ToggleView(value);
+  const handleSetLayout14ToggleViewChange = (value) =>
+    setLayout14ToggleView(value);
 
   const store = {
     language,
@@ -431,7 +432,7 @@ export const AppProvider = ({
     search,
     handleSearchProduct,
     layout14ToggleView,
-    handleSetLayout14ToggleViewChange
+    handleSetLayout14ToggleViewChange,
   };
 
   return (

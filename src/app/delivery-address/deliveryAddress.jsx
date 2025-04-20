@@ -176,7 +176,7 @@ const DeliveryAddress = () => {
     ) {
       if (showMap && markerPosition?.lat) {
         if (!areaDetails?.area && !areaDetails?.branch) {
-          handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
+          handleOpenAreaChange((prev) => ({ open: true, route: "/checkout" }));
         } else {
           let block =
             homePageDetails?.vendor_data?.enable_address_types?.includes(

@@ -63,11 +63,13 @@ const DeliveryMapStatus = ({
       );
       if (currentBranch.length) {
         return (
-          <div>
-            {language == "ltr"
-              ? currentBranch[0].address
-              : currentBranch[0].arabic_address}
-          </div>
+          <>
+            <NormalText
+              enText={currentBranch[0].address}
+              arText={currentBranch[0].arabic_address}
+              color="#837f7f"
+            />{" "}
+          </>
         );
       }
     }
@@ -168,13 +170,18 @@ const DeliveryMapStatus = ({
                 </div>
               ) : null}
               <div>
-                {customer_details?.self_pickup === "1"
-                  ? language === "ltr"
-                    ? customer_details?.branch
-                    : customer_details?.branch_ar
-                  : language === "ltr"
-                  ? customer_details?.area
-                  : customer_details?.area_ar}
+                <NormalText
+                  enText={
+                    customer_details?.self_pickup === "1"
+                      ? customer_details?.branch
+                      : customer_details?.area
+                  }
+                  arText={
+                    customer_details?.self_pickup === "1"
+                      ? customer_details?.branch_ar
+                      : customer_details?.area_ar
+                  }
+                />
               </div>
             </div>
             {customer_details?.self_pickup === "1" ? (
@@ -258,7 +265,7 @@ const DeliveryMapStatus = ({
         {customer_details?.self_pickup === "1" ? (
           <SubHeadline enText={"Buyer Name"} arText={"اسم المشتري"} />
         ) : null}
-        <SubHeadline
+        <NormalText
           enText={customer_details?.name}
           arText={customer_details?.name}
         />

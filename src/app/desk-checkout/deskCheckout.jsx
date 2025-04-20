@@ -544,7 +544,10 @@ const DeskCheckout = () => {
     ) {
       if (markerPosition?.lat) {
         if (!areaDetails?.area && !areaDetails?.branch) {
-          handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
+          handleOpenAreaChange((prev) => ({
+            open: true,
+            route: "/desk-checkout",
+          }));
         } else {
           let block =
             homePageDetails?.vendor_data?.enable_address_types?.includes(
@@ -961,9 +964,7 @@ const DeskCheckout = () => {
   //   }
   // };
 
-  const handleAddressClick = () => {
-
-  }
+  const handleAddressClick = () => {};
 
   return (
     <Box sx={{ height: "100vh", padding: "20px" }}>
@@ -1077,7 +1078,7 @@ const DeskCheckout = () => {
               <Box
                 className="contact-details-next-button"
                 onClick={() => {
-                  if(!selectAddress) {
+                  if (!selectAddress) {
                     handleAddressClick();
                   } else {
                     handleDeliveryAddressNext();

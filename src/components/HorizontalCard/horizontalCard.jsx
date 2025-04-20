@@ -163,7 +163,7 @@ const HorizontalCard = ({ product }) => {
                 homePageDetails?.vendor_data?.international_delivery === "" ||
                 internationalDelivery.country_name.toLowerCase() === "kuwait")
             ) {
-              handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
+              handleOpenAreaChange((prev) => ({ open: true, route: "/" }));
               // router.push(`/area`);
             }
           }
@@ -273,7 +273,7 @@ const HorizontalCard = ({ product }) => {
                 homePageDetails?.vendor_data?.international_delivery === "" ||
                 internationalDelivery.country_name.toLowerCase() === "kuwait")
             ) {
-              handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
+              handleOpenAreaChange((prev) => ({ open: true, route: "/" }));
 
               // router.push(`/area`);
             }

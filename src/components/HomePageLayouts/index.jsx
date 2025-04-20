@@ -12,16 +12,20 @@ import SearchProductList from "../SeachBar/searchProductList";
 import OrderType from "../HomePage/OrderType/orderType";
 import ReviewBar from "../ReviewBar/reviewBar";
 import { Box } from "@mui/material";
+import AreaModal from "../AreaModal/areaModal";
+import { useRouter } from "next/navigation";
 
 const HomePageLayouts = ({ homePageDetails }) => {
   const [searchItems, setSearchItems] = useState([]);
-  const { search, cart } = useContext(AppContext);
+  const { search, cart, openArea, handleOpenAreaChange } =
+    useContext(AppContext);
   const [searchLoading, setSearchLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(0);
   const [isPageLoading, setIsPageLoading] = useState(false);
 
   const observer = useRef();
+  const router = useRouter();
 
   const lastBookElementRef = useCallback(
     (node) => {
@@ -116,6 +120,13 @@ const HomePageLayouts = ({ homePageDetails }) => {
       ) : (
         renderLayoutType(homePageDetails?.categories)
       )}
+      <AreaModal
+        handleClose={() => {
+          handleOpenAreaChange({ open: false, route: "/" });
+          router.push(openArea.route);
+        }}
+        showAreaModal={openArea.open}
+      />
       {cart?.cartCount ? <ReviewBar /> : null}
     </Box>
   );

@@ -233,7 +233,10 @@ const AddressDetails = ({
     ) {
       if (markerPosition?.lat) {
         if (!areaDetails?.area && !areaDetails?.branch) {
-          handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
+          handleOpenAreaChange((prev) => ({
+            open: true,
+            route: "/desk-checkout",
+          }));
         } else {
           let block =
             homePageDetails?.vendor_data?.enable_address_types?.includes(

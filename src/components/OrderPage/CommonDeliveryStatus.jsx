@@ -5,6 +5,8 @@ import { AppContext } from "@/context/AppContext";
 import CheckMark from "@/SVGs/CheckMark";
 import OrderCancelIcon from "@/SVGs/OrderCancelIcon";
 import MainTitle from "../common/MainTitle/mainTitle";
+import NormalText from "../assetBoxDesign/NormalText/normalText";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 const CommonDeliveryStatus = ({ orderDetails }) => {
   const { language, areaDetails, vendorSlug, homePageDetails } =
@@ -113,13 +115,14 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
               </div>
             ) : (
               <div>
-                {language == "ltr"
-                  ? `Pickup from ${convertToAmPm(
-                      currentBranch[0]?.office_start_time
-                    )} to ${convertToAmPm(currentBranch[0]?.office_end_time)}`
-                  : `الاستلام من ${convertToAmPm(
-                      currentBranch[0]?.office_start_time
-                    )} إلى ${convertToAmPm(currentBranch[0]?.office_end_time)}`}
+                <SubHeadline
+                  enText={`Pickup from ${convertToAmPm(
+                    currentBranch[0]?.office_start_time
+                  )} to ${convertToAmPm(currentBranch[0]?.office_end_time)}`}
+                  arText={`الاستلام من ${convertToAmPm(
+                    currentBranch[0]?.office_start_time
+                  )} إلى ${convertToAmPm(currentBranch[0]?.office_end_time)}`}
+                />
               </div>
             )}
           </>

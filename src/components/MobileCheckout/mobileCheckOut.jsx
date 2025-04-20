@@ -20,6 +20,7 @@ import { tele } from "@/constants/constants";
 import SnapPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
 import ReactPixel from "react-facebook-pixel";
+import AreaModal from "../AreaModal/areaModal";
 
 const MobileCheckOut = () => {
   const {
@@ -40,6 +41,7 @@ const MobileCheckOut = () => {
     handleOpenAreaChange,
   } = useContext(AppContext);
   const router = useRouter();
+  const [showAreaModal, setShowAreaModal] = useState(false);
 
   const [apply, setApply] = useState("");
   const [loading, setLoading] = useState(false);
@@ -76,14 +78,14 @@ const MobileCheckOut = () => {
       !areaDetails?.area &&
       !areaDetails?.branch
     ) {
-      handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
-      // history.push(`/area`);
+      router.push("/");
+      handleOpenAreaChange({ open: true, route: "/checkout" });
     } else if (
       internationalDelivery.delivery_country_code.toLowerCase() !== "kw" &&
       internationalDelivery.delivery_address1 == "" &&
       internationalDelivery.delivery_address2 == ""
     ) {
-      history.push("/delivery-address");
+      router.push("/delivery-address");
     } else {
       return true;
     }
@@ -486,131 +488,135 @@ const MobileCheckOut = () => {
   };
   return (
     <EstoreLayout1>
-      {checkAllCondition() ? (
-        <div
-          className="holder-container"
-          style={
-            showAddress
-              ? {
-                  paddingBottom: "36px",
-                  height: "100vh",
-                  overflow: "hidden",
-                  position: "relative",
+      <>
+        {checkAllCondition() ? (
+          <div
+            className="holder-container"
+            style={
+              showAddress
+                ? {
+                    paddingBottom: "36px",
+                    height: "100vh",
+                    overflow: "hidden",
+                    position: "relative",
+                  }
+                : { paddingBottom: "36px" }
+            }
+          >
+            <div
+              onClick={() => {
+                if (areaDetails?.type === "pickup") {
+                  history.push("/contact-details");
+                } else {
+                  history.push("/");
                 }
-              : { paddingBottom: "36px" }
-          }
-        >
-          <div
-            onClick={() => {
-              if (areaDetails?.type === "pickup") {
-                history.push("/contact-details");
-              } else {
-                history.push("/");
-              }
-            }}
-          ></div>
-          <MainTitle enText={"Checkout"} arText={"تفاصيل الطلب"} />
+              }}
+            ></div>
+            <MainTitle enText={"Checkout"} arText={"تفاصيل الطلب"} />
 
-          <div
-            className="checkout-page-text"
-            style={{ marginTop: "5px", marginBottom: "10px" }}
-          >
-            {language === "ltr" ? "Items Details" : "تفاصيل عربة التسوق"}
-          </div>
-          <NewOrderProductList
-            setSuccessPromocode={setSuccessPromocode}
-            successPromocode={successPromocode}
-            deliveryCharge={deliveryCharge}
-          />
-          <div
-            className="checkout-page-text"
-            style={{ marginTop: "25px", marginBottom: "5px" }}
-          >
-            {areaDetails?.type === "delivery"
-              ? language === "ltr"
-                ? "Delivery For"
-                : "التسليم ل"
-              : language === "ltr"
-              ? "Pickup For"
-              : "بيك اب ل"}
-          </div>
-          <BuyerDetails />
-          {internationalDelivery.delivery_country_code.toLowerCase() === "kw" ||
-          homePageDetails?.vendor_data?.international_delivery === "3" ||
-          homePageDetails?.vendor_data?.international_delivery === "" ? (
-            <NewDeliveryDetails
-              addressDetails={addressDetails}
-              companyData={companyData}
-              setShowAddress={setShowAddress}
-              showAddress={showAddress}
-            />
-          ) : (
-            <DeliveryAddressSection
-              internationalDelivery={internationalDelivery}
-            />
-          )}
-          {companyData && <NewDeliveryCompany companyData={companyData} />}
-          <NewPaymentSelector
-            handleSetPaymentChange={handleSetPaymentChange}
-            payment={payment}
-            setWidth={setWidth}
-            width={width}
-          />
-          {cart?.show_promocode == 1 ? (
-            <NewPromocode
-              promocode={promocode}
-              setPromocode={setPromocode}
-              setApply={setApply}
-              apply={apply}
+            <div
+              className="checkout-page-text"
+              style={{ marginTop: "5px", marginBottom: "10px" }}
+            >
+              {language === "ltr" ? "Items Details" : "تفاصيل عربة التسوق"}
+            </div>
+            <NewOrderProductList
               setSuccessPromocode={setSuccessPromocode}
+              successPromocode={successPromocode}
               deliveryCharge={deliveryCharge}
             />
-          ) : null}
-          <NewAmountDetails
-            cart={cart}
-            areaDetails={areaDetails}
-            language={language}
-            details={homePageDetails}
-            payment={payment}
-            onConfirmOrder={() => {
-              if (
-                internationalDelivery.delivery_country_code.toLowerCase() ===
-                  "kw" ||
-                homePageDetails?.vendor_data?.international_delivery === "3" ||
-                homePageDetails?.vendor_data?.international_delivery === ""
-              ) {
-                onConfirmOrder(payment);
-              } else {
-                submitInternational(payment);
-              }
-            }}
-          />
-          {loading && (
             <div
-              style={{
-                width: "100%",
-                height: "100vh",
-                position: "fixed",
-                top: "0",
-                left: "0",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: "8",
-              }}
-              className="order-spinner-background"
+              className="checkout-page-text"
+              style={{ marginTop: "25px", marginBottom: "5px" }}
             >
-              <Spinner
-                height="50px"
-                color={homePageDetails?.vendor_data?.vendor_color}
-                size="6px"
-              />
+              {areaDetails?.type === "delivery"
+                ? language === "ltr"
+                  ? "Delivery For"
+                  : "التسليم ل"
+                : language === "ltr"
+                ? "Pickup For"
+                : "بيك اب ل"}
             </div>
-          )}
-        </div>
-      ) : (
-        <></>
-      )}
+            <BuyerDetails />
+            {internationalDelivery.delivery_country_code.toLowerCase() ===
+              "kw" ||
+            homePageDetails?.vendor_data?.international_delivery === "3" ||
+            homePageDetails?.vendor_data?.international_delivery === "" ? (
+              <NewDeliveryDetails
+                addressDetails={addressDetails}
+                companyData={companyData}
+                setShowAddress={setShowAddress}
+                showAddress={showAddress}
+              />
+            ) : (
+              <DeliveryAddressSection
+                internationalDelivery={internationalDelivery}
+              />
+            )}
+            {companyData && <NewDeliveryCompany companyData={companyData} />}
+            <NewPaymentSelector
+              handleSetPaymentChange={handleSetPaymentChange}
+              payment={payment}
+              setWidth={setWidth}
+              width={width}
+            />
+            {cart?.show_promocode == 1 ? (
+              <NewPromocode
+                promocode={promocode}
+                setPromocode={setPromocode}
+                setApply={setApply}
+                apply={apply}
+                setSuccessPromocode={setSuccessPromocode}
+                deliveryCharge={deliveryCharge}
+              />
+            ) : null}
+            <NewAmountDetails
+              cart={cart}
+              areaDetails={areaDetails}
+              language={language}
+              details={homePageDetails}
+              payment={payment}
+              onConfirmOrder={() => {
+                if (
+                  internationalDelivery.delivery_country_code.toLowerCase() ===
+                    "kw" ||
+                  homePageDetails?.vendor_data?.international_delivery ===
+                    "3" ||
+                  homePageDetails?.vendor_data?.international_delivery === ""
+                ) {
+                  onConfirmOrder(payment);
+                } else {
+                  submitInternational(payment);
+                }
+              }}
+            />
+            {loading && (
+              <div
+                style={{
+                  width: "100%",
+                  height: "100vh",
+                  position: "fixed",
+                  top: "0",
+                  left: "0",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: "8",
+                }}
+                className="order-spinner-background"
+              >
+                <Spinner
+                  height="50px"
+                  color={homePageDetails?.vendor_data?.vendor_color}
+                  size="6px"
+                />
+              </div>
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
+      </>
     </EstoreLayout1>
   );
 };

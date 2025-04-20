@@ -505,7 +505,7 @@ const ProductDetails = ({
             homePageDetails?.vendor_data?.international_delivery === "3" ||
             homePageDetails?.vendor_data?.international_delivery === "")
         ) {
-          handleOpenAreaChange((prev) => ({ open: true, goHome: true }));
+          handleOpenAreaChange((prev) => ({ open: true, route: "/" }));
         } else {
           router.back();
         }
@@ -614,7 +614,7 @@ const ProductDetails = ({
               homePageDetails?.vendor_data?.international_delivery === "" ||
               internationalDelivery.country_name.toLowerCase() === "kuwait")
           ) {
-            handleOpenAreaChange((prev) => ({ open: true, goHome: true }));
+            handleOpenAreaChange((prev) => ({ open: true, route: "/" }));
             // history.push(`/area`, {
             //   from: "prdetails",
             // });
@@ -997,7 +997,7 @@ const ProductDetails = ({
                           ? setShowRegister(true)
                           : handleOpenAreaChange((prev) => ({
                               open: true,
-                              goHome: true,
+                              route: "/",
                             }));
                         // : history.push(`/area`, {
                         //     from: "prdetails",

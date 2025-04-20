@@ -32,8 +32,7 @@ function DeliveryTimeSelect() {
 
   useEffect(() => {
     if (!areaDetails?.area && !areaDetails?.branch) {
-      handleOpenAreaChange((prev) => ({ open: true, goHome: false }));
-      // history.push(`/area`);
+      handleOpenAreaChange((prev) => ({ open: true, route: "/timing" }));
     } else {
       let temp = areaDetails?.data?.branch?.filter(
         (k, i) => k?.id == areaDetails?.branchForArea?.id

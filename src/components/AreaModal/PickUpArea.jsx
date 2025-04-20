@@ -229,6 +229,17 @@ const PickUpArea = ({ handleClose }) => {
                   alignItems: "center",
                   padding: "20px 0",
                 }}
+                onClick={(e) => {
+                  if (branch?.availability_status == 1) {
+                    e.preventDefault();
+                    onBranchSelect(
+                      branch?.name,
+                      branch?.arabic_name,
+                      branch?.id,
+                      branch?.area_ids?.length == 0 ? 1 : branch?.area_ids[0]
+                    );
+                  }
+                }}
               >
                 <div
                   onClick={(e) => {
@@ -263,7 +274,12 @@ const PickUpArea = ({ handleClose }) => {
                     )}
                   </Box>
                 </div>
-                <IconButton onClick={() => router.push(`/branches`)}>
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push(`/branches`);
+                  }}
+                >
                   <InfoOutlinedIcon sx={{ color: "#000" }} />
                 </IconButton>
               </ListItem>
