@@ -10,6 +10,8 @@ import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSq
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import NormalText from "../assetBoxDesign/NormalText/normalText";
 import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
+import SnapPixel from "react-snapchat-pixel";
+import TiktokPixel from "tiktok-pixel";
 
 const HorizontalCard = ({ product }) => {
   const {
@@ -528,7 +530,7 @@ const HorizontalCard = ({ product }) => {
                               margin: 0,
                               fontWeight: "400",
                               display: "flex",
-                              alignItems: "center"
+                              alignItems: "center",
                             }}
                           >
                             <span>

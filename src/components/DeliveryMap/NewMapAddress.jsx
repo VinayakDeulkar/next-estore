@@ -154,7 +154,7 @@ const NewMapAddress = ({
     }
   };
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
+    googleMapsApiKey: "AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg",
   });
   useEffect(() => {}, [markerPosition]);
 

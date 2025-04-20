@@ -6,6 +6,7 @@ import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
+import SnapPixel from "react-snapchat-pixel";
 
 const Timing = () => {
   const { homePageDetails, areaDetails } = useContext(AppContext);

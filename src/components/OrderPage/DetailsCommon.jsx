@@ -3,54 +3,78 @@ import moment from "moment";
 import ReactFlagsSelect from "react-flags-select";
 import { AppContext } from "@/context/AppContext";
 import { telecount } from "@/constants/constants";
+import NormalText from "../assetBoxDesign/NormalText/normalText";
 
 const DetailsCommon = ({ data }) => {
   const { language } = useContext(AppContext);
+  const getPaymentText = () => {
+    switch (data.value) {
+      case "1":
+        return { enText: "K-NET", arText: "كي نت" };
+      case "2":
+        return { enText: "Credit Card", arText: "بطاقة الائتمان" };
+      case "3":
+        return { enText: "Cash On Delivery", arText: "الدفع عند الاستلام" };
+      case "4":
+        return { enText: "Apple Pay Debit", arText: "أبل بي - بطاقات الخصم" };
+      case "5":
+        return {
+          enText: "Apple Pay Credit",
+          arText: "أبل بي - بطاقات الإئتمان",
+        };
 
+      default:
+        break;
+    }
+  };
   return (
     <>
       {data.value && (
         <div className="details-common-mainDIv">
-          <div className="details-common-firstdiv">
-            {language === "ltr" ? data.english_value : data.arabic_value}
-          </div>
+          <NormalText
+            enText={data.english_value}
+            arText={data.arabic_value}
+            color="#a3a2a2"
+          />
+
           <div className="details-common-seconddiv">
             {data.is_amount ? (
-              <>
-                <span>
-                  {data?.value ? parseFloat(data?.value).toFixed(3) : 0}
-                </span>{" "}
-                {language === "rtl" ? "د.ك" : "KD"}
-              </>
+              <NormalText
+                enText={`${
+                  data?.value ? parseFloat(data?.value).toFixed(3) : 0
+                } KD`}
+                arText={`${
+                  data?.value ? parseFloat(data?.value).toFixed(3) : 0
+                } د.ك`}
+              />
             ) : data.is_payment_type ? (
-              <>
-                {data.value == "1" && (language == "ltr" ? "K-NET" : "كي نت")}
-                {data.value == "2" &&
-                  (language == "ltr" ? "Credit Card" : "بطاقة الائتمان")}
-                {data.value == "3" &&
-                  (language == "ltr"
-                    ? "Cash On Delivery"
-                    : "الدفع عند الاستلام")}
-                {data.value == "4" &&
-                  (language == "ltr"
-                    ? "Apple Pay Debit"
-                    : "أبل بي - بطاقات الخصم")}
-                {data.value == "5" &&
-                  (language == "ltr"
-                    ? "Apple Pay Credit"
-                    : "أبل بي - بطاقات الإئتمان")}
-              </>
+              <NormalText
+                enText={getPaymentText().enText}
+                arText={getPaymentText().arText}
+              />
             ) : data.is_Date ? (
-              <>
-                {moment(data.value).locale("en").format("DD") +
+              <NormalText
+                enText={`${
+                  moment(data.value).locale("en").format("DD") +
                   " " +
                   moment(data.value)
                     .locale(language === "ltr" ? "en" : "ar-sa")
                     .format("MMMM") +
                   moment(data.value).locale("en").format(", yyyy") +
                   " @ " +
-                  moment(data.value).locale("en").format("hh:mm A")}
-              </>
+                  moment(data.value).locale("en").format("hh:mm A")
+                }`}
+                arText={`${
+                  moment(data.value).locale("en").format("DD") +
+                  " " +
+                  moment(data.value)
+                    .locale(language === "ltr" ? "en" : "ar-sa")
+                    .format("MMMM") +
+                  moment(data.value).locale("en").format(", yyyy") +
+                  " @ " +
+                  moment(data.value).locale("en").format("hh:mm A")
+                }`}
+              />
             ) : data.is_phone ? (
               <div
                 className="contact-store-phonenumber"
@@ -63,10 +87,13 @@ const DetailsCommon = ({ data }) => {
                   disabled
                   customLabels={telecount}
                 />{" "}
-                +965 {data.value}
+                <NormalText
+                  enText={`+965 ${data.value}`}
+                  arText={`+965 ${data.value}`}
+                />
               </div>
             ) : (
-              <>{data.value}</>
+              <NormalText enText={data.value} arText={data.value} />
             )}
           </div>
         </div>

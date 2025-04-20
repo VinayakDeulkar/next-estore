@@ -39,7 +39,7 @@ const DeliveryMapLocation = ({ startLat, startLng, endLat, endLng }) => {
     <>
       {coordinates && center && directionsOptions ? (
         <LoadScript
-          googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+          googleMapsApiKey={"AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg"}
         >
           <GoogleMap
             className={`map-border-new ${

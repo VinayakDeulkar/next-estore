@@ -20,6 +20,8 @@ import { checkoutTag } from "@/constants/checkouttag";
 import ReactPixel from "react-facebook-pixel";
 import { mapArea } from "@/constants/areaConstant";
 import axios from "axios";
+import SnapPixel from "react-snapchat-pixel";
+import TiktokPixel from "tiktok-pixel";
 
 const DeskCheckoutSection = ({ showPaymentMethod }) => {
   const {

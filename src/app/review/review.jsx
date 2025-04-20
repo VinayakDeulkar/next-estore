@@ -16,6 +16,7 @@ import SubTitle from "@/components/common/SubTitle/subTitle";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
+import SnapPixel from "react-snapchat-pixel";
 
 const Review = () => {
   const {

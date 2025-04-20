@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import EstoreLayout1 from "../EstoreLayouts/estoreLayout1";
 import { AppContext } from "@/context/AppContext";
-import { getDeliveryCompanies } from "@/apis";
+import { getDeliveryCompanies, updateDeliveryCharges } from "@/apis";
 import MainTitle from "../common/MainTitle/mainTitle";
 import NewOrderProductList from "../NewOrderProductList/NewOrderProductList";
 import BuyerDetails from "../NewOrderDetailsPage/Components/BuyerDetails";
@@ -15,6 +15,11 @@ import Spinner from "../common/Spinner/spinner";
 import { useRouter } from "next/navigation";
 import { mapArea } from "@/constants/areaConstant";
 import axios from "axios";
+import moment from "moment";
+import { tele } from "@/constants/constants";
+import SnapPixel from "react-snapchat-pixel";
+import TiktokPixel from "tiktok-pixel";
+import ReactPixel from "react-facebook-pixel";
 
 const MobileCheckOut = () => {
   const {
@@ -216,6 +221,24 @@ const MobileCheckOut = () => {
       }
     })();
   }, [window, window.google, window.google?.maps, areaDetails?.area]);
+
+  const getDeliveryCharge = async (delivery_charge) => {
+    if (delivery_charge) {
+      const response = await updateDeliveryCharges(
+        vendorSlug?.data?.ecom_url_slug,
+        homePageDetails?.vendor_data?.vendors_id,
+        areaDetails?.area_id,
+        delivery_charge
+      );
+      if (response && response.status) {
+        setLoading(false);
+        setCart(response.data);
+      } else {
+        setLoading(false);
+        router.push("/");
+      }
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -457,7 +480,6 @@ const MobileCheckOut = () => {
               quantity: item?.quantity,
             }))
           );
-        console.log(res.data.data.payment_url, "res.data.data.payment_url");
         window.location.assign(res.data.data.payment_url);
       })
       .catch((e) => console.log(e));

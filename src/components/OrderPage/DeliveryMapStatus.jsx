@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
-import ReactFlagsSelect from "react-flags-select";
-import { AppContext } from "@/context/AppContext";
 import { tele, telecount } from "@/constants/constants";
 import { getAddressType } from "@/constants/function";
+import { AppContext } from "@/context/AppContext";
+import ReactFlagsSelect from "react-flags-select";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import DeliveryMapLocation from "./DeliveryMapLocation";
 import OrderDeliveryAddress from "./OrderDeliveryAddress";
-import Title from "../common/Title/Title";
+import NormalText from "../assetBoxDesign/NormalText/normalText";
 
 const DeliveryMapStatus = ({
   location_coordinates,
@@ -90,7 +91,7 @@ const DeliveryMapStatus = ({
         className="orderStatus-userData"
         style={{ border: "none", marginTop: "0" }}
       >
-        <Title
+        <SubHeadline
           enText={
             customer_details?.self_pickup == 1 ? "Pickup From" : "Delivered To"
           }
@@ -255,13 +256,13 @@ const DeliveryMapStatus = ({
       </div>
       <div className="orderStatus-userphone">
         {customer_details?.self_pickup === "1" ? (
-          <div className="common-delivery-status-order-number-grey">
-            {language === "ltr" ? "Buyer Name" : "اسم المشتري"}
-          </div>
+          <SubHeadline enText={"Buyer Name"} arText={"اسم المشتري"} />
         ) : null}
-        <div className="orderStatus-userData-deliverText">
-          {customer_details?.name}
-        </div>
+        <SubHeadline
+          enText={customer_details?.name}
+          arText={customer_details?.name}
+        />
+
         <div
           className="orderStatus-userphone-userName"
           style={{ display: "flex", alignItems: "center" }}
@@ -273,17 +274,15 @@ const DeliveryMapStatus = ({
             disabled
             customLabels={telecount}
           />
-          {customer_details?.country_code} {customer_details?.phone_number}
+          <NormalText
+            enText={`${customer_details?.country_code} ${customer_details?.phone_number}`}
+            arText={`${customer_details?.country_code} ${customer_details?.phone_number}`}
+          />
         </div>
-        <div
-          className="orderStatus-userphone-userName"
-          style={{
-            marginLeft: language == "ltr" ? "25px" : "0px",
-            marginRight: language == "rtl" ? "25px" : "0px",
-          }}
-        >
-          {customer_details?.email}
-        </div>
+        <NormalText
+          enText={customer_details?.email}
+          arText={customer_details?.email}
+        />
       </div>
     </div>
   );

@@ -18,6 +18,8 @@ import { useRouter } from "next/navigation";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import GridLayout1 from "@/components/GridLayouts/gridLayout1";
 import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 
 const OrderPage = (props) => {
   const { language, homePageDetails } = useContext(AppContext);
@@ -42,14 +44,8 @@ const OrderPage = (props) => {
   ];
   return (
     <Box sx={{ height: "100vh" }}>
-      <HeaderBox />
-      <GridLayout1 sx={{ height: "calc(100vh - 70px)", padding: "20px" }}>
-        <Box
-          sx={{
-            padding: "20px",
-            height: "calc(100vh - 120px)",
-          }}
-        >
+      <EstoreLayout1>
+        <Box>
           {orderDetails && <CommonDeliveryStatus orderDetails={orderDetails} />}
           {orderDetails ? (
             <DeliveryMapStatus
@@ -65,12 +61,18 @@ const OrderPage = (props) => {
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
-                  {language === "ltr" ? element.english : element.arabic}
+                  <SubHeadline
+                    enText={element.english}
+                    arText={element.arabic}
+                  />
                 </AccordionSummary>
                 <AccordionDetails>{element?.component}</AccordionDetails>
               </Accordion>
             ))}
-          <div className="order-status-reorder-button-div">
+          <div
+            className="order-status-reorder-button-div"
+            style={{ marginTop: "20px" }}
+          >
             <div
               className={`pay-now-button ${
                 homePageDetails?.vendor_data?.home_page_type === "18" &&
@@ -100,9 +102,7 @@ const OrderPage = (props) => {
             </div>
           </div>
         </Box>
-
-        <CarouselImage />
-      </GridLayout1>
+      </EstoreLayout1>
     </Box>
   );
 };

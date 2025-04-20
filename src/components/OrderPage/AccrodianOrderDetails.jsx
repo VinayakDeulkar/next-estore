@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
 import ProductCard from "./ProductCard";
-import SubTitle from "../common/SubTitle/subTitle";
 import Title from "../common/Title/Title";
+import NormalText from "../assetBoxDesign/NormalText/normalText";
+import Notes from "../assetBoxDesign/Notes/notes";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 export const AccrodianOrderDetails = ({ orderDetails }) => {
   const { language, homePageDetails } = useContext(AppContext);
@@ -17,28 +19,36 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
           />
         ))}
       <div className="details-common-mainDIv" style={{ padding: "0 10px" }}>
-        <SubTitle enText={"Sub Total"} arText={"الإجمالي"} />
-        <div className="details-common-seconddiv">
-          <span>
-            {orderDetails?.subTotal
+        <NormalText enText={"Sub Total"} arText={"الإجمالي"} />
+        <NormalText
+          enText={`${
+            orderDetails?.subTotal
               ? parseFloat(orderDetails?.subTotal).toFixed(3)
-              : 0}
-          </span>{" "}
-          {language === "rtl" ? "د.ك" : "KD"}
-        </div>
+              : 0
+          } KD`}
+          arText={`${
+            orderDetails?.subTotal
+              ? parseFloat(orderDetails?.subTotal).toFixed(3)
+              : 0
+          } د.ك`}
+        />
       </div>
       {orderDetails?.delivery_charge &&
       orderDetails?.customer_details?.self_pickup !== "1" ? (
         <div className="details-common-mainDIv" style={{ padding: "0 10px" }}>
-          <SubTitle enText={"Delivery Charges"} arText={"رسوم التوصيل"} />
-          <div className="details-common-seconddiv">
-            <span>
-              {orderDetails?.delivery_charge
+          <NormalText enText={"Delivery Charges"} arText={"رسوم التوصيل"} />
+          <NormalText
+            enText={`${
+              orderDetails?.delivery_charge
                 ? parseFloat(orderDetails?.delivery_charge).toFixed(3)
-                : 0}
-            </span>{" "}
-            {language === "rtl" ? "د.ك" : "KD"}
-          </div>
+                : 0
+            } KD`}
+            arText={`${
+              orderDetails?.delivery_charge
+                ? parseFloat(orderDetails?.delivery_charge).toFixed(3)
+                : 0
+            } د.ك`}
+          />
         </div>
       ) : null}
       {orderDetails.promo_code_price ? (
@@ -46,17 +56,19 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
           className="details-common-mainDIv"
           style={{ padding: "0 10px", color: "red" }}
         >
-          <div className="details-common-seconddiv">
-            {language === "ltr" ? "Discount" : "خصم الرمز الترويجي"}
-          </div>
-          <div className="details-common-seconddiv">
-            <span>
-              {orderDetails?.promo_code_price
+          <Notes enText={"Discount"} arText={"خصم الرمز الترويجي"} />
+          <NormalText
+            enText={`${
+              orderDetails?.promo_code_price
                 ? parseFloat(orderDetails?.promo_code_price).toFixed(3)
-                : 0}
-            </span>{" "}
-            {language === "rtl" ? "د.ك" : "KD"}
-          </div>
+                : 0
+            } KD`}
+            arText={`${
+              orderDetails?.promo_code_price
+                ? parseFloat(orderDetails?.promo_code_price).toFixed(3)
+                : 0
+            } د.ك`}
+          />
         </div>
       ) : null}
       <div
@@ -65,11 +77,19 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
           "fashion-theme-border"
         }`}
       >
-        <Title enText={"Total Payment"} arText={"المبلغ الإجمالي"} />
-        <div>
-          <span>{parseFloat(orderDetails?.total_amount ?? 0).toFixed(3)}</span>{" "}
-          {language === "rtl" ? "د.ك" : "KD"}
-        </div>
+        <SubHeadline enText={"Total Payment"} arText={"المبلغ الإجمالي"} />
+        <SubHeadline
+          enText={`${
+            orderDetails?.total_amount
+              ? parseFloat(orderDetails?.total_amount).toFixed(3)
+              : 0
+          } KD`}
+          arText={`${
+            orderDetails?.total_amount
+              ? parseFloat(orderDetails?.total_amount).toFixed(3)
+              : 0
+          } د.ك`}
+        />
       </div>
     </div>
   );

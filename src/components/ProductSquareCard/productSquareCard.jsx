@@ -3,19 +3,15 @@ import { AppContext } from "@/context/AppContext";
 import { Box, Card, CardContent, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import Spinner from "../common/Spinner/spinner";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
-import "./productSquareCard.css";
 import ReactPixel from "react-facebook-pixel";
-import AddToCartIcon from "@/SVGs/AddToCartIcon";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import SnapPixel from "react-snapchat-pixel";
+import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
+import NormalText from "../assetBoxDesign/NormalText/normalText";
 import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSquare";
 import SubTitle from "../common/SubTitle/subTitle";
-import NormalText from "../assetBoxDesign/NormalText/normalText";
-import SmallButtonRounded from "../assetBoxDesign/SmallButtonRounded/smallButtonRounded";
-import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
+import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import "./productSquareCard.css";
+import TiktokPixel from "tiktok-pixel";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =

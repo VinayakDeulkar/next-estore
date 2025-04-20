@@ -21,6 +21,8 @@ import OptionBox from "@/components/assetBoxDesign/OptionBox/optionBox";
 import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
 import TextInputField from "@/components/assetBoxDesign/TextField/textInputField";
 import MultipleItems from "@/components/assetBoxDesign/MultipleItems/multipleItems";
+import SnapPixel from "react-snapchat-pixel";
+import TiktokPixel from "tiktok-pixel";
 
 const ProductDetails = ({
   product,
