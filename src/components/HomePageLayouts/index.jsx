@@ -1,24 +1,31 @@
-import React, { useCallback, useContext, useRef, useState } from "react";
-import Layout15 from "./Layout15";
-import Layout11 from "./Layout11";
-import "../custom.css";
-import Layout13 from "./Layout13";
-import Layout12 from "./Layout12";
-import Layout14 from "./Layout14";
-import SearchBar from "../SeachBar/searchBar";
 import { AppContext } from "@/context/AppContext";
+import { Box } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useCallback, useContext, useRef, useState } from "react";
+import AreaModal from "../AreaModal/areaModal";
+import "../custom.css";
+import OrderType from "../HomePage/OrderType/orderType";
+import SearchBar from "../SeachBar/searchBar";
 import SearchNone from "../SeachBar/searchNone";
 import SearchProductList from "../SeachBar/searchProductList";
-import OrderType from "../HomePage/OrderType/orderType";
+import Layout11 from "./Layout11";
+import Layout12 from "./Layout12";
+import Layout13 from "./Layout13";
+import Layout14 from "./Layout14";
+import Layout15 from "./Layout15";
 import ReviewBar from "../ReviewBar/reviewBar";
-import { Box } from "@mui/material";
-import AreaModal from "../AreaModal/areaModal";
-import { useRouter } from "next/navigation";
+import HomepageDesign from "../InternationalDelivery/HomepageDesign";
 
-const HomePageLayouts = ({ homePageDetails }) => {
+const HomePageLayouts = () => {
   const [searchItems, setSearchItems] = useState([]);
-  const { search, cart, openArea, handleOpenAreaChange } =
-    useContext(AppContext);
+  const {
+    homePageDetails,
+    openArea,
+    handleOpenAreaChange,
+    search,
+    cart,
+    internationalDelivery,
+  } = useContext(AppContext);
   const [searchLoading, setSearchLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(0);
@@ -75,6 +82,7 @@ const HomePageLayouts = ({ homePageDetails }) => {
     }
   };
 
+  const handleCountryChange = (code) => {};
   return (
     <Box sx={{ position: "relative" }}>
       <SearchBar
@@ -87,7 +95,19 @@ const HomePageLayouts = ({ homePageDetails }) => {
         hasMore={hasMore}
         setPage={setPage}
       />
-      <OrderType />
+      {homePageDetails?.vendor_data?.international_delivery !== "3" &&
+      homePageDetails?.vendor_data?.international_delivery !== "" ? (
+        <div style={{ marginBottom: "20px" }}>
+          <HomepageDesign handleCountryChange={handleCountryChange} />
+        </div>
+      ) : null}
+      {(homePageDetails?.vendor_data?.international_delivery == "3" ||
+        homePageDetails?.vendor_data?.international_delivery == "") &&
+      internationalDelivery &&
+      internationalDelivery.delivery_country_code === "KW" ? (
+        <OrderType />
+      ) : null}
+
       {search != "" ? (
         searchItems?.length != 0 || searchLoading ? (
           <>

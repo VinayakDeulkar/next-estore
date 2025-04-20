@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import Image from "next/image";
+import EstoreBag from "@/SVGs/EstoreBag";
 
 const ReviewBar = () => {
   const { cart, homePageDetails } = useContext(AppContext);
@@ -28,7 +29,7 @@ const ReviewBar = () => {
       component="button"
       onClick={() => {
         window.innerWidth > 600
-          ? router.push("/desk-checkout")
+          ? router.push("/checkout-desktop")
           : router.push("/review");
       }}
     >
@@ -60,12 +61,7 @@ const ReviewBar = () => {
               color="#fff"
             />
           </Box>
-          <Image
-            loading="lazy"
-            src={"/images/eStore.png"}
-            width={25}
-            height={25}
-          />
+          <EstoreBag />
         </Grid>
         <Grid item md={4} sm={4} lg={4} xs={4}>
           <SubHeadline

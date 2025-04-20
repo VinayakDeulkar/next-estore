@@ -1,0 +1,218 @@
+#bottomDrawer {
+  position: absolute;
+  display: table;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  z-index: 100;
+}
+
+#bottomDrawer.open {
+  transform: scale(1);
+}
+
+#bottomDrawer.open .modal-background {
+  background: rgba(222, 222, 222, 1);
+  backdrop-filter: blur(5px);
+  animation: fadeInforDrawer 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#bottomDrawer.open .modal-background .modal {
+  opacity: 0;
+  animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#bottomDrawer.open + .content {
+  animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#bottomDrawer.open.out {
+  animation: quickScaleDown 0s 0.5s linear forwards;
+}
+
+#bottomDrawer.open.out .modal-background {
+  animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#bottomDrawer.open.out .modal-background .modal {
+  animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#bottomDrawer.open.out + .content {
+  animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#bottomDrawer .modal-background {
+  display: table-cell;
+  background: #f8f8f8;
+  text-align: start;
+  vertical-align: bottom;
+}
+
+#bottomDrawer .modal-background .modal {
+  display: inline-block;
+  border-radius: 3px;
+  font-weight: 300;
+  position: relative;
+  height: auto;
+  max-height: 90vh;
+  width: 100%;
+}
+
+.drawerOuterDiv {
+  border-top-right-radius: 19px;
+  border-top-left-radius: 19px;
+}
+
+.drawerInnerDiv {
+  background: #fff;
+  padding: 20px;
+  border-radius: 19px;
+  padding-bottom: 24px;
+  position: relative;
+  max-height: 90vh;
+  overflow: auto;
+  padding-bottom: 100px;
+}
+
+.drawerInnerDiv::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  display: none;
+  background-color: #f5f5f5;
+}
+
+.handleBackground {
+  margin-top: -2px;
+  background: linear-gradient(180deg, #000 4.62%, #000 9.67%);
+  border-bottom-left-radius: 19px;
+  border-bottom-right-radius: 19px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08); */
+
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04); */
+  /* Reduced shadow */
+  padding: 10px;
+  width: 100%;
+  /* transition: box-shadow 0.2s ease, transform 0.2s ease; */
+  cursor: pointer;
+}
+
+.card.active {
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08); */
+  /* Reduced active shadow */
+  transform: translateY(-0.7px);
+  /* Less movement */
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.drawerCrossIcon {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+@keyframes fadeInforDrawer {
+  0% {
+    background: rgba(222, 222, 222, 0.41);
+  }
+
+  100% {
+    background: rgba(222, 222, 222, 0.41);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.8) translateY(1000px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleBack {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.85);
+  }
+}
+
+@keyframes quickScaleDown {
+  0% {
+    transform: scale(1);
+  }
+
+  99.9% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes scaleDown {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.8) translateY(1000px);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleForward {
+  0% {
+    transform: scale(0.85);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

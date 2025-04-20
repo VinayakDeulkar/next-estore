@@ -22,6 +22,7 @@ const HorizontalCard = ({ product }) => {
     areaDetails,
     vendorSlug,
     handleOpenAreaChange,
+    internationalDelivery,
   } = useContext(AppContext);
   const [inCart, setInCart] = useState(0);
   const [spinLoader, setSpinLoader] = useState(false);

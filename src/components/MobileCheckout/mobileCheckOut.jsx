@@ -22,6 +22,7 @@ import TiktokPixel from "tiktok-pixel";
 import ReactPixel from "react-facebook-pixel";
 import AreaModal from "../AreaModal/areaModal";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import DeliveryAddressSection from "../InternationalDelivery/DeliveryAddressSection";
 
 const MobileCheckOut = () => {
   const {

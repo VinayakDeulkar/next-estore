@@ -131,6 +131,7 @@ const NewContactDetails = ({ errorContactDetails }) => {
                 name: e.target.value,
               });
             }}
+            value={contactDetails?.name}
           />
           {errorContactDetails.nameError && (
             <label className="error-text">
@@ -151,6 +152,7 @@ const NewContactDetails = ({ errorContactDetails }) => {
               email: e.target.value,
             });
           }}
+          value={contactDetails?.email}
         />
         {errorContactDetails.emailError && (
           <label className="error-text">

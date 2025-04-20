@@ -1,0 +1,112 @@
+:root {
+  --vendor-color: black;
+  --vendor-color-light: black;
+  --vendor-hover-color: black;
+  --vendor-font-family: "Open Sans", sans-serif;
+}
+
+.international-delivery-home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.international-map-div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.international-map-div div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.international-map-div .ReactFlagsSelect-module_selectBtn__19wW7 {
+  border-bottom: none !important;
+  color: #000;
+}
+
+.international-map-div div ul {
+  right: 0;
+  left: auto;
+  max-width: 100% !important;
+  top: 30px;
+}
+
+.international-map-div .ReactFlagsSelect-module_selectOptions__3LNBJ {
+  min-width: 300px !important;
+  max-width: 300px !important;
+  width: 300px !important;
+}
+
+html[dir="rtl"] .international-map-div div ul {
+  right: auto;
+  left: 0;
+}
+
+html[dir="rtl"] .international-map-div {
+  font-family: "Open Sans", sans-serif;
+  direction: ltr;
+}
+
+.country-select-label {
+  color: #a3a2a2;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+html[dir="rtl"] .country-select-label {
+  font-size: 15px;
+}
+
+.international-country-selector div ul {
+  min-width: 100% !important;
+}
+
+.state-dropDown {
+  height: 150px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  font-size: 16px;
+  background-color: white;
+  border: 0.5px solid black;
+  padding: 8px 0px;
+  z-index: 1000;
+  width: 100%;
+}
+
+html[dir="rtl"] .state-dropDown {
+  font-size: 20px;
+}
+
+.state-dropDown div {
+  padding: 0px 8px;
+  cursor: pointer;
+}
+
+.state-dropDown div:hover {
+  background-color: var(--vendor-color-light);
+  color: white;
+}
+
+.state-name-holder {
+  font-size: 16px;
+  user-select: none;
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+html[dir="rtl"] .state-name-holder {
+  font-size: 20px;
+}
+.international-map-div {
+  font-size: 14px;
+  font-weight: 400;
+}

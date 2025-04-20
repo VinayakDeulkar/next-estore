@@ -133,12 +133,13 @@ const DeliveryMapStatus = ({
                     {getAddressType(customer_details.address_type, "", "19")}
                   </div>
                 ) : null}
-                <div>
-                  {customer_details?.self_pickup != "1" &&
-                  customer_details?.title
-                    ? customer_details.title
-                    : null}
-                </div>
+                {customer_details?.self_pickup != "1" &&
+                customer_details?.title ? (
+                  <NormalText
+                    enText={customer_details.title}
+                    arText={customer_details.title}
+                  />
+                ) : null}
               </div>
             )}
             <div
@@ -169,7 +170,7 @@ const DeliveryMapStatus = ({
                   {getAddressType(customer_details.address_type, "", "19")}
                 </div>
               ) : null}
-              <div>
+              <div style={{ padding: "0 25px" }}>
                 <NormalText
                   enText={
                     customer_details?.self_pickup === "1"

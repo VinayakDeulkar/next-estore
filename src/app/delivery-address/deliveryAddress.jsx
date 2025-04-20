@@ -5,6 +5,7 @@ import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import DeliveryMapContainer from "@/components/DeliveryMap/DeliveryMapContainer";
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
+import InternationalAddress from "@/components/InternationalDelivery/InternationalAddress";
 import { mapArea } from "@/constants/areaConstant";
 import { tele } from "@/constants/constants";
 import { AppContext } from "@/context/AppContext";
@@ -445,7 +446,10 @@ const DeliveryAddress = () => {
     const forClick = document.getElementById("forClickOnly");
     forClick?.click();
   };
-
+  console.log(
+    internationalDelivery.delivery_country_code,
+    "internationalDelivery.delivery_country_code"
+  );
   return (
     <Box>
       <EstoreLayout1>
@@ -484,6 +488,7 @@ const DeliveryAddress = () => {
               homePageDetails?.vendor_data?.home_page_type === "18" &&
               "fashion-theme"
             }`}
+            style={{ padding: "20px" }}
           >
             <Box
               className="contact-details-next-button"

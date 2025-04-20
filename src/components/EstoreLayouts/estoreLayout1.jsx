@@ -12,8 +12,14 @@ const EstoreLayout1 = ({ children }) => {
             sx={{
               height: "calc(100vh - 50px)",
               overflow: "scroll",
-              padding: window.innerWidth > 600 ? "0 40px" : "0 20px",
-              width: window.innerWidth > 600 ? "100%" : "100vw",
+              padding:
+                window != undefined && window?.innerWidth > 600
+                  ? "0 40px"
+                  : "0 20px",
+              width:
+                window != undefined && window?.innerWidth > 600
+                  ? "100%"
+                  : "100vw",
             }}
           >
             {children}

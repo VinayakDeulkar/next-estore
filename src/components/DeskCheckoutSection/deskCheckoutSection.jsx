@@ -22,6 +22,7 @@ import { mapArea } from "@/constants/areaConstant";
 import axios from "axios";
 import SnapPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 const DeskCheckoutSection = ({ showPaymentMethod }) => {
   const {

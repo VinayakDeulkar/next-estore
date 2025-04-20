@@ -158,7 +158,6 @@ const ContactInfo = ({
                         alignItems: "center",
                         color: "#fff",
                         padding: "5px 7px",
-                        backgroundColor: "#4CAF50",
                         borderRadius: "50px",
                         fontSize: "12px",
                         gap: "5px",
@@ -198,6 +197,7 @@ const ContactInfo = ({
                     name: e.target.value,
                   })
                 }
+                value={contactDetails?.name}
               />
               {errorContactDetails.nameError && (
                 <label className="error-text">
@@ -212,12 +212,13 @@ const ContactInfo = ({
           {homePageDetails?.vendor_data?.checkout_method === "1" ||
           showNameEmailFields ? (
             <>
-              <div className="customerInputsFlex">
-                <div className="form__group formSemi">
+              <div className="customerInputsFlex" style={{ width: "100%" }}>
+                <div className="form__group formSemi" style={{ width: "100%" }}>
                   <TextInputField
                     name={"email"}
                     label={"Email"}
                     arLabel={"البريد الإلكتروني"}
+                    value={contactDetails?.email}
                     handleChange={(e) => {
                       handleContactDetailsChange({
                         ...contactDetails,

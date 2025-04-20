@@ -12,7 +12,7 @@ export const saveOrderDetails = async ({
   domain,
 }) => {
   const response = await axios.post(
-    `${NEXT_PUBLIC_API_URL}/save-order-details`,
+    `${process.env.NEXT_PUBLIC_API_URL}/save-order-details`,
     JSON.stringify({
       token: process.env.NEXT_PUBLIC_APP_TOKEN,
       user_string: localStorage.getItem("userID"),

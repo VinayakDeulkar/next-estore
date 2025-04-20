@@ -89,11 +89,7 @@ const NewPaymentSelector = ({
         </div>
       </div>
 
-      <div
-        className={`payment-details-mainDiv ${
-          getMethodsCount() ? "fourbuttons" : ""
-        }`}
-      >
+      <div className={`payment-details-mainDiv fourbuttons`}>
         {homePageDetails?.vendor_data?.is_apple_pay?.length > 0 && isSafari ? (
           <Box
             onClick={(e) => {

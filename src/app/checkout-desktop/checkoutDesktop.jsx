@@ -1,13 +1,12 @@
 "use client";
 import DeskCheckoutComponents from "@/components/DeskCheckoutComponents";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
-import MainTitle from "@/components/common/MainTitle/mainTitle";
-import Title from "@/components/common/Title/Title";
 import { AppContext } from "@/context/AppContext";
 import { Grid } from "@mui/material";
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 const CheckoutDesktop = () => {
   const { language } = useContext(AppContext);
@@ -33,7 +32,7 @@ const CheckoutDesktop = () => {
           sx={{ height: "calc(100vh - 120px)", overflow: "scroll" }}
           className="checkoutScroll"
         >
-          <MainTitle enText={"Checkout"} arText={"تفاصيل الطلب"} />
+          <HeadLine enText={"Checkout"} arText={"تفاصيل الطلب"} />
           <DeskCheckoutComponents />
         </Grid>
         <Grid item xs={0} sm={0.5}>

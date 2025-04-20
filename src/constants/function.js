@@ -175,3 +175,22 @@ export const varientBackgroundColor = (varient, vendor_color) => {
       break;
   }
 };
+
+export const displayInternationalTime = (deliveryTime, deliveryType) => {
+  switch (deliveryType) {
+    case "3":
+      return deliveryTime === "1"
+        ? { eng: "day", arb: "يوم" }
+        : { eng: "days", arb: "أيام" };
+    case "4":
+      return deliveryTime === "1"
+        ? { eng: "week", arb: "أسبوع" }
+        : { eng: "weeks", arb: "أسابيع" };
+    case "5":
+      return deliveryTime === "1"
+        ? { eng: "month", arb: "شهر" }
+        : { eng: "month", arb: "شهور" };
+    default:
+      break;
+  }
+};

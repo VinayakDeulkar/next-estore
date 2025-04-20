@@ -12,6 +12,7 @@ const TextInputField = ({ value, handleChange, name, label, arLabel }) => {
         height: "65px",
         display: "flex",
         alignItems: "end",
+        width: "100%",
       }}
     >
       <input

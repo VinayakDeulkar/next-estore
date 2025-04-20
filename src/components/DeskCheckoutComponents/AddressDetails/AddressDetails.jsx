@@ -1,6 +1,8 @@
+import { GetUserDetails } from "@/apis";
 import AddressSection from "@/components/AddressSection/addressSection";
 import DeliveryMapContainer from "@/components/DeliveryMap/DeliveryMapContainer";
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
+import InternationalAddress from "@/components/InternationalDelivery/InternationalAddress";
 import { mapArea } from "@/constants/areaConstant";
 import { tele } from "@/constants/constants";
 import { AppContext } from "@/context/AppContext";
@@ -235,7 +237,7 @@ const AddressDetails = ({
         if (!areaDetails?.area && !areaDetails?.branch) {
           handleOpenAreaChange((prev) => ({
             open: true,
-            route: "/desk-checkout",
+            route: "/checkout-desktop",
           }));
         } else {
           let block =
@@ -261,8 +263,8 @@ const AddressDetails = ({
             !areaName
           ) {
             if (userDetails?.is_guest) {
-              // getDistanceMatrix();
-              // getEstimatedDeliveryTime();
+              getDistanceMatrix();
+              getEstimatedDeliveryTime();
               triggerPaymentMethod();
             } else {
               setLoading(true);
@@ -378,21 +380,35 @@ const AddressDetails = ({
     const forClick = document.getElementById("forClickOnly");
     forClick?.click();
   };
+
+  const [internationalError, setInternationalError] = useState({
+    delivery_state: false,
+    delivery_city: false,
+    delivery_address1: false,
+    delivery_address2: false,
+  });
   return (
     <Box>
-      {!showAddressForm ? (
-        <AddressSection />
+      {homePageDetails?.vendor_data?.international_delivery === "3" ||
+      homePageDetails?.vendor_data?.international_delivery === "" ||
+      internationalDelivery.delivery_country_code.toUpperCase() === "KW" ||
+      areaDetails.area_id !== "" ? (
+        !showAddressForm ? (
+          <AddressSection />
+        ) : (
+          <NewAddressForm
+            areaDetails={areaDetails}
+            blockValidation={blockValidation}
+            streetValidation={streetValidation}
+            houseValidation={houseValidation}
+            addressNameValidation={addressNameValidation}
+            errorState={errorState}
+            setMarkerPosition={setMarkerPosition}
+            setShowMap={() => setShowMap(true)}
+          />
+        )
       ) : (
-        <NewAddressForm
-          areaDetails={areaDetails}
-          blockValidation={blockValidation}
-          streetValidation={streetValidation}
-          houseValidation={houseValidation}
-          addressNameValidation={addressNameValidation}
-          errorState={errorState}
-          setMarkerPosition={setMarkerPosition}
-          setShowMap={() => setShowMap(true)}
-        />
+        <InternationalAddress internationalError={internationalError} />
       )}
       <Dialog open={showMap} onClose={() => setShowMap(false)} maxWidth="lg">
         <Box height={"80vh"} width="40vw" sx={{ padding: "20px" }}>

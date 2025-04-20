@@ -1,40 +1,43 @@
+import React, { useContext, useEffect, useState } from "react";
+import Spinner from "../common/Spinner/spinner";
+import { AppContext } from "@/context/AppContext";
 import {
-  GetUserDetails,
   changeArea,
   deleteUserAddress,
   getScheduleTime,
+  GetUserDetails,
 } from "@/apis";
-import { getAddressType } from "@/constants/function";
-import { AppContext } from "@/context/AppContext";
-import ThreeDots from "@/SVGs/ThreeDots";
-import moment from "moment";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
-import { useContext, useEffect, useState } from "react";
-import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import AddressCard from "../common/AddressCard/AddressCard";
+import Pointer from "@/SVGs/Pointer";
+import ThreeDots from "@/SVGs/ThreeDots";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import RightArrow from "@/SVGs/RightArrow";
+import LocationIcon from "@/SVGs/LocationIcon";
+import { getAddressType } from "@/constants/function";
+import Divider from "../Divider/Divider";
+import moment from "moment";
+import "./BottomDrawer.css";
 
-const AddressSection = () => {
+const BottomDrawer = ({ type, onClick, hideAddress }) => {
   const {
     language,
-    userDetails,
-    handleAddressDetailsChange,
-    areaDetails,
-    homePageDetails,
     vendorSlug,
+    areaDetails,
     handleAreaDetailsChange,
+    userDetails,
     handleUserDetailsChange,
     resetUserDetails,
-    addressDetails,
+    handleAddressDetailsChange,
+    homePageDetails,
   } = useContext(AppContext);
-  const { enqueueSnackbar } = useSnackbar();
-  const [addressData, setAddressData] = useState([]);
   const router = useRouter();
+  const [addressData, setAddressData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const getAddressData = async () => {
-    if (userDetails?.address) {
-      const addresslist = userDetails?.address?.map((ele) => {
+  const getAddressData = () => {
+    if (userDetails.address) {
+      const addresslist = userDetails.address.map((ele) => {
         return {
           id: ele.id,
           addressName: ele.title ?? ele.addressName,
@@ -55,174 +58,23 @@ const AddressSection = () => {
         };
       });
       setAddressData(addresslist);
-
-      addresslist?.map(async (element) => {
-        if (element?.is_primary === "1") {
-          handleAddressDetailsChange((prev) => ({
-            ...prev,
-            id: element?.id,
-            area_id: element?.area_id,
-            block: element?.block,
-            street: element?.street,
-            avenue: element?.avenue,
-            house: element?.house,
-            floor: element?.floor_number ?? element?.floor,
-            flat: element?.flat_number ?? element?.flat,
-            lat: element?.latitude ?? element?.lat,
-            lng: element?.longitude ?? element?.lng,
-            fixedLat: element?.latitude ?? element?.lat,
-            fixedLng: element?.longitude ?? element?.lng,
-            addressType: element?.addressType,
-            addressName: element?.addressName,
-            special_directions: element?.special_directions,
-          }));
-          const addedAddress = [];
-          areaDetails?.data?.governarate?.forEach((address) => {
-            const foundAddress = address?.area?.find(
-              (area) => area?.area_id == element?.area_id
-            );
-            if (foundAddress) {
-              addedAddress.push(foundAddress);
-            }
-          });
-
-          const changeAreaResponse = await changeArea({
-            vendors_id: homePageDetails?.vendor_data?.vendors_id,
-            area_id: element?.area_id,
-            vendorSlug: vendorSlug?.data?.ecom_url_slug,
-            user_string: localStorage.getItem("userID"),
-          });
-          if (changeAreaResponse.status === true) {
-            if (changeAreaResponse.data.show_popup === 0) {
-              const timeResponse = await getScheduleTime({
-                vendors_id: homePageDetails?.vendor_data?.vendors_id,
-                area_id: element?.area_id,
-                vendorSlug: vendorSlug?.data?.ecom_url_slug,
-              });
-              if (timeResponse.status) {
-                let selectedBranch = timeResponse.data.branch;
-                let activeBranch = areaDetails?.data?.branch?.filter(
-                  (branch) => branch?.id == selectedBranch?.id
-                )[0];
-                let estimationTime =
-                  timeResponse.data?.delivery_details?.delivery_expected_type !=
-                  6
-                    ? timeResponse.data?.delivery_details
-                        ?.delivery_expected_time
-                    : 0;
-                if (
-                  timeResponse.data.time == 1 &&
-                  addedAddress[0].availability_status == 1
-                ) {
-                  handleAreaDetailsChange((k) => ({
-                    ...k,
-                    area: addedAddress[0].area_name,
-                    minimum: addedAddress[0].minimum_charge,
-                    shopOpen: timeResponse.data.time,
-                    now: timeResponse.data.time,
-                    branch: "",
-                    ar_branch: "",
-                    ar_area: addedAddress[0].area_name_ar,
-                    area_id: addedAddress[0].area_id,
-                    deliveryTiming: timeResponse.data.schedule_time,
-                    ar_deliveryTiming: timeResponse.data.schedule_time_ar,
-                    customDelivery:
-                      timeResponse.data?.delivery_details
-                        ?.delivery_expected_type == 6,
-                    getDeliveryTiming: moment()
-                      .add(estimationTime, "minutes")
-                      .toDate(),
-                    laterDeliveryTiming: moment()
-                      .add(estimationTime, "minutes")
-                      .toDate(),
-                    branchForArea: {
-                      ...timeResponse.data.branch,
-                      end:
-                        activeBranch?.office_end_time >
-                        activeBranch?.office_start_time
-                          ? moment(activeBranch?.office_end_time, "HH:mm:ss")
-                          : moment(
-                              activeBranch?.office_end_time,
-                              "HH:mm:ss"
-                            ).add(1, "days"),
-                      start: moment(
-                        activeBranch?.office_start_time,
-                        "HH:mm:ss"
-                      ),
-                    },
-                  }));
-                } else {
-                  handleAreaDetailsChange((l) => ({
-                    ...l,
-                    area: addedAddress[0].area_name,
-                    minimum: addedAddress[0].minimum_charge,
-                    shopOpen:
-                      addedAddress[0].availability_status == 1
-                        ? timeResponse.data.time
-                        : 2,
-                    now:
-                      addedAddress[0].availability_status == 1
-                        ? timeResponse.data.time
-                        : 2,
-                    ar_area: addedAddress[0].area_name_ar,
-                    area_id: addedAddress[0].area_id,
-                    branch: "",
-                    ar_branch: "",
-                    deliveryTiming: timeResponse?.data?.schedule_time,
-                    ar_deliveryTiming: timeResponse?.data?.schedule_time_ar,
-                    customDelivery:
-                      timeResponse.data?.delivery_details
-                        ?.delivery_expected_type == 6,
-                    getDeliveryTiming:
-                      addedAddress[0].availability_status == 1 ||
-                      timeResponse.data.time == 2
-                        ? moment(
-                            timeResponse.data.preorder_on,
-                            "YYYY-MM-DD HH:mm:ss"
-                          ).toDate()
-                        : moment().add(estimationTime, "minutes").toDate(),
-                    laterDeliveryTiming:
-                      addedAddress[0].availability_status == 1 ||
-                      timeResponse.data.time == 2
-                        ? moment(
-                            timeResponse.data.preorder_on,
-                            "YYYY-MM-DD HH:mm:ss"
-                          ).toDate()
-                        : moment().add(estimationTime, "minutes").toDate(),
-                    branchForArea: {
-                      ...timeResponse.data.branch,
-                      end:
-                        activeBranch?.office_end_time >
-                        activeBranch?.office_start_time
-                          ? moment(activeBranch?.office_end_time, "HH:mm:ss")
-                          : moment(
-                              activeBranch?.office_end_time,
-                              "HH:mm:ss"
-                            ).add(1, "days"),
-                      start: moment(
-                        activeBranch?.office_start_time,
-                        "HH:mm:ss"
-                      ),
-                    },
-                  }));
-                }
-              } else {
-              }
-            } else {
-            }
-          }
-        }
-      });
     }
   };
-
-  useEffect(() => {}, [addressDetails, areaDetails]);
-
   useEffect(() => {
-    if (userDetails?.address?.length && !addressDetails?.id) {
-      getAddressData();
+    getAddressData();
+  }, [userDetails.address, userDetails.address?.length]);
+
+  const showDrawer = () => {
+    const modalContainer = document.getElementById("bottomDrawer");
+    const body = document.body;
+    if (modalContainer && body) {
+      if (modalContainer) {
+        modalContainer.removeAttribute("class");
+        modalContainer.classList.add("open");
+        body.classList.add("modal-active");
+      }
     }
-  }, [userDetails?.address, userDetails?.address?.length]);
+  };
 
   const houseLabel = (addressType) => {
     switch (addressType) {
@@ -241,7 +93,6 @@ const AddressSection = () => {
         return "";
     }
   };
-
   const flatLabel = (addressType) => {
     switch (addressType) {
       case "2":
@@ -253,6 +104,9 @@ const AddressSection = () => {
         return "";
     }
   };
+  useEffect(() => {
+    showDrawer();
+  }, []);
 
   const updateAddress = (id) => {
     addressData.map(async (address) => {
@@ -399,6 +253,7 @@ const AddressSection = () => {
           } else {
           }
         }
+        router.push("/delivery-address");
       }
     });
   };
@@ -406,7 +261,7 @@ const AddressSection = () => {
   const updateUserResponse = async () => {
     const contactInfo = JSON.parse(localStorage.getItem("contactInfo"));
     const response = await GetUserDetails({
-      vendor_id: homePageDetails?.vendor_data?.vendors_id,
+      vendor_id: homePageDetails?.vendor_data.vendors_id,
       sendSMS: false,
       country_code: `+${tele[contactInfo.code]}`,
       phone_number: contactInfo.phone,
@@ -432,9 +287,10 @@ const AddressSection = () => {
           addressString: "",
           addressType: "1",
         });
+        router.push("/");
       }
     } else {
-      enqueueSnackbar({ variant: "error", message: response?.message });
+      toast.error(response?.message);
       localStorage.removeItem("token");
       localStorage.removeItem("contactInfo");
       resetUserDetails();
@@ -456,7 +312,7 @@ const AddressSection = () => {
       updateUserResponse();
     } else {
       setLoading(false);
-      enqueueSnackbar({ variant: "error", message: response?.message });
+      toast.error(response?.message);
     }
   };
 
@@ -480,9 +336,9 @@ const AddressSection = () => {
       special_directions: addressData?.special_directions,
     }));
     const addedAddress = [];
-    areaDetails?.data?.governarate?.forEach((address) => {
-      const foundAddress = address?.area?.find(
-        (area) => area?.area_id == addressData?.area_id
+    areaDetails.data.governarate.forEach((address) => {
+      const foundAddress = address.area.find(
+        (area) => area.area_id == addressData.area_id
       );
       if (foundAddress) {
         addedAddress.push(foundAddress);
@@ -491,7 +347,7 @@ const AddressSection = () => {
 
     const changeAreaResponse = await changeArea({
       vendors_id: homePageDetails?.vendor_data?.vendors_id,
-      area_id: addressData?.area_id,
+      area_id: addressData.area_id,
       vendorSlug: vendorSlug?.data?.ecom_url_slug,
       user_string: localStorage.getItem("userID"),
     });
@@ -499,7 +355,7 @@ const AddressSection = () => {
       if (changeAreaResponse.data.show_popup === 0) {
         const timeResponse = await getScheduleTime({
           vendors_id: homePageDetails?.vendor_data?.vendors_id,
-          area_id: addressData?.area_id,
+          area_id: addressData.area_id,
           vendorSlug: vendorSlug?.data?.ecom_url_slug,
         });
         if (timeResponse.status) {
@@ -530,6 +386,7 @@ const AddressSection = () => {
               customDelivery:
                 timeResponse.data?.delivery_details?.delivery_expected_type ==
                 6,
+
               getDeliveryTiming: moment()
                 .add(estimationTime, "minutes")
                 .toDate(),
@@ -606,57 +463,210 @@ const AddressSection = () => {
       } else {
       }
     }
+    if (type === "checkout") {
+      router.push("/checkout");
+      onClick();
+    } else {
+      if (localStorage.getItem("newPath") == "review") {
+        localStorage.removeItem("newPath");
+        router.push("/checkout");
+      } else {
+        router.push("/");
+      }
+    }
   };
   return (
-    <div>
-      <SubHeadline enText={"Delivery Address"} arText={"عنوان التسليم"} />
-      {addressData?.map((address, i) => (
-        <div key={i}>
-          <div>
-            <AddressCard
-              cardClick={() => handleAddressClick(address)}
-              icon={getAddressType(address.addressType, "", "28px")}
-              info={{
-                name: address?.addressName,
-                area:
-                  language === "ltr"
-                    ? address.area
-                    : address.ar_area
-                    ? address.ar_area
-                    : address.area,
-                addressFirst: `${language == "ltr" ? "Street" : "شارع "} ${
-                  address?.street
-                }
-        ${", "}
-        ${language == "ltr" ? "Block" : "قطعة "} ${address?.block}
-        ${", "}
-        ${houseLabel(address?.addressType)} ${address?.house}
-        ${address?.avenue || address?.floor || address?.flat ? ", " : ""}`,
-                addressSecond: `${
-                  address?.avenue ? (language == "ltr" ? "Avenue" : "جادة") : ""
-                }
-         ${address?.avenue ? address?.avenue : ""}
-         ${address?.floor ? ", " : ""}
+    <div id="bottomDrawer">
+      <div
+        className={"modal-background"}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (type === "checkout") {
+            hideAddress?.();
+          }
+        }}
+      >
+        <div
+          className={"modal"}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <div className="drawerOuterDiv">
+            <div className="drawerInnerDiv">
+              <SubHeadline
+                enText={"Select your delivery address"}
+                arText={"حدد عنوان التسليم الخاص بك"}
+              />
 
-        ${address?.floor ? (language == "ltr" ? "Floor No." : "رقم الدور") : ""}
-          ${address?.floor ? address?.floor : ""}
-          ${address?.flat ? ", " : ""}
-        ${address?.flat ? flatLabel(address?.addressType) : ""}
-        ${address?.flat ? address?.flat : ""}`,
-                special_directions: address?.special_directions,
-              }}
-              symbol={<ThreeDots />}
-              onEdit={() => {
-                updateAddress(address?.id);
-              }}
-              onDelete={() => deleteAddress(address?.id)}
-              selected={addressDetails?.id === address?.id}
-            />
+              {addressData.map((address, i) => (
+                <div key={i}>
+                  <div>
+                    <AddressCard
+                      cardClick={() => handleAddressClick(address)}
+                      icon={getAddressType(address.addressType, "", "28px")}
+                      info={{
+                        name: address?.addressName,
+                        area:
+                          language === "ltr"
+                            ? address.area
+                            : address.ar_area
+                            ? address.ar_area
+                            : address.area,
+                        addressFirst: `${
+                          language == "ltr" ? "Street" : "شارع "
+                        } ${address?.street}
+                  ${", "}
+                  ${language == "ltr" ? "Block" : "قطعة "} ${address?.block}
+                  ${", "}
+                  ${houseLabel(address?.addressType)} ${address?.house}
+                  ${
+                    address?.avenue || address?.floor || address?.flat
+                      ? ", "
+                      : ""
+                  }`,
+                        addressSecond: `${
+                          address?.avenue
+                            ? language == "ltr"
+                              ? "Avenue"
+                              : "جادة"
+                            : ""
+                        }
+                   ${address?.avenue ? address?.avenue : ""}
+                   ${address?.floor ? ", " : ""}
+
+                  ${
+                    address?.floor
+                      ? language == "ltr"
+                        ? "Floor No."
+                        : "رقم الدور"
+                      : ""
+                  }
+                    ${address?.floor ? address?.floor : ""}
+                    ${address?.flat ? ", " : ""}
+                  ${address?.flat ? flatLabel(address?.addressType) : ""}
+                  ${address?.flat ? address?.flat : ""}`,
+                        special_directions: address.special_directions,
+                      }}
+                      symbol={<ThreeDots />}
+                      onEdit={() => {
+                        updateAddress(address?.id);
+                      }}
+                      onDelete={() => deleteAddress(address?.id)}
+                    />
+                  </div>
+                </div>
+              ))}
+
+              {addressData?.length > 0 ? <Divider /> : null}
+
+              <AddressCard
+                icon={<Pointer />}
+                info={{
+                  name:
+                    language === "ltr"
+                      ? "Deliver to new location"
+                      : "تسليم إلى الموقع الجديد",
+                  desc:
+                    language === "ltr"
+                      ? "Add new address to deliver to."
+                      : "أضف عنوانًا جديدًا للتوصيل إليه.",
+                }}
+                symbol={<RightArrow size={32} strokeWidth={1} />}
+                cardClick={() => {
+                  handleAreaDetailsChange({
+                    ...areaDetails,
+                    area: "",
+                    branch: "",
+                    branch_id: "",
+                    area_id: "",
+                  });
+                  handleAddressDetailsChange({
+                    block: "",
+                    street: "",
+                    avenue: "",
+                    house: "",
+                    floor: "",
+                    flat: "",
+                    special_directions: "",
+                    lat: 29.378,
+                    lng: 47.99,
+                    fixedLat: 29.378,
+                    fixedLng: 47.99,
+                    addressString: "",
+                    addressType: "1",
+                  });
+                  router.push("/delivery-address");
+                }}
+              />
+
+              <AddressCard
+                icon={<LocationIcon />}
+                info={{
+                  name:
+                    language === "ltr"
+                      ? "Deliver to current location"
+                      : "تسليم إلى الموقع الحالي",
+                  desc:
+                    language === "ltr"
+                      ? "Choose this option to locate your place."
+                      : "اختر هذا الخيار لتحديد مكانك.",
+                }}
+                cardClick={() => {
+                  handleAreaDetailsChange({
+                    ...areaDetails,
+                    area: "",
+                    branch: "",
+                    branch_id: "",
+                    area_id: "",
+                  });
+                  handleAddressDetailsChange({
+                    block: "",
+                    street: "",
+                    avenue: "",
+                    house: "",
+                    floor: "",
+                    flat: "",
+                    special_directions: "",
+                    lat: 29.378,
+                    lng: 47.99,
+                    fixedLat: 29.378,
+                    fixedLng: 47.99,
+                    addressString: "",
+                    addressType: "1",
+                  });
+                  router.push("/delivery-address");
+                }}
+              />
+            </div>
           </div>
         </div>
-      ))}
+      </div>
+
+      {loading && (
+        <div
+          style={{
+            width: "100%",
+            height: "100vh",
+            position: "fixed",
+            top: "0",
+            left: "0",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: "8",
+          }}
+          className="order-spinner-background"
+        >
+          <Spinner
+            height="50px"
+            color={homePageDetails?.vendor_data?.vendor_color}
+            size="6px"
+          />
+        </div>
+      )}
     </div>
   );
 };
 
-export default AddressSection;
+export default BottomDrawer;

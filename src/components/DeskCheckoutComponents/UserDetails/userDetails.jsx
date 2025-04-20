@@ -4,7 +4,7 @@ import {
   updateUserDetails,
   verifyUserOTP,
 } from "@/apis";
-import Title from "@/components/common/Title/Title";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import ContactInfo from "@/components/ContactInfo/ContactInfo";
 import NewContactDetails from "@/components/NewContactDetails/NewContactDetails";
 import OtpVerification from "@/components/OtpVerification/OtpVerification";
@@ -408,7 +408,7 @@ const UserDetails = ({
   };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-      <Title enText={"Contact Details"} arText={"ارقام التواصل"} />
+      <SubHeadline enText={"Contact Details"} arText={"ارقام التواصل"} />
       {renderContactType()}
       {showPickUpForm ? <PickupContainer pickupError={pickupError} /> : null}
       {!showAddressComponents ? (

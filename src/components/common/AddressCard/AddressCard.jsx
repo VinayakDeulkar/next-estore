@@ -19,13 +19,14 @@ const AddressCard = ({
   onDelete,
   cardClick,
   user,
+  selected = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
   const { language } = useContext(AppContext);
 
   return (
-    <div className="cardMain" onClick={cardClick}>
+    <div className={`cardMain ${selected ? "active" : ""}`} onClick={cardClick}>
       <div
         style={{
           display: "flex",

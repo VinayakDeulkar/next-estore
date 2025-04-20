@@ -189,7 +189,7 @@ export const AppProvider = ({
         window.location.host.replace(/^www\./, "") !== "shop.playon.today"
           ? "delivery"
           : "pickup",
-      data: {},
+      data: { ...areaDetails.data },
       area: "",
       branch: "",
       branch_id: "",
@@ -343,15 +343,16 @@ export const AppProvider = ({
             user_id: localStorage.getItem("id"),
             language: language,
           });
+          console.log(response, "response");
           if (response?.status) {
             setUserDetails({ ...response?.data });
-            setContactDetails({
+            setContactDetails((contactDetails) => ({
               ...contactDetails,
               name: response?.data?.name,
               email: response?.data?.email,
               phone: contactInfo.phone,
               phoneCode: contactInfo.code,
-            });
+            }));
           } else {
             localStorage.removeItem("token");
             localStorage.removeItem("contactInfo");
@@ -363,7 +364,7 @@ export const AppProvider = ({
         localStorage.removeItem("contactInfo");
       }
     }
-  }, [localStorage?.getItem("token"), vendorSlugResponse?.data?.vendor_data]);
+  }, [vendorSlugResponse?.data?.vendor_data]);
 
   const handleEmptyCart = async () => {
     const response = await emptyUserCart({

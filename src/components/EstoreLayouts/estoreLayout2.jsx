@@ -8,7 +8,7 @@ import HomePageLayouts from "../HomePageLayouts";
 import { AppContext } from "@/context/AppContext";
 
 const EstoreLayout2 = () => {
-  const {homePageDetails} = useContext(AppContext);
+  const { homePageDetails } = useContext(AppContext);
 
   return (
     <>
@@ -36,7 +36,7 @@ const EstoreLayout2 = () => {
               <OrderType />
             </div>
           </div>
-          <HomePageLayouts homePageDetails={homePageDetails} />
+          <HomePageLayouts />
         </div>
       </GridLayout2>
     </>

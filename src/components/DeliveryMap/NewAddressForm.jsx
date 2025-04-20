@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AppContext } from "@/context/AppContext";
-import { useRouter } from "next/navigation";
-import HomeIcon from "@/assets/icons/addressIcons/HomeIcon";
 import ApparentIcon from "@/assets/icons/addressIcons/ApparentIcon";
+import HomeIcon from "@/assets/icons/addressIcons/HomeIcon";
 import OfficeIcons from "@/assets/icons/addressIcons/OfficeIcons";
-import CommonHeader from "../common/CommonHeader/CommonHeader";
-import NewAddressFormField from "./NewAddressFormField";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import "./deliverymap.css";
 import "@/components/ContactInfo/contactInfo.css";
+import { AppContext } from "@/context/AppContext";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
 import AreaModal from "../AreaModal/areaModal";
-import Title from "../common/Title/Title";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import "./deliverymap.css";
+import NewAddressFormField from "./NewAddressFormField";
 
 const NewAddressForm = ({
   areaDetails,
@@ -54,7 +53,7 @@ const NewAddressForm = ({
 
   return (
     <div>
-      <Title
+      <SubHeadline
         enText={"Add your delivery details"}
         arText={"أضف تفاصيل التسليم الخاصة بك"}
       />
