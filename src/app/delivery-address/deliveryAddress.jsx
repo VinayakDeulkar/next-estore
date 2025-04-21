@@ -243,7 +243,7 @@ const DeliveryAddress = () => {
                   user_id: localStorage.getItem("id"),
                   language: language,
                 });
-                console.log(response,"response")
+                console.log(response, "response");
                 if (response?.status) {
                   handleUserDetailsChange({ ...response?.data });
                   handleAddressDetailsChange((k) => ({
@@ -454,7 +454,12 @@ const DeliveryAddress = () => {
   return (
     <Box>
       <EstoreLayout1>
-        <Box>
+        <Box
+          sx={{
+            position: "relative",
+            height: "calc(100vh - 50px)",
+          }}
+        >
           {homePageDetails?.vendor_data?.international_delivery === "3" ||
           homePageDetails?.vendor_data?.international_delivery === "" ||
           internationalDelivery.delivery_country_code.toUpperCase() === "KW" ||
@@ -489,7 +494,7 @@ const DeliveryAddress = () => {
               homePageDetails?.vendor_data?.home_page_type === "18" &&
               "fashion-theme"
             }`}
-            style={{ padding: "20px" }}
+            style={{ padding: "20px", position: "sticky" }}
           >
             <Box
               className="contact-details-next-button"

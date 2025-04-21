@@ -626,8 +626,23 @@ const AddressDetails = ({
       ) : (
         <InternationalAddress internationalError={internationalError} />
       )}
-      <Dialog open={showMap} onClose={() => setShowMap(false)} maxWidth="lg">
-        <Box height={"80vh"} width="40vw" sx={{ padding: "20px" }}>
+      <Dialog
+        open={showMap}
+        onClose={() => setShowMap(false)}
+        maxWidth="md"
+        sx={{
+          "& .MuiDialog-container > .MuiPaper-root": {
+            borderRadius: "16px", // Change this value as needed
+            minWidth: "400px",
+          },
+        }}
+      >
+        <Box
+          sx={{
+            padding: "20px",
+            width: window.innerWidth > 600 ? "560px" : "auto",
+          }}
+        >
           <DeliveryMapContainer
             selectedArea={areaDetails?.area}
             markerPosition={markerPosition}

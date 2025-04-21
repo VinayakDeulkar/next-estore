@@ -3,6 +3,9 @@ import HeaderBox from "../common/HeaderBox/headerBox";
 import CarouselImage from "../HomePage/CarosouleImage/carosouleImage";
 
 const EstoreLayout1 = ({ children }) => {
+  const checkSize = () => {
+    return window != undefined && window?.innerWidth > 600;
+  };
   return (
     <Box sx={{ height: "100vh", overflow: "hidden", width: "100%" }}>
       <Grid container sx={{ width: "100vw" }}>
@@ -12,14 +15,8 @@ const EstoreLayout1 = ({ children }) => {
             sx={{
               height: "calc(100vh - 50px)",
               overflow: "scroll",
-              padding:
-                window != undefined && window?.innerWidth > 600
-                  ? "0 40px"
-                  : "0 20px",
-              width:
-                window != undefined && window?.innerWidth > 600
-                  ? "100%"
-                  : "100vw",
+              padding: checkSize() ? "0 40px" : "0 20px",
+              width: checkSize() ? "100%" : "100vw",
             }}
           >
             {children}
