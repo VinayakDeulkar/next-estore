@@ -318,7 +318,40 @@ const ProductSquareCard = ({ product, imgHeight }) => {
       }}
       onClick={handleCardClick}
     >
-      <div style={{ position: "relative" }}>
+      <div
+        style={{
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          gap: "5px",
+        }}
+      >
+        <div className="product-price-div" style={{ minHeight: "32px" }}>
+          {product?.offer_applied == 1 && (
+            <p
+              className="buy-get-img "
+              onClick={(e) =>
+                inCart == 0 ? onAddToCartClick(e, 1) : e.preventDefault()
+              }
+              style={{
+                backgroundColor: product?.color,
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
+                fontSize: language == "ltr" ? 12 : 15,
+                padding: "0 15px",
+                fontWeight: "400",
+              }}
+            >
+              <span>
+                {language === "ltr"
+                  ? product?.offer_msg
+                  : product?.offer_msg_ar}
+              </span>
+            </p>
+          )}
+        </div>
+
         <CardMedia
           component="img"
           height="200"
@@ -328,7 +361,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
             maxWidth: "100%",
             height: imgHeight ? imgHeight : "200px",
             objectFit: "cover",
-            borderRadius: "8px",
+            borderRadius: "5px",
             marginBottom: "10px",
           }}
         />
@@ -361,36 +394,14 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           },
           display: "flex",
           flexDirection: "column",
-          gap: "7px",
+          gap: "10px",
         }}
       >
         <SubTitle
           enText={product?.product_name}
           arText={product?.product_name_ar}
         />
-        <div
-          onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
-          className="product-price"
-          style={{ alignItems: "center", fontWeight: "400" }}
-        >
-          {product?.quantity != 0 && product?.discount_applied == 1 && (
-            <del
-              style={{
-                fontSize: language == "ltr" ? 11 : 14,
-                display: "flex",
-              }}
-              className="product-price-del"
-            >
-              <span style={{ fontSize: language == "ltr" ? 11 : 14 }}>
-                {product?.base_price
-                  ? parseFloat(product?.base_price).toFixed(3)
-                  : 0}
-                &nbsp;
-              </span>
-              {language === "rtl" ? "د.ك" : "KD"}
-            </del>
-          )}
-        </div>
+
         {product?.short_description != "" ? (
           <div className="product-description">
             <NormalText
@@ -409,7 +420,10 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           </div>
         ) : null}
         {product?.product_type != 0 ? (
-          <div className="product-price-div">
+          <div
+            className="product-price-div"
+            style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+          >
             {product?.product_status == 0 ? (
               <p
                 className="buy-get-img"
@@ -500,37 +514,35 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                         ? parseFloat(product?.product_price).toFixed(3)
                         : 0
                     } KD`}
+                    width="90px"
+                    fontSize="14px"
                   />
                 )}
               </div>
             )}
-          </div>
-        ) : null}
-        {product?.product_type != 0 ? (
-          <div className="product-price-div">
-            {product?.offer_applied == 1 && (
-              <p
-                className="buy-get-img "
-                onClick={(e) =>
-                  inCart == 0 ? onAddToCartClick(e, 1) : e.preventDefault()
-                }
-                style={{
-                  backgroundColor: product?.color,
-                  color: "white",
-                  border: "none",
-                  borderRadius: "30px",
-                  fontSize: language == "ltr" ? 12 : 15,
-                  padding: "0 15px",
-                  fontWeight: "400",
-                }}
-              >
-                <span>
-                  {language === "ltr"
-                    ? product?.offer_msg
-                    : product?.offer_msg_ar}
-                </span>
-              </p>
-            )}
+            {/* <div
+              onClick={(e) => inCart == 0 && onAddToCartClick(e, 1)}
+              className="product-price"
+              style={{ alignItems: "center", fontWeight: "400" }}
+            >
+              {product?.quantity != 0 && product?.discount_applied == 1 && (
+                <del
+                  style={{
+                    fontSize: language == "ltr" ? 11 : 14,
+                    display: "flex",
+                  }}
+                  className="product-price-del"
+                >
+                  <span style={{ fontSize: language == "ltr" ? 11 : 14 }}>
+                    {product?.base_price
+                      ? parseFloat(product?.base_price).toFixed(3)
+                      : 0}
+                    &nbsp;
+                  </span>
+                  {language === "rtl" ? "د.ك" : "KD"}
+                </del>
+              )}
+            </div> */}
           </div>
         ) : null}
       </CardContent>

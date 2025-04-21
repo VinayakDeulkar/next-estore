@@ -9,6 +9,8 @@ const SmallButtonSquare = ({
   handleClick,
   varient,
   width = "106px",
+  fontWeight = "500",
+  fontSize = "16px",
 }) => {
   const { language, homePageDetails } = useContext(AppContext);
 
@@ -17,7 +19,7 @@ const SmallButtonSquare = ({
       component="button"
       sx={{
         width: width,
-        borderRadius: "8px",
+        borderRadius: "5px",
         backgroundColor: varientBackgroundColor(
           varient,
           homePageDetails?.vendor_data?.vendor_color
@@ -28,8 +30,8 @@ const SmallButtonSquare = ({
           varient,
           homePageDetails?.vendor_data?.vendor_color
         ),
-        fontWeight: "500",
-        fontSize: "16px",
+        fontWeight: fontWeight,
+        fontSize: fontSize,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

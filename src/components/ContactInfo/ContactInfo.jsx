@@ -122,8 +122,8 @@ const ContactInfo = ({
                   <input
                     type="tel"
                     className="form__field hideBorder"
-                    placeholder=""
                     name="phone"
+                    placeholder="98765432"
                     id="phone"
                     required="true"
                     disabled={
@@ -272,7 +272,7 @@ const ContactInfo = ({
         <div>
           <div
             style={{
-              fontSize: language === "ltr" ? "13px" : "14px",
+              fontSize: language === "ltr" ? "16px" : "18px",
               fontWeight: 400,
             }}
           >
@@ -292,7 +292,7 @@ const ContactInfo = ({
             <div
               style={{
                 color: "#636363",
-                fontSize: language === "ltr" ? "11px" : "12px",
+                fontSize: language === "ltr" ? "14px" : "16px",
               }}
             >
               {homePageDetails?.vendor_data?.checkout_method === "2"
@@ -310,11 +310,11 @@ const ContactInfo = ({
       {!showNameEmailFields && showGuestUser ? (
         <div
           style={{
-            fontSize: language === "ltr" ? "13px" : "14px",
+            fontSize: language === "ltr" ? "16px" : "18px",
             marginTop: "30px",
             // position: "absolute",
             bottom: "100px",
-            fontWeight: 500,
+            fontWeight: 400,
             textDecoration: "underline",
             width: "100%",
             textAlign: "center",

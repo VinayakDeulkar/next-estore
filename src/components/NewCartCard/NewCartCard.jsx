@@ -15,6 +15,7 @@ import { IconButton } from "@mui/material";
 import Spinner from "../common/Spinner/spinner";
 import Title from "../common/Title/Title";
 import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   const {
@@ -240,7 +241,11 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
           }}
         >
           <div style={{ width: "100%" }}>
-            <Title enText={product.english_name} arText={product.arabic_name} />
+            <SubHeadline
+              enText={product.english_name}
+              arText={product.arabic_name}
+              fontWeight="300"
+            />
             <div>
               {product?.addOns?.map((i) => (
                 <div className="cart-cart-product-notes" key={i?.item}>

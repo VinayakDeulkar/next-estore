@@ -133,9 +133,9 @@ html[dir="rtl"] .form__label.phoneLabel.dataFilled {
   font-weight: 500;
   color: #000;
 }
-
 .form__field:placeholder-shown ~ .form__label.phoneLabel {
-  left: 95px;
+  left: 0px;
+  top: -25px;
 }
 
 .form__field:focus ~ .form__label.phoneLabel,
@@ -181,7 +181,7 @@ html[dir="rtl"] .form__field:-webkit-autofill ~ .form__label.phoneLabel {
 }
 
 .blueBox {
-  background-color: #eefdff;
+  background-color: rgba(242, 242, 242, 0.5);
   padding: 20px 15px;
   border-radius: 10px;
   display: flex;

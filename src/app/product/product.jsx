@@ -1,4 +1,5 @@
 "use client";
+import BackComponent from "@/components/BackComponent";
 import BackButton from "@/components/common/BackButton/BackButton";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
@@ -27,13 +28,11 @@ const Product = (props) => {
             <Box sx={{ position: "relative" }}>
               <Box
                 sx={{
-                  position: "sticky",
-                  top: "20px",
-                  left: "80px",
-                  zIndex: "100",
+                  position: "relative",
+                  height: "30px",
                 }}
               >
-                <BackButton variant="dark" />
+                <BackComponent />
               </Box>
               <Box
                 sx={{ display: "flex", flexDirection: "column", gap: "20px" }}

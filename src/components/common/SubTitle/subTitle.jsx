@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 const SubTitle = ({ enText, arText }) => {
   const { language } = useContext(AppContext);
   return (
-    <Box sx={{ fontSize: "14px", fontWeight: "300" }}>
+    <Box sx={{ fontSize: "16px", fontWeight: "300" }}>
       {language === "ltr" ? enText : arText}
     </Box>
   );

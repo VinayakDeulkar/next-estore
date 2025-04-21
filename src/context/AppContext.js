@@ -450,7 +450,11 @@ export const AppProvider = ({
             language === "ltr" ? "SFT Schrifted Sans TRIAL Var" : "Orleen",
         }}
       >
-        <SnackbarProvider>{children}</SnackbarProvider>
+        <SnackbarProvider
+          anchorOrigin={{ horizontal: "left", vertical: "top" }}
+        >
+          {children}
+        </SnackbarProvider>
       </Box>
     </AppContext.Provider>
   );

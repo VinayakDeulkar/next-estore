@@ -686,7 +686,11 @@ const ProductDetails = ({
     <Box>
       <div style={showRegister ? { height: "10vh", overflow: "hidden" } : {}}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <HeadLine enText={product?.name} arText={product?.name_ar} />
+          <HeadLine
+            enText={product?.name}
+            arText={product?.name_ar}
+            fontSize="24px"
+          />
           {product?.offer_applied == 1 ? (
             <NormalText
               enText={product?.offer_msg}
@@ -694,10 +698,10 @@ const ProductDetails = ({
               color={product?.offer_color}
             />
           ) : null}
-          <SubHeadline
+          {/* <SubHeadline
             enText={product.category_name}
             arText={product?.category_name_ar}
-          />
+          /> */}
 
           {(product?.variation_id != "" &&
             productvariationPrice?.[addedVariaton.toString()]?.sku) ||
@@ -729,11 +733,12 @@ const ProductDetails = ({
                 gap: "8px",
                 alignItems: "end",
                 justifyContent: "start",
-                fontSize: "14px",
-                fontWeight: 500,
+                fontSize: "16px",
+                fontWeight: 400,
+                marginBottom: "10px",
               }}
             >
-              {product &&
+              {/* {product &&
                 parseFloat(product?.price_after_discount.split(",").join("")) !=
                   parseFloat(product?.base_price) &&
                 product?.base_price != "" && (
@@ -744,7 +749,7 @@ const ProductDetails = ({
                     </del>
                     <br></br>
                   </>
-                )}
+                )} */}
               <span>
                 {product ? (
                   <>
@@ -934,6 +939,7 @@ const ProductDetails = ({
               arLabel={"أضف ملاحظة (اختياري)"}
               handleChange={(e) => onNoteChange(e)}
               value={note}
+              color="rgb(141, 141, 141)"
             />
           ) : null}
           {product?.prodyct_type != 3 ? (

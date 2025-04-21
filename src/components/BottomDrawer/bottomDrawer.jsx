@@ -601,7 +601,7 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
                 }}
               />
 
-              <AddressCard
+              {/* <AddressCard
                 icon={<LocationIcon />}
                 info={{
                   name:
@@ -638,7 +638,7 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
                   });
                   router.push("/delivery-address");
                 }}
-              />
+              /> */}
             </div>
           </div>
         </div>

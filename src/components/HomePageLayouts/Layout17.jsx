@@ -116,6 +116,7 @@ const Layout17 = ({
                   category?.category_name == categorynow ? "dark" : "outline"
                 }`}
                 width="auto"
+                fontWeight="300"
               />
             </div>
           </Box>
@@ -135,7 +136,7 @@ const Layout17 = ({
         >
           <AccordionSummary
             expandIcon={
-              <ExpandMoreIcon sx={{ fontSize: "36px", fill: "#000" }} />
+              <ExpandMoreIcon sx={{ fontSize: "30px", fill: "#000" }} />
             }
             aria-controls="panel1a-content"
             id="panel1a-header"
@@ -145,6 +146,7 @@ const Layout17 = ({
               <HeadLine
                 arText={category?.category_name_ar}
                 enText={category?.category_name}
+                fontSize="22px"
               />
             </div>
           </AccordionSummary>

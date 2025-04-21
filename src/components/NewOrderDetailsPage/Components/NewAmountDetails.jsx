@@ -1,3 +1,4 @@
+import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import SubTitle from "@/components/common/SubTitle/subTitle";
 import Title from "@/components/common/Title/Title";
@@ -12,7 +13,7 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
     <div className="acmount-mainDIv">
       <div className="pt-2" style={{ marginBottom: "40px" }}>
         <div className="amount-sub-div">
-          <SubTitle enText={"Sub Total"} arText={"الإجمالي"} />
+          <NormalText enText={"Sub Total"} arText={"الإجمالي"} />
 
           <div className="amount-sub-amount">
             <span>
@@ -39,7 +40,7 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
         {areaDetails?.type == "delivery" &&
         homePageDetails?.vendor_data?.vendors_id != "1250" ? (
           <div className="amount-sub-div">
-            <SubTitle enText={"Delivery Charges"} arText={"رسوم التوصيل"} />
+            <NormalText enText={"Delivery Charges"} arText={"رسوم التوصيل"} />
             <div className="amount-sub-amount">
               <span>
                 {cart?.deliveryCharge

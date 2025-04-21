@@ -94,7 +94,7 @@ html[dir="rtl"] .delivery-selected-address .right-arrow {
 }
 
 .deliver-type-active {
-  background-color: #eaf9fa;
+  background-color: rgba(242, 242, 242, 0.5);
   border-radius: 8px;
   padding: 10px;
 }
@@ -113,7 +113,7 @@ html[dir="rtl"] .delivery-selected-address .right-arrow {
   } */
 .delivery-type-text {
   color: #000;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   margin-top: 10px;
 }
@@ -165,14 +165,14 @@ html[dir="rtl"] .delivery-type-text {
 
 .delivery-address-form input:focus ~ .label-name,
 .delivery-address-form input:not(:focus):valid ~ .label-name {
-  top: -14px;
+  top: -17px;
   bottom: 0;
   left: 0;
 }
 
 html[dir="rtl"] .delivery-address-form input:focus ~ .label-name,
 html[dir="rtl"] .delivery-address-form input:not(:focus):valid ~ .label-name {
-  top: -15px;
+  top: -17px;
   bottom: 0;
   right: 0;
   left: auto;

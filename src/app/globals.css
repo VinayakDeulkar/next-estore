@@ -70,10 +70,9 @@ input {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding-bottom: 5px;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  border-bottom: 0.25px solid #ccc;
+  padding: 10px;
+  border: 1px solid #e8e6e6;
+  border-radius: 10px;
 }
 
 .checkoutPageText {
@@ -124,7 +123,7 @@ html[dir="rtl"] .checkoutPageText {
   padding: 13px 20px;
   border-radius: 8px;
   height: 45px;
-  background-color: #eaf9fa;
+  background-color: rgba(242, 242, 242, 0.5);
   margin: 20px 0;
 }
 
@@ -134,7 +133,7 @@ html[dir="rtl"] .checkoutPageText {
   font-weight: 300;
   align-items: center;
   vertical-align: middle;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .newreview-button-div {
@@ -171,7 +170,7 @@ html[dir="rtl"] .newreview-button-div {
   display: flex;
   justify-content: center;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   width: 100%;
   /* width: 143px; */
   align-items: center;

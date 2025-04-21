@@ -154,13 +154,15 @@ const Review = () => {
     <Box>
       <EstoreLayout1>
         <Box sx={{ position: "relative", height: "calc(100vh - 56px)" }}>
-          <div>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+          >
             {areaDetails.type == "delivery" ? (
-              <HeadLine enText={"Delivery Info"} arText={"معلومات التسليم"} />
+              <HeadLine enText={"Review Order"} arText={"مراجعة الطلب"} />
             ) : (
-              <HeadLine enText={"Pickup Info"} arText={"معلومات الالتقاط"} />
+              <HeadLine enText={"Pickup Info"} arText={"تفاصيل الإستلام"} />
             )}
-            {areaDetails.type == "delivery" &&
+            {/* {areaDetails.type == "delivery" &&
               (homePageDetails?.vendor_data?.international_delivery === "3" ||
                 homePageDetails?.vendor_data?.international_delivery ===
                   "") && (
@@ -200,7 +202,7 @@ const Review = () => {
                     </div>
                   </Link>
                 </>
-              )}
+              )} */}
 
             <SubHeadline enText="Items Details" arText="تفاصيل عربة التسوق" />
             <NewOrderProductList
@@ -208,7 +210,11 @@ const Review = () => {
               successPromocode={successPromocode}
             />
             <div className="newreview-details-div">
-              <SubHeadline enText={"Sub Total"} arText={"الإجمالي"} />
+              <SubHeadline
+                enText={"Sub Total"}
+                arText={"الإجمالي"}
+                fontWeight="300"
+              />
 
               <p className="newreview-text">
                 <span>{parseFloat(cart?.subTotal).toFixed(3)}</span>{" "}

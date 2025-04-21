@@ -3,7 +3,14 @@ import { Box } from "@mui/material";
 import React, { useContext } from "react";
 import "./textInputField.css";
 
-const TextInputField = ({ value, handleChange, name, label, arLabel }) => {
+const TextInputField = ({
+  value,
+  handleChange,
+  name,
+  label,
+  arLabel,
+  color = "#000",
+}) => {
   const { language } = useContext(AppContext);
   return (
     <Box
@@ -26,7 +33,11 @@ const TextInputField = ({ value, handleChange, name, label, arLabel }) => {
         value={value}
         onChange={handleChange}
       />
-      <label htmlFor={name} className="text-field-label">
+      <label
+        htmlFor={name}
+        className="text-field-label"
+        style={{ color: color }}
+      >
         {language == "ltr" ? label : arLabel}
       </label>
     </Box>

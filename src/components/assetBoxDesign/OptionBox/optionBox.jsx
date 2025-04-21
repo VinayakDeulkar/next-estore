@@ -1,5 +1,6 @@
 import SubTitle from "@/components/common/SubTitle/subTitle";
 import { Box } from "@mui/material";
+import NormalText from "../NormalText/normalText";
 
 const OptionBox = ({
   enText,
@@ -27,7 +28,7 @@ const OptionBox = ({
         borderRadius: "6.38px",
       }}
     >
-      <SubTitle enText={enText} arText={arText} />
+      <NormalText enText={enText} arText={arText} />
       {amount ? (
         <Box
           sx={{
@@ -39,7 +40,7 @@ const OptionBox = ({
           }}
         >
           <Box>{parseFloat(amount).toFixed(3)}</Box>
-          <SubTitle enText={"KD"} arText={"د.ك"} />
+          <NormalText enText={"KD"} arText={"د.ك"} />
         </Box>
       ) : null}
     </Box>

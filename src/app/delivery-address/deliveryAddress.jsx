@@ -273,6 +273,7 @@ const DeliveryAddress = () => {
                   enqueueSnackbar({
                     variant: "error",
                     message: response?.message,
+                    anchorOrigin: { horizontal: "left", vertical: "top" },
                   });
                   localStorage.removeItem("token");
                   localStorage.removeItem("contactInfo");
@@ -283,6 +284,7 @@ const DeliveryAddress = () => {
                 enqueueSnackbar({
                   variant: "error",
                   message: addResponse?.message,
+                  anchorOrigin: { horizontal: "left", vertical: "top" },
                 });
               }
             }

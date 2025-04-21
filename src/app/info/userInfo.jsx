@@ -138,6 +138,7 @@ const UserInfo = ({ type }) => {
       enqueueSnackbar({
         variant: "error",
         message: response?.message,
+        anchorOrigin: { horizontal: "left", vertical: "top" },
       });
       localStorage.removeItem("token");
       localStorage.removeItem("contactInfo");
@@ -165,6 +166,7 @@ const UserInfo = ({ type }) => {
       enqueueSnackbar({
         variant: "error",
         message: response?.message,
+        anchorOrigin: { horizontal: "left", vertical: "top" },
       });
     }
   };

@@ -96,7 +96,7 @@ const HomePageLayouts = () => {
   const handleCountryChange = (code) => {};
   return (
     <Box sx={{ position: "relative" }}>
-      <SearchBar
+      {/* <SearchBar
         setSearchLoading={setSearchLoading}
         searchItems={searchItems}
         setSearchItems={setSearchItems}
@@ -105,7 +105,7 @@ const HomePageLayouts = () => {
         setHasMore={setHasMore}
         hasMore={hasMore}
         setPage={setPage}
-      />
+      /> */}
       {homePageDetails?.vendor_data?.international_delivery !== "3" &&
       homePageDetails?.vendor_data?.international_delivery !== "" ? (
         <div style={{ marginBottom: "20px" }}>
@@ -149,7 +149,9 @@ const HomePageLayouts = () => {
           <SearchNone />
         )
       ) : (
-        <div style={{paddingBottom: "80px"}}>{renderLayoutType(homePageDetails?.categories)}</div>
+        <div style={{ paddingBottom: "80px" }}>
+          {renderLayoutType(homePageDetails?.categories)}
+        </div>
       )}
       <AreaModal
         handleClose={() => {

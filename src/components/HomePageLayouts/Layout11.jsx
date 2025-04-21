@@ -85,6 +85,7 @@ const Layout11 = ({
                   category?.category_name == categorynow ? "dark" : "outline"
                 }`}
                 width="auto"
+                fontWeight="300"
               />
             </div>
           </Box>

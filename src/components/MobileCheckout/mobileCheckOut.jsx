@@ -23,6 +23,7 @@ import ReactPixel from "react-facebook-pixel";
 import AreaModal from "../AreaModal/areaModal";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import DeliveryAddressSection from "../InternationalDelivery/DeliveryAddressSection";
+import BottomDrawer from "../BottomDrawer/bottomDrawer";
 
 const MobileCheckOut = () => {
   const {
@@ -590,6 +591,17 @@ const MobileCheckOut = () => {
                 }
               }}
             />
+            {showAddress &&
+            userDetails?.address?.length > 0 &&
+            areaDetails?.type !== "pickup" ? (
+              <BottomDrawer
+                type="checkout"
+                onClick={() => setShowAddress(false)}
+                hideAddress={() => {
+                  setShowAddress(false);
+                }}
+              />
+            ) : null}
             {loading && (
               <div
                 style={{

@@ -332,7 +332,7 @@ const Login = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "20px",
+            gap: openOtpPage ? "20px" : "40px",
             position: "relative",
             height: "calc(100vh - 50px)",
           }}

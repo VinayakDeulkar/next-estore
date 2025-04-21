@@ -83,7 +83,7 @@ const NewContactDetails = ({ errorContactDetails }) => {
               <input
                 type="tel"
                 className="form__field hideBorder"
-                placeholder=""
+                placeholder="98765432"
                 name="phone"
                 id="phone"
                 required="true"

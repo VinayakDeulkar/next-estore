@@ -13,6 +13,7 @@ import NewAddressFormField from "./NewAddressFormField";
 import SchoolIcon from "@/SVGs/SchoolIcon";
 import MosqueIcon from "@/SVGs/MosqueIcon";
 import GovernmentIcon from "@/SVGs/GovernmentIcon";
+import HeadLine from "../assetBoxDesign/Headline/headLine";
 
 const NewAddressForm = ({
   areaDetails,
@@ -56,10 +57,7 @@ const NewAddressForm = ({
 
   return (
     <div>
-      <SubHeadline
-        enText={"Add your delivery details"}
-        arText={"أضف تفاصيل التسليم الخاصة بك"}
-      />
+      <HeadLine enText={"Delivery Details"} arText={"تفاصيل التوصيل"} />
       <div className="delivery-address-address-select">
         <div className="delivery-address-type-select nav nav-tabs">
           <div
@@ -362,7 +360,7 @@ const NewAddressForm = ({
       {!userDetails?.is_guest ? (
         <div
           className="blueBox"
-          style={{ marginTop: "25px", marginBottom: "40px" }}
+          style={{ marginTop: "25px", marginBottom: "40px", gap: "20px" }}
         >
           <div>
             <div class="round">
@@ -391,8 +389,8 @@ const NewAddressForm = ({
           <div>
             <div
               style={{
-                fontSize: language === "ltr" ? "13px" : "14px",
-                fontWeight: 500,
+                fontSize: language === "ltr" ? "14px" : "16px",
+                fontWeight: 400,
               }}
             >
               {language === "ltr"
@@ -402,7 +400,7 @@ const NewAddressForm = ({
             <div
               style={{
                 color: "#636363",
-                fontSize: language === "ltr" ? "11px" : "12px",
+                fontSize: language === "ltr" ? "14px" : "16px",
               }}
             >
               {language === "ltr"

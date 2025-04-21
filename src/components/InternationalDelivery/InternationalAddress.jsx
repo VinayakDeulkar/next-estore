@@ -2,6 +2,7 @@ import { AppContext } from "@/context/AppContext";
 import { useContext, useEffect } from "react";
 import TextInputField from "../assetBoxDesign/TextField/textInputField";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import HeadLine from "../assetBoxDesign/Headline/headLine";
 
 const InternationalAddress = ({ internationalError }) => {
   const { internationalDelivery, handleInternationalDeliveryChange, language } =
@@ -11,10 +12,7 @@ const InternationalAddress = ({ internationalError }) => {
 
   return (
     <div>
-      <SubHeadline
-        enText={"Add your delivery details"}
-        arText={"أضف تفاصيل التسليم الخاصة بك"}
-      />
+      <HeadLine enText={"Delivery Details"} arText={"تفاصيل التوصيل"} />
       <div
         className="contact-details-form-maindiv"
         style={{

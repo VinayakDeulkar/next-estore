@@ -13,16 +13,16 @@ const VendorBox = () => {
         display: "flex",
         flexDirection: window.innerWidth > 600 ? "column" : "row",
         gap: "20px",
-        padding: "20px",
+        padding: "24px 0",
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Image
           loading="lazy"
-          width={110}
-          height={110}
+          width={80}
+          height={80}
           style={{
-            borderRadius: "13.75px",
+            borderRadius: "13px",
             border: "1.5px solid #9191913D",
           }}
           src={
@@ -45,7 +45,7 @@ const VendorBox = () => {
           textAlign: window.innerWidth > 600 ? "center" : "start",
         }}
       >
-        <Box sx={{ fontSize: "32px", fontWeight: "500" }}>
+        <Box sx={{ fontSize: "28px", fontWeight: "400" }}>
           {language === "ltr"
             ? homePageDetails?.vendor_data?.name
             : homePageDetails?.vendor_data?.name_ar}

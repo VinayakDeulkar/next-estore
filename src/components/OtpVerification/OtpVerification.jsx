@@ -81,18 +81,28 @@ const OtpVerification = ({
     });
     setLoading(false);
     if (response?.status) {
-      enqueueSnackbar({ variant: "success", message: response?.message });
+      enqueueSnackbar({
+        hideIconVariant: true,
+        autoHideDuration: 30000000,
+        variant: "success",
+        message: response?.message,
+        anchorOrigin: { horizontal: "left", vertical: "top" },
+      });
       setOtpSent(true);
       setSeconds(59);
       setMinutes(0);
       setTimerStatus(true);
     } else {
-      enqueueSnackbar({ variant: "error", message: response?.message });
+      enqueueSnackbar({
+        variant: "error",
+        message: response?.message,
+        anchorOrigin: { horizontal: "left", vertical: "top" },
+      });
     }
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
       {/* <div className="toasterDiv">
         <Toaster position="top-left" reverseOrder={false} />
       </div> */}
@@ -101,11 +111,24 @@ const OtpVerification = ({
         englishTitle="One Time Password Authentication"
         arabicTitle="مصادقة كلمة المرور لمرة واحدة"
       />
-
+      <div className="sentOtpDiv">
+        {homePageDetails?.vendor_data?.checkout_method === "2"
+          ? language === "ltr"
+            ? `OTP sent to +${tele[contactDetails?.phoneCode]} ${
+                contactDetails?.phone
+              }`
+            : `تم إرسال كلمة المرور لمرة واحدة (OTP) إلى +${
+                tele[contactDetails?.phoneCode]
+              } ${contactDetails?.phone}`
+          : language === "ltr"
+          ? `OTP sent to ${contactDetails?.email}`
+          : `تم إرسال كلمة المرور لمرة واحدة (OTP) إلى ${contactDetails?.email}`}
+      </div>
       <div>
         <div className="enterOtpText">
           {language === "ltr" ? "Enter OTP" : "أدخل كلمة المرور لمرة واحدة"}
         </div>
+
         <div style={{ marginTop: "5px" }}>
           <OtpInput
             value={otp}
@@ -137,27 +160,13 @@ const OtpVerification = ({
         </div>
       </div>
 
-      <div className="sentOtpDiv">
-        {homePageDetails?.vendor_data?.checkout_method === "2"
-          ? language === "ltr"
-            ? `OTP sent to +${tele[contactDetails?.phoneCode]} ${
-                contactDetails?.phone
-              }`
-            : `تم إرسال كلمة المرور لمرة واحدة (OTP) إلى +${
-                tele[contactDetails?.phoneCode]
-              } ${contactDetails?.phone}`
-          : language === "ltr"
-          ? `OTP sent to ${contactDetails?.email}`
-          : `تم إرسال كلمة المرور لمرة واحدة (OTP) إلى ${contactDetails?.email}`}
-      </div>
-
       <div className="blueBox" style={{ marginTop: "55px" }}>
         <img src="images/Sent.png" className="sentImg" />
         <div>
           <div
             style={{
-              fontSize: language === "ltr" ? "13px" : "14px",
-              fontWeight: 500,
+              fontSize: language === "ltr" ? "16px" : "18px",
+              fontWeight: 400,
             }}
           >
             {otpSentMethod == 1
@@ -176,7 +185,7 @@ const OtpVerification = ({
             <div
               style={{
                 color: "#636363",
-                fontSize: language === "ltr" ? "11px" : "12px",
+                fontSize: language === "ltr" ? "14px" : "16px",
               }}
             >
               {formatTime(minutes)}:{formatTime(seconds)}

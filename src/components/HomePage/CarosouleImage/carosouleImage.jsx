@@ -25,7 +25,7 @@ const CarouselImage = () => {
       sx={{
         "& .carousel-root .carousel .control-arrow": {
           display: "none",
-          borderRadius: "13.81px",
+          borderRadius: "13px",
         },
       }}
     >

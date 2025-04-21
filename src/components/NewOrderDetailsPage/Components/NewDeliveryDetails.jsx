@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { getAddressType } from "@/constants/function";
 import ClockIcon from "@/SVGs/ClockIcon";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
-
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 const NewDeliveryDetails = ({
   addressDetails,
   companyData,
@@ -111,11 +111,7 @@ const NewDeliveryDetails = ({
             <div className={`secondCardDiv`}>
               <div>
                 <div className="headingText">{addressDetails.addressName}</div>
-                <div className="headingText">
-                  {language === "ltr"
-                    ? getGovernarate().governarate_name
-                    : getGovernarate().governarate_name_ar}
-                </div>
+
                 <div className="areaText">
                   {areaDetails.type === "delivery" ? (
                     <div>
@@ -285,10 +281,7 @@ const NewDeliveryDetails = ({
             </div>
           </div>
           <div className="buyer-details-secondDiv">
-            <i
-              className="fa fa-angle-right right-arrow"
-              style={{ fontSize: "26px" }}
-            ></i>
+            <ArrowForwardIosIcon sx={{ fontSize: "18px" }} />
           </div>
         </div>
       </div>
