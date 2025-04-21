@@ -4,6 +4,7 @@ import {
   updateUserDetails,
   verifyUserOTP,
 } from "@/apis";
+import AreaModal from "@/components/AreaModal/areaModal";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import ContactInfo from "@/components/ContactInfo/ContactInfo";
 import NewContactDetails from "@/components/NewContactDetails/NewContactDetails";
@@ -25,6 +26,7 @@ const UserDetails = ({
   triggerDeliveryAddress,
   showAddressComponents,
   setSelectAddress,
+  triggerPaymentMethod,
 }) => {
   const {
     language,
@@ -37,6 +39,8 @@ const UserDetails = ({
     handleContactDetailsChange,
     internationalDelivery,
     resetUserDetails,
+    handleOpenAreaChange,
+    openArea,
   } = useContext(AppContext);
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
@@ -222,7 +226,7 @@ const UserDetails = ({
         contactDetails.name &&
         nameValidation(contactDetails.name)
       ) {
-        setStepper(1);
+        setshowPickUpForm(true);
       } else {
         setLoading(true);
         const response = await RegisterUser({
@@ -389,8 +393,12 @@ const UserDetails = ({
           triggerDeliveryAddress();
         }
       }
-    } else if (stepper === 1) {
-      if (contactDetails.model !== "" && contactDetails.color !== "") {
+    } else {
+      console.log("In pickup container");
+      if (!areaDetails?.branch) {
+        handleOpenAreaChange((prev) => ({ open: true, route: "/checkout-desktop" }));
+      } else if (contactDetails.model !== "" && contactDetails.color !== "") {
+        triggerPaymentMethod();
       } else {
         if (contactDetails.model == "" && contactDetails.color !== "") {
           setPickupError({ ...pickupError, modelError: true });
@@ -425,6 +433,13 @@ const UserDetails = ({
           {language === "ltr" ? "Next" : "متابعة"}
         </Box>
       ) : null}
+      <AreaModal
+        handleClose={() => {
+          triggerPaymentMethod()
+          handleOpenAreaChange({ open: false, route: "/" });
+        }}
+        showAreaModal={openArea.open}
+      />
     </Box>
   );
 };

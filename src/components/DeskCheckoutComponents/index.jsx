@@ -29,6 +29,7 @@ const DeskCheckoutComponents = () => {
         triggerDeliveryAddress={triggerDeliveryAddress}
         showAddressComponents={showAddressComponents}
         setSelectAddress={setSelectAddress}
+        triggerPaymentMethod={triggerPaymentMethod}
       />
       {showAddressComponents ? (
         <AddressDetails
@@ -36,6 +37,7 @@ const DeskCheckoutComponents = () => {
           triggerPaymentMethod={triggerPaymentMethod}
           selectAddress={selectAddress}
           setDeliveryKm={setDeliveryKm}
+          
         />
       ) : null}
       {showPaymentMethod ? <PaymentDetails deliveryKm={deliveryKm} /> : null}

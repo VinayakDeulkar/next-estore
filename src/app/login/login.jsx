@@ -31,6 +31,7 @@ const Login = () => {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const [stepper, setStepper] = useState(0);
 
   const router = useRouter();
 

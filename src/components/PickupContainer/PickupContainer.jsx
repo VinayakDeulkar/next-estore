@@ -2,19 +2,21 @@ import React, { useContext } from "react";
 import CommonSectionHeader from "./CommonSectionHeader";
 import { AppContext } from "@/context/AppContext";
 import "@/components/ContactInfo/contactInfo.css";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import NormalText from "../assetBoxDesign/NormalText/normalText";
 
 const PickupContainer = ({ pickupError }) => {
   const { language, contactDetails, handleContactDetailsChange } =
     useContext(AppContext);
   return (
     <>
-      <CommonSectionHeader
-        englishHeader="Pickup car information"
-        arabicHeader="معلومات السيارة للاستلام "
+      <SubHeadline
+        enText="Pickup car information"
+        arText="معلومات السيارة للاستلام "
       />
-      <CommonSectionHeader
-        englishHeader="Help us quickly identify your vehicle"
-        arabicHeader="ساعدنا في التعرف على سيارتك بسرعة."
+      <NormalText
+        enText="Help us quickly identify your vehicle"
+        arText="ساعدنا في التعرف على سيارتك بسرعة."
         color="#000"
       />
       <div className="contact-details-form-maindiv">

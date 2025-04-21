@@ -243,6 +243,7 @@ const DeliveryAddress = () => {
                   user_id: localStorage.getItem("id"),
                   language: language,
                 });
+                console.log(response,"response")
                 if (response?.status) {
                   handleUserDetailsChange({ ...response?.data });
                   handleAddressDetailsChange((k) => ({

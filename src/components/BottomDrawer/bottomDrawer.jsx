@@ -18,6 +18,7 @@ import { getAddressType } from "@/constants/function";
 import Divider from "../Divider/Divider";
 import moment from "moment";
 import "./BottomDrawer.css";
+import { tele } from "@/constants/constants";
 
 const BottomDrawer = ({ type, onClick, hideAddress }) => {
   const {
