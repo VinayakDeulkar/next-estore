@@ -33,6 +33,7 @@ const OptionPopupBox = ({ open, handleClose, enTitle, arTitle, buttons }) => {
                 arText={button?.arText}
                 varient={button?.varient}
                 handleClick={button?.handleClick}
+                key={index}
               />
             ))}
           </Box>

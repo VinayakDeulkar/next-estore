@@ -10,6 +10,9 @@ import AreaModal from "../AreaModal/areaModal";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import "./deliverymap.css";
 import NewAddressFormField from "./NewAddressFormField";
+import SchoolIcon from "@/SVGs/SchoolIcon";
+import MosqueIcon from "@/SVGs/MosqueIcon";
+import GovernmentIcon from "@/SVGs/GovernmentIcon";
 
 const NewAddressForm = ({
   areaDetails,

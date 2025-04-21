@@ -23,6 +23,7 @@ import TextInputField from "@/components/assetBoxDesign/TextField/textInputField
 import MultipleItems from "@/components/assetBoxDesign/MultipleItems/multipleItems";
 import SnapPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
+import ProductRegistrationModal from "@/components/ProductRegistrationModal/ProductRegistrationModal";
 
 const ProductDetails = ({
   product,
@@ -886,6 +887,7 @@ const ProductDetails = ({
                     {checked[addonIndex]?.map(
                       (addonsOption, addonsOptionIndex) => (
                         <OptionBox
+                          key={addonsOptionIndex}
                           enText={addonsOption?.english_name}
                           arText={addonsOption?.arabic_name}
                           selected={

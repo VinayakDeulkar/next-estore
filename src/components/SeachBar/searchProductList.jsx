@@ -24,6 +24,7 @@ const SearchProductList = ({ loading, products, lastBookElementRef }) => {
               variant="rounded"
               width="100%"
               height={115}
+              key={i}
             />
           ))}
         </Box>

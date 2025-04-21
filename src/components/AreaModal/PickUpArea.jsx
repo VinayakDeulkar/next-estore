@@ -16,6 +16,7 @@ import Notes from "../assetBoxDesign/Notes/notes";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import axios from "axios";
 import CheckoutModal from "../NewOrderDetailsPage/Components/CheckoutModal";
+import SearchNone from "../SeachBar/searchNone";
 const PickUpArea = ({ handleClose }) => {
   const {
     homePageDetails,
@@ -229,6 +230,7 @@ const PickUpArea = ({ handleClose }) => {
                   alignItems: "center",
                   padding: "20px 0",
                 }}
+                key={i}
                 onClick={(e) => {
                   if (branch?.availability_status == 1) {
                     e.preventDefault();

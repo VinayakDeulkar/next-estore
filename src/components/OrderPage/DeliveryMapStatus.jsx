@@ -170,7 +170,7 @@ const DeliveryMapStatus = ({
                   {getAddressType(customer_details.address_type, "", "19")}
                 </div>
               ) : null}
-              <div style={{ padding: "0 25px" }}>
+              <div >
                 <NormalText
                   enText={
                     customer_details?.self_pickup === "1"

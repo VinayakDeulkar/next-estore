@@ -1,5 +1,5 @@
 import { AppContext } from "@/context/AppContext";
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useCallback, useContext, useRef, useState } from "react";
 import AreaModal from "../AreaModal/areaModal";

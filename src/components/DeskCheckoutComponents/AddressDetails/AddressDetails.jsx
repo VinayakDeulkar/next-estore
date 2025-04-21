@@ -1,4 +1,9 @@
-import { GetUserDetails } from "@/apis";
+import {
+  GetUserDetails,
+  getDeliveryCompanies,
+  saveUserAddress,
+  updateDeliveryCharges,
+} from "@/apis";
 import AddressSection from "@/components/AddressSection/addressSection";
 import DeliveryMapContainer from "@/components/DeliveryMap/DeliveryMapContainer";
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
@@ -8,6 +13,8 @@ import { tele } from "@/constants/constants";
 import { AppContext } from "@/context/AppContext";
 import { Box, Dialog } from "@mui/material";
 import axios from "axios";
+import moment from "moment";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 
 const AddressDetails = ({
@@ -27,10 +34,18 @@ const AddressDetails = ({
     addressDetails,
     handleOpenAreaChange,
     handleAddressDetailsChange,
+    handleCartChange,
+    cart,
   } = useContext(AppContext);
   const [markerPosition, setMarkerPosition] = useState(null);
   const [showAddressForm, setShowAddressForm] = useState(true);
   const [showMap, setShowMap] = useState(false);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [deliveryKm, setDeliveryKm] = useState();
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
+  const [companyData, setCompanyData] = useState();
+  const [notServing, setNotServing] = useState(0);
   const [selectedBounds, setSelectedBounds] = useState({
     north: 30.0978,
     south: 28.5244,
@@ -54,6 +69,12 @@ const AddressDetails = ({
     areaNameErrorMessage: "",
     areaNameErrorMessagear: "",
   });
+
+  const checkAllCondition = () => {
+    if (!cart?.cartCount) {
+      router.push(`/`);
+    }
+  };
 
   useEffect(() => {
     if (selectAddress) {
@@ -263,13 +284,13 @@ const AddressDetails = ({
             !areaName
           ) {
             if (userDetails?.is_guest) {
+              console.log("userDetails?.is_guest");
               getDistanceMatrix();
-              getEstimatedDeliveryTime();
               triggerPaymentMethod();
             } else {
               setLoading(true);
               const addResponse = await saveUserAddress({
-                vendor_id: details.vendor.vendor_id,
+                vendor_id: homePageDetails?.vendor_data.vendor_id,
                 ecom_user_id: userDetails.id,
                 address_type: addressDetails.addressType,
                 area: areaDetails?.area,
@@ -323,8 +344,7 @@ const AddressDetails = ({
                     lng: addressDetails.lng,
                     is_primary: addressDetails.is_primary,
                   }));
-                  // getDistanceMatrix();
-                  // getEstimatedDeliveryTime();
+                  getDistanceMatrix();
                   // setLoading(false);
                   triggerPaymentMethod();
                 } else {
@@ -387,6 +407,202 @@ const AddressDetails = ({
     delivery_address1: false,
     delivery_address2: false,
   });
+
+  const getDistanceMatrix = async () => {
+    if (
+      areaDetails?.type == "delivery" &&
+      areaDetails?.data?.branch &&
+      (internationalDelivery.delivery_country_code.toLowerCase() === "kw" ||
+        homePageDetails?.vendor_data?.international_delivery === "3" ||
+        homePageDetails?.vendor_data?.international_delivery === "")
+    ) {
+      // let selectedArea = areaDetails?.area;
+      if (areaDetails?.area == "Mutlaa") {
+        const branch_latlng = areaDetails?.data?.branch?.filter(
+          (branch) => branch.id == areaDetails?.branchForArea.id
+        );
+        if (window.google && window.google.maps) {
+          const origin = new window.google.maps.LatLng(
+            String(branch_latlng[0].lat),
+            String(branch_latlng[0].lng)
+          );
+          const destination = new window.google.maps.LatLng(
+            String(addressDetails.lat),
+            String(addressDetails.lng)
+          );
+          const service = new window.google.maps.DistanceMatrixService();
+          const request = {
+            origins: [origin],
+            destinations: [destination],
+            travelMode: "DRIVING",
+            unitSystem: window.google.maps.UnitSystem.METRIC, // Specify metric units for kilometers
+          };
+
+          service.getDistanceMatrix(request, (response, status) => {
+            if (
+              status === "OK" &&
+              response.rows[0].elements[0].status === "OK"
+            ) {
+              const distanceInMeters =
+                response.rows[0].elements[0].distance.value;
+              const distanceInKilometers = distanceInMeters / 1000;
+              setDeliveryKm(distanceInKilometers);
+            } else {
+              console.error("Error:", status);
+            }
+          });
+        }
+      } else {
+        let selectedAra = mapArea.find(
+          (ele) =>
+            ele.area_name == areaDetails.area ||
+            ele.area_name_ar == areaDetails.area_ar
+        );
+        const selectedArea = selectedAra.area_map;
+
+        const encodedPlaceName = encodeURIComponent(
+          `street ${addressDetails.street} ,block ${addressDetails.block} ,${selectedArea}, Kuwait`
+        );
+        const respones = await axios.get(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`
+        );
+        if (respones.status === 200) {
+          let getSelectedAreaDetails = [];
+          if (respones?.data?.results.length == 1) {
+            getSelectedAreaDetails.push(respones?.data?.results[0]);
+          } else {
+            respones?.data?.results.map((ele) =>
+              ele.address_components.map((element) => {
+                if (
+                  element.short_name.toLowerCase() ==
+                    selectedArea.toLowerCase() ||
+                  element.long_name.toLowerCase() == selectedArea.toLowerCase()
+                ) {
+                  getSelectedAreaDetails.push(ele);
+                }
+              })
+            );
+          }
+
+          let lat = getSelectedAreaDetails[0]?.geometry?.location?.lat;
+          let lng = getSelectedAreaDetails[0]?.geometry?.location?.lng;
+
+          const branch_latlng = areaDetails?.data?.branch?.filter(
+            (branch) => branch.id == areaDetails?.branchForArea.id
+          );
+          if (window.google && window.google.maps) {
+            const origin = new window.google.maps.LatLng(
+              String(branch_latlng[0].lat),
+              String(branch_latlng[0].lng)
+            );
+            const destination = new window.google.maps.LatLng(
+              String(addressDetails.lat),
+              String(addressDetails.lng)
+            );
+            const service = new window.google.maps.DistanceMatrixService();
+            const request = {
+              origins: [origin],
+              destinations: [destination],
+              travelMode: "DRIVING",
+              unitSystem: window.google.maps.UnitSystem.METRIC, // Specify metric units for kilometers
+            };
+            service.getDistanceMatrix(request, (response, status) => {
+              if (
+                status === "OK" &&
+                response.rows[0].elements[0].status === "OK"
+              ) {
+                const distanceInMeters =
+                  response.rows[0].elements[0].distance.value;
+                const distanceInKilometers = distanceInMeters / 1000;
+                console.log(distanceInKilometers, "distanceInKilometers");
+                setDeliveryKm(distanceInKilometers);
+              } else {
+                console.error("Error:", status);
+              }
+            });
+          }
+        }
+      }
+    }
+  };
+  useEffect(() => {
+    if (window && window.google && window.google.maps) {
+      getDistanceMatrix();
+    }
+  }, [window, window.google, window.google?.maps, areaDetails?.area]);
+
+  useEffect(() => {
+    (async () => {
+      if (
+        deliveryKm &&
+        areaDetails?.type == "delivery" &&
+        areaDetails?.area != "Mutlaa"
+      ) {
+        setLoading(true);
+        const response = await getDeliveryCompanies({
+          vendor_id: homePageDetails?.vendor_data.vendors_id,
+          product: cart.cartItems,
+          distance: deliveryKm,
+          area_id: areaDetails?.area_id,
+          block_id: addressDetails.block,
+          ecommerce_vendor_id: homePageDetails?.vendor_data.ecommerce_vendor_id,
+          branch_id: areaDetails?.branchForArea.id,
+          destination: {
+            latitude: Number(addressDetails.lat),
+            longitude: Number(addressDetails.lng),
+          },
+          block: addressDetails.block,
+          street: addressDetails.street,
+          avenue: addressDetails.avenue,
+          house_no: addressDetails.house,
+          floor_no: addressDetails.floor,
+          flat_no: addressDetails.flat,
+          time: areaDetails?.now,
+          schedule_time: areaDetails?.deliveryTiming,
+          preorder_on: moment(areaDetails?.laterDeliveryTiming)
+            .locale("en")
+            .format("YYYY-MM-DD HH:mm:ss"),
+        });
+        if (response?.status) {
+          if (response.is_activated === "1") {
+            if (response.data.is_serving === 0) {
+              setNotServing(1);
+              setLoading(false);
+            } else {
+              setCompanyData(response.data);
+              setDeliveryCharge(response.data.delivery_charge);
+              if (response.data.delivery_charge) {
+                getDeliveryCharge(response.data.delivery_charge);
+              }
+              setLoading(false);
+            }
+          } else {
+            setLoading(false);
+          }
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
+      }
+    })();
+  }, [deliveryKm]);
+  const getDeliveryCharge = async (delivery_charge) => {
+    if (delivery_charge) {
+      const response = await updateDeliveryCharges(
+        vendorSlugResponse?.data?.ecom_url_slug,
+        homePageDetails?.vendor_data?.vendors_id,
+        areaDetails?.area_id,
+        delivery_charge
+      );
+      if (response && response.status) {
+        setLoading(false);
+        handleCartChange(response.data);
+      } else {
+        setLoading(false);
+        router.push("/");
+      }
+    }
+  };
   return (
     <Box>
       {homePageDetails?.vendor_data?.international_delivery === "3" ||

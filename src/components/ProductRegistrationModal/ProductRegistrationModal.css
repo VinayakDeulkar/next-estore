@@ -1,0 +1,46 @@
+.productRegistrationHeader {
+    padding: 20px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+html[dir="rtl"] .productRegistrationHeader {
+    font-size: 24px;
+}
+
+.registerProductDetails {
+    width: 100%;
+}
+
+.registerProductImg {
+    height: 150px;
+    width: 150px;
+    border-radius: 10px;
+}
+
+.registerProductName {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+html[dir="rtl"] .registerProductName {
+    font-size: 20px;
+}
+
+.selectedVariation {
+    color: #a3a2a2;
+    font-size: 14px;
+}
+
+html[dir="rtl"] .selectedVariation {
+    font-size: 16px;
+}
+
+.responseText {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+html[dir="rtl"] .responseText {
+    font-size: 18px;
+}
