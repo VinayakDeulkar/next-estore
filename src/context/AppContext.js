@@ -406,6 +406,10 @@ export const AppProvider = ({
   const handleSetLayout14ToggleViewChange = (value) =>
     setLayout14ToggleView(value);
 
+  const [layout17ToggleView, setLayout17ToggleView] = useState(false);
+  const handleSetLayout17ToggleViewChange = (value) =>
+    setLayout17ToggleView(value);
+
   const store = {
     language,
     handleLanguageChange,
@@ -434,6 +438,8 @@ export const AppProvider = ({
     handleSearchProduct,
     layout14ToggleView,
     handleSetLayout14ToggleViewChange,
+    layout17ToggleView,
+    handleSetLayout17ToggleViewChange,
   };
 
   return (

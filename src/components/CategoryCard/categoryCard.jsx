@@ -6,7 +6,8 @@ import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import { AppContext } from "@/context/AppContext";
 
 const CategoryCard = ({ category }) => {
-  const { homePageDetails, layout14ToggleView } = useContext(AppContext);
+  const { homePageDetails, layout14ToggleView, layout17ToggleView } =
+    useContext(AppContext);
   const router = useRouter();
 
   const handleCardClick = () => {
@@ -17,6 +18,7 @@ const CategoryCard = ({ category }) => {
     switch (homePageDetails?.vendor_data?.home_page_type) {
       case "11":
       case layout14ToggleView ? "14" : null:
+      case layout17ToggleView ? "17" : null:
         return (
           <Card
             sx={{
@@ -28,6 +30,7 @@ const CategoryCard = ({ category }) => {
             }}
             onClick={handleCardClick}
           >
+            {console.log(" in cate")}
             <CardMedia
               component="img"
               height="200"
@@ -56,6 +59,7 @@ const CategoryCard = ({ category }) => {
       case "15":
       case "16":
       case !layout14ToggleView ? "14" : null:
+      case !layout17ToggleView ? "17" : null:
         return (
           <Card
             sx={{

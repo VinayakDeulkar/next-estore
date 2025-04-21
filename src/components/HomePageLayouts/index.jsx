@@ -15,6 +15,7 @@ import Layout14 from "./Layout14";
 import Layout15 from "./Layout15";
 import ReviewBar from "../ReviewBar/reviewBar";
 import HomepageDesign from "../InternationalDelivery/HomepageDesign";
+import Layout17 from "./Layout17";
 
 const HomePageLayouts = () => {
   const [searchItems, setSearchItems] = useState([]);
@@ -77,6 +78,16 @@ const HomePageLayouts = () => {
       case "15":
         return <Layout15 categories={categories} />;
 
+      case "17":
+        return (
+          <Layout17
+            categories={categories}
+            setcategoryopen={setcategoryopen}
+            setcategorynow={setcategorynow}
+            categorynow={categorynow}
+          />
+        );
+
       default:
         break;
     }
@@ -138,7 +149,7 @@ const HomePageLayouts = () => {
           <SearchNone />
         )
       ) : (
-        renderLayoutType(homePageDetails?.categories)
+        <div style={{paddingBottom: "80px"}}>{renderLayoutType(homePageDetails?.categories)}</div>
       )}
       <AreaModal
         handleClose={() => {

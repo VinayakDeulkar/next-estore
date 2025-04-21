@@ -32,7 +32,7 @@ const Products = (props) => {
   const [productsData, setProductsData] = useState([]);
   const [subCategoryData, setSubCategoryData] = useState([]);
   const [hasSubCategories, setHasSubCategories] = useState(false);
-  const { homePageDetails } = useContext(AppContext);
+  const { homePageDetails, layout17ToggleView } = useContext(AppContext);
 
   useEffect(() => {
     if (props?.is_subcategory === 1) {
@@ -103,6 +103,7 @@ const Products = (props) => {
         case "10":
         case "11":
         case "14":
+        case layout17ToggleView ? "17" : null:
           return (
             <Grid container spacing={1}>
               {productsData?.map((product) => (
@@ -116,6 +117,7 @@ const Products = (props) => {
         case "12":
         case "13":
         case "15":
+        case !layout17ToggleView ? "17" : null:
           return (
             <Grid container className="gridContainer">
               {productsData?.map((product) => (
