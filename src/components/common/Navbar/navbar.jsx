@@ -4,6 +4,7 @@ import BurgerIcon from "@/SVGs/BurgerIcon";
 import { Box, Grid, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
+import SearchBox from "../SearchBox/searchBox";
 const Navbar = ({ handleDrawar }) => {
   const { homePageDetails, language, cart, handleLanguageChange } =
     useContext(AppContext);
@@ -66,7 +67,7 @@ const Navbar = ({ handleDrawar }) => {
             </Box>
           </IconButton>
         </Grid>
-        <Grid
+        {/* <Grid
           item
           xs={4}
           sm={4}
@@ -77,20 +78,24 @@ const Navbar = ({ handleDrawar }) => {
             alignItems: "center",
             justifyContent: "center",
           }}
-        ></Grid>
+        >
+          <SearchBox />
+        </Grid> */}
         <Grid
           item
-          xs={4}
-          sm={4}
-          md={4}
+          xs={8}
+          sm={8}
+          md={8}
           sx={{
             height: "50px",
             display: "flex",
             alignItems: "center",
             justifyContent: "end",
-            padding: "8px",
+            padding: "20px",
+            gap: "10px"
           }}
         >
+          <SearchBox />
           <Box
             sx={{
               fontFamily:

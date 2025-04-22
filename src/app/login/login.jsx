@@ -5,6 +5,7 @@ import {
   updateUserDetails,
   verifyUserOTP,
 } from "@/apis";
+import BackComponent from "@/components/BackComponent";
 import ContactInfo from "@/components/ContactInfo/ContactInfo";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import OtpVerification from "@/components/OtpVerification/OtpVerification";
@@ -328,6 +329,7 @@ const Login = () => {
   return (
     <Box>
       <EstoreLayout1>
+        <BackComponent />
         <Box
           sx={{
             display: "flex",

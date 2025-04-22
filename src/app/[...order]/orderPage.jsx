@@ -20,6 +20,7 @@ import GridLayout1 from "@/components/GridLayouts/gridLayout1";
 import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const OrderPage = (props) => {
   const { language, homePageDetails } = useContext(AppContext);
@@ -54,21 +55,42 @@ const OrderPage = (props) => {
               payment_status={orderDetails?.payment_status}
             />
           ) : null}
-          {orderDetails &&
-            accordianArray?.map((element) => (
-              <Accordion key={element.english}>
-                <AccordionSummary
-                  aria-controls="panel1-content"
-                  id="panel1-header"
+          <div>
+            {orderDetails &&
+              accordianArray?.map((element) => (
+                <Accordion
+                  key={element?.english}
+                  sx={{
+                    // mb: 2,
+                    "&:before": {
+                      // Removes the default divider completely
+                      display: "none !important",
+                    },
+                    boxShadow: "none", // Removes shadow
+                    border: "none", // Ensures no border
+                    "&.Mui-expanded": {
+                      // Optional: Styles when expanded
+                      margin: "auto", // Maintains spacing
+                      boxShadow: "none", // Ensures no shadow when expanded
+                    },
+                    borderBottom: "0.25px solid #ccc",
+                  }}
                 >
-                  <SubHeadline
-                    enText={element.english}
-                    arText={element.arabic}
-                  />
-                </AccordionSummary>
-                <AccordionDetails>{element?.component}</AccordionDetails>
-              </Accordion>
-            ))}
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                    sx={{ padding: 0 }}
+                  >
+                    <SubHeadline
+                      enText={element.english}
+                      arText={element.arabic}
+                    />
+                  </AccordionSummary>
+                  <AccordionDetails>{element?.component}</AccordionDetails>
+                </Accordion>
+              ))}
+          </div>
           <div
             className="order-status-reorder-button-div"
             style={{ marginTop: "20px" }}

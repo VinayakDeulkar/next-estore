@@ -17,6 +17,7 @@ import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import SnapPixel from "react-snapchat-pixel";
+import BackComponent from "@/components/BackComponent";
 
 const Review = () => {
   const {
@@ -153,6 +154,7 @@ const Review = () => {
   return (
     <Box>
       <EstoreLayout1>
+        <BackComponent backClick={() => router.push(`/`)} />
         <Box sx={{ position: "relative", height: "calc(100vh - 56px)" }}>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}

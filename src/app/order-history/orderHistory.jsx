@@ -1,6 +1,7 @@
 "use client";
 import OrderHistoryIcon from "@/SVGs/OrderHistoryIcon";
 import { getUserOrderDetails } from "@/apis";
+import BackComponent from "@/components/BackComponent";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
@@ -98,6 +99,7 @@ const OrderHistory = () => {
   return (
     <Box>
       <EstoreLayout1>
+        <BackComponent />
         <Box>
           <HeadLine enText="My Orders" arText="مشترياتي" />
           {orderData ? (
@@ -117,7 +119,7 @@ const OrderHistory = () => {
                       <div
                         className="historyRow"
                         onClick={() =>
-                          history.push(`/order=${ele?.order_number}`)
+                          router.push(`/order=${ele?.order_number}`)
                         }
                       >
                         <div style={{ display: "flex", alignItems: "center" }}>

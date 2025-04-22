@@ -1,5 +1,6 @@
 "use client";
 import { GetUserDetails, getVendorCountries, saveUserAddress } from "@/apis";
+import BackComponent from "@/components/BackComponent";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import DeliveryMapContainer from "@/components/DeliveryMap/DeliveryMapContainer";
@@ -456,6 +457,7 @@ const DeliveryAddress = () => {
   return (
     <Box>
       <EstoreLayout1>
+        <BackComponent />
         <Box
           sx={{
             position: "relative",

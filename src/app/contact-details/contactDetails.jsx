@@ -1,5 +1,6 @@
 "use client";
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import BackComponent from "@/components/BackComponent";
 import GridLayout from "@/components/common/GridLayout/gridLayout";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import MainTitle from "@/components/common/MainTitle/mainTitle";
@@ -110,6 +111,7 @@ const ContactDetails = () => {
   return (
     <Box>
       <EstoreLayout1>
+      <BackComponent />
         <Box
           sx={{
             display: "flex",

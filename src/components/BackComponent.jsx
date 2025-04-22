@@ -1,10 +1,12 @@
 import { AppContext } from "@/context/AppContext";
 import LeftArrow from "@/SVGs/LeftArrow";
 import RightArrow from "@/SVGs/RightArrow";
+import { useRouter } from "next/navigation";
 import { useContext } from "react";
 
-const BackComponent = () => {
+const BackComponent = ({ backClick }) => {
   const { language } = useContext(AppContext);
+  const router = useRouter();
 
   return (
     <div
@@ -14,6 +16,7 @@ const BackComponent = () => {
         cursor: "pointer",
         marginBottom: "4px",
       }}
+      onClick={backClick ? backClick : () => router.back()}
     >
       {language === "ltr" ? (
         <div

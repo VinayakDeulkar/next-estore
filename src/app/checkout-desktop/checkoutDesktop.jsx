@@ -1,4 +1,5 @@
 "use client";
+import BackComponent from "@/components/BackComponent";
 import DeskCheckoutComponents from "@/components/DeskCheckoutComponents";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
@@ -32,6 +33,7 @@ const CheckoutDesktop = () => {
           sx={{ height: "calc(100vh - 120px)", overflow: "scroll" }}
           className="checkoutScroll"
         >
+          <BackComponent />
           <HeadLine enText={"Checkout"} arText={"تفاصيل الطلب"} />
           <DeskCheckoutComponents />
         </Grid>

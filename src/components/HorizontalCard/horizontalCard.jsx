@@ -315,7 +315,41 @@ const HorizontalCard = ({ product }) => {
     >
       <Grid container spacing={2}>
         <Grid item xs={3.5}>
-          <div style={{ position: "relative" }}>
+          <div
+            style={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              gap: "5px"
+            }}
+          >
+            <div className="product-price-div">
+              {product?.offer_applied == 1 && (
+                <p
+                  className="buy-get-img"
+                  onClick={(e) =>
+                    inCart == 0 ? onAddToCartClick(e, 1) : e.preventDefault()
+                  }
+                  style={{
+                    backgroundColor: product?.color,
+                    color: "white",
+                    border: "none",
+                    borderRadius: "5px",
+                    fontSize: "11px",
+                    padding: "0 10px",
+                    fontWeight: "400",
+                    minHeight: "25px"
+                  }}
+                >
+                  <span>
+                    {language === "ltr"
+                      ? product?.offer_msg
+                      : product?.offer_msg_ar}
+                  </span>
+                </p>
+              )}
+            </div>
+
             <CardMedia
               component="img"
               image={product?.image}
@@ -324,23 +358,25 @@ const HorizontalCard = ({ product }) => {
                 width: "125px",
                 height: "125px",
                 objectFit: "cover",
-                borderRadius: "8px",
+                borderRadius: "5px",
               }}
             />
             {product?.label ? (
               <TypographyConverter
                 sx={{
-                  fontSize: "12px",
+                  fontSize: "11px",
+                  padding: "2px 0",
                   fontWeight: 300,
                   backgroundColor: product?.label_color || "rgb(242, 28, 28)",
                   color: "#fff",
                   position: "absolute",
-                  top: 0,
+                  // top: 0,
+                  bottom: 0,
                   left: 0,
                   width: "100%",
                   textAlign: "center",
-                  borderTopLeftRadius: "8px",
-                  borderTopRightRadius: "8px",
+                  borderBottomLeftRadius: "5px",
+                  borderBottomRightRadius: "5px",
                 }}
                 enText={product?.label}
                 arText={product?.label_ar}
@@ -355,6 +391,11 @@ const HorizontalCard = ({ product }) => {
               "&:last-child": {
                 paddingBottom: "0",
               },
+              display: "flex",
+              flexDirection: "column",
+              gap: "5px",
+              justifyContent: "center",
+              height: "100%",
             }}
           >
             <SubHeadline
@@ -392,24 +433,6 @@ const HorizontalCard = ({ product }) => {
                   gap: "5px",
                 }}
               >
-                {product?.offer_applied == 1 && (
-                  <Box
-                    className={`cost-bubble ${
-                      product?.product_status == 0 ? "small-padding" : ""
-                    }`}
-                    sx={{
-                      color: product?.color,
-                      border: "none",
-                      padding: 0,
-                      fontSize: 14,
-                      fontWeight: "300",
-                    }}
-                  >
-                    {language === "ltr"
-                      ? product?.offer_msg
-                      : product?.offer_msg_ar}
-                  </Box>
-                )}
                 {product?.product_status == 0 ? (
                   <Box
                     href={``}

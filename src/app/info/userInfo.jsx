@@ -26,6 +26,7 @@ import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 import ReactFlagsSelect from "react-flags-select";
 import "./addressSection.css";
+import BackComponent from "@/components/BackComponent";
 
 const UserInfo = ({ type }) => {
   const {
@@ -508,14 +509,12 @@ const UserInfo = ({ type }) => {
 
   return (
     <EstoreLayout1>
+      <BackComponent />
       <div>
         <div
           className="holder-container"
           style={{ position: "relative", minHeight: "calc(100vh - 53px)" }}
         >
-          <Box sx={{ position: "relative", height: "74px" }}>
-            <BackButton />
-          </Box>
           <>
             <HeadLine enText={"My Personal Info"} arText={"معلوماتي الشخصية"} />
 

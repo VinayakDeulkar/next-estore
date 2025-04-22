@@ -298,10 +298,10 @@ html[dir="rtl"] .order-status-reorder-button {
   margin-bottom: 17px;
   min-height: 53px;
   line-height: normal;
-  border-bottom: 0.25px solid #ccc;
+  /* border-bottom: 0.25px solid #ccc;
   border-top: 0.25px solid #ccc;
   padding-top: 28px;
-  padding-bottom: 28px;
+  padding-bottom: 28px; */
 }
 
 .orderStatus-userphone .orderStatus-userphone-deliverText {

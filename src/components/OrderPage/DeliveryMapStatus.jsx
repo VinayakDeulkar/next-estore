@@ -104,7 +104,7 @@ const DeliveryMapStatus = ({
         {customer_details.is_international_delivery === "1" ? (
           <OrderDeliveryAddress customer_details={customer_details} />
         ) : (
-          <>
+          <div style={{border: "1px solid #e1e1e1", padding: "15px", borderRadius: "10px", marginTop: "5px"}}>
             {customer_details.title && (
               <div
                 className={
@@ -170,7 +170,12 @@ const DeliveryMapStatus = ({
                   {getAddressType(customer_details.address_type, "", "19")}
                 </div>
               ) : null}
-              <div >
+              <div
+                style={{
+                  marginLeft: language == "ltr" ? "25px" : "0px",
+                  marginRight: language == "rtl" ? "25px" : "0px",
+                }}
+              >
                 <NormalText
                   enText={
                     customer_details?.self_pickup === "1"
@@ -259,13 +264,14 @@ const DeliveryMapStatus = ({
                 </div>
               </div>
             )}
-          </>
+          </div>
         )}
       </div>
-      <div className="orderStatus-userphone">
+      <div className="orderStatus-userphone" >
         {customer_details?.self_pickup === "1" ? (
           <SubHeadline enText={"Buyer Name"} arText={"اسم المشتري"} />
         ) : null}
+        <div style={{border: "1px solid #e1e1e1", padding: "15px", borderRadius: "10px", marginTop: "5px"}}>
         <NormalText
           enText={customer_details?.name}
           arText={customer_details?.name}
@@ -291,6 +297,7 @@ const DeliveryMapStatus = ({
           enText={customer_details?.email}
           arText={customer_details?.email}
         />
+        </div>
       </div>
     </div>
   );

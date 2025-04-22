@@ -25,6 +25,7 @@ const TrackOrder = () => {
   return (
     <Box>
       <EstoreLayout1>
+        <BackComponent />
         <div className="trackOrder-whitebox">
           <div>
             <Box sx={{ display: "flex", justifyContent: "center" }}>

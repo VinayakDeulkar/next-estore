@@ -16,6 +16,7 @@ import Layout15 from "./Layout15";
 import ReviewBar from "../ReviewBar/reviewBar";
 import HomepageDesign from "../InternationalDelivery/HomepageDesign";
 import Layout17 from "./Layout17";
+import SearchBox from "../common/SearchBox/searchBox";
 
 const HomePageLayouts = () => {
   const [searchItems, setSearchItems] = useState([]);

@@ -6,7 +6,6 @@ import {
 } from "@/apis";
 import { AppProvider } from "@/context/AppContext";
 import "./globals.css";
-
 import { headers } from "next/headers";
 import "../assets/Fonts/Orleen.css";
 import "../assets/Fonts/SFTfont.css";

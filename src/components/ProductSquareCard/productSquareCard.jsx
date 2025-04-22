@@ -326,10 +326,10 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           gap: "5px",
         }}
       >
-        <div className="product-price-div" style={{ minHeight: "32px" }}>
+        <div className="product-price-div" style={{ minHeight: "30px" }}>
           {product?.offer_applied == 1 && (
             <p
-              className="buy-get-img "
+              className="buy-get-img"
               onClick={(e) =>
                 inCart == 0 ? onAddToCartClick(e, 1) : e.preventDefault()
               }
@@ -338,8 +338,8 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 color: "white",
                 border: "none",
                 borderRadius: "5px",
-                fontSize: language == "ltr" ? 12 : 15,
-                padding: "0 15px",
+                fontSize: "12px",
+                padding: "0 10px",
                 fontWeight: "400",
               }}
             >
@@ -362,7 +362,6 @@ const ProductSquareCard = ({ product, imgHeight }) => {
             height: imgHeight ? imgHeight : "200px",
             objectFit: "cover",
             borderRadius: "5px",
-            marginBottom: "10px",
           }}
         />
         {product?.label ? (
@@ -374,12 +373,13 @@ const ProductSquareCard = ({ product, imgHeight }) => {
               backgroundColor: product?.label_color || "rgb(242, 28, 28)",
               color: "#fff",
               position: "absolute",
-              top: 0,
+              // top: 0,
+              bottom: 0,
               left: 0,
               width: "100%",
               textAlign: "center",
-              borderTopLeftRadius: "8px",
-              borderTopRightRadius: "8px",
+              borderBottomLeftRadius: "5px",
+              borderBottomRightRadius: "5px",
             }}
             enText={product?.label}
             arText={product?.label_ar}
@@ -395,6 +395,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           display: "flex",
           flexDirection: "column",
           gap: "10px",
+          marginTop: "5px"
         }}
       >
         <SubTitle
