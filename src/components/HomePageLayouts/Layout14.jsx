@@ -17,7 +17,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AppContext } from "@/context/AppContext";
 
 const Layout14 = ({ categories }) => {
-  const { language, layout14ToggleView, handleSetLayout14ToggleViewChange } = useContext(AppContext);
+  const { language, layout14ToggleView, handleSetLayout14ToggleViewChange } =
+    useContext(AppContext);
 
   const boxView = () => {
     return (
@@ -28,7 +29,6 @@ const Layout14 = ({ categories }) => {
           borderRadius: "8px",
         }}
       >
-        {console.log(categories, "first")}
         <Grid container className="gridContainer">
           {categories?.map((category) => (
             <Grid item xs={6} key={category?.id}>
@@ -61,7 +61,14 @@ const Layout14 = ({ categories }) => {
               id="panel1a-header"
               sx={{ padding: 0 }}
             >
-              <div style={{display: "flex", justifyContent: "space-between", alignItems: "center",width: "100%"}}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -147,7 +154,11 @@ const Layout14 = ({ categories }) => {
           onClick={() => handleSetLayout14ToggleViewChange(!layout14ToggleView)}
         >
           <NormalText enText={"Change View"} arText={"تغيير العرض"} />
-          {layout14ToggleView ? <WindowIcon /> : <ListIcon sx={{ fontSize: 30 }} />}
+          {layout14ToggleView ? (
+            <WindowIcon />
+          ) : (
+            <ListIcon sx={{ fontSize: 30 }} />
+          )}
         </div>
       </div>
       {layout14ToggleView ? listView() : boxView()}

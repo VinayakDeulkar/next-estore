@@ -2,10 +2,10 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useRef } from "react";
 
-function MapContainer({ branch, isLoaded }) {
+function MapContainer({ branch }) {
   const mapRef = useRef(null);
 
-  return isLoaded ? (
+  return (
     <GoogleMap
       zoom={13}
       center={{
@@ -20,7 +20,7 @@ function MapContainer({ branch, isLoaded }) {
         }}
       />
     </GoogleMap>
-  ) : null;
+  );
 }
 
 export default MapContainer;

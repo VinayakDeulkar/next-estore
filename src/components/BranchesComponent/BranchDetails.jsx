@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import MapContainer from "./MapContainer";
 
 const drawerBleeding = 56;
-function BranchDetails({ branchId, setBranchId, isLoaded }) {
+function BranchDetails({ branchId, setBranchId }) {
   const { areaDetails, language } = useContext(AppContext);
   const [branch, setBranch] = useState({});
 
@@ -49,7 +49,7 @@ function BranchDetails({ branchId, setBranchId, isLoaded }) {
         <React.Fragment>
           {branch?.office_end_time ? (
             <>
-              <MapContainer branch={branch} isLoaded={isLoaded}></MapContainer>
+              <MapContainer branch={branch}></MapContainer>
               <div className="branch-call-div">
                 <div className="branch-call-flex">
                   <a

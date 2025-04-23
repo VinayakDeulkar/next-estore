@@ -196,7 +196,6 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   };
 
   const getDeliveryCharge = async () => {
-    console.log(deliveryCharge, "deliveryCharge");
     if (deliveryCharge) {
       setSpinLoader(true);
       const response = await updateDeliveryCharges(

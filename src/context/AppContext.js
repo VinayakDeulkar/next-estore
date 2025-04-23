@@ -6,6 +6,9 @@ import { SnackbarProvider } from "notistack";
 import { emptyUserCart, getUserCart, GetUserDetails } from "@/apis";
 import { tele } from "@/constants/constants";
 import { Box } from "@mui/material";
+import { LoadScript } from "@react-google-maps/api";
+import NoVendor from "@/components/NoVendor/noVendor";
+import Customloader from "@/components/customLoader/customloader";
 
 export const AppContext = createContext();
 
@@ -343,7 +346,6 @@ export const AppProvider = ({
             user_id: localStorage.getItem("id"),
             language: language,
           });
-          console.log(response, "response");
           if (response?.status) {
             setUserDetails({ ...response?.data });
             setContactDetails((contactDetails) => ({
@@ -464,23 +466,35 @@ export const AppProvider = ({
     page,
     handlePageChange,
     hasMore,
-    handleHasMoreChange
+    handleHasMoreChange,
   };
 
   return (
     <AppContext.Provider value={store}>
-      <Box
-        sx={{
-          fontFamily:
-            language === "ltr" ? "SFT Schrifted Sans TRIAL Var" : "Orleen",
-        }}
-      >
-        <SnackbarProvider
-          anchorOrigin={{ horizontal: "left", vertical: "top" }}
+      {vendorSlugResponse?.data?.ecom_url_slug ? (
+        <Box
+          sx={{
+            fontFamily:
+              language === "ltr" ? "SFT Schrifted Sans TRIAL Var" : "Orleen",
+          }}
         >
-          {children}
-        </SnackbarProvider>
-      </Box>
+          <LoadScript
+            googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}
+            libraries={["drawing", "geometry", "places"]}
+            loadingElement={
+              <Customloader vendorData={vendorSlugResponse?.data} />
+            }
+          >
+            <SnackbarProvider
+              anchorOrigin={{ horizontal: "left", vertical: "top" }}
+            >
+              {children}
+            </SnackbarProvider>
+          </LoadScript>
+        </Box>
+      ) : (
+        <NoVendor />
+      )}
     </AppContext.Provider>
   );
 };

@@ -292,7 +292,8 @@ const ProductRegistrationModal = ({
                 token: process.env.NEXT_PUBLIC_APP_TOKEN,
                 vendor_slug: vendorSlug?.data?.ecom_url_slug,
                 vendor_id: homePageDetails?.vendor_data?.vendors_id,
-                ecommerce_vendor_id: homePageDetails?.vendor_data?.ecommerce_vendor_id,
+                ecommerce_vendor_id:
+                  homePageDetails?.vendor_data?.ecommerce_vendor_id,
                 order_number: response?.data?.data?.order_number,
               })
             )
@@ -696,11 +697,10 @@ const ProductRegistrationModal = ({
                 className={`bottom-button`}
                 style={{ width: "100%", position: "sticky", bottom: 0 }}
               >
-                <Box component={"a"}
+                <Box
+                  component={"a"}
                   className={`text-center checkout-button `}
                   onClick={(e) => {
-                    console.log("registrationSuccess");
-
                     registrationSuccess || registrationFailed?.status
                       ? router.push("/")
                       : registerProduct(e);

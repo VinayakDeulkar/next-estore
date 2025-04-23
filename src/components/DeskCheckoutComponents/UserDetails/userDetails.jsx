@@ -394,11 +394,13 @@ const UserDetails = ({
         }
       }
     } else {
-      console.log("In pickup container");
       if (!areaDetails?.branch) {
-        handleOpenAreaChange((prev) => ({ open: true, route: "/checkout-desktop" }));
+        handleOpenAreaChange((prev) => ({
+          open: true,
+          route: "/checkout-desktop",
+        }));
       } else if (contactDetails.model !== "" && contactDetails.color !== "") {
-        triggerPaymentMethod();
+        triggerPaymentMethod(true);
       } else {
         if (contactDetails.model == "" && contactDetails.color !== "") {
           setPickupError({ ...pickupError, modelError: true });
@@ -435,7 +437,7 @@ const UserDetails = ({
       ) : null}
       <AreaModal
         handleClose={() => {
-          triggerPaymentMethod()
+          triggerPaymentMethod(true);
           handleOpenAreaChange({ open: false, route: "/" });
         }}
         showAreaModal={openArea.open}

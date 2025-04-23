@@ -79,7 +79,7 @@ const AddressDetails = ({
   useEffect(() => {
     if (selectAddress) {
       setShowAddressForm(false);
-      triggerPaymentMethod();
+      triggerPaymentMethod(true);
     }
   }, [selectAddress]);
 
@@ -232,7 +232,7 @@ const AddressDetails = ({
       internationalDelivery.delivery_address1 !== "" &&
       internationalDelivery.delivery_address2 !== ""
     ) {
-      triggerPaymentMethod();
+      triggerPaymentMethod(true);
     } else {
       let errorData = {};
       if (internationalDelivery.delivery_address1 === "") {
@@ -284,9 +284,8 @@ const AddressDetails = ({
             !areaName
           ) {
             if (userDetails?.is_guest) {
-              console.log("userDetails?.is_guest");
               getDistanceMatrix();
-              triggerPaymentMethod();
+              triggerPaymentMethod(true);
             } else {
               setLoading(true);
               const addResponse = await saveUserAddress({
@@ -346,7 +345,8 @@ const AddressDetails = ({
                   }));
                   getDistanceMatrix();
                   // setLoading(false);
-                  triggerPaymentMethod();
+                  setShowAddressForm(false);
+                  triggerPaymentMethod(true);
                 } else {
                   enqueueSnackbar({
                     variant: "error",
@@ -437,7 +437,6 @@ const AddressDetails = ({
             travelMode: "DRIVING",
             unitSystem: window.google.maps.UnitSystem.METRIC, // Specify metric units for kilometers
           };
-
           service.getDistanceMatrix(request, (response, status) => {
             if (
               status === "OK" &&
@@ -514,7 +513,6 @@ const AddressDetails = ({
                 const distanceInMeters =
                   response.rows[0].elements[0].distance.value;
                 const distanceInKilometers = distanceInMeters / 1000;
-                console.log(distanceInKilometers, "distanceInKilometers");
                 setDeliveryKm(distanceInKilometers);
               } else {
                 console.error("Error:", status);
@@ -526,10 +524,10 @@ const AddressDetails = ({
     }
   };
   useEffect(() => {
-    if (window && window.google && window.google.maps) {
+    if (window && window.google && window.google.maps && areaDetails?.area) {
       getDistanceMatrix();
     }
-  }, [window, window.google, window.google?.maps, areaDetails?.area]);
+  }, [window, window.google, window.google?.maps, areaDetails?.area, cart]);
 
   useEffect(() => {
     (async () => {
@@ -610,7 +608,10 @@ const AddressDetails = ({
       internationalDelivery.delivery_country_code.toUpperCase() === "KW" ||
       areaDetails.area_id !== "" ? (
         !showAddressForm ? (
-          <AddressSection />
+          <AddressSection
+            setShowAddressForm={setShowAddressForm}
+            triggerPaymentMethod={triggerPaymentMethod}
+          />
         ) : (
           <NewAddressForm
             areaDetails={areaDetails}
