@@ -410,6 +410,21 @@ export const AppProvider = ({
   const handleSetLayout17ToggleViewChange = (value) =>
     setLayout17ToggleView(value);
 
+  const [searchItems, setSearchItems] = useState([]);
+  const handleSearchItemsChange = (value) => setSearchItems(value);
+
+  const [searchLoading, setSearchLoading] = useState(false);
+  const handleSearchLoadingChange = (value) => setSearchLoading(value);
+
+  const [isPageLoading, setIsPageLoading] = useState(false);
+  const handleIsPageLoadingChange = (value) => setIsPageLoading(value);
+
+  const [page, setPage] = useState(0);
+  const handlePageChange = (value) => setPage(value);
+
+  const [hasMore, setHasMore] = useState(0);
+  const handleHasMoreChange = (value) => setHasMore(value);
+
   const store = {
     language,
     handleLanguageChange,
@@ -440,6 +455,16 @@ export const AppProvider = ({
     handleSetLayout14ToggleViewChange,
     layout17ToggleView,
     handleSetLayout17ToggleViewChange,
+    searchItems,
+    handleSearchItemsChange,
+    searchLoading,
+    handleSearchLoadingChange,
+    isPageLoading,
+    handleIsPageLoadingChange,
+    page,
+    handlePageChange,
+    hasMore,
+    handleHasMoreChange
   };
 
   return (

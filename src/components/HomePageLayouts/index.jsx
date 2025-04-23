@@ -19,7 +19,6 @@ import Layout17 from "./Layout17";
 import SearchBox from "../common/SearchBox/searchBox";
 
 const HomePageLayouts = () => {
-  const [searchItems, setSearchItems] = useState([]);
   const {
     homePageDetails,
     openArea,
@@ -27,11 +26,12 @@ const HomePageLayouts = () => {
     search,
     cart,
     internationalDelivery,
+    isPageLoading,
+    hasMore,
+    handlePageChange,
+    searchItems,
+    searchLoading,
   } = useContext(AppContext);
-  const [searchLoading, setSearchLoading] = useState(false);
-  const [page, setPage] = useState(0);
-  const [hasMore, setHasMore] = useState(0);
-  const [isPageLoading, setIsPageLoading] = useState(false);
 
   const observer = useRef();
   const router = useRouter();
@@ -42,7 +42,7 @@ const HomePageLayouts = () => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          setPage((prevPageNumber) => prevPageNumber + 1);
+          handlePageChange((prevPageNumber) => prevPageNumber + 1);
         }
       });
       if (node) observer.current.observe(node);
@@ -95,6 +95,7 @@ const HomePageLayouts = () => {
   };
 
   const handleCountryChange = (code) => {};
+
   return (
     <Box sx={{ position: "relative" }}>
       {/* <SearchBar
@@ -154,6 +155,7 @@ const HomePageLayouts = () => {
           {renderLayoutType(homePageDetails?.categories)}
         </div>
       )}
+
       <AreaModal
         handleClose={() => {
           handleOpenAreaChange({ open: false, route: "/" });

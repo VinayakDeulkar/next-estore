@@ -24,6 +24,7 @@ const SearchBar = ({
     search,
     language,
   } = useContext(AppContext);
+  
   useEffect(() => {
     if (hasMore && page != 0) setIsPageLoading((l) => true);
     else {
@@ -92,6 +93,7 @@ const SearchBar = ({
         console.log(e);
       });
   }, [search, page]);
+
   const changeSearchText = (e) => {
     handleSearchProduct(e.target.value);
   };

@@ -320,7 +320,7 @@ const HorizontalCard = ({ product }) => {
               position: "relative",
               display: "flex",
               flexDirection: "column",
-              gap: "5px"
+              gap: "5px",
             }}
           >
             <div className="product-price-div">
@@ -338,7 +338,8 @@ const HorizontalCard = ({ product }) => {
                     fontSize: "11px",
                     padding: "0 10px",
                     fontWeight: "400",
-                    minHeight: "25px"
+                    minHeight: "25px",
+                    width: "125px",
                   }}
                 >
                   <span>
@@ -377,6 +378,7 @@ const HorizontalCard = ({ product }) => {
                   textAlign: "center",
                   borderBottomLeftRadius: "5px",
                   borderBottomRightRadius: "5px",
+                  width: "125px",
                 }}
                 enText={product?.label}
                 arText={product?.label_ar}

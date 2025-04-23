@@ -2,13 +2,12 @@ import GridLayout2 from "@/components/GridLayouts/gridLayout2";
 import { AppContext } from "@/context/AppContext";
 import BurgerIcon from "@/SVGs/BurgerIcon";
 import { Box, Grid, IconButton } from "@mui/material";
-import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import SearchBox from "../SearchBox/searchBox";
+
 const Navbar = ({ handleDrawar }) => {
-  const { homePageDetails, language, cart, handleLanguageChange } =
+  const { homePageDetails, language, handleLanguageChange } =
     useContext(AppContext);
-  const router = useRouter();
 
   const renderGridNav = () => {
     switch (homePageDetails?.estoreLayout) {
@@ -92,7 +91,7 @@ const Navbar = ({ handleDrawar }) => {
             alignItems: "center",
             justifyContent: "end",
             padding: "20px",
-            gap: "10px"
+            gap: "10px",
           }}
         >
           <SearchBox />

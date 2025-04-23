@@ -33,6 +33,7 @@
 
 .searchBox.active .searchInput {
   opacity: 1;
+  color: #000;
 }
 
 .searchIcon {
@@ -44,7 +45,7 @@
   z-index: 1;
 }
 
-.closeIcon {
+/* .closeIcon {
   position: absolute;
   right: 10px;
   width: 20px;
@@ -75,4 +76,4 @@
 
 .closeLine:last-child {
   transform: rotate(-45deg);
-}
+} */
