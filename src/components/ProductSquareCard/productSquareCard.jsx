@@ -315,6 +315,9 @@ const ProductSquareCard = ({ product, imgHeight }) => {
         cursor: "pointer",
         boxShadow: "none",
         width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
       }}
       onClick={handleCardClick}
     >
@@ -323,7 +326,6 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          gap: "5px",
         }}
       >
         <div className="product-price-div" style={{ minHeight: "30px" }}>
@@ -369,7 +371,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
             sx={{
               fontSize: "13px",
               padding: "3px 0",
-              fontWeight: 300,
+              fontWeight: 400,
               backgroundColor: product?.label_color || "rgb(242, 28, 28)",
               color: "#fff",
               position: "absolute",
@@ -395,7 +397,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           display: "flex",
           flexDirection: "column",
           gap: "10px",
-          marginTop: "5px"
+          marginTop: "5px",
         }}
       >
         <SubTitle

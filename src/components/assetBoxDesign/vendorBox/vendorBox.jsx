@@ -15,6 +15,7 @@ const VendorBox = () => {
         gap: "20px",
         padding: "24px 0",
       }}
+      id="vendor-box"
     >
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Image

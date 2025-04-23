@@ -18,7 +18,7 @@ const Footer = () => {
         flexDirection: "column",
         alignItems: "center",
         gap: "20px",
-        margin: checkSize() ? "0 -40px" : "0 -20px"
+        margin: checkSize() ? "0 -40px 0 -28px" : "0 -20px 0 -10px",
       }}
     >
       <a
@@ -68,7 +68,7 @@ const Footer = () => {
         container
         sx={{
           width: "100%",
-          backgroundColor: vendorSlug?.data?.vendor_data?.vendor_color, 
+          backgroundColor: vendorSlug?.data?.vendor_data?.vendor_color,
           borderTopLeftRadius: "8px",
           borderTopRightRadius: "8px",
           color: "#fff",

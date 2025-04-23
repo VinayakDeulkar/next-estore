@@ -7,10 +7,11 @@ const SubHeadline = ({
   arText,
   color = "#000",
   fontWeight = "400",
+  fontSize = "16px",
 }) => {
   const { language } = useContext(AppContext);
   return (
-    <Box sx={{ fontWeight: fontWeight, fontSize: "16px", color: color }}>
+    <Box sx={{ fontWeight: fontWeight, fontSize: fontSize, color: color }}>
       {language === "ltr" ? enText : arText}
     </Box>
   );

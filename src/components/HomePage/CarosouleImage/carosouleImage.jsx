@@ -36,11 +36,12 @@ const CarouselImage = () => {
         showIndicators={false}
         showArrows={false}
         infiniteLoop
-        interval={3000}
-        transitionTime={700}
+        interval={1000}
+        transitionTime={1000}
         emulateTouch
         stopOnHover
         className="carouselImage"
+        animationHandler={"fade"}
       >
         {homePageDetails?.vendor_data?.banner_images?.map((image) => (
           <Box key={image?.id} sx={{ borderRadius: "13.81px" }}>

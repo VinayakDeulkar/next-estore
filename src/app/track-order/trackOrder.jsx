@@ -12,6 +12,7 @@ import SubTitle from "@/components/common/SubTitle/subTitle";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
 import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
+import BackComponent from "@/components/BackComponent";
 
 const TrackOrder = () => {
   const [trackingNumber, setTrackingNumber] = useState();

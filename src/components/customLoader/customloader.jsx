@@ -14,20 +14,27 @@ const Customloader = ({ vendorData }) => {
     >
       <Box
         sx={{
-          height: "300px",
-          width: "300px",
           display: "flex",
+          justifyContent: "center",
           flexDirection: "column",
           gap: "20px",
-          background: vendorData?.vendor_data?.vendor_color ?? "#000",
-          borderRadius: "13px",
         }}
       >
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            height: "300px",
+            width: "300px",
+            gap: "20px",
+            background: vendorData?.vendor_data?.vendor_color ?? "#000",
+            borderRadius: "13px",
+          }}
+        >
           <Image
             src={vendorData?.vendor_data?.english_new_background}
-            height={200}
-            width={200}
+            height={250}
+            width={250}
           />
         </Box>
         <Box sx={{ display: "flex", justifyContent: "center" }}>

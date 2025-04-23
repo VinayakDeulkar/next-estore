@@ -36,6 +36,7 @@ const AddressDetails = ({
     handleAddressDetailsChange,
     handleCartChange,
     cart,
+    vendorSlugResponse,
   } = useContext(AppContext);
   const [markerPosition, setMarkerPosition] = useState(null);
   const [showAddressForm, setShowAddressForm] = useState(true);

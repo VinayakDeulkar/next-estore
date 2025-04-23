@@ -2,12 +2,14 @@ import GridLayout2 from "@/components/GridLayouts/gridLayout2";
 import { AppContext } from "@/context/AppContext";
 import BurgerIcon from "@/SVGs/BurgerIcon";
 import { Box, Grid, IconButton } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import SearchBox from "../SearchBox/searchBox";
+import Image from "next/image";
 
 const Navbar = ({ handleDrawar }) => {
   const { homePageDetails, language, handleLanguageChange } =
     useContext(AppContext);
+  const [logo, setLogo] = useState(false);
 
   const renderGridNav = () => {
     switch (homePageDetails?.estoreLayout) {
@@ -29,6 +31,19 @@ const Navbar = ({ handleDrawar }) => {
         break;
     }
   };
+  const handleScroll = () => {
+    if (window.scrollY - 350 > (100 * 32) / window.innerHeight) {
+      setLogo((f) => true);
+    } else setLogo((f) => false);
+  };
+
+  useEffect(() => {
+    console.log("scroll");
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const navChidren = () => {
     return (
@@ -66,7 +81,7 @@ const Navbar = ({ handleDrawar }) => {
             </Box>
           </IconButton>
         </Grid>
-        {/* <Grid
+        <Grid
           item
           xs={4}
           sm={4}
@@ -78,13 +93,25 @@ const Navbar = ({ handleDrawar }) => {
             justifyContent: "center",
           }}
         >
-          <SearchBox />
-        </Grid> */}
+          <Box>
+            {logo ? (
+              <Image
+                height={50}
+                width={50}
+                src={
+                  language === "ltr"
+                    ? homePageDetails?.vendor_data?.english_new_background
+                    : homePageDetails?.vendor_data?.arabic_new_background
+                }
+              />
+            ) : null}
+          </Box>
+        </Grid>
         <Grid
           item
-          xs={8}
-          sm={8}
-          md={8}
+          xs={4}
+          sm={4}
+          md={4}
           sx={{
             height: "50px",
             display: "flex",
@@ -94,7 +121,7 @@ const Navbar = ({ handleDrawar }) => {
             gap: "10px",
           }}
         >
-          <SearchBox />
+          {/* <SearchBox /> */}
           <Box
             sx={{
               fontFamily:

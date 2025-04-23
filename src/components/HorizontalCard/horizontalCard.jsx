@@ -335,7 +335,7 @@ const HorizontalCard = ({ product }) => {
                     color: "white",
                     border: "none",
                     borderRadius: "5px",
-                    fontSize: "11px",
+                    fontSize: "12px",
                     padding: "0 10px",
                     fontWeight: "400",
                     minHeight: "25px",
@@ -403,10 +403,12 @@ const HorizontalCard = ({ product }) => {
             <SubHeadline
               enText={product?.product_name}
               arText={product?.product_name_ar}
+              fontSize="20px"
             />
             {product?.short_description != "" ? (
               <div className="product-description">
                 <NormalText
+                  fontSize="16px"
                   color={"#888888"}
                   enText={product?.short_description
                     ?.replace(/(<([^>]+)>)/gi, "")
@@ -538,7 +540,7 @@ const HorizontalCard = ({ product }) => {
                     }}
                     className="cost-bubble price-bubble big-add-cart"
                   >
-                    <div>
+                    {/* <div>
                       {product?.product_status == 1 &&
                       product?.discount_applied == 1 ? (
                         <del style={{ color: "red" }}>
@@ -569,7 +571,7 @@ const HorizontalCard = ({ product }) => {
                           </span>
                         </del>
                       ) : null}
-                    </div>
+                    </div> */}
                     <SmallButtonSquare
                       handleClick={(e) => {
                         e.stopPropagation();
