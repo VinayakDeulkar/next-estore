@@ -1,6 +1,7 @@
 "use client";
 import VendorBox from "@/components/assetBoxDesign/vendorBox/vendorBox";
 import BottomDrawer from "@/components/BottomDrawer/bottomDrawer";
+import Footer from "@/components/common/Footer/Footer";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import EstoreLayout2 from "@/components/EstoreLayouts/estoreLayout2";

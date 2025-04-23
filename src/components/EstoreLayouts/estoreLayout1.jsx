@@ -1,6 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import HeaderBox from "../common/HeaderBox/headerBox";
 import CarouselImage from "../HomePage/CarosouleImage/carosouleImage";
+import Footer from "../common/Footer/footer";
 
 const EstoreLayout1 = ({ children }) => {
   const checkSize = () => {
@@ -20,6 +21,7 @@ const EstoreLayout1 = ({ children }) => {
             }}
           >
             {children}
+            <Footer />
           </Box>
         </Grid>
         {window?.innerWidth > 600 ? (
