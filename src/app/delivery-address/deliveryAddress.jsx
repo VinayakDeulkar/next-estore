@@ -461,7 +461,10 @@ const DeliveryAddress = () => {
         <Box
           sx={{
             position: "relative",
-            height: "calc(100vh - 50px)",
+            height: "calc(100vh - 80px)",
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "column",
           }}
         >
           {homePageDetails?.vendor_data?.international_delivery === "3" ||

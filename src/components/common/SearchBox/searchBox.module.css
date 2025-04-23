@@ -19,8 +19,9 @@
 
 .searchInput {
   position: absolute;
-  left: 40px;
-  width: calc(100% - 80px);
+  /* left: 40px; */
+  width: calc(100% - 40px);
+  right: 0;
   height: 100%;
   border: none;
   outline: none;

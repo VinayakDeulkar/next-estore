@@ -111,14 +111,14 @@ const ContactDetails = () => {
   return (
     <Box>
       <EstoreLayout1>
-      <BackComponent />
+        <BackComponent />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             gap: "40px",
             position: "relative",
-            height: "calc(100vh - 50px)",
+            height: "calc(100vh - 80px)",
           }}
         >
           <HeadLine enText={"Contact Details"} arText={"ارقام التواصل"} />

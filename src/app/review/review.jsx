@@ -155,7 +155,7 @@ const Review = () => {
     <Box>
       <EstoreLayout1>
         <BackComponent backClick={() => router.push(`/`)} />
-        <Box sx={{ position: "relative", height: "calc(100vh - 56px)" }}>
+        <Box sx={{ position: "relative", height: "calc(100vh - 80px)" }}>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
           >
@@ -164,47 +164,6 @@ const Review = () => {
             ) : (
               <HeadLine enText={"Pickup Info"} arText={"تفاصيل الإستلام"} />
             )}
-            {/* {areaDetails.type == "delivery" &&
-              (homePageDetails?.vendor_data?.international_delivery === "3" ||
-                homePageDetails?.vendor_data?.international_delivery ===
-                  "") && (
-                <>
-                  <Link href={`/timing`} className="deliveryInfoMainDIv">
-                    <div className="buyer-details-firstDiv">
-                      <div className="checkoutPageText">
-                        {areaDetails?.now == 1
-                          ? language === "ltr"
-                            ? `${
-                                !areaDetails?.customDelivery
-                                  ? "Delivery Within"
-                                  : ""
-                              } ${areaDetails?.deliveryTiming}`
-                            : `${
-                                !areaDetails?.customDelivery
-                                  ? "التوصيل سيكون خلال"
-                                  : ""
-                              } ${areaDetails?.ar_deliveryTiming}`
-                          : moment(areaDetails?.laterDeliveryTiming)
-                              .locale("en")
-                              .format("DD") +
-                            " " +
-                            moment(areaDetails?.laterDeliveryTiming)
-                              .locale(language == "ltr" ? "en" : "ar-sa")
-                              .format("MMMM") +
-                            moment(areaDetails?.laterDeliveryTiming)
-                              .locale("en")
-                              .format(", yyyy hh:mm ") +
-                            moment(areaDetails?.laterDeliveryTiming)
-                              .locale(language == "ltr" ? "en" : "ar-sa")
-                              .format("A")}
-                      </div>
-                    </div>
-                    <div className="buyer-details-secondDiv">
-                      <ArrowForwardIosIcon sx={{ fontSize: "14px" }} />
-                    </div>
-                  </Link>
-                </>
-              )} */}
 
             <SubHeadline enText="Items Details" arText="تفاصيل عربة التسوق" />
             <NewOrderProductList

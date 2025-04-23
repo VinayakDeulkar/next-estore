@@ -25,8 +25,6 @@ const SearchBox = () => {
     hasMore,
   } = useContext(AppContext);
 
-  console.log(search, "search");
-
   useEffect(() => {
     if (hasMore && page != 0) handleIsPageLoadingChange((l) => true);
     else {
@@ -53,7 +51,6 @@ const SearchBox = () => {
         }
       )
       .then((res) => {
-        console.log(res, "res");
         handleSearchLoadingChange(() => false);
         handleIsPageLoadingChange((l) => false);
         handleSearchItemsChange((s) => [...s, ...res.data.data]);
@@ -130,7 +127,7 @@ const SearchBox = () => {
     >
       <input
         type="search"
-        placeholder="Search..."
+        placeholder={language === "ltr" ? "Search..." : "يبحث..."}
         id={"Search"}
         name={"Search"}
         value={search}
