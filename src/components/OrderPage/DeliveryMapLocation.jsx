@@ -38,36 +38,32 @@ const DeliveryMapLocation = ({ startLat, startLng, endLat, endLng }) => {
   return (
     <>
       {coordinates && center && directionsOptions ? (
-        <LoadScript
-          googleMapsApiKey={"AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg"}
+        <GoogleMap
+          className={`map-border-new ${
+            homePageDetails?.vendor_data?.home_page_type === "18" &&
+            "fashion-theme-border"
+          }`}
+          mapContainerStyle={{
+            height: "300px",
+            width: "100%",
+            marginTop: "27px",
+            borderRadius:
+              homePageDetails?.vendor_data?.home_page_type === "18"
+                ? "0"
+                : "19px",
+          }}
+          zoom={13}
+          options={{
+            disableDefaultUI: true,
+            zoomControl: true,
+          }}
         >
-          <GoogleMap
-            className={`map-border-new ${
-              homePageDetails?.vendor_data?.home_page_type === "18" &&
-              "fashion-theme-border"
-            }`}
-            mapContainerStyle={{
-              height: "300px",
-              width: "100%",
-              marginTop: "27px",
-              borderRadius:
-                homePageDetails?.vendor_data?.home_page_type === "18"
-                  ? "0"
-                  : "19px",
-            }}
-            zoom={13}
-            options={{
-              disableDefaultUI: true,
-              zoomControl: true,
-            }}
-          >
-            <DirectionsService
-              options={directionsOptions}
-              callback={directionsCallback}
-            />
-            {direction && <DirectionsRenderer directions={direction} />}
-          </GoogleMap>
-        </LoadScript>
+          <DirectionsService
+            options={directionsOptions}
+            callback={directionsCallback}
+          />
+          {direction && <DirectionsRenderer directions={direction} />}
+        </GoogleMap>
       ) : (
         <div
           style={{

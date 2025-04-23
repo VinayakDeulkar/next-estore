@@ -10,10 +10,7 @@ import "./branchPage.css";
 
 const BranchesPage = () => {
   const [branchId, setBranchId] = useState("");
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey:
-      "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg",
-  });
+
   return (
     <EstoreLayout1>
       <Box
@@ -31,11 +28,7 @@ const BranchesPage = () => {
           <BranchList setBranchId={setBranchId} />
         </Box>
 
-        <BranchDetails
-          branchId={branchId}
-          setBranchId={setBranchId}
-          isLoaded={isLoaded}
-        />
+        <BranchDetails branchId={branchId} setBranchId={setBranchId} />
       </Box>
     </EstoreLayout1>
   );

@@ -15,7 +15,7 @@ import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import AddressCard from "../common/AddressCard/AddressCard";
 import { tele } from "@/constants/constants";
 
-const AddressSection = () => {
+const AddressSection = ({ setShowAddressForm, triggerPaymentMethod }) => {
   const {
     language,
     userDetails,
@@ -56,8 +56,8 @@ const AddressSection = () => {
         };
       });
       setAddressData(addresslist);
-      const pimaryAddress = addresslist?.map(
-        async (element) => element?.is_primary === "1"
+      const pimaryAddress = addresslist?.filter(
+        (element) => element?.is_primary === "1"
       );
 
       if (pimaryAddress.length) {
@@ -113,7 +113,7 @@ const AddressSection = () => {
                   : 0;
               if (
                 timeResponse.data.time == 1 &&
-                addedAddress[0].availability_status == 1
+                addedAddress[0]?.availability_status == 1
               ) {
                 handleAreaDetailsChange((k) => ({
                   ...k,
@@ -361,8 +361,7 @@ const AddressSection = () => {
   useEffect(() => {
     if (userDetails?.address?.length && !addressDetails?.id) {
       getAddressData();
-    }
-    else if(userDetails?.address?.length){
+    } else if (userDetails?.address?.length) {
       const addresslist = userDetails?.address?.map((ele) => {
         return {
           id: ele.id,
@@ -557,6 +556,8 @@ const AddressSection = () => {
                   },
                 }));
               }
+              setShowAddressForm(true);
+              triggerPaymentMethod(false);
             } else {
             }
           } else {

@@ -14,7 +14,7 @@
   min-height: 105px;
 }
 .cardMain.active {
-  background-color: rgba(236, 255, 254, 1);
+  background-color: rgba(242, 242, 242, 0.5);
 }
 
 .firstCardDiv {

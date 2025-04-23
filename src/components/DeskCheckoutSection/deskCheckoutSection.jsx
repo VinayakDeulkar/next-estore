@@ -64,11 +64,6 @@ const DeskCheckoutSection = ({ showPaymentMethod }) => {
     }
   }, [cart]);
 
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey:
-      "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg", // Replace with your Google Maps API key
-  });
-
   useEffect(() => {
     (async () => {
       const check = checkAllCondition();

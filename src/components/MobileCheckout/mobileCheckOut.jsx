@@ -237,7 +237,7 @@ const MobileCheckOut = () => {
       );
       if (response && response.status) {
         setLoading(false);
-        setCart(response.data);
+        handleCartChange(response.data);
       } else {
         setLoading(false);
         router.push("/");

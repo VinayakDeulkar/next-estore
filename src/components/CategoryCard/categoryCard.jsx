@@ -30,7 +30,6 @@ const CategoryCard = ({ category }) => {
             }}
             onClick={handleCardClick}
           >
-            {console.log(" in cate")}
             <CardMedia
               component="img"
               height="200"

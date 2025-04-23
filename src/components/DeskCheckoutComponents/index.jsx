@@ -14,8 +14,8 @@ const DeskCheckoutComponents = () => {
   const triggerDeliveryAddress = () => {
     setShowAddressComponents(true);
   };
-  const triggerPaymentMethod = () => {
-    setShowPaymentMethod(true);
+  const triggerPaymentMethod = (value) => {
+    setShowPaymentMethod(value);
   };
   return (
     <Box
@@ -37,7 +37,6 @@ const DeskCheckoutComponents = () => {
           triggerPaymentMethod={triggerPaymentMethod}
           selectAddress={selectAddress}
           setDeliveryKm={setDeliveryKm}
-          
         />
       ) : null}
       {showPaymentMethod ? <PaymentDetails deliveryKm={deliveryKm} /> : null}

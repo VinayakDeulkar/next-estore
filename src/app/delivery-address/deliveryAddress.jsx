@@ -244,7 +244,6 @@ const DeliveryAddress = () => {
                   user_id: localStorage.getItem("id"),
                   language: language,
                 });
-                console.log(response, "response");
                 if (response?.status) {
                   handleUserDetailsChange({ ...response?.data });
                   handleAddressDetailsChange((k) => ({
@@ -450,10 +449,7 @@ const DeliveryAddress = () => {
     const forClick = document.getElementById("forClickOnly");
     forClick?.click();
   };
-  console.log(
-    internationalDelivery.delivery_country_code,
-    "internationalDelivery.delivery_country_code"
-  );
+
   return (
     <Box>
       <EstoreLayout1>
