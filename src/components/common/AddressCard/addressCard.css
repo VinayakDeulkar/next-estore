@@ -13,6 +13,7 @@
   cursor: pointer;
   min-height: 105px;
 }
+
 .cardMain.active {
   background-color: rgba(242, 242, 242, 0.5);
 }
@@ -54,7 +55,7 @@
 }
 
 .actions.show {
-  left: 40px;
+  left: 75px;
   transform: translateY(-50%) translateX(0);
   opacity: 1;
 }

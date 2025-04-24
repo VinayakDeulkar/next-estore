@@ -76,22 +76,60 @@ const DeliveryMapStatus = ({
     return null;
   };
   return (
-    <div>
-      {location_coordinates?.branch_lat &&
-        location_coordinates.delivery_lat &&
-        payment_status === "1" &&
-        customer_details.is_international_delivery !== "1" && (
-          <DeliveryMapLocation
-            startLat={location_coordinates.branch_lat}
-            startLng={location_coordinates.branch_lng}
-            endLat={location_coordinates.delivery_lat}
-            endLng={location_coordinates.delivery_lng}
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <div>
+        {location_coordinates?.branch_lat &&
+          location_coordinates.delivery_lat &&
+          payment_status === "1" &&
+          customer_details.is_international_delivery !== "1" && (
+            <DeliveryMapLocation
+              startLat={location_coordinates.branch_lat}
+              startLng={location_coordinates.branch_lng}
+              endLat={location_coordinates.delivery_lat}
+              endLng={location_coordinates.delivery_lng}
+            />
+          )}
+      </div>
+      <div>
+        {customer_details?.self_pickup === "1" ? (
+          <SubHeadline enText={"Buyer Name"} arText={"اسم المشتري"} />
+        ) : null}
+        <div
+          style={{
+            border: "1px solid #e1e1e1",
+            padding: "15px",
+            borderRadius: "10px",
+            marginTop: "5px",
+          }}
+        >
+          <NormalText
+            enText={customer_details?.name}
+            arText={customer_details?.name}
           />
-        )}
-      <div
-        className="orderStatus-userData"
-        style={{ border: "none", marginTop: "0" }}
-      >
+
+          <div
+            className="orderStatus-userphone-userName"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <ReactFlagsSelect
+              className="showFlag-only"
+              selected={getFlag()}
+              showSelectedLabel={false}
+              disabled
+              customLabels={telecount}
+            />
+            <NormalText
+              enText={`${customer_details?.country_code} ${customer_details?.phone_number}`}
+              arText={`${customer_details?.country_code} ${customer_details?.phone_number}`}
+            />
+          </div>
+          <NormalText
+            enText={customer_details?.email}
+            arText={customer_details?.email}
+          />
+        </div>
+      </div>
+      <div style={{ border: "none", marginTop: "0" }}>
         <SubHeadline
           enText={
             customer_details?.self_pickup == 1 ? "Pickup From" : "Delivered To"
@@ -177,10 +215,15 @@ const DeliveryMapStatus = ({
                 </div>
               ) : null}
               <div
-                style={{
-                  marginLeft: language == "ltr" ? "25px" : "0px",
-                  marginRight: language == "rtl" ? "25px" : "0px",
-                }}
+                style={
+                  customer_details?.self_pickup != "1" &&
+                  customer_details?.title
+                    ? {
+                        marginLeft: language == "ltr" ? "25px" : "0px",
+                        marginRight: language == "rtl" ? "25px" : "0px",
+                      }
+                    : {}
+                }
               >
                 <NormalText
                   enText={
@@ -272,45 +315,6 @@ const DeliveryMapStatus = ({
             )}
           </div>
         )}
-      </div>
-      <div className="orderStatus-userphone">
-        {customer_details?.self_pickup === "1" ? (
-          <SubHeadline enText={"Buyer Name"} arText={"اسم المشتري"} />
-        ) : null}
-        <div
-          style={{
-            border: "1px solid #e1e1e1",
-            padding: "15px",
-            borderRadius: "10px",
-            marginTop: "5px",
-          }}
-        >
-          <NormalText
-            enText={customer_details?.name}
-            arText={customer_details?.name}
-          />
-
-          <div
-            className="orderStatus-userphone-userName"
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            <ReactFlagsSelect
-              className="showFlag-only"
-              selected={getFlag()}
-              showSelectedLabel={false}
-              disabled
-              customLabels={telecount}
-            />
-            <NormalText
-              enText={`${customer_details?.country_code} ${customer_details?.phone_number}`}
-              arText={`${customer_details?.country_code} ${customer_details?.phone_number}`}
-            />
-          </div>
-          <NormalText
-            enText={customer_details?.email}
-            arText={customer_details?.email}
-          />
-        </div>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const NewPaymentSelector = ({
   setWidth,
   width,
 }) => {
-  const { homePageDetails, language, internationalDelivery } =
+  const { homePageDetails, language, internationalDelivery, activeBackgroundColor } =
     useContext(AppContext);
 
   const resizer = () => {
@@ -77,7 +77,6 @@ const NewPaymentSelector = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginTop: "25px",
         }}
       >
         <SubHeadline enText={"Payment Method"} arText={"طريقة الدفع"} />
@@ -96,12 +95,8 @@ const NewPaymentSelector = ({
               e.preventDefault();
               handleSetPaymentChange(4);
             }}
-            className={`intro-flex payment-details-holder  ${
-              payment == 4 ? "active" : ""
-            }  ${
-              homePageDetails?.vendor_data?.home_page_type === "18" &&
-              "fashion-theme-border"
-            }`}
+            className={`intro-flex payment-details-holder`}
+            style={payment == 4 ? {backgroundColor: activeBackgroundColor, border: "2px solid #000"} : {}}
           >
             <span className="del-ic" style={{ padding: 0 }}>
               <img
@@ -123,12 +118,8 @@ const NewPaymentSelector = ({
             e.preventDefault();
             handleSetPaymentChange(1);
           }}
-          className={`intro-flex payment-details-holder  ${
-            payment == 1 ? "active" : ""
-          }  ${
-            homePageDetails?.vendor_data?.home_page_type === "18" &&
-            "fashion-theme-border"
-          }`}
+          className={`intro-flex payment-details-holder`}
+          style={payment == 1 ? {backgroundColor: activeBackgroundColor, border: "2px solid #000"} : {}}
         >
           <span className="del-ic" style={{ padding: 0 }}>
             <img
@@ -145,12 +136,8 @@ const NewPaymentSelector = ({
               e.preventDefault();
               handleSetPaymentChange(2);
             }}
-            className={`intro-flex payment-details-holder  ${
-              payment == 2 ? "active" : ""
-            }  ${
-              homePageDetails?.vendor_data?.home_page_type === "18" &&
-              "fashion-theme-border"
-            }`}
+            className={`intro-flex payment-details-holder`}
+            style={payment == 2 ? {backgroundColor: activeBackgroundColor, border: "2px solid #000"} : {}}
           >
             <span className="del-ic" style={{ padding: 0 }}>
               <img
@@ -185,12 +172,8 @@ const NewPaymentSelector = ({
               e.preventDefault();
               handleSetPaymentChange(3);
             }}
-            className={`intro-flex payment-details-holder  ${
-              payment == 3 ? "active" : ""
-            }  ${
-              homePageDetails?.vendor_data?.home_page_type === "18" &&
-              "fashion-theme-border"
-            }`}
+            className={`intro-flex payment-details-holder`}
+            style={payment == 3 ? {backgroundColor: activeBackgroundColor, border: "2px solid #000"} : {}}
           >
             <span className="del-ic" style={{ padding: 0 }}>
               <img

@@ -107,10 +107,10 @@ const OtpVerification = ({
         <Toaster position="top-left" reverseOrder={false} />
       </div> */}
 
-      <Title
+      {/* <Title
         englishTitle="One Time Password Authentication"
         arabicTitle="مصادقة كلمة المرور لمرة واحدة"
-      />
+      /> */}
       <div className="sentOtpDiv">
         {homePageDetails?.vendor_data?.checkout_method === "2"
           ? language === "ltr"

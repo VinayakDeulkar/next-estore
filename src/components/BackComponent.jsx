@@ -20,13 +20,13 @@ const BackComponent = ({ backClick }) => {
     >
       {language === "ltr" ? (
         <div
-          style={{ display: "flex", alignItems: "center", marginLeft: "-8px" }}
+          style={{ display: "flex", alignItems: "center", marginLeft: "-5px" }}
         >
           <LeftArrow />
         </div>
       ) : (
         <div
-          style={{ display: "flex", alignItems: "center", marginRight: "-8px" }}
+          style={{ display: "flex", alignItems: "center", marginRight: "-5px" }}
         >
           <RightArrow size={20} strokeWidth={2} />
         </div>

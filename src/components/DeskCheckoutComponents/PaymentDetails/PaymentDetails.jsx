@@ -13,7 +13,7 @@ import { checkoutTag } from "@/constants/checkouttag";
 import { saveOrderDetails } from "@/apis/submitOrderApi";
 import { tele } from "@/constants/constants";
 
-const PaymentDetails = ({ deliveryKm }) => {
+const PaymentDetails = () => {
   const {
     vendorSlug,
     homePageDetails,
@@ -26,8 +26,10 @@ const PaymentDetails = ({ deliveryKm }) => {
     addressDetails,
     payment,
     handleSetPaymentChange,
+    deliveryKm,
+    companyData,
+    deliveryCharge
   } = useContext(AppContext);
-  const [companyData, setCompanyData] = useState();
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState({ show_popup: 0 });
   const [width, setWidth] = useState(0);
@@ -35,7 +37,6 @@ const PaymentDetails = ({ deliveryKm }) => {
   const [successPromocode, setSuccessPromocode] = useState("");
   const [promocode, setPromocode] = useState("");
   const [apply, setApply] = useState("");
-  const [deliveryCharge, setDeliveryCharge] = useState(0);
 
   const getBranchCordinates = () => {
     const branchlatlng = areaDetails.data.branch.filter(
@@ -45,6 +46,7 @@ const PaymentDetails = ({ deliveryKm }) => {
       return { lat: branchlatlng[0].lat, lng: branchlatlng[0].lng };
     }
   };
+
   const submitFunc = async (method) => {
     axios
       .post(
@@ -161,6 +163,7 @@ const PaymentDetails = ({ deliveryKm }) => {
       })
       .catch((e) => console.log(e));
   };
+
   const checkAvailbility = async (method) => {
     axios
       .post(
@@ -184,6 +187,7 @@ const PaymentDetails = ({ deliveryKm }) => {
       })
       .catch((e) => console.log(e));
   };
+
   const onConfirmOrder = (method) => {
     setLoading((loading) => true);
     axios
@@ -283,10 +287,9 @@ const PaymentDetails = ({ deliveryKm }) => {
     } else {
     }
   };
+
   return (
-    <div>
-      {" "}
-      <>
+    <div style={{display: "flex", flexDirection: "column", gap: "30px"}}>
         {companyData && <NewDeliveryCompany companyData={companyData} />}
         <NewPaymentSelector
           handleSetPaymentChange={handleSetPaymentChange}
@@ -318,7 +321,6 @@ const PaymentDetails = ({ deliveryKm }) => {
             }
           }}
         />
-      </>
     </div>
   );
 };

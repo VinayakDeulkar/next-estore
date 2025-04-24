@@ -26,6 +26,7 @@ const OrderPage = (props) => {
   const { language, homePageDetails } = useContext(AppContext);
   const orderDetails = props.data;
   const router = useRouter();
+  console.log(props.data, "props.data")
   const accordianArray = [
     {
       english: "Order Details",
@@ -46,15 +47,21 @@ const OrderPage = (props) => {
   return (
     <Box sx={{ height: "100vh" }}>
       <EstoreLayout1>
-        <Box>
-          {orderDetails && <CommonDeliveryStatus orderDetails={orderDetails} />}
-          {orderDetails ? (
-            <DeliveryMapStatus
-              location_coordinates={orderDetails?.location_coordinates}
-              customer_details={orderDetails?.customer_details}
-              payment_status={orderDetails?.payment_status}
-            />
-          ) : null}
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          <div>
+            {orderDetails && (
+              <CommonDeliveryStatus orderDetails={orderDetails} />
+            )}
+          </div>
+          <div>
+            {orderDetails ? (
+              <DeliveryMapStatus
+                location_coordinates={orderDetails?.location_coordinates}
+                customer_details={orderDetails?.customer_details}
+                payment_status={orderDetails?.payment_status}
+              />
+            ) : null}
+          </div>
           <div>
             {orderDetails &&
               accordianArray?.map((element) => (
@@ -83,8 +90,8 @@ const OrderPage = (props) => {
                     sx={{ padding: 0 }}
                   >
                     <SubHeadline
-                      enText={element.english}
-                      arText={element.arabic}
+                      enText={element?.english}
+                      arText={element?.arabic}
                     />
                   </AccordionSummary>
                   <AccordionDetails>{element?.component}</AccordionDetails>

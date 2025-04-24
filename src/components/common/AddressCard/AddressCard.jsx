@@ -23,10 +23,18 @@ const AddressCard = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
-  const { language } = useContext(AppContext);
+  const { language, activeBackgroundColor } = useContext(AppContext);
 
   return (
-    <div className={`cardMain ${selected ? "active" : ""}`} onClick={cardClick}>
+    <div
+      className={`cardMain`}
+      style={
+        selected
+          ? { backgroundColor: activeBackgroundColor, border: "2px solid #000" }
+          : {}
+      }
+      onClick={cardClick}
+    >
       <div
         style={{
           display: "flex",
@@ -104,7 +112,7 @@ const AddressCard = ({
 
       <div
         className={`actions ${isExpanded ? "show" : ""}`}
-        style={{ gap: "40px" }}
+        style={{ gap: "75px" }}
       >
         {onEdit ? (
           <div
@@ -113,6 +121,7 @@ const AddressCard = ({
               e.stopPropagation();
               onEdit();
             }}
+            style={{display: "flex", flexDirection: "column", alignItems: "center",gap: "2px"}}
           >
             <div>
               <EditPencilIcon />
@@ -128,6 +137,7 @@ const AddressCard = ({
               onDelete();
               setIsExpanded(!isExpanded);
             }}
+            style={{display: "flex", flexDirection: "column", alignItems: "center", gap: "2px"}}
           >
             <div>
               <DeleteCrossIcon />

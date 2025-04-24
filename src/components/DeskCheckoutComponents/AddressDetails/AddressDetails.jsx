@@ -37,15 +37,19 @@ const AddressDetails = ({
     handleCartChange,
     cart,
     vendorSlugResponse,
+    deliveryKm,
+    handleDeliveryKm,
+    deliveryCharge,
+    handleDeliveryCharge,
+    companyData,
+    handleCompanyData,
+    vendorSlug
   } = useContext(AppContext);
   const [markerPosition, setMarkerPosition] = useState(null);
   const [showAddressForm, setShowAddressForm] = useState(true);
   const [showMap, setShowMap] = useState(false);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [deliveryKm, setDeliveryKm] = useState();
-  const [deliveryCharge, setDeliveryCharge] = useState(0);
-  const [companyData, setCompanyData] = useState();
   const [notServing, setNotServing] = useState(0);
   const [selectedBounds, setSelectedBounds] = useState({
     north: 30.0978,
@@ -446,7 +450,7 @@ const AddressDetails = ({
               const distanceInMeters =
                 response.rows[0].elements[0].distance.value;
               const distanceInKilometers = distanceInMeters / 1000;
-              setDeliveryKm(distanceInKilometers);
+              handleDeliveryKm(distanceInKilometers);
             } else {
               console.error("Error:", status);
             }
@@ -514,7 +518,7 @@ const AddressDetails = ({
                 const distanceInMeters =
                   response.rows[0].elements[0].distance.value;
                 const distanceInKilometers = distanceInMeters / 1000;
-                setDeliveryKm(distanceInKilometers);
+                handleDeliveryKm(distanceInKilometers);
               } else {
                 console.error("Error:", status);
               }
@@ -568,8 +572,8 @@ const AddressDetails = ({
               setNotServing(1);
               setLoading(false);
             } else {
-              setCompanyData(response.data);
-              setDeliveryCharge(response.data.delivery_charge);
+              handleCompanyData(response.data);
+              handleDeliveryCharge(response.data.delivery_charge);
               if (response.data.delivery_charge) {
                 getDeliveryCharge(response.data.delivery_charge);
               }
@@ -585,10 +589,11 @@ const AddressDetails = ({
       }
     })();
   }, [deliveryKm]);
+
   const getDeliveryCharge = async (delivery_charge) => {
     if (delivery_charge) {
       const response = await updateDeliveryCharges(
-        vendorSlugResponse?.data?.ecom_url_slug,
+        vendorSlug?.data?.ecom_url_slug,
         homePageDetails?.vendor_data?.vendors_id,
         areaDetails?.area_id,
         delivery_charge
@@ -602,6 +607,7 @@ const AddressDetails = ({
       }
     }
   };
+
   return (
     <Box>
       {homePageDetails?.vendor_data?.international_delivery === "3" ||

@@ -418,7 +418,6 @@ const UserDetails = ({
   };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-      <SubHeadline enText={"Contact Details"} arText={"ارقام التواصل"} />
       {renderContactType()}
       {showPickUpForm ? <PickupContainer pickupError={pickupError} /> : null}
       {!showAddressComponents ? (

@@ -19,6 +19,7 @@ const NewPromocode = ({
     vendorSlug,
     handleCartChange,
     areaDetails,
+    activeBackgroundColor,
   } = useContext(AppContext);
   const [apiCalled, setApiCalled] = useState(false);
 
@@ -70,6 +71,7 @@ const NewPromocode = ({
               homePageDetails?.vendor_data?.home_page_type === "18" &&
               "fashion-theme-border"
             }`}
+            style={{ backgroundColor: activeBackgroundColor }}
             id="name"
             name="first_name"
             required="true"

@@ -23,6 +23,7 @@ const ContactInfo = ({
     handleContactDetailsChange,
     internationalDelivery,
     handleInternationalDeliveryChange,
+    activeBackgroundColor
   } = useContext(AppContext);
   const router = useRouter();
 
@@ -147,13 +148,12 @@ const ContactInfo = ({
                       }
                     }}
                   />
-                  {homePageDetails?.vendor_data?.checkout_method === "2" &&
-                  showNameEmailFields ? (
+                  {contactDetails?.phone && showNameEmailFields ? (
                     <div
                       style={{
                         position: "absolute",
                         right: "10px",
-                        top: "10px",
+                        top: "7px",
                         display: "flex",
                         alignItems: "center",
                         color: "#fff",
@@ -185,20 +185,45 @@ const ContactInfo = ({
               )}
             </>
           ) : null}
+
           {showNameEmailFields ? (
             <>
-              <TextInputField
-                name="fullName"
-                label={"Full Name"}
-                arLabel={"الاسم الكامل"}
-                handleChange={(e) =>
-                  handleContactDetailsChange({
-                    ...contactDetails,
-                    name: e.target.value,
-                  })
-                }
-                value={contactDetails?.name}
-              />
+              <div className="customerInputsFlex" style={{ width: "100%" }}>
+                <div className="form__group formSemi" style={{ width: "100%" }}>
+                  <TextInputField
+                    name="fullName"
+                    label={"Full Name"}
+                    arLabel={"الاسم الكامل"}
+                    handleChange={(e) =>
+                      handleContactDetailsChange({
+                        ...contactDetails,
+                        name: e.target.value,
+                      })
+                    }
+                    value={contactDetails?.name}
+                  />
+                  {contactDetails?.name && showNameEmailFields ? (
+                    <div
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "27px",
+                        display: "flex",
+                        alignItems: "center",
+                        color: "#fff",
+                        padding: "5px 7px",
+                        borderRadius: "50px",
+                        fontSize: "12px",
+                        gap: "5px",
+                      }}
+                    >
+                      <CheckCircleIcon
+                        sx={{ fill: "#4CAF50", fontSize: "20px" }}
+                      />
+                    </div>
+                  ) : null}
+                </div>
+              </div>
               {errorContactDetails.nameError && (
                 <label className="error-text">
                   {language == "ltr"
@@ -226,13 +251,12 @@ const ContactInfo = ({
                       });
                     }}
                   />
-                  {homePageDetails?.vendor_data?.checkout_method === "1" &&
-                  showNameEmailFields ? (
+                  {contactDetails?.email && showNameEmailFields ? (
                     <div
                       style={{
                         position: "absolute",
                         right: "10px",
-                        top: "10px",
+                        top: "27px",
                         display: "flex",
                         alignItems: "center",
                         padding: "5px 7px",
@@ -257,8 +281,8 @@ const ContactInfo = ({
         </div>
       </div>
 
-      <div className="blueBox" style={{ marginTop: "20px" }}>
-        {showNameEmailFields ? null : (
+      {!showNameEmailFields ? (
+        <div className="blueBox" style={{ marginTop: "20px" }}>
           <img
             src={
               homePageDetails?.vendor_data?.checkout_method === "2"
@@ -267,28 +291,21 @@ const ContactInfo = ({
             }
             className="sentImg"
           />
-        )}
-
-        <div>
-          <div
-            style={{
-              fontSize: language === "ltr" ? "16px" : "18px",
-              fontWeight: 400,
-            }}
-          >
-            {showNameEmailFields
-              ? language === "ltr"
-                ? "Add your details so your checkout next time will be quick"
-                : "أضف التفاصيل الخاصة بك حتى تكون عملية الدفع الخاصة بك في المرة القادمة سريعة"
-              : homePageDetails?.vendor_data?.checkout_method === "2"
-              ? language === "ltr"
-                ? "Login via whatsapp"
-                : "تسجيل الدخول عبر الواتس اب"
-              : language === "ltr"
-              ? "Login via email"
-              : "تسجيل الدخول عبر البريد الإلكتروني"}
-          </div>
-          {showNameEmailFields ? null : (
+          <div>
+            <div
+              style={{
+                fontSize: language === "ltr" ? "16px" : "18px",
+                fontWeight: 400,
+              }}
+            >
+              {homePageDetails?.vendor_data?.checkout_method === "2"
+                ? language === "ltr"
+                  ? "Login via whatsapp"
+                  : "تسجيل الدخول عبر الواتس اب"
+                : language === "ltr"
+                ? "Login via email"
+                : "تسجيل الدخول عبر البريد الإلكتروني"}
+            </div>
             <div
               style={{
                 color: "#636363",
@@ -303,9 +320,9 @@ const ContactInfo = ({
                 ? "Use your email to login to your account."
                 : "استخدم بريدك الإلكتروني لتسجيل الدخول إلى حسابك."}
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      ) : null}
 
       {!showNameEmailFields && showGuestUser ? (
         <div

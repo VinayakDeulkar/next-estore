@@ -1,6 +1,7 @@
 import { AppContext } from "@/context/AppContext";
 import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 const NewDeliveryCompany = ({ companyData }) => {
   const { language, areaDetails } = useContext(AppContext);
@@ -60,12 +61,9 @@ const NewDeliveryCompany = ({ companyData }) => {
   };
 
   return (
-    <>
-      <div
-        className="checkoutPageText"
-        style={{ marginTop: "25px", marginBottom: "5px" }}
-      >
-        {language === "ltr" ? "Delivery Done By" : "تم التسليم بواسطة"}
+    <div>
+      <div className="checkoutPageText">
+        <SubHeadline enText={"Delivery Done By"} arText={"تم التسليم بواسطة"} />
       </div>
       <div className="cardMain">
         <div
@@ -78,7 +76,7 @@ const NewDeliveryCompany = ({ companyData }) => {
         >
           <div className={`firstCardDiv`}>
             <img
-              src={companyData.logo}
+              src={companyData?.logo}
               style={{ height: "50px", width: "50px", borderRadius: "10px" }}
             />
           </div>
@@ -126,7 +124,7 @@ const NewDeliveryCompany = ({ companyData }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -11,7 +11,7 @@ import { LoadScript, useJsApiLoader } from "@react-google-maps/api";
 import { useContext } from "react";
 
 const CheckoutDesktop = () => {
-  const { language } = useContext(AppContext);
+  const { cart } = useContext(AppContext);
 
   return (
     <>
@@ -35,7 +35,9 @@ const CheckoutDesktop = () => {
           className="checkoutScroll"
         >
           <BackComponent />
+          <div style={{marginBottom: "30px"}}>
           <HeadLine enText={"Checkout"} arText={"تفاصيل الطلب"} />
+          </div>
           <DeskCheckoutComponents />
         </Grid>
         <Grid item xs={0} sm={0.5}>

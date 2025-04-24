@@ -306,50 +306,64 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
       {orderDetails?.delivery_details?.name &&
       orderDetails?.payment_status === "1" &&
       orderDetails.customer_details.self_pickup !== "1" ? (
-        <div className="delivery-company-mainDiv" style={{ gap: "15px" }}>
-          <div className="delivery-company-imageDiv">
-            <img
-              src={orderDetails?.delivery_details?.logo}
-              alt="logo"
-              style={{ height: "50px", width: "50px", borderRadius: "10px" }}
-            />
-          </div>
-          <div>
-            <div className="delivery-company-secondDiv">
-              <div className="delivery-company-delivery-by-text">
-                {language === "ltr" ? "Delivered By" : "التوصيل بواسطة"}
+        <div style={{marginTop: "20px"}}>
+          <SubHeadline enText={"Delivered By"} arText={"التوصيل بواسطة"} />
+          <div
+            style={{
+              border: "1px solid #e1e1e1",
+              padding: "15px",
+              borderRadius: "10px",
+              marginTop: "5px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+                gap: "22px",
+              }}
+            >
+              <div className={`firstCardDiv`}>
+                <img
+                  src={orderDetails?.delivery_details?.logo}
+                  style={{
+                    height: "50px",
+                    width: "50px",
+                    borderRadius: "10px",
+                  }}
+                />
               </div>
-              <div
-                className="delivery-company-delivery-by-text"
-                style={{ color: "#000" }}
-              >
-                {orderDetails?.estimated_date && (
-                  <>
-                    {moment(orderDetails?.estimated_date)
-                      .locale("en")
-                      .format("DD") +
-                      " " +
-                      moment(orderDetails?.estimated_date)
-                        .locale(language == "ltr" ? "en" : "ar-sa")
-                        .format("MMMM") +
-                      moment(orderDetails?.estimated_date)
-                        .locale("en")
-                        .format(", yyyy")}
-                  </>
-                )}
+              <div className={`secondCardDiv`}>
+                <NormalText
+                  enText={
+                    orderDetails?.estimated_date && (
+                      <>
+                        {moment(orderDetails?.estimated_date)
+                          .locale("en")
+                          .format("DD") +
+                          " " +
+                          moment(orderDetails?.estimated_date)
+                            .locale(language == "ltr" ? "en" : "ar-sa")
+                            .format("MMMM") +
+                          moment(orderDetails?.estimated_date)
+                            .locale("en")
+                            .format(", yyyy")}
+                      </>
+                    )
+                  }
+                />
+                <NormalText
+                  enText={orderDetails?.delivery_details?.name}
+                  arText={orderDetails?.delivery_details?.arabic_name}
+                />
+                <NormalText
+                  enText={
+                    orderDetails?.estimated_time &&
+                    calculateTimeLeft(orderDetails?.estimated_time)
+                  }
+                />
               </div>
-            </div>
-            <div className="delivery-company-secondDiv">
-              <div className="delivery-company-delivery-name">
-                {language === "ltr"
-                  ? orderDetails?.delivery_details?.name
-                  : orderDetails?.delivery_details?.arabic_name}
-              </div>
-              {orderDetails?.estimated_time && (
-                <div className="delivery-company-delivery-text">
-                  {calculateTimeLeft(orderDetails?.estimated_time)}
-                </div>
-              )}
             </div>
           </div>
         </div>

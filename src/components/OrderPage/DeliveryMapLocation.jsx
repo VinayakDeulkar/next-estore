@@ -46,7 +46,6 @@ const DeliveryMapLocation = ({ startLat, startLng, endLat, endLng }) => {
           mapContainerStyle={{
             height: "300px",
             width: "100%",
-            marginTop: "27px",
             borderRadius:
               homePageDetails?.vendor_data?.home_page_type === "18"
                 ? "0"

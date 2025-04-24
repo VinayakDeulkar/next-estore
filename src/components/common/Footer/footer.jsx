@@ -72,7 +72,7 @@ const Footer = () => {
           borderTopLeftRadius: "8px",
           borderTopRightRadius: "8px",
           color: "#fff",
-          padding: checkSize() ? "50px" : "30px 20px",
+          padding: checkSize() ? "50px 30px" : "30px 20px",
         }}
       >
         <Grid
@@ -100,11 +100,6 @@ const Footer = () => {
                 ? vendorSlug?.data?.vendor_data?.english_new_background
                 : vendorSlug?.data?.vendor_data?.arabic_new_background
             }
-            alt={
-              language == "ltr"
-                ? vendorSlug?.data?.vendor_data?.name
-                : vendorSlug?.data?.vendor_data?.name_ar
-            }
           />
         </Grid>
         <Grid
@@ -113,8 +108,8 @@ const Footer = () => {
           sx={{ display: "flex", flexDirection: "column", gap: "15px" }}
         >
           <div>
-            <NormalText enText={"+965 225 22334"} color={"#fff"} />
-            <NormalText enText={"info@petrafood.com"} color={"#fff"} />
+            <NormalText enText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`} color={"#fff"} />
+            {/* <NormalText enText={vendorSlug?.data?.vendor_data?.support_mail} color={"#fff"} /> */}
             <NormalText enText={"@Petrafood"} color={"#fff"} />
           </div>
           <div>

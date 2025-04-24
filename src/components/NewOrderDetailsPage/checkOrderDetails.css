@@ -253,10 +253,6 @@ html[dir="rtl"] .delivery-company-delivery-text {
   align-items: center;
 }
 
-.payment-details-holder.active {
-  border: 2px solid #000;
-}
-
 .payment-details-holder .del-ic {
   display: flex;
   align-items: center;
@@ -621,9 +617,8 @@ html[dir="rtl"] .delivery-address-details-secondDiv .right-arrow {
 
 .payment-details-headDIv,
 .acmount-mainDIv {
-  margin-top: 28px;
   border-top: 0.25px solid #ccc;
-  padding-top: 28px;
+  padding-top: 20px;
 }
 
 .order-details-cart-disocunt {

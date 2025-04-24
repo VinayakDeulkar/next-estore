@@ -17,6 +17,7 @@ import ReviewBar from "../ReviewBar/reviewBar";
 import HomepageDesign from "../InternationalDelivery/HomepageDesign";
 import Layout17 from "./Layout17";
 import SearchBox from "../common/SearchBox/searchBox";
+import Footer from "../common/Footer/footer";
 
 const HomePageLayouts = () => {
   const {
@@ -151,8 +152,11 @@ const HomePageLayouts = () => {
           <SearchNone />
         )
       ) : (
-        <div style={{ paddingBottom: "80px" }}>
-          {renderLayoutType(homePageDetails?.categories)}
+        <div>
+          <div style={{ paddingBottom: "80px" }}>
+            {renderLayoutType(homePageDetails?.categories)}
+          </div>
+          <Footer />
         </div>
       )}
 

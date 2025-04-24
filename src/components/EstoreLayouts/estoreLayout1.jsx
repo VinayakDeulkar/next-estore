@@ -21,7 +21,6 @@ const EstoreLayout1 = ({ children }) => {
             }}
           >
             {children}
-            <Footer />
           </Box>
         </Grid>
         {window?.innerWidth > 600 ? (

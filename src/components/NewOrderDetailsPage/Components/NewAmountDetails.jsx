@@ -11,7 +11,7 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
 
   return (
     <div className="acmount-mainDIv">
-      <div className="pt-2" style={{ marginBottom: "40px" }}>
+      <div style={{ marginBottom: "30px" }}>
         <div className="amount-sub-div">
           <NormalText enText={"Sub Total"} arText={"الإجمالي"} />
 

@@ -27,6 +27,7 @@ const AddressSection = ({ setShowAddressForm, triggerPaymentMethod }) => {
     handleUserDetailsChange,
     resetUserDetails,
     addressDetails,
+    activeBackgroundColor
   } = useContext(AppContext);
   const { enqueueSnackbar } = useSnackbar();
   const [addressData, setAddressData] = useState([]);
@@ -152,18 +153,18 @@ const AddressSection = ({ setShowAddressForm, triggerPaymentMethod }) => {
               } else {
                 handleAreaDetailsChange((l) => ({
                   ...l,
-                  area: addedAddress[0].area_name,
-                  minimum: addedAddress[0].minimum_charge,
+                  area: addedAddress[0]?.area_name,
+                  minimum: addedAddress[0]?.minimum_charge,
                   shopOpen:
-                    addedAddress[0].availability_status == 1
-                      ? timeResponse.data.time
+                    addedAddress[0]?.availability_status == 1
+                      ? timeResponse?.data?.time
                       : 2,
                   now:
-                    addedAddress[0].availability_status == 1
-                      ? timeResponse.data.time
+                    addedAddress[0]?.availability_status == 1
+                      ? timeResponse?.data?.time
                       : 2,
-                  ar_area: addedAddress[0].area_name_ar,
-                  area_id: addedAddress[0].area_id,
+                  ar_area: addedAddress[0]?.area_name_ar,
+                  area_id: addedAddress[0]?.area_id,
                   branch: "",
                   ar_branch: "",
                   deliveryTiming: timeResponse?.data?.schedule_time,
@@ -172,23 +173,23 @@ const AddressSection = ({ setShowAddressForm, triggerPaymentMethod }) => {
                     timeResponse.data?.delivery_details
                       ?.delivery_expected_type == 6,
                   getDeliveryTiming:
-                    addedAddress[0].availability_status == 1 ||
-                    timeResponse.data.time == 2
+                    addedAddress[0]?.availability_status == 1 ||
+                    timeResponse?.data?.time == 2
                       ? moment(
-                          timeResponse.data.preorder_on,
+                          timeResponse?.data?.preorder_on,
                           "YYYY-MM-DD HH:mm:ss"
                         ).toDate()
                       : moment().add(estimationTime, "minutes").toDate(),
                   laterDeliveryTiming:
-                    addedAddress[0].availability_status == 1 ||
-                    timeResponse.data.time == 2
+                    addedAddress[0]?.availability_status == 1 ||
+                    timeResponse?.data?.time == 2
                       ? moment(
-                          timeResponse.data.preorder_on,
+                          timeResponse?.data?.preorder_on,
                           "YYYY-MM-DD HH:mm:ss"
                         ).toDate()
                       : moment().add(estimationTime, "minutes").toDate(),
                   branchForArea: {
-                    ...timeResponse.data.branch,
+                    ...timeResponse?.data?.branch,
                     end:
                       activeBranch?.office_end_time >
                       activeBranch?.office_start_time
