@@ -457,7 +457,7 @@ const DeliveryAddress = () => {
         <Box
           sx={{
             position: "relative",
-            height: "calc(100vh - 80px)",
+            height: "calc(100vh - 150px)",
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "column",

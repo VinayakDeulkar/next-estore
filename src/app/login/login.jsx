@@ -336,7 +336,10 @@ const Login = () => {
             flexDirection: "column",
             gap: openOtpPage ? "20px" : "40px",
             position: "relative",
-            height: "calc(100vh - 80px)",
+            height:
+              window.innerWidth > 900
+                ? "calc(100vh - 80px)"
+                : "calc(100vh - 150px)",
           }}
         >
           <HeadLine

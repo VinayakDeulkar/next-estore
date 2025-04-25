@@ -155,7 +155,7 @@ const Review = () => {
     <Box>
       <EstoreLayout1>
         <BackComponent backClick={() => router.push(`/`)} />
-        <Box sx={{ position: "relative", height: "calc(100vh - 80px)" }}>
+        <Box sx={{ position: "relative", height: "calc(100vh - 150px)" }}>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
           >

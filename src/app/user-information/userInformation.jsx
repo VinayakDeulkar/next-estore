@@ -278,213 +278,227 @@ const UserInformation = () => {
         <HeadLine enText={"My Information"} arText={"معلوماتي"} />
       </div>
       <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            position: "relative",
-            height: "calc(100vh - 80px)",
-          }}
-        >
-      <div
-        style={{
-          position: "relative",
+        sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "20px",
-          marginTop: "30px",
+          position: "relative",
+          height:
+            window.innerWidth > 900
+              ? "calc(100vh - 80px)"
+              : "calc(100vh - 150px)",
         }}
       >
-        <>
-          <div className="customerInputsFlex">
-            <div className="form__group formSemi">
-              <div className="inputFlag">
-                <div
-                  style={
-                    homePageDetails?.vendor_data?.checkout_method === "2"
-                      ? {
-                          backgroundColor: "#EAEAEA",
-                          borderRadius: "10px",
-                          height: "44px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }
-                      : {}
-                  }
-                >
-                  <ReactFlagsSelect
-                    selected={contactDetails?.phoneCode}
-                    searchable={true}
-                    showSelectedLabel={false}
-                    customLabels={telecount}
-                    disabled={
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            marginTop: "30px",
+          }}
+        >
+          <>
+            <div className="customerInputsFlex">
+              <div className="form__group formSemi">
+                <div className="inputFlag">
+                  <div
+                    style={
                       homePageDetails?.vendor_data?.checkout_method === "2"
+                        ? {
+                            backgroundColor: "#EAEAEA",
+                            borderRadius: "10px",
+                            height: "44px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }
+                        : {}
                     }
-                    onSelect={(code) => {
+                  >
+                    <ReactFlagsSelect
+                      selected={contactDetails?.phoneCode}
+                      searchable={true}
+                      showSelectedLabel={false}
+                      customLabels={telecount}
+                      disabled={
+                        homePageDetails?.vendor_data?.checkout_method === "2"
+                      }
+                      onSelect={(code) => {
+                        handleContactDetailsChange({
+                          ...contactDetails,
+                          phoneCode: code,
+                          phone: contactDetails?.phone?.substring(
+                            0,
+                            code == "KW" ? 8 : 12
+                          ),
+                        });
+                      }}
+                    ></ReactFlagsSelect>
+                  </div>
+                </div>
+                <input
+                  type="tel"
+                  className="form__field hideBorder"
+                  name="phone"
+                  placeholder="98765432"
+                  id="phone"
+                  required="true"
+                  disabled={
+                    homePageDetails?.vendor_data?.checkout_method === "2"
+                  }
+                  value={contactDetails?.phone}
+                  autoComplete="tel"
+                  onChange={(e) => {
+                    const newValue = modifyValue(e.target.value);
+                    if (
+                      (contactDetails.phoneCode === "KW" &&
+                        newValue.length <= 8) ||
+                      (contactDetails.phoneCode !== "KW" &&
+                        newValue.length <= 10)
+                    ) {
                       handleContactDetailsChange({
                         ...contactDetails,
-                        phoneCode: code,
-                        phone: contactDetails?.phone?.substring(
-                          0,
-                          code == "KW" ? 8 : 12
-                        ),
+                        phone: newValue,
                       });
+                    }
+                  }}
+                />
+                {contactDetails?.phone ? (
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: "10px",
+                      top: "7px",
+                      display: "flex",
+                      alignItems: "center",
+                      color: "#fff",
+                      padding: "5px 7px",
+                      borderRadius: "50px",
+                      fontSize: "12px",
+                      gap: "5px",
                     }}
-                  ></ReactFlagsSelect>
-                </div>
+                  >
+                    <CheckCircleIcon
+                      sx={{ fill: "#4CAF50", fontSize: "20px" }}
+                    />
+                  </div>
+                ) : null}
+                <label
+                  htmlFor="phone"
+                  className="form__label phoneLabel dataFilled"
+                >
+                  {language == "ltr" ? "Phone Number" : "رقم الهاتف"}
+                </label>
               </div>
-              <input
-                type="tel"
-                className="form__field hideBorder"
-                name="phone"
-                placeholder="98765432"
-                id="phone"
-                required="true"
-                disabled={homePageDetails?.vendor_data?.checkout_method === "2"}
-                value={contactDetails?.phone}
-                autoComplete="tel"
-                onChange={(e) => {
-                  const newValue = modifyValue(e.target.value);
-                  if (
-                    (contactDetails.phoneCode === "KW" &&
-                      newValue.length <= 8) ||
-                    (contactDetails.phoneCode !== "KW" && newValue.length <= 10)
-                  ) {
+            </div>
+            {errorContactDetails.phoneError && (
+              <label className="error-text">
+                {language == "ltr"
+                  ? errorContactDetails.phoneErrorMessage
+                  : errorContactDetails.phoneErrorMessagear}
+              </label>
+            )}
+          </>
+
+          <>
+            <div className="customerInputsFlex" style={{ width: "100%" }}>
+              <div className="form__group formSemi" style={{ width: "100%" }}>
+                <TextInputField
+                  name="fullName"
+                  label={"Full Name"}
+                  arLabel={"الاسم الكامل"}
+                  handleChange={(e) =>
                     handleContactDetailsChange({
                       ...contactDetails,
-                      phone: newValue,
-                    });
+                      name: e.target.value,
+                    })
                   }
-                }}
-              />
-              {contactDetails?.phone ? (
-                <div
-                  style={{
-                    position: "absolute",
-                    right: "10px",
-                    top: "7px",
-                    display: "flex",
-                    alignItems: "center",
-                    color: "#fff",
-                    padding: "5px 7px",
-                    borderRadius: "50px",
-                    fontSize: "12px",
-                    gap: "5px",
-                  }}
-                >
-                  <CheckCircleIcon sx={{ fill: "#4CAF50", fontSize: "20px" }} />
-                </div>
-              ) : null}
-              <label
-                htmlFor="phone"
-                className="form__label phoneLabel dataFilled"
-              >
-                {language == "ltr" ? "Phone Number" : "رقم الهاتف"}
+                  value={contactDetails?.name}
+                />
+                {contactDetails?.name ? (
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: "10px",
+                      top: "27px",
+                      display: "flex",
+                      alignItems: "center",
+                      color: "#fff",
+                      padding: "5px 7px",
+                      borderRadius: "50px",
+                      fontSize: "12px",
+                      gap: "5px",
+                    }}
+                  >
+                    <CheckCircleIcon
+                      sx={{ fill: "#4CAF50", fontSize: "20px" }}
+                    />
+                  </div>
+                ) : null}
+              </div>
+            </div>
+            {errorContactDetails.nameError && (
+              <label className="error-text">
+                {language == "ltr"
+                  ? errorContactDetails.nameErrorMessage
+                  : errorContactDetails.nameErrorMessagear}
               </label>
-            </div>
-          </div>
-          {errorContactDetails.phoneError && (
-            <label className="error-text">
-              {language == "ltr"
-                ? errorContactDetails.phoneErrorMessage
-                : errorContactDetails.phoneErrorMessagear}
-            </label>
-          )}
-        </>
+            )}
+          </>
 
-        <>
-          <div className="customerInputsFlex" style={{ width: "100%" }}>
-            <div className="form__group formSemi" style={{ width: "100%" }}>
-              <TextInputField
-                name="fullName"
-                label={"Full Name"}
-                arLabel={"الاسم الكامل"}
-                handleChange={(e) =>
-                  handleContactDetailsChange({
-                    ...contactDetails,
-                    name: e.target.value,
-                  })
-                }
-                value={contactDetails?.name}
-              />
-              {contactDetails?.name ? (
-                <div
-                  style={{
-                    position: "absolute",
-                    right: "10px",
-                    top: "27px",
-                    display: "flex",
-                    alignItems: "center",
-                    color: "#fff",
-                    padding: "5px 7px",
-                    borderRadius: "50px",
-                    fontSize: "12px",
-                    gap: "5px",
+          <>
+            <div className="customerInputsFlex" style={{ width: "100%" }}>
+              <div className="form__group formSemi" style={{ width: "100%" }}>
+                <TextInputField
+                  name={"email"}
+                  label={"Email"}
+                  arLabel={"البريد الإلكتروني"}
+                  value={contactDetails?.email}
+                  disabled={
+                    homePageDetails?.vendor_data?.checkout_method === "1"
+                  }
+                  handleChange={(e) => {
+                    handleContactDetailsChange({
+                      ...contactDetails,
+                      email: e.target.value,
+                    });
                   }}
-                >
-                  <CheckCircleIcon sx={{ fill: "#4CAF50", fontSize: "20px" }} />
-                </div>
-              ) : null}
+                />
+                {contactDetails?.email ? (
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: "10px",
+                      top: "27px",
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "5px 7px",
+                    }}
+                  >
+                    <CheckCircleIcon
+                      sx={{ fill: "#4CAF50", fontSize: "20px" }}
+                    />
+                  </div>
+                ) : null}
+              </div>
             </div>
-          </div>
-          {errorContactDetails.nameError && (
-            <label className="error-text">
-              {language == "ltr"
-                ? errorContactDetails.nameErrorMessage
-                : errorContactDetails.nameErrorMessagear}
-            </label>
-          )}
-        </>
-
-        <>
-          <div className="customerInputsFlex" style={{ width: "100%" }}>
-            <div className="form__group formSemi" style={{ width: "100%" }}>
-              <TextInputField
-                name={"email"}
-                label={"Email"}
-                arLabel={"البريد الإلكتروني"}
-                value={contactDetails?.email}
-                disabled={homePageDetails?.vendor_data?.checkout_method === "1"}
-                handleChange={(e) => {
-                  handleContactDetailsChange({
-                    ...contactDetails,
-                    email: e.target.value,
-                  });
-                }}
-              />
-              {contactDetails?.email ? (
-                <div
-                  style={{
-                    position: "absolute",
-                    right: "10px",
-                    top: "27px",
-                    display: "flex",
-                    alignItems: "center",
-                    padding: "5px 7px",
-                  }}
-                >
-                  <CheckCircleIcon sx={{ fill: "#4CAF50", fontSize: "20px" }} />
-                </div>
-              ) : null}
-            </div>
-          </div>
-          {errorContactDetails.emailError && (
-            <label className="error-text">
-              {language == "ltr"
-                ? errorContactDetails.emailErrorMessage
-                : errorContactDetails.emailErrorMessagear}
-            </label>
-          )}
-        </>
-      </div>
-
-      <div
-        className={`contact-details-bottom-button contact-details-mobile-button`}
-      >
-        <div className="contact-details-next-button" onClick={updateUserInfo}>
-          {language === "ltr" ? "Update" : "تحديث"}
+            {errorContactDetails.emailError && (
+              <label className="error-text">
+                {language == "ltr"
+                  ? errorContactDetails.emailErrorMessage
+                  : errorContactDetails.emailErrorMessagear}
+              </label>
+            )}
+          </>
         </div>
-      </div>
+
+        <div
+          className={`contact-details-bottom-button contact-details-mobile-button`}
+        >
+          <div className="contact-details-next-button" onClick={updateUserInfo}>
+            {language === "ltr" ? "Update" : "تحديث"}
+          </div>
+        </div>
       </Box>
     </EstoreLayout1>
   );

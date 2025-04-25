@@ -5,7 +5,10 @@ const HorizontalProductGrid = ({ children }) => {
   const [child1, child2] = React.Children.toArray(children);
 
   return (
-    <Grid container style={{ height: "calc(100vh - 80px)", overflow: "hidden" }}>
+    <Grid
+      container
+      style={{ height: "calc(100vh - 80px)", overflow: "hidden" }}
+    >
       <Grid item xs={6}>
         {child1}
       </Grid>

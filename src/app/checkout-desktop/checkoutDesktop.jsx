@@ -31,12 +31,12 @@ const CheckoutDesktop = () => {
           item
           xs={0}
           sm={4}
-          sx={{ height: "calc(100vh - 120px)", overflow: "scroll" }}
+          sx={{ height: "calc(100vh - 80px)", overflow: "scroll" }}
           className="checkoutScroll"
         >
           <BackComponent />
-          <div style={{marginBottom: "30px"}}>
-          <HeadLine enText={"Checkout"} arText={"تفاصيل الطلب"} />
+          <div style={{ marginBottom: "30px" }}>
+            <HeadLine enText={"Checkout"} arText={"تفاصيل الطلب"} />
           </div>
           <DeskCheckoutComponents />
         </Grid>
