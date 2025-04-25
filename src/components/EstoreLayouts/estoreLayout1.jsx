@@ -5,7 +5,7 @@ import Footer from "../common/Footer/footer";
 
 const EstoreLayout1 = ({ children }) => {
   const checkSize = () => {
-    return window != undefined && window?.innerWidth > 600;
+    return window != undefined && window?.innerWidth > 990;
   };
   return (
     <Box sx={{ height: "100vh", overflow: "hidden", width: "100%" }}>
@@ -23,7 +23,7 @@ const EstoreLayout1 = ({ children }) => {
             {children}
           </Box>
         </Grid>
-        {window?.innerWidth > 600 ? (
+        {window?.innerWidth > 990 ? (
           <Grid
             item
             sm={12}

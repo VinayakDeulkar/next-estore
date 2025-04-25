@@ -8,7 +8,7 @@ import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
 const Footer = () => {
   const { language, vendorSlug } = useContext(AppContext);
   const checkSize = () => {
-    return window != undefined && window?.innerWidth > 600;
+    return window != undefined && window?.innerWidth > 990;
   };
 
   return (
@@ -18,7 +18,11 @@ const Footer = () => {
         flexDirection: "column",
         alignItems: "center",
         gap: "20px",
-        margin: checkSize() ? "0 -40px 0 -28px" : "0 -20px 0 -10px",
+        margin: checkSize()
+          ? language === "ltr"
+            ? "0 -40px 0 -28px"
+            : "0 -28px 0 -40px"
+          : "0 -10px 0 -10px",
       }}
     >
       <a
@@ -108,7 +112,10 @@ const Footer = () => {
           sx={{ display: "flex", flexDirection: "column", gap: "15px" }}
         >
           <div>
-            <NormalText enText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`} color={"#fff"} />
+            <NormalText
+              enText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`}
+              color={"#fff"}
+            />
             {/* <NormalText enText={vendorSlug?.data?.vendor_data?.support_mail} color={"#fff"} /> */}
             <NormalText enText={"@Petrafood"} color={"#fff"} />
           </div>

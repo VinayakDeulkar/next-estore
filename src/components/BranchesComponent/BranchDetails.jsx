@@ -15,7 +15,7 @@ function BranchDetails({ branchId, setBranchId }) {
       setBranch(areaDetails.data.branch[branchId]);
     }
   }, [areaDetails.data.branch, branchId]);
-  console.log(areaDetails.data.branch,"areaDetails.data.branch")
+  console.log(areaDetails.data.branch, "areaDetails.data.branch");
   return (
     <SwipeableDrawer
       anchor="bottom"
@@ -25,7 +25,7 @@ function BranchDetails({ branchId, setBranchId }) {
       disableSwipeToOpen={true}
       PaperProps={{
         sx: {
-          width: window.innerWidth > 600 ?"37.555%":"100%",
+          width: window.innerWidth > 990 ? "37.555%" : "100%",
           position: "absolute",
           bottom: 0,
           left: 0,

@@ -46,7 +46,7 @@ const HeaderBox = ({}) => {
         </Box>
         <Box
           sx={{
-            width: window.innerWidth < 600 ? "90vw" : "30vw",
+            width: window.innerWidth < 991 ? "90vw" : "30vw",
           }}
         >
           <VendorInfoBox />

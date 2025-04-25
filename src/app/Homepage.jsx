@@ -36,13 +36,13 @@ const Homepage = () => {
               sx={{
                 position: "relative",
                 margin: checkDrawer()
-                  ? window.innerWidth > 600
+                  ? window.innerWidth > 990
                     ? "-40px"
                     : "-20px"
                   : "0",
               }}
             >
-              {window?.innerWidth < 600 ? (
+              {window?.innerWidth < 991 ? (
                 <Box sx={{ direction: "ltr" }}>
                   <CarouselImage />
                 </Box>

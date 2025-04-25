@@ -19,7 +19,7 @@ const Navbar = ({ handleDrawar }) => {
       case "2":
         return (
           <>
-            {window.innerWidth > 600 ? (
+            {window.innerWidth > 990 ? (
               <GridLayout2>{navChidren()}</GridLayout2>
             ) : (
               <div>{navChidren()}</div>
@@ -157,7 +157,7 @@ const Navbar = ({ handleDrawar }) => {
         zIndex: 999,
         color: "blue",
         position: "sticky",
-        padding: window.innerWidth > 600 ? "0 32px" : "0",
+        padding: window.innerWidth > 990 ? "0 32px" : "0",
       }}
     >
       {renderGridNav()}

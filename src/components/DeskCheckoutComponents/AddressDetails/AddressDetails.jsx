@@ -43,7 +43,7 @@ const AddressDetails = ({
     handleDeliveryCharge,
     companyData,
     handleCompanyData,
-    vendorSlug
+    vendorSlug,
   } = useContext(AppContext);
   const [markerPosition, setMarkerPosition] = useState(null);
   const [showAddressForm, setShowAddressForm] = useState(true);
@@ -648,7 +648,7 @@ const AddressDetails = ({
         <Box
           sx={{
             padding: "20px",
-            width: window.innerWidth > 600 ? "560px" : "auto",
+            width: window.innerWidth > 990 ? "560px" : "auto",
           }}
         >
           <DeliveryMapContainer

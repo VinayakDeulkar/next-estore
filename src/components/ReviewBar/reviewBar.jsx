@@ -19,7 +19,7 @@ const ReviewBar = () => {
         alignItems: "center",
         zIndex: "100",
         width:
-          window.innerWidth > 600 ? "calc(37.5% - 80px)" : "calc(100% - 40px)",
+          window.innerWidth > 990 ? "calc(37.5% - 80px)" : "calc(100% - 40px)",
         background: homePageDetails?.vendor_data?.vendor_color,
         minHeight: "53px",
         color: "#fff",
@@ -28,7 +28,7 @@ const ReviewBar = () => {
       }}
       component="button"
       onClick={() => {
-        window.innerWidth > 600
+        window.innerWidth > 990
           ? router.push("/checkout-desktop")
           : router.push("/review");
       }}

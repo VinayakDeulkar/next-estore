@@ -11,7 +11,7 @@ const VendorBox = () => {
     <Box
       sx={{
         display: "flex",
-        flexDirection: window.innerWidth > 600 ? "column" : "row",
+        flexDirection: window.innerWidth > 990 ? "column" : "row",
         gap: "20px",
         padding: "24px 0",
       }}
@@ -43,7 +43,7 @@ const VendorBox = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          textAlign: window.innerWidth > 600 ? "center" : "start",
+          textAlign: window.innerWidth > 990 ? "center" : "start",
         }}
       >
         <Box sx={{ fontSize: "28px", fontWeight: "400" }}>

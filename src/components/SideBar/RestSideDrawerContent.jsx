@@ -15,6 +15,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
     handleCartChange,
     homePageDetails,
     handleSetPaymentChange,
+    areaDetails,
   } = useContext(AppContext);
   const router = useRouter();
   const contactInfo = JSON.parse(localStorage.getItem("contactInfo") || "{}");
@@ -115,7 +116,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
             window.location.host.replace(/^www\./, "") !== "shop.playon.today"
               ? "delivery"
               : "pickup",
-          data: {},
+          data: { ...areaDetails.data },
           area: "",
           branch: "",
           branch_id: "",

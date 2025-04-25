@@ -164,7 +164,7 @@ function DeliveryTimeSelect() {
                 laterDeliveryTiming: timeInput,
               }));
             }
-            history.push("/");
+            router.push("/");
           }}
           style={{ fontWeight: 700 }}
           className="text-center checkout-button"

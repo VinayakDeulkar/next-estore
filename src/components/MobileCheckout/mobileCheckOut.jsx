@@ -509,9 +509,9 @@ const MobileCheckOut = () => {
             <div
               onClick={() => {
                 if (areaDetails?.type === "pickup") {
-                  history.push("/contact-details");
+                  router.push("/contact-details");
                 } else {
-                  history.push("/");
+                  router.push("/");
                 }
               }}
             ></div>

@@ -7,7 +7,7 @@ import HorizontalCard from "@/components/HorizontalCard/horizontalCard";
 import ProductSquareCard from "@/components/ProductSquareCard/productSquareCard";
 import { AppContext } from "@/context/AppContext";
 import { Box, Grid } from "@mui/material";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import "../../components/HomePageLayouts/layout.css";
 
@@ -22,7 +22,7 @@ const Products = (props) => {
   const [subCategoryData, setSubCategoryData] = useState([]);
   const [hasSubCategories, setHasSubCategories] = useState(false);
   const { homePageDetails, layout17ToggleView } = useContext(AppContext);
-
+  const router = useRouter();
   useEffect(() => {
     if (props?.is_subcategory === 1) {
       setHasSubCategories(true);
@@ -73,7 +73,7 @@ const Products = (props) => {
     setProductsData([]);
     setHasMore(0);
     setPage(0);
-    history.goBack();
+    router.goBack();
   };
 
   const categoryProducts = () => {

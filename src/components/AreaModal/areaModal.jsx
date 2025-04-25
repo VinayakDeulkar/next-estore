@@ -20,16 +20,18 @@ const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition, type }) => {
           "& .MuiDialog-container > .MuiPaper-root": {
             borderRadius: "16px", // Change this value as needed
             minWidth: "400px",
-            margin:"15px"
+            margin: "15px",
           },
-          "& .MuiDialog-container": { justifyContent: type === "deskCheckout" ? "center" : "flex-start" },
+          "& .MuiDialog-container": {
+            justifyContent: type === "deskCheckout" ? "center" : "flex-start",
+          },
         }}
       >
         <Box
           sx={{
             height: "calc(100vh - 50px)",
             padding: "20px",
-            width: window.innerWidth > 600 ? "560px" : "auto",
+            width: window.innerWidth > 990 ? "560px" : "auto",
             display: "flex",
             flexDirection: "column",
             gap: "20px",
