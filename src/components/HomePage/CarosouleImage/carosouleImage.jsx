@@ -36,8 +36,8 @@ const CarouselImage = () => {
         showIndicators={false}
         showArrows={false}
         infiniteLoop
-        interval={1000}
-        transitionTime={1000}
+        interval={2000}
+        transitionTime={2000}
         emulateTouch
         stopOnHover
         className="carouselImage"
