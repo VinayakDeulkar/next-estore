@@ -19,7 +19,14 @@ const AccordianContactStore = () => {
     },
   ];
   return (
-    <div>
+    <div
+      style={{
+        border: "1px solid #e1e1e1",
+        padding: "15px",
+        borderRadius: "10px",
+        marginBottom: "10px",
+      }}
+    >
       {vendor_Data &&
         vendor_Data.map((row, i) => <DetailsCommon key={i} data={row} />)}
     </div>

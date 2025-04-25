@@ -243,6 +243,10 @@ const ContactInfo = ({
                     name={"email"}
                     label={"Email"}
                     arLabel={"البريد الإلكتروني"}
+                    disabled={
+                      homePageDetails?.vendor_data?.checkout_method === "1" &&
+                      showNameEmailFields
+                    }
                     value={contactDetails?.email}
                     handleChange={(e) => {
                       handleContactDetailsChange({

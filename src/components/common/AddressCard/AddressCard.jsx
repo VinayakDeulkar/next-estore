@@ -94,7 +94,7 @@ const AddressCard = ({
             className="btn"
             onClick={(e) => {
               e.stopPropagation();
-              history.push("/user-info");
+              router.push("/user-information");
             }}
             style={{
               display: "flex",

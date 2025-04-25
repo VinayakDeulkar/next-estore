@@ -7,9 +7,17 @@ import Notes from "../assetBoxDesign/Notes/notes";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 export const AccrodianOrderDetails = ({ orderDetails }) => {
-  const { language, homePageDetails } = useContext(AppContext);
+  const { language, homePageDetails, activeBackgroundColor } =
+    useContext(AppContext);
   return (
-    <div>
+    <div
+      style={{
+        border: "1px solid #e1e1e1",
+        padding: "15px",
+        borderRadius: "10px",
+        marginBottom: "10px"
+      }}
+    >
       {orderDetails?.cartItems &&
         orderDetails?.cartItems.map((product, i) => (
           <ProductCard
@@ -76,6 +84,7 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
           homePageDetails?.vendor_data?.home_page_type === "18" &&
           "fashion-theme-border"
         }`}
+        style={{ backgroundColor: activeBackgroundColor }}
       >
         <SubHeadline enText={"Total Payment"} arText={"المبلغ الإجمالي"} />
         <SubHeadline

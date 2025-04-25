@@ -99,7 +99,7 @@ const OrderHistory = () => {
   return (
     <Box>
       <EstoreLayout1>
-        <BackComponent />
+        <BackComponent backClick={() =>  router.push("/")} />
         <Box>
           <HeadLine enText="My Orders" arText="مشترياتي" />
           {orderData ? (

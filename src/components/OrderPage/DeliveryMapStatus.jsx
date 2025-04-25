@@ -288,8 +288,6 @@ const DeliveryMapStatus = ({
                       </>
                     ) : null}
                     {", "}
-                  </div>
-                  <div>
                     {houseLabel()} {customer_details?.house_number}
                     {customer_details?.floor_number ? (
                       <>

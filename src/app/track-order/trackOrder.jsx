@@ -26,7 +26,7 @@ const TrackOrder = () => {
   return (
     <Box>
       <EstoreLayout1>
-        <BackComponent />
+        <BackComponent backClick={() =>  router.push("/")} />
         <div className="trackOrder-whitebox">
           <div>
             <Box sx={{ display: "flex", justifyContent: "center" }}>

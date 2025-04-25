@@ -89,7 +89,14 @@ const AccordianPaymentDetails = ({ orderDetails }) => {
   }, [orderDetails]);
 
   return (
-    <div>
+    <div
+      style={{
+        border: "1px solid #e1e1e1",
+        padding: "15px",
+        borderRadius: "10px",
+        marginBottom: "10px",
+      }}
+    >
       {finalTransaction &&
         finalTransaction.map((row, i) => <DetailsCommon key={i} data={row} />)}
     </div>

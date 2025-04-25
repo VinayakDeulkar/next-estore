@@ -509,7 +509,7 @@ const UserInfo = ({ type }) => {
 
   return (
     <EstoreLayout1>
-      <BackComponent />
+      <BackComponent backClick={() =>  router.push("/")} />
       <div>
         <div
           className="holder-container"
@@ -603,8 +603,6 @@ const UserInfo = ({ type }) => {
                 </div>
               </div>
             ))}
-
-            {addressData?.length > 0 ? <Divider /> : null}
 
             <AddressCard
               cardClick={() => {

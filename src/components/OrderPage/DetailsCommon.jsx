@@ -7,6 +7,53 @@ import NormalText from "../assetBoxDesign/NormalText/normalText";
 
 const DetailsCommon = ({ data }) => {
   const { language } = useContext(AppContext);
+
+  const getPaymentImg = () => {
+    switch (data.value) {
+      case "1":
+        return (
+          <img
+            style={{ height: "20px", width: "20px" }}
+            src="images/knet icon mini.png"
+          />
+        );
+
+      case "2":
+        return (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img
+              style={{ height: "15px", width: "35px" }}
+              src="images/visa.png"
+            />
+            <img
+              style={{ height: "15px", width: "35px" }}
+              src="images/master.png"
+            />
+          </div>
+        );
+
+      case "3":
+        return (
+          <img
+            style={{ height: "20px", width: "20px" }}
+            src="images/icons8-money-64.png"
+          />
+        );
+
+      case "4":
+      case "5":
+        return (
+          <img
+            style={{ height: "15px", width: "35px" }}
+            src="images/newApplePayButton.png"
+          />
+        );
+
+      default:
+        break;
+    }
+  };
+
   const getPaymentText = () => {
     switch (data.value) {
       case "1":
@@ -48,10 +95,17 @@ const DetailsCommon = ({ data }) => {
                 } د.ك`}
               />
             ) : data.is_payment_type ? (
-              <NormalText
-                enText={getPaymentText().enText}
-                arText={getPaymentText().arText}
-              />
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "5px" }}
+              >
+                <div>{getPaymentImg()}</div>
+                <div>
+                  <NormalText
+                    enText={getPaymentText().enText}
+                    arText={getPaymentText().arText}
+                  />
+                </div>
+              </div>
             ) : data.is_Date ? (
               <NormalText
                 enText={`${

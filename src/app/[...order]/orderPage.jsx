@@ -26,7 +26,7 @@ const OrderPage = (props) => {
   const { language, homePageDetails } = useContext(AppContext);
   const orderDetails = props.data;
   const router = useRouter();
-  console.log(props.data, "props.data")
+  console.log(props.data, "props.data");
   const accordianArray = [
     {
       english: "Order Details",
@@ -68,17 +68,15 @@ const OrderPage = (props) => {
                 <Accordion
                   key={element?.english}
                   sx={{
-                    // mb: 2,
                     "&:before": {
-                      // Removes the default divider completely
                       display: "none !important",
                     },
-                    boxShadow: "none", // Removes shadow
-                    border: "none", // Ensures no border
+                    boxShadow: "none",
+                    border: "none",
                     "&.Mui-expanded": {
-                      // Optional: Styles when expanded
-                      margin: "auto", // Maintains spacing
-                      boxShadow: "none", // Ensures no shadow when expanded
+                      margin: "auto",
+                      boxShadow: "none",
+                      borderBottom: "none"
                     },
                     borderBottom: "0.25px solid #ccc",
                   }}
@@ -94,7 +92,7 @@ const OrderPage = (props) => {
                       arText={element?.arabic}
                     />
                   </AccordionSummary>
-                  <AccordionDetails>{element?.component}</AccordionDetails>
+                  <AccordionDetails sx={{padding: 0}}>{element?.component}</AccordionDetails>
                 </Accordion>
               ))}
           </div>
