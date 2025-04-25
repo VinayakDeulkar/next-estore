@@ -57,7 +57,7 @@ const NewAddressForm = ({
 
   return (
     <div>
-      <HeadLine enText={"Delivery Details"} arText={"تفاصيل التوصيل"} />
+      <SubHeadline enText={"Delivery Details"} arText={"تفاصيل التوصيل"} />
       <div className="delivery-address-address-select">
         <div className="delivery-address-type-select nav nav-tabs">
           <div
@@ -334,6 +334,7 @@ const NewAddressForm = ({
             setShowAreaModal(false);
             setShowMap?.();
           }}
+          type={"deskCheckout"}
         />
 
         {errorState.areaNameError && (

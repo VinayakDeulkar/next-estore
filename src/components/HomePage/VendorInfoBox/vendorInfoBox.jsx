@@ -8,12 +8,12 @@ const VendorInfoBox = () => {
   const { homePageDetails, language } = useContext(AppContext);
   return (
     <Box sx={{ padding: "40px 20px" }}>
-      <Grid container>
-        <Grid item lg={1.8} sx={3}>
+      <div style={{display: "flex", alignItems: "center", gap: "15px"}}> 
+        <div>
           <Image
             loading="lazy"
-            width={110}
-            height={110}
+            width={75}
+            height={75}
             style={{
               borderRadius: "10px",
             }}
@@ -28,32 +28,25 @@ const VendorInfoBox = () => {
                 : homePageDetails?.vendor_data?.name_ar
             }
           />
-        </Grid>
-        <Grid
-          item
-          sm={9}
-          lg={10.2}
-          sx={{ display: "flex", alignItems: "center" }}
-        >
-          <Box sx={{ paddingLeft: "10px" }}>
-            <TypographyConverter
-              sx={{ color: "#000", textAlign: "start", fontSize: "28px" }}
-              enText={homePageDetails?.vendor_data?.name}
-              arText={homePageDetails?.vendor_data?.name_ar}
-            />
-            <TypographyConverter
-              sx={{
-                color: "#000",
-                textAlign: "start",
-                color: "#848484",
-                fontWeight: 200,
-              }}
-              enText={homePageDetails?.vendor_data?.slogan}
-              arText={homePageDetails?.vendor_data?.slogan_ar}
-            />
-          </Box>
-        </Grid>
-      </Grid>
+        </div>
+        <div sx={{ display: "flex", alignItems: "center" }}>
+          <TypographyConverter
+            sx={{ color: "#000", textAlign: "start", fontSize: "28px" }}
+            enText={homePageDetails?.vendor_data?.name}
+            arText={homePageDetails?.vendor_data?.name_ar}
+          />
+          <TypographyConverter
+            sx={{
+              color: "#000",
+              textAlign: "start",
+              color: "#848484",
+              fontWeight: 200,
+            }}
+            enText={homePageDetails?.vendor_data?.slogan}
+            arText={homePageDetails?.vendor_data?.slogan_ar}
+          />
+        </div>
+      </div>
     </Box>
   );
 };

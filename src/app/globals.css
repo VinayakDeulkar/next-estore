@@ -23,6 +23,9 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+html[dir="rtl"] body{
+  font-family: Orleen !important;
+}
 
 @layer utilities {
   .text-balance {

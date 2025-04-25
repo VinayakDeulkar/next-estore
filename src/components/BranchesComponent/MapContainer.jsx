@@ -3,6 +3,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useRef } from "react";
 
 function MapContainer({ branch }) {
+  console.log(branch,"branch")
   const mapRef = useRef(null);
 
   return (

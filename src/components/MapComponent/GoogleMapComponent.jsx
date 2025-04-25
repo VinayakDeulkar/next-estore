@@ -13,31 +13,36 @@ const center = {
   lng: 72.8777,
 };
 
-const GoogleMapComponent = () => {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDK_1lc7uLQSGYHVpr0mGl-c1Zys2OPOdg",
-  });
-
-  const [marker, setMarker] = useState(null);
-
+const GoogleMapComponent = ({ lat, lng }) => {
+  console.log(lat, lng, "lat,lang");
   const onMapClick = useCallback((event) => {
     if (event.latLng) {
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
-      setMarker({ lat, lng });
     }
   }, []);
-
-  if (!isLoaded) return <p>Loading Maps...</p>;
 
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={marker || center}
-      zoom={marker ? 15 : 5}
+      center={{
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+      }}
+      zoom={{ lat, lng } ? 15 : 5}
       onClick={onMapClick}
     >
-      {marker && <Marker position={marker} />}
+      {{
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+      } && (
+        <Marker
+          position={{
+            lat: parseFloat(lat),
+            lng: parseFloat(lng),
+          }}
+        />
+      )}
     </GoogleMap>
   );
 };

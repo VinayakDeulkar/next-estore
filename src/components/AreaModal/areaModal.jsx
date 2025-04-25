@@ -6,7 +6,7 @@ import "./areaModal.css";
 import DeliveryArea from "./DeliveryArea";
 import PickUpArea from "./PickUpArea";
 
-const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition }) => {
+const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition, type }) => {
   const { areaDetails } = useContext(AppContext);
   useEffect(() => {}, [areaDetails]);
 
@@ -20,7 +20,9 @@ const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition }) => {
           "& .MuiDialog-container > .MuiPaper-root": {
             borderRadius: "16px", // Change this value as needed
             minWidth: "400px",
+            margin:"15px"
           },
+          "& .MuiDialog-container": { justifyContent: type === "deskCheckout" ? "center" : "flex-start" },
         }}
       >
         <Box

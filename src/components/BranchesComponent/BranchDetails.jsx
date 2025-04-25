@@ -3,6 +3,7 @@ import { Box, DialogTitle, SwipeableDrawer } from "@mui/material";
 import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
 import MapContainer from "./MapContainer";
+import GoogleMapComponent from "../MapComponent/GoogleMapComponent";
 
 const drawerBleeding = 56;
 function BranchDetails({ branchId, setBranchId }) {
@@ -14,6 +15,7 @@ function BranchDetails({ branchId, setBranchId }) {
       setBranch(areaDetails.data.branch[branchId]);
     }
   }, [areaDetails.data.branch, branchId]);
+  console.log(areaDetails.data.branch,"areaDetails.data.branch")
   return (
     <SwipeableDrawer
       anchor="bottom"
@@ -23,7 +25,7 @@ function BranchDetails({ branchId, setBranchId }) {
       disableSwipeToOpen={true}
       PaperProps={{
         sx: {
-          width: "100%",
+          width: window.innerWidth > 600 ?"37.555%":"100%",
           position: "absolute",
           bottom: 0,
           left: 0,
@@ -49,6 +51,10 @@ function BranchDetails({ branchId, setBranchId }) {
         <React.Fragment>
           {branch?.office_end_time ? (
             <>
+              {branch?.lat && branch?.lng ? (
+                <GoogleMapComponent lat={branch?.lat} lng={branch?.lng} />
+              ) : null}
+
               <MapContainer branch={branch}></MapContainer>
               <div className="branch-call-div">
                 <div className="branch-call-flex">

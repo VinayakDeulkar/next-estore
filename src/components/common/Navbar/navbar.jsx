@@ -150,13 +150,14 @@ const Navbar = ({ handleDrawar }) => {
   return (
     <Box
       sx={{
-        backgroundColor: homePageDetails?.vendor_data?.vendor_color,
+        // backgroundColor: homePageDetails?.vendor_data?.vendor_color,
         height: "50px",
         top: 0,
         left: 0,
         zIndex: 999,
         color: "blue",
         position: "sticky",
+        padding: window.innerWidth > 600 ? "0 32px" : "0",
       }}
     >
       {renderGridNav()}
