@@ -1,26 +1,22 @@
 "use client";
-import GridLayout from "@/components/common/GridLayout/gridLayout";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import AccordianContactStore from "@/components/OrderPage/AccordianContactStore";
 import AccordianPaymentDetails from "@/components/OrderPage/AccordianPaymentDetails";
 import { AccrodianOrderDetails } from "@/components/OrderPage/AccrodianOrderDetails";
+import CommonDeliveryStatus from "@/components/OrderPage/CommonDeliveryStatus";
+import DeliveryMapStatus from "@/components/OrderPage/DeliveryMapStatus";
 import { AppContext } from "@/context/AppContext";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
 } from "@mui/material";
-import React, { useContext } from "react";
-import "./newOrderStatus.css";
-import CommonDeliveryStatus from "@/components/OrderPage/CommonDeliveryStatus";
-import DeliveryMapStatus from "@/components/OrderPage/DeliveryMapStatus";
 import { useRouter } from "next/navigation";
-import HeaderBox from "@/components/common/HeaderBox/headerBox";
-import GridLayout1 from "@/components/GridLayouts/gridLayout1";
-import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
-import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
-import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useContext } from "react";
+import "./newOrderStatus.css";
 
 const OrderPage = (props) => {
   const { language, homePageDetails } = useContext(AppContext);
@@ -76,7 +72,7 @@ const OrderPage = (props) => {
                     "&.Mui-expanded": {
                       margin: "auto",
                       boxShadow: "none",
-                      borderBottom: "none"
+                      borderBottom: "none",
                     },
                     borderBottom: "0.25px solid #ccc",
                   }}
@@ -92,7 +88,9 @@ const OrderPage = (props) => {
                       arText={element?.arabic}
                     />
                   </AccordionSummary>
-                  <AccordionDetails sx={{padding: 0}}>{element?.component}</AccordionDetails>
+                  <AccordionDetails sx={{ padding: 0 }}>
+                    {element?.component}
+                  </AccordionDetails>
                 </Accordion>
               ))}
           </div>

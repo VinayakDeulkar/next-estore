@@ -1,29 +1,25 @@
 "use client";
 import { addToCartApi, updateCartQauntity } from "@/apis";
+import ProductRegistrationModal from "@/components/ProductRegistrationModal/ProductRegistrationModal";
 import QuantityError from "@/components/QuantityError/quantityError";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import MultipleItems from "@/components/assetBoxDesign/MultipleItems/multipleItems";
+import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
+import OptionBox from "@/components/assetBoxDesign/OptionBox/optionBox";
+import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
+import TextInputField from "@/components/assetBoxDesign/TextField/textInputField";
 import Spinner from "@/components/common/Spinner/spinner";
 import { addCartTag } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
-import AddIcon from "@mui/icons-material/Add";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import RemoveIcon from "@mui/icons-material/Remove";
 import { Box } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 import ReactPixel from "react-facebook-pixel";
-import "./productDetails.css";
-import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
-import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
-import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
-import OptionBox from "@/components/assetBoxDesign/OptionBox/optionBox";
-import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
-import TextInputField from "@/components/assetBoxDesign/TextField/textInputField";
-import MultipleItems from "@/components/assetBoxDesign/MultipleItems/multipleItems";
 import SnapPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
-import ProductRegistrationModal from "@/components/ProductRegistrationModal/ProductRegistrationModal";
+import "./productDetails.css";
 
 const ProductDetails = ({
   product,

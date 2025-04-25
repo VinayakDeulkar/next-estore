@@ -1,6 +1,5 @@
 import { Box, Card, CardContent, CardMedia, Grid } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import { AppContext } from "@/context/AppContext";
 import moment from "moment";
 import ReactPixel from "react-facebook-pixel";
@@ -12,6 +11,7 @@ import NormalText from "../assetBoxDesign/NormalText/normalText";
 import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
 import SnapPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
+import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 
 const HorizontalCard = ({ product }) => {
   const {

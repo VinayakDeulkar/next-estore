@@ -9,9 +9,9 @@ import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
 import NormalText from "../assetBoxDesign/NormalText/normalText";
 import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSquare";
 import SubTitle from "../common/SubTitle/subTitle";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import "./productSquareCard.css";
 import TiktokPixel from "tiktok-pixel";
+import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =

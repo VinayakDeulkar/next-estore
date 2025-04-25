@@ -1,4 +1,4 @@
-import Homepage from "./homepage";
+import Homepage from "@/app/Homepage";
 
 const Page = async () => {
   return <Homepage />;

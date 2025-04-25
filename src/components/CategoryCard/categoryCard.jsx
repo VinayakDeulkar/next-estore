@@ -1,9 +1,8 @@
-import { Card, CardContent, CardMedia } from "@mui/material";
-import React, { useContext } from "react";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
-import { useRouter } from "next/navigation";
-import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import { AppContext } from "@/context/AppContext";
+import { Card, CardContent, CardMedia } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 const CategoryCard = ({ category }) => {
   const { homePageDetails, layout14ToggleView, layout17ToggleView } =

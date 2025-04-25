@@ -3,7 +3,7 @@ import { Divider, List, ListItem } from "@mui/material";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
-import TypographyConverter from "../common/TypographyConveter/TypographyConverter";
+import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 
 const RestSideDrawerContent = ({ setBurger }) => {
   const {

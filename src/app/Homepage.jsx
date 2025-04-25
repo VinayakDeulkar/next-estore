@@ -1,14 +1,12 @@
 "use client";
 import VendorBox from "@/components/assetBoxDesign/vendorBox/vendorBox";
 import BottomDrawer from "@/components/BottomDrawer/bottomDrawer";
-import Footer from "@/components/common/Footer/Footer";
-import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import EstoreLayout2 from "@/components/EstoreLayouts/estoreLayout2";
 import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
 import HomePageLayouts from "@/components/HomePageLayouts";
 import { AppContext } from "@/context/AppContext";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import { useContext } from "react";
 
 const Homepage = () => {

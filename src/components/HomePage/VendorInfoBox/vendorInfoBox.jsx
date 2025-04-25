@@ -1,14 +1,14 @@
+import TypographyConverter from "@/components/common/TypographyConveter/typographyConverter";
 import { AppContext } from "@/context/AppContext";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import Image from "next/image";
 import { useContext } from "react";
-import TypographyConverter from "../../common/TypographyConveter/TypographyConverter";
 
 const VendorInfoBox = () => {
   const { homePageDetails, language } = useContext(AppContext);
   return (
     <Box sx={{ padding: "40px 20px" }}>
-      <div style={{display: "flex", alignItems: "center", gap: "15px"}}> 
+      <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
         <div>
           <Image
             loading="lazy"

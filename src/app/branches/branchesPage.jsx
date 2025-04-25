@@ -4,7 +4,6 @@ import BranchList from "@/components/BranchesComponent/BranchList";
 import BackButton from "@/components/common/BackButton/BackButton";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import { Box } from "@mui/material";
-import { useJsApiLoader } from "@react-google-maps/api";
 import { useState } from "react";
 import "./branchPage.css";
 

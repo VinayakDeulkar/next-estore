@@ -1,26 +1,15 @@
 "use client";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
+import CategoryCard from "@/components/CategoryCard/categoryCard";
+import BackButton from "@/components/common/BackButton/BackButton";
+import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
+import HorizontalCard from "@/components/HorizontalCard/horizontalCard";
 import ProductSquareCard from "@/components/ProductSquareCard/productSquareCard";
+import { AppContext } from "@/context/AppContext";
 import { Box, Grid } from "@mui/material";
 import { useSearchParams } from "next/navigation";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import "../../components/HomePageLayouts/layout.css";
-import GridLayout from "@/components/common/GridLayout/gridLayout";
-import SingleProductCard from "@/components/SingleProductCard/singleProductCard";
-import { AppContext } from "@/context/AppContext";
-import HorizontalCard from "@/components/HorizontalCard/horizontalCard";
-import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
-import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
-import BackButton from "@/components/common/BackButton/BackButton";
-import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
-import CategoryCard from "@/components/CategoryCard/categoryCard";
-import Notes from "@/components/assetBoxDesign/Notes/notes";
-import NotificationAlerts from "@/components/assetBoxDesign/NotificationAlerts/notificationAlerts";
 
 const Products = (props) => {
   const [page, setPage] = useState(0);

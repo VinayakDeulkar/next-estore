@@ -8,15 +8,14 @@ import {
   IconButton,
   ListItem,
 } from "@mui/material";
+import axios from "axios";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import NormalText from "../assetBoxDesign/NormalText/normalText";
 import Notes from "../assetBoxDesign/Notes/notes";
-import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
-import axios from "axios";
-import CheckoutModal from "../NewOrderDetailsPage/Components/CheckoutModal";
 import SearchNone from "../SeachBar/searchNone";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 const PickUpArea = ({ handleClose }) => {
   const {
     homePageDetails,

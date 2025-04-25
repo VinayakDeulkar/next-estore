@@ -6,7 +6,7 @@ const HorizontalVendorInfo = () => {
   const { homePageDetails, language } = useContext(AppContext);
 
   return (
-    <div style={{display: "flex", alignItems: "center", gap: "20px"}}>
+    <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
       <div>
         <img
           className="horizontalVendorInfoImg"
