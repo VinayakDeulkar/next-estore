@@ -31,10 +31,12 @@ const Product = (props) => {
               <Box
                 sx={{ display: "flex", flexDirection: "column", gap: "20px" }}
               >
-                <ProductCarousel
-                  product={props?.data}
-                  addedVariaton={addedVariaton}
-                />
+                <Box sx={{ direction: "ltr" }}>
+                  <ProductCarousel
+                    product={props?.data}
+                    addedVariaton={addedVariaton}
+                  />
+                </Box>
                 <ProductDetails
                   product={props?.data}
                   addon={props?.addons}
