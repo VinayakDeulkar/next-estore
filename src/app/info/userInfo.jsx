@@ -642,6 +642,7 @@ const UserInfo = ({ type }) => {
                     : "أضف عنوانًا جديدًا للتوصيل إليه.",
               }}
               symbol={<RightArrow size={32} strokeWidth={1} />}
+              disableSymbolClick={true}
             />
           </>
         </div>

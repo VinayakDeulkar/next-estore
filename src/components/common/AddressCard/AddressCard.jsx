@@ -20,6 +20,7 @@ const AddressCard = ({
   cardClick,
   user,
   selected = false,
+  disableSymbolClick = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
@@ -80,6 +81,9 @@ const AddressCard = ({
             <IconButton
               sx={{ height: "100%", width: "100%" }}
               onClick={(e) => {
+                if (disableSymbolClick) {
+                  return;
+                }
                 e.stopPropagation();
                 setIsExpanded(!isExpanded);
               }}
@@ -121,7 +125,12 @@ const AddressCard = ({
               e.stopPropagation();
               onEdit();
             }}
-            style={{display: "flex", flexDirection: "column", alignItems: "center",gap: "2px"}}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "2px",
+            }}
           >
             <div>
               <EditPencilIcon />
@@ -137,7 +146,12 @@ const AddressCard = ({
               onDelete();
               setIsExpanded(!isExpanded);
             }}
-            style={{display: "flex", flexDirection: "column", alignItems: "center", gap: "2px"}}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "2px",
+            }}
           >
             <div>
               <DeleteCrossIcon />

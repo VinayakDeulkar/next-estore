@@ -243,7 +243,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
             <SubHeadline
               enText={product.english_name}
               arText={product.arabic_name}
-              fontWeight="300"
+              fontWeight="500"
             />
             <div>
               {product?.addOns?.map((i) => (

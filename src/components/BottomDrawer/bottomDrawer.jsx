@@ -599,6 +599,7 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
                   });
                   router.push("/delivery-address");
                 }}
+                disableSymbolClick={true}
               />
 
               {/* <AddressCard

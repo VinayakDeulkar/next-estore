@@ -2,6 +2,8 @@
 import {
   GetUserDetails,
   RegisterUser,
+  changeArea,
+  getScheduleTime,
   updateUserDetails,
   verifyUserOTP,
 } from "@/apis";
@@ -21,6 +23,7 @@ import {
 } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
 import { Box, Snackbar } from "@mui/material";
+import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import React, { useContext, useEffect, useState } from "react";
@@ -47,6 +50,9 @@ const Login = () => {
     handleContactDetailsChange,
     internationalDelivery,
     handleInternationalDeliveryChange,
+    handleAreaDetailsChange,
+    handleAddressDetailsChange,
+    vendorSlug
   } = useContext(AppContext);
 
   const [errorContactDetails, setErrorContactDetails] = useState({
@@ -65,6 +71,329 @@ const Login = () => {
   useEffect(() => {
     handleUserDetailsChange({ ...userDetails, is_guest: false });
   }, []);
+
+  const getAddressData = async (userReponseAddress) => {
+    if (userReponseAddress) {
+      const addresslist = userReponseAddress?.map((ele) => {
+        return {
+          id: ele.id,
+          addressName: ele.title ?? ele.addressName,
+          addressType: ele.address_type,
+          area: ele.area,
+          area_id: ele.area_id,
+          ar_area: ele.ar_area,
+          street: ele.street,
+          block: ele.block,
+          avenue: ele.avenue,
+          house: ele.house_number,
+          floor: ele.floor_number,
+          flat: ele.flat_number,
+          special_directions: ele?.special_directions,
+          lat: ele?.latitude,
+          lng: ele?.longitude,
+          is_primary: ele?.is_primary,
+        };
+      });
+      // setAddressData(addresslist);
+      const pimaryAddress = addresslist?.filter(
+        (element) => element?.is_primary === "1"
+      );
+
+      if (pimaryAddress.length) {
+        handleAddressDetailsChange((prev) => ({
+          ...prev,
+          id: pimaryAddress[0]?.id,
+          area_id: pimaryAddress[0]?.area_id,
+          block: pimaryAddress[0]?.block,
+          street: pimaryAddress[0]?.street,
+          avenue: pimaryAddress[0]?.avenue,
+          house: pimaryAddress[0]?.house,
+          floor: pimaryAddress[0]?.floor_number ?? pimaryAddress[0]?.floor,
+          flat: pimaryAddress[0]?.flat_number ?? pimaryAddress[0]?.flat,
+          lat: pimaryAddress[0]?.latitude ?? pimaryAddress[0]?.lat,
+          lng: pimaryAddress[0]?.longitude ?? pimaryAddress[0]?.lng,
+          fixedLat: pimaryAddress[0]?.latitude ?? pimaryAddress[0]?.lat,
+          fixedLng: pimaryAddress[0]?.longitude ?? pimaryAddress[0]?.lng,
+          addressType: pimaryAddress[0]?.addressType,
+          addressName: pimaryAddress[0]?.addressName,
+          special_directions: pimaryAddress[0]?.special_directions,
+        }));
+        const addedAddress = [];
+        areaDetails?.data?.governarate?.forEach((address) => {
+          const foundAddress = address?.area?.find(
+            (area) => area?.area_id == pimaryAddress[0]?.area_id
+          );
+          if (foundAddress) {
+            addedAddress.push(foundAddress);
+          }
+        });
+
+        const changeAreaResponse = await changeArea({
+          vendors_id: homePageDetails?.vendor_data?.vendors_id,
+          area_id: pimaryAddress[0]?.area_id,
+          vendorSlug: vendorSlug?.data?.ecom_url_slug,
+          user_string: localStorage.getItem("userID"),
+        });
+        if (changeAreaResponse.status === true) {
+          if (changeAreaResponse.data.show_popup === 0) {
+            const timeResponse = await getScheduleTime({
+              vendors_id: homePageDetails?.vendor_data?.vendors_id,
+              area_id: pimaryAddress[0]?.area_id,
+              vendorSlug: vendorSlug?.data?.ecom_url_slug,
+            });
+            if (timeResponse.status) {
+              let selectedBranch = timeResponse.data.branch;
+              let activeBranch = areaDetails?.data?.branch?.filter(
+                (branch) => branch?.id == selectedBranch?.id
+              )[0];
+              let estimationTime =
+                timeResponse.data?.delivery_details?.delivery_expected_type != 6
+                  ? timeResponse.data?.delivery_details?.delivery_expected_time
+                  : 0;
+              if (
+                timeResponse.data.time == 1 &&
+                addedAddress[0]?.availability_status == 1
+              ) {
+                handleAreaDetailsChange((k) => ({
+                  ...k,
+                  area: addedAddress[0].area_name,
+                  minimum: addedAddress[0].minimum_charge,
+                  shopOpen: timeResponse.data.time,
+                  now: timeResponse.data.time,
+                  branch: "",
+                  ar_branch: "",
+                  ar_area: addedAddress[0].area_name_ar,
+                  area_id: addedAddress[0].area_id,
+                  deliveryTiming: timeResponse.data.schedule_time,
+                  ar_deliveryTiming: timeResponse.data.schedule_time_ar,
+                  customDelivery:
+                    timeResponse.data?.delivery_details
+                      ?.delivery_expected_type == 6,
+                  getDeliveryTiming: moment()
+                    .add(estimationTime, "minutes")
+                    .toDate(),
+                  laterDeliveryTiming: moment()
+                    .add(estimationTime, "minutes")
+                    .toDate(),
+                  branchForArea: {
+                    ...timeResponse.data.branch,
+                    end:
+                      activeBranch?.office_end_time >
+                      activeBranch?.office_start_time
+                        ? moment(activeBranch?.office_end_time, "HH:mm:ss")
+                        : moment(activeBranch?.office_end_time, "HH:mm:ss").add(
+                            1,
+                            "days"
+                          ),
+                    start: moment(activeBranch?.office_start_time, "HH:mm:ss"),
+                  },
+                }));
+              } else {
+                handleAreaDetailsChange((l) => ({
+                  ...l,
+                  area: addedAddress[0]?.area_name,
+                  minimum: addedAddress[0]?.minimum_charge,
+                  shopOpen:
+                    addedAddress[0]?.availability_status == 1
+                      ? timeResponse?.data?.time
+                      : 2,
+                  now:
+                    addedAddress[0]?.availability_status == 1
+                      ? timeResponse?.data?.time
+                      : 2,
+                  ar_area: addedAddress[0]?.area_name_ar,
+                  area_id: addedAddress[0]?.area_id,
+                  branch: "",
+                  ar_branch: "",
+                  deliveryTiming: timeResponse?.data?.schedule_time,
+                  ar_deliveryTiming: timeResponse?.data?.schedule_time_ar,
+                  customDelivery:
+                    timeResponse.data?.delivery_details
+                      ?.delivery_expected_type == 6,
+                  getDeliveryTiming:
+                    addedAddress[0]?.availability_status == 1 ||
+                    timeResponse?.data?.time == 2
+                      ? moment(
+                          timeResponse?.data?.preorder_on,
+                          "YYYY-MM-DD HH:mm:ss"
+                        ).toDate()
+                      : moment().add(estimationTime, "minutes").toDate(),
+                  laterDeliveryTiming:
+                    addedAddress[0]?.availability_status == 1 ||
+                    timeResponse?.data?.time == 2
+                      ? moment(
+                          timeResponse?.data?.preorder_on,
+                          "YYYY-MM-DD HH:mm:ss"
+                        ).toDate()
+                      : moment().add(estimationTime, "minutes").toDate(),
+                  branchForArea: {
+                    ...timeResponse?.data?.branch,
+                    end:
+                      activeBranch?.office_end_time >
+                      activeBranch?.office_start_time
+                        ? moment(activeBranch?.office_end_time, "HH:mm:ss")
+                        : moment(activeBranch?.office_end_time, "HH:mm:ss").add(
+                            1,
+                            "days"
+                          ),
+                    start: moment(activeBranch?.office_start_time, "HH:mm:ss"),
+                  },
+                }));
+              }
+            } else {
+            }
+          } else {
+          }
+        }
+      } else {
+        handleAddressDetailsChange((prev) => ({
+          ...prev,
+          id: addresslist[0]?.id,
+          area_id: addresslist[0]?.area_id,
+          block: addresslist[0]?.block,
+          street: addresslist[0]?.street,
+          avenue: addresslist[0]?.avenue,
+          house: addresslist[0]?.house,
+          floor: addresslist[0]?.floor_number ?? addresslist[0]?.floor,
+          flat: addresslist[0]?.flat_number ?? addresslist[0]?.flat,
+          lat: addresslist[0]?.latitude ?? addresslist[0]?.lat,
+          lng: addresslist[0]?.longitude ?? addresslist[0]?.lng,
+          fixedLat: addresslist[0]?.latitude ?? addresslist[0]?.lat,
+          fixedLng: addresslist[0]?.longitude ?? addresslist[0]?.lng,
+          addressType: addresslist[0]?.addressType,
+          addressName: addresslist[0]?.addressName,
+          special_directions: addresslist[0]?.special_directions,
+        }));
+        const addedAddress = [];
+        areaDetails?.data?.governarate?.forEach((address) => {
+          const foundAddress = address?.area?.find(
+            (area) => area?.area_id == addresslist[0]?.area_id
+          );
+          if (foundAddress) {
+            addedAddress.push(foundAddress);
+          }
+        });
+
+        const changeAreaResponse = await changeArea({
+          vendors_id: homePageDetails?.vendor_data?.vendors_id,
+          area_id: addresslist[0]?.area_id,
+          vendorSlug: vendorSlug?.data?.ecom_url_slug,
+          user_string: localStorage.getItem("userID"),
+        });
+        if (changeAreaResponse.status === true) {
+          if (changeAreaResponse.data.show_popup === 0) {
+            const timeResponse = await getScheduleTime({
+              vendors_id: homePageDetails?.vendor_data?.vendors_id,
+              area_id: addresslist[0]?.area_id,
+              vendorSlug: vendorSlug?.data?.ecom_url_slug,
+            });
+            if (timeResponse.status) {
+              let selectedBranch = timeResponse.data.branch;
+              let activeBranch = areaDetails?.data?.branch?.filter(
+                (branch) => branch?.id == selectedBranch?.id
+              )[0];
+              let estimationTime =
+                timeResponse.data?.delivery_details?.delivery_expected_type != 6
+                  ? timeResponse.data?.delivery_details?.delivery_expected_time
+                  : 0;
+              if (
+                timeResponse.data.time == 1 &&
+                addedAddress[0].availability_status == 1
+              ) {
+                handleAreaDetailsChange((k) => ({
+                  ...k,
+                  area: addedAddress[0].area_name,
+                  minimum: addedAddress[0].minimum_charge,
+                  shopOpen: timeResponse.data.time,
+                  now: timeResponse.data.time,
+                  branch: "",
+                  ar_branch: "",
+                  ar_area: addedAddress[0].area_name_ar,
+                  area_id: addedAddress[0].area_id,
+                  deliveryTiming: timeResponse.data.schedule_time,
+                  ar_deliveryTiming: timeResponse.data.schedule_time_ar,
+                  customDelivery:
+                    timeResponse.data?.delivery_details
+                      ?.delivery_expected_type == 6,
+                  getDeliveryTiming: moment()
+                    .add(estimationTime, "minutes")
+                    .toDate(),
+                  laterDeliveryTiming: moment()
+                    .add(estimationTime, "minutes")
+                    .toDate(),
+                  branchForArea: {
+                    ...timeResponse.data.branch,
+                    end:
+                      activeBranch?.office_end_time >
+                      activeBranch?.office_start_time
+                        ? moment(activeBranch?.office_end_time, "HH:mm:ss")
+                        : moment(activeBranch?.office_end_time, "HH:mm:ss").add(
+                            1,
+                            "days"
+                          ),
+                    start: moment(activeBranch?.office_start_time, "HH:mm:ss"),
+                  },
+                }));
+              } else {
+                handleAreaDetailsChange((l) => ({
+                  ...l,
+                  area: addedAddress[0].area_name,
+                  minimum: addedAddress[0].minimum_charge,
+                  shopOpen:
+                    addedAddress[0].availability_status == 1
+                      ? timeResponse.data.time
+                      : 2,
+                  now:
+                    addedAddress[0].availability_status == 1
+                      ? timeResponse.data.time
+                      : 2,
+                  ar_area: addedAddress[0].area_name_ar,
+                  area_id: addedAddress[0].area_id,
+                  branch: "",
+                  ar_branch: "",
+                  deliveryTiming: timeResponse?.data?.schedule_time,
+                  ar_deliveryTiming: timeResponse?.data?.schedule_time_ar,
+                  customDelivery:
+                    timeResponse.data?.delivery_details
+                      ?.delivery_expected_type == 6,
+                  getDeliveryTiming:
+                    addedAddress[0].availability_status == 1 ||
+                    timeResponse.data.time == 2
+                      ? moment(
+                          timeResponse.data.preorder_on,
+                          "YYYY-MM-DD HH:mm:ss"
+                        ).toDate()
+                      : moment().add(estimationTime, "minutes").toDate(),
+                  laterDeliveryTiming:
+                    addedAddress[0].availability_status == 1 ||
+                    timeResponse.data.time == 2
+                      ? moment(
+                          timeResponse.data.preorder_on,
+                          "YYYY-MM-DD HH:mm:ss"
+                        ).toDate()
+                      : moment().add(estimationTime, "minutes").toDate(),
+                  branchForArea: {
+                    ...timeResponse.data.branch,
+                    end:
+                      activeBranch?.office_end_time >
+                      activeBranch?.office_start_time
+                        ? moment(activeBranch?.office_end_time, "HH:mm:ss")
+                        : moment(activeBranch?.office_end_time, "HH:mm:ss").add(
+                            1,
+                            "days"
+                          ),
+                    start: moment(activeBranch?.office_start_time, "HH:mm:ss"),
+                  },
+                }));
+              }
+            } else {
+            }
+          } else {
+          }
+        }
+      }
+    }
+  };
 
   const handleNext = async () => {
     if (openOtpPage) {
@@ -88,7 +417,7 @@ const Login = () => {
           vendor_id: homePageDetails?.vendor_data.vendors_id,
           sendSMS: false,
           country_code: `+${tele[contactDetails.phoneCode]}`,
-          phone_number: contactDetails.phone,
+          phone_number: contactDetails?.phone,
           jwt_token: response?.jwt_token,
           user_id: localStorage.getItem("id"),
           language: language,
@@ -143,6 +472,7 @@ const Login = () => {
               ) {
                 router.push("/delivery-address");
               } else {
+                getAddressData(userReponse?.data?.address);
                 router.push("/checkout");
               }
             } else {
@@ -314,7 +644,6 @@ const Login = () => {
 
           if (response?.data?.is_otp_sent) {
             localStorage.setItem("id", response?.data?.id);
-
             enqueueSnackbar({ variant: "success", message: response?.message });
             setOtpSent(true);
             setOpenOtpPage(true);
