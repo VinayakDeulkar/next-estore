@@ -37,7 +37,7 @@
 .delivery-selected-address-area {
   font-size: 14px;
   color: #000;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 html[dir="rtl"] .delivery-selected-address-area {
@@ -113,7 +113,7 @@ html[dir="rtl"] .delivery-selected-address .right-arrow {
   } */
 .delivery-type-text {
   color: #000;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 16px;
   margin-top: 10px;
 }
@@ -152,7 +152,7 @@ html[dir="rtl"] .delivery-type-text {
   font-weight: 400;
   padding: 0 7px;
   position: absolute;
-  top: 17px;
+  top: 19px;
   user-select: none;
   transition: 0.2s ease all;
 }
@@ -165,14 +165,14 @@ html[dir="rtl"] .delivery-type-text {
 
 .delivery-address-form input:focus ~ .label-name,
 .delivery-address-form input:not(:focus):valid ~ .label-name {
-  top: -17px;
+  top: -10px;
   bottom: 0;
   left: 0;
 }
 
 html[dir="rtl"] .delivery-address-form input:focus ~ .label-name,
 html[dir="rtl"] .delivery-address-form input:not(:focus):valid ~ .label-name {
-  top: -17px;
+  top: -19px;
   bottom: 0;
   right: 0;
   left: auto;
@@ -186,7 +186,7 @@ html[dir="rtl"] .delivery-address-form input:not(:focus):valid ~ .label-name {
   font-weight: 400;
   padding: 0 7px;
   position: absolute;
-  top: 17px;
+  top: 19px;
   user-select: none;
   transition: 0.2s ease all;
 }
@@ -194,12 +194,11 @@ html[dir="rtl"] .delivery-address-form input:not(:focus):valid ~ .label-name {
 .delivery-address-form-div1 .form-control {
   border: 1px solid #e1e1e1;
   border-radius: 9px;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
   padding: 7px;
   box-shadow: none;
   color: #000;
-  height: 43px;
   width: 100%;
 }
 .delivery-address-form-div1 .form-control:focus {
@@ -213,12 +212,11 @@ html[dir="rtl"] .delivery-address-form input:not(:focus):valid ~ .label-name {
 
 .delivery-address-form-div .form-control {
   border: 1px solid #e1e1e1;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
   border-radius: 9px;
   color: #000000;
   padding: 7px;
-  height: 43px;
 }
 
 .delivery-address-form-div .form-control:focus {

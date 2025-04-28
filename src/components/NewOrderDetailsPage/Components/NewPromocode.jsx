@@ -56,7 +56,7 @@ const NewPromocode = ({
     }
   };
   return (
-    <div className="promocode-mainDiv">
+    <div>
       <SubHeadline enText={"Promotion Code"} arText={"الرمز الترويجي"} />
       <div
         className={`promocode-input-div ${

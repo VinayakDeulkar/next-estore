@@ -129,6 +129,9 @@ const Layout17 = ({
             borderRadius: "10px !important",
             boxShadow: "none",
             padding: 0,
+            "&.Mui-expanded": {
+              margin: "25px 0", 
+            }
           }}
           key={category?.category_id}
           expanded={expendedList.includes(category?.category_id)}

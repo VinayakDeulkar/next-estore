@@ -517,80 +517,98 @@ const MobileCheckOut = () => {
             ></div>
             <MainTitle enText={"Checkout"} arText={"تفاصيل الطلب"} />
 
-            <SubHeadline enText="Items Details" arText="تفاصيل عربة التسوق" />
-            <NewOrderProductList
-              setSuccessPromocode={setSuccessPromocode}
-              successPromocode={successPromocode}
-              deliveryCharge={deliveryCharge}
-            />
-            <div
-              className="checkout-page-text"
-              style={{ marginTop: "25px", marginBottom: "5px" }}
-            >
-              <SubHeadline
-                enText={
-                  areaDetails?.type === "delivery"
-                    ? "Delivery For"
-                    : "Pickup For"
-                }
-                arText={
-                  areaDetails?.type === "delivery" ? "التسليم ل" : "بيك اب ل"
-                }
+            <div style={{display: "flex", flexDirection: "column", gap: "25px"}}>
+              <div>
+                <SubHeadline
+                  enText="Items Details"
+                  arText="تفاصيل عربة التسوق"
+                />
+                <NewOrderProductList
+                  setSuccessPromocode={setSuccessPromocode}
+                  successPromocode={successPromocode}
+                  deliveryCharge={deliveryCharge}
+                />
+              </div>
+              <div
+                className="checkout-page-text"
+              >
+                <SubHeadline
+                  enText={
+                    areaDetails?.type === "delivery"
+                      ? "Delivery For"
+                      : "Pickup For"
+                  }
+                  arText={
+                    areaDetails?.type === "delivery" ? "التسليم ل" : "بيك اب ل"
+                  }
+                />
+                <BuyerDetails />
+              </div>
+              <div>
+                {internationalDelivery.delivery_country_code.toLowerCase() ===
+                  "kw" ||
+                homePageDetails?.vendor_data?.international_delivery === "3" ||
+                homePageDetails?.vendor_data?.international_delivery === "" ? (
+                  <NewDeliveryDetails
+                    addressDetails={addressDetails}
+                    companyData={companyData}
+                    setShowAddress={setShowAddress}
+                    showAddress={showAddress}
+                  />
+                ) : (
+                  <DeliveryAddressSection
+                    internationalDelivery={internationalDelivery}
+                  />
+                )}
+              </div>
+              <div>
+                {companyData && (
+                  <NewDeliveryCompany companyData={companyData} />
+                )}
+              </div>
+              <div>
+                <NewPaymentSelector
+                  handleSetPaymentChange={handleSetPaymentChange}
+                  payment={payment}
+                  setWidth={setWidth}
+                  width={width}
+                />
+              </div>
+              <div>
+                {cart?.show_promocode == 1 ? (
+                  <NewPromocode
+                    promocode={promocode}
+                    setPromocode={setPromocode}
+                    setApply={setApply}
+                    apply={apply}
+                    setSuccessPromocode={setSuccessPromocode}
+                    deliveryCharge={deliveryCharge}
+                  />
+                ) : null}
+              </div>
+            </div>
+            <div>
+              <NewAmountDetails
+                cart={cart}
+                areaDetails={areaDetails}
+                language={language}
+                details={homePageDetails}
+                payment={payment}
+                onConfirmOrder={() => {
+                  if (
+                    internationalDelivery.delivery_country_code.toLowerCase() ===
+                      "kw" ||
+                    homePageDetails?.vendor_data?.international_delivery ===
+                      "3" ||
+                    homePageDetails?.vendor_data?.international_delivery === ""
+                  ) {
+                    onConfirmOrder(payment);
+                  } else {
+                    submitInternational(payment);
+                  }
+                }}
               />
             </div>
-            <BuyerDetails />
-            {internationalDelivery.delivery_country_code.toLowerCase() ===
-              "kw" ||
-            homePageDetails?.vendor_data?.international_delivery === "3" ||
-            homePageDetails?.vendor_data?.international_delivery === "" ? (
-              <NewDeliveryDetails
-                addressDetails={addressDetails}
-                companyData={companyData}
-                setShowAddress={setShowAddress}
-                showAddress={showAddress}
-              />
-            ) : (
-              <DeliveryAddressSection
-                internationalDelivery={internationalDelivery}
-              />
-            )}
-            {companyData && <NewDeliveryCompany companyData={companyData} />}
-            <NewPaymentSelector
-              handleSetPaymentChange={handleSetPaymentChange}
-              payment={payment}
-              setWidth={setWidth}
-              width={width}
-            />
-            {cart?.show_promocode == 1 ? (
-              <NewPromocode
-                promocode={promocode}
-                setPromocode={setPromocode}
-                setApply={setApply}
-                apply={apply}
-                setSuccessPromocode={setSuccessPromocode}
-                deliveryCharge={deliveryCharge}
-              />
-            ) : null}
-            <NewAmountDetails
-              cart={cart}
-              areaDetails={areaDetails}
-              language={language}
-              details={homePageDetails}
-              payment={payment}
-              onConfirmOrder={() => {
-                if (
-                  internationalDelivery.delivery_country_code.toLowerCase() ===
-                    "kw" ||
-                  homePageDetails?.vendor_data?.international_delivery ===
-                    "3" ||
-                  homePageDetails?.vendor_data?.international_delivery === ""
-                ) {
-                  onConfirmOrder(payment);
-                } else {
-                  submitInternational(payment);
-                }
-              }}
-            />
             {showAddress &&
             userDetails?.address?.length > 0 &&
             areaDetails?.type !== "pickup" ? (

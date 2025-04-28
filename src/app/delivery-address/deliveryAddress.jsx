@@ -497,7 +497,7 @@ const DeliveryAddress = () => {
               homePageDetails?.vendor_data?.home_page_type === "18" &&
               "fashion-theme"
             }`}
-            style={{ padding: "20px", position: "sticky" }}
+            style={{ position: "sticky" }}
           >
             <Box
               className="contact-details-next-button"

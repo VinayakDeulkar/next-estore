@@ -50,6 +50,9 @@ const Layout14 = ({ categories }) => {
               borderRadius: "10px !important",
               boxShadow: "none",
               padding: 0,
+              "&.Mui-expanded": {
+                margin: "25px 0", 
+              }
             }}
             key={category?.category_id}
           >

@@ -767,7 +767,8 @@ const ProductDetails = ({
               style={{
                 fontWeight: "300",
                 fontSize: "14px",
-                color: "rgba(141, 141, 141, 1)",
+                // color: "rgba(141, 141, 141, 1)",
+                color: "rgb(141, 141, 141)"
               }}
             ></p>
           ) : null}
@@ -869,12 +870,17 @@ const ProductDetails = ({
                       {checked[addonIndex]?.some(
                         (check, k) => check.isChecked
                       ) && (
-                        <SmallButtonRounded
-                          enText={"Clear All"}
-                          arText={"مسح الإختيار"}
-                          varient={"dark"}
-                          handleClick={() => onClearAll(addonIndex)}
-                        />
+                        <div
+                          className="max-tab"
+                          style={{
+                            margin: "0",
+                            fontSize: "14px",
+                            fontWeight: 500,
+                          }}
+                          onClick={() => onClearAll(addonIndex)}
+                        >
+                          {language == "ltr" ? "Clear All" : "مسح الإختيار"}
+                        </div>
                       )}
                     </Box>
                   </Box>

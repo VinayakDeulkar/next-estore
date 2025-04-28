@@ -11,8 +11,12 @@ const NewPaymentSelector = ({
   setWidth,
   width,
 }) => {
-  const { homePageDetails, language, internationalDelivery, activeBackgroundColor } =
-    useContext(AppContext);
+  const {
+    homePageDetails,
+    language,
+    internationalDelivery,
+    activeBackgroundColor,
+  } = useContext(AppContext);
 
   const resizer = () => {
     setWidth((i) => document.getElementById("slider-width")?.offsetWidth);
@@ -96,7 +100,14 @@ const NewPaymentSelector = ({
               handleSetPaymentChange(4);
             }}
             className={`intro-flex payment-details-holder`}
-            style={payment == 4 ? {backgroundColor: activeBackgroundColor, border: "2px solid #000"} : {}}
+            style={
+              payment == 4
+                ? {
+                    backgroundColor: activeBackgroundColor,
+                    border: "2px solid #000",
+                  }
+                : {}
+            }
           >
             <span className="del-ic" style={{ padding: 0 }}>
               <img
@@ -119,7 +130,14 @@ const NewPaymentSelector = ({
             handleSetPaymentChange(1);
           }}
           className={`intro-flex payment-details-holder`}
-          style={payment == 1 ? {backgroundColor: activeBackgroundColor, border: "2px solid #000"} : {}}
+          style={
+            payment == 1
+              ? {
+                  backgroundColor: activeBackgroundColor,
+                  border: "2px solid #000",
+                }
+              : {}
+          }
         >
           <span className="del-ic" style={{ padding: 0 }}>
             <img
@@ -137,7 +155,14 @@ const NewPaymentSelector = ({
               handleSetPaymentChange(2);
             }}
             className={`intro-flex payment-details-holder`}
-            style={payment == 2 ? {backgroundColor: activeBackgroundColor, border: "2px solid #000"} : {}}
+            style={
+              payment == 2
+                ? {
+                    backgroundColor: activeBackgroundColor,
+                    border: "2px solid #000",
+                  }
+                : {}
+            }
           >
             <span className="del-ic" style={{ padding: 0 }}>
               <img
@@ -173,7 +198,14 @@ const NewPaymentSelector = ({
               handleSetPaymentChange(3);
             }}
             className={`intro-flex payment-details-holder`}
-            style={payment == 3 ? {backgroundColor: activeBackgroundColor, border: "2px solid #000"} : {}}
+            style={
+              payment == 3
+                ? {
+                    backgroundColor: activeBackgroundColor,
+                    border: "2px solid #000",
+                  }
+                : {}
+            }
           >
             <span className="del-ic" style={{ padding: 0 }}>
               <img

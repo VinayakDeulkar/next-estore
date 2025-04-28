@@ -2,11 +2,17 @@ import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import React, { useContext } from "react";
 
-const NormalText = ({ enText, arText, color = "#000", fontSize = "14px" }) => {
+const NormalText = ({
+  enText,
+  arText,
+  color = "#000",
+  fontSize = "14px",
+  fontWeight = "300",
+}) => {
   const { language } = useContext(AppContext);
 
   return (
-    <Box sx={{ fontWeight: "300", fontSize: fontSize, color: color }}>
+    <Box sx={{ fontWeight: fontWeight, fontSize: fontSize, color: color }}>
       {language === "ltr" ? enText : arText}
     </Box>
   );

@@ -61,10 +61,7 @@ const NewDeliveryDetails = ({
   };
   return (
     <div /* style={{ paddingTop: "10px" }} */>
-      <div
-        className="checkout-page-text"
-        style={{ marginTop: "25px", marginBottom: "5px" }}
-      >
+      <div className="checkout-page-text">
         <SubHeadline
           enText={
             areaDetails?.type == "delivery"

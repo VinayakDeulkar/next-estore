@@ -610,15 +610,9 @@ html[dir="rtl"] .delivery-address-details-secondDiv .right-arrow {
   transform: rotate(180deg);
 }
 
-.promocode-mainDiv {
-  border-top: 0.25px solid #ccc;
-  padding-top: 20px;
-}
-
 .payment-details-headDIv,
 .acmount-mainDIv {
-  border-top: 0.25px solid #ccc;
-  padding-top: 20px;
+  padding-top: 13px;
 }
 
 .order-details-cart-disocunt {
