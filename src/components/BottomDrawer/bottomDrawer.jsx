@@ -19,6 +19,10 @@ import Divider from "../Divider/Divider";
 import moment from "moment";
 import "./BottomDrawer.css";
 import { tele } from "@/constants/constants";
+import { SwipeableDrawer } from "@mui/material";
+
+
+const drawerBleeding = 56;
 
 const BottomDrawer = ({ type, onClick, hideAddress }) => {
   const {
@@ -61,21 +65,10 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
       setAddressData(addresslist);
     }
   };
+
   useEffect(() => {
     getAddressData();
   }, [userDetails.address, userDetails.address?.length]);
-
-  const showDrawer = () => {
-    const modalContainer = document.getElementById("bottomDrawer");
-    const body = document.body;
-    if (modalContainer && body) {
-      if (modalContainer) {
-        modalContainer.removeAttribute("class");
-        modalContainer.classList.add("open");
-        body.classList.add("modal-active");
-      }
-    }
-  };
 
   const houseLabel = (addressType) => {
     switch (addressType) {
@@ -105,9 +98,6 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
         return "";
     }
   };
-  useEffect(() => {
-    showDrawer();
-  }, []);
 
   const updateAddress = (id) => {
     addressData.map(async (address) => {
@@ -478,45 +468,53 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
   };
   return (
     <div id="bottomDrawer">
-      <div
-        className={"modal-background"}
-        onClick={(e) => {
-          e.stopPropagation();
-          if (type === "checkout") {
-            hideAddress?.();
-          }
+      <SwipeableDrawer
+        anchor="bottom"
+        open={true}
+        onClose={() => {}}
+        swipeAreaWidth={drawerBleeding}
+        disableSwipeToOpen={true}
+        PaperProps={{
+          sx: {
+            width: window.innerWidth > 990 ? "37.555%" : "100%",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            borderTopLeftRadius: 12,
+            borderTopRightRadius: 12,
+            backgroundColor: "#f5f5f5",
+          },
         }}
+        container={
+          typeof window !== "undefined"
+            ? () => document.getElementById("drawer-container")
+            : undefined
+        }
       >
-        <div
-          className={"modal"}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          <div className="drawerOuterDiv">
-            <div className="drawerInnerDiv">
-              <SubHeadline
-                enText={"Select your delivery address"}
-                arText={"حدد عنوان التسليم الخاص بك"}
-              />
+        <div className="drawerOuterDiv">
+          <div className="drawerInnerDiv">
+            <SubHeadline
+              enText={"Select your delivery address"}
+              arText={"حدد عنوان التسليم الخاص بك"}
+            />
 
-              {addressData.map((address, i) => (
-                <div key={i}>
-                  <div>
-                    <AddressCard
-                      cardClick={() => handleAddressClick(address)}
-                      icon={getAddressType(address.addressType, "", "28px")}
-                      info={{
-                        name: address?.addressName,
-                        area:
-                          language === "ltr"
-                            ? address.area
-                            : address.ar_area
-                            ? address.ar_area
-                            : address.area,
-                        addressFirst: `${
-                          language == "ltr" ? "Street" : "شارع "
-                        } ${address?.street}
+            {addressData.map((address, i) => (
+              <div key={i}>
+                <div>
+                  <AddressCard
+                    cardClick={() => handleAddressClick(address)}
+                    icon={getAddressType(address.addressType, "", "28px")}
+                    info={{
+                      name: address?.addressName,
+                      area:
+                        language === "ltr"
+                          ? address.area
+                          : address.ar_area
+                          ? address.ar_area
+                          : address.area,
+                      addressFirst: `${
+                        language == "ltr" ? "Street" : "شارع "
+                      } ${address?.street}
                   ${", "}
                   ${language == "ltr" ? "Block" : "قطعة "} ${address?.block}
                   ${", "}
@@ -526,13 +524,13 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
                       ? ", "
                       : ""
                   }`,
-                        addressSecond: `${
-                          address?.avenue
-                            ? language == "ltr"
-                              ? "Avenue"
-                              : "جادة"
-                            : ""
-                        }
+                      addressSecond: `${
+                        address?.avenue
+                          ? language == "ltr"
+                            ? "Avenue"
+                            : "جادة"
+                          : ""
+                      }
                    ${address?.avenue ? address?.avenue : ""}
                    ${address?.floor ? ", " : ""}
 
@@ -547,62 +545,62 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
                     ${address?.flat ? ", " : ""}
                   ${address?.flat ? flatLabel(address?.addressType) : ""}
                   ${address?.flat ? address?.flat : ""}`,
-                        special_directions: address.special_directions,
-                      }}
-                      symbol={<ThreeDots />}
-                      onEdit={() => {
-                        updateAddress(address?.id);
-                      }}
-                      onDelete={() => deleteAddress(address?.id)}
-                    />
-                  </div>
+                      special_directions: address.special_directions,
+                    }}
+                    symbol={<ThreeDots />}
+                    onEdit={() => {
+                      updateAddress(address?.id);
+                    }}
+                    onDelete={() => deleteAddress(address?.id)}
+                  />
                 </div>
-              ))}
+              </div>
+            ))}
 
-              {addressData?.length > 0 ? <Divider /> : null}
+            {addressData?.length > 0 ? <Divider /> : null}
 
-              <AddressCard
-                icon={<Pointer />}
-                info={{
-                  name:
-                    language === "ltr"
-                      ? "Deliver to new location"
-                      : "تسليم إلى الموقع الجديد",
-                  desc:
-                    language === "ltr"
-                      ? "Add new address to deliver to."
-                      : "أضف عنوانًا جديدًا للتوصيل إليه.",
-                }}
-                symbol={<RightArrow size={32} strokeWidth={1} />}
-                cardClick={() => {
-                  handleAreaDetailsChange({
-                    ...areaDetails,
-                    area: "",
-                    branch: "",
-                    branch_id: "",
-                    area_id: "",
-                  });
-                  handleAddressDetailsChange({
-                    block: "",
-                    street: "",
-                    avenue: "",
-                    house: "",
-                    floor: "",
-                    flat: "",
-                    special_directions: "",
-                    lat: 29.378,
-                    lng: 47.99,
-                    fixedLat: 29.378,
-                    fixedLng: 47.99,
-                    addressString: "",
-                    addressType: "1",
-                  });
-                  router.push("/delivery-address");
-                }}
-                disableSymbolClick={true}
-              />
+            <AddressCard
+              icon={<Pointer />}
+              info={{
+                name:
+                  language === "ltr"
+                    ? "Deliver to new location"
+                    : "تسليم إلى الموقع الجديد",
+                desc:
+                  language === "ltr"
+                    ? "Add new address to deliver to."
+                    : "أضف عنوانًا جديدًا للتوصيل إليه.",
+              }}
+              symbol={<RightArrow size={32} strokeWidth={1} />}
+              cardClick={() => {
+                handleAreaDetailsChange({
+                  ...areaDetails,
+                  area: "",
+                  branch: "",
+                  branch_id: "",
+                  area_id: "",
+                });
+                handleAddressDetailsChange({
+                  block: "",
+                  street: "",
+                  avenue: "",
+                  house: "",
+                  floor: "",
+                  flat: "",
+                  special_directions: "",
+                  lat: 29.378,
+                  lng: 47.99,
+                  fixedLat: 29.378,
+                  fixedLng: 47.99,
+                  addressString: "",
+                  addressType: "1",
+                });
+                router.push("/delivery-address");
+              }}
+              disableSymbolClick={true}
+            />
 
-              {/* <AddressCard
+            {/* <AddressCard
                 icon={<LocationIcon />}
                 info={{
                   name:
@@ -640,10 +638,9 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
                   router.push("/delivery-address");
                 }}
               /> */}
-            </div>
           </div>
         </div>
-      </div>
+      </SwipeableDrawer>
 
       {loading && (
         <div

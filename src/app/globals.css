@@ -730,13 +730,12 @@ html[dir="rtl"] .delivery-order-header .delivery-order-title {
 }
 
 .bottom-button {
-  position: sticky;
   display: flex;
   width: 100%;
   justify-content: space-between;
   z-index: 100;
   bottom: 0;
-  padding: 0px 8px 8px;
+  padding: 0px 0px 8px;
   min-height: 53px;
   background-color: transparent;
 }

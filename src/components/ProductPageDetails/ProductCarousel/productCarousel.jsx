@@ -21,6 +21,7 @@ const ProductCarousel = ({ product, addedVariaton }) => {
       emulateTouch
       stopOnHover
       className="carouselImage"
+      animationHandler={"fade"}
     >
       <Box className="product-owl-img">
         <img

@@ -50,7 +50,7 @@ const Layout15 = ({ categories }) => {
             boxShadow: "none",
             padding: 0,
             "&.Mui-expanded": {
-              margin: "25px 0", 
+              margin: "25px 0",
             },
           }}
           key={category?.category_id}
@@ -65,10 +65,27 @@ const Layout15 = ({ categories }) => {
             id="panel1a-header"
             sx={{ padding: 0 }}
           >
-            <HeadLine
-              arText={category?.category_name_ar}
-              enText={category?.category_name}
-            />
+            <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
+              <HeadLine
+                arText={category?.category_name_ar}
+                enText={category?.category_name}
+              />
+              <div
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "500",
+                  border: "1px solid #000",
+                  padding: "0 18px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "15px",
+                  marginTop: "3px",
+                }}
+              >
+                {category?.products?.length}
+              </div>
+            </div>
           </AccordionSummary>
           {category?.is_subcategory ? (
             <Grid container spacing={"20px"}>

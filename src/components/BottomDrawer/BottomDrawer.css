@@ -1,3 +1,9 @@
+body.modal-open {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+
 #bottomDrawer {
   position: absolute;
   display: table;
@@ -6,7 +12,7 @@
   top: 0;
   left: 0;
   transform: scale(0);
-  z-index: 100;
+  z-index: 9999;
 }
 
 #bottomDrawer.open {

@@ -1,6 +1,8 @@
 import SubTitle from "@/components/common/SubTitle/subTitle";
 import { Box } from "@mui/material";
 import NormalText from "../NormalText/normalText";
+import { useContext } from "react";
+import { AppContext } from "@/context/AppContext";
 
 const OptionBox = ({
   enText,
@@ -10,6 +12,8 @@ const OptionBox = ({
   selected,
   disabled,
 }) => {
+  const { activeBackgroundColor } = useContext(AppContext);
+
   return (
     <Box
       component="button"
@@ -21,9 +25,9 @@ const OptionBox = ({
         alignItems: "center",
         justifyContent: "space-between",
         padding: "10px",
-        border: "1.5px solid #AEAEAE",
+        border: selected ? "2px solid #000" : "1.5px solid #AEAEAE",
         height: "40px",
-        backgroundColor: selected ? "#F2F2F2" : disabled ? "#ced4da" : "#fff",
+        backgroundColor: selected ? activeBackgroundColor : disabled ? "#ced4da" : "#fff",
         width: "100%",
         borderRadius: "6.38px",
       }}

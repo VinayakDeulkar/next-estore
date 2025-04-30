@@ -99,8 +99,8 @@ const Layout11 = ({
             boxShadow: "none",
             padding: 0,
             "&.Mui-expanded": {
-              margin: "25px 0", 
-            }
+              margin: "25px 0",
+            },
           }}
           key={category?.category_id}
           expanded={expendedList.includes(category?.category_id)}
@@ -114,11 +114,28 @@ const Layout11 = ({
             id="panel1a-header"
             sx={{ padding: 0 }}
           >
-            <div id={`category${i}`} onClick={() => setcategoryopen(true)}>
-              <HeadLine
-                arText={category?.category_name_ar}
-                enText={category?.category_name}
-              />
+            <div style={{width: "100%", display: "flex", alignItems: "center", gap: "10px"}}>
+              <div id={`category${i}`} onClick={() => setcategoryopen(true)}>
+                <HeadLine
+                  arText={category?.category_name_ar}
+                  enText={category?.category_name}
+                />
+              </div>
+              <div
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "500",
+                  border: "1px solid #000",
+                  padding: "0 18px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "15px",
+                  marginTop: "3px"
+                }}
+              >
+                {category?.products?.length}
+              </div>
             </div>
           </AccordionSummary>
           {category?.is_subcategory ? (

@@ -17,6 +17,7 @@ const Homepage = () => {
     internationalDelivery,
     addressDetails,
   } = useContext(AppContext);
+  
   const checkDrawer = () =>
     homePageDetails?.vendor_data &&
     userDetails?.address?.length > 0 &&
@@ -35,11 +36,6 @@ const Homepage = () => {
             <Box
               sx={{
                 position: "relative",
-                margin: checkDrawer()
-                  ? window.innerWidth > 990
-                    ? "-40px"
-                    : "-20px"
-                  : "0",
               }}
             >
               {window?.innerWidth < 991 ? (

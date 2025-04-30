@@ -29,9 +29,19 @@
 
 .text-field-input:focus ~ .text-field-label,
 .text-field-input:not(:focus):valid ~ .text-field-label {
+  font-size: 11px;
   top: 0px;
   bottom: 0;
   left: 0;
+  padding: 0 5px;
+}
+
+html[dir="rtl"] .text-field-input:focus ~ .text-field-label,
+html[dir="rtl"] .text-field-input:not(:focus):valid ~ .text-field-label {
+  top: 0px;
+  bottom: 0;
+  right: 0;
+  left: auto;
 }
 
 .text-field-input:focus ~ .text-field-label,

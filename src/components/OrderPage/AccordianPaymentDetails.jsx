@@ -22,7 +22,7 @@ const AccordianPaymentDetails = ({ orderDetails }) => {
               : "Payment Trial By",
           arabic_value:
             orderDetails?.payment_status === "1"
-              ? "المدفوعة بواسطة"
+              ? "طريقة الدفع"
               : "تجربة الدفع بواسطة",
           value: orderDetails?.payment_method,
           is_payment_type: true,
@@ -35,7 +35,7 @@ const AccordianPaymentDetails = ({ orderDetails }) => {
         },
         {
           english_value: "Transaction No.",
-          arabic_value: "رقم التحويلة",
+          arabic_value: "رقم العملية",
           value: orderDetails?.transaction_number,
         },
         {

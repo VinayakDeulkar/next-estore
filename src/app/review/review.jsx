@@ -155,7 +155,18 @@ const Review = () => {
     <Box>
       <EstoreLayout1>
         <BackComponent backClick={() => router.push(`/`)} />
-        <Box sx={{ position: "relative", height: "calc(100vh - 150px)" }}>
+        <Box
+          sx={{
+            position: "relative",
+            height: "calc(100vh - 150px)",
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "0px 0px 8px",
+          }}
+        >
           <div
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
           >
@@ -184,71 +195,69 @@ const Review = () => {
             </div>
           </div>
 
-          <div className="newreview-button-div">
-            <div
-              className={`contact-details-bottom-button review-order-mobile-button contact-details-mobile-button  ${
-                homePageDetails?.vendor_data?.home_page_type === "18" &&
-                "fashion-theme"
-              }`}
-              style={{ width: "100%", position: "absolute" }}
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "12px",
+            }}
+          >
+            <Link
+              href={``}
+              className="contact-details-back-button background-issue"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/");
+              }}
             >
-              <Link
-                href={``}
-                className="contact-details-back-button background-issue"
-                onClick={(e) => {
-                  e.preventDefault();
-                  router.push("/");
-                }}
-              >
-                {language === "ltr" ? "+ Add More" : "+ أضف المزيد "}
-              </Link>
-              <Link
-                className="contact-details-next-button"
-                href={``}
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (
-                    parseFloat(cart?.subTotal) >=
-                    (homePageDetails?.vendor_data?.minimum_charge != "" ||
-                    (areaDetails?.minimum != "" && areaDetails?.minimum)
-                      ? homePageDetails?.vendor_data?.minimum_charge != ""
-                        ? parseFloat(
-                            homePageDetails?.vendor_data?.minimum_charge
-                          )
-                        : parseFloat(areaDetails?.minimum)
-                      : 0)
-                  ) {
-                    onGoCheckoutClick();
-                  }
-                }}
-              >
-                {parseFloat(cart?.subTotal) >=
-                (homePageDetails?.vendor_data?.minimum_charge != "" ||
-                (areaDetails?.minimum != "" && areaDetails?.minimum)
-                  ? homePageDetails?.vendor_data?.minimum_charge != ""
-                    ? parseFloat(homePageDetails?.vendor_data?.minimum_charge)
-                    : parseFloat(areaDetails?.minimum)
-                  : 0)
-                  ? language == "ltr"
-                    ? "Checkout"
-                    : "متابعة الطلب"
-                  : language == "ltr"
-                  ? `Minimum Order is ${
-                      areaDetails?.minimum != ""
-                        ? parseFloat(areaDetails?.minimum).toFixed(3)
-                        : parseFloat(
-                            homePageDetails?.vendor_data?.minimum_charge
-                          ).toFixed(3)
-                    } KD`
-                  : `الحد الأدنى للطلب هو ${
-                      areaDetails?.minimum != ""
-                        ? parseFloat(areaDetails?.minimum).toFixed(3)
-                        : parseFloat(
-                            homePageDetails?.vendor_data?.minimum_charge
-                          ).toFixed(3)
-                    } د.ك`}
-              </Link>
-            </div>
+              {language === "ltr" ? "+ Add More" : "+ أضف المزيد "}
+            </Link>
+            <Link
+              className="contact-details-next-button"
+              href={``}
+              onClick={(e) => {
+                e.preventDefault();
+                if (
+                  parseFloat(cart?.subTotal) >=
+                  (homePageDetails?.vendor_data?.minimum_charge != "" ||
+                  (areaDetails?.minimum != "" && areaDetails?.minimum)
+                    ? homePageDetails?.vendor_data?.minimum_charge != ""
+                      ? parseFloat(homePageDetails?.vendor_data?.minimum_charge)
+                      : parseFloat(areaDetails?.minimum)
+                    : 0)
+                ) {
+                  onGoCheckoutClick();
+                }
+              }}
+            >
+              {parseFloat(cart?.subTotal) >=
+              (homePageDetails?.vendor_data?.minimum_charge != "" ||
+              (areaDetails?.minimum != "" && areaDetails?.minimum)
+                ? homePageDetails?.vendor_data?.minimum_charge != ""
+                  ? parseFloat(homePageDetails?.vendor_data?.minimum_charge)
+                  : parseFloat(areaDetails?.minimum)
+                : 0)
+                ? language == "ltr"
+                  ? "Checkout"
+                  : "متابعة الطلب"
+                : language == "ltr"
+                ? `Minimum Order is ${
+                    areaDetails?.minimum != ""
+                      ? parseFloat(areaDetails?.minimum).toFixed(3)
+                      : parseFloat(
+                          homePageDetails?.vendor_data?.minimum_charge
+                        ).toFixed(3)
+                  } KD`
+                : `الحد الأدنى للطلب هو ${
+                    areaDetails?.minimum != ""
+                      ? parseFloat(areaDetails?.minimum).toFixed(3)
+                      : parseFloat(
+                          homePageDetails?.vendor_data?.minimum_charge
+                        ).toFixed(3)
+                  } د.ك`}
+            </Link>
           </div>
           {popup ? (
             <ModalClosed note={popup} setNote={setPopup}></ModalClosed>

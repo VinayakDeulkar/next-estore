@@ -659,7 +659,7 @@ const ProductRegistrationModal = ({
                         : "تلتقط من"
                       : language === "ltr"
                       ? "Delivered To"
-                      : "تفاصيل الاستلام"}
+                      : "التوصيل إلى"}
                   </div>
 
                   <div className="orderStatus-userData-deliverText">

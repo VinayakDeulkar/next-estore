@@ -52,7 +52,7 @@ const Login = () => {
     handleInternationalDeliveryChange,
     handleAreaDetailsChange,
     handleAddressDetailsChange,
-    vendorSlug
+    vendorSlug,
   } = useContext(AppContext);
 
   const [errorContactDetails, setErrorContactDetails] = useState({
@@ -655,6 +655,12 @@ const Login = () => {
     }
   };
 
+  const isValidEmail = () => {
+    return (
+      contactDetails?.email.includes("@") && contactDetails?.email.includes(".")
+    );
+  };
+
   return (
     <Box>
       <EstoreLayout1>
@@ -663,7 +669,11 @@ const Login = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: openOtpPage ? "20px" : "40px",
+            gap:
+              openOtpPage ||
+              homePageDetails?.vendor_data?.checkout_method === "1"
+                ? "20px"
+                : "40px",
             position: "relative",
             height:
               window.innerWidth > 900
@@ -689,6 +699,7 @@ const Login = () => {
               errorContactDetails={errorContactDetails}
               showNameEmailFields={showNameEmailFields}
               showGuestUser={showGuestUser}
+              position={"absolute"}
             />
           )}
           <div
@@ -699,8 +710,22 @@ const Login = () => {
           >
             <Box
               className="contact-details-next-button"
+              sx={{
+                backgroundColor:
+                  homePageDetails?.vendor_data?.checkout_method === "1"
+                    ? !isValidEmail()
+                      ? "gray"
+                      : {}
+                    : {},
+              }}
               onClick={() => {
-                handleNext();
+                if (homePageDetails?.vendor_data?.checkout_method === "1") {
+                  if (isValidEmail()) {
+                    handleNext();
+                  }
+                } else {
+                  handleNext();
+                }
               }}
             >
               {language === "ltr" ? "Next" : "متابعة"}

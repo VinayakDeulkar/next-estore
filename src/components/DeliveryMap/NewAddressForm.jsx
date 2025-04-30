@@ -314,10 +314,10 @@ const NewAddressForm = ({
               }
             >
               {areaDetails?.area === ""
-                ? language == "ltr"
+                ? language === "ltr"
                   ? "Select delivery location"
                   : "حدد موقع التسليم"
-                : language == "ltr"
+                : language === "ltr"
                 ? areaDetails?.area
                 : areaDetails?.ar_area}
             </span>

@@ -39,7 +39,7 @@ const ReviewBar = () => {
           md={4}
           sm={4}
           lg={4}
-          xs={4}
+          xs={3}
           sx={{
             textAlign: "start",
             display: "flex",
@@ -63,7 +63,7 @@ const ReviewBar = () => {
           </Box>
           <EstoreBag />
         </Grid>
-        <Grid item md={4} sm={4} lg={4} xs={4}>
+        <Grid item md={4} sm={4} lg={4} xs={5}>
           <SubHeadline
             enText={"Review Order"}
             arText={"مراجعة الطلب"}

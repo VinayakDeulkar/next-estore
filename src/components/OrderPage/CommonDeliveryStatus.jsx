@@ -160,7 +160,7 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
                   : orderDetails?.payment_status === "1"
                   ? orderDetails?.current_status?.name
                     ? orderDetails?.current_status?.arabic_name
-                    : "تم استلام الطلب"
+                    : "تم اتمام الطلب"
                   : "لم يتم تقديم الطلب"
               }
             />
@@ -212,8 +212,8 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
                   {orderDetails?.customer_details?.self_pickup === "1"
                     ? null
                     : language === "ltr"
-                    ? "ETA "
-                    : "موعد الاستلام"}
+                    ? "ETA"
+                    : "موعد التسليم"}
                   {orderDetails?.customer_details?.self_pickup ===
                   "1" ? null : (
                     <div>

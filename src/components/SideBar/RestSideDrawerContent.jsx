@@ -4,6 +4,7 @@ import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import SocialMedia from "../common/SocialMedia/socialMedia";
 
 const RestSideDrawerContent = ({ setBurger }) => {
   const {
@@ -219,7 +220,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
     }
   };
   return (
-    <List style={{ marginBottom: "360px" }}>
+    <List>
       {sectionsArray &&
         sectionsArray
           .filter((ele) => Object.keys(ele).length != 0)

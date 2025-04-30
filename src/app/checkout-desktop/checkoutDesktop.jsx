@@ -8,10 +8,12 @@ import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import { AppContext } from "@/context/AppContext";
 import { Grid } from "@mui/material";
 import { LoadScript, useJsApiLoader } from "@react-google-maps/api";
+import { useRouter } from "next/navigation";
 import { useContext } from "react";
 
 const CheckoutDesktop = () => {
-  const { cart } = useContext(AppContext);
+  const { userDetails, handleUserDetailsChange } = useContext(AppContext);
+  const router = useRouter();
 
   return (
     <>
@@ -34,7 +36,18 @@ const CheckoutDesktop = () => {
           sx={{ height: "calc(100vh - 80px)", overflow: "scroll" }}
           className="checkoutScroll"
         >
-          <BackComponent />
+          <BackComponent
+            backClick={() => {
+              if (userDetails?.is_guest) {
+                handleUserDetailsChange((prev) => ({
+                  ...prev,
+                  is_guest: false,
+                }));
+              } else {
+                router.push("/");
+              }
+            }}
+          />
           <div style={{ marginBottom: "30px" }}>
             <HeadLine enText={"Checkout"} arText={"تفاصيل الطلب"} />
           </div>

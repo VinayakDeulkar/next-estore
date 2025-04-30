@@ -82,10 +82,12 @@ const UserDetails = ({
   const renderContactType = () => {
     if (userDetails?.is_guest) {
       return (
-        <NewContactDetails
-          errorContactDetails={errorContactDetails}
-          setErrorContactDetails={setErrorContactDetails}
-        />
+        <div style={{marginTop: "10px"}}>
+          <NewContactDetails
+            errorContactDetails={errorContactDetails}
+            setErrorContactDetails={setErrorContactDetails}
+          />
+        </div>
       );
     } else if (openOtpPage) {
       return (

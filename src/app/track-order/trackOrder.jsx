@@ -30,7 +30,7 @@ const TrackOrder = () => {
         <div className="trackOrder-whitebox">
           <div>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <HeadLine enText={"Orders Tracker"} arText={"تعقب الطلبات"} />
+              <HeadLine enText={"Orders Tracker"} arText={"تتبع الطلبات"} />
             </Box>
             <div className="tracker-order-center order-tracker-image">
               <img

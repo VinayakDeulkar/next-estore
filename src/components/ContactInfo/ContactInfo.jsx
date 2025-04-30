@@ -13,6 +13,7 @@ const ContactInfo = ({
   showNameEmailFields,
   showGuestUser,
   stopRedirect = false,
+  position = "unset",
 }) => {
   const {
     language,
@@ -23,7 +24,7 @@ const ContactInfo = ({
     handleContactDetailsChange,
     internationalDelivery,
     handleInternationalDeliveryChange,
-    activeBackgroundColor
+    activeBackgroundColor,
   } = useContext(AppContext);
   const router = useRouter();
 
@@ -152,12 +153,13 @@ const ContactInfo = ({
                     <div
                       style={{
                         position: "absolute",
-                        right: "10px",
+                        right: language === "ltr" && "10px",
+                        left: language !== "ltr" && 0,
                         top: "7px",
                         display: "flex",
                         alignItems: "center",
                         color: "#fff",
-                        padding: "5px 7px",
+                        padding: language === "ltr" ? "5px 7px" : "5px 12px",
                         borderRadius: "50px",
                         fontSize: "12px",
                         gap: "5px",
@@ -206,12 +208,13 @@ const ContactInfo = ({
                     <div
                       style={{
                         position: "absolute",
-                        right: "10px",
+                        right: language === "ltr" && "10px",
+                        left: language !== "ltr" && 0,
                         top: "27px",
                         display: "flex",
                         alignItems: "center",
                         color: "#fff",
-                        padding: "5px 7px",
+                        padding: language === "ltr" ? "5px 7px" : "5px 12px",
                         borderRadius: "50px",
                         fontSize: "12px",
                         gap: "5px",
@@ -259,11 +262,12 @@ const ContactInfo = ({
                     <div
                       style={{
                         position: "absolute",
-                        right: "10px",
+                        right: language === "ltr" && "10px",
+                        left: language !== "ltr" && 0,
                         top: "27px",
                         display: "flex",
                         alignItems: "center",
-                        padding: "5px 7px",
+                        padding: language === "ltr" ? "5px 7px" : "5px 12px",
                       }}
                     >
                       <CheckCircleIcon
@@ -333,7 +337,7 @@ const ContactInfo = ({
           style={{
             fontSize: language === "ltr" ? "16px" : "18px",
             marginTop: "30px",
-            // position: "absolute",
+            position: position,
             bottom: "100px",
             fontWeight: 400,
             textDecoration: "underline",

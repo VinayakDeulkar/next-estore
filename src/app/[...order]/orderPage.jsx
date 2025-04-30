@@ -22,7 +22,6 @@ const OrderPage = (props) => {
   const { language, homePageDetails } = useContext(AppContext);
   const orderDetails = props.data;
   const router = useRouter();
-  console.log(props.data, "props.data");
   const accordianArray = [
     {
       english: "Order Details",
@@ -30,8 +29,8 @@ const OrderPage = (props) => {
       component: <AccrodianOrderDetails orderDetails={orderDetails} />,
     },
     {
-      english: "Payments Details",
-      arabic: "تفاصيل المدفوعات",
+      english: "Payment Details",
+      arabic: "تفاصيل عملية الدفع",
       component: <AccordianPaymentDetails orderDetails={orderDetails} />,
     },
     {

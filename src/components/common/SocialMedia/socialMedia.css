@@ -1,5 +1,4 @@
 .sideMenu-bottom-mainDiv {
-  position: absolute;
   width: 100%;
   bottom: 0;
   left: 0;
@@ -61,7 +60,11 @@ html[dir="rtl"] .privacy-policy-text {
   text-align: center;
   font-size: 15px;
   /* font-style: italic; */
-  font-weight: 200;
+  font-weight: 300;
   line-height: normal;
-  margin-bottom: 7px;
+  margin: 0 0 7px -61px;
+}
+
+html[dir="rtl"] .poweredBy-text {
+  margin: 0 0 7px -45px;
 }

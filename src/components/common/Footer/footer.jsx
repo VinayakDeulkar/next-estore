@@ -42,7 +42,7 @@ const Footer = () => {
               color: "#000",
               display: "flex",
               alignItems: "center",
-              margin: `${language === "ltr" ? "0 0 0 10px" : "0 35px 0 0"}`,
+              margin: `${language === "ltr" ? "0 0 0 3px" : "0 55px 0 0"}`,
               fontSize: `${language === "ltr" ? "16px" : "18px"}`,
               marginBottom: "5px",
             }}
@@ -114,9 +114,11 @@ const Footer = () => {
           <div>
             <NormalText
               enText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`}
+              arText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`}
               color={"#fff"}
+              isNumber={true}
             />
-            {/* <NormalText enText={vendorSlug?.data?.vendor_data?.support_mail} color={"#fff"} /> */}
+            <NormalText enText={vendorSlug?.data?.vendor_data?.support_mail} arText={vendorSlug?.data?.vendor_data?.support_mail} color={"#fff"} />
             <NormalText enText={"@Petrafood"} color={"#fff"} />
           </div>
           <div>

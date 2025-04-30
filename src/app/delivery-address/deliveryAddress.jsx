@@ -492,13 +492,7 @@ const DeliveryAddress = () => {
           ) : (
             <InternationalAddress internationalError={internationalError} />
           )}
-          <div
-            className={`contact-details-bottom-button contact-details-mobile-button ${
-              homePageDetails?.vendor_data?.home_page_type === "18" &&
-              "fashion-theme"
-            }`}
-            style={{ position: "sticky" }}
-          >
+          <div>
             <Box
               className="contact-details-next-button"
               onClick={() => {

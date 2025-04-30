@@ -135,7 +135,7 @@ const DeliveryMapStatus = ({
             customer_details?.self_pickup == 1 ? "Pickup From" : "Delivered To"
           }
           arText={
-            customer_details?.self_pickup == 1 ? "تلتقط من" : "تفاصيل الاستلام"
+            customer_details?.self_pickup == 1 ? "تلتقط من" : "التوصيل إلى"
           }
         />
         {customer_details.is_international_delivery === "1" ? (

@@ -12,6 +12,7 @@ import SubTitle from "../common/SubTitle/subTitle";
 import "./productSquareCard.css";
 import TiktokPixel from "tiktok-pixel";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =
@@ -400,7 +401,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           marginTop: "5px",
         }}
       >
-        <SubTitle
+        <SubHeadline
           enText={product?.product_name}
           arText={product?.product_name_ar}
         />
@@ -517,8 +518,9 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                         ? parseFloat(product?.product_price).toFixed(3)
                         : 0
                     } KD`}
-                    width="90px"
-                    fontSize="14px"
+                    width="82px"
+                    fontSize="13px"
+                    height="28px"
                   />
                 )}
               </div>

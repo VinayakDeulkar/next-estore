@@ -11,6 +11,7 @@ const SmallButtonSquare = ({
   width = "106px",
   fontWeight = "500",
   fontSize = "16px",
+  height = "35px"
 }) => {
   const { language, homePageDetails } = useContext(AppContext);
 
@@ -25,7 +26,7 @@ const SmallButtonSquare = ({
           homePageDetails?.vendor_data?.vendor_color
         ),
         padding: "8px",
-        height: "35px",
+        height: height,
         color: varientColor(
           varient,
           homePageDetails?.vendor_data?.vendor_color

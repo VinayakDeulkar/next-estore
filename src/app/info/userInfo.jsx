@@ -203,6 +203,7 @@ const UserInfo = ({ type }) => {
           vendors_id: homePageDetails?.vendor_data?.vendors_id,
           area_id: address.area_id,
           vendorSlug: vendorSlug?.data?.ecom_url_slug,
+          user_string: localStorage.getItem("userID"),
         });
         if (response.status === true) {
           if (response.data.show_popup === 0) {
@@ -509,7 +510,7 @@ const UserInfo = ({ type }) => {
 
   return (
     <EstoreLayout1>
-      <BackComponent backClick={() =>  router.push("/")} />
+      <BackComponent backClick={() => router.push("/")} />
       <div>
         <div
           className="holder-container"

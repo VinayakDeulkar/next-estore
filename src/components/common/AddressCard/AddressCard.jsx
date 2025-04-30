@@ -135,7 +135,7 @@ const AddressCard = ({
             <div>
               <EditPencilIcon />
             </div>
-            <div>{language === "ltr" ? "Edit" : "يحرر"}</div>
+            <div>{language === "ltr" ? "Edit" : "تعديل"}</div>
           </div>
         ) : null}
         {onDelete ? (
@@ -156,7 +156,7 @@ const AddressCard = ({
             <div>
               <DeleteCrossIcon />
             </div>
-            <div>{language === "ltr" ? "Delete" : "يمسح"}</div>
+            <div>{language === "ltr" ? "Delete" : "مسح"}</div>
           </div>
         ) : null}
       </div>

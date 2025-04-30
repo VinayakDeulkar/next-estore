@@ -303,6 +303,10 @@ const HorizontalCard = ({ product }) => {
     }
   }, [cart]);
 
+  const handleCardClick = () => {
+    router.push(`/product?id=${product?.product_slug}`);
+  };
+
   return (
     <Card
       sx={{
@@ -311,7 +315,9 @@ const HorizontalCard = ({ product }) => {
         padding: "15px 0px",
         gap: "20px",
         boxShadow: "none",
+        cursor: "pointer"
       }}
+      onClick={handleCardClick}
     >
       <Grid container spacing={2}>
         <Grid item xs={3.5}>
@@ -590,6 +596,9 @@ const HorizontalCard = ({ product }) => {
                           ? parseFloat(product?.product_price).toFixed(3)
                           : 0
                       } KD`}
+                      width="82px"
+                      fontSize="13px"
+                      height="28px"
                     />
                   </Box>
                 )}

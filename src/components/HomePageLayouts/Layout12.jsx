@@ -30,10 +30,27 @@ const Layout12 = ({ categories }) => {
               justifyContent: "space-between",
             }}
           >
-            <HeadLine
-              arText={category?.category_name_ar}
-              enText={category?.category_name}
-            />
+            <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
+              <HeadLine
+                arText={category?.category_name_ar}
+                enText={category?.category_name}
+              />
+              <div
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "500",
+                  border: "1px solid #000",
+                  padding: "0 18px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "15px",
+                  marginTop: "3px",
+                }}
+              >
+                {category?.products?.length}
+              </div>
+            </div>
             <SmallButtonRounded
               enText={"Show More"}
               arText={"عرض المزيد"}

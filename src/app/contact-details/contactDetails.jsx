@@ -121,7 +121,7 @@ const ContactDetails = () => {
             height: "calc(100vh - 150px)",
           }}
         >
-          <HeadLine enText={"Contact Details"} arText={"ارقام التواصل"} />
+          <HeadLine enText={"Contact Details"} arText={"معلومات التواصل"} />
           {stepper === 0 ? (
             <NewContactDetails
               errorContactDetails={errorContactDetails}
