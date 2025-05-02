@@ -265,6 +265,9 @@ const PickUpArea = ({ handleClose }) => {
                       enText={branch?.address}
                       arText={branch?.arabic_address}
                     />
+                    <div style={{borderBottom: "1px solid #dee2e6", padding: "5px"}}>
+
+                    </div>
 
                     {branch?.availability_status != 1 && (
                       <Notes

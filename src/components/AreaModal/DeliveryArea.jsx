@@ -272,6 +272,9 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
                       [k]: !governarateActive[k],
                     });
                   }}
+                  sx={{
+                    fontWeight: "500"
+                  }}
                 >
                   {language === "ltr"
                     ? gov?.governarate_name
