@@ -17,7 +17,8 @@ const Homepage = () => {
     internationalDelivery,
     addressDetails,
   } = useContext(AppContext);
-  
+  console.log(homePageDetails, "homePageDetails");
+
   const checkDrawer = () =>
     homePageDetails?.vendor_data &&
     userDetails?.address?.length > 0 &&
@@ -39,8 +40,8 @@ const Homepage = () => {
               }}
             >
               {window?.innerWidth < 991 ? (
-                <Box sx={{ direction: "ltr" }}>
-                  <CarouselImage />
+                <Box sx={{ direction: "ltr", margin: "0 -22px" }}>
+                  <CarouselImage mobile={true} />
                 </Box>
               ) : null}
               {checkDrawer() ? <BottomDrawer type={"home"} /> : null}

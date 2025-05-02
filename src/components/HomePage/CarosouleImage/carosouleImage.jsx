@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { useContext } from "react";
 import { Carousel } from "react-responsive-carousel";
 
-const CarouselImage = () => {
+const CarouselImage = ({ mobile = false }) => {
   const { homePageDetails } = useContext(AppContext);
 
   const carouselHeight = () => {
@@ -25,7 +25,7 @@ const CarouselImage = () => {
       sx={{
         "& .carousel-root .carousel .control-arrow": {
           display: "none",
-          borderRadius: "13px",
+          borderRadius: mobile ? "0" : "13px",
         },
       }}
     >
@@ -44,14 +44,14 @@ const CarouselImage = () => {
         animationHandler={"fade"}
       >
         {homePageDetails?.vendor_data?.banner_images?.map((image) => (
-          <Box key={image?.id} sx={{ borderRadius: "13.81px" }}>
+          <Box key={image?.id} sx={{ borderRadius: mobile ? "0" : "13.81px" }}>
             <img
               loading="lazy"
               src={image?.image}
               style={{
                 width: "100%",
                 height: carouselHeight(),
-                borderRadius: "13.81px",
+                borderRadius: mobile ? "0" : "13.81px",
                 border: "1.5px solid #9191913D",
               }}
               alt="image?.image"

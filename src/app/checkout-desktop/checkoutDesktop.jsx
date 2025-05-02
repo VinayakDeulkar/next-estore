@@ -41,12 +41,7 @@ const CheckoutDesktop = () => {
         <Grid item xs={0} sm={2}>
           {/* For Aligment */}
         </Grid>
-        <Grid
-          item
-          xs={0}
-          sm={4}
-          className="checkoutScroll"
-        >
+        <Grid item xs={0} sm={3.5} className="checkoutScroll">
           <BackComponent
             backClick={() => {
               if (userDetails?.is_guest) {
