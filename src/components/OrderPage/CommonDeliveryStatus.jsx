@@ -306,7 +306,7 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
       {orderDetails?.delivery_details?.name &&
       orderDetails?.payment_status === "1" &&
       orderDetails.customer_details.self_pickup !== "1" ? (
-        <div style={{marginTop: "20px"}}>
+        <div style={{ marginTop: "20px" }}>
           <SubHeadline enText={"Delivered By"} arText={"التوصيل بواسطة"} />
           <div
             style={{
@@ -352,6 +352,23 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
                       </>
                     )
                   }
+                  arText={
+                    orderDetails?.estimated_date && (
+                      <>
+                        {moment(orderDetails?.estimated_date)
+                          .locale("en")
+                          .format("DD") +
+                          " " +
+                          moment(orderDetails?.estimated_date)
+                            .locale(language == "ltr" ? "en" : "ar-sa")
+                            .format("MMMM") +
+                          moment(orderDetails?.estimated_date)
+                            .locale("en")
+                            .format(", yyyy")}
+                      </>
+                    )
+                  }
+                  isNumber={true}
                 />
                 <NormalText
                   enText={orderDetails?.delivery_details?.name}
@@ -362,6 +379,11 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
                     orderDetails?.estimated_time &&
                     calculateTimeLeft(orderDetails?.estimated_time)
                   }
+                  arText={
+                    orderDetails?.estimated_time &&
+                    calculateTimeLeft(orderDetails?.estimated_time)
+                  }
+                  isNumber={true}
                 />
               </div>
             </div>

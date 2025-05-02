@@ -6,17 +6,14 @@ import AddressDetails from "./AddressDetails/AddressDetails";
 import PaymentDetails from "./PaymentDetails/PaymentDetails";
 import { AppContext } from "@/context/AppContext";
 
-const DeskCheckoutComponents = () => {
-  const [showPaymentMethod, setShowPaymentMethod] = useState(false);
-  const [showAddressComponents, setShowAddressComponents] = useState(false);
-  const [selectAddress, setSelectAddress] = useState(false);
-
-  const triggerDeliveryAddress = () => {
-    setShowAddressComponents(true);
-  };
-  const triggerPaymentMethod = (value) => {
-    setShowPaymentMethod(value);
-  };
+const DeskCheckoutComponents = ({
+  showPaymentMethod,
+  showAddressComponents,
+  selectAddress,
+  setSelectAddress,
+  triggerDeliveryAddress,
+  triggerPaymentMethod,
+}) => {
   return (
     <Box
       sx={{
@@ -38,7 +35,6 @@ const DeskCheckoutComponents = () => {
           selectAddress={selectAddress}
         />
       ) : null}
-      {showPaymentMethod ? <PaymentDetails /> : null}
     </Box>
   );
 };

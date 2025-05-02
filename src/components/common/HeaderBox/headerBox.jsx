@@ -6,12 +6,33 @@ import Navbar from "../Navbar/navbar";
 import ClearIcon from "@mui/icons-material/Clear";
 import SocialMedia from "../SocialMedia/socialMedia";
 import { AppContext } from "@/context/AppContext";
+import { getTNC } from "@/apis/getTNC";
+import TermsModal from "@/components/TermsModal/termsModal";
+
 const HeaderBox = ({}) => {
   const [open, setOpen] = useState(false);
   const handleDrawar = () => {
     setOpen(true);
   };
-  const { language } = useContext(AppContext);
+  const { language, vendorSlug, homePageDetails } = useContext(AppContext);
+  const [isOpen, setIsOpen] = useState(false);
+  const [termsData, setTermsData] = useState();
+
+  const handleTermsClick = async () => {
+    try {
+      const response = await getTNC({
+        vendorSlug: vendorSlug?.data?.ecom_url_slug,
+        vendors_id: homePageDetails?.vendor_data?.vendors_id,
+      });
+      console.log(response, "In termsclick");
+      if (response.status) {
+        setIsOpen(true);
+        setTermsData(response?.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box sx={{ position: "sticky" }}>
@@ -53,7 +74,7 @@ const HeaderBox = ({}) => {
           sx={{
             width: window.innerWidth < 991 ? "90vw" : "30vw",
             minHeight: "100vh",
-            overflowX: "hidden"
+            overflowX: "hidden",
           }}
         >
           <div
@@ -70,7 +91,12 @@ const HeaderBox = ({}) => {
               <VendorInfoBox />
               <RestSideDrawerContent setBurger={setOpen} />
             </Box>
-            <SocialMedia />
+            <SocialMedia handleTermsClick={handleTermsClick} />
+            <TermsModal
+              isOpen={isOpen}
+              handleClose={() => setIsOpen(false)}
+              termsData={termsData}
+            />
           </div>
         </Box>
       </Drawer>

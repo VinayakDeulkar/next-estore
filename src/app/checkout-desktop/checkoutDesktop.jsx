@@ -1,6 +1,7 @@
 "use client";
 import BackComponent from "@/components/BackComponent";
 import DeskCheckoutComponents from "@/components/DeskCheckoutComponents";
+import PaymentDetails from "@/components/DeskCheckoutComponents/PaymentDetails/PaymentDetails";
 import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProductList";
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
@@ -9,11 +10,22 @@ import { AppContext } from "@/context/AppContext";
 import { Grid } from "@mui/material";
 import { LoadScript, useJsApiLoader } from "@react-google-maps/api";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const CheckoutDesktop = () => {
-  const { userDetails, handleUserDetailsChange } = useContext(AppContext);
+  const { userDetails, handleUserDetailsChange, language } =
+    useContext(AppContext);
   const router = useRouter();
+  const [showPaymentMethod, setShowPaymentMethod] = useState(false);
+  const [showAddressComponents, setShowAddressComponents] = useState(false);
+  const [selectAddress, setSelectAddress] = useState(false);
+
+  const triggerDeliveryAddress = () => {
+    setShowAddressComponents(true);
+  };
+  const triggerPaymentMethod = (value) => {
+    setShowPaymentMethod(value);
+  };
 
   return (
     <>
@@ -33,7 +45,6 @@ const CheckoutDesktop = () => {
           item
           xs={0}
           sm={4}
-          sx={{ height: "calc(100vh - 80px)", overflow: "scroll" }}
           className="checkoutScroll"
         >
           <BackComponent
@@ -51,14 +62,33 @@ const CheckoutDesktop = () => {
           <div style={{ marginBottom: "30px" }}>
             <HeadLine enText={"Checkout"} arText={"تفاصيل الطلب"} />
           </div>
-          <DeskCheckoutComponents />
+          <DeskCheckoutComponents
+            showPaymentMethod={showPaymentMethod}
+            showAddressComponents={showAddressComponents}
+            selectAddress={selectAddress}
+            setSelectAddress={setSelectAddress}
+            triggerDeliveryAddress={triggerDeliveryAddress}
+            triggerPaymentMethod={triggerPaymentMethod}
+          />
         </Grid>
         <Grid item xs={0} sm={0.5}>
           {/* For Aligment */}
         </Grid>
-        <Grid item xs={0} sm={3.5}>
-          <SubHeadline enText="Items Details" arText="تفاصيل عربة التسوق" />
-          <NewOrderProductList />
+        <Grid
+          item
+          xs={0}
+          sm={3.5}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+          }}
+        >
+          <div>
+            <SubHeadline enText="Items Details" arText="تفاصيل عربة التسوق" />
+            <NewOrderProductList />
+          </div>
+          {showPaymentMethod ? <PaymentDetails /> : null}
         </Grid>
         <Grid item xs={0} sm={2}>
           {/* For Aligment */}

@@ -5,16 +5,32 @@ import { Box, Grid, IconButton } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import SearchBox from "../SearchBox/searchBox";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Navbar = ({ handleDrawar }) => {
   const { homePageDetails, language, handleLanguageChange } =
     useContext(AppContext);
   const [logo, setLogo] = useState(false);
+  const pathname = usePathname();
 
   const renderGridNav = () => {
     switch (homePageDetails?.estoreLayout) {
       case "1":
-        return <>{navChidren()}</>;
+        return (
+          <>
+            {pathname === "/checkout-desktop" ? (
+              <Grid container>
+                <Grid item xs={2}></Grid>
+                <Grid item xs={8}>
+                  {navChidren()}
+                </Grid>
+                <Grid item xs={2}></Grid>
+              </Grid>
+            ) : (
+              navChidren()
+            )}
+          </>
+        );
 
       case "2":
         return (
@@ -64,7 +80,6 @@ const Navbar = ({ handleDrawar }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "start",
-            padding: "0 12px",
           }}
         >
           <IconButton color="#fff" onClick={handleDrawar}>

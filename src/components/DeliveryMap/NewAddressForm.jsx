@@ -345,6 +345,7 @@ const NewAddressForm = ({
           </label>
         )}
       </div>
+
       <div
         className="form-tab-section checkout-one"
         style={{ paddingTop: "25px" }}
@@ -358,11 +359,9 @@ const NewAddressForm = ({
           // handleMapChanges={handleMapChanges}
         />
       </div>
+
       {!userDetails?.is_guest ? (
-        <div
-          className="blueBox"
-          style={{ marginTop: "25px", marginBottom: "40px", gap: "20px" }}
-        >
+        <div className="blueBox" style={{ marginTop: "25px", gap: "20px" }}>
           <div>
             <div class="round">
               <input
@@ -410,9 +409,7 @@ const NewAddressForm = ({
             </div>
           </div>
         </div>
-      ) : (
-        <div style={{ margin: "50px 0" }}></div>
-      )}
+      ) : null}
     </div>
   );
 };

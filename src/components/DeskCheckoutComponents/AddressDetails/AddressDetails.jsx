@@ -678,6 +678,7 @@ const AddressDetails = ({
           onClick={() => {
             handleDeliveryAddressNext();
           }}
+          style={{margin: "30px 0 8px"}}
         >
           {language === "ltr" ? "Next" : "متابعة"}
         </Box>

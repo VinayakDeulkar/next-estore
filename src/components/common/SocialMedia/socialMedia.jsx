@@ -1,6 +1,6 @@
 import { AppContext } from "@/context/AppContext";
 import React, { useContext } from "react";
-import "./socialMedia.css"
+import "./socialMedia.css";
 import PhoneIcons from "@/SVGs/socialMediaIcons/PhoneIcons";
 import InstagramIcon from "@/SVGs/socialMediaIcons/InstagramIcon";
 import FacebookIcon from "@/SVGs/socialMediaIcons/FacebookIcon";
@@ -8,8 +8,8 @@ import GoogleIcon from "@/SVGs/socialMediaIcons/GoogleIcon";
 import TwitterIcons from "@/SVGs/socialMediaIcons/TwitterIcons";
 import YouTubeIcons from "@/SVGs/socialMediaIcons/YouTubeIcons";
 
-const SocialMedia = () => {
-  const {language, homePageDetails } = useContext(AppContext);
+const SocialMedia = ({ handleTermsClick }) => {
+  const { language, homePageDetails } = useContext(AppContext);
 
   return (
     <div className="sideMenu-bottom-mainDiv">
@@ -88,7 +88,7 @@ const SocialMedia = () => {
       </div>
       <div className="privacy-policy-text">
         <div>{language === "ltr" ? "Privacy Policy" : "سياسة الخصوصية"}</div>
-        <div style={{ cursor: "pointer" }} /* onClick={handleTermsClick} */>
+        <div style={{ cursor: "pointer" }} onClick={handleTermsClick}>
           {language === "ltr" ? "Terms & Conditions" : "الشروط و الأحكام"}
         </div>
       </div>

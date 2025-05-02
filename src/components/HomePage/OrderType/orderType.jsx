@@ -109,14 +109,12 @@ const OrderType = () => {
         }}
       >
         {getBoxValue()}
-        <IconButton>
-          <KeyboardArrowDown
-            sx={{
-              fontSize: 26,
-              color: "#000",
-            }}
-          />
-        </IconButton>
+        <KeyboardArrowDown
+          sx={{
+            fontSize: 26,
+            color: "#000",
+          }}
+        />
       </Box>
       {areaDetails?.area != "" ? (
         <Box
@@ -127,6 +125,19 @@ const OrderType = () => {
             if (!areaDetails?.customDelivery) router.push("/timing");
           }}
           sx={{
+            padding: "20px 10px",
+            width: "100%",
+            border: 0,
+            border: "1px solid #aeaeae",
+            outline: 0,
+            fontSize: "14px",
+            color: "#000",
+            padding: "4px 10px",
+            fontWeight: 400,
+            background: "transparent",
+            transition: "border-color 0.2s",
+            borderRadius: "10px",
+            height: "44px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
