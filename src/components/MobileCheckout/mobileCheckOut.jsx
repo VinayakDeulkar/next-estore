@@ -252,6 +252,7 @@ const MobileCheckOut = () => {
         areaDetails?.type == "delivery" &&
         areaDetails?.area != "Mutlaa"
       ) {
+        console.log("In mobile checkout");
         setLoading(true);
         const response = await getDeliveryCompanies({
           vendor_id: homePageDetails?.vendor_data?.vendors_id,

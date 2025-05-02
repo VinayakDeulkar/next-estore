@@ -262,7 +262,7 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
       <Box>
         {area?.length != 0
           ? area?.map((gov, k) => (
-              <Accordion key={k}>
+              <Accordion key={k} sx={{ boxShadow: "none" }}>
                 <AccordionSummary
                   aria-controls="panel1-content"
                   id="panel1-header"

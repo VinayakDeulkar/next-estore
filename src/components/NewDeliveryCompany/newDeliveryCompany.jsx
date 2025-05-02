@@ -6,6 +6,7 @@ import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 const NewDeliveryCompany = ({ companyData }) => {
   const { language, areaDetails } = useContext(AppContext);
   const [timeLeftToShow, setTimeLeftToShow] = useState();
+  console.log(areaDetails, "areaDetails")
 
   useEffect(() => {
     if (companyData?.estimated_time) {
@@ -100,7 +101,7 @@ const NewDeliveryCompany = ({ companyData }) => {
                     .format("DD") +
                     " " +
                     moment(companyData?.estimated_date)
-                      .locale(language == "ltr" ? "en" : "ar-sa")
+                      .locale(language === "ltr" ? "en" : "ar-sa")
                       .format("MMMM") +
                     moment(companyData?.estimated_date)
                       .locale("en")

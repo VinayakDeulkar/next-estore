@@ -56,9 +56,13 @@ const UserDetails = ({
     if (userDetails?.name) {
       setShowNameEmailFields(true);
       setShowGuestUser(false);
-      triggerDeliveryAddress();
-      if (userDetails?.address?.length) {
-        setSelectAddress(true);
+      if (areaDetails?.type === "pickup") {
+        setshowPickUpForm(true);
+      } else {
+        triggerDeliveryAddress();
+        if (userDetails?.address?.length) {
+          setSelectAddress(true);
+        }
       }
     }
   }, [userDetails?.name]);
@@ -82,7 +86,7 @@ const UserDetails = ({
   const renderContactType = () => {
     if (userDetails?.is_guest) {
       return (
-        <div style={{marginTop: "10px"}}>
+        <div style={{ marginTop: "10px" }}>
           <NewContactDetails
             errorContactDetails={errorContactDetails}
             setErrorContactDetails={setErrorContactDetails}
@@ -347,14 +351,42 @@ const UserDetails = ({
     }
   };
   const handleNext = () => {
-    if (openOtpPage) {
-      handleOtpValidation();
-    } else if (showNameEmailFields) {
-      handleUserChange();
+    if (areaDetails?.type === "pickup") {
+      pickupNext();
     } else {
-      handleOTPSend();
+      if (openOtpPage) {
+        handleOtpValidation();
+      } else if (showNameEmailFields) {
+        handleUserChange();
+      } else {
+        handleOTPSend();
+      }
     }
   };
+
+  const pickupNext = () => {
+    if (!areaDetails?.branch) {
+      handleOpenAreaChange((prev) => ({
+        open: true,
+        route: "/checkout-desktop",
+      }));
+    } else if (contactDetails.model !== "" && contactDetails.color !== "") {
+      triggerPaymentMethod(true);
+    } else {
+      if (contactDetails.model == "" && contactDetails.color !== "") {
+        setPickupError({ ...pickupError, modelError: true });
+      } else if (contactDetails.model !== "" && contactDetails.color == "") {
+        setPickupError({ ...pickupError, colorError: true });
+      } else {
+        setPickupError({
+          ...pickupError,
+          colorError: true,
+          modelError: true,
+        });
+      }
+    }
+  };
+
   const handleGuestNext = () => {
     if (!showPickUpForm) {
       let email = emailValidation(
@@ -396,26 +428,7 @@ const UserDetails = ({
         }
       }
     } else {
-      if (!areaDetails?.branch) {
-        handleOpenAreaChange((prev) => ({
-          open: true,
-          route: "/checkout-desktop",
-        }));
-      } else if (contactDetails.model !== "" && contactDetails.color !== "") {
-        triggerPaymentMethod(true);
-      } else {
-        if (contactDetails.model == "" && contactDetails.color !== "") {
-          setPickupError({ ...pickupError, modelError: true });
-        } else if (contactDetails.model !== "" && contactDetails.color == "") {
-          setPickupError({ ...pickupError, colorError: true });
-        } else {
-          setPickupError({
-            ...pickupError,
-            colorError: true,
-            modelError: true,
-          });
-        }
-      }
+      pickupNext();
     }
   };
   return (
@@ -442,6 +455,7 @@ const UserDetails = ({
           handleOpenAreaChange({ open: false, route: "/" });
         }}
         showAreaModal={openArea.open}
+        type={"deskCheckout"}
       />
     </Box>
   );

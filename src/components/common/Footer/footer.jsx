@@ -119,15 +119,10 @@ const Footer = () => {
               isNumber={true}
             />
             <NormalText enText={vendorSlug?.data?.vendor_data?.support_mail} arText={vendorSlug?.data?.vendor_data?.support_mail} color={"#fff"} />
-            <NormalText enText={"@Petrafood"} color={"#fff"} />
+            <NormalText enText={vendorSlug?.data?.vendor_data?.name} arText={vendorSlug?.data?.vendor_data?.name_ar} color={"#fff"} />
           </div>
           <div>
-            <NormalText enText={"Main Page"} color={"#fff"} />
-            <NormalText enText={"Track Order"} color={"#fff"} />
-            <NormalText enText={"Branches"} color={"#fff"} />
-          </div>
-          <div>
-            <NormalText enText={"Petra Foods W.L.LC"} color={"#fff"} />
+            <NormalText enText={"Petra Foods W.L.LC"} arText={"Petra Foods W.L.LC"} color={"#fff"} />
           </div>
         </Grid>
       </Grid>

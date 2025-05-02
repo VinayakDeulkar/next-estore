@@ -290,7 +290,7 @@ const PaymentDetails = () => {
 
   return (
     <div style={{display: "flex", flexDirection: "column", gap: "30px"}}>
-        {companyData && <NewDeliveryCompany companyData={companyData} />}
+        {companyData && areaDetails?.type !== "pickup" ? <NewDeliveryCompany companyData={companyData} /> : null}
         <NewPaymentSelector
           handleSetPaymentChange={handleSetPaymentChange}
           payment={payment}

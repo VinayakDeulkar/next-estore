@@ -541,6 +541,7 @@ const AddressDetails = ({
         areaDetails?.type == "delivery" &&
         areaDetails?.area != "Mutlaa"
       ) {
+        console.log("In address section");
         setLoading(true);
         const response = await getDeliveryCompanies({
           vendor_id: homePageDetails?.vendor_data.vendors_id,

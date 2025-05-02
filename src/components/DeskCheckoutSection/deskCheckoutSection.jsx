@@ -200,6 +200,7 @@ const DeskCheckoutSection = ({ showPaymentMethod }) => {
         areaDetails?.type == "delivery" &&
         areaDetails?.area != "Mutlaa"
       ) {
+        console.log("In desc checkout");
         setLoading(true);
         const response = await getDeliveryCompanies({
           vendor_id: homePageDetails?.vendor_data?.vendors_id,
@@ -566,7 +567,7 @@ const DeskCheckoutSection = ({ showPaymentMethod }) => {
       />
       {showPaymentMethod ? (
         <>
-          {companyData && <NewDeliveryCompany companyData={companyData} />}
+          {companyData && areaDetails?.type !== "pickup" ? <NewDeliveryCompany companyData={companyData} /> : null}
           <NewPaymentSelector
             handleSetPaymentChange={handleSetPaymentChange}
             payment={payment}

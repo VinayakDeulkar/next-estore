@@ -319,8 +319,8 @@ const HorizontalCard = ({ product }) => {
       }}
       onClick={handleCardClick}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={3.5}>
+      <div style={{display: "flex", alignItems: "center", gap: "15px"}}>
+        <div>
           <div
             style={{
               position: "relative",
@@ -341,6 +341,7 @@ const HorizontalCard = ({ product }) => {
                     color: "white",
                     border: "none",
                     borderRadius: "5px",
+                    objectFit: "cover",
                     fontSize: "12px",
                     padding: "0 10px",
                     fontWeight: "400",
@@ -358,13 +359,13 @@ const HorizontalCard = ({ product }) => {
             </div>
 
             <CardMedia
-              component="img"
+              // component="img"
               image={product?.image}
               alt={product?.product_name}
               style={{
                 width: "125px",
                 height: "125px",
-                objectFit: "cover",
+                // objectFit: "cover",
                 borderRadius: "5px",
               }}
             />
@@ -391,8 +392,8 @@ const HorizontalCard = ({ product }) => {
               />
             ) : null}
           </div>
-        </Grid>
-        <Grid item xs={8.5}>
+        </div>
+        <div>
           <CardContent
             sx={{
               padding: "0",
@@ -605,8 +606,8 @@ const HorizontalCard = ({ product }) => {
               </div>
             ) : null}
           </CardContent>
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </Card>
   );
 };

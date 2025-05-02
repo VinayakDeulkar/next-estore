@@ -23,8 +23,8 @@
 }
 
 .sentImg {
-  height: 23px;
-  width: 23px;
+  height: 30px;
+  width: 30px;
 }
 
 .form__field:placeholder-shown ~ .form__label {

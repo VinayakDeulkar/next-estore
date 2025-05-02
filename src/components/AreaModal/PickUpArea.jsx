@@ -222,27 +222,15 @@ const PickUpArea = ({ handleClose }) => {
       <Box>
         {branchs?.length != 0
           ? branchs?.map((branch, i) => (
-              <ListItem
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "20px 0",
-                }}
-                key={i}
-                onClick={(e) => {
-                  if (branch?.availability_status == 1) {
-                    e.preventDefault();
-                    onBranchSelect(
-                      branch?.name,
-                      branch?.arabic_name,
-                      branch?.id,
-                      branch?.area_ids?.length == 0 ? 1 : branch?.area_ids[0]
-                    );
-                  }
-                }}
-              >
-                <div
+              <>
+                <ListItem
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "20px 0",
+                  }}
+                  key={i}
                   onClick={(e) => {
                     if (branch?.availability_status == 1) {
                       e.preventDefault();
@@ -254,39 +242,59 @@ const PickUpArea = ({ handleClose }) => {
                       );
                     }
                   }}
-                  className="branch-details"
                 >
-                  <Box component={"a"}>
-                    <SubHeadline
-                      enText={branch?.name}
-                      arText={branch?.arabic_name}
-                    />
-                    <NormalText
-                      enText={branch?.address}
-                      arText={branch?.arabic_address}
-                    />
-                    <div style={{borderBottom: "1px solid #dee2e6", padding: "5px"}}>
-
-                    </div>
-
-                    {branch?.availability_status != 1 && (
-                      <Notes
-                        enText={"STORE IS BUSY"}
-                        arText={"المتجر مشغول "}
-                        color={"#ce1414"}
+                  <div
+                    onClick={(e) => {
+                      if (branch?.availability_status == 1) {
+                        e.preventDefault();
+                        onBranchSelect(
+                          branch?.name,
+                          branch?.arabic_name,
+                          branch?.id,
+                          branch?.area_ids?.length == 0
+                            ? 1
+                            : branch?.area_ids[0]
+                        );
+                      }
+                    }}
+                    className="branch-details"
+                  >
+                    <Box component={"a"}>
+                      <SubHeadline
+                        enText={branch?.name}
+                        arText={branch?.arabic_name}
                       />
-                    )}
-                  </Box>
-                </div>
-                <IconButton
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    router.push(`/branches`);
-                  }}
-                >
-                  <InfoOutlinedIcon sx={{ color: "#000" }} />
-                </IconButton>
-              </ListItem>
+                      <NormalText
+                        enText={branch?.address}
+                        arText={branch?.arabic_address}
+                      />
+
+                      {branch?.availability_status != 1 && (
+                        <Notes
+                          enText={"STORE IS BUSY"}
+                          arText={"المتجر مشغول "}
+                          color={"#ce1414"}
+                        />
+                      )}
+                    </Box>
+                  </div>
+                  <IconButton
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      router.push(`/branches`);
+                    }}
+                  >
+                    <InfoOutlinedIcon sx={{ color: "#000" }} />
+                  </IconButton>
+                </ListItem>
+                {i !== branchs?.length - 1 && (
+                  <div
+                    style={{
+                      borderBottom: "1px solid #dee2e6" /* padding: "5px" */,
+                    }}
+                  ></div>
+                )}
+              </>
             ))
           : branchSearch != "" && (
               <SearchNone searchText={branchSearch}></SearchNone>
