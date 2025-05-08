@@ -10,8 +10,10 @@ const NewDeliveryCompany = ({ companyData }) => {
   console.log(areaDetails, "areaDetails");
 
   useEffect(() => {
+    console.log("first");
     if (companyData?.estimated_time) {
       const time = calculateTimeLeft(companyData?.estimated_time);
+      console.log(time, "time");
       if (time) {
         setTimeLeftToShow(time);
       }
@@ -30,24 +32,12 @@ const NewDeliveryCompany = ({ companyData }) => {
 
     if (timeDifference <= 0) {
       return (
-        // moment(companyData?.estimated_time, "HH:mm:ss")
-        //   .locale("en")
-        //   .format("hh:mm") +
-        // moment(companyData?.estimated_time, "HH:mm:ss")
-        //   .locale(language == "ltr" ? "en" : "ar-sa")
-        //   .format("A")
         moment(companyData?.estimated_time, "HH:mm:ss")
           .locale("en")
           .format("hh:mm") +
-        (language === "ltr"
-          ? moment(companyData?.estimated_time, "HH:mm:ss").format("A")
-          : moment
-              .localeData("ar-sa")
-              .meridiem(
-                moment(companyData?.estimated_time, "HH:mm:ss").hours(),
-                moment(companyData?.estimated_time, "HH:mm:ss").minutes(),
-                false
-              ))
+        moment(companyData?.estimated_time, "HH:mm:ss")
+          .locale(language == "ltr" ? "en" : "ar-sa")
+          .format("A")
       );
     }
 
@@ -96,14 +86,14 @@ const NewDeliveryCompany = ({ companyData }) => {
           </div>
           <div className={`secondCardDiv`}>
             <div className="headingText">
-              {console.log(moment.locale())}
-              {console.log(moment.localeData("ar-sa").meridiem(12))}
               {areaDetails.deliveryTiming &&
               companyData.delivery_partner_name == "Armada"
                 ? language === "ltr"
                   ? areaDetails.deliveryTiming
                   : areaDetails.ar_deliveryTiming
-                : timeLeftToShow}
+                : companyData?.estimated_time
+                ? calculateTimeLeft(companyData?.estimated_time)
+                : null}
             </div>
             <div
               className="areaText"

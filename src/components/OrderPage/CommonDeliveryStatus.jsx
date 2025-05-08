@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import moment from "moment";
+import "moment/locale/ar-sa";
 import { AppContext } from "@/context/AppContext";
 import CheckMark from "@/SVGs/CheckMark";
 import OrderCancelIcon from "@/SVGs/OrderCancelIcon";
@@ -335,56 +335,44 @@ const CommonDeliveryStatus = ({ orderDetails }) => {
                 />
               </div>
               <div className={`secondCardDiv`}>
-                <NormalText
-                  enText={
-                    orderDetails?.estimated_date && (
-                      <>
-                        {moment(orderDetails?.estimated_date)
+                <div
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "300",
+                    color: "000",
+                    textAlign: "start",
+                  }}
+                >
+                  {orderDetails?.estimated_date && (
+                    <>
+                      {moment(orderDetails?.estimated_date)
+                        .locale("en")
+                        .format("DD") +
+                        " " +
+                        moment(orderDetails?.estimated_date)
+                          .locale(language == "ltr" ? "en" : "ar-sa")
+                          .format("MMMM") +
+                        moment(orderDetails?.estimated_date)
                           .locale("en")
-                          .format("DD") +
-                          " " +
-                          moment(orderDetails?.estimated_date)
-                            .locale(language == "ltr" ? "en" : "ar-sa")
-                            .format("MMMM") +
-                          moment(orderDetails?.estimated_date)
-                            .locale("en")
-                            .format(", yyyy")}
-                      </>
-                    )
-                  }
-                  arText={
-                    orderDetails?.estimated_date && (
-                      <>
-                        {moment(orderDetails?.estimated_date)
-                          .locale("en")
-                          .format("DD") +
-                          " " +
-                          moment(orderDetails?.estimated_date)
-                            .locale(language == "ltr" ? "en" : "ar-sa")
-                            .format("MMMM") +
-                          moment(orderDetails?.estimated_date)
-                            .locale("en")
-                            .format(", yyyy")}
-                      </>
-                    )
-                  }
-                  isNumber={true}
-                />
+                          .format(", yyyy")}
+                    </>
+                  )}
+                </div>
                 <NormalText
                   enText={orderDetails?.delivery_details?.name}
                   arText={orderDetails?.delivery_details?.arabic_name}
                 />
-                <NormalText
-                  enText={
-                    orderDetails?.estimated_time &&
-                    calculateTimeLeft(orderDetails?.estimated_time)
-                  }
-                  arText={
-                    orderDetails?.estimated_time &&
-                    calculateTimeLeft(orderDetails?.estimated_time)
-                  }
-                  isNumber={true}
-                />
+                <div
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "300",
+                    color: "000",
+                    textAlign: "start",
+                  }}
+                >
+                  {orderDetails?.estimated_time &&
+                    calculateTimeLeft(orderDetails?.estimated_time)}
+                </div>
               </div>
             </div>
           </div>
