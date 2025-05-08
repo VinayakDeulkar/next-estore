@@ -1,12 +1,13 @@
 import { AppContext } from "@/context/AppContext";
 import moment from "moment";
+import "moment/locale/ar-sa";
 import React, { useContext, useEffect, useState } from "react";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 
 const NewDeliveryCompany = ({ companyData }) => {
   const { language, areaDetails } = useContext(AppContext);
   const [timeLeftToShow, setTimeLeftToShow] = useState();
-  console.log(areaDetails, "areaDetails")
+  console.log(areaDetails, "areaDetails");
 
   useEffect(() => {
     if (companyData?.estimated_time) {
@@ -29,12 +30,24 @@ const NewDeliveryCompany = ({ companyData }) => {
 
     if (timeDifference <= 0) {
       return (
+        // moment(companyData?.estimated_time, "HH:mm:ss")
+        //   .locale("en")
+        //   .format("hh:mm") +
+        // moment(companyData?.estimated_time, "HH:mm:ss")
+        //   .locale(language == "ltr" ? "en" : "ar-sa")
+        //   .format("A")
         moment(companyData?.estimated_time, "HH:mm:ss")
           .locale("en")
           .format("hh:mm") +
-        moment(companyData?.estimated_time, "HH:mm:ss")
-          .locale(language == "ltr" ? "en" : "ar-sa")
-          .format("A")
+        (language === "ltr"
+          ? moment(companyData?.estimated_time, "HH:mm:ss").format("A")
+          : moment
+              .localeData("ar-sa")
+              .meridiem(
+                moment(companyData?.estimated_time, "HH:mm:ss").hours(),
+                moment(companyData?.estimated_time, "HH:mm:ss").minutes(),
+                false
+              ))
       );
     }
 
@@ -83,6 +96,8 @@ const NewDeliveryCompany = ({ companyData }) => {
           </div>
           <div className={`secondCardDiv`}>
             <div className="headingText">
+              {console.log(moment.locale())}
+              {console.log(moment.localeData("ar-sa").meridiem(12))}
               {areaDetails.deliveryTiming &&
               companyData.delivery_partner_name == "Armada"
                 ? language === "ltr"

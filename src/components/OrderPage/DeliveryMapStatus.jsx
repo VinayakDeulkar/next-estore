@@ -240,30 +240,32 @@ const DeliveryMapStatus = ({
               </div>
             </div>
             {customer_details?.self_pickup === "1" ? (
-              <div className="orderStatus-userData-addressText">
-                {getBranchAddress()}
-                {customer_details?.car_model ? (
-                  <>
-                    {language == "ltr" ? "Model" : "نوع السيارة"}{" "}
-                    {customer_details?.car_model}
-                  </>
-                ) : null}
-                {customer_details?.car_color ? (
-                  <>
-                    {", "}
-                    {language == "ltr" ? "Color" : "اللون"}{" "}
-                    {customer_details?.car_color}
-                  </>
-                ) : null}
-                {customer_details?.license_number ? (
-                  <>
-                    {", "}
-                    {language == "ltr"
-                      ? "License Plate "
-                      : "رقم لوحة السيارة"}{" "}
-                    {customer_details?.license_number}
-                  </>
-                ) : null}
+              <div className="orderStatus-userData-addressText" style={{flexDirection: "column", alignItems: "start"}}>
+                <div>{getBranchAddress()}</div>
+                <div>
+                  {customer_details?.car_model ? (
+                    <>
+                      {language == "ltr" ? "Model" : "نوع السيارة"}{" "}
+                      {customer_details?.car_model}
+                    </>
+                  ) : null}
+                  {customer_details?.car_color ? (
+                    <>
+                      {", "}
+                      {language == "ltr" ? "Color" : "اللون"}{" "}
+                      {customer_details?.car_color}
+                    </>
+                  ) : null}
+                  {customer_details?.license_number ? (
+                    <>
+                      {", "}
+                      {language == "ltr"
+                        ? "License Plate "
+                        : "رقم لوحة السيارة"}{" "}
+                      {customer_details?.license_number}
+                    </>
+                  ) : null}
+                </div>
               </div>
             ) : (
               <div
