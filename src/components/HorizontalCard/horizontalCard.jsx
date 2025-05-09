@@ -315,7 +315,9 @@ const HorizontalCard = ({ product }) => {
         padding: "15px 0px",
         gap: "20px",
         boxShadow: "none",
-        cursor: "pointer"
+        cursor: "pointer",
+        padding: "20px",
+        "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" },
       }}
       onClick={handleCardClick}
     >

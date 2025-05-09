@@ -319,6 +319,8 @@ const ProductSquareCard = ({ product, imgHeight }) => {
         display: "flex",
         flexDirection: "column",
         gap: "10px",
+        padding: "20px",
+        "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" },
       }}
       onClick={handleCardClick}
     >

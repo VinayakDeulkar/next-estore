@@ -185,7 +185,7 @@ const Layout17 = ({
             </Grid>
           ) : (
             <AccordionDetails sx={{ padding: 0 }}>
-              <Grid container spacing={layout17ToggleView ? 1 : "20px"}>
+              <Grid container>
                 {category?.products?.map((product) => (
                   <>
                     {layout17ToggleView ? (
@@ -193,7 +193,11 @@ const Layout17 = ({
                         <HorizontalCard product={product} />
                       </Grid>
                     ) : (
-                      <Grid item xs={6} key={product?.id}>
+                      <Grid
+                        item
+                        xs={6}
+                        key={product?.id}
+                      >
                         <ProductSquareCard product={product} />
                       </Grid>
                     )}

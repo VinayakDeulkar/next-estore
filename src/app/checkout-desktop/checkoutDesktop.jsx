@@ -34,14 +34,14 @@ const CheckoutDesktop = () => {
         container
         sx={{
           height: "calc(100vh - 80px)",
-          padding: "20px",
+          padding: "0 20px 20px",
           width: "100%",
         }}
       >
-        <Grid item xs={0} sm={2}>
+        <Grid item xs={0} sm={2.1}>
           {/* For Aligment */}
         </Grid>
-        <Grid item xs={0} sm={3.5} className="checkoutScroll">
+        <Grid item xs={0} sm={3.5} className="checkoutScroll" sx={{padding: "15px 0 0 0",}}>
           <BackComponent
             backClick={() => {
               if (userDetails?.is_guest) {
@@ -72,11 +72,13 @@ const CheckoutDesktop = () => {
         <Grid
           item
           xs={0}
-          sm={3.5}
+          sm={3.7}
           sx={{
             display: "flex",
             flexDirection: "column",
             gap: "30px",
+            padding: "20px",
+            backgroundColor: "rgba(0, 0, 0, 0.04)"
           }}
         >
           <div>

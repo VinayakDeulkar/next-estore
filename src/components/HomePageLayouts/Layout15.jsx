@@ -97,7 +97,7 @@ const Layout15 = ({ categories }) => {
             </Grid>
           ) : (
             <AccordionDetails sx={{ padding: 0 }}>
-              <Grid container spacing={"20px"}>
+              <Grid container>
                 {category?.products?.map((product) => (
                   <Grid item {...sizes()} key={product?.id}>
                     <ProductSquareCard product={product} />

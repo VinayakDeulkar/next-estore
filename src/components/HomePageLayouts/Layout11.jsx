@@ -148,7 +148,7 @@ const Layout11 = ({
             </Grid>
           ) : (
             <AccordionDetails sx={{ padding: 0 }}>
-              <Grid container spacing={1}>
+              <Grid container>
                 {category?.products?.map((product) => (
                   <Grid item xs={12} key={product?.id}>
                     <HorizontalCard product={product} />

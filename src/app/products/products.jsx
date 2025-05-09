@@ -94,7 +94,7 @@ const Products = (props) => {
         case "14":
         case layout17ToggleView ? "17" : null:
           return (
-            <Grid container spacing={1}>
+            <Grid container>
               {productsData?.map((product) => (
                 <Grid item xs={12} key={product?.id}>
                   <HorizontalCard product={product} />

@@ -469,16 +469,16 @@ const DeliveryAddress = () => {
           internationalDelivery.delivery_country_code.toUpperCase() === "KW" ||
           areaDetails.area_id !== "" ? (
             <>
-              {true ? (
-                // <DeliveryMapContainer
-                //   selectedArea={areaDetails?.area}
-                //   markerPosition={markerPosition}
-                //   setMarkerPosition={setMarkerPosition}
-                //   selectedBounds={selectedBounds}
-                //   setSelectedBounds={setSelectedBounds}
-                //   triggerClick={handleMapLoad}
-                // />
-                <LeafletMap />
+              {showMap ? (
+                <DeliveryMapContainer
+                  selectedArea={areaDetails?.area}
+                  markerPosition={markerPosition}
+                  setMarkerPosition={setMarkerPosition}
+                  selectedBounds={selectedBounds}
+                  setSelectedBounds={setSelectedBounds}
+                  triggerClick={handleMapLoad}
+                />
+                // <LeafletMap />
               ) : (
                 <NewAddressForm
                   areaDetails={areaDetails}
