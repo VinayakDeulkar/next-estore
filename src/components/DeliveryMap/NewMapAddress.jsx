@@ -7,7 +7,6 @@ import {
 } from "@react-google-maps/api";
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
-
 import { useSnackbar } from "notistack";
 import Spinner from "../common/Spinner/spinner";
 

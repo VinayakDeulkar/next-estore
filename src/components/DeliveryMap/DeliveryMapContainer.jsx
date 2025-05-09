@@ -21,6 +21,7 @@ const DeliveryMapContainer = ({
   useEffect(() => {
     triggerClick();
   }, []);
+  
   const houseLabel = () => {
     switch (addressDetails.addressType) {
       case "1":

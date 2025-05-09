@@ -7,6 +7,7 @@ import DeliveryMapContainer from "@/components/DeliveryMap/DeliveryMapContainer"
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
 import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import InternationalAddress from "@/components/InternationalDelivery/InternationalAddress";
+import LeafletMap from "@/components/LeafletMap/leafletMap";
 import { mapArea } from "@/constants/areaConstant";
 import { tele } from "@/constants/constants";
 import { AppContext } from "@/context/AppContext";
@@ -468,15 +469,16 @@ const DeliveryAddress = () => {
           internationalDelivery.delivery_country_code.toUpperCase() === "KW" ||
           areaDetails.area_id !== "" ? (
             <>
-              {showMap ? (
-                <DeliveryMapContainer
-                  selectedArea={areaDetails?.area}
-                  markerPosition={markerPosition}
-                  setMarkerPosition={setMarkerPosition}
-                  selectedBounds={selectedBounds}
-                  setSelectedBounds={setSelectedBounds}
-                  triggerClick={handleMapLoad}
-                />
+              {true ? (
+                // <DeliveryMapContainer
+                //   selectedArea={areaDetails?.area}
+                //   markerPosition={markerPosition}
+                //   setMarkerPosition={setMarkerPosition}
+                //   selectedBounds={selectedBounds}
+                //   setSelectedBounds={setSelectedBounds}
+                //   triggerClick={handleMapLoad}
+                // />
+                <LeafletMap />
               ) : (
                 <NewAddressForm
                   areaDetails={areaDetails}
