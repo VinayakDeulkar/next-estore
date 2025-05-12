@@ -469,27 +469,32 @@ const DeliveryAddress = () => {
           internationalDelivery.delivery_country_code.toUpperCase() === "KW" ||
           areaDetails.area_id !== "" ? (
             <>
-              {showMap ? (
-                <DeliveryMapContainer
-                  selectedArea={areaDetails?.area}
-                  markerPosition={markerPosition}
-                  setMarkerPosition={setMarkerPosition}
-                  selectedBounds={selectedBounds}
-                  setSelectedBounds={setSelectedBounds}
-                  triggerClick={handleMapLoad}
-                />
-                // <LeafletMap />
-              ) : (
-                <NewAddressForm
-                  areaDetails={areaDetails}
-                  blockValidation={blockValidation}
-                  streetValidation={streetValidation}
-                  houseValidation={houseValidation}
-                  addressNameValidation={addressNameValidation}
-                  errorState={errorState}
-                  setMarkerPosition={setMarkerPosition}
-                />
-              )}
+              {
+                /* showMap */ true ? (
+                  // <DeliveryMapContainer
+                  //   selectedArea={areaDetails?.area}
+                  //   markerPosition={markerPosition}
+                  //   setMarkerPosition={setMarkerPosition}
+                  //   selectedBounds={selectedBounds}
+                  //   setSelectedBounds={setSelectedBounds}
+                  //   triggerClick={handleMapLoad}
+                  // />
+                  <LeafletMap
+                    markerPosition={markerPosition}
+                    setMarkerPosition={setMarkerPosition}
+                  />
+                ) : (
+                  <NewAddressForm
+                    areaDetails={areaDetails}
+                    blockValidation={blockValidation}
+                    streetValidation={streetValidation}
+                    houseValidation={houseValidation}
+                    addressNameValidation={addressNameValidation}
+                    errorState={errorState}
+                    setMarkerPosition={setMarkerPosition}
+                  />
+                )
+              }
             </>
           ) : (
             <InternationalAddress internationalError={internationalError} />
