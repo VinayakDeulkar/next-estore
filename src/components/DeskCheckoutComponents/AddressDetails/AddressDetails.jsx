@@ -88,48 +88,44 @@ const AddressDetails = ({
       triggerPaymentMethod(true);
     }
   }, [selectAddress]);
+  const calculateBound = async (area_details) => {
+    if (area_details == "Mutlaa") {
+      setSelectedBounds({
+        north: 29.5761,
+        south: 29.38842,
+        east: 47.66437,
+        west: 47.538132,
+      });
+    } else {
+      const selectedAra = mapArea.find((ele) => ele.area_name == area_details);
+      const encodedPlaceName = encodeURIComponent(
+        selectedAra.area_map + " Kuwait"
+      );
+      const respones = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`
+      );
+      if (respones.status === 200) {
+        setSelectedBounds({
+          north: Number(
+            respones?.data?.results[0]?.geometry?.viewport?.northeast.lat
+          ),
+          south: Number(
+            respones?.data?.results[0]?.geometry?.viewport?.southwest.lat
+          ),
+          east: Number(
+            respones?.data?.results[0]?.geometry?.viewport?.northeast.lng
+          ),
+          west: Number(
+            respones?.data?.results[0]?.geometry?.viewport?.southwest.lng
+          ),
+        });
+      }
+    }
+  };
 
   useEffect(() => {
     if (areaDetails?.area) {
-      (async () => {
-        if (areaDetails?.area == "Mutlaa") {
-          setSelectedBounds({
-            north: 29.5761,
-            south: 29.38842,
-            east: 47.66437,
-            west: 47.538132,
-          });
-        } else {
-          const selectedAra = mapArea.find(
-            (ele) =>
-              ele.area_name == areaDetails?.area ||
-              ele.area_name_ar == areaDetails?.ar_area
-          );
-          const encodedPlaceName = encodeURIComponent(
-            selectedAra.area_map + " Kuwait"
-          );
-          const respones = await axios.get(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`
-          );
-
-          if (respones.status === 200) {
-            setSelectedBounds({
-              north: Number(
-                respones?.data?.results[0]?.geometry?.viewport?.northeast.lat
-              ),
-              south: Number(
-                respones?.data?.results[0]?.geometry?.viewport?.southwest.lat
-              ),
-              east: Number(
-                respones?.data?.results[0]?.geometry?.viewport?.northeast.lng
-              ),
-              west: Number(
-                respones?.data?.results[0]?.geometry?.viewport?.southwest.lng
-              ),
-            });
-          }
-        }
-      })();
+      calculateBound(areaDetails?.area);
     }
   }, [areaDetails?.area]);
 
@@ -542,7 +538,6 @@ const AddressDetails = ({
         areaDetails?.type == "delivery" &&
         areaDetails?.area != "Mutlaa"
       ) {
-        console.log("In address section");
         setLoading(true);
         const response = await getDeliveryCompanies({
           vendor_id: homePageDetails?.vendor_data.vendors_id,
@@ -630,7 +625,11 @@ const AddressDetails = ({
             addressNameValidation={addressNameValidation}
             errorState={errorState}
             setMarkerPosition={setMarkerPosition}
-            setShowMap={() => setShowMap(true)}
+            setShowMap={async (area_details) => {
+              console.log(area_details, "area_details");
+              await calculateBound(area_details);
+              setShowMap(true);
+            }}
           />
         )
       ) : (

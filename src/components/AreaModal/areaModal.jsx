@@ -21,7 +21,7 @@ const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition, type }) => {
             borderRadius: "16px", // Change this value as needed
             minWidth: "400px",
             margin: "15px",
-            overflow: "hidden"
+            overflow: "hidden",
           },
           "& .MuiDialog-container": {
             justifyContent: type === "deskCheckout" ? "center" : "flex-start",
@@ -36,7 +36,7 @@ const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition, type }) => {
             display: "flex",
             flexDirection: "column",
             gap: "20px",
-            overflowY: "auto"
+            overflowY: "auto",
           }}
           onClick={(e) => e.stopPropagation()}
         >

@@ -330,9 +330,11 @@ const NewAddressForm = ({
         <AreaModal
           setMarkerPosition={setMarkerPosition}
           showAreaModal={showAreaModal}
-          handleClose={() => {
+          handleClose={(area) => {
             setShowAreaModal(false);
-            setShowMap?.();
+            if (area) {
+              setShowMap?.(area);
+            }
           }}
           type={"deskCheckout"}
         />

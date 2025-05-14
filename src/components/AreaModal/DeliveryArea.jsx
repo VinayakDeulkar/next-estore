@@ -204,7 +204,7 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
               },
             }));
           }
-          handleClose(false, "");
+          handleClose(eng);
           setLoading(false);
         } else {
           setLoading(false);
@@ -273,7 +273,7 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
                     });
                   }}
                   sx={{
-                    fontWeight: "500"
+                    fontWeight: "500",
                   }}
                 >
                   {language === "ltr"
