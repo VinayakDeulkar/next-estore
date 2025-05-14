@@ -14,7 +14,6 @@ const center = {
 };
 
 const GoogleMapComponent = ({ lat, lng }) => {
-  console.log(lat, lng, "lat,lang");
   const onMapClick = useCallback((event) => {
     if (event.latLng) {
       const lat = event.latLng.lat();

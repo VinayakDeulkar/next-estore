@@ -8,6 +8,7 @@ import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import DeliveryMapLocation from "./DeliveryMapLocation";
 import OrderDeliveryAddress from "./OrderDeliveryAddress";
 import NormalText from "../assetBoxDesign/NormalText/normalText";
+import LeafletRoutingMap from "../LeafletRoutingMap/leafletRoutingMap";
 
 const DeliveryMapStatus = ({
   location_coordinates,
@@ -82,7 +83,13 @@ const DeliveryMapStatus = ({
           location_coordinates.delivery_lat &&
           payment_status === "1" &&
           customer_details.is_international_delivery !== "1" && (
-            <DeliveryMapLocation
+            // <DeliveryMapLocation
+            //   startLat={location_coordinates.branch_lat}
+            //   startLng={location_coordinates.branch_lng}
+            //   endLat={location_coordinates.delivery_lat}
+            //   endLng={location_coordinates.delivery_lng}
+            // />
+            <LeafletRoutingMap
               startLat={location_coordinates.branch_lat}
               startLng={location_coordinates.branch_lng}
               endLat={location_coordinates.delivery_lat}
@@ -240,7 +247,10 @@ const DeliveryMapStatus = ({
               </div>
             </div>
             {customer_details?.self_pickup === "1" ? (
-              <div className="orderStatus-userData-addressText" style={{flexDirection: "column", alignItems: "start"}}>
+              <div
+                className="orderStatus-userData-addressText"
+                style={{ flexDirection: "column", alignItems: "start" }}
+              >
                 <div>{getBranchAddress()}</div>
                 <div>
                   {customer_details?.car_model ? (

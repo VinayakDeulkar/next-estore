@@ -4,6 +4,7 @@ import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
 import MapContainer from "./MapContainer";
 import GoogleMapComponent from "../MapComponent/GoogleMapComponent";
+import LeafletMapComponent from "../LeafletMapComponent/leafletMapComponent";
 
 const drawerBleeding = 56;
 function BranchDetails({ branchId, setBranchId }) {
@@ -52,10 +53,9 @@ function BranchDetails({ branchId, setBranchId }) {
           {branch?.office_end_time ? (
             <>
               {branch?.lat && branch?.lng ? (
-                <GoogleMapComponent lat={branch?.lat} lng={branch?.lng} />
+                // <GoogleMapComponent lat={branch?.lat} lng={branch?.lng} />
+                <LeafletMapComponent branch={branch} />
               ) : null}
-
-              <MapContainer branch={branch}></MapContainer>
               <div className="branch-call-div">
                 <div className="branch-call-flex">
                   <a
