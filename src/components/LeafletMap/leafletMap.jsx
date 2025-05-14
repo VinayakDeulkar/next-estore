@@ -78,7 +78,7 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
       maxBounds={bounds}
       maxBoundsViscosity={1.0}
       scrollWheelZoom={false}
-      style={{ height: "500px", width: "100%" }}
+      style={{ height: "600px", width: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

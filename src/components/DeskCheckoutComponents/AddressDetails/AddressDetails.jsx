@@ -99,7 +99,7 @@ const AddressDetails = ({
     } else {
       const selectedAra = mapArea.find((ele) => ele.area_name == area_details);
       const encodedPlaceName = encodeURIComponent(
-        selectedAra.area_map + " Kuwait"
+        selectedAra?.area_map + " Kuwait"
       );
       const respones = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedPlaceName}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`
@@ -672,7 +672,10 @@ const AddressDetails = ({
                 setShowMap(false);
               }
             }}
-            style={!markerPosition?.lat ? { backgroundColor: "grey" } : {}}
+            style={{
+              backgroundColor: !markerPosition?.lat && "grey",
+              marginTop: "20px",
+            }}
           >
             {language === "ltr" ? "Save" : "يحفظ"}
           </Box>
