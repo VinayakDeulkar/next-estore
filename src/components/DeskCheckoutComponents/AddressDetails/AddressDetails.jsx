@@ -8,6 +8,7 @@ import AddressSection from "@/components/AddressSection/addressSection";
 import DeliveryMapContainer from "@/components/DeliveryMap/DeliveryMapContainer";
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
 import InternationalAddress from "@/components/InternationalDelivery/InternationalAddress";
+import LeafletMap from "@/components/LeafletMap/leafletMap";
 import { mapArea } from "@/constants/areaConstant";
 import { tele } from "@/constants/constants";
 import { AppContext } from "@/context/AppContext";
@@ -652,13 +653,18 @@ const AddressDetails = ({
             width: window.innerWidth > 990 ? "560px" : "auto",
           }}
         >
-          <DeliveryMapContainer
+          {/* <DeliveryMapContainer
             selectedArea={areaDetails?.area}
             markerPosition={markerPosition}
             setMarkerPosition={setMarkerPosition}
             selectedBounds={selectedBounds}
             setSelectedBounds={setSelectedBounds}
             triggerClick={handleMapLoad}
+          /> */}
+          <LeafletMap
+            markerPosition={markerPosition}
+            setMarkerPosition={setMarkerPosition}
+            selectedBounds={selectedBounds}
           />
           <Box
             className="contact-details-next-button"
@@ -679,7 +685,7 @@ const AddressDetails = ({
           onClick={() => {
             handleDeliveryAddressNext();
           }}
-          style={{margin: "30px 0 8px"}}
+          style={{ margin: "30px 0 8px" }}
         >
           {language === "ltr" ? "Next" : "متابعة"}
         </Box>

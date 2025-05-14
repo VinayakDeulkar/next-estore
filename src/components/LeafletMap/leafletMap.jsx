@@ -73,7 +73,7 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
 
   return (
     <MapContainer
-      center={[29.3759, 47.9774]}
+      // center={[29.3759, 47.9774]}
       bounds={bounds}
       maxBounds={bounds}
       maxBoundsViscosity={1.0}
