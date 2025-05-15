@@ -728,9 +728,9 @@ const ProductDetails = ({
                 display: "flex",
                 gap: "8px",
                 alignItems: "end",
-                justifyContent: "start",
-                fontSize: "16px",
-                fontWeight: 400,
+                justifyContent: "end",
+                fontSize: "18px",
+                fontWeight: "500",
                 marginBottom: "10px",
               }}
             >
@@ -749,8 +749,8 @@ const ProductDetails = ({
               <span>
                 {product ? (
                   <>
-                    <span>{product.price_after_discount}</span>{" "}
-                    {language === "rtl" ? "د.ك" : "KD"}
+                    {language === "rtl" ? "د.ك" : "KD"}{" "}
+                    <span>{product.price_after_discount}</span>
                   </>
                 ) : null}{" "}
               </span>
@@ -768,7 +768,7 @@ const ProductDetails = ({
                 fontWeight: "300",
                 fontSize: "14px",
                 // color: "rgba(141, 141, 141, 1)",
-                color: "rgb(141, 141, 141)"
+                color: "rgb(141, 141, 141)",
               }}
             ></p>
           ) : null}
