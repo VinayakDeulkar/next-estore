@@ -23,13 +23,16 @@ const ProductCarousel = ({ product, addedVariaton }) => {
       className="carouselImage"
       animationHandler={"fade"}
     >
-      <Box className="product-owl-img">
+      <Box
+        className="product-owl-img"
+      >
         <img
           loading="lazy"
           style={{
             height: "100%",
-            borderRadius: "13.81px",
-            border: "1.5px solid #9191913D",
+            // borderRadius: "13.81px",
+            // margin: checkSize() ? "0 -40px" : "0 -20px",
+            // border: "1.5px solid #9191913D",
           }}
           src={`${
             product?.productvariationPrice?.[addedVariaton.toString()]?.image
@@ -50,8 +53,9 @@ const ProductCarousel = ({ product, addedVariaton }) => {
                 alt={i}
                 style={{
                   height: "100%",
-                  borderRadius: "13.81px",
-                  border: "1.5px solid #9191913D",
+                  // borderRadius: "13.81px",
+                  // margin: checkSize() ? "0 -40px" : "0 -20px",
+                  // border: "1.5px solid #9191913D",
                 }}
               />
             </Box>

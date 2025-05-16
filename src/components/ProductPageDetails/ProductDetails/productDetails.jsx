@@ -20,6 +20,8 @@ import ReactPixel from "react-facebook-pixel";
 import SnapPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
 import "./productDetails.css";
+import AddToCartIcon from "@/SVGs/AddToCartIcon";
+import AddToBagIcon from "@/SVGs/AddToBagIcon";
 
 const ProductDetails = ({
   product,
@@ -1035,93 +1037,113 @@ const ProductDetails = ({
                 </div>
               ) : null
             ) : (
-              <div
-                // className={`bottom-button ${
-                //   homePageDetails?.vendor_data?.home_page_type == "18"
-                //     ? "bottom-button-full"
-                //     : "bottom-button-half"
-                // }`}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "end",
-                  gap: "10px",
-                  marginBottom: "20px"
-                }}
-              >
+              <>
                 <div
                   style={{
+                    padding: "10px",
+                    margin: "0 -20px",
+                    borderBottom: "1px solid #adb5bd",
+                  }}
+                ></div>
+                <div
+                  // className={`bottom-button ${
+                  //   homePageDetails?.vendor_data?.home_page_type == "18"
+                  //     ? "bottom-button-full"
+                  //     : "bottom-button-half"
+                  // }`}
+                  style={{
                     display: "flex",
-                    flexDirection: "column",
-                    gap: "7px",
+                    justifyContent: "space-between",
+                    alignItems: "end",
+                    gap: "10px",
+                    margin: "12px 0",
                   }}
                 >
                   <div
                     style={{
-                      fontSize: "18px",
-                      fontWeight: "500",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "7px",
                     }}
                   >
-                    {language === "rtl" ? "د.ك" : "KD"}{" "}
-                    <span>
-                      {parseFloat(
-                        (price + addonsPrice + variationPrice) * prodNumber
-                      )?.toFixed(3)}
-                    </span>
+                    <div
+                      style={{
+                        fontSize: "18px",
+                        fontWeight: "500",
+                      }}
+                    >
+                      {language === "rtl" ? "د.ك" : "KD"}{" "}
+                      <span>
+                        {parseFloat(
+                          (price + addonsPrice + variationPrice) * prodNumber
+                        )?.toFixed(3)}
+                      </span>
+                    </div>
+                    <div>
+                      {product?.prodyct_type != 3 ? (
+                        // <div className="details-container pt-2">
+                        //   <div className="product-outer-div">
+                        //     <div className="product-inner-div item-count-div">
+                        <div>
+                          {product?.quantity &&
+                          product?.product_status != 0 &&
+                          isRequired?.every((l) => l == true) ? (
+                            <MultipleItems
+                              count={prodNumber}
+                              removeClick={onMinus}
+                              addClick={onPlus}
+                            />
+                          ) : null}
+                        </div>
+                      ) : //     </div>
+                      //   </div>
+                      // </div>
+                      null}
+                    </div>
                   </div>
-                  <div>
-                    {product?.prodyct_type != 3 ? (
-                      // <div className="details-container pt-2">
-                      //   <div className="product-outer-div">
-                      //     <div className="product-inner-div item-count-div">
-                      <div>
-                        {product?.quantity &&
-                        product?.product_status != 0 &&
-                        isRequired?.every((l) => l == true) ? (
-                          <MultipleItems
-                            count={prodNumber}
-                            removeClick={onMinus}
-                            addClick={onPlus}
-                          />
-                        ) : null}
-                      </div>
-                    ) : //     </div>
-                    //   </div>
-                    // </div>
-                    null}
-                  </div>
-                </div>
-                <div
-                  // className={`text-center checkout-button ${
-                  //   homePageDetails?.vendor_data?.home_page_type == "18"
-                  //     ? "fashion-checkout-page"
-                  //     : ""
-                  // }`}
-                  style={{
-                    padding: "15px 25px",
-                    backgroundColor: "#000",
-                    color: "#fff",
-                    borderRadius: "50px",
-                  }}
-                  onClick={(e) => checkApplication(e)}
-                >
-                  {product?.quantity && product?.product_status != 0 ? (
-                    isRequired?.every((l) => l == true) &&
-                    variationRequired?.every((l) => l == true) ? (
-                      productvariation?.length == 0 ||
-                      (productvariationPrice?.[getKey(addedVariaton)] &&
-                        (productvariationPrice?.[getKey(addedVariaton)]
-                          ?.quantity > 0 ||
-                          productvariationPrice?.[getKey(addedVariaton)]
-                            ?.quantity == null)) ? (
-                        spinLoader ? (
-                          <Spinner height="16px" size="2.5px" />
-                        ) : (
-                          <>
-                            {`${
-                              language === "ltr" ? "Add to Order" : "إضافة "
-                            }`}
-                            {/* <span className="span-s">
+                  <div
+                    // className={`text-center checkout-button ${
+                    //   homePageDetails?.vendor_data?.home_page_type == "18"
+                    //     ? "fashion-checkout-page"
+                    //     : ""
+                    // }`}
+                    style={{
+                      padding: "15px 25px",
+                      backgroundColor: "#000",
+                      color: "#fff",
+                      borderRadius: "50px",
+                      fontSize: language === "ltr" ? "17px" : "19px",
+                    }}
+                    onClick={(e) => checkApplication(e)}
+                  >
+                    {product?.quantity && product?.product_status != 0 ? (
+                      isRequired?.every((l) => l == true) &&
+                      variationRequired?.every((l) => l == true) ? (
+                        productvariation?.length == 0 ||
+                        (productvariationPrice?.[getKey(addedVariaton)] &&
+                          (productvariationPrice?.[getKey(addedVariaton)]
+                            ?.quantity > 0 ||
+                            productvariationPrice?.[getKey(addedVariaton)]
+                              ?.quantity == null)) ? (
+                          spinLoader ? (
+                            <Spinner height="16px" size="2.5px" />
+                          ) : (
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "7px",
+                              }}
+                            >
+                              <AddToBagIcon />
+                              <div>
+                                {`${
+                                  language === "ltr"
+                                    ? "Add to bag"
+                                    : "أضف إلى الحقيبة"
+                                }`}
+                              </div>
+                              {/* <span className="span-s">
                               &nbsp;&nbsp;
                               {parseFloat(
                                 (price + addonsPrice + variationPrice) *
@@ -1131,31 +1153,32 @@ const ProductDetails = ({
                             </span>
                             {`
               ${language === "rtl" ? "د.ك" : "KD"}`} */}
-                          </>
+                            </div>
+                          )
+                        ) : (
+                          `${
+                            language === "ltr"
+                              ? "Variation Out of Stock"
+                              : "إنتهت الكمية المعروضة"
+                          }`
                         )
                       ) : (
                         `${
                           language === "ltr"
-                            ? "Variation Out of Stock"
-                            : "إنتهت الكمية المعروضة"
+                            ? "Select Required Addons"
+                            : "حدد الإضافات المطلوبة"
                         }`
                       )
                     ) : (
                       `${
                         language === "ltr"
-                          ? "Select Required Addons"
-                          : "حدد الإضافات المطلوبة"
+                          ? product?.status_label
+                          : product?.status_label_ar
                       }`
-                    )
-                  ) : (
-                    `${
-                      language === "ltr"
-                        ? product?.status_label
-                        : product?.status_label_ar
-                    }`
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
+              </>
             )
           ) : null}
         </Box>
