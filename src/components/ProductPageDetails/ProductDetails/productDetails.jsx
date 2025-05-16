@@ -944,7 +944,7 @@ const ProductDetails = ({
               color="rgb(141, 141, 141)"
             />
           ) : null}
-          {product?.prodyct_type != 3 ? (
+          {/* {product?.prodyct_type != 3 ? (
             <div className="details-container pt-2">
               <div className="product-outer-div">
                 <div
@@ -963,7 +963,7 @@ const ProductDetails = ({
                 </div>
               </div>
             </div>
-          ) : null}
+          ) : null} */}
           {showQuantity ? <QuantityError errorMsg={errorMsg} /> : null}
           {showRegister ? (
             <ProductRegistrationModal
@@ -1036,19 +1036,73 @@ const ProductDetails = ({
               ) : null
             ) : (
               <div
-                className={`bottom-button ${
-                  homePageDetails?.vendor_data?.home_page_type == "18"
-                    ? "bottom-button-full"
-                    : "bottom-button-half"
-                }`}
+                // className={`bottom-button ${
+                //   homePageDetails?.vendor_data?.home_page_type == "18"
+                //     ? "bottom-button-full"
+                //     : "bottom-button-half"
+                // }`}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "end",
+                  gap: "10px",
+                  marginBottom: "20px"
+                }}
               >
-                <Link
-                  href={``}
-                  className={`text-center checkout-button ${
-                    homePageDetails?.vendor_data?.home_page_type == "18"
-                      ? "fashion-checkout-page"
-                      : ""
-                  }`}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "7px",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {language === "rtl" ? "د.ك" : "KD"}{" "}
+                    <span>
+                      {parseFloat(
+                        (price + addonsPrice + variationPrice) * prodNumber
+                      )?.toFixed(3)}
+                    </span>
+                  </div>
+                  <div>
+                    {product?.prodyct_type != 3 ? (
+                      // <div className="details-container pt-2">
+                      //   <div className="product-outer-div">
+                      //     <div className="product-inner-div item-count-div">
+                      <div>
+                        {product?.quantity &&
+                        product?.product_status != 0 &&
+                        isRequired?.every((l) => l == true) ? (
+                          <MultipleItems
+                            count={prodNumber}
+                            removeClick={onMinus}
+                            addClick={onPlus}
+                          />
+                        ) : null}
+                      </div>
+                    ) : //     </div>
+                    //   </div>
+                    // </div>
+                    null}
+                  </div>
+                </div>
+                <div
+                  // className={`text-center checkout-button ${
+                  //   homePageDetails?.vendor_data?.home_page_type == "18"
+                  //     ? "fashion-checkout-page"
+                  //     : ""
+                  // }`}
+                  style={{
+                    padding: "15px 25px",
+                    backgroundColor: "#000",
+                    color: "#fff",
+                    borderRadius: "50px",
+                  }}
                   onClick={(e) => checkApplication(e)}
                 >
                   {product?.quantity && product?.product_status != 0 ? (
@@ -1067,7 +1121,7 @@ const ProductDetails = ({
                             {`${
                               language === "ltr" ? "Add to Order" : "إضافة "
                             }`}
-                            <span className="span-s">
+                            {/* <span className="span-s">
                               &nbsp;&nbsp;
                               {parseFloat(
                                 (price + addonsPrice + variationPrice) *
@@ -1076,7 +1130,7 @@ const ProductDetails = ({
                               &nbsp;
                             </span>
                             {`
-              ${language === "rtl" ? "د.ك" : "KD"}`}
+              ${language === "rtl" ? "د.ك" : "KD"}`} */}
                           </>
                         )
                       ) : (
@@ -1100,7 +1154,7 @@ const ProductDetails = ({
                         : product?.status_label_ar
                     }`
                   )}
-                </Link>
+                </div>
               </div>
             )
           ) : null}
