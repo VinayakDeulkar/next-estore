@@ -30,7 +30,7 @@ const Layout12 = ({ categories }) => {
               justifyContent: "space-between",
             }}
           >
-            <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <HeadLine
                 arText={category?.category_name_ar}
                 enText={category?.category_name}
@@ -77,6 +77,7 @@ const Layout12 = ({ categories }) => {
                 sx={{
                   flex: "0 0 auto",
                   width: "250px",
+                  padding: "10px",
                 }}
               >
                 <ProductSquareCard product={product} />

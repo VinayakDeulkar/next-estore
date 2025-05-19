@@ -6,7 +6,7 @@ import { useContext } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import SocialMedia from "../common/SocialMedia/socialMedia";
 
-const RestSideDrawerContent = ({ setBurger }) => {
+const RestSideDrawerContent = () => {
   const {
     language,
     handleUserDetailsChange,
@@ -17,6 +17,7 @@ const RestSideDrawerContent = ({ setBurger }) => {
     homePageDetails,
     handleSetPaymentChange,
     areaDetails,
+    handleSideMenuDrawer
   } = useContext(AppContext);
   const router = useRouter();
   const contactInfo = JSON.parse(localStorage.getItem("contactInfo") || "{}");
@@ -102,16 +103,16 @@ const RestSideDrawerContent = ({ setBurger }) => {
       case "FAQs":
         break;
       case "Track Order":
-        setBurger(false);
+        handleSideMenuDrawer(false);
         router.push("/track-order");
         break;
 
       case "My Orders":
-        setBurger(false);
+        handleSideMenuDrawer(false);
         router.push("/order-history");
         break;
       case "Logout":
-        setBurger(false);
+        handleSideMenuDrawer(false);
         handleAreaDetailsChange({
           type:
             window.location.host.replace(/^www\./, "") !== "shop.playon.today"
@@ -196,23 +197,23 @@ const RestSideDrawerContent = ({ setBurger }) => {
         break;
 
       case "My Information":
-        setBurger(false);
+        handleSideMenuDrawer(false);
         router.push("/info");
         break;
 
       case "Login":
         handleUserDetailsChange((prev) => ({ ...prev, is_guest: false }));
-        setBurger(false);
+        handleSideMenuDrawer(false);
         router.push("/login");
         break;
       case "Home":
       case "Reserve":
       case "Menu":
-        setBurger(false);
+        handleSideMenuDrawer(false);
         router.push("/");
         break;
       case "Branch":
-        setBurger(false);
+        handleSideMenuDrawer(false);
         router.push("/branches");
         break;
       default:

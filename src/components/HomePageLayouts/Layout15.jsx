@@ -99,7 +99,7 @@ const Layout15 = ({ categories }) => {
             <AccordionDetails sx={{ padding: 0 }}>
               <Grid container>
                 {category?.products?.map((product) => (
-                  <Grid item {...sizes()} key={product?.id}>
+                  <Grid item {...sizes()} key={product?.id} sx={{padding: "10px"}}>
                     <ProductSquareCard product={product} />
                   </Grid>
                 ))}

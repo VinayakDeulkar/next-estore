@@ -12,6 +12,8 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import UploadIcon from "@mui/icons-material/Upload";
 import { useRouter } from "next/navigation";
+import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
+
 
 const Product = (props) => {
   const { homePageDetails, language } = useContext(AppContext);
@@ -37,7 +39,7 @@ const Product = (props) => {
                     width: checkSize() ? "100%" : "100vw",
                   }}
                 >
-                  <Box sx={{ position: "relative" }}>
+                  <Box sx={{ position: "relative", height: "100%" }}>
                     <div
                       style={{
                         position: "absolute",
@@ -85,7 +87,7 @@ const Product = (props) => {
                         }}
                       >
                         <UploadIcon
-                          style={{ fontSize: "23px", color: "black" }}
+                          style={{ fontSize: "22px", color: "black" }}
                         />
                       </Fab>
                     </div>
@@ -94,6 +96,7 @@ const Product = (props) => {
                         display: "flex",
                         flexDirection: "column",
                         gap: "20px",
+                        height: "100%"
                       }}
                     >
                       <Box sx={{ direction: "ltr" }}>
@@ -102,7 +105,7 @@ const Product = (props) => {
                           addedVariaton={addedVariaton}
                         />
                       </Box>
-                      <Box sx={{ padding: checkSize() ? "0 40px" : "0 20px" }}>
+                      <Box sx={{ padding: checkSize() ? "0 40px" : "0 20px", height: "100%" }}>
                         <ProductDetails
                           product={props?.data}
                           addon={props?.addons}

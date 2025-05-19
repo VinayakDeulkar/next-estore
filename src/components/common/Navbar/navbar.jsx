@@ -7,9 +7,13 @@ import SearchBox from "../SearchBox/searchBox";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const Navbar = ({ handleDrawar }) => {
-  const { homePageDetails, language, handleLanguageChange } =
-    useContext(AppContext);
+const Navbar = () => {
+  const {
+    homePageDetails,
+    language,
+    handleLanguageChange,
+    handleSideMenuDrawer,
+  } = useContext(AppContext);
   const [logo, setLogo] = useState(false);
   const pathname = usePathname();
 
@@ -82,7 +86,7 @@ const Navbar = ({ handleDrawar }) => {
             justifyContent: "start",
           }}
         >
-          <IconButton color="#fff" onClick={handleDrawar}>
+          <IconButton color="#fff" onClick={() => handleSideMenuDrawer(true)}>
             <Box
               sx={{
                 height: "20px",

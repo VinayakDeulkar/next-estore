@@ -22,6 +22,7 @@ import TiktokPixel from "tiktok-pixel";
 import "./productDetails.css";
 import AddToCartIcon from "@/SVGs/AddToCartIcon";
 import AddToBagIcon from "@/SVGs/AddToBagIcon";
+import SquareOptionBox from "@/components/assetBoxDesign/SquareOptionBox/squareOptionBox";
 
 const ProductDetails = ({
   product,
@@ -65,6 +66,10 @@ const ProductDetails = ({
     ar: "",
   });
   const { enqueueSnackbar } = useSnackbar();
+
+  const checkSize = () => {
+    return window != undefined && window?.innerWidth > 990;
+  };
 
   useEffect(() => {
     if (showQuantity) {
@@ -680,15 +685,46 @@ const ProductDetails = ({
     return response;
   };
 
+  const renderLabelEmoji = (type) => {
+    switch (type) {
+      case "1":
+        return <>❤️</>;
+
+      case "2":
+        return <>⭐</>;
+    }
+  };
+
   return (
-    <Box>
-      <div style={showRegister ? { height: "10vh", overflow: "hidden" } : {}}>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <Box style={{height: "100%"}}>
+      <div
+        style={
+          showRegister
+            ? { height: "10vh", overflow: "hidden" }
+            : {
+                display: "flex",
+                flexWrap: "wrap", 
+                alignContent: "space-between",
+                gap: "50px",
+                height: "100%"
+              }
+        }
+      >
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
           <HeadLine
             enText={product?.name}
             arText={product?.name_ar}
             fontSize="24px"
           />
+          <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            <div>{renderLabelEmoji("1")}</div>
+            <NormalText
+              enText={/* product?.label */ "Most Ordered"}
+              arText={product?.label_ar}
+              color={"#333333"}
+              fontSize={"13px"}
+            />
+          </div>
           {product?.offer_applied == 1 ? (
             <NormalText
               enText={product?.offer_msg}
@@ -768,9 +804,10 @@ const ProductDetails = ({
               }}
               style={{
                 fontWeight: "300",
-                fontSize: "14px",
+                fontSize: "15px",
                 // color: "rgba(141, 141, 141, 1)",
-                color: "rgb(141, 141, 141)",
+                // color: "rgb(141, 141, 141)",
+                color: "#333333",
               }}
             ></p>
           ) : null}
@@ -794,38 +831,80 @@ const ProductDetails = ({
                   </Box>
                 </Box>
                 <Box
-                  sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
+                  sx={
+                    variationChecked[variantIndex]?.length <= 2
+                      ? {
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          width: "100%",
+                        }
+                      : {
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "10px",
+                        }
+                  }
                 >
                   {variationChecked[variantIndex]?.map(
-                    (variantOption, variantOptionIndex) => (
-                      <OptionBox
-                        key={variantOptionIndex}
-                        enText={variantOption?.english_name}
-                        arText={variantOption?.arabic_name}
-                        disabled={checkIsDisabled(
-                          variationChecked[variantIndex][variantOptionIndex]
-                            .value,
-                          variantIndex
-                        )}
-                        amount={
-                          productvariationPrice?.[
-                            variantOption.value.toString()
-                          ]?.price
-                        }
-                        selected={
-                          variationChecked[variantIndex][variantOptionIndex]
-                            .isChecked
-                        }
-                        handleClick={(e) => {
-                          e.stopPropagation();
-                          e.nativeEvent.stopPropagation();
-                          onVariationChecked(
-                            variantOption?.value,
+                    (variantOption, variantOptionIndex) =>
+                      variationChecked[variantIndex]?.length <= 2 ? (
+                        <SquareOptionBox
+                          key={variantOptionIndex}
+                          enText={variantOption?.english_name}
+                          arText={variantOption?.arabic_name}
+                          selected={
+                            variationChecked[variantIndex][variantOptionIndex]
+                              .isChecked
+                          }
+                          amount={
+                            productvariationPrice?.[
+                              variantOption.value.toString()
+                            ]?.price
+                          }
+                          disabled={checkIsDisabled(
+                            variationChecked[variantIndex][variantOptionIndex]
+                              .value,
                             variantIndex
-                          );
-                        }}
-                      />
-                    )
+                          )}
+                          handleClick={(e) => {
+                            e.stopPropagation();
+                            e.nativeEvent.stopPropagation();
+                            onVariationChecked(
+                              variantOption?.value,
+                              variantIndex
+                            );
+                          }}
+                        />
+                      ) : (
+                        <OptionBox
+                          key={variantOptionIndex}
+                          enText={variantOption?.english_name}
+                          arText={variantOption?.arabic_name}
+                          disabled={checkIsDisabled(
+                            variationChecked[variantIndex][variantOptionIndex]
+                              .value,
+                            variantIndex
+                          )}
+                          amount={
+                            productvariationPrice?.[
+                              variantOption.value.toString()
+                            ]?.price
+                          }
+                          selected={
+                            variationChecked[variantIndex][variantOptionIndex]
+                              .isChecked
+                          }
+                          handleClick={(e) => {
+                            e.stopPropagation();
+                            e.nativeEvent.stopPropagation();
+                            onVariationChecked(
+                              variantOption?.value,
+                              variantIndex
+                            );
+                          }}
+                        />
+                      )
                   )}
                 </Box>
               </Box>
@@ -887,51 +966,98 @@ const ProductDetails = ({
                     </Box>
                   </Box>
                   <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "10px",
-                    }}
+                    sx={
+                      checked[addonIndex]?.length <= 2
+                        ? {
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            width: "100%",
+                          }
+                        : {
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "10px",
+                          }
+                    }
                   >
                     {checked[addonIndex]?.map(
-                      (addonsOption, addonsOptionIndex) => (
-                        <OptionBox
-                          key={addonsOptionIndex}
-                          enText={addonsOption?.english_name}
-                          arText={addonsOption?.arabic_name}
-                          selected={
-                            checked[addonIndex][addonsOptionIndex].isChecked
-                          }
-                          amount={addonsOption.price}
-                          disabled={
-                            addonsOption.disabled == 1 ||
-                            addonsOption.label != ""
-                          }
-                          handleClick={(e) => {
-                            e.stopPropagation();
-                            e.nativeEvent.stopPropagation();
-                            if (
-                              addonsOption?.disabled == 0 &&
-                              addonsOption.label == ""
-                            ) {
-                              if (addon?.max_selection != 1)
-                                onChecked(
-                                  addonsOption?.value,
-                                  addonsOption.price,
-                                  addon.max_selection,
-                                  addonIndex
-                                );
-                              else
-                                onSelectChecked(
-                                  addonsOption?.value,
-                                  addonsOption.price,
-                                  addon.max_selection,
-                                  addonIndex
-                                );
+                      (addonsOption, addonsOptionIndex) =>
+                        checked[addonIndex]?.length <= 2 ? (
+                          <SquareOptionBox
+                            key={addonsOptionIndex}
+                            enText={addonsOption?.english_name}
+                            arText={addonsOption?.arabic_name}
+                            selected={
+                              checked[addonIndex][addonsOptionIndex].isChecked
                             }
-                          }}
-                        />
-                      )
+                            amount={addonsOption.price}
+                            disabled={
+                              addonsOption.disabled == 1 ||
+                              addonsOption.label != ""
+                            }
+                            handleClick={(e) => {
+                              e.stopPropagation();
+                              e.nativeEvent.stopPropagation();
+                              if (
+                                addonsOption?.disabled == 0 &&
+                                addonsOption.label == ""
+                              ) {
+                                if (addon?.max_selection != 1)
+                                  onChecked(
+                                    addonsOption?.value,
+                                    addonsOption.price,
+                                    addon.max_selection,
+                                    addonIndex
+                                  );
+                                else
+                                  onSelectChecked(
+                                    addonsOption?.value,
+                                    addonsOption.price,
+                                    addon.max_selection,
+                                    addonIndex
+                                  );
+                              }
+                            }}
+                          />
+                        ) : (
+                          <OptionBox
+                            key={addonsOptionIndex}
+                            enText={addonsOption?.english_name}
+                            arText={addonsOption?.arabic_name}
+                            selected={
+                              checked[addonIndex][addonsOptionIndex].isChecked
+                            }
+                            amount={addonsOption.price}
+                            disabled={
+                              addonsOption.disabled == 1 ||
+                              addonsOption.label != ""
+                            }
+                            handleClick={(e) => {
+                              e.stopPropagation();
+                              e.nativeEvent.stopPropagation();
+                              if (
+                                addonsOption?.disabled == 0 &&
+                                addonsOption.label == ""
+                              ) {
+                                if (addon?.max_selection != 1)
+                                  onChecked(
+                                    addonsOption?.value,
+                                    addonsOption.price,
+                                    addon.max_selection,
+                                    addonIndex
+                                  );
+                                else
+                                  onSelectChecked(
+                                    addonsOption?.value,
+                                    addonsOption.price,
+                                    addon.max_selection,
+                                    addonIndex
+                                  );
+                              }
+                            }}
+                          />
+                        )
                     )}
                   </Box>
                 </Box>
@@ -980,6 +1106,8 @@ const ProductDetails = ({
               note={note}
             />
           ) : null}
+        </Box>
+        <Box sx={{width: "100%"}}>
           {product?.prodyct_type != 3 ? (
             product?.prodyct_type == 2 ? (
               !showRegister ? (
@@ -989,6 +1117,7 @@ const ProductDetails = ({
                       ? "bottom-button-full"
                       : "bottom-button-half"
                   }`}
+                  style={{width: "100%"}}
                 >
                   <Link
                     href={``}
@@ -1037,26 +1166,25 @@ const ProductDetails = ({
                 </div>
               ) : null
             ) : (
-              <>
+              <div
+                style={{
+                  // position: "fixed",
+                  // bottom: 0,
+                  // left: 0,
+                  // right: 0,
+                  // backgroundColor: "#fff",
+                  borderTop: "1px solid #ced4da",
+                  padding: "20px 0",
+                  margin: checkSize() ? "0 -40px" : "0 -20px"
+                }}
+              >
                 <div
-                  style={{
-                    padding: "10px",
-                    margin: "0 -20px",
-                    borderBottom: "1px solid #adb5bd",
-                  }}
-                ></div>
-                <div
-                  // className={`bottom-button ${
-                  //   homePageDetails?.vendor_data?.home_page_type == "18"
-                  //     ? "bottom-button-full"
-                  //     : "bottom-button-half"
-                  // }`}
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "end",
                     gap: "10px",
-                    margin: "12px 0",
+                    margin: checkSize() ? "0 40px" : "0 20px"
                   }}
                 >
                   <div
@@ -1178,7 +1306,7 @@ const ProductDetails = ({
                     )}
                   </div>
                 </div>
-              </>
+              </div>
             )
           ) : null}
         </Box>

@@ -427,8 +427,9 @@ export const AppProvider = ({
   const [hasMore, setHasMore] = useState(0);
   const handleHasMoreChange = (value) => setHasMore(value);
 
-  const [activeBackgroundColor, setActiveBackgroundColor] = useState("#f8f9fa");
-  const handleActiveBackgroundColor = (value) => setActiveBackgroundColor(value);
+  const [activeBackgroundColor, setActiveBackgroundColor] = useState("#f2f2f2");
+  const handleActiveBackgroundColor = (value) =>
+    setActiveBackgroundColor(value);
 
   const [deliveryKm, setDeliveryKm] = useState();
   const handleDeliveryKm = (value) => setDeliveryKm(value);
@@ -438,6 +439,9 @@ export const AppProvider = ({
 
   const [companyData, setCompanyData] = useState();
   const handleCompanyData = (value) => setCompanyData(value);
+
+  const [sideMenuDrawer, setSideMenuDrawer] = useState(false);
+  const handleSideMenuDrawer = (value) => setSideMenuDrawer(value);
 
   const store = {
     language,
@@ -485,7 +489,9 @@ export const AppProvider = ({
     deliveryCharge,
     handleDeliveryCharge,
     companyData,
-    handleCompanyData
+    handleCompanyData,
+    sideMenuDrawer,
+    handleSideMenuDrawer,
   };
 
   return (

@@ -110,7 +110,7 @@ const Products = (props) => {
           return (
             <Grid container className="gridContainer">
               {productsData?.map((product) => (
-                <Grid item xs={6} key={product?.id}>
+                <Grid item xs={6} key={product?.id} sx={{padding: "10px"}}>
                   <ProductSquareCard product={product} />
                 </Grid>
               ))}
@@ -122,7 +122,7 @@ const Products = (props) => {
             <>
               <Grid container sx={{ gap: "50px", padding: "25px 80px" }}>
                 {productsData?.map((product) => (
-                  <Grid item xs={12} key={product?.id}>
+                  <Grid item xs={12} key={product?.id} sx={{padding: "10px"}}>
                     <ProductSquareCard product={product} imgHeight={"250px"} />
                   </Grid>
                 ))}

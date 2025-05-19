@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import NormalText from "../NormalText/normalText";
 import { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
+import DoneIcon from "@mui/icons-material/Done";
 
 const OptionBox = ({
   enText,
@@ -12,7 +13,7 @@ const OptionBox = ({
   selected,
   disabled,
 }) => {
-  const { activeBackgroundColor } = useContext(AppContext);
+  const { activeBackgroundColor, language } = useContext(AppContext);
 
   return (
     <Box
@@ -25,26 +26,36 @@ const OptionBox = ({
         alignItems: "center",
         justifyContent: "space-between",
         padding: "10px",
-        border: selected ? "2px solid #000" : "1.5px solid #AEAEAE",
+        border: "1.5px solid #AEAEAE",
         height: "40px",
-        backgroundColor: selected ? activeBackgroundColor : disabled ? "#ced4da" : "#fff",
+        backgroundColor: selected ? "#000" : disabled ? "#ced4da" : "#fff",
+        color: selected ? "#fff" : "#000",
         width: "100%",
         borderRadius: "6.38px",
       }}
     >
-      <NormalText enText={enText} arText={arText} />
+      <Box sx={{display: "flex", alignItems: "center", gap: "10px"}}>
+        <NormalText
+          enText={enText}
+          arText={arText}
+          color={selected ? "#fff" : "#000"}
+        />
+        {selected && (
+          <DoneIcon sx={{ color: selected && "#fff", fontSize: "18px", marginTop: "-3px" }} />
+        )}
+      </Box>
       {amount ? (
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: "8px",
+            gap: "5px",
             fontSize: "14px",
             fontWeight: "400",
           }}
         >
-          <Box>{parseFloat(amount).toFixed(3)}</Box>
-          <NormalText enText={"KD"} arText={"د.ك"} />
+          {language === "rtl" ? "د.ك" : "KD"}{" "}
+          <span>{parseFloat(amount).toFixed(3)}</span>
         </Box>
       ) : null}
     </Box>

@@ -172,12 +172,13 @@ const Layout17 = ({
             </div>
           </AccordionSummary>
           {category?.is_subcategory ? (
-            <Grid container spacing={4}>
+            <Grid container>
               {category?.products?.map((product) => (
                 <Grid
                   item
                   xs={layout17ToggleView ? 12 : 6}
                   key={product?.category_id}
+                  sx={{padding: "10px"}}
                 >
                   <CategoryCard category={product} />
                 </Grid>
@@ -197,6 +198,7 @@ const Layout17 = ({
                         item
                         xs={6}
                         key={product?.id}
+                        sx={{padding: "10px"}}
                       >
                         <ProductSquareCard product={product} />
                       </Grid>
