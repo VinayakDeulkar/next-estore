@@ -112,7 +112,7 @@ const Homepage = () => {
                                     ? "SFT Schrifted Sans TRIAL Var"
                                     : "Orleen",
                                 color: "#000",
-                                fontSize: language === "ltr" ? "14px" : "8px",
+                                fontSize: language === "ltr" ? "14px" : "12px",
                               }}
                               onClick={() => {
                                 document
@@ -130,7 +130,7 @@ const Homepage = () => {
                                 );
                               }}
                             >
-                              {language === "rtl" ? "English" : "عربي"}
+                              {language === "rtl" ? "En" : "عربي"}
                             </Fab>
                           </div>
                         </Box>

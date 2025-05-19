@@ -27,6 +27,9 @@ const CarouselImage = ({ mobile = false }) => {
           display: "none",
           borderRadius: mobile ? "0" : "13px",
         },
+        width: "100%",
+        height: carouselHeight(),
+        overflow: "hidden",
       }}
     >
       <Carousel
