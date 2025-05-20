@@ -87,6 +87,9 @@ const MenuDrawer = () => {
         >
           <Box>
             <VendorInfoBox />
+            <Box sx={{ padding: "10px 20px 14px 20px" }}>
+              <Box sx={{ borderTop: "1px solid #000" }}></Box>
+            </Box>
             <RestSideDrawerContent />
           </Box>
           <SocialMedia handleTermsClick={handleTermsClick} />

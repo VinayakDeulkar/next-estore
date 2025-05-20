@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import SocialMedia from "../common/SocialMedia/socialMedia";
+import HomeIcon from "@/SVGs/MenuDrawerIcons/HomeIcon";
+import BranchesIcon from "@/SVGs/MenuDrawerIcons/BranchesIcon";
+import TrackOrderIcon from "@/SVGs/MenuDrawerIcons/TrackOrderIcon";
+import MyInfoIcon from "@/SVGs/MenuDrawerIcons/MyInfoIcon";
+import MyOrdersIcon from "@/SVGs/MenuDrawerIcons/MyOrdersIcon";
+import LogoutIcon from "@/SVGs/MenuDrawerIcons/LogoutIcon";
 
 const RestSideDrawerContent = () => {
   const {
@@ -17,7 +23,7 @@ const RestSideDrawerContent = () => {
     homePageDetails,
     handleSetPaymentChange,
     areaDetails,
-    handleSideMenuDrawer
+    handleSideMenuDrawer,
   } = useContext(AppContext);
   const router = useRouter();
   const contactInfo = JSON.parse(localStorage.getItem("contactInfo") || "{}");
@@ -36,11 +42,13 @@ const RestSideDrawerContent = () => {
           ? "الصفحة الرئيسية"
           : "الصفحة الرئيسية",
       link: "/",
+      icon: <HomeIcon height={18} width={18} />,
     },
     {
       englishType: "Branch",
       arabicType: "افرعنا",
       link: "/branches",
+      icon: <BranchesIcon height={18} width={18} />,
     },
     // {
     //     englishType: "FAQs",
@@ -51,6 +59,7 @@ const RestSideDrawerContent = () => {
       englishType: "Track Order",
       arabicType: "تعقب الطلب",
       link: "/track-order",
+      icon: <TrackOrderIcon height={16} width={16} />,
     },
     {
       ...(contactInfo?.phone &&
@@ -62,6 +71,7 @@ const RestSideDrawerContent = () => {
             englishType: "My Information",
             arabicType: "معلوماتي",
             link: "",
+            icon: <MyInfoIcon height={18} width={18} />,
           }
         : null),
     },
@@ -75,6 +85,7 @@ const RestSideDrawerContent = () => {
             englishType: "My Orders",
             arabicType: "مشترياتي",
             link: "",
+            icon: <MyOrdersIcon height={17} width={17} />,
           }
         : null),
     },
@@ -88,6 +99,7 @@ const RestSideDrawerContent = () => {
             englishType: "Logout",
             arabicType: "تسجيل الخروج",
             link: "",
+            icon: <LogoutIcon height={18} width={18} />,
           }
         : homePageDetails?.vendor_data?.checkout_method != null
         ? {
@@ -230,8 +242,16 @@ const RestSideDrawerContent = () => {
               key={i}
               className="restSide-div"
               onClick={() => navigateFunction(section)}
-              sx={{ fontSize: "20px", cursor: "pointer" }}
+              sx={{
+                fontSize: "20px",
+                cursor: "pointer",
+                padding: "10px 20px",
+                display: "flex",
+                alignItems: "center",
+                gap: "18px",
+              }}
             >
+              {section?.icon}
               {language === "ltr" ? section.englishType : section.arabicType}
             </ListItem>
           ))}

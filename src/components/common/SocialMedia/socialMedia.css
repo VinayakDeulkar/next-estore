@@ -10,7 +10,7 @@ html[dir="rtl"] .sideMenu-bottom-mainDiv {
 }
 
 .sidemenu-social-icon {
-  margin-bottom: 38px;
+  margin-bottom: 30px;
 }
 
 .reach-Us-Via-text {
@@ -28,17 +28,17 @@ html[dir="rtl"] .reach-Us-Via-text {
 
 .sideMenu-BottomIcons {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   /* align-items: center; */
   justify-content: center;
   margin-top: 10px;
 }
 
 .privacy-policy-text {
-  padding-top: 19px;
-  padding-bottom: 13px;
-  border-top: 0.5px solid #e3e3e3;
-  border-bottom: 0.5px solid #e3e3e3;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
   display: flex;
   justify-content: space-between;
   color: #000;
@@ -52,19 +52,19 @@ html[dir="rtl"] .reach-Us-Via-text {
 }
 
 html[dir="rtl"] .privacy-policy-text {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .poweredBy-text {
   color: #000;
   text-align: center;
-  font-size: 15px;
+  font-size: 12px;
   /* font-style: italic; */
   font-weight: 300;
   line-height: normal;
-  margin: 0 0 7px -61px;
+  margin: 0 0 7px -43px;
 }
 
 html[dir="rtl"] .poweredBy-text {
-  margin: 0 0 7px -45px;
+  margin: 0 0 7px 0px;
 }
