@@ -66,5 +66,5 @@ html[dir="rtl"] .privacy-policy-text {
 }
 
 html[dir="rtl"] .poweredBy-text {
-  margin: 0 0 7px 0px;
+  margin: 0 0 7px -35px;
 }

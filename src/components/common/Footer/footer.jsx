@@ -42,8 +42,8 @@ const Footer = () => {
               color: "#000",
               display: "flex",
               alignItems: "center",
-              margin: `${language === "ltr" ? "0 0 0 3px" : "0 55px 0 0"}`,
-              fontSize: `${language === "ltr" ? "16px" : "18px"}`,
+              margin: `${language === "ltr" ? "0 0 0 2px" : "0 46px 0 0"}`,
+              fontSize: `${language === "ltr" ? "12px" : "14px"}`,
               marginBottom: "5px",
             }}
           >
