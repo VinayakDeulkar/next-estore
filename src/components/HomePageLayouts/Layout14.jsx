@@ -51,8 +51,8 @@ const Layout14 = ({ categories }) => {
               boxShadow: "none",
               padding: 0,
               "&.Mui-expanded": {
-                margin: "25px 0", 
-              }
+                margin: "25px 0",
+              },
             }}
             key={category?.category_id}
           >

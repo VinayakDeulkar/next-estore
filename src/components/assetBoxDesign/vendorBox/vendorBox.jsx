@@ -23,7 +23,7 @@ const VendorBox = () => {
           width={80}
           height={80}
           style={{
-            borderRadius: "13px",
+            borderRadius: "8px",
             border: "1.5px solid #9191913D",
           }}
           src={
@@ -53,7 +53,7 @@ const VendorBox = () => {
         </Box>
 
         {homePageDetails?.vendor_data?.slogan ? (
-          <Box sx={{ color: "#8D8D8D" }}>
+          <Box sx={{ color: "#8D8D8D", fontWeight: 300 }}>
             <SubHeadline
               enText={homePageDetails?.vendor_data?.slogan}
               arText={homePageDetails?.vendor_data?.slogan_ar}

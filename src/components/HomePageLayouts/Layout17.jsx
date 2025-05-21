@@ -154,7 +154,7 @@ const Layout17 = ({
                 arText={category?.category_name_ar}
                 enText={category?.category_name}
               />
-              <div
+              {/* <div
                 style={{
                   fontSize: "16px",
                   fontWeight: "500",
@@ -168,7 +168,7 @@ const Layout17 = ({
                 }}
               >
                 {category?.products?.length}
-              </div>
+              </div> */}
             </div>
           </AccordionSummary>
           {category?.is_subcategory ? (
@@ -178,7 +178,7 @@ const Layout17 = ({
                   item
                   xs={layout17ToggleView ? 12 : 6}
                   key={product?.category_id}
-                  sx={{padding: "10px"}}
+                  sx={{ padding: "10px" }}
                 >
                   <CategoryCard category={product} />
                 </Grid>
@@ -198,7 +198,7 @@ const Layout17 = ({
                         item
                         xs={6}
                         key={product?.id}
-                        sx={{padding: "10px"}}
+                        sx={{ padding: "10px" }}
                       >
                         <ProductSquareCard product={product} />
                       </Grid>

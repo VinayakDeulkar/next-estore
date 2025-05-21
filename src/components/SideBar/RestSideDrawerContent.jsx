@@ -1,16 +1,15 @@
 import { AppContext } from "@/context/AppContext";
-import { Divider, List, ListItem } from "@mui/material";
+import BranchesIcon from "@/SVGs/MenuDrawerIcons/BranchesIcon";
+import HomeIcon from "@/SVGs/MenuDrawerIcons/HomeIcon";
+import LoginIcon from "@/SVGs/MenuDrawerIcons/LoginIcon";
+import LogoutIcon from "@/SVGs/MenuDrawerIcons/LogoutIcon";
+import MyInfoIcon from "@/SVGs/MenuDrawerIcons/MyInfoIcon";
+import MyOrdersIcon from "@/SVGs/MenuDrawerIcons/MyOrdersIcon";
+import TrackOrderIcon from "@/SVGs/MenuDrawerIcons/TrackOrderIcon";
+import { List, ListItem } from "@mui/material";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
-import SocialMedia from "../common/SocialMedia/socialMedia";
-import HomeIcon from "@/SVGs/MenuDrawerIcons/HomeIcon";
-import BranchesIcon from "@/SVGs/MenuDrawerIcons/BranchesIcon";
-import TrackOrderIcon from "@/SVGs/MenuDrawerIcons/TrackOrderIcon";
-import MyInfoIcon from "@/SVGs/MenuDrawerIcons/MyInfoIcon";
-import MyOrdersIcon from "@/SVGs/MenuDrawerIcons/MyOrdersIcon";
-import LogoutIcon from "@/SVGs/MenuDrawerIcons/LogoutIcon";
 
 const RestSideDrawerContent = () => {
   const {
@@ -106,6 +105,7 @@ const RestSideDrawerContent = () => {
             englishType: "Login",
             arabicType: "تسجيل الدخول",
             link: "",
+            icon: <LoginIcon height={18} width={18} />,
           }
         : null),
     },
@@ -243,7 +243,7 @@ const RestSideDrawerContent = () => {
               className="restSide-div"
               onClick={() => navigateFunction(section)}
               sx={{
-                fontSize: "20px",
+                fontSize: "16px",
                 cursor: "pointer",
                 padding: "10px 20px",
                 display: "flex",

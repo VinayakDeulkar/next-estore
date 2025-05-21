@@ -65,7 +65,7 @@ const Layout15 = ({ categories }) => {
             id="panel1a-header"
             sx={{ padding: 0 }}
           >
-            <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <HeadLine
                 arText={category?.category_name_ar}
                 enText={category?.category_name}
@@ -99,7 +99,12 @@ const Layout15 = ({ categories }) => {
             <AccordionDetails sx={{ padding: 0 }}>
               <Grid container>
                 {category?.products?.map((product) => (
-                  <Grid item {...sizes()} key={product?.id} sx={{padding: "10px"}}>
+                  <Grid
+                    item
+                    {...sizes()}
+                    key={product?.id}
+                    sx={{ padding: "10px" }}
+                  >
                     <ProductSquareCard product={product} />
                   </Grid>
                 ))}

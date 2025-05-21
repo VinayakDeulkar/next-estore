@@ -32,6 +32,7 @@ html[dir="rtl"] .reach-Us-Via-text {
   /* align-items: center; */
   justify-content: center;
   margin-top: 10px;
+  align-items: center;
 }
 
 .privacy-policy-text {

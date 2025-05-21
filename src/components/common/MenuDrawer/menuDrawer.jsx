@@ -88,7 +88,7 @@ const MenuDrawer = () => {
           <Box>
             <VendorInfoBox />
             <Box sx={{ padding: "10px 20px 14px 20px" }}>
-              <Box sx={{ borderTop: "1px solid #000" }}></Box>
+              <Box sx={{ borderTop: "1px solid #e3e3e3" }}></Box>
             </Box>
             <RestSideDrawerContent />
           </Box>

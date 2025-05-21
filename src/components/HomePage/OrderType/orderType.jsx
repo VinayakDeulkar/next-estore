@@ -9,11 +9,14 @@ import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import styles from "./orderType.module.css";
 import moment from "moment";
+import BottomDrawer from "@/components/BottomDrawer/bottomDrawer";
 
 const OrderType = () => {
-  const { homePageDetails, areaDetails } = useContext(AppContext);
+  const { homePageDetails, areaDetails, addressDetails, userDetails } =
+    useContext(AppContext);
   const router = useRouter();
   const [showAreaModal, setShowAreaModal] = useState(false);
+  const [showAddress, setShowAddress] = useState(false);
 
   const getBoxValue = () => {
     if (areaDetails?.type === "delivery") {
@@ -22,12 +25,16 @@ const OrderType = () => {
           enText={
             areaDetails?.area === ""
               ? "Select Your Delivery Location"
+              : addressDetails?.addressName
+              ? `${addressDetails?.addressName}, ${areaDetails.area}`
               : areaDetails.area
           }
           arText={
             areaDetails?.area === ""
               ? "حدد موقع التسليم الخاص بك"
-              : areaDetails?.ar_area
+              : addressDetails?.addressName
+              ? `${addressDetails?.addressName}, ${areaDetails.ar_area}`
+              : areaDetails.ar_area
           }
         />
       );
@@ -102,10 +109,15 @@ const OrderType = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          backgroundColor: "#fff",
         }}
         component="button"
         onClick={() => {
-          setShowAreaModal(true);
+          if (addressDetails?.addressName) {
+            setShowAddress(true);
+          } else {
+            setShowAreaModal(true);
+          }
         }}
       >
         {getBoxValue()}
@@ -128,7 +140,7 @@ const OrderType = () => {
             padding: "20px 10px",
             width: "100%",
             border: 0,
-            border: "1px solid #aeaeae",
+            // border: "1px solid #aeaeae",
             outline: 0,
             fontSize: "14px",
             color: "#000",
@@ -137,10 +149,12 @@ const OrderType = () => {
             background: "transparent",
             transition: "border-color 0.2s",
             borderRadius: "10px",
-            height: "44px",
+            // height: "44px",
+            height: "20px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            // backgroundColor: "#fff",
           }}
         >
           <NormalText enText={"Delivery Time"} arText={"وقت التوصيل"} />
@@ -155,12 +169,12 @@ const OrderType = () => {
               enText={getTimeValue().enText}
               arText={getTimeValue().arText}
             />
-            <KeyboardArrowDown
+            {/* <KeyboardArrowDown
               sx={{
                 fontSize: 26,
                 color: "#000",
               }}
-            />
+            /> */}
           </Box>
         </Box>
       ) : null}
@@ -170,6 +184,17 @@ const OrderType = () => {
           setShowAreaModal(false);
         }}
       />
+      {showAddress &&
+      userDetails?.address?.length > 0 &&
+      areaDetails?.type !== "pickup" ? (
+        <BottomDrawer
+          type="home"
+          onClick={() => setShowAddress(false)}
+          hideAddress={() => {
+            setShowAddress(false);
+          }}
+        />
+      ) : null}
     </div>
   );
 };

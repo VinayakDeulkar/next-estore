@@ -11,7 +11,7 @@ const SmallButtonSquare = ({
   width = "106px",
   fontWeight = "500",
   fontSize = "16px",
-  height = "35px"
+  height = "35px",
 }) => {
   const { language, homePageDetails } = useContext(AppContext);
 
@@ -39,7 +39,7 @@ const SmallButtonSquare = ({
         whiteSpace: "nowrap",
         border:
           varient === "outline"
-            ? `1px solid ${homePageDetails?.vendor_data?.vendor_color}`
+            ? `1.5px solid rgba(255, 255, 255, 0.75)`
             : null,
       }}
       onClick={handleClick}

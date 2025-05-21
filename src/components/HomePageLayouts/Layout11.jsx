@@ -114,7 +114,14 @@ const Layout11 = ({
             id="panel1a-header"
             sx={{ padding: 0 }}
           >
-            <div style={{width: "100%", display: "flex", alignItems: "center", gap: "10px"}}>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
               <div id={`category${i}`} onClick={() => setcategoryopen(true)}>
                 <HeadLine
                   arText={category?.category_name_ar}
@@ -131,7 +138,7 @@ const Layout11 = ({
                   justifyContent: "center",
                   alignItems: "center",
                   borderRadius: "15px",
-                  marginTop: "3px"
+                  marginTop: "3px",
                 }}
               >
                 {category?.products?.length}

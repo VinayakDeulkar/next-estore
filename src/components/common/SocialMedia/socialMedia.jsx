@@ -42,6 +42,7 @@ const SocialMedia = ({ handleTermsClick }) => {
               enText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`}
               arText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`}
               isNumber={true}
+              fontSize="12px"
               fontWeight={400}
             />
           </Box>
@@ -50,6 +51,7 @@ const SocialMedia = ({ handleTermsClick }) => {
             <NormalText
               enText={vendorSlug?.data?.vendor_data?.support_mail}
               arText={vendorSlug?.data?.vendor_data?.support_mail}
+              fontSize="12px"
               fontWeight={400}
             />
           </Box>
@@ -66,7 +68,7 @@ const SocialMedia = ({ handleTermsClick }) => {
                 target="_blank"
                 className="social-link"
               >
-                <PhoneIcons height={13} width={13} />
+                <PhoneIcons height={15} width={15} />
               </a>
             ) : null}
             {homePageDetails?.vendor_data?.social_media?.instagram != "" &&
@@ -80,7 +82,7 @@ const SocialMedia = ({ handleTermsClick }) => {
                 <InstagramIcon height={15} width={15} />
               </a>
             ) : null}
-            {homePageDetails?.vendor_data?.social_media?.facebook != "" &&
+            {/* {homePageDetails?.vendor_data?.social_media?.facebook != "" &&
             homePageDetails?.vendor_data?.social_media?.facebook ? (
               <a
                 rel="noreferrer"
@@ -90,7 +92,7 @@ const SocialMedia = ({ handleTermsClick }) => {
               >
                 <FacebookIcon height={16} width={16} />
               </a>
-            ) : null}
+            ) : null} */}
             {homePageDetails?.vendor_data?.social_media?.google != "" &&
             homePageDetails?.vendor_data?.social_media?.google ? (
               <a
@@ -121,7 +123,7 @@ const SocialMedia = ({ handleTermsClick }) => {
                 target="_blank"
                 className="social-link"
               >
-                <YouTubeIcons height={16} width={16} />
+                <YouTubeIcons height={18} width={18} />
               </a>
             ) : null}
           </div>

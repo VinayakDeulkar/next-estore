@@ -14,7 +14,7 @@ const VendorInfoBox = () => {
           width={75}
           height={75}
           style={{
-            borderRadius: "10px",
+            borderRadius: "5px",
           }}
           src={
             language == "ltr"
@@ -32,8 +32,8 @@ const VendorInfoBox = () => {
             color: "#000",
             textAlign: "start",
             fontSize: "28px",
-            fontWeight: "500",
-            marginTop: "5px"
+            fontWeight: 400,
+            marginTop: "5px",
           }}
           enText={homePageDetails?.vendor_data?.name}
           arText={homePageDetails?.vendor_data?.name_ar}
@@ -42,7 +42,7 @@ const VendorInfoBox = () => {
           sx={{
             textAlign: "start",
             color: "#8D8D8D",
-            fontWeight: 400,
+            fontWeight: 200,
             fontSize: "21px",
             marginTop: "-4px",
           }}
