@@ -80,7 +80,9 @@ const OrderPage = (props) => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
                     id="panel1-header"
-                    sx={{ padding: 0 }}
+                    sx={{
+                      padding: 0,
+                    }}
                   >
                     <SubHeadline
                       enText={element?.english}

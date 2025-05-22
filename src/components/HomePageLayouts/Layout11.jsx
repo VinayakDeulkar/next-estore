@@ -112,7 +112,12 @@ const Layout11 = ({
             }
             aria-controls="panel1a-content"
             id="panel1a-header"
-            sx={{ padding: 0 }}
+            sx={{
+              "& .MuiAccordionSummary-content.Mui-expanded": {
+                margin: "20px 0 10px 0",
+              },
+              padding: 0,
+            }}
           >
             <div
               style={{
@@ -128,21 +133,23 @@ const Layout11 = ({
                   enText={category?.category_name}
                 />
               </div>
-              <div
-                style={{
-                  fontSize: "16px",
-                  fontWeight: "500",
-                  border: "1px solid #000",
-                  padding: "0 18px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: "15px",
-                  marginTop: "3px",
-                }}
-              >
-                {category?.products?.length}
-              </div>
+              {!expendedList.includes(category?.category_id) && (
+                <div
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "500",
+                    border: "1px solid #000",
+                    padding: "0 18px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "15px",
+                    marginTop: "3px",
+                  }}
+                >
+                  {category?.products?.length}
+                </div>
+              )}
             </div>
           </AccordionSummary>
           {category?.is_subcategory ? (
