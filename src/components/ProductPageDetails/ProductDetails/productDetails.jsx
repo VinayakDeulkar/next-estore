@@ -23,6 +23,7 @@ import "./productDetails.css";
 import AddToCartIcon from "@/SVGs/AddToCartIcon";
 import AddToBagIcon from "@/SVGs/AddToBagIcon";
 import SquareOptionBox from "@/components/assetBoxDesign/SquareOptionBox/squareOptionBox";
+import NumberCounter from "@/components/Animations/numberCounter";
 
 const ProductDetails = ({
   product,
@@ -696,21 +697,28 @@ const ProductDetails = ({
   };
 
   return (
-    <Box style={{height: "100%"}}>
+    <Box style={{ height: "100%" }}>
       <div
         style={
           showRegister
             ? { height: "10vh", overflow: "hidden" }
             : {
                 display: "flex",
-                flexWrap: "wrap", 
+                flexWrap: "wrap",
                 alignContent: "space-between",
                 gap: "50px",
-                height: "100%"
+                height: "100%",
               }
         }
       >
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            width: "100%",
+          }}
+        >
           <HeadLine
             enText={product?.name}
             arText={product?.name_ar}
@@ -1107,7 +1115,7 @@ const ProductDetails = ({
             />
           ) : null}
         </Box>
-        <Box sx={{width: "100%"}}>
+        <Box sx={{ width: "100%" }}>
           {product?.prodyct_type != 3 ? (
             product?.prodyct_type == 2 ? (
               !showRegister ? (
@@ -1117,7 +1125,7 @@ const ProductDetails = ({
                       ? "bottom-button-full"
                       : "bottom-button-half"
                   }`}
-                  style={{width: "100%"}}
+                  style={{ width: "100%" }}
                 >
                   <Link
                     href={``}
@@ -1175,7 +1183,7 @@ const ProductDetails = ({
                   // backgroundColor: "#fff",
                   borderTop: "1px solid #ced4da",
                   padding: "20px 0",
-                  margin: checkSize() ? "0 -40px" : "0 -20px"
+                  margin: checkSize() ? "0 -40px" : "0 -20px",
                 }}
               >
                 <div
@@ -1184,7 +1192,7 @@ const ProductDetails = ({
                     justifyContent: "space-between",
                     alignItems: "end",
                     gap: "10px",
-                    margin: checkSize() ? "0 40px" : "0 20px"
+                    margin: checkSize() ? "0 40px" : "0 20px",
                   }}
                 >
                   <div
@@ -1216,7 +1224,12 @@ const ProductDetails = ({
                           {product?.quantity &&
                           product?.product_status != 0 &&
                           isRequired?.every((l) => l == true) ? (
-                            <MultipleItems
+                            // <MultipleItems
+                            //   count={prodNumber}
+                            //   removeClick={onMinus}
+                            //   addClick={onPlus}
+                            // />
+                            <NumberCounter
                               count={prodNumber}
                               removeClick={onMinus}
                               addClick={onPlus}
