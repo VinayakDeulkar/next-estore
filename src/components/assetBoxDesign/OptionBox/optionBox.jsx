@@ -13,7 +13,7 @@ const OptionBox = ({
   selected,
   disabled,
 }) => {
-  const { activeBackgroundColor, language } = useContext(AppContext);
+  const { homePageDetails, language } = useContext(AppContext);
 
   return (
     <Box
@@ -28,20 +28,30 @@ const OptionBox = ({
         padding: "10px",
         border: "1.5px solid #AEAEAE",
         height: "40px",
-        backgroundColor: selected ? "#000" : disabled ? "#ced4da" : "#fff",
+        backgroundColor: selected
+          ? homePageDetails?.vendor_data?.vendor_color
+          : disabled
+          ? "#ced4da"
+          : "#fff",
         color: selected ? "#fff" : "#000",
         width: "100%",
         borderRadius: "6.38px",
       }}
     >
-      <Box sx={{display: "flex", alignItems: "center", gap: "10px"}}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <NormalText
           enText={enText}
           arText={arText}
           color={selected ? "#fff" : "#000"}
         />
         {selected && (
-          <DoneIcon sx={{ color: selected && "#fff", fontSize: "18px", marginTop: "-3px" }} />
+          <DoneIcon
+            sx={{
+              color: selected && "#fff",
+              fontSize: "18px",
+              marginTop: "-3px",
+            }}
+          />
         )}
       </Box>
       {amount ? (

@@ -1,5 +1,5 @@
 import { AppContext } from "@/context/AppContext";
-import { Card, CardContent, CardMedia } from "@mui/material";
+import { Box, Card, CardContent, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
@@ -29,19 +29,27 @@ const CategoryCard = ({ category }) => {
             }}
             onClick={handleCardClick}
           >
-            <CardMedia
-              component="img"
-              height="200"
-              image={category?.category_image}
-              alt={category?.category_name}
-              style={{
-                width: "125px",
-                height: "125px",
-                objectFit: "cover",
+            <Box
+              sx={{
+                overflow: "hidden",
                 borderRadius: "8px",
+                height: "125px",
                 marginBottom: "10px",
               }}
-            />
+            >
+              <CardMedia
+                component="img"
+                height="200"
+                image={category?.category_image}
+                alt={category?.category_name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                }}
+              />
+            </Box>
             <CardContent sx={{ padding: "0" }}>
               <SubHeadline
                 enText={category?.category_name}
@@ -67,19 +75,28 @@ const CategoryCard = ({ category }) => {
             }}
             onClick={handleCardClick}
           >
-            <CardMedia
-              component="img"
-              height="200"
-              image={category?.category_image}
-              alt={category?.category_name}
-              style={{
-                maxWidth: "100%",
-                height: "200px",
-                objectFit: "cover",
+            <Box
+              sx={{
+                overflow: "hidden",
                 borderRadius: "8px",
+                height: "200px",
                 marginBottom: "10px",
               }}
-            />
+            >
+              <CardMedia
+                component="img"
+                height="200"
+                image={category?.category_image}
+                alt={category?.category_name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                }}
+                className="zoomImg"
+              />
+            </Box>
             <CardContent
               sx={{
                 padding: "0",

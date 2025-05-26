@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import SearchBox from "../SearchBox/searchBox";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const {
@@ -86,19 +87,25 @@ const Navbar = () => {
             justifyContent: "start",
           }}
         >
-          <IconButton color="#fff" onClick={() => handleSideMenuDrawer(true)}>
-            <Box
-              sx={{
-                height: "20px",
-                width: "20px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <BurgerIcon />
-            </Box>
-          </IconButton>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <IconButton color="#fff" onClick={() => handleSideMenuDrawer(true)}>
+              <Box
+                sx={{
+                  height: "20px",
+                  width: "20px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <BurgerIcon />
+              </Box>
+            </IconButton>
+          </motion.div>
         </Grid>
         <Grid
           item
@@ -141,26 +148,34 @@ const Navbar = () => {
           }}
         >
           {/* <SearchBox /> */}
-          <Box
-            sx={{
-              fontFamily:
-                language === "rtl" ? "SFT Schrifted Sans TRIAL Var" : "Orleen",
-              color: "#000",
-            }}
-            component={"button"}
-            onClick={() => {
-              document
-                .getElementsByTagName("html")[0]
-                .setAttribute("dir", language.split("").reverse().join(""));
-              sessionStorage.setItem(
-                "language",
-                language.split("").reverse().join("")
-              );
-              handleLanguageChange(language.split("").reverse().join(""));
-            }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            {language === "rtl" ? "English" : "عربي"}
-          </Box>
+            <Box
+              sx={{
+                fontFamily:
+                  language === "rtl"
+                    ? "SFT Schrifted Sans TRIAL Var"
+                    : "Orleen",
+                color: "#000",
+              }}
+              component={"button"}
+              onClick={() => {
+                document
+                  .getElementsByTagName("html")[0]
+                  .setAttribute("dir", language.split("").reverse().join(""));
+                sessionStorage.setItem(
+                  "language",
+                  language.split("").reverse().join("")
+                );
+                handleLanguageChange(language.split("").reverse().join(""));
+              }}
+            >
+              {language === "rtl" ? "English" : "عربي"}
+            </Box>
+          </motion.div>
         </Grid>
       </Grid>
     );

@@ -13,6 +13,7 @@ import "./productSquareCard.css";
 import TiktokPixel from "tiktok-pixel";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import NumberCounter from "../Animations/numberCounter";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =
@@ -318,7 +319,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
         width: "100%",
         display: "flex",
         flexDirection: "column",
-        gap: "10px"
+        gap: "10px",
       }}
       onClick={handleCardClick}
     >
@@ -355,18 +356,27 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           )}
         </div>
 
-        <CardMedia
-          component="img"
-          height="200"
-          image={product?.image}
-          alt={product?.product_name}
-          style={{
-            maxWidth: "100%",
-            height: imgHeight ? imgHeight : "200px",
-            objectFit: "cover",
+        <Box
+          sx={{
+            overflow: "hidden",
             borderRadius: "5px",
+            height: imgHeight ? imgHeight : "200px",
           }}
-        />
+        >
+          <CardMedia
+            component="img"
+            height="200"
+            image={product?.image}
+            alt={product?.product_name}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "5px",
+            }}
+            className="zoomImg"
+          />
+        </Box>
         {product?.label ? (
           <TypographyConverter
             sx={{
@@ -492,7 +502,13 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 0 ? null : product?.price_on_selection == 1 ? null : inCart !=
                   0 ? (
                   <Box onClick={(e) => e.preventDefault()}>
-                    <MultipleItems
+                    {/* <MultipleItems
+                      loading={spinLoader}
+                      count={inCart}
+                      removeClick={(e) => onAddToCartClick(e, -1)}
+                      addClick={(e) => onAddToCartClick(e, 1)}
+                    /> */}
+                    <NumberCounter
                       loading={spinLoader}
                       count={inCart}
                       removeClick={(e) => onAddToCartClick(e, -1)}

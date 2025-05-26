@@ -11,6 +11,7 @@ import { useContext } from "react";
 import BurgerIcon from "@/SVGs/BurgerIcon";
 import MenuDrawer from "@/components/common/MenuDrawer/menuDrawer";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
+import { motion } from "framer-motion";
 
 const Homepage = () => {
   const {
@@ -78,20 +79,26 @@ const Homepage = () => {
                               zIndex: 50,
                             }}
                           >
-                            <Fab
-                              size="small"
-                              sx={{
-                                boxShadow: "none",
-                                backgroundColor: "white",
-                                color: "black",
-                              }}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                handleSideMenuDrawer(true);
-                              }}
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.5 }}
                             >
-                              <BurgerIcon />
-                            </Fab>
+                              <Fab
+                                size="small"
+                                sx={{
+                                  boxShadow: "none",
+                                  backgroundColor: "white",
+                                  color: "black",
+                                }}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleSideMenuDrawer(true);
+                                }}
+                              >
+                                <BurgerIcon />
+                              </Fab>
+                            </motion.div>
                           </div>
                           <div
                             style={{
@@ -102,44 +109,63 @@ const Homepage = () => {
                               zIndex: 50,
                             }}
                           >
-                            <Fab
-                              size="small"
-                              sx={{
-                                boxShadow: "none",
-                                backgroundColor: "white",
-                                fontFamily:
-                                  language === "rtl"
-                                    ? "SFT Schrifted Sans TRIAL Var"
-                                    : "Orleen",
-                                color: "#000",
-                                fontSize: language === "ltr" ? "14px" : "12px",
-                              }}
-                              onClick={() => {
-                                document
-                                  .getElementsByTagName("html")[0]
-                                  .setAttribute(
-                                    "dir",
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.5 }}
+                            >
+                              <Fab
+                                size="small"
+                                sx={{
+                                  boxShadow: "none",
+                                  backgroundColor: "white",
+                                  fontFamily:
+                                    language === "rtl"
+                                      ? "SFT Schrifted Sans TRIAL Var"
+                                      : "Orleen",
+                                  color: "#000",
+                                  fontSize:
+                                    language === "ltr" ? "14px" : "12px",
+                                }}
+                                onClick={() => {
+                                  document
+                                    .getElementsByTagName("html")[0]
+                                    .setAttribute(
+                                      "dir",
+                                      language.split("").reverse().join("")
+                                    );
+                                  sessionStorage.setItem(
+                                    "language",
                                     language.split("").reverse().join("")
                                   );
-                                sessionStorage.setItem(
-                                  "language",
-                                  language.split("").reverse().join("")
-                                );
-                                handleLanguageChange(
-                                  language.split("").reverse().join("")
-                                );
-                              }}
-                            >
-                              {language === "rtl" ? "En" : "عربي"}
-                            </Fab>
+                                  handleLanguageChange(
+                                    language.split("").reverse().join("")
+                                  );
+                                }}
+                              >
+                                {language === "rtl" ? "En" : "عربي"}
+                              </Fab>
+                            </motion.div>
                           </div>
                         </Box>
                         <MenuDrawer />
-                        <CarouselImage mobile={true} />
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <CarouselImage mobile={true} />
+                        </motion.div>
                       </Box>
                     ) : null}
                     {checkDrawer() ? <BottomDrawer type={"home"} /> : null}
-                    <VendorBox />
+                    <motion.div
+                      initial={{ opacity: 0, y: "20px" }}
+                      animate={{ opacity: 1, y: "0px" }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                    >
+                      <VendorBox />
+                    </motion.div>
                     <HomePageLayouts />
                   </Box>
                 </Box>
@@ -152,7 +178,13 @@ const Homepage = () => {
                   lg={7.5}
                   sx={{ padding: "10px", direction: "ltr" }}
                 >
-                  <CarouselImage />
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <CarouselImage />
+                  </motion.div>
                 </Grid>
               ) : null}
             </Grid>

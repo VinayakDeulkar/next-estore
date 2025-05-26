@@ -12,7 +12,7 @@ const SquareOptionBox = ({
   selected,
   disabled,
 }) => {
-  const { language } = useContext(AppContext);
+  const { language, homePageDetails } = useContext(AppContext);
 
   return (
     <Box
@@ -22,7 +22,11 @@ const SquareOptionBox = ({
       }}
       sx={{
         padding: "20px",
-        backgroundColor: selected ? "#000" : disabled ? "#ced4da" : "#fff",
+        backgroundColor: selected
+          ? homePageDetails?.vendor_data?.vendor_color
+          : disabled
+          ? "#ced4da"
+          : "#fff",
         color: selected ? "#fff" : "#000",
         border: "1.5px solid #AEAEAE",
         borderRadius: "10px",

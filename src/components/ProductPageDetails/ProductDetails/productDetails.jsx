@@ -1199,7 +1199,8 @@ const ProductDetails = ({
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      gap: "7px",
+                      alignItems: "start",
+                      gap: "3px",
                     }}
                   >
                     <div
@@ -1250,7 +1251,7 @@ const ProductDetails = ({
                     // }`}
                     style={{
                       padding: "15px 25px",
-                      backgroundColor: "#000",
+                      backgroundColor: homePageDetails?.vendor_data?.vendor_color,
                       color: "#fff",
                       borderRadius: "50px",
                       fontSize: language === "ltr" ? "17px" : "19px",

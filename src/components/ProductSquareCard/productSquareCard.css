@@ -18,3 +18,11 @@
   transition: all 0.2s ease-in 0s;
   user-select: none;
 }
+
+.zoomImg {
+  transition: transform 0.2s;
+}
+
+.zoomImg:hover {
+  transform: scale(1.1);
+}

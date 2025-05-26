@@ -319,7 +319,7 @@ const HorizontalCard = ({ product }) => {
       }}
       onClick={handleCardClick}
     >
-      <div style={{display: "flex", alignItems: "center", gap: "15px"}}>
+      <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
         <div>
           <div
             style={{
@@ -358,17 +358,27 @@ const HorizontalCard = ({ product }) => {
               )}
             </div>
 
-            <CardMedia
-              // component="img"
-              image={product?.image}
-              alt={product?.product_name}
-              style={{
-                width: "125px",
-                height: "125px",
-                // objectFit: "cover",
+            <Box
+              sx={{
+                overflow: "hidden",
                 borderRadius: "5px",
+                height: "125px",
+                width: "125px"
               }}
-            />
+            >
+              <CardMedia
+                // component="img"
+                image={product?.image}
+                alt={product?.product_name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "5px",
+                }}
+                className="zoomImg"
+              />
+            </Box>
             {product?.label ? (
               <TypographyConverter
                 sx={{

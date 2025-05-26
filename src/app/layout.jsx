@@ -10,6 +10,7 @@ import { headers } from "next/headers";
 import "../assets/Fonts/Orleen.css";
 import "../assets/Fonts/SFTfont.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import LoadingWrapper from "@/components/Animations/LoadingWrapper";
 
 export async function generateMetadata({ params }) {
   const headersList = headers();
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }) {
     description: slogan,
     icons: [
       {
-        url: `${english_new_background}?v=${Date.now()}`, // Prevent caching
+        url: `${english_new_background}?v=${Date.now()}`, 
         type: "image/jpeg",
       },
     ],
@@ -85,8 +86,7 @@ export default async function RootLayout({ children }) {
   } = await getData();
   return (
     <html lang="en">
-      <head>
-      </head>
+      <head></head>
       <body
         style={{
           fontFamily: "SFT Schrifted Sans TRIAL Var",
@@ -98,7 +98,7 @@ export default async function RootLayout({ children }) {
           deliveryResponse={deliveryResponse}
           estoreBranchesResponse={estoreBranchesResponse}
         >
-          {children}
+          <LoadingWrapper>{children}</LoadingWrapper>
         </AppProvider>
       </body>
     </html>

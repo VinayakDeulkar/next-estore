@@ -194,3 +194,7 @@ export const displayInternationalTime = (deliveryTime, deliveryType) => {
       break;
   }
 };
+
+export const mobileScreen = () => {
+  return window != undefined && window?.innerWidth < 991;
+};

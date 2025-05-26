@@ -18,6 +18,7 @@ import HomepageDesign from "../InternationalDelivery/HomepageDesign";
 import Layout17 from "./Layout17";
 import SearchBox from "../common/SearchBox/searchBox";
 import Footer from "../common/Footer/footer";
+import { motion } from "framer-motion";
 
 const HomePageLayouts = () => {
   const {
@@ -111,15 +112,27 @@ const HomePageLayouts = () => {
       /> */}
       {homePageDetails?.vendor_data?.international_delivery !== "3" &&
       homePageDetails?.vendor_data?.international_delivery !== "" ? (
-        <div style={{ marginBottom: "20px" }}>
-          <HomepageDesign handleCountryChange={handleCountryChange} />
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: "20px" }}
+          animate={{ opacity: 1, y: "0px" }}
+          transition={{ duration: 0.5, delay: 1 }}
+        >
+          <div style={{ marginBottom: "20px" }}>
+            <HomepageDesign handleCountryChange={handleCountryChange} />
+          </div>
+        </motion.div>
       ) : null}
       {(homePageDetails?.vendor_data?.international_delivery == "3" ||
         homePageDetails?.vendor_data?.international_delivery == "") &&
       internationalDelivery &&
       internationalDelivery.delivery_country_code === "KW" ? (
-        <OrderType />
+        <motion.div
+          initial={{ opacity: 0, y: "20px" }}
+          animate={{ opacity: 1, y: "0px" }}
+          transition={{ duration: 0.5, delay: 1 }}
+        >
+          <OrderType />
+        </motion.div>
       ) : null}
 
       {search != "" ? (
@@ -153,10 +166,16 @@ const HomePageLayouts = () => {
         )
       ) : (
         <div>
-          <div style={{ paddingBottom: "80px" }}>
-            {renderLayoutType(homePageDetails?.categories)}
-          </div>
-          <Footer />
+          <motion.div
+            initial={{ opacity: 0, y: "20px" }}
+            animate={{ opacity: 1, y: "0px" }}
+            transition={{ duration: 0.5, delay: 1.5 }}
+          >
+            <div style={{ paddingBottom: "80px" }}>
+              {renderLayoutType(homePageDetails?.categories)}
+            </div>
+            <Footer />
+          </motion.div>
         </div>
       )}
 
