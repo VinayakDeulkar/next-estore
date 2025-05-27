@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSquare";
 import {
   Accordion,
@@ -40,6 +40,10 @@ const Layout17 = ({
     }
   };
 
+  useEffect(() => {
+    setcategorynow(() => categories[0]?.category_name);
+  }, []);
+
   const onCategorySelect = (category, k) => {
     setcategorynow(() => category?.category_name);
     $("#categoryflex").animate(
@@ -57,7 +61,7 @@ const Layout17 = ({
       $("html, body").animate(
         {
           scrollTop:
-            element.offset().top - (window.screen.width < 991 ? 107 : 59),
+            element.offset().top - (window.innerWidth < 991 ? 107 : 59),
         },
         "slow"
       );
