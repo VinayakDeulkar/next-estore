@@ -12,6 +12,7 @@ import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
 import SnapPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import NumberCounter from "../Animations/numberCounter";
 
 const HorizontalCard = ({ product }) => {
   const {
@@ -363,7 +364,7 @@ const HorizontalCard = ({ product }) => {
                 overflow: "hidden",
                 borderRadius: "5px",
                 height: "125px",
-                width: "125px"
+                width: "125px",
               }}
             >
               <CardMedia
@@ -535,7 +536,13 @@ const HorizontalCard = ({ product }) => {
                       {language === "rtl" ? "د.ك" : "KD"}
                     </span>
                     <Box sx={{ display: "flex", justifyContent: "start" }}>
-                      <MultipleItems
+                      {/* <MultipleItems
+                        loading={spinLoader}
+                        removeClick={(e) => onAddToCartClick(e, -1)}
+                        addClick={(e) => onAddToCartClick(e, 1)}
+                        count={inCart}
+                      /> */}
+                      <NumberCounter
                         loading={spinLoader}
                         removeClick={(e) => onAddToCartClick(e, -1)}
                         addClick={(e) => onAddToCartClick(e, 1)}

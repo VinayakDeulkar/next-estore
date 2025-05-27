@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styles from "./footer.module.css";
 import { AppContext } from "@/context/AppContext";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Tooltip } from "@mui/material";
 import Image from "next/image";
 import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
 
@@ -118,11 +118,31 @@ const Footer = () => {
               color={"#fff"}
               isNumber={true}
             />
-            <NormalText enText={vendorSlug?.data?.vendor_data?.support_mail} arText={vendorSlug?.data?.vendor_data?.support_mail} color={"#fff"} />
-            <NormalText enText={vendorSlug?.data?.vendor_data?.name} arText={vendorSlug?.data?.vendor_data?.name_ar} color={"#fff"} />
+            <Box
+              sx={{
+                whiteSpace: "normal",
+                wordBreak: "break-word",
+                color: "#fff",
+              }}
+            >
+              <NormalText
+                enText={vendorSlug?.data?.vendor_data?.support_mail}
+                arText={vendorSlug?.data?.vendor_data?.support_mail}
+                color={"#fff"}
+              />
+            </Box>
+            <NormalText
+              enText={vendorSlug?.data?.vendor_data?.name}
+              arText={vendorSlug?.data?.vendor_data?.name_ar}
+              color={"#fff"}
+            />
           </div>
           <div>
-            <NormalText enText={"Petra Foods W.L.LC"} arText={"Petra Foods W.L.LC"} color={"#fff"} />
+            <NormalText
+              enText={"Petra Foods W.L.LC"}
+              arText={"Petra Foods W.L.LC"}
+              color={"#fff"}
+            />
           </div>
         </Grid>
       </Grid>

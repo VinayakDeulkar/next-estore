@@ -4,6 +4,7 @@ import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import "../checkOrderDetails.css";
+import { motion } from "framer-motion";
 
 const NewPaymentSelector = ({
   payment,
@@ -100,14 +101,18 @@ const NewPaymentSelector = ({
               handleSetPaymentChange(4);
             }}
             className={`intro-flex payment-details-holder`}
-            style={
-              payment == 4
-                ? {
-                    backgroundColor: activeBackgroundColor,
-                    border: "2px solid #000",
-                  }
-                : {}
-            }
+            // style={
+            //   payment == 4
+            //     ? {
+            //         backgroundColor: activeBackgroundColor,
+            //         border: "2px solid #000",
+            //       }
+            //     : {}
+            // }
+            style={{
+              position: "relative",
+              zIndex: 1,
+            }}
           >
             <span className="del-ic" style={{ padding: 0 }}>
               <img
@@ -121,6 +126,17 @@ const NewPaymentSelector = ({
               ></img>
             </span>
             <Title enText={"Apple Pay"} arText={"أبل الدفع"} />
+            {payment == 4 && (
+              <motion.div
+                layoutId="tab-highlight"
+                className="absolute inset-0 rounded-md border-2 border-black"
+                style={{
+                  backgroundColor: activeBackgroundColor, // Light gray background for active tab
+                  zIndex: -1,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
           </Box>
         ) : null}
         <Box
@@ -130,14 +146,18 @@ const NewPaymentSelector = ({
             handleSetPaymentChange(1);
           }}
           className={`intro-flex payment-details-holder`}
-          style={
-            payment == 1
-              ? {
-                  backgroundColor: activeBackgroundColor,
-                  border: "2px solid #000",
-                }
-              : {}
-          }
+          // style={
+          //   payment == 1
+          //     ? {
+          //         backgroundColor: activeBackgroundColor,
+          //         border: "2px solid #000",
+          //       }
+          //     : {}
+          // }
+          style={{
+            position: "relative",
+            zIndex: 1,
+          }}
         >
           <span className="del-ic" style={{ padding: 0 }}>
             <img
@@ -147,6 +167,17 @@ const NewPaymentSelector = ({
             ></img>
           </span>
           <Title enText={"K-NET"} arText={"كي نت"} />
+          {payment == 1 && (
+            <motion.div
+              layoutId="tab-highlight"
+              className="absolute inset-0 rounded-md border-2 border-black"
+              style={{
+                backgroundColor: activeBackgroundColor, // Light gray background for active tab
+                zIndex: -1,
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
+          )}
         </Box>
         {homePageDetails?.vendor_data?.is_credit_card != 0 ? (
           <Box
@@ -155,14 +186,18 @@ const NewPaymentSelector = ({
               handleSetPaymentChange(2);
             }}
             className={`intro-flex payment-details-holder`}
-            style={
-              payment == 2
-                ? {
-                    backgroundColor: activeBackgroundColor,
-                    border: "2px solid #000",
-                  }
-                : {}
-            }
+            // style={
+            //   payment == 2
+            //     ? {
+            //         backgroundColor: activeBackgroundColor,
+            //         border: "2px solid #000",
+            //       }
+            //     : {}
+            // }
+            style={{
+              position: "relative",
+              zIndex: 1,
+            }}
           >
             <span className="del-ic" style={{ padding: 0 }}>
               <img
@@ -185,6 +220,17 @@ const NewPaymentSelector = ({
               ></img>
             </span>
             <Title enText={"Credit"} arText={"ائتمان"} />
+            {payment == 2 && (
+              <motion.div
+                layoutId="tab-highlight"
+                className="absolute inset-0 rounded-md border-2 border-black"
+                style={{
+                  backgroundColor: activeBackgroundColor, // Light gray background for active tab
+                  zIndex: -1,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
           </Box>
         ) : null}
         {homePageDetails?.vendor_data?.is_cod == 1 &&
@@ -198,14 +244,18 @@ const NewPaymentSelector = ({
               handleSetPaymentChange(3);
             }}
             className={`intro-flex payment-details-holder`}
-            style={
-              payment == 3
-                ? {
-                    backgroundColor: activeBackgroundColor,
-                    border: "2px solid #000",
-                  }
-                : {}
-            }
+            // style={
+            //   payment == 3
+            //     ? {
+            //         backgroundColor: activeBackgroundColor,
+            //         border: "2px solid #000",
+            //       }
+            //     : {}
+            // }
+            style={{
+              position: "relative",
+              zIndex: 1,
+            }}
           >
             <span className="del-ic" style={{ padding: 0 }}>
               <img
@@ -215,6 +265,17 @@ const NewPaymentSelector = ({
               ></img>
             </span>
             <Title enText={"Cash"} arText={"نقدي"} />
+            {payment == 3 && (
+              <motion.div
+                layoutId="tab-highlight"
+                className="absolute inset-0 rounded-md border-2 border-black"
+                style={{
+                  backgroundColor: activeBackgroundColor, // Light gray background for active tab
+                  zIndex: -1,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
           </Box>
         ) : null}
       </div>

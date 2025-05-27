@@ -68,60 +68,115 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
     [selectedBounds.south, selectedBounds.west],
     [selectedBounds.north, selectedBounds.east],
   ];
-  const { areaDetails, language, handleAddressDetailsChange } =
+  const { areaDetails, addressDetails, language, handleAddressDetailsChange } =
     useContext(AppContext);
 
-  return (
-    <MapContainer
-      // center={[29.3759, 47.9774]}
-      bounds={bounds}
-      maxBounds={bounds}
-      maxBoundsViscosity={1.0}
-      scrollWheelZoom={false}
-      style={{ height: "600px", width: "100%" }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <HandleMapClick
-        setMarkerPosition={setMarkerPosition}
-        selectedBounds={selectedBounds}
-        enqueueSnackbar={enqueueSnackbar}
-        areaDetails={areaDetails}
-        language={language}
-        handleAddressDetailsChange={handleAddressDetailsChange}
-      />
-      {markerPosition && (
-        <Marker
-          position={markerPosition}
-          draggable={true}
-          eventHandlers={{
-            dragend: (e) => {
-              const lat = e.target.getLatLng().lat;
-              const lng = e.target.getLatLng().lng;
+  const houseLabel = () => {
+    switch (addressDetails.addressType) {
+      case "1":
+        return language == "ltr" ? "House No." : "عمارة";
 
-              if (isWithinBounds(lat, lng, selectedBounds)) {
-                setMarkerPosition({ lat, lng });
-                handleAddressDetailsChange((a) => ({
-                  ...a,
-                  lat,
-                  lng,
-                }));
-              } else {
-                enqueueSnackbar({
-                  variant: "error",
-                  message:
-                    language === "ltr"
-                      ? `Please drag inside area ${areaDetails?.area}`
-                      : `الرجاء السحب داخل المنطقة ${areaDetails?.ar_area}`,
-                });
-              }
-            },
-          }}
+      case "2":
+      case "3":
+        return language == "ltr" ? "Building no." : "عمارة";
+
+      case "4":
+        return language == "ltr" ? "School Name" : "اسم المدرسة";
+
+      case "5":
+        return language == "ltr" ? "Mosque Name" : "اسم المسجد";
+
+      case "6":
+        return language == "ltr" ? "Government Entity" : "مبنى حكومة";
+      default:
+        return "";
+    }
+  };
+
+  return (
+    <>
+      <MapContainer
+        // center={[29.3759, 47.9774]}
+        bounds={bounds}
+        maxBounds={bounds}
+        maxBoundsViscosity={1.0}
+        scrollWheelZoom={false}
+        style={{ height: "600px", width: "100%" }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-      )}
-    </MapContainer>
+        <HandleMapClick
+          setMarkerPosition={setMarkerPosition}
+          selectedBounds={selectedBounds}
+          enqueueSnackbar={enqueueSnackbar}
+          areaDetails={areaDetails}
+          language={language}
+          handleAddressDetailsChange={handleAddressDetailsChange}
+        />
+        {markerPosition && (
+          <Marker
+            position={markerPosition}
+            draggable={true}
+            eventHandlers={{
+              dragend: (e) => {
+                const lat = e.target.getLatLng().lat;
+                const lng = e.target.getLatLng().lng;
+
+                if (isWithinBounds(lat, lng, selectedBounds)) {
+                  setMarkerPosition({ lat, lng });
+                  handleAddressDetailsChange((a) => ({
+                    ...a,
+                    lat,
+                    lng,
+                  }));
+                } else {
+                  enqueueSnackbar({
+                    variant: "error",
+                    message:
+                      language === "ltr"
+                        ? `Please drag inside area ${areaDetails?.area}`
+                        : `الرجاء السحب داخل المنطقة ${areaDetails?.ar_area}`,
+                  });
+                }
+              },
+            }}
+          />
+        )}
+      </MapContainer>
+      <div style={{marginTop: "-50px"}}>
+        <div
+          style={{
+            fontSize: language === "ltr" ? "16px" : "17px",
+          }}
+        >
+          {language === "ltr" ? areaDetails?.area : areaDetails?.ar_area}
+        </div>
+        {addressDetails?.block ? (
+          <div
+            style={{
+              color: "#636363",
+              fontSize: language === "ltr" ? "14px" : "15px",
+            }}
+          >
+            {language == "ltr" ? "Street" : "شارع "} {addressDetails?.street}
+            {", "}
+            {language == "ltr" ? "Block" : "قطعة "} {addressDetails?.block}
+            {addressDetails?.avenue ? (
+              <>
+                {", "}
+                {language == "ltr" ? "Avenue" : "جادة"} {addressDetails?.avenue}
+              </>
+            ) : null}
+            {", "}
+            {houseLabel()} {addressDetails?.house}
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+    </>
   );
 };
 

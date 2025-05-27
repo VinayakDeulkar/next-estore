@@ -159,13 +159,7 @@ const Homepage = () => {
                       </Box>
                     ) : null}
                     {checkDrawer() ? <BottomDrawer type={"home"} /> : null}
-                    <motion.div
-                      initial={{ opacity: 0, y: "20px" }}
-                      animate={{ opacity: 1, y: "0px" }}
-                      transition={{ duration: 0.5, delay: 0.5 }}
-                    >
                       <VendorBox />
-                    </motion.div>
                     <HomePageLayouts />
                   </Box>
                 </Box>

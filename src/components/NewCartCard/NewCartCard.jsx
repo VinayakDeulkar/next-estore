@@ -16,6 +16,7 @@ import Spinner from "../common/Spinner/spinner";
 import Title from "../common/Title/Title";
 import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import NumberCounter from "../Animations/numberCounter";
 
 const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   const {
@@ -271,7 +272,13 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
             className="cart-cart-product-quantity-div"
             style={{ width: "100%" }}
           >
-            <MultipleItems
+            {/* <MultipleItems
+              loading={spinLoader}
+              count={product.quantity}
+              addClick={(e) => onAddQuantityClick(e)}
+              removeClick={(e) => onMinusQuantityClick(e)}
+            /> */}
+            <NumberCounter
               loading={spinLoader}
               count={product.quantity}
               addClick={(e) => onAddQuantityClick(e)}

@@ -10,6 +10,7 @@ import { useContext, useState } from "react";
 import styles from "./orderType.module.css";
 import moment from "moment";
 import BottomDrawer from "@/components/BottomDrawer/bottomDrawer";
+import { motion, AnimatePresence } from "framer-motion";
 
 const OrderType = () => {
   const { homePageDetails, areaDetails, addressDetails, userDetails } =
@@ -54,6 +55,7 @@ const OrderType = () => {
       );
     }
   };
+
   const getTimeValue = () => {
     if (areaDetails?.now == 1) {
       return {

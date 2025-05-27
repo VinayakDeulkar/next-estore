@@ -27,6 +27,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
   };
 
   const onAddToCartClick = async (event, n) => {
+    console.log(spinLoader, "spinLoader");
     if (!spinLoader) {
       event.preventDefault();
       setSpinLoader(true);
