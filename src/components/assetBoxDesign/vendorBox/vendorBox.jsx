@@ -3,12 +3,10 @@ import { Box } from "@mui/material";
 import Image from "next/image";
 import { useContext } from "react";
 import SubHeadline from "../SubHeadline/subHeadline";
-import StaggeredAnimation from "@/components/Animations/staggeredAnimation";
 import { motion } from "framer-motion";
 
 const VendorBox = () => {
   const { homePageDetails, language } = useContext(AppContext);
-  const staggeredAnimationRef = StaggeredAnimation();
 
   return (
     <Box
@@ -19,7 +17,6 @@ const VendorBox = () => {
         padding: "24px 0",
       }}
       id="vendor-box"
-      // ref={staggeredAnimationRef}
     >
       <motion.div
         initial={{ opacity: 0, y: "20px" }}
