@@ -61,8 +61,8 @@ const Footer = () => {
               style={{ height: "50px", width: "auto" }}
               src={
                 language === "ltr"
-                  ? "images/payzahFooterImg.png"
-                  : "images/arPayzahFooterImg.png"
+                  ? "images/PayzahImage.png"
+                  : "images/ArPayzahImage.png"
               }
             ></img>
           </div>

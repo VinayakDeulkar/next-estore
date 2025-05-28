@@ -82,7 +82,7 @@ const Homepage = () => {
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              transition={{ duration: 0.5 }}
+                              transition={{ duration: 0.2 }}
                             >
                               <Fab
                                 size="small"
@@ -112,7 +112,7 @@ const Homepage = () => {
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              transition={{ duration: 0.5 }}
+                              transition={{ duration: 0.2 }}
                             >
                               <Fab
                                 size="small"
@@ -152,7 +152,7 @@ const Homepage = () => {
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
-                          transition={{ duration: 0.5 }}
+                          transition={{ duration: 0.2 }}
                         >
                           <CarouselImage mobile={true} />
                         </motion.div>
@@ -175,7 +175,7 @@ const Homepage = () => {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.2, delay: 0.8 }}
                   >
                     <CarouselImage />
                   </motion.div>

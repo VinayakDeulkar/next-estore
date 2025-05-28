@@ -21,7 +21,7 @@ const VendorBox = () => {
       <motion.div
         initial={{ opacity: 0, y: "20px" }}
         animate={{ opacity: 1, y: "0px" }}
-        transition={{ duration: 0.5, delay: 0.5 }}
+        transition={{ duration: 0.2, delay: 0.2 }}
       >
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Image
@@ -50,7 +50,7 @@ const VendorBox = () => {
         <motion.div
           initial={{ opacity: 0, y: "20px" }}
           animate={{ opacity: 1, y: "0px" }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.2, delay: 0.2 }}
         >
           <Box
             sx={{
@@ -72,7 +72,7 @@ const VendorBox = () => {
           <motion.div
             initial={{ opacity: 0, y: "20px" }}
             animate={{ opacity: 1, y: "0px" }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.2, delay: 0.2 }}
           >
             <div
               style={{

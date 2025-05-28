@@ -90,7 +90,7 @@ const Navbar = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.2 }}
           >
             <IconButton color="#fff" onClick={() => handleSideMenuDrawer(true)}>
               <Box
@@ -151,7 +151,7 @@ const Navbar = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.2 }}
           >
             <Box
               sx={{

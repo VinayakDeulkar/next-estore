@@ -14,7 +14,7 @@ const ReviewBar = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 1.9 }}
+      transition={{ duration: 0.2, delay: 0.8 }}
     >
       <Box
         sx={{

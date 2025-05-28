@@ -34,7 +34,7 @@ const SquareOptionBox = ({
         flexDirection: "column",
         gap: "25px",
         alignItems: "start",
-        width: "47%",
+        width:'175px',
       }}
     >
       <NormalText

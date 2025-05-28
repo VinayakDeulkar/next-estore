@@ -115,7 +115,7 @@ const HomePageLayouts = () => {
         <motion.div
           initial={{ opacity: 0, y: "20px" }}
           animate={{ opacity: 1, y: "0px" }}
-          transition={{ duration: 0.5, delay: 1 }}
+          transition={{ duration: 0.2, delay: 0.4 }}
         >
           <div style={{ marginBottom: "20px" }}>
             <HomepageDesign handleCountryChange={handleCountryChange} />
@@ -129,7 +129,7 @@ const HomePageLayouts = () => {
         <motion.div
           initial={{ opacity: 0, y: "20px" }}
           animate={{ opacity: 1, y: "0px" }}
-          transition={{ duration: 0.5, delay: 1 }}
+          transition={{ duration: 0.2, delay: 0.4 }}
         >
           <OrderType />
         </motion.div>
@@ -169,7 +169,7 @@ const HomePageLayouts = () => {
           <motion.div
             initial={{ opacity: 0, y: "20px" }}
             animate={{ opacity: 1, y: "0px" }}
-            transition={{ duration: 0.5, delay: 1.5 }}
+            transition={{ duration: 0.2, delay: 0.6 }}
           >
             <div style={{ paddingBottom: "80px" }}>
               {renderLayoutType(homePageDetails?.categories)}

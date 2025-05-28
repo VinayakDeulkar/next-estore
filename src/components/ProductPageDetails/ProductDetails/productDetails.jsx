@@ -830,8 +830,9 @@ const ProductDetails = ({
                 <Box
                   sx={{
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: "start",
                     alignItems: "end",
+                    gap:"20px"
                   }}
                 >
                   <Box sx={{ fontSize: "16px", fontWeight: 500 }}>
@@ -979,7 +980,8 @@ const ProductDetails = ({
                         ? {
                             display: "flex",
                             alignItems: "center",
-                            justifyContent: "space-between",
+                            justifyContent: "start",
+                            gap:"20px",
                             width: "100%",
                           }
                         : {
