@@ -145,7 +145,7 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
           />
         )}
       </MapContainer>
-      <div style={{marginTop: "-50px"}}>
+      <div>
         <div
           style={{
             fontSize: language === "ltr" ? "16px" : "17px",

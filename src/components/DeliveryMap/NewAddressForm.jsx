@@ -25,6 +25,7 @@ const NewAddressForm = ({
   handleMapChanges,
   setMarkerPosition,
   setShowMap,
+  triggerPaymentMethod
 }) => {
   const {
     language,
@@ -295,7 +296,10 @@ const NewAddressForm = ({
 
       <div
         className="delivery-address-form-div1"
-        onClick={() => setShowAreaModal(!showAreaModal)}
+        onClick={() => {
+          setShowAreaModal(!showAreaModal);
+          triggerPaymentMethod(false);
+        }}
       >
         <div style={{ position: "relative", width: "100%" }}>
           <label

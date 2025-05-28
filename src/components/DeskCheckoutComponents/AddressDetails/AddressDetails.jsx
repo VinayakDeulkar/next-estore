@@ -630,6 +630,7 @@ const AddressDetails = ({
               await calculateBound(area_details);
               setShowMap(true);
             }}
+            triggerPaymentMethod={triggerPaymentMethod}
           />
         )
       ) : (

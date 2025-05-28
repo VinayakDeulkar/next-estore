@@ -86,7 +86,12 @@ export default async function RootLayout({ children }) {
   } = await getData();
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <link
+          rel="icon"
+          href={vendorSlugResponse?.data?.vendor_data?.english_new_background}
+        />
+      </head>
       <body
         style={{
           fontFamily: "SFT Schrifted Sans TRIAL Var",

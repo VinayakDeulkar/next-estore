@@ -832,7 +832,7 @@ const ProductDetails = ({
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "end",
-                    gap:"20px"
+                    gap: "20px",
                   }}
                 >
                   <Box sx={{ fontSize: "16px", fontWeight: 500 }}>
@@ -981,7 +981,7 @@ const ProductDetails = ({
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "start",
-                            gap:"20px",
+                            gap: "20px",
                             width: "100%",
                           }
                         : {
@@ -1253,7 +1253,8 @@ const ProductDetails = ({
                     // }`}
                     style={{
                       padding: "15px 25px",
-                      backgroundColor: homePageDetails?.vendor_data?.vendor_color,
+                      backgroundColor:
+                        homePageDetails?.vendor_data?.vendor_color,
                       color: "#fff",
                       borderRadius: "50px",
                       fontSize: language === "ltr" ? "17px" : "19px",
@@ -1270,13 +1271,28 @@ const ProductDetails = ({
                             productvariationPrice?.[getKey(addedVariaton)]
                               ?.quantity == null)) ? (
                           spinLoader ? (
-                            <Spinner height="16px" size="2.5px" />
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "10px",
+                              }}
+                            >
+                              <Spinner height="16px" size="2.5px" />
+                              <div>
+                                {`${
+                                  language === "ltr" ? "Processing" : "يعالج"
+                                }`}
+                              </div>
+                            </div>
                           ) : (
                             <div
                               style={{
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "7px",
+                                cursor: "pointer"
                               }}
                             >
                               <AddToBagIcon />
