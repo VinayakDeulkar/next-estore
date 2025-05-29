@@ -81,7 +81,7 @@ const DetailsCommon = ({ data }) => {
           <NormalText
             enText={data.english_value}
             arText={data.arabic_value}
-            color="#a3a2a2"
+            color="#837f7f"
           />
 
           <div className="details-common-seconddiv">

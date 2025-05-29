@@ -13,6 +13,7 @@ import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
 import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
 import BackComponent from "@/components/BackComponent";
+import { motion } from "framer-motion";
 
 const TrackOrder = () => {
   const [trackingNumber, setTrackingNumber] = useState();
@@ -26,39 +27,72 @@ const TrackOrder = () => {
   return (
     <Box>
       <EstoreLayout1>
-        <BackComponent backClick={() =>  router.push("/")} />
+        <BackComponent backClick={() => router.push("/")} />
         <div className="trackOrder-whitebox">
           <div>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <HeadLine enText={"Orders Tracker"} arText={"تتبع الطلبات"} />
-            </Box>
-            <div className="tracker-order-center order-tracker-image">
-              <img
-                src="images/delivery-packed-image.jpg"
-                className="trackorder-image"
-              />
-            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <HeadLine enText={"Orders Tracker"} arText={"تتبع الطلبات"} />
+              </Box>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="tracker-order-center order-tracker-image">
+                <img
+                  src="images/delivery-packed-image.jpg"
+                  className="trackorder-image"
+                />
+              </div>
+            </motion.div>
 
-            <div style={{ textAlign: "center", marginBottom: "20px" }}>
-              <NormalText
-                enText={
-                  "Track shipments and orders by entering the tracking number."
-                }
-                arText={"تتبع الشحنات والطلبات عن طريق إدخال رقم التتبع."}
-                color="#a3a2a2"
-              />
-            </div>
-            <div className="tracker-order-center">
-              <div className="track-divider-line"></div>
-            </div>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-              <TextInputField
-                handleChange={(e) => {
-                  setTrackingNumber(e.target.value);
-                }}
-                label={"Tracking Number Goes Here"}
-                arLabel={"ضع رقم الطلب هنا لتتبعه"}
-              />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                <NormalText
+                  enText={
+                    "Track shipments and orders by entering the tracking number."
+                  }
+                  arText={"تتبع الشحنات والطلبات عن طريق إدخال رقم التتبع."}
+                />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: "20px" }}
+              animate={{ opacity: 1, y: "0px" }}
+              transition={{ duration: 0.2, delay: 0.2 }}
+            >
+              <div className="tracker-order-center">
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setTrackingNumber(e.target.value);
+                  }}
+                  className="order-tracker-input-field"
+                  placeholder={
+                    language === "ltr"
+                      ? "Tracking Number Goes Here"
+                      : "ضع رقم الطلب هنا لتتبعه"
+                  }
+                />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: "20px" }}
+              animate={{ opacity: 1, y: "0px" }}
+              transition={{ duration: 0.2, delay: 0.4 }}
+            >
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <SmallButtonRounded
                   handleClick={handleSubmit}
@@ -67,7 +101,7 @@ const TrackOrder = () => {
                   varient={"dark"}
                 />
               </Box>
-            </Box>
+            </motion.div>
           </div>
         </div>
       </EstoreLayout1>

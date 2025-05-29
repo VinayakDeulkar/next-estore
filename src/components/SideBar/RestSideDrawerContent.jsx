@@ -41,13 +41,13 @@ const RestSideDrawerContent = () => {
           ? "الصفحة الرئيسية"
           : "الصفحة الرئيسية",
       link: "/",
-      icon: <HomeIcon height={18} width={18} />,
+      icon: <HomeIcon height={21} width={21} />,
     },
     {
-      englishType: "Branch",
-      arabicType: "افرعنا",
+      englishType: "Branches",
+      arabicType: "الفروع",
       link: "/branches",
-      icon: <BranchesIcon height={18} width={18} />,
+      icon: <BranchesIcon height={21} width={21} />,
     },
     // {
     //     englishType: "FAQs",
@@ -58,7 +58,7 @@ const RestSideDrawerContent = () => {
       englishType: "Track Order",
       arabicType: "تعقب الطلب",
       link: "/track-order",
-      icon: <TrackOrderIcon height={16} width={16} />,
+      icon: <TrackOrderIcon height={19} width={19} />,
     },
     {
       ...(contactInfo?.phone &&
@@ -70,7 +70,7 @@ const RestSideDrawerContent = () => {
             englishType: "My Information",
             arabicType: "معلوماتي",
             link: "",
-            icon: <MyInfoIcon height={18} width={18} />,
+            icon: <MyInfoIcon height={19} width={19} />,
           }
         : null),
     },
@@ -84,7 +84,7 @@ const RestSideDrawerContent = () => {
             englishType: "My Orders",
             arabicType: "مشترياتي",
             link: "",
-            icon: <MyOrdersIcon height={17} width={17} />,
+            icon: <MyOrdersIcon height={20} width={20} />,
           }
         : null),
     },
@@ -98,14 +98,14 @@ const RestSideDrawerContent = () => {
             englishType: "Logout",
             arabicType: "تسجيل الخروج",
             link: "",
-            icon: <LogoutIcon height={18} width={18} />,
+            icon: <LogoutIcon height={21} width={21} />,
           }
         : homePageDetails?.vendor_data?.checkout_method != null
         ? {
             englishType: "Login",
             arabicType: "تسجيل الدخول",
             link: "",
-            icon: <LoginIcon height={18} width={18} />,
+            icon: <LoginIcon height={21} width={21} />,
           }
         : null),
     },
@@ -224,7 +224,7 @@ const RestSideDrawerContent = () => {
         handleSideMenuDrawer(false);
         router.push("/");
         break;
-      case "Branch":
+      case "Branches":
         handleSideMenuDrawer(false);
         router.push("/branches");
         break;
@@ -243,9 +243,9 @@ const RestSideDrawerContent = () => {
               className="restSide-div"
               onClick={() => navigateFunction(section)}
               sx={{
-                fontSize: "16px",
+                fontSize: "19px",
                 cursor: "pointer",
-                padding: "10px 20px",
+                padding: "13px 20px",
                 display: "flex",
                 alignItems: "center",
                 gap: "18px",

@@ -33,7 +33,7 @@ const VendorInfoBox = () => {
             textAlign: "start",
             fontSize: "28px",
             fontWeight: 400,
-            marginTop: "5px",
+            marginTop: "10px",
           }}
           enText={homePageDetails?.vendor_data?.name}
           arText={homePageDetails?.vendor_data?.name_ar}
@@ -42,9 +42,9 @@ const VendorInfoBox = () => {
           sx={{
             textAlign: "start",
             color: "#8D8D8D",
-            fontWeight: 200,
-            fontSize: "21px",
-            marginTop: "-4px",
+            fontWeight: 400,
+            fontSize: "18px",
+            marginTop: "-2px",
           }}
           enText={homePageDetails?.vendor_data?.slogan}
           arText={homePageDetails?.vendor_data?.slogan_ar}

@@ -83,7 +83,7 @@ html[dir="rtl"] .shipment-tracker-text {
   background: #fbfbfb;
   width: 241px;
   height: 45px;
-  margin-bottom: 26px;
+  margin: 20px 0 25px;
 }
 
 .order-tracker-input-field::placeholder {

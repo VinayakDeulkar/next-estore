@@ -1,10 +1,11 @@
 import { AppContext } from "@/context/AppContext";
-import { Box, DialogTitle, SwipeableDrawer } from "@mui/material";
+import { Box, DialogTitle, IconButton, SwipeableDrawer } from "@mui/material";
 import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
 import MapContainer from "./MapContainer";
 import GoogleMapComponent from "../MapComponent/GoogleMapComponent";
 import LeafletMapComponent from "../LeafletMapComponent/leafletMapComponent";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const drawerBleeding = 56;
 function BranchDetails({ branchId, setBranchId }) {
@@ -43,10 +44,31 @@ function BranchDetails({ branchId, setBranchId }) {
     >
       <Box
         sx={{
+          position: "absolute",
+          display: "flex",
+          justifyContent: "end",
+          right: language === "ltr" ? "20px" : 0,
+          left: language === "ltr" ? 0 : "20px",
+          "& .MuiIconButton-root": {
+            padding: 0,
+          },
+          marginTop: "34px",
+        }}
+      >
+        <IconButton onClick={() => setBranchId("")}>
+          <ClearIcon
+            sx={{
+              fill: "#000",
+            }}
+          />
+        </IconButton>
+      </Box>
+      <Box
+        sx={{
           padding: "20px",
         }}
       >
-        <DialogTitle>
+        <DialogTitle sx={{ padding: "10px 0 16px", fontWeight: "600" }}>
           {language === "ltr" ? branch?.address : branch?.arabic_address}
         </DialogTitle>
         <React.Fragment>

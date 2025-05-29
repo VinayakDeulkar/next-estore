@@ -79,13 +79,14 @@ const VendorBox = () => {
                 color: "#8D8D8D",
                 fontWeight: 300,
                 textAlign: window.innerWidth > 990 ? "center" : "start",
-                marginTop: "-5px",
+                marginTop: "-2px",
               }}
             >
               <SubHeadline
                 enText={homePageDetails?.vendor_data?.slogan}
                 arText={homePageDetails?.vendor_data?.slogan_ar}
                 color="#8D8D8D"
+                fontSize="18px"
               />
             </div>
           </motion.div>

@@ -24,8 +24,8 @@ const Homepage = () => {
     handleSideMenuDrawer,
     handleLanguageChange,
   } = useContext(AppContext);
-  console.log(homePageDetails, "homePageDetails");
 
+  console.log(addressDetails, "addressDetailsaddressDetails");
   const checkDrawer = () =>
     homePageDetails?.vendor_data &&
     userDetails?.address?.length > 0 &&
@@ -159,7 +159,7 @@ const Homepage = () => {
                       </Box>
                     ) : null}
                     {checkDrawer() ? <BottomDrawer type={"home"} /> : null}
-                      <VendorBox />
+                    <VendorBox />
                     <HomePageLayouts />
                   </Box>
                 </Box>

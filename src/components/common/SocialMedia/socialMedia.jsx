@@ -26,6 +26,7 @@ const SocialMedia = ({ handleTermsClick }) => {
             enText={"Reach Us"}
             arText={"تواصل معنا"}
             fontWeight={400}
+            fontSize={"15px"}
           />
         </Box>
         <Box
@@ -37,21 +38,21 @@ const SocialMedia = ({ handleTermsClick }) => {
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: "15px" }}>
-            <ContactIcon height={16} width={16} />
+            <ContactIcon height={18} width={18} />
             <NormalText
               enText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`}
               arText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`}
               isNumber={true}
-              fontSize="12px"
+              fontSize="13px"
               fontWeight={400}
             />
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: "15px" }}>
-            <MailIcon height={14} width={14} />
+            <MailIcon height={16} width={16} />
             <NormalText
               enText={vendorSlug?.data?.vendor_data?.support_mail}
               arText={vendorSlug?.data?.vendor_data?.support_mail}
-              fontSize="12px"
+              fontSize="13px"
               fontWeight={400}
             />
           </Box>
@@ -68,7 +69,7 @@ const SocialMedia = ({ handleTermsClick }) => {
                 target="_blank"
                 className="social-link"
               >
-                <PhoneIcons height={15} width={15} />
+                <PhoneIcons height={19} width={19} />
               </a>
             ) : null}
             {homePageDetails?.vendor_data?.social_media?.instagram != "" &&
@@ -79,7 +80,7 @@ const SocialMedia = ({ handleTermsClick }) => {
                 target="_blank"
                 className="social-link"
               >
-                <InstagramIcon height={15} width={15} />
+                <InstagramIcon height={19} width={19} />
               </a>
             ) : null}
             {/* {homePageDetails?.vendor_data?.social_media?.facebook != "" &&
@@ -101,7 +102,7 @@ const SocialMedia = ({ handleTermsClick }) => {
                 target="_blank"
                 className="social-link"
               >
-                <GoogleIcon height={16} width={16} />
+                <GoogleIcon height={20} width={20} />
               </a>
             ) : null}
             {homePageDetails?.vendor_data?.social_media?.twitter != "" &&
@@ -112,7 +113,7 @@ const SocialMedia = ({ handleTermsClick }) => {
                 target="_blank"
                 className="social-link"
               >
-                <TwitterIcons height={18} width={18} />
+                <TwitterIcons height={22} width={22} />
               </a>
             ) : null}
             {homePageDetails?.vendor_data?.social_media?.youtube != "" &&
@@ -123,7 +124,7 @@ const SocialMedia = ({ handleTermsClick }) => {
                 target="_blank"
                 className="social-link"
               >
-                <YouTubeIcons height={18} width={18} />
+                <YouTubeIcons height={22} width={22} />
               </a>
             ) : null}
           </div>

@@ -6,6 +6,8 @@ import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import "./branchPage.css";
+import BackComponent from "@/components/BackComponent";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 
 const BranchesPage = () => {
   const [branchId, setBranchId] = useState("");
@@ -20,9 +22,8 @@ const BranchesPage = () => {
           height: "calc(100vh - 56px)",
         }}
       >
-        <Box sx={{ position: "relative", height: "74px" }}>
-          <BackButton />
-        </Box>
+        <BackComponent backClick={() => router.push("/")} />
+        <HeadLine enText="Branches" arText="الفروع" />
         <Box>
           <BranchList setBranchId={setBranchId} />
         </Box>

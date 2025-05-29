@@ -22,12 +22,13 @@
   -moz-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 16px 0;
+  padding: 16px 40px;
   cursor: pointer;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: all;
   transition-duration: 0.5s;
   border-bottom: 1px solid #f6f7fb;
+  margin: 0 -40px;
 }
 
 .branch-list-container .branch-list .branch-list-item:last-child {

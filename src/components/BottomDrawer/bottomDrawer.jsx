@@ -19,8 +19,7 @@ import Divider from "../Divider/Divider";
 import moment from "moment";
 import "./BottomDrawer.css";
 import { tele } from "@/constants/constants";
-import { SwipeableDrawer } from "@mui/material";
-
+import { Box, SwipeableDrawer } from "@mui/material";
 
 const drawerBleeding = 56;
 
@@ -325,6 +324,7 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
       addressType: addressData.addressType,
       addressName: addressData.addressName,
       special_directions: addressData?.special_directions,
+      is_primary: addressData?.is_primary
     }));
     const addedAddress = [];
     areaDetails.data.governarate.forEach((address) => {
@@ -493,10 +493,12 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
       >
         <div className="drawerOuterDiv">
           <div className="drawerInnerDiv">
-            <SubHeadline
-              enText={"Select your delivery address"}
-              arText={"حدد عنوان التسليم الخاص بك"}
-            />
+            <Box sx={{ marginBottom: "12px" }}>
+              <SubHeadline
+                enText={"Select Address"}
+                arText={"إختر عنوان التوصيل"}
+              />
+            </Box>
 
             {addressData.map((address, i) => (
               <div key={i}>
@@ -557,7 +559,11 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
               </div>
             ))}
 
-            {addressData?.length > 0 ? <Divider /> : null}
+            {addressData?.length > 0 ? (
+              <div style={{margin: "15px 0"}}>
+                <Divider />
+              </div>
+            ) : null}
 
             <AddressCard
               icon={<Pointer />}
