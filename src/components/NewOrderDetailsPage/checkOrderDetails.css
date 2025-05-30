@@ -367,7 +367,7 @@ html[dir="rtl"] .promocode-text.collapsed .right-arrow {
 .amount-discount {
   font-size: 14px;
   color: #d70404;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 html[dir="rtl"] .amount-discount {
@@ -384,7 +384,7 @@ html[dir="rtl"] .amount-discount {
 
 .amount-sub-label {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .amount-sub-label-total {
@@ -402,7 +402,7 @@ html[dir="rtl"] .amount-sub-label-total {
 
 .amount-sub-amount {
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 500;
   display: flex;
   gap: 10px;
 }
@@ -612,7 +612,7 @@ html[dir="rtl"] .delivery-address-details-secondDiv .right-arrow {
 
 .payment-details-headDIv,
 .acmount-mainDIv {
-  padding-top: 13px;
+  margin-top: -10px;
 }
 
 .order-details-cart-disocunt {

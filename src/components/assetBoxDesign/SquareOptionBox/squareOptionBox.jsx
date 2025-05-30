@@ -34,7 +34,7 @@ const SquareOptionBox = ({
         flexDirection: "column",
         gap: "25px",
         alignItems: "start",
-        width:'175px',
+        width: "175px",
       }}
     >
       <NormalText
@@ -66,7 +66,9 @@ const SquareOptionBox = ({
             alignItems: "center",
             gap: "3px",
             borderRadius: "8px",
-            backgroundColor: selected ? "#fff" : "#000",
+            backgroundColor: selected
+              ? "#fff"
+              : homePageDetails?.vendor_data?.vendor_color,
             padding: "8px 15px",
             marginTop: "10px",
           }}
@@ -75,7 +77,7 @@ const SquareOptionBox = ({
             <DoneIcon sx={{ color: selected && "#000", fontSize: "18px" }} />
           )}
           <NormalText
-            enText={selected ? "Selected" : "Choose"}
+            enText={selected ? "Selected" : "Select"}
             arText={selected ? "مختارة" : "يختار"}
             color={selected ? "#000" : "#fff"}
           />

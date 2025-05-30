@@ -71,7 +71,10 @@ const NewPromocode = ({
               homePageDetails?.vendor_data?.home_page_type === "18" &&
               "fashion-theme-border"
             }`}
-            style={{ backgroundColor: activeBackgroundColor }}
+            style={{
+              backgroundColor:
+                window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
+            }}
             id="name"
             name="first_name"
             required="true"

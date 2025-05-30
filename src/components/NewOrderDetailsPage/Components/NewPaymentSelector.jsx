@@ -104,10 +104,11 @@ const NewPaymentSelector = ({
             style={
               payment == 4
                 ? {
-                    backgroundColor: activeBackgroundColor,
+                    backgroundColor:
+                      window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
                     border: "2px solid #000",
                   }
-                : {}
+                : { backgroundColor: "#fff" }
             }
           >
             <span className="del-ic" style={{ padding: 0 }}>
@@ -134,10 +135,11 @@ const NewPaymentSelector = ({
           style={
             payment == 1
               ? {
-                  backgroundColor: activeBackgroundColor,
+                  backgroundColor:
+                    window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
                   border: "2px solid #000",
                 }
-              : {}
+              : { backgroundColor: "#fff" }
           }
         >
           <span className="del-ic" style={{ padding: 0 }}>
@@ -159,10 +161,11 @@ const NewPaymentSelector = ({
             style={
               payment == 2
                 ? {
-                    backgroundColor: activeBackgroundColor,
+                    backgroundColor:
+                      window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
                     border: "2px solid #000",
                   }
-                : {}
+                : { backgroundColor: "#fff" }
             }
           >
             <span className="del-ic" style={{ padding: 0 }}>
@@ -202,10 +205,11 @@ const NewPaymentSelector = ({
             style={
               payment == 3
                 ? {
-                    backgroundColor: activeBackgroundColor,
+                    backgroundColor:
+                      window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
                     border: "2px solid #000",
                   }
-                : {}
+                : { backgroundColor: "#fff" }
             }
           >
             <span className="del-ic" style={{ padding: 0 }}>

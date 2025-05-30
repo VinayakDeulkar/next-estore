@@ -202,21 +202,6 @@ const ProductDetails = ({
     }
   };
 
-  const onShareClick = () => {
-    if (typeof window !== "undefined" && navigator.share) {
-      navigator
-        .share({
-          url: window.location.href,
-        })
-        .then(() => {
-          console.log("Sharing successfull");
-        })
-        .catch(() => {
-          console.log("Sharing failed");
-        });
-    }
-  };
-
   const onSelectChecked = (value, price, max, key) => {
     if (value) {
       let temps = checked;
@@ -724,49 +709,65 @@ const ProductDetails = ({
             arText={product?.name_ar}
             fontSize="24px"
           />
-          <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-            <div>{renderLabelEmoji("1")}</div>
-            <NormalText
-              enText={/* product?.label */ "Most Ordered"}
-              arText={product?.label_ar}
-              color={"#333333"}
-              fontSize={"13px"}
-            />
-          </div>
-          {product?.base_price != "" && product?.prodyct_type != 3 ? (
-            <Box
-              sx={{
-                display: "flex",
-                gap: "8px",
-                alignItems: "end",
-                justifyContent: "end",
-                fontSize: "18px",
-                fontWeight: "500",
-                marginBottom: "10px",
-              }}
-            >
-              {product &&
-                parseFloat(product?.price_after_discount.split(",").join("")) !=
-                  parseFloat(product?.base_price) &&
-                product?.base_price != "" && (
-                  <>
-                    <del>
-                      <span>{parseFloat(product.base_price).toFixed(3)} </span>{" "}
-                      {language === "rtl" ? "د.ك" : "KD"}
-                    </del>
-                    <br></br>
-                  </>
-                )}
-              <span>
-                {product ? (
-                  <>
-                    {language === "rtl" ? "د.ك" : "KD"}{" "}
-                    <span>{product.price_after_discount}</span>
-                  </>
-                ) : null}{" "}
-              </span>
-            </Box>
-          ) : null}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "end",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+              <div>{renderLabelEmoji("1")}</div>
+              <NormalText
+                enText={/* product?.label */ "Most Ordered"}
+                arText={product?.label_ar}
+                color={"#333333"}
+                fontSize={"13px"}
+              />
+            </div>
+            {product?.base_price != "" && product?.prodyct_type != 3 ? (
+              <Box>
+                {product &&
+                  parseFloat(
+                    product?.price_after_discount.split(",").join("")
+                  ) != parseFloat(product?.base_price) &&
+                  product?.base_price != "" && (
+                    <div
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: "500",
+                        textAlign: "end",
+                        color: "rgb(141, 141, 141)"
+                      }}
+                    >
+                      <del>
+                        <span>
+                          {language === "rtl" ? "د.ك" : "KD"}{" "}
+                          <span>
+                            {parseFloat(product.base_price).toFixed(3)}
+                          </span>
+                        </span>
+                      </del>
+                      <br></br>
+                    </div>
+                  )}
+                <span
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "500",
+                  }}
+                >
+                  {product ? (
+                    <>
+                      {language === "rtl" ? "د.ك" : "KD"}{" "}
+                      <span>{product.price_after_discount}</span>
+                    </>
+                  ) : null}{" "}
+                </span>
+              </Box>
+            ) : null}
+          </Box>
+
           {product?.offer_applied == 1 ? (
             <NormalText
               enText={product?.offer_msg}
@@ -1237,6 +1238,7 @@ const ProductDetails = ({
                               count={prodNumber}
                               removeClick={onMinus}
                               addClick={onPlus}
+                              gap="6px"
                             />
                           ) : null}
                         </div>

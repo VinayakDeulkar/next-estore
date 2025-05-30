@@ -16,9 +16,9 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
           <NormalText
             enText={"Sub Total"}
             arText={"الإجمالي"}
-            fontWeight="400"
+            fontWeight="500"
           />
-          <div className="amount-sub-amount" style={{ fontWeight: "400" }}>
+          <div className="amount-sub-amount" style={{ fontWeight: "500" }}>
             <span>
               {cart?.subTotal ? parseFloat(cart?.subTotal).toFixed(3) : 0}
             </span>{" "}
@@ -46,9 +46,9 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
             <NormalText
               enText={"Delivery Charges"}
               arText={"رسوم التوصيل"}
-              fontWeight="400"
+              fontWeight="500"
             />
-            <div className="amount-sub-amount" style={{ fontWeight: "400" }}>
+            <div className="amount-sub-amount" style={{ fontWeight: "500" }}>
               <span>
                 {cart?.deliveryCharge
                   ? parseFloat(cart?.deliveryCharge).toFixed(3)
@@ -90,10 +90,10 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
           </div>
         ) : null}
         <div className="amount-sub-div">
-          <Title enText={"Total"} arText={"المجموع"} fontWeight="500" />
+          <Title enText={"Total"} arText={"المجموع"} fontWeight="600" />
           <div
             className="amount-sub-amount-total"
-            style={{ fontWeight: "500" }}
+            style={{ fontWeight: "600" }}
           >
             <span>
               {

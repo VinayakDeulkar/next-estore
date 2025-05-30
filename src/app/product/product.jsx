@@ -13,7 +13,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import UploadIcon from "@mui/icons-material/Upload";
 import { useRouter } from "next/navigation";
 import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
-
+import ShareIcon from "@/SVGs/ShareIcon";
 
 const Product = (props) => {
   const { homePageDetails, language } = useContext(AppContext);
@@ -23,6 +23,21 @@ const Product = (props) => {
 
   const checkSize = () => {
     return window != undefined && window?.innerWidth > 990;
+  };
+
+  const onShareClick = () => {
+    if (typeof window !== "undefined" && navigator.share) {
+      navigator
+        .share({
+          url: window.location.href,
+        })
+        .then(() => {
+          console.log("Sharing successfull");
+        })
+        .catch(() => {
+          console.log("Sharing failed");
+        });
+    }
   };
 
   const renderProductLayout = () => {
@@ -69,34 +84,37 @@ const Product = (props) => {
                         )}
                       </Fab>
                     </div>
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "16px",
-                        right: language === "ltr" && "16px",
-                        left: language !== "ltr" && "16px",
-                        zIndex: 50,
-                      }}
-                    >
-                      <Fab
-                        size="small"
-                        sx={{
-                          boxShadow: "none",
-                          backgroundColor: "white",
-                          color: "black",
+                    {navigator.share && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "16px",
+                          right: language === "ltr" && "16px",
+                          left: language !== "ltr" && "16px",
+                          zIndex: 50,
                         }}
+                        onClick={() => onShareClick()}
                       >
-                        <UploadIcon
-                          style={{ fontSize: "22px", color: "black" }}
-                        />
-                      </Fab>
-                    </div>
+                        <Fab
+                          size="small"
+                          sx={{
+                            boxShadow: "none",
+                            backgroundColor: "white",
+                            color: "black",
+                          }}
+                        >
+                          <Box sx={{ margin: "0 0 0 2px" }}>
+                            <ShareIcon height={"21px"} width={"21px"} />
+                          </Box>
+                        </Fab>
+                      </div>
+                    )}
                     <Box
                       sx={{
                         display: "flex",
                         flexDirection: "column",
                         gap: "20px",
-                        height: "100%"
+                        height: "100%",
                       }}
                     >
                       <Box sx={{ direction: "ltr" }}>
@@ -105,7 +123,12 @@ const Product = (props) => {
                           addedVariaton={addedVariaton}
                         />
                       </Box>
-                      <Box sx={{ padding: checkSize() ? "0 40px" : "0 20px", height: "100%" }}>
+                      <Box
+                        sx={{
+                          padding: checkSize() ? "0 40px" : "0 20px",
+                          height: "100%",
+                        }}
+                      >
                         <ProductDetails
                           product={props?.data}
                           addon={props?.addons}
