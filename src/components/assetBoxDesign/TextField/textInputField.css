@@ -25,6 +25,7 @@
   top: 32px;
   user-select: none;
   transition: 0.2s ease all;
+  pointer-events: none;
 }
 
 .text-field-input:focus ~ .text-field-label,

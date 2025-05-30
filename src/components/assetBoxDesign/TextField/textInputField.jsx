@@ -10,6 +10,7 @@ const TextInputField = ({
   label,
   arLabel,
   color = "#000",
+  fontWeight = "400",
 }) => {
   const { language } = useContext(AppContext);
   return (
@@ -32,11 +33,12 @@ const TextInputField = ({
         autoComplete
         value={value}
         onChange={handleChange}
+        style={{ fontWeight: fontWeight }}
       />
       <label
         htmlFor={name}
         className="text-field-label"
-        style={{ color: color }}
+        style={{ color: color, fontWeight: fontWeight, position: "absolute" }}
       >
         {language == "ltr" ? label : arLabel}
       </label>

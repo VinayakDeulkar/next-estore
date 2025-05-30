@@ -733,6 +733,40 @@ const ProductDetails = ({
               fontSize={"13px"}
             />
           </div>
+          {product?.base_price != "" && product?.prodyct_type != 3 ? (
+            <Box
+              sx={{
+                display: "flex",
+                gap: "8px",
+                alignItems: "end",
+                justifyContent: "end",
+                fontSize: "18px",
+                fontWeight: "500",
+                marginBottom: "10px",
+              }}
+            >
+              {product &&
+                parseFloat(product?.price_after_discount.split(",").join("")) !=
+                  parseFloat(product?.base_price) &&
+                product?.base_price != "" && (
+                  <>
+                    <del>
+                      <span>{parseFloat(product.base_price).toFixed(3)} </span>{" "}
+                      {language === "rtl" ? "د.ك" : "KD"}
+                    </del>
+                    <br></br>
+                  </>
+                )}
+              <span>
+                {product ? (
+                  <>
+                    {language === "rtl" ? "د.ك" : "KD"}{" "}
+                    <span>{product.price_after_discount}</span>
+                  </>
+                ) : null}{" "}
+              </span>
+            </Box>
+          ) : null}
           {product?.offer_applied == 1 ? (
             <NormalText
               enText={product?.offer_msg}
@@ -768,40 +802,6 @@ const ProductDetails = ({
             />
           ) : null}
 
-          {product?.base_price != "" && product?.prodyct_type != 3 ? (
-            <Box
-              sx={{
-                display: "flex",
-                gap: "8px",
-                alignItems: "end",
-                justifyContent: "end",
-                fontSize: "18px",
-                fontWeight: "500",
-                marginBottom: "10px",
-              }}
-            >
-              {/* {product &&
-                parseFloat(product?.price_after_discount.split(",").join("")) !=
-                  parseFloat(product?.base_price) &&
-                product?.base_price != "" && (
-                  <>
-                    <del>
-                      <span>{parseFloat(product.base_price).toFixed(3)} </span>{" "}
-                      {language === "rtl" ? "د.ك" : "KD"}
-                    </del>
-                    <br></br>
-                  </>
-                )} */}
-              <span>
-                {product ? (
-                  <>
-                    {language === "rtl" ? "د.ك" : "KD"}{" "}
-                    <span>{product.price_after_discount}</span>
-                  </>
-                ) : null}{" "}
-              </span>
-            </Box>
-          ) : null}
           {product?.short_description ? (
             <p
               dangerouslySetInnerHTML={{
@@ -1080,6 +1080,7 @@ const ProductDetails = ({
               handleChange={(e) => onNoteChange(e)}
               value={note}
               color="rgb(141, 141, 141)"
+              fontWeight="300"
             />
           ) : null}
           {/* {product?.prodyct_type != 3 ? (
@@ -1292,7 +1293,7 @@ const ProductDetails = ({
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "7px",
-                                cursor: "pointer"
+                                cursor: "pointer",
                               }}
                             >
                               <AddToBagIcon />
