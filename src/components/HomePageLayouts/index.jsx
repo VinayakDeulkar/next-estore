@@ -171,7 +171,7 @@ const HomePageLayouts = () => {
             animate={{ opacity: 1, y: "0px" }}
             transition={{ duration: 0.2, delay: 0.6 }}
           >
-            <div style={{ paddingBottom: "80px" }}>
+            <div style={{ paddingBottom: "40px" }}>
               {renderLayoutType(homePageDetails?.categories)}
             </div>
             <Footer />

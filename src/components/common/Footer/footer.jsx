@@ -24,6 +24,7 @@ const Footer = () => {
             : "0 -28px 0 -40px"
           : "0 -10px 0 -10px",
       }}
+      id="pageFooter"
     >
       <a
         href="http://payzah.com/"
@@ -77,6 +78,8 @@ const Footer = () => {
           borderTopRightRadius: "8px",
           color: "#fff",
           padding: checkSize() ? "50px 30px" : "30px 20px",
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <Grid
@@ -106,11 +109,7 @@ const Footer = () => {
             }
           />
         </Grid>
-        <Grid
-          item
-          xs={6}
-          sx={{ display: "flex", flexDirection: "column", gap: "15px" }}
-        >
+        <Grid item xs={6}>
           <div>
             <NormalText
               enText={`${"+965"} ${vendorSlug?.data?.vendor_data?.phone}`}
@@ -134,13 +133,6 @@ const Footer = () => {
             <NormalText
               enText={vendorSlug?.data?.vendor_data?.name}
               arText={vendorSlug?.data?.vendor_data?.name_ar}
-              color={"#fff"}
-            />
-          </div>
-          <div>
-            <NormalText
-              enText={"Petra Foods W.L.LC"}
-              arText={"Petra Foods W.L.LC"}
               color={"#fff"}
             />
           </div>

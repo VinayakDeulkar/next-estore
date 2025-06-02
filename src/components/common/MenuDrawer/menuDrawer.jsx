@@ -6,6 +6,7 @@ import RestSideDrawerContent from "@/components/SideBar/RestSideDrawerContent";
 import SocialMedia from "../SocialMedia/socialMedia";
 import TermsModal from "@/components/TermsModal/termsModal";
 import { AppContext } from "@/context/AppContext";
+import { getTNC } from "@/apis/getTNC";
 
 const MenuDrawer = () => {
   const {

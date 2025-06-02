@@ -5,7 +5,7 @@ import "@/components/ContactInfo/contactInfo.css";
 import { AppContext } from "@/context/AppContext";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AreaModal from "../AreaModal/areaModal";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import "./deliverymap.css";
@@ -36,6 +36,13 @@ const NewAddressForm = ({
   } = useContext(AppContext);
   const router = useRouter();
   const [showAreaModal, setShowAreaModal] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+
+  useEffect(() => {
+    if (addressDetails?.addressName) {
+      setIsEdit(true);
+    }
+  }, []);
 
   const getPlaceHolder = () => {
     switch (addressDetails.addressType) {
@@ -58,7 +65,10 @@ const NewAddressForm = ({
 
   return (
     <div>
-      <SubHeadline enText={"Delivery Details"} arText={"تفاصيل التوصيل"} />
+      <SubHeadline
+        enText={isEdit ? "Edit Address" : "Delivery Details"}
+        arText={isEdit ? "تعديل العنوان" : "تفاصيل التوصيل"}
+      />
       <div className="delivery-address-address-select">
         <div className="delivery-address-type-select nav nav-tabs">
           <div

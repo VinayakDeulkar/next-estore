@@ -73,13 +73,16 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
     setAreaSearch(e.target.value);
   };
   const moveup = () => {
-    $("html, body").animate(
-      {
-        scrollTop:
-          $(`#deliverySearch`).offset().top - $(`#deliverySearch`).offset().top,
-      },
-      "slow"
-    );
+    const element = $("#deliverySearch");
+
+    if (element.length) {
+      $("html, body").animate(
+        {
+          scrollTop: element.offset().top,
+        },
+        "slow"
+      );
+    }
   };
 
   const changeAreaApi = async (key) => {
@@ -274,6 +277,12 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
                   }}
                   sx={{
                     fontWeight: "500",
+                    "&.Mui-expanded": {
+                      minHeight: 0,
+                    },
+                    "&.Mui-expanded .MuiAccordionSummary-content": {
+                      margin: "0 0 8px",
+                    },
                   }}
                 >
                   {language === "ltr"
@@ -289,7 +298,7 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
                       <ListItem
                         sx={{
                           display: "flex",
-                          justifyContent: "space-between",
+                          justifyContent: "s",
                           alignItems: "center",
                           borderBottom: "1px solid #e5e7eb",
                         }}

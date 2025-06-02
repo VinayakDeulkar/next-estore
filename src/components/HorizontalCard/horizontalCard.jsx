@@ -421,12 +421,12 @@ const HorizontalCard = ({ product }) => {
             <SubHeadline
               enText={product?.product_name}
               arText={product?.product_name_ar}
-              fontSize="20px"
+              fontSize="18px"
             />
             {product?.short_description != "" ? (
               <div className="product-description">
                 <NormalText
-                  fontSize="16px"
+                  fontSize="15px"
                   color={"#888888"}
                   enText={product?.short_description
                     ?.replace(/(<([^>]+)>)/gi, "")

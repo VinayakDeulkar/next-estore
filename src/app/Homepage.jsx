@@ -24,8 +24,7 @@ const Homepage = () => {
     handleSideMenuDrawer,
     handleLanguageChange,
   } = useContext(AppContext);
-
-  console.log(addressDetails, "addressDetailsaddressDetails");
+  
   const checkDrawer = () =>
     homePageDetails?.vendor_data &&
     userDetails?.address?.length > 0 &&

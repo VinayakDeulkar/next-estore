@@ -26,6 +26,7 @@ const CategoryCard = ({ category }) => {
               width: "100%",
               display: "flex",
               gap: "18px",
+              alignItems: "center"
             }}
             onClick={handleCardClick}
           >
@@ -54,6 +55,7 @@ const CategoryCard = ({ category }) => {
               <SubHeadline
                 enText={category?.category_name}
                 arText={category?.category_name_ar}
+                fontSize="21px"
               />
             </CardContent>
           </Card>
@@ -108,6 +110,7 @@ const CategoryCard = ({ category }) => {
               <SubHeadline
                 enText={category?.category_name}
                 arText={category?.category_name_ar}
+                fontSize="21px"
               />
             </CardContent>
           </Card>

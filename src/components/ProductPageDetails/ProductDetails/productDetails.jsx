@@ -737,7 +737,7 @@ const ProductDetails = ({
                         fontSize: "12px",
                         fontWeight: "500",
                         textAlign: "end",
-                        color: "rgb(141, 141, 141)"
+                        color: "rgb(141, 141, 141)",
                       }}
                     >
                       <del>
@@ -934,31 +934,43 @@ const ProductDetails = ({
                       alignItems: "end",
                     }}
                   >
-                    <Box sx={{ fontSize: "16px", fontWeight: 500 }}>
-                      {language == "ltr"
-                        ? addon?.english_name
-                        : addon?.arabic_name}
-                      <span
-                        className="max-tab"
+                    <Box
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 500,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <div>
+                        {language == "ltr"
+                          ? addon?.english_name
+                          : addon?.arabic_name}
+                      </div>
+                      <div
                         style={{
-                          margin: "0",
-                          marginLeft: language == "ltr" ? "10px" : "0",
-                          marginRight: language == "ltr" ? "0" : "10px",
+                          color: "#252525",
                           fontSize: "14px",
-                          fontWeight: 500,
+                          fontWeight: "300",
                         }}
                       >
-                        {language == "ltr" ? "Max" : "الحد الأقصى"}
+                        {language == "ltr" ? "Max selection" : "اختيار ماكس"}
                         <span>&nbsp;{addon.max_selection}</span>
-                      </span>
+                      </div>
                     </Box>
                     <Box>
                       {product?.quantity &&
                         product?.product_status != 0 &&
                         addon?.is_required == 1 && (
-                          <NormalText enText={"Required"} arText={"مطلوب"} />
+                          <NormalText
+                            enText={"Required"}
+                            arText={"مطلوب"}
+                            color={"#252525"}
+                          />
                         )}
-                      {checked[addonIndex]?.some(
+                      {/* {checked[addonIndex]?.some(
                         (check, k) => check.isChecked
                       ) && (
                         <div
@@ -972,7 +984,7 @@ const ProductDetails = ({
                         >
                           {language == "ltr" ? "Clear All" : "مسح الإختيار"}
                         </div>
-                      )}
+                      )} */}
                     </Box>
                   </Box>
                   <Box

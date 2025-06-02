@@ -447,12 +447,6 @@ html[dir="rtl"] .pay-now-button {
   font-size: 24px;
 }
 
-.product-detail-image {
-  height: 70px;
-  width: 70px;
-  border-radius: 10px;
-}
-
 .buyer-details-firstDiv div.buyer-details-name {
   font-size: 20px;
   font-weight: 600;

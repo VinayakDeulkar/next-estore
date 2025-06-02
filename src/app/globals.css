@@ -286,6 +286,7 @@ html[dir="rtl"] .newreview-button-div {
   height: 70px;
   width: 70px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .fashion-theme-border {
@@ -1467,4 +1468,25 @@ label {
 
 .showFlag-only .ReactFlagsSelect-module_selectBtn__19wW7:after {
   display: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  background-color: black; /* Change to your desired color */
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+  cursor: pointer;
+}
+
+input[type="search"]::-moz-search-cancel-button {
+  -moz-appearance: none;
+  height: 1em;
+  width: 1em;
+  background-color: black; /* Change to your desired color */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 1em 1em;
+  cursor: pointer;
 }

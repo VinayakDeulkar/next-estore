@@ -147,12 +147,13 @@ const SocialMedia = ({ handleTermsClick }) => {
           style={{ display: "flex", justifyContent: "center", width: "100%" }}
         >
           <img
-            style={{ height: "50px", width: "auto" }}
+            style={{ height: "50px", width: "auto", cursor: "pointer" }}
             src={
               language === "ltr"
                 ? "images/PayzahImage.png"
                 : "images/ArPayzahImage.png"
             }
+            onClick={() => window.open("https://payzah.com/", "_blank")}
           ></img>
         </div>
       </div>

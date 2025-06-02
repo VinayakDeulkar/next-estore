@@ -16,6 +16,8 @@ import NormalText from "../assetBoxDesign/NormalText/normalText";
 import Notes from "../assetBoxDesign/Notes/notes";
 import SearchNone from "../SeachBar/searchNone";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import $ from "jquery";
+
 const PickUpArea = ({ handleClose }) => {
   const {
     homePageDetails,
@@ -190,14 +192,18 @@ const PickUpArea = ({ handleClose }) => {
     }
   };
   const moveup = () => {
-    $("html, body").animate(
-      {
-        scrollTop:
-          $(`#pickupSearch`).offset().top - $(`#pickupSearch`).offset().top,
-      },
-      "slow"
-    );
+    const element = $("#pickupSearch");
+
+    if (element.length) {
+      $("html, body").animate(
+        {
+          scrollTop: element.offset().top,
+        },
+        "slow"
+      );
+    }
   };
+
   return (
     <div>
       <div
@@ -229,6 +235,7 @@ const PickUpArea = ({ handleClose }) => {
                     justifyContent: "space-between",
                     alignItems: "center",
                     padding: "20px 0",
+                    cursor: "pointer"
                   }}
                   key={i}
                   onClick={(e) => {

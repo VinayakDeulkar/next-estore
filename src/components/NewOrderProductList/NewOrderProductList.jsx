@@ -9,7 +9,7 @@ const NewOrderProductList = ({
 }) => {
   const { cart } = useContext(AppContext);
   return (
-    <div className="cartItemsDiv">
+    <div className="cartItemsDiv" style={{ backgroundColor: "#fff" }}>
       {cart &&
         cart.cartItems &&
         cart.cartItems.map((product, index) => (

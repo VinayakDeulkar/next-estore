@@ -227,10 +227,10 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
         <div>
           <img
             src={product?.product_img}
-            className={`product-detail-image  ${
+            className={`product-detail-image ${
               homePageDetails?.vendor_data?.home_page_type === "18" &&
               "fashion-theme-border"
-            }`} /*  alt={product.english_name} */
+            }`}
           />
         </div>
         <div
