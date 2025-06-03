@@ -23,44 +23,26 @@ const LoadingWrapper = ({ children }) => {
           <AnimatePresence>
             <>
               <motion.div
-                initial={
-                  mobileScreen()
-                    ? { width: 0, left: "50%" }
-                    : { height: 0, top: "50%" }
-                }
-                animate={
-                  mobileScreen()
-                    ? { width: "100vw", left: "0%" }
-                    : { height: "100vh", top: "0%" }
-                }
+                initial={{ height: 0, top: "50%" }}
+                animate={{ height: "100vh", top: "0%" }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.2 }}
-                className={
-                  mobileScreen()
-                    ? "absolute top-1/2 h-0.5 bg-white z-20"
-                    : "absolute left-1/2 w-0.5 bg-white z-20"
-                }
+                className={"absolute left-1/2 w-0.5 bg-white z-20"}
                 style={{
-                  transform: mobileScreen()
-                    ? "translateY(-50%)"
-                    : "translateX(-50%)",
+                  transform: "translateX(-50%)",
                 }}
               />
 
               <motion.div
-                initial={mobileScreen() ? { y: 0 } : { x: 0 }}
-                animate={mobileScreen() ? { y: "-100%" } : { x: "-100%" }}
+                initial={{ x: 0 }}
+                animate={{ x: "-100%" }}
                 transition={{ delay: 1, duration: 0.8 }}
-                className={
-                  mobileScreen()
-                    ? "absolute top-0 left-0 w-full h-1/2 z-10"
-                    : "absolute top-0 left-0 w-1/2 h-full z-10"
-                }
+                className={"absolute top-0 left-0 w-1/2 h-full z-10"}
                 style={{
                   backgroundColor: homePageDetails?.vendor_data?.vendor_color,
                   display: "flex",
-                  justifyContent: mobileScreen() ? "center" : "end",
-                  alignItems: mobileScreen() ? "end" : "center",
+                  justifyContent: "end",
+                  alignItems: "center",
                   overflow: "hidden",
                 }}
               >
@@ -68,29 +50,26 @@ const LoadingWrapper = ({ children }) => {
                   src={homePageDetails?.vendor_data?.english_new_background}
                   className="object-cover"
                   style={{
-                    transform: mobileScreen()
-                      ? "translateY(125px)"
-                      : "translateX(125px)",
-                    width: "250px",
-                    height: "250px",
+                    transform:
+                      window.innerWidth > 600
+                        ? "translateX(125px)"
+                        : "translateX(100px)",
+                    width: window.innerWidth > 600 ? "250px" : "200px",
+                    height: window.innerWidth > 600 ? "250px" : "200px",
                   }}
                 />
               </motion.div>
 
               <motion.div
-                initial={mobileScreen() ? { y: 0 } : { x: 0 }}
-                animate={mobileScreen() ? { y: "100%" } : { x: "100%" }}
+                initial={{ x: 0 }}
+                animate={{ x: "100%" }}
                 transition={{ delay: 1, duration: 0.8 }}
-                className={
-                  mobileScreen()
-                    ? "absolute bottom-0 left-0 w-full h-1/2 z-10"
-                    : "absolute top-0 right-0 w-1/2 h-full z-10"
-                }
+                className={"absolute top-0 right-0 w-1/2 h-full z-10"}
                 style={{
                   backgroundColor: homePageDetails?.vendor_data?.vendor_color,
                   display: "flex",
-                  justifyContent: mobileScreen() ? "center" : "start",
-                  alignItems: mobileScreen() ? "start" : "center",
+                  justifyContent: "start",
+                  alignItems: "center",
                   overflow: "hidden",
                 }}
               >
@@ -98,11 +77,9 @@ const LoadingWrapper = ({ children }) => {
                   src={homePageDetails?.vendor_data?.english_new_background}
                   className="object-cover"
                   style={{
-                    transform: mobileScreen()
-                      ? "translateY(-125px)"
-                      : "translateX(-125px)",
-                    width: "250px",
-                    height: "250px",
+                    transform: window.innerWidth > 600 ? "translateX(-125px)" : "translateX(-100px)",
+                    width: window.innerWidth > 600 ? "250px" : "200px",
+                    height: window.innerWidth > 600 ? "250px" : "200px",
                   }}
                 />
               </motion.div>
