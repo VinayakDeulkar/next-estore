@@ -301,6 +301,7 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
                           justifyContent: "s",
                           alignItems: "center",
                           borderBottom: "1px solid #e5e7eb",
+                          fontWeight: "300",
                         }}
                         onClick={() => {
                           handleCityClick(city);

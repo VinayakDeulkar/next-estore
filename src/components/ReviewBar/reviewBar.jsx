@@ -110,11 +110,23 @@ const ReviewBar = () => {
           <Grid item md={4} sm={4} lg={4} xs={4} sx={{ textAlign: "end" }}>
             <SubHeadline
               enText={`${
-                cart?.subTotal ? parseFloat(cart?.subTotal).toFixed(3) : 0
-              } KD`}
+                cart?.subTotal
+                  ? Number(cart.subTotal).toLocaleString("en-KW", {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    })
+                  : "0.000"
+              }
+               KD`}
               arText={`${
-                cart?.subTotal ? parseFloat(cart?.subTotal).toFixed(3) : 0
-              } د.ك`}
+                cart?.subTotal
+                  ? Number(cart.subTotal).toLocaleString("en-KW", {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    })
+                  : "0.000"
+              }
+               د.ك`}
               color={isOverlappingFooter ? "#000" : "#fff"}
             />
           </Grid>

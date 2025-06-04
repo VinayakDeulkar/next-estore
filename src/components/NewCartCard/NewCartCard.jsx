@@ -244,23 +244,33 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
             <SubHeadline
               enText={product.english_name}
               arText={product.arabic_name}
-              fontWeight="500"
+              fontWeight="300"
             />
             <div>
               {product?.addOns?.map((i) => (
-                <div className="cart-cart-product-notes" key={i?.item}>
+                <div
+                  className="cart-cart-product-notes"
+                  key={i?.item}
+                  style={{ fontWeight: "200" }}
+                >
                   {language == "ltr" ? i?.item : i?.item_ar}
                 </div>
               ))}
               {product?.variation_id.length > 0 ? (
-                <div className="cart-cart-product-notes">
+                <div
+                  className="cart-cart-product-notes"
+                  style={{ fontWeight: "200" }}
+                >
                   {language == "ltr"
                     ? product.variation_name
                     : product.variation_name_ar}
                 </div>
               ) : null}
               {product?.offer_applied == 1 && (
-                <div className="cart-cart-product-offer">
+                <div
+                  className="cart-cart-product-offer"
+                  style={{ fontWeight: "200" }}
+                >
                   {language == "ltr"
                     ? product?.offer_message
                     : product?.offer_message_ar}
@@ -291,19 +301,31 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
                   (product?.offer_applied == 1 &&
                     product?.stripe_amount != 0)) && (
                   <>
-                    <span className="order-details-cart-disocunt">
+                    <span
+                      className="order-details-cart-disocunt"
+                      style={{ fontWeight: "300" }}
+                    >
                       {product?.stripe_amount
-                        ? parseFloat(product?.stripe_amount)?.toFixed(3)
-                        : 0}{" "}
+                        ? Number(product.stripe_amount).toLocaleString(
+                            "en-KW",
+                            {
+                              minimumFractionDigits: 3,
+                              maximumFractionDigits: 3,
+                            }
+                          )
+                        : "0.000"}{" "}
                       {language === "rtl" ? "د.ك" : "KD"}
                     </span>
                   </>
                 )}
-                <div>
+                <div style={{ fontWeight: "300" }}>
                   <span>
                     {product?.original_price
-                      ? parseFloat(product?.original_price).toFixed(3)
-                      : 0}
+                      ? Number(product.original_price).toLocaleString("en-KW", {
+                          minimumFractionDigits: 3,
+                          maximumFractionDigits: 3,
+                        })
+                      : "0.000"}
                   </span>{" "}
                   {language === "rtl" ? "د.ك" : "KD"}
                 </div>

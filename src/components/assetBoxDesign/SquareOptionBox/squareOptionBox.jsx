@@ -36,7 +36,9 @@ const SquareOptionBox = ({
         sx={{
           padding: "20px",
           color: selected ? "#fff" : "#000",
-          border: "1.5px solid #AEAEAE",
+          border: selected
+            ? `1.5px solid ${homePageDetails?.vendor_data?.vendor_color}`
+            : "1.5px solid #AEAEAE",
           borderRadius: "10px",
           display: "flex",
           flexDirection: "column",

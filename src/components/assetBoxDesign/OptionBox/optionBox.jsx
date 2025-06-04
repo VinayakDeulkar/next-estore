@@ -39,7 +39,9 @@ const OptionBox = ({
           alignItems: "center",
           justifyContent: "space-between",
           padding: "10px",
-          border: "1.5px solid #AEAEAE",
+          border: selected
+            ? `1.5px solid ${homePageDetails?.vendor_data?.vendor_color}`
+            : "1.5px solid #AEAEAE",
           height: "40px",
           color: selected ? "#fff" : "#000",
           width: "100%",

@@ -55,7 +55,7 @@ const AddressCard = ({
           {info?.flag ? (
             <div
               className="secondText"
-              style={{ display: "flex", alignItems: "center" }}
+              style={{ display: "flex", alignItems: "center", color: "#000" }}
             >
               {info.flag} +{tele[info?.phoneCode]} {info?.phone}
             </div>

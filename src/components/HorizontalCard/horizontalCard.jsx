@@ -427,7 +427,7 @@ const HorizontalCard = ({ product }) => {
               <div className="product-description">
                 <NormalText
                   fontSize="15px"
-                  color={"#888888"}
+                  color={"#8D8D8D"}
                   enText={product?.short_description
                     ?.replace(/(<([^>]+)>)/gi, "")
                     .replace(/\&nbsp;/gi, "")
@@ -438,6 +438,7 @@ const HorizontalCard = ({ product }) => {
                     .replace(/\&nbsp;/gi, "")
                     .replace(/\s\s+/g, " ")
                     .replace(/&#39;/gi, "'")}
+                  fontWeight={"200"}
                 />
               </div>
             ) : null}

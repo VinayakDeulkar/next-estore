@@ -24,16 +24,21 @@ const TextInputField = ({
       }}
     >
       <input
+        inputMode="text"
         type="text"
         placeholder=""
         className="text-field-input"
         id={name}
         name={name}
-        required="true"
+        required
         autoComplete
         value={value}
         onChange={handleChange}
-        style={{ fontWeight: fontWeight }}
+        style={{
+          fontWeight: fontWeight,
+          minHeight: "unset",
+          lineHeight: "normal",
+        }}
       />
       <label
         htmlFor={name}

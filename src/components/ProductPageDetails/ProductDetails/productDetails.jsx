@@ -744,7 +744,13 @@ const ProductDetails = ({
                         <span>
                           {language === "rtl" ? "د.ك" : "KD"}{" "}
                           <span>
-                            {parseFloat(product.base_price).toFixed(3)}
+                            {Number(product.base_price).toLocaleString(
+                              "en-KW",
+                              {
+                                minimumFractionDigits: 3,
+                                maximumFractionDigits: 3,
+                              }
+                            )}
                           </span>
                         </span>
                       </del>
@@ -1198,7 +1204,7 @@ const ProductDetails = ({
                   // right: 0,
                   // backgroundColor: "#fff",
                   borderTop: "1px solid #ced4da",
-                  padding: "20px 0",
+                  padding: "20px 0px 35px",
                   margin: checkSize() ? "0 -40px" : "0 -20px",
                 }}
               >
@@ -1227,9 +1233,13 @@ const ProductDetails = ({
                     >
                       {language === "rtl" ? "د.ك" : "KD"}{" "}
                       <span>
-                        {parseFloat(
-                          (price + addonsPrice + variationPrice) * prodNumber
-                        )?.toFixed(3)}
+                        {(
+                          (price + addonsPrice + variationPrice) *
+                          prodNumber
+                        )?.toLocaleString("en-KW", {
+                          minimumFractionDigits: 3,
+                          maximumFractionDigits: 3,
+                        })}
                       </span>
                     </div>
                     <div>

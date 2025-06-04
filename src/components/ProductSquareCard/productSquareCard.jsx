@@ -430,6 +430,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                 .replace(/\s\s+/g, " ")
                 .replace(/&#39;/gi, "'")}
               color={"#8D8D8D"}
+              fontWeight={"200"}
             />
           </div>
         ) : null}
