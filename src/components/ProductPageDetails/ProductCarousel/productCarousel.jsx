@@ -122,58 +122,28 @@ const ProductCarousel = ({ product, addedVariaton }) => {
       </Carousel>
 
       {/* Thumbnail Navigation */}
-      {allImages.length > 1 && (
+      {allImages?.length > 1 && (
         <Box
           sx={{
-            position: "relative",
-            mt: 2,
             display: "flex",
             justifyContent: "center",
-            px: 2,
+            alignItems: "center",
+            mt: 2,
+            gap: 1,
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              gap: 1,
-              overflowX: "auto",
-              scrollbarWidth: "none",
-              "&::-webkit-scrollbar": {
-                display: "none",
-              },
-            }}
-          >
-            {allImages.map((image, index) => (
-              <Box
-                key={index}
-                sx={{
-                  position: "relative",
-                  cursor: "pointer",
-                  p: 0.5,
-                  minWidth: 60,
-                  flexShrink: 0,
-                }}
-                onClick={() => handleThumbnailClick(index)}
-              >
-                <img
-                  src={image}
-                  alt={`Thumbnail ${index + 1}`}
-                  style={{
-                    width: "65px",
-                    height: "65px",
-                    objectFit: "cover",
-                    borderRadius: "4px",
-                    border:
-                      activeIndex === index
-                        ? "2px solid #000"
-                        : "2px solid transparent",
-                    opacity: activeIndex === index ? 1 : 0.7,
-                    transition: "all 0.2s ease",
-                  }}
-                />
-              </Box>
-            ))}
-          </Box>
+          {allImages.map((_, index) => (
+            <Box
+              key={index}
+              sx={{
+                width: "30px",
+                height: "6px",
+                borderRadius: "5px",
+                backgroundColor: activeIndex === index ? "#000" : "#ccc",
+                transition: "background-color 0.3s ease",
+              }}
+            />
+          ))}
         </Box>
       )}
     </Box>
