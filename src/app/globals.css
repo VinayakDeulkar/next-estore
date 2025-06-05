@@ -24,6 +24,7 @@ body {
   /* height: 100vh;
   overflow: hidden; */
 }
+
 html[dir="rtl"] body {
   font-family: Orleen !important;
 }
@@ -32,6 +33,16 @@ html[dir="rtl"] body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+textarea,
+select {
+  transform: scale(1);
 }
 
 .contact-details-bottom-button {

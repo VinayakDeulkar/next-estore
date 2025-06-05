@@ -26,12 +26,8 @@ export async function generateMetadata({ params }) {
   return {
     title: name,
     description: slogan,
-    viewport: {
-      width: "device-width",
-      initialScale: 1,
-      maximumScale: 1,
-      userScalable: "no",
-    },
+    viewport:
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
     icons: [
       {
         url: `${english_new_background}?v=${Date.now()}`,

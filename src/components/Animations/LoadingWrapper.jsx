@@ -1,12 +1,13 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { AppContext } from "@/context/AppContext";
-import { mobileScreen } from "@/constants/function";
+import { Box } from "@mui/material";
 
 const LoadingWrapper = ({ children }) => {
   const { homePageDetails } = useContext(AppContext);
   const [showCurtain, setShowCurtain] = useState(true);
+  const lineControls = useAnimation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,15 +17,57 @@ const LoadingWrapper = ({ children }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const runAnimation = async () => {
+      lineControls.start({
+        height: "100vh",
+        top: "0%",
+        opacity: 1,
+        transition: { duration: 1.2 },
+      });
+
+      setTimeout(() => {
+        lineControls.start({
+          opacity: 0,
+          transition: { duration: 0 },
+        });
+      }, 1000);
+    };
+
+    runAnimation();
+  }, []);
+
   return (
     <>
       {showCurtain ? (
         <div className="relative w-full h-screen bg-white overflow-hidden">
+          <Box
+            sx={{
+              position: "fixed", 
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+              zIndex: 999, 
+              pointerEvents: "none", 
+            }}
+          >
+            <img
+              src={homePageDetails?.vendor_data?.english_new_background}
+              className="object-cover"
+              style={{
+                width: window.innerWidth > 600 ? "175px" : "150px",
+                height: window.innerWidth > 600 ? "175px" : "150px",
+                borderRadius: "10px",
+              }}
+            />
+          </Box>
           <AnimatePresence>
             <>
               <motion.div
                 initial={{ height: 0, top: "50%" }}
-                animate={{ height: "100vh", top: "0%" }}
+                animate={lineControls}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.2 }}
                 className={"absolute left-1/2 w-0.5 bg-white z-20"}
@@ -45,20 +88,7 @@ const LoadingWrapper = ({ children }) => {
                   alignItems: "center",
                   overflow: "hidden",
                 }}
-              >
-                <img
-                  src={homePageDetails?.vendor_data?.english_new_background}
-                  className="object-cover"
-                  style={{
-                    transform:
-                      window.innerWidth > 600
-                        ? "translateX(125px)"
-                        : "translateX(100px)",
-                    width: window.innerWidth > 600 ? "250px" : "200px",
-                    height: window.innerWidth > 600 ? "250px" : "200px",
-                  }}
-                />
-              </motion.div>
+              ></motion.div>
 
               <motion.div
                 initial={{ x: 0 }}
@@ -72,17 +102,7 @@ const LoadingWrapper = ({ children }) => {
                   alignItems: "center",
                   overflow: "hidden",
                 }}
-              >
-                <img
-                  src={homePageDetails?.vendor_data?.english_new_background}
-                  className="object-cover"
-                  style={{
-                    transform: window.innerWidth > 600 ? "translateX(-125px)" : "translateX(-100px)",
-                    width: window.innerWidth > 600 ? "250px" : "200px",
-                    height: window.innerWidth > 600 ? "250px" : "200px",
-                  }}
-                />
-              </motion.div>
+              ></motion.div>
             </>
           </AnimatePresence>
         </div>
