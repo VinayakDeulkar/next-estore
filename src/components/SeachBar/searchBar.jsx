@@ -24,7 +24,7 @@ const SearchBar = ({
     search,
     language,
   } = useContext(AppContext);
-  
+
   useEffect(() => {
     if (hasMore && page != 0) setIsPageLoading((l) => true);
     else {
@@ -112,7 +112,7 @@ const SearchBar = ({
         type="search"
         placeholder={language === "ltr" ? "Search" : "بحث"}
         className="text-field-input"
-        style={{ borderRadius: "46px", padding: "4px 15px" }}
+        style={{ borderRadius: "46px", padding: "4px 15px", fontSize: "16px" }}
         id={"Search"}
         name={"Search"}
         autoComplete

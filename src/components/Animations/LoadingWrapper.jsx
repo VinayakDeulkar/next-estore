@@ -18,6 +18,10 @@ const LoadingWrapper = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    sessionStorage.setItem("load", "initial");
+  }, []);
+
+  useEffect(() => {
     const runAnimation = async () => {
       lineControls.start({
         height: "100vh",
@@ -39,18 +43,18 @@ const LoadingWrapper = ({ children }) => {
 
   return (
     <>
-      {showCurtain ? (
+      {showCurtain && !sessionStorage.getItem("load") ? (
         <div className="relative w-full h-screen bg-white overflow-hidden">
           <Box
             sx={{
-              position: "fixed", 
+              position: "fixed",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               width: "100%",
               height: "100%",
-              zIndex: 999, 
-              pointerEvents: "none", 
+              zIndex: 999,
+              pointerEvents: "none",
             }}
           >
             <img

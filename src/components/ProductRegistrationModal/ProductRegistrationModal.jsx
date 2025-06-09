@@ -555,6 +555,7 @@ const ProductRegistrationModal = ({
                                   name: e.target.value,
                                 });
                               }}
+                              style={{fontSize: "16px"}}
                             ></input>
                             <label
                               for="name"
@@ -602,6 +603,7 @@ const ProductRegistrationModal = ({
                                 email: e.target.value,
                               });
                             }}
+                            style={{fontSize: "16px"}}
                           ></input>
                           <label
                             for="email"

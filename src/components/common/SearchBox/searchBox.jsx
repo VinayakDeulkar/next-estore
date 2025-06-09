@@ -138,6 +138,7 @@ const SearchBox = () => {
         }}
         ref={inputRef}
         className={styles.searchInput}
+        style={{fontSize: "16px"}}
       />
       <div className={styles.searchIcon} onClick={handleSearchClick}>
         <svg viewBox="0 0 24 24" width="20" height="20">

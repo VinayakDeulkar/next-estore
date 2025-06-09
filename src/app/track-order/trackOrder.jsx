@@ -84,6 +84,7 @@ const TrackOrder = () => {
                       ? "Tracking Number Goes Here"
                       : "ضع رقم الطلب هنا لتتبعه"
                   }
+                  style={{fontSize: "16px"}}
                 />
               </div>
             </motion.div>

@@ -260,6 +260,7 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
           }
           className="delivery-area-search-input"
           value={areaSearch}
+          style={{fontSize: "16px"}}
         ></input>
       </div>
       <Box>

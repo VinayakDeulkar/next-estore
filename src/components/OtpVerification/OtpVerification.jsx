@@ -142,7 +142,7 @@ const OtpVerification = ({
               border: "1px solid #E1E1E1",
               outline: "none",
               color: "#000",
-              fontSize: "14px",
+              fontSize: "16px",
             }}
             containerStyle={{
               gap: "10px",

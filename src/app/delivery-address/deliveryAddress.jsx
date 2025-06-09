@@ -498,8 +498,8 @@ const DeliveryAddress = () => {
           ) : (
             <InternationalAddress internationalError={internationalError} />
           )}
-          <div style={{padding: window.innerWidth < 380 ? "20px 0 20px" : "20px 0 0"}}>
-            {console.log(window.innerWidth < 380, "window.innerWidth")}
+          <div style={{padding: window.innerWidth < 376 ? "20px 0 20px" : "20px 0 0"}}>
+            {console.log(window.innerWidth , "window.innerWidth")}
             <Box
               className="contact-details-next-button"
               onClick={() => {

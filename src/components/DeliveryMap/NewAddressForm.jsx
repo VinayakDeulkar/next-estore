@@ -292,6 +292,7 @@ const NewAddressForm = ({
                   addressName: e.target.value,
                 }));
               }}
+              style={{ fontSize: "16px" }}
             ></input>
           </div>
           {errorState.addressNameError && (
@@ -326,7 +327,7 @@ const NewAddressForm = ({
               style={
                 areaDetails?.area === ""
                   ? { color: "#B3B3B3", fontWeight: "300" }
-                  : {}
+                  : { fontSize: "16px" }
               }
             >
               {areaDetails?.area === ""

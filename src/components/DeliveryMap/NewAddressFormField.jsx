@@ -64,6 +64,7 @@ const NewAddressFormField = ({
                 street: e.target.value,
               }));
             }}
+            style={{fontSize: "16px"}}
           ></input>
           <label for="street" className="label-name">
             {language == "ltr" ? "Street" : "شارع "} <sup>*</sup>
@@ -100,6 +101,7 @@ const NewAddressFormField = ({
                     : addressDetails.block,
                 }));
               }}
+              style={{fontSize: "16px"}}
             ></input>
             <label for="block" className="label-name">
               {language == "ltr" ? "Block" : "قطعة "} <sup>*</sup>
@@ -129,6 +131,7 @@ const NewAddressFormField = ({
                   avenue: e.target.value,
                 }));
               }}
+              style={{fontSize: "16px"}}
             ></input>
             <label for="avenue" className="label-name">
               {language == "ltr" ? "Avenue" : "جادة"}
@@ -162,6 +165,7 @@ const NewAddressFormField = ({
                   house: e.target.value,
                 }));
               }}
+              style={{fontSize: "16px"}}
             ></input>
             <label for="house" className="label-name">
               {houseLabel()}
@@ -195,7 +199,7 @@ const NewAddressFormField = ({
                     floor: e.target.value,
                   }));
                 }}
-                style={{ width: "100%" }}
+                style={{ width: "100%", fontSize: "16px"}}
               ></input>
               <label for="floor" className="label-name">
                 {language == "ltr" ? "Floor no." : "رقم الدور"}
@@ -212,7 +216,7 @@ const NewAddressFormField = ({
                 name="first_name"
                 required="true"
                 value={addressDetails.flat}
-                style={{ width: "100%" }}
+                style={{ width: "100%", fontSize: "16px"}}
                 onChange={(e) => {
                   handleAddressDetailsChange((prev) => ({
                     ...prev,
@@ -254,6 +258,7 @@ const NewAddressFormField = ({
                 special_directions: e.target.value,
               }));
             }}
+            style={{fontSize: "16px"}}
           ></input>
         </div>
       </div>

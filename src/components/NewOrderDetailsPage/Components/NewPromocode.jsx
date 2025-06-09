@@ -74,6 +74,7 @@ const NewPromocode = ({
             style={{
               backgroundColor:
                 window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
+              fontSize: "16px",
             }}
             id="name"
             name="first_name"

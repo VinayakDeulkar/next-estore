@@ -223,6 +223,7 @@ const PickUpArea = ({ handleClose }) => {
           }
           className="delivery-area-search-input"
           value={branchSearch}
+          style={{fontSize: "16px"}}
         ></input>
       </div>
       <Box>

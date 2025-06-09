@@ -37,6 +37,7 @@ const PickupContainer = ({ pickupError }) => {
                   model: e.target.value,
                 });
               }}
+              style={{fontSize: "16px"}}
             />
             <label htmlFor="Model" className="form__label">
               {language == "ltr" ? "Model" : "نوع السيارة"}
@@ -69,6 +70,7 @@ const PickupContainer = ({ pickupError }) => {
                   color: e.target.value,
                 });
               }}
+              style={{fontSize: "16px"}}
             />
             <label htmlFor="car_color" className="form__label">
               {language == "ltr" ? "Color" : "اللون"}
@@ -101,6 +103,7 @@ const PickupContainer = ({ pickupError }) => {
                   license: e.target.value,
                 });
               }}
+              style={{fontSize: "16px"}}
             />
             <label htmlFor="car_plate" className="form__label">
               {language == "ltr"
