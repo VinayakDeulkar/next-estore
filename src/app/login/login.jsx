@@ -678,7 +678,7 @@ const Login = () => {
             height:
               window.innerWidth > 900
                 ? "calc(100vh - 80px)"
-                : "calc(100vh - 150px)",
+                : "calc(100% - 50px)",
           }}
         >
           <HeadLine

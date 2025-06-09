@@ -47,7 +47,7 @@ select {
 
 .contact-details-bottom-button {
   position: absolute;
-  bottom: 20px;
+  bottom: 0;
   height: 45px;
   width: 100%;
   left: 0;
@@ -165,7 +165,7 @@ html[dir="rtl"] .newreview-button-div {
 
 .contact-details-bottom-button {
   position: absolute;
-  bottom: 20px;
+  bottom: 0;
   height: 45px;
   width: 100%;
   left: 0;
@@ -1446,7 +1446,7 @@ label {
 }
 
 .ReactFlagsSelect-module_selectOptions__3LNBJ {
-  min-width: 530% !important;
+  min-width: 465% !important;
   max-height: 275px !important;
 }
 

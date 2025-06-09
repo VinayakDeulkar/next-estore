@@ -199,12 +199,14 @@ const UserInfo = ({ type }) => {
             }
           })
         );
+        setLoading(true);
         const response = await changeArea({
           vendors_id: homePageDetails?.vendor_data?.vendors_id,
           area_id: address.area_id,
           vendorSlug: vendorSlug?.data?.ecom_url_slug,
           user_string: localStorage.getItem("userID"),
         });
+        setLoading(false);
         if (response.status === true) {
           if (response.data.show_popup === 0) {
             const timeResponse = await getScheduleTime({

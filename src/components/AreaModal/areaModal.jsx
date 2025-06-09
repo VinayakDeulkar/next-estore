@@ -10,6 +10,7 @@ const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition, type }) => {
   const { areaDetails } = useContext(AppContext);
   useEffect(() => {}, [areaDetails]);
 
+  console.log(type, "typetype")
   return (
     <>
       <Dialog
@@ -19,12 +20,12 @@ const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition, type }) => {
         sx={{
           "& .MuiDialog-container > .MuiPaper-root": {
             borderRadius: "16px", // Change this value as needed
-            minWidth: "400px",
+            minWidth: "340px",
             margin: "15px",
             overflow: "hidden",
           },
           "& .MuiDialog-container": {
-            justifyContent: type === "deskCheckout" ? "center" : "flex-start",
+            justifyContent: type === "deskCheckout" || window.innerWidth < 991 ? "center" : "flex-start",
           },
         }}
       >

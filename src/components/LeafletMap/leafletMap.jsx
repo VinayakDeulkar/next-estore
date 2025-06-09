@@ -94,7 +94,7 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
   };
 
   return (
-    <>
+    <div>
       <MapContainer
         // center={[29.3759, 47.9774]}
         bounds={bounds}
@@ -145,7 +145,7 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
           />
         )}
       </MapContainer>
-      <div>
+      <div style={{marginTop: "15px"}}>
         <div
           style={{
             fontSize: language === "ltr" ? "16px" : "17px",
@@ -176,7 +176,7 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
           <></>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -338,7 +338,7 @@ const ContactInfo = ({
             fontSize: language === "ltr" ? "16px" : "18px",
             marginTop: "30px",
             position: position,
-            bottom: "100px",
+            bottom: "70px",
             fontWeight: 400,
             textDecoration: "underline",
             width: "100%",

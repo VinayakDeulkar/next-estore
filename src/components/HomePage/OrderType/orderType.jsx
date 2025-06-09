@@ -190,11 +190,8 @@ const OrderType = () => {
       userDetails?.address?.length > 0 &&
       areaDetails?.type !== "pickup" ? (
         <BottomDrawer
-          type="home"
+          type="orderType"
           onClick={() => setShowAddress(false)}
-          hideAddress={() => {
-            setShowAddress(false);
-          }}
         />
       ) : null}
     </div>

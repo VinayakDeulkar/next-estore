@@ -458,7 +458,7 @@ const DeliveryAddress = () => {
         <Box
           sx={{
             position: "relative",
-            height: "calc(100vh - 150px)",
+            height: "calc(100% - 50px)",
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "column",
@@ -498,7 +498,8 @@ const DeliveryAddress = () => {
           ) : (
             <InternationalAddress internationalError={internationalError} />
           )}
-          <div>
+          <div style={{padding: window.innerWidth < 380 ? "20px 0 20px" : "20px 0 0"}}>
+            {console.log(window.innerWidth < 380, "window.innerWidth")}
             <Box
               className="contact-details-next-button"
               onClick={() => {

@@ -118,7 +118,7 @@ const ContactDetails = () => {
             flexDirection: "column",
             gap: "40px",
             position: "relative",
-            height: "calc(100vh - 150px)",
+            height: "calc(100% - 50px)",
           }}
         >
           <HeadLine enText={"Contact Details"} arText={"معلومات التواصل"} />
@@ -134,6 +134,7 @@ const ContactDetails = () => {
               homePageDetails?.vendor_data?.home_page_type === "18" &&
               "fashion-theme"
             }`}
+            style={{bottom: 0}}
           >
             <Box
               className="contact-details-next-button"

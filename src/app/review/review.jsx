@@ -158,13 +158,11 @@ const Review = () => {
         <Box
           sx={{
             position: "relative",
-            height: "calc(100vh - 150px)",
+            height: "calc(100% - 50px)",
             width: "100%",
-            height: "100%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: "0px 0px 8px",
           }}
         >
           <div

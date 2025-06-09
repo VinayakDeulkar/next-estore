@@ -499,12 +499,12 @@ const MobileCheckOut = () => {
             style={
               showAddress
                 ? {
-                    paddingBottom: "36px",
+                    paddingBottom: "30px",
                     height: "100vh",
                     overflow: "hidden",
                     position: "relative",
                   }
-                : { paddingBottom: "36px" }
+                : { paddingBottom: "30px" }
             }
           >
             <div
@@ -616,9 +616,6 @@ const MobileCheckOut = () => {
               <BottomDrawer
                 type="checkout"
                 onClick={() => setShowAddress(false)}
-                hideAddress={() => {
-                  setShowAddress(false);
-                }}
               />
             ) : null}
             {loading && (

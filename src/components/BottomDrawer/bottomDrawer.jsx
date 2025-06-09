@@ -324,7 +324,7 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
       addressType: addressData.addressType,
       addressName: addressData.addressName,
       special_directions: addressData?.special_directions,
-      is_primary: addressData?.is_primary
+      is_primary: addressData?.is_primary,
     }));
     const addedAddress = [];
     areaDetails.data.governarate.forEach((address) => {
@@ -457,6 +457,8 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
     if (type === "checkout") {
       router.push("/checkout");
       onClick();
+    } else if (type === "orderType") {
+      onClick();
     } else {
       if (localStorage.getItem("newPath") == "review") {
         localStorage.removeItem("newPath");
@@ -560,7 +562,7 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
             ))}
 
             {addressData?.length > 0 ? (
-              <div style={{margin: "15px 0"}}>
+              <div style={{ margin: "15px 0" }}>
                 <Divider />
               </div>
             ) : null}
@@ -648,7 +650,7 @@ const BottomDrawer = ({ type, onClick, hideAddress }) => {
         </div>
       </SwipeableDrawer>
 
-      {loading && (
+      {true && (
         <div
           style={{
             width: "100%",
