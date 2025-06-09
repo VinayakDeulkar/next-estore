@@ -102,6 +102,7 @@ const NewContactDetails = ({ errorContactDetails }) => {
                     });
                   }
                 }}
+                style={{fontSize: "16px"}}
               />
 
               <label

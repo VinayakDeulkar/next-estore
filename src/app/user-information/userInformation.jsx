@@ -362,6 +362,7 @@ const UserInformation = () => {
                       });
                     }
                   }}
+                  style={{fontSize: "16px"}}
                 />
                 {contactDetails?.phone ? (
                   <div

@@ -26,49 +26,39 @@ const Footer = () => {
       }}
       id="pageFooter"
     >
-      <a
-        href="http://payzah.com/"
-        style={{
-          width: 220,
-          height: 132,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
-        <div>
-          <div
-            style={{
-              color: "#000",
-              display: "flex",
-              alignItems: "center",
-              margin: `${language === "ltr" ? "0 0 0 2px" : "0 46px 0 0"}`,
-              fontSize: `${language === "ltr" ? "12px" : "14px"}`,
-              marginBottom: "5px",
-            }}
-          >
-            {language === "ltr" ? "Powered By" : "مدعوم من قبل"}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-evenly",
-              marginBottom: 10,
-            }}
-          >
-            <img
-              style={{ height: "50px", width: "auto" }}
-              src={
-                language === "ltr"
-                  ? "images/PayzahImage.png"
-                  : "images/ArPayzahImage.png"
-              }
-            ></img>
-          </div>
+      <div>
+        <div
+          style={{
+            color: "#000",
+            display: "flex",
+            alignItems: "center",
+            margin: `${language === "ltr" ? "0 0 0 2px" : "0 46px 0 0"}`,
+            fontSize: `${language === "ltr" ? "12px" : "14px"}`,
+            marginBottom: "5px",
+          }}
+        >
+          {language === "ltr" ? "Powered By" : "مدعوم من قبل"}
         </div>
-      </a>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-evenly",
+            marginBottom: 10,
+            cursor: "pointer"
+          }}
+        >
+          <img
+            style={{ height: "50px", width: "auto" }}
+            src={
+              language === "ltr"
+                ? "images/PayzahImage.png"
+                : "images/ArPayzahImage.png"
+            }
+            onClick={() => window.open("https://payzah.com/", "_blank")}
+          ></img>
+        </div>
+      </div>
       <Grid
         container
         sx={{

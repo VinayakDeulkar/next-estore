@@ -148,6 +148,7 @@ const ContactInfo = ({
                         });
                       }
                     }}
+                    style={{fontSize: "16px"}}
                   />
                   {contactDetails?.phone && showNameEmailFields ? (
                     <div

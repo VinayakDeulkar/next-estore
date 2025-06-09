@@ -520,6 +520,7 @@ const ProductRegistrationModal = ({
                                 });
                               }
                             }}
+                            style={{fontSize: "16px"}}
                           ></input>
                         </div>
                         {errorContactDetails.phoneError && (
