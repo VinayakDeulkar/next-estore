@@ -9,7 +9,10 @@ import Spinner from "../common/Spinner/spinner";
 import { useRouter } from "next/navigation";
 import { registerProductApi } from "@/apis/registerProduct";
 import { tele, telecount } from "@/constants/constants";
-import { Box } from "@mui/material";
+import { Box, Dialog, IconButton } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
+import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import TextInputField from "../assetBoxDesign/TextField/textInputField";
 
 const ProductRegistrationModal = ({
   showRegister,
@@ -21,6 +24,7 @@ const ProductRegistrationModal = ({
   productvariation,
   prodNumber,
   note,
+  type,
 }) => {
   const {
     language,
@@ -180,20 +184,20 @@ const ProductRegistrationModal = ({
     }
   };
 
-  useEffect(() => {
-    const modalContainer = document.getElementById("termsmodal-container");
-    const body = document.body;
-    if (modalContainer && body) {
-      if (showRegister && modalContainer) {
-        modalContainer.removeAttribute("class");
-        modalContainer.classList.add("open");
-        body.classList.add("modal-active");
-      } else {
-        modalContainer.classList.add("out");
-        body.classList.remove("modal-active");
-      }
-    }
-  }, [showRegister]);
+  // useEffect(() => {
+  //   const modalContainer = document.getElementById("termsmodal-container");
+  //   const body = document.body;
+  //   if (modalContainer && body) {
+  //     if (showRegister && modalContainer) {
+  //       modalContainer.removeAttribute("class");
+  //       modalContainer.classList.add("open");
+  //       body.classList.add("modal-active");
+  //     } else {
+  //       modalContainer.classList.add("out");
+  //       body.classList.remove("modal-active");
+  //     }
+  //   }
+  // }, [showRegister]);
 
   const modifyValue = (phoneNumber) => {
     if (phoneNumber.includes("+")) {
@@ -341,151 +345,568 @@ const ProductRegistrationModal = ({
   };
 
   return (
-    <div
-      id="termsmodal-container"
-      style={{ top: "-53px", height: "100vh", overflow: "hidden" }}
-    >
-      <div className={"modal-background"} onClick={(e) => e.stopPropagation()}>
+    <>
+      {/* <div
+        id="termsmodal-container"
+        style={{ top: "-53px", height: "100vh", overflow: "hidden" }}
+      >
         <div
-          className={"modal"}
-          style={{ padding: "10px", width: "100%", position: "relative" }}
+          className={"modal-background"}
+          onClick={(e) => e.stopPropagation()}
         >
           <div
-            style={{
-              overflowY: "auto",
-              paddingRight: 10,
-              maxHeight: "90vh",
-              overflowX: "hidden",
-              paddingLeft: 10,
-              color: "#000",
-              background: "#fff",
-              borderRadius: "20px",
-              width: "100%",
-              position: "relative",
-            }}
-            className="paymentTypeMain firstDetailsTab scrollbarPaylinkCard"
+            className={"modal"}
+            style={{ padding: "10px", width: "100%", position: "relative" }}
           >
             <div
-              className="headerModal"
               style={{
-                position: "sticky",
-                top: "0",
+                overflowY: "auto",
+                paddingRight: 10,
+                maxHeight: "90vh",
+                overflowX: "hidden",
+                paddingLeft: 10,
+                color: "#000",
+                background: "#fff",
+                borderRadius: "20px",
                 width: "100%",
-                background: "white",
+                position: "relative",
+              }}
+              className="paymentTypeMain firstDetailsTab scrollbarPaylinkCard"
+            >
+              <div
+                className="headerModal"
+                style={{
+                  position: "sticky",
+                  top: "0",
+                  width: "100%",
+                  background: "white",
+                }}
+              >
+                <div
+                  style={{
+                    margin: 0,
+                    position: "absolute",
+                  }}
+                  className="goBackButton"
+                >
+                  <div
+                    onClick={() => {
+                      handleClose(false, "");
+                    }}
+                    style={{
+                      marginBottom: "0",
+                      paddingTop: "15px",
+                      marginLeft: language === "ltr" ? 0 : "-15px",
+                      marginRight: language === "ltr" ? "-15px" : 0,
+                    }}
+                  >
+                    <BackComponent />
+                  </div>
+                </div>
+              </div>
+
+              <div className="productRegistrationHeader">
+                {language === "ltr" ? "Product Registration" : "تسجيل المنتج"}
+              </div>
+
+              <div className="registerProductDetails">
+                <div style={{ marginBottom: "10px" }}>
+                  <img
+                    src={product?.image}
+                    alt=""
+                    className="registerProductImg"
+                  />
+                </div>
+                <div>
+                  <div className="registerProductName">
+                    {language === "ltr" ? product?.name : product?.name_ar}
+                  </div>
+                  <div
+                    className="selectedVariation"
+                    style={{ marginTop: "5px" }}
+                  >
+                    {addedVariaton.length > 0
+                      ? language === "ltr"
+                        ? variationName.eng
+                        : variationName.ar
+                      : null}
+                    {addedAddons.length > 0
+                      ? language === "ltr"
+                        ? addonName.eng
+                        : addonName.ar
+                      : null}
+                  </div>
+                  {prodNumber > 0 ? (
+                    <div
+                      style={
+                        language === "ltr"
+                          ? {
+                              fontSize: "14px",
+                              fontWeight: "400",
+                              marginTop: "5px",
+                            }
+                          : {
+                              fontSize: "16px",
+                              fontWeight: "400",
+                              marginTop: "5px",
+                            }
+                      }
+                    >
+                      {language === "ltr" ? "Quantity:" : "كمية:"}&nbsp;
+                      <span>{prodNumber}</span>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+
+              {spinLoader ? (
+                <div style={{ padding: "30px" }}>
+                  <Spinner
+                    height="45px"
+                    size="5px"
+                    color={homePageDetails?.vendor_data?.vendor_color}
+                  />
+                </div>
+              ) : null}
+
+              {spinLoader ||
+              registrationSuccess ||
+              registrationFailed?.status ? null : (
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    padding: "20px",
+                    direction: language,
+                    paddingBottom: "50px",
+                  }}
+                >
+                  <form action="javascript/void" autoComplete="on">
+                    <div className="contact-details-form-maindiv">
+                      <form>
+                        <div className="contact-details-form-div">
+                          <label
+                            className="contact-details-label-name"
+                            style={{ width: "100%", textAlign: "start" }}
+                          >
+                            {language == "ltr" ? "Phone Number" : "رقم الهاتف"}
+                          </label>
+                          <div className="contact-form-container">
+                            <ReactFlagsSelect
+                              selected={contactDetails?.phoneCode}
+                              searchable={true}
+                              showSelectedLabel={false}
+                              customLabels={telecount}
+                              className="contact-details-flag"
+                              onSelect={(code) => {
+                                handleContactDetailsChange({
+                                  ...contactDetails,
+                                  phoneCode: code,
+                                  phone: contactDetails?.phone?.substring(
+                                    0,
+                                    code == "KW" ? 8 : 12
+                                  ),
+                                });
+                              }}
+                            />
+                            <input
+                              type="tel"
+                              className="contact-details-form-control contact-details-phone-number"
+                              placeholder=""
+                              id="phone"
+                              name="phone"
+                              required="true"
+                              value={contactDetails.phone}
+                              autoComplete="tel"
+                              onChange={(e) => {
+                                const newValue = modifyValue(e.target.value);
+                                if (
+                                  (contactDetails.phoneCode === "KW" &&
+                                    newValue.length <= 8) ||
+                                  (contactDetails.phoneCode !== "KW" &&
+                                    newValue.length <= 10)
+                                ) {
+                                  handleContactDetailsChange({
+                                    ...contactDetails,
+                                    phone: newValue,
+                                  });
+                                }
+                              }}
+                              style={{ fontSize: "16px" }}
+                            ></input>
+                          </div>
+                          {errorContactDetails.phoneError && (
+                            <label
+                              className="error-text"
+                              style={{ textAlign: "start", width: "100%" }}
+                            >
+                              {language == "ltr"
+                                ? errorContactDetails.phoneErrorMessage
+                                : errorContactDetails.phoneErrorMessagear}
+                            </label>
+                          )}
+                        </div>
+                        <div
+                          className="contact-details-form-div"
+                          style={{ display: "flex", alignItems: "flex-end" }}
+                        >
+                          <div style={{ width: "100%" }}>
+                            <div className="contact-form-container">
+                              <input
+                                type="text"
+                                className="contact-details-form-control"
+                                placeholder=""
+                                id="name"
+                                name="name"
+                                required="true"
+                                autoComplete
+                                value={contactDetails.name}
+                                onChange={(e) => {
+                                  handleContactDetailsChange({
+                                    ...contactDetails,
+                                    name: e.target.value,
+                                  });
+                                }}
+                                style={{ fontSize: "16px" }}
+                              ></input>
+                              <label
+                                for="name"
+                                className="contact-details-label-name contact-details-label-name1"
+                                style={{ width: "100%", textAlign: "start" }}
+                              >
+                                {language == "ltr"
+                                  ? "Full Name"
+                                  : "الاسم الكامل"}
+                              </label>
+                            </div>
+                            {errorContactDetails.nameError && (
+                              <label
+                                className="error-text"
+                                style={{ textAlign: "start", width: "100%" }}
+                              >
+                                {language == "ltr"
+                                  ? errorContactDetails.nameErrorMessage
+                                  : errorContactDetails.nameErrorMessagear}
+                              </label>
+                            )}
+                          </div>
+                        </div>
+                      </form>
+                      <div
+                        className="contact-details-form-div"
+                        style={{
+                          marginBottom: "0",
+                          display: "flex",
+                          alignItems: "flex-end",
+                        }}
+                      >
+                        <div style={{ width: "100%" }}>
+                          <div className="contact-form-container">
+                            <input
+                              type="email"
+                              className="contact-details-form-control"
+                              placeholder=""
+                              id="email"
+                              name="email"
+                              required="true"
+                              autoComplete
+                              value={contactDetails.email}
+                              onChange={(e) => {
+                                handleContactDetailsChange({
+                                  ...contactDetails,
+                                  email: e.target.value,
+                                });
+                              }}
+                              style={{ fontSize: "16px" }}
+                            ></input>
+                            <label
+                              for="email"
+                              className="contact-details-label-name contact-details-label-name1"
+                              style={{ width: "100%", textAlign: "start" }}
+                            >
+                              {language == "ltr"
+                                ? "Email"
+                                : "البريد الإلكتروني"}
+                            </label>
+                          </div>
+                          {errorContactDetails.emailError && (
+                            <label
+                              className="error-text"
+                              style={{ textAlign: "start", width: "100%" }}
+                            >
+                              {language == "ltr"
+                                ? errorContactDetails.emailErrorMessage
+                                : errorContactDetails.emailErrorMessagear}
+                            </label>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              )}
+
+              {registrationSuccess ? (
+                <div style={{ width: "100%" }}>
+                  <div
+                    className="responseText"
+                    style={{ color: "green", padding: "20px" }}
+                  >
+                    {language === "ltr"
+                      ? "Product registered successfully"
+                      : "تم تسجيل المنتج بنجاح"}
+                  </div>
+                  <div
+                    style={{ textAlign: "start", padding: "0 20px 20px 20px" }}
+                  >
+                    <div>
+                      <div className="common-delivery-status-order-number-grey">
+                        {language === "ltr" ? "Order No." : "رقم الطلب"}
+                      </div>
+                      <div className="common-delivery-status-order-number-black">
+                        {orderDetails?.order_number}
+                      </div>
+                    </div>
+
+                    <div
+                      className={"common-delivery-status-order-number-grey"}
+                      style={{ marginTop: "15px" }}
+                    >
+                      {orderDetails?.self_pickup === "1"
+                        ? language === "ltr"
+                          ? "Pickup From"
+                          : "تلتقط من"
+                        : language === "ltr"
+                        ? "Delivered To"
+                        : "التوصيل إلى"}
+                    </div>
+
+                    <div className="orderStatus-userData-deliverText">
+                      {orderDetails?.self_pickup === "1"
+                        ? language === "ltr"
+                          ? orderDetails?.branch
+                          : orderDetails?.branch_ar
+                        : language === "ltr"
+                        ? orderDetails?.area
+                        : orderDetails?.area_ar}
+                    </div>
+
+                    <div className="orderStatus-userData-addressText">
+                      {getBranchAddress()}
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
+              {registrationFailed?.status ? (
+                <div
+                  className="responseText"
+                  style={{ color: "red", padding: "20px" }}
+                >
+                  {registrationFailed?.message
+                    ? registrationFailed.message
+                    : language === "ltr"
+                    ? "Something went wrong. Please try again later"
+                    : "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقا"}
+                </div>
+              ) : null}
+
+              {!spinLoader ? (
+                <div
+                  className={`bottom-button`}
+                  style={{ width: "100%", position: "sticky", bottom: 0 }}
+                >
+                  <Box
+                    component={"a"}
+                    className={`text-center checkout-button `}
+                    onClick={(e) => {
+                      registrationSuccess || registrationFailed?.status
+                        ? router.push("/")
+                        : registerProduct(e);
+                    }}
+                  >
+                    {registrationSuccess || registrationFailed?.status
+                      ? language === "ltr"
+                        ? "Continue Shopping"
+                        : "مواصلة التسوق"
+                      : language === "ltr"
+                      ? "Register"
+                      : "يسجل"}
+                  </Box>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </div> */}
+
+      <Dialog
+        open={showRegister}
+        onClose={handleClose}
+        maxWidth="md"
+        sx={{
+          "& .MuiDialog-container > .MuiPaper-root": {
+            borderRadius: "16px", // Change this value as needed
+            minWidth: "340px",
+            margin: "15px",
+            overflow: "hidden",
+          },
+          "& .MuiDialog-container": {
+            justifyContent:
+              type === "deskCheckout" || window.innerWidth < 991
+                ? "center"
+                : "flex-start",
+          },
+        }}
+      >
+        <Box
+          sx={{
+            height: "calc(100vh - 50px)",
+            padding: "20px",
+            width: window.innerWidth > 990 ? "560px" : "auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            overflowY: "auto",
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "end",
+              "& .MuiIconButton-root": {
+                padding: 0,
+              },
+            }}
+          >
+            <IconButton onClick={handleClose}>
+              <ClearIcon
+                sx={{
+                  fill: "#000",
+                }}
+              />
+            </IconButton>
+          </Box>
+
+          {/* <div className="productRegistrationHeader">
+            {language === "ltr" ? "Product Registration" : "تسجيل المنتج"}
+          </div> */}
+
+          <Box sx={{ textAlign: "center" }}>
+            <SubHeadline
+              enText={"Product Registration"}
+              arText={"تسجيل المنتج"}
+              fontSize="24px"
+            />
+          </Box>
+
+          <div className="registerProductDetails">
+            <div
+              style={{
+                marginBottom: "10px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img src={product?.image} alt="" className="registerProductImg" />
+            </div>
+            <div>
+              <div style={{ textAlign: "center" }}>
+                <SubHeadline
+                  enText={product?.name}
+                  arText={product?.name_ar}
+                  fontSize="18px"
+                />
+              </div>
+              <div
+                className="selectedVariation"
+                style={{ marginTop: "5px", textAlign: "center" }}
+              >
+                {addedVariaton.length > 0
+                  ? language === "ltr"
+                    ? variationName.eng
+                    : variationName.ar
+                  : null}
+                {addedAddons.length > 0
+                  ? language === "ltr"
+                    ? addonName.eng
+                    : addonName.ar
+                  : null}
+              </div>
+              {prodNumber > 0 ? (
+                <div
+                  style={
+                    language === "ltr"
+                      ? {
+                          fontSize: "14px",
+                          fontWeight: "400",
+                          marginTop: "5px",
+                          textAlign: "center",
+                        }
+                      : {
+                          fontSize: "16px",
+                          fontWeight: "400",
+                          marginTop: "5px",
+                          textAlign: "center",
+                        }
+                  }
+                >
+                  {language === "ltr" ? "Quantity:" : "كمية:"}&nbsp;
+                  <span>{prodNumber}</span>
+                </div>
+              ) : null}
+            </div>
+          </div>
+
+          {spinLoader ? (
+            <div
+              style={{
+                padding: "30px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Spinner
+                height="45px"
+                size="5px"
+                color={homePageDetails?.vendor_data?.vendor_color}
+              />
+            </div>
+          ) : null}
+
+          {spinLoader ||
+          registrationSuccess ||
+          registrationFailed?.status ? null : (
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                padding: "20px",
+                direction: language,
+                paddingBottom: "50px",
               }}
             >
               <div
                 style={{
-                  margin: 0,
-                  position: "absolute",
-                }}
-                className="goBackButton"
-              >
-                <div
-                  onClick={() => {
-                    handleClose(false, "");
-                  }}
-                  style={{
-                    marginBottom: "0",
-                    paddingTop: "15px",
-                    marginLeft: language === "ltr" ? 0 : "-15px",
-                    marginRight: language === "ltr" ? "-15px" : 0,
-                  }}
-                >
-                  <BackComponent />
-                </div>
-              </div>
-              <div className="productRegistrationHeader">
-                {language === "ltr" ? "Product Registration" : "تسجيل المنتج"}
-              </div>
-            </div>
-
-            <div className="registerProductDetails">
-              <div style={{ marginBottom: "10px" }}>
-                <img
-                  src={product?.image}
-                  alt=""
-                  className="registerProductImg"
-                />
-              </div>
-              <div>
-                <div className="registerProductName">
-                  {language === "ltr" ? product?.name : product?.name_ar}
-                </div>
-                <div className="selectedVariation" style={{ marginTop: "5px" }}>
-                  {addedVariaton.length > 0
-                    ? language === "ltr"
-                      ? variationName.eng
-                      : variationName.ar
-                    : null}
-                  {addedAddons.length > 0
-                    ? language === "ltr"
-                      ? addonName.eng
-                      : addonName.ar
-                    : null}
-                </div>
-                {prodNumber > 0 ? (
-                  <div
-                    style={
-                      language === "ltr"
-                        ? {
-                            fontSize: "14px",
-                            fontWeight: "400",
-                            marginTop: "5px",
-                          }
-                        : {
-                            fontSize: "16px",
-                            fontWeight: "400",
-                            marginTop: "5px",
-                          }
-                    }
-                  >
-                    {language === "ltr" ? "Quantity:" : "كمية:"}&nbsp;
-                    <span>{prodNumber}</span>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-
-            {spinLoader ? (
-              <div style={{ padding: "30px" }}>
-                <Spinner
-                  height="45px"
-                  size="5px"
-                  color={homePageDetails?.vendor_data?.vendor_color}
-                />
-              </div>
-            ) : null}
-
-            {spinLoader ||
-            registrationSuccess ||
-            registrationFailed?.status ? null : (
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  padding: "20px",
-                  direction: language,
-                  paddingBottom: "50px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "15px",
                 }}
               >
-                <form action="javascript/void" autoComplete="on">
-                  <div className="contact-details-form-maindiv">
-                    <form>
-                      <div className="contact-details-form-div">
-                        <label
-                          className="contact-details-label-name"
-                          style={{ width: "100%", textAlign: "start" }}
-                        >
-                          {language == "ltr" ? "Phone Number" : "رقم الهاتف"}
-                        </label>
-                        <div className="contact-form-container">
+                <>
+                  <div className="customerInputsFlex">
+                    <div className="form__group formSemi">
+                      <div className="inputFlag">
+                        <div>
                           <ReactFlagsSelect
+                            key={contactDetails?.phoneCode}
                             selected={contactDetails?.phoneCode}
                             searchable={true}
                             showSelectedLabel={false}
                             customLabels={telecount}
-                            className="contact-details-flag"
                             onSelect={(code) => {
                               handleContactDetailsChange({
                                 ...contactDetails,
@@ -497,232 +918,201 @@ const ProductRegistrationModal = ({
                               });
                             }}
                           />
-                          <input
-                            type="tel"
-                            className="contact-details-form-control contact-details-phone-number"
-                            placeholder=""
-                            id="phone"
-                            name="phone"
-                            required="true"
-                            value={contactDetails.phone}
-                            autoComplete="tel"
-                            onChange={(e) => {
-                              const newValue = modifyValue(e.target.value);
-                              if (
-                                (contactDetails.phoneCode === "KW" &&
-                                  newValue.length <= 8) ||
-                                (contactDetails.phoneCode !== "KW" &&
-                                  newValue.length <= 10)
-                              ) {
-                                handleContactDetailsChange({
-                                  ...contactDetails,
-                                  phone: newValue,
-                                });
-                              }
-                            }}
-                            style={{fontSize: "16px"}}
-                          ></input>
                         </div>
-                        {errorContactDetails.phoneError && (
-                          <label
-                            className="error-text"
-                            style={{ textAlign: "start", width: "100%" }}
-                          >
-                            {language == "ltr"
-                              ? errorContactDetails.phoneErrorMessage
-                              : errorContactDetails.phoneErrorMessagear}
-                          </label>
-                        )}
                       </div>
-                      <div
-                        className="contact-details-form-div"
-                        style={{ display: "flex", alignItems: "flex-end" }}
+                      <input
+                        type="tel"
+                        className="form__field hideBorder"
+                        name="phone"
+                        placeholder="98765432"
+                        id="phone"
+                        required="true"
+                        value={contactDetails?.phone}
+                        autoComplete="tel"
+                        onChange={(e) => {
+                          const newValue = modifyValue(e.target.value);
+                          if (
+                            (contactDetails.phoneCode === "KW" &&
+                              newValue.length <= 8) ||
+                            (contactDetails.phoneCode !== "KW" &&
+                              newValue.length <= 10)
+                          ) {
+                            handleContactDetailsChange({
+                              ...contactDetails,
+                              phone: newValue,
+                            });
+                          }
+                        }}
+                        style={{ fontSize: "16px" }}
+                      />
+                      <label
+                        htmlFor="phone"
+                        className="form__label phoneLabel dataFilled"
                       >
-                        <div style={{ width: "100%" }}>
-                          <div className="contact-form-container">
-                            <input
-                              type="text"
-                              className="contact-details-form-control"
-                              placeholder=""
-                              id="name"
-                              name="name"
-                              required="true"
-                              autoComplete
-                              value={contactDetails.name}
-                              onChange={(e) => {
-                                handleContactDetailsChange({
-                                  ...contactDetails,
-                                  name: e.target.value,
-                                });
-                              }}
-                              style={{fontSize: "16px"}}
-                            ></input>
-                            <label
-                              for="name"
-                              className="contact-details-label-name contact-details-label-name1"
-                              style={{ width: "100%", textAlign: "start" }}
-                            >
-                              {language == "ltr" ? "Full Name" : "الاسم الكامل"}
-                            </label>
-                          </div>
-                          {errorContactDetails.nameError && (
-                            <label
-                              className="error-text"
-                              style={{ textAlign: "start", width: "100%" }}
-                            >
-                              {language == "ltr"
-                                ? errorContactDetails.nameErrorMessage
-                                : errorContactDetails.nameErrorMessagear}
-                            </label>
-                          )}
-                        </div>
-                      </div>
-                    </form>
+                        {language == "ltr" ? "Phone Number" : "رقم الهاتف"}
+                      </label>
+                    </div>
+                  </div>
+                  {errorContactDetails.phoneError && (
+                    <label className="error-text">
+                      {language == "ltr"
+                        ? errorContactDetails.phoneErrorMessage
+                        : errorContactDetails.phoneErrorMessagear}
+                    </label>
+                  )}
+                </>
+
+                <>
+                  <div className="customerInputsFlex" style={{ width: "100%" }}>
                     <div
-                      className="contact-details-form-div"
-                      style={{
-                        marginBottom: "0",
-                        display: "flex",
-                        alignItems: "flex-end",
-                      }}
+                      className="form__group formSemi"
+                      style={{ width: "100%" }}
                     >
-                      <div style={{ width: "100%" }}>
-                        <div className="contact-form-container">
-                          <input
-                            type="email"
-                            className="contact-details-form-control"
-                            placeholder=""
-                            id="email"
-                            name="email"
-                            required="true"
-                            autoComplete
-                            value={contactDetails.email}
-                            onChange={(e) => {
-                              handleContactDetailsChange({
-                                ...contactDetails,
-                                email: e.target.value,
-                              });
-                            }}
-                            style={{fontSize: "16px"}}
-                          ></input>
-                          <label
-                            for="email"
-                            className="contact-details-label-name contact-details-label-name1"
-                            style={{ width: "100%", textAlign: "start" }}
-                          >
-                            {language == "ltr" ? "Email" : "البريد الإلكتروني"}
-                          </label>
-                        </div>
-                        {errorContactDetails.emailError && (
-                          <label
-                            className="error-text"
-                            style={{ textAlign: "start", width: "100%" }}
-                          >
-                            {language == "ltr"
-                              ? errorContactDetails.emailErrorMessage
-                              : errorContactDetails.emailErrorMessagear}
-                          </label>
-                        )}
-                      </div>
+                      <TextInputField
+                        name="fullName"
+                        label={"Full Name"}
+                        arLabel={"الاسم الكامل"}
+                        handleChange={(e) =>
+                          handleContactDetailsChange({
+                            ...contactDetails,
+                            name: e.target.value,
+                          })
+                        }
+                        value={contactDetails?.name}
+                      />
                     </div>
                   </div>
-                </form>
+                  {errorContactDetails.nameError && (
+                    <label className="error-text">
+                      {language == "ltr"
+                        ? errorContactDetails.nameErrorMessage
+                        : errorContactDetails.nameErrorMessagear}
+                    </label>
+                  )}
+                </>
+
+                <>
+                  <div className="customerInputsFlex" style={{ width: "100%" }}>
+                    <div
+                      className="form__group formSemi"
+                      style={{ width: "100%" }}
+                    >
+                      <TextInputField
+                        name={"email"}
+                        label={"Email"}
+                        arLabel={"البريد الإلكتروني"}
+                        value={contactDetails?.email}
+                        handleChange={(e) => {
+                          handleContactDetailsChange({
+                            ...contactDetails,
+                            email: e.target.value,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {errorContactDetails.emailError && (
+                    <label className="error-text">
+                      {language == "ltr"
+                        ? errorContactDetails.emailErrorMessage
+                        : errorContactDetails.emailErrorMessagear}
+                    </label>
+                  )}
+                </>
               </div>
-            )}
+            </div>
+          )}
 
-            {registrationSuccess ? (
-              <div style={{ width: "100%" }}>
-                <div
-                  className="responseText"
-                  style={{ color: "green", padding: "20px" }}
-                >
-                  {language === "ltr"
-                    ? "Product registered successfully"
-                    : "تم تسجيل المنتج بنجاح"}
-                </div>
-                <div
-                  style={{ textAlign: "start", padding: "0 20px 20px 20px" }}
-                >
-                  <div>
-                    <div className="common-delivery-status-order-number-grey">
-                      {language === "ltr" ? "Order No." : "رقم الطلب"}
-                    </div>
-                    <div className="common-delivery-status-order-number-black">
-                      {orderDetails?.order_number}
-                    </div>
-                  </div>
-
-                  <div
-                    className={"common-delivery-status-order-number-grey"}
-                    style={{ marginTop: "15px" }}
-                  >
-                    {orderDetails?.self_pickup === "1"
-                      ? language === "ltr"
-                        ? "Pickup From"
-                        : "تلتقط من"
-                      : language === "ltr"
-                      ? "Delivered To"
-                      : "التوصيل إلى"}
-                  </div>
-
-                  <div className="orderStatus-userData-deliverText">
-                    {orderDetails?.self_pickup === "1"
-                      ? language === "ltr"
-                        ? orderDetails?.branch
-                        : orderDetails?.branch_ar
-                      : language === "ltr"
-                      ? orderDetails?.area
-                      : orderDetails?.area_ar}
-                  </div>
-
-                  <div className="orderStatus-userData-addressText">
-                    {getBranchAddress()}
-                  </div>
-                </div>
-              </div>
-            ) : null}
-
-            {registrationFailed?.status ? (
+          {registrationSuccess ? (
+            <div style={{ width: "100%" }}>
               <div
                 className="responseText"
-                style={{ color: "red", padding: "20px" }}
+                style={{ color: "green", padding: "20px", textAlign: "center" }}
               >
-                {registrationFailed?.message
-                  ? registrationFailed.message
-                  : language === "ltr"
-                  ? "Something went wrong. Please try again later"
-                  : "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقا"}
+                {language === "ltr"
+                  ? "Product registered successfully"
+                  : "تم تسجيل المنتج بنجاح"}
               </div>
-            ) : null}
+              <div style={{ textAlign: "start", padding: "0 20px 20px 20px" }}>
+                <div>
+                  <div className="common-delivery-status-order-number-grey">
+                    {language === "ltr" ? "Order No." : "رقم الطلب"}
+                  </div>
+                  <div className="common-delivery-status-order-number-black">
+                    {orderDetails?.order_number}
+                  </div>
+                </div>
 
-            {!spinLoader ? (
-              <div
-                className={`bottom-button`}
-                style={{ width: "100%", position: "sticky", bottom: 0 }}
-              >
-                <Box
-                  component={"a"}
-                  className={`text-center checkout-button `}
-                  onClick={(e) => {
-                    registrationSuccess || registrationFailed?.status
-                      ? router.push("/")
-                      : registerProduct(e);
-                  }}
+                <div
+                  className={"common-delivery-status-order-number-grey"}
+                  style={{ marginTop: "15px" }}
                 >
-                  {registrationSuccess || registrationFailed?.status
+                  {orderDetails?.self_pickup === "1"
                     ? language === "ltr"
-                      ? "Continue Shopping"
-                      : "مواصلة التسوق"
+                      ? "Pickup From"
+                      : "تلتقط من"
                     : language === "ltr"
-                    ? "Register"
-                    : "يسجل"}
-                </Box>
+                    ? "Delivered To"
+                    : "التوصيل إلى"}
+                </div>
+
+                <div className="orderStatus-userData-deliverText">
+                  {orderDetails?.self_pickup === "1"
+                    ? language === "ltr"
+                      ? orderDetails?.branch
+                      : orderDetails?.branch_ar
+                    : language === "ltr"
+                    ? orderDetails?.area
+                    : orderDetails?.area_ar}
+                </div>
+
+                <div className="orderStatus-userData-addressText">
+                  {getBranchAddress()}
+                </div>
               </div>
-            ) : null}
-          </div>
-        </div>
-      </div>
-    </div>
+            </div>
+          ) : null}
+
+          {registrationFailed?.status ? (
+            <div
+              className="responseText"
+              style={{ color: "red", padding: "20px", textAlign: "center" }}
+            >
+              {registrationFailed?.message
+                ? registrationFailed.message
+                : language === "ltr"
+                ? "Something went wrong. Please try again later"
+                : "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقا"}
+            </div>
+          ) : null}
+
+          {!spinLoader ? (
+            <div
+              className={`bottom-button`}
+              style={{ width: "100%", position: "sticky", bottom: 0 }}
+            >
+              <Box
+                component={"a"}
+                className={`text-center checkout-button `}
+                onClick={(e) => {
+                  registrationSuccess || registrationFailed?.status
+                    ? router.push("/")
+                    : registerProduct(e);
+                }}
+              >
+                {registrationSuccess || registrationFailed?.status
+                  ? language === "ltr"
+                    ? "Continue Shopping"
+                    : "مواصلة التسوق"
+                  : language === "ltr"
+                  ? "Register"
+                  : "يسجل"}
+              </Box>
+            </div>
+          ) : null}
+        </Box>
+      </Dialog>
+    </>
   );
 };
 

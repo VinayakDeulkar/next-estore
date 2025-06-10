@@ -1,46 +1,229 @@
 .productRegistrationHeader {
-    padding: 20px;
-    font-size: 22px;
-    font-weight: 500;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: 500;
 }
 
 html[dir="rtl"] .productRegistrationHeader {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .registerProductDetails {
-    width: 100%;
+  width: 100%;
 }
 
 .registerProductImg {
-    height: 150px;
-    width: 150px;
-    border-radius: 10px;
+  height: 150px;
+  width: 150px;
+  border-radius: 10px;
 }
 
 .registerProductName {
-    font-size: 18px;
-    font-weight: 400;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 html[dir="rtl"] .registerProductName {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .selectedVariation {
-    color: #a3a2a2;
-    font-size: 14px;
+  color: #a3a2a2;
+  font-size: 14px;
 }
 
 html[dir="rtl"] .selectedVariation {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .responseText {
-    font-size: 16px;
-    font-weight: 400;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 html[dir="rtl"] .responseText {
-    font-size: 18px;
+  font-size: 18px;
+}
+
+.customerInputsFlex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form__group {
+  position: relative;
+  /* padding: 15px 0 0; */
+  /* width: calc(100% / 2 - 10px); */
+  width: 100%;
+  /* max-width: 200px; */
+}
+
+.formSemi {
+  /* max-width: 275px; */
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.form__field::placeholder {
+  color: transparent;
+}
+
+.sentImg {
+  height: 30px;
+  width: 30px;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 14px;
+  cursor: text;
+  font-weight: 400;
+  top: 12px;
+  left: 11px;
+}
+
+html[dir="rtl"] .form__field:placeholder-shown ~ .form__label {
+  right: 11px;
+}
+
+.form__field:focus {
+  border-image-slice: 1;
+  font-weight: 400;
+  border: 1px solid #000;
+}
+
+.form__field:focus ~ .form__label,
+.form__field:autofill ~ .form__label,
+.form__field:-webkit-autofill ~ .form__label {
+  position: absolute;
+  top: -20px;
+  display: block;
+  transition: 0.2s;
+  font-size: 11px;
+  color: #000;
+  font-weight: 400;
+  left: 0;
+}
+
+.form__field:focus ~ .form__label.phoneLabel,
+.form__field:autofill ~ .form__label.phoneLabel,
+.form__field:-webkit-autofill ~ .form__label.phoneLabel {
+  left: 0;
+}
+
+html[dir="rtl"] .form__field:focus ~ .form__label,
+html[dir="rtl"] .form__field:autofill ~ .form__label,
+html[dir="rtl"] .form__field:-webkit-autofill ~ .form__label {
+  left: auto;
+  right: 0;
+}
+
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border: 1px solid #aeaeae;
+  outline: 0;
+  font-size: 14px;
+  color: #000;
+  padding: 4px 10px;
+  font-weight: 400;
+  background: transparent;
+  transition: border-color 0.2s;
+  border-radius: 10px;
+  height: 44px;
+}
+
+html[dir="rtl"] .form__field {
+  font-size: 16px;
+  text-align: end;
+}
+
+html[dir="rtl"] .form__field:placeholder-shown ~ .form__label {
+  font-size: 16px;
+}
+
+html[dir="rtl"] .form__field:focus ~ .form__label {
+  font-size: 13px;
+  top: -4px;
+  right: 0;
+}
+
+html[dir="rtl"] .form__field:focus ~ .form__label.phoneLabel,
+html[dir="rtl"] .form__field:autofill ~ .form__label.phoneLabel,
+html[dir="rtl"] .form__field:-webkit-autofill ~ .form__label.phoneLabel {
+  right: 0;
+  left: auto;
+  top: -25px;
+}
+
+.form__label.phoneLabel.dataFilled {
+  left: 0;
+  right: auto;
+}
+
+html[dir="rtl"] .form__label.phoneLabel.dataFilled {
+  left: auto;
+  right: 0;
+}
+
+.form__label {
+  position: absolute;
+  top: -20px;
+  display: block;
+  transition: 0.2s;
+  font-size: 11px;
+  font-weight: 500;
+  color: #000;
+}
+.form__field:placeholder-shown ~ .form__label.phoneLabel {
+  left: 0px;
+  top: -25px;
+}
+
+.form__field:focus ~ .form__label.phoneLabel,
+.form__field:autofill ~ .form__label.phoneLabel,
+.form__field:-webkit-autofill ~ .form__label.phoneLabel {
+  position: absolute;
+  top: -20px;
+  display: block;
+  transition: 0.2s;
+  font-size: 11px;
+  color: #000;
+  font-weight: 400;
+  left: 0;
+}
+
+html[dir="rtl"] .form__field:placeholder-shown ~ .form__label.phoneLabel {
+  right: 95px;
+}
+
+html[dir="rtl"] .form__field:focus ~ .form__label.phoneLabel,
+html[dir="rtl"] .form__field:autofill ~ .form__label.phoneLabel,
+html[dir="rtl"] .form__field:-webkit-autofill ~ .form__label.phoneLabel {
+  right: 0;
+}
+
+.hideBorder .phoneLabel {
+  left: 0;
+}
+
+.customerInputError {
+  border-color: #c00 !important;
+}
+
+.flagWrap {
+  border: 0.25px solid #a4b4c8;
+  border-radius: 5px;
+  height: 32px;
+}
+
+.changeHeight {
+  height: 80px !important;
+  width: 100% !important;
 }

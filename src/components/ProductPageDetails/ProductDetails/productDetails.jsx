@@ -72,6 +72,8 @@ const ProductDetails = ({
     return window != undefined && window?.innerWidth > 990;
   };
 
+  console.log(showRegister, "showRegister");
+
   useEffect(() => {
     if (showQuantity) {
       setTimeout(() => {
@@ -1123,7 +1125,7 @@ const ProductDetails = ({
             </div>
           ) : null} */}
           {showQuantity ? <QuantityError errorMsg={errorMsg} /> : null}
-          {showRegister ? (
+          {/* showRegister */true ? (
             <ProductRegistrationModal
               showRegister={showRegister}
               handleClose={() => setShowRegister(false)}
@@ -1164,15 +1166,7 @@ const ProductDetails = ({
                         variationRequired?.every((l) => l == true)
                       ) {
                         e.preventDefault();
-                        areaDetails?.branchForArea?.id
-                          ? setShowRegister(true)
-                          : handleOpenAreaChange((prev) => ({
-                              open: true,
-                              route: "/",
-                            }));
-                        // : history.push(`/area`, {
-                        //     from: "prdetails",
-                        //   });
+                        setShowRegister(true);
                       } else {
                         e.preventDefault();
                       }
