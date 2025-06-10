@@ -7,13 +7,13 @@ const EstoreLayout1 = ({ children }) => {
     return window != undefined && window?.innerWidth > 990;
   };
   return (
-    <Box sx={{ height: "100vh", overflow: "hidden", width: "100%" }}>
+    <Box sx={{ height: "100dvh", overflow: "hidden", width: "100%" }}>
       <Grid container sx={{ width: "100vw" }}>
         <Grid item sm={12} md={12} lg={4.5}>
           <HeaderBox />
           <Box
             sx={{
-              height: "calc(100vh - 50px)",
+              height: "calc(100dvh - 50px)",
               overflow: "scroll",
               padding: checkSize() ? "0 40px" : "0 20px",
               width: checkSize() ? "100%" : "100vw",

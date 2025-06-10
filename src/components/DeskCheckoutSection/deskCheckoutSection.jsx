@@ -567,7 +567,9 @@ const DeskCheckoutSection = ({ showPaymentMethod }) => {
       />
       {showPaymentMethod ? (
         <>
-          {companyData && areaDetails?.type !== "pickup" ? <NewDeliveryCompany companyData={companyData} /> : null}
+          {companyData && areaDetails?.type !== "pickup" ? (
+            <NewDeliveryCompany companyData={companyData} />
+          ) : null}
           <NewPaymentSelector
             handleSetPaymentChange={handleSetPaymentChange}
             payment={payment}
@@ -612,7 +614,7 @@ const DeskCheckoutSection = ({ showPaymentMethod }) => {
         <div
           style={{
             width: "100%",
-            height: "100vh",
+            height: "100dvh",
             position: "fixed",
             top: "0",
             left: "0",

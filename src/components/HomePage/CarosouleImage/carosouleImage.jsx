@@ -1,4 +1,6 @@
 "use client";
+import { breakPoints } from "@/constants/constants";
+import { betweenTwoDevice } from "@/constants/function";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import { useContext } from "react";
@@ -10,7 +12,11 @@ const CarouselImage = ({ mobile = false }) => {
   const carouselHeight = () => {
     switch (homePageDetails?.estoreLayout) {
       case "1":
-        return window.innerWidth > 990 ? "calc(100vh - 20px)" : "310.77px";
+        return betweenTwoDevice(0, breakPoints.sm)
+          ? "310.77px"
+          : betweenTwoDevice(breakPoints.sm, breakPoints.md)
+          ? "610.77px"
+          : "calc(100dvh - 20px)";
 
       case "2":
         return "700px";

@@ -284,8 +284,8 @@ const UserInformation = () => {
           position: "relative",
           height:
             window.innerWidth > 900
-              ? "calc(100vh - 80px)"
-              : "calc(100vh - 150px)",
+              ? "calc(100dvh - 80px)"
+              : "calc(100dvh - 150px)",
         }}
       >
         <div
@@ -362,7 +362,7 @@ const UserInformation = () => {
                       });
                     }
                   }}
-                  style={{fontSize: "16px"}}
+                  style={{ fontSize: "16px" }}
                 />
                 {contactDetails?.phone ? (
                   <div

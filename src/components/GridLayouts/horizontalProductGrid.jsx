@@ -7,7 +7,7 @@ const HorizontalProductGrid = ({ children }) => {
   return (
     <Grid
       container
-      style={{ height: "calc(100vh - 80px)", overflow: "hidden" }}
+      style={{ height: "calc(100dvh - 80px)", overflow: "hidden" }}
     >
       <Grid item xs={6}>
         {child1}
@@ -15,7 +15,7 @@ const HorizontalProductGrid = ({ children }) => {
       <Grid
         item
         xs={6}
-        sx={{ height: "calc(100vh - 120px)", overflow: "scroll" }}
+        sx={{ height: "calc(100dvh - 120px)", overflow: "scroll" }}
       >
         {child2}
       </Grid>

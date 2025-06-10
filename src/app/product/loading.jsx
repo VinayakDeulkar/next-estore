@@ -3,7 +3,7 @@ import React from "react";
 
 const loader = () => {
   return (
-    <Box sx={{ height: "100vh", overflow: "hidden", width: "100%" }}>
+    <Box sx={{ height: "100dvh", overflow: "hidden", width: "100%" }}>
       <Grid container sx={{ width: "100vw" }}>
         <Grid item sm={12} md={12} lg={4.5} sx={{ padding: "40px" }}>
           <Skeleton

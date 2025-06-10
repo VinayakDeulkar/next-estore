@@ -22,19 +22,7 @@ const Navbar = () => {
     switch (homePageDetails?.estoreLayout) {
       case "1":
         return (
-          <>
-            {pathname === "/checkout-desktop" ? (
-              <Grid container>
-                <Grid item xs={2}></Grid>
-                <Grid item xs={8}>
-                  {navChidren()}
-                </Grid>
-                <Grid item xs={2}></Grid>
-              </Grid>
-            ) : (
-              navChidren()
-            )}
-          </>
+          <>{pathname === "/checkout-desktop" ? navChidren() : navChidren()}</>
         );
 
       case "2":

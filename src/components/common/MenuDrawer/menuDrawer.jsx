@@ -72,7 +72,7 @@ const MenuDrawer = () => {
       <Box
         sx={{
           width: window.innerWidth < 991 ? "90vw" : "30vw",
-          minHeight: "100vh",
+          minHeight: "100dvh",
           overflowX: "hidden",
         }}
       >

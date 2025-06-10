@@ -19,7 +19,7 @@ const BranchesPage = () => {
           display: "flex",
           flexDirection: "column",
           position: "relative",
-          height: "calc(100vh - 56px)",
+          height: "calc(100dvh - 56px)",
         }}
       >
         <BackComponent backClick={() => router.push("/")} />

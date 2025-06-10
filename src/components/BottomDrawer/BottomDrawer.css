@@ -7,7 +7,7 @@ body.modal-open {
 #bottomDrawer {
   position: absolute;
   display: table;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   top: 0;
   left: 0;

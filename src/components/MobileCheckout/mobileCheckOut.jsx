@@ -499,7 +499,7 @@ const MobileCheckOut = () => {
               showAddress
                 ? {
                     paddingBottom: "30px",
-                    height: "100vh",
+                    height: "100dvh",
                     overflow: "hidden",
                     position: "relative",
                   }
@@ -517,7 +517,9 @@ const MobileCheckOut = () => {
             ></div>
             <MainTitle enText={"Checkout"} arText={"تفاصيل الطلب"} />
 
-            <div style={{display: "flex", flexDirection: "column", gap: "25px"}}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "25px" }}
+            >
               <div>
                 <SubHeadline
                   enText="Items Details"
@@ -529,9 +531,7 @@ const MobileCheckOut = () => {
                   deliveryCharge={deliveryCharge}
                 />
               </div>
-              <div
-                className="checkout-page-text"
-              >
+              <div className="checkout-page-text">
                 <SubHeadline
                   enText={
                     areaDetails?.type === "delivery"
@@ -621,7 +621,7 @@ const MobileCheckOut = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "100vh",
+                  height: "100dvh",
                   position: "fixed",
                   top: "0",
                   left: "0",

@@ -6,6 +6,7 @@ import NewOrderProductList from "@/components/NewOrderProductList/NewOrderProduc
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
+import MenuDrawer from "@/components/common/MenuDrawer/menuDrawer";
 import { AppContext } from "@/context/AppContext";
 import { Grid } from "@mui/material";
 import { LoadScript, useJsApiLoader } from "@react-google-maps/api";
@@ -29,19 +30,25 @@ const CheckoutDesktop = () => {
 
   return (
     <>
-      <HeaderBox />
       <Grid
         container
         sx={{
-          height: "calc(100vh - 80px)",
-          padding: "0 20px 20px",
+          height: "100dvh",
+          padding: "20px",
           width: "100%",
         }}
       >
         <Grid item xs={0} sm={2.1}>
           {/* For Aligment */}
         </Grid>
-        <Grid item xs={0} sm={3.5} className="checkoutScroll" sx={{padding: "15px 0 0 0",}}>
+        <Grid
+          item
+          xs={0}
+          sm={3.5}
+          className="checkoutScroll"
+          sx={{ padding: "15px 0 0 0" }}
+        >
+          <HeaderBox />
           <BackComponent
             backClick={() => {
               if (userDetails?.is_guest) {
@@ -78,7 +85,7 @@ const CheckoutDesktop = () => {
             flexDirection: "column",
             gap: "30px",
             padding: "20px",
-            backgroundColor: "rgba(0, 0, 0, 0.04)"
+            backgroundColor: "rgba(0, 0, 0, 0.04)",
           }}
         >
           <div>

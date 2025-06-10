@@ -503,3 +503,10 @@ export const tele = {
   QA: "974",
   MZ: "258",
 };
+
+export const breakPoints = {
+  sm: 600,
+  md: 900,
+  lg: 1200,
+  xl: 1500,
+};

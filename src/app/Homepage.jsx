@@ -24,7 +24,7 @@ const Homepage = () => {
     handleSideMenuDrawer,
     handleLanguageChange,
   } = useContext(AppContext);
-  
+
   const checkDrawer = () =>
     homePageDetails?.vendor_data &&
     userDetails?.address?.length > 0 &&
@@ -45,7 +45,7 @@ const Homepage = () => {
         return (
           <Box
             sx={{
-              height: "100vh",
+              height: "100dvh",
               overflow: checkSize() && "hidden",
               width: "100%",
             }}
@@ -55,7 +55,7 @@ const Homepage = () => {
                 {checkSize() && <HeaderBox />}
                 <Box
                   sx={{
-                    height: checkSize() ? "calc(100vh - 50px)" : "100%",
+                    height: checkSize() ? "calc(100dvh - 50px)" : "100%",
                     overflow: "scroll",
                     padding: checkSize() ? "0 40px" : "0 20px",
                     width: checkSize() ? "100%" : "100vw",

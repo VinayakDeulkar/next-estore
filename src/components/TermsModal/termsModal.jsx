@@ -25,7 +25,7 @@ const TermsModal = ({ isOpen, handleClose, termsData, type }) => {
     >
       <Box
         sx={{
-          height: "calc(100vh - 50px)",
+          height: "calc(100dvh - 50px)",
           padding: "20px",
           width: window.innerWidth > 990 ? "560px" : "auto",
           display: "flex",
@@ -56,7 +56,7 @@ const TermsModal = ({ isOpen, handleClose, termsData, type }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: "-5px"
+            marginTop: "-5px",
           }}
         >
           <SubHeadline

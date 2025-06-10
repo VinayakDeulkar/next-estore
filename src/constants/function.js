@@ -195,3 +195,6 @@ export const displayInternationalTime = (deliveryTime, deliveryType) => {
   }
 };
 
+export const betweenTwoDevice = (small, large) => {
+  return window.innerWidth > small && window.innerWidth < large;
+};

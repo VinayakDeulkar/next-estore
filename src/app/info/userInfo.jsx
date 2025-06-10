@@ -516,7 +516,7 @@ const UserInfo = ({ type }) => {
       <div>
         <div
           className="holder-container"
-          style={{ position: "relative", minHeight: "calc(100vh - 53px)" }}
+          style={{ position: "relative", minHeight: "calc(100dvh - 53px)" }}
         >
           <>
             <HeadLine enText={"My Personal Info"} arText={"معلوماتي الشخصية"} />
@@ -654,7 +654,7 @@ const UserInfo = ({ type }) => {
           <div
             style={{
               width: "100%",
-              height: "100vh",
+              height: "100dvh",
               position: "fixed",
               top: "0",
               left: "0",

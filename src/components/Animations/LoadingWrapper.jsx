@@ -24,7 +24,7 @@ const LoadingWrapper = ({ children }) => {
   useEffect(() => {
     const runAnimation = async () => {
       lineControls.start({
-        height: "100vh",
+        height: "100dvh",
         top: "0%",
         opacity: 1,
         transition: { duration: 1.2 },

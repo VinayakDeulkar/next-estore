@@ -29,7 +29,7 @@ const Timing = () => {
   return (
     <Box>
       <EstoreLayout1>
-        <Box sx={{ height: "calc(100vh - 56px)", position: "relative" }}>
+        <Box sx={{ height: "calc(100dvh - 56px)", position: "relative" }}>
           <DeliveryTimeHeader></DeliveryTimeHeader>
           <DeliveryTimeSelect></DeliveryTimeSelect>
         </Box>

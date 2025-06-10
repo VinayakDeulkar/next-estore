@@ -110,7 +110,7 @@ const Products = (props) => {
           return (
             <Grid container className="gridContainer">
               {productsData?.map((product) => (
-                <Grid item xs={6} key={product?.id} sx={{padding: "10px"}}>
+                <Grid item xs={6} key={product?.id} sx={{ padding: "10px" }}>
                   <ProductSquareCard product={product} />
                 </Grid>
               ))}
@@ -122,7 +122,7 @@ const Products = (props) => {
             <>
               <Grid container sx={{ gap: "50px", padding: "25px 80px" }}>
                 {productsData?.map((product) => (
-                  <Grid item xs={12} key={product?.id} sx={{padding: "10px"}}>
+                  <Grid item xs={12} key={product?.id} sx={{ padding: "10px" }}>
                     <ProductSquareCard product={product} imgHeight={"250px"} />
                   </Grid>
                 ))}
@@ -165,7 +165,7 @@ const Products = (props) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                height: "calc(100vh - 400px)",
+                height: "calc(100dvh - 400px)",
               }}
             >
               <SubHeadline

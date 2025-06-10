@@ -208,7 +208,7 @@ const OrderPage = (props) => {
   };
 
   return (
-    <Box sx={{ height: "100vh" }}>
+    <Box sx={{ height: "100dvh" }}>
       <EstoreLayout1>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div>

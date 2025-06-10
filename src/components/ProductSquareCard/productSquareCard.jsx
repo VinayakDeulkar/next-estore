@@ -14,6 +14,8 @@ import TiktokPixel from "tiktok-pixel";
 import TypographyConverter from "../common/TypographyConveter/typographyConverter";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import NumberCounter from "../Animations/numberCounter";
+import { breakPoints } from "@/constants/constants";
+import { betweenTwoDevice } from "@/constants/function";
 
 const ProductSquareCard = ({ product, imgHeight }) => {
   const { language, cart, handleCartChange, homePageDetails, areaDetails } =
@@ -360,12 +362,20 @@ const ProductSquareCard = ({ product, imgHeight }) => {
           sx={{
             overflow: "hidden",
             borderRadius: "5px",
-            height: imgHeight ? imgHeight : "200px",
+            height: imgHeight
+              ? imgHeight
+              : !betweenTwoDevice(breakPoints.sm, breakPoints.lg)
+              ? "200px"
+              : "300px",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
           <CardMedia
             component="img"
-            height="200"
+            height={
+              !betweenTwoDevice(breakPoints.sm, breakPoints.lg) ? "200" : "300"
+            }
             image={product?.image}
             alt={product?.product_name}
             style={{

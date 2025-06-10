@@ -13,7 +13,7 @@ const GridLayout1 = ({ children }) => {
 
   const gridTwoStyle = () => {
     return window.innerWidth > 990
-      ? { height: "100vh", position: "sticky", top: 0, order: 2 }
+      ? { height: "100dvh", position: "sticky", top: 0, order: 2 }
       : { height: "40vh", position: "relative", order: 1 };
   };
 

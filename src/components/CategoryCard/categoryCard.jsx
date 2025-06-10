@@ -3,6 +3,8 @@ import { Box, Card, CardContent, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
+import { betweenTwoDevice } from "@/constants/function";
+import { breakPoints } from "@/constants/constants";
 
 const CategoryCard = ({ category }) => {
   const { homePageDetails, layout14ToggleView, layout17ToggleView } =
@@ -26,7 +28,7 @@ const CategoryCard = ({ category }) => {
               width: "100%",
               display: "flex",
               gap: "18px",
-              alignItems: "center"
+              alignItems: "center",
             }}
             onClick={handleCardClick}
           >
@@ -40,7 +42,11 @@ const CategoryCard = ({ category }) => {
             >
               <CardMedia
                 component="img"
-                height="200"
+                height={
+                  !betweenTwoDevice(breakPoints.sm, breakPoints.lg)
+                    ? "200"
+                    : "300"
+                }
                 image={category?.category_image}
                 alt={category?.category_name}
                 style={{
@@ -81,13 +87,19 @@ const CategoryCard = ({ category }) => {
               sx={{
                 overflow: "hidden",
                 borderRadius: "8px",
-                height: "200px",
+                height: !betweenTwoDevice(breakPoints.sm, breakPoints.lg)
+                  ? "200"
+                  : "300",
                 marginBottom: "10px",
               }}
             >
               <CardMedia
                 component="img"
-                height="200"
+                height={
+                  !betweenTwoDevice(breakPoints.sm, breakPoints.lg)
+                    ? "200"
+                    : "300"
+                }
                 image={category?.category_image}
                 alt={category?.category_name}
                 style={{

@@ -11,7 +11,7 @@ const Order = () => {
       <GridLayout
         backgroundColor={"#fff"}
         padding={"20px"}
-        sx={{ height: "calc(100vh - 50px)" }}
+        sx={{ height: "calc(100dvh - 50px)" }}
       >
         <Box></Box>
       </GridLayout>
