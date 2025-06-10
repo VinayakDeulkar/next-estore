@@ -24,6 +24,8 @@ const ProductSquareCard = ({ product, imgHeight }) => {
   const [spinLoader, setSpinLoader] = useState(false);
   const router = useRouter();
 
+  console.log(product, "productproductproduct")
+
   const handleCardClick = () => {
     router.push(`/product?id=${product?.product_slug}`);
   };
@@ -456,8 +458,8 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                   borderRadius: "30px",
                   fontSize: language == "ltr" ? 13 : 15,
                   padding: "0 15px",
-                  color: "#818181",
-                  border: "2px solid #818181",
+                  color: "#000",
+                  border: "2px solid #000",
                 }}
               >
                 <div>
@@ -475,8 +477,8 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                   borderRadius: "30px",
                   fontSize: language == "ltr" ? 13 : 15,
                   padding: "0 15px",
-                  color: "#818181",
-                  border: "2px solid #818181",
+                  color: "#000",
+                  border: "2px solid #000",
                 }}
               >
                 {language === "ltr"
@@ -490,13 +492,11 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                   borderRadius: "30px",
                   fontSize: language == "ltr" ? 13 : 15,
                   padding: "0 15px",
-                  color: "#818181",
-                  border: "2px solid #818181",
+                  color: "#000",
+                  border: "2px solid #000",
                 }}
               >
-                {language === "ltr"
-                  ? "Product Registration only"
-                  : "حجز المنتج فقط"}
+                {language === "ltr" ? "Register" : "يسجل"}
               </div>
             ) : (
               <div

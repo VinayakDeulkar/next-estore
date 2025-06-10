@@ -499,15 +499,13 @@ const HorizontalCard = ({ product }) => {
                       borderRadius: "30px",
                       fontSize: language == "ltr" ? 14 : 15,
                       padding: "0 15px",
-                      color: "#818181",
-                      border: "2px solid #818181",
+                      color: "#000",
+                      border: "2px solid #000",
                       minWidth: "155px",
                       fontWeight: "300",
                     }}
                   >
-                    {language === "ltr"
-                      ? "Product Registration only"
-                      : "حجز المنتج فقط"}
+                    {language === "ltr" ? "Register" : "يسجل"}
                   </Box>
                 ) : inCart != 0 ? (
                   <div

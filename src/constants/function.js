@@ -159,7 +159,7 @@ export const varientColor = (varient, vendor_color) => {
       return "#fff";
 
     case "outline":
-      return vendor_color;
+      return "#000";
 
     default:
       break;

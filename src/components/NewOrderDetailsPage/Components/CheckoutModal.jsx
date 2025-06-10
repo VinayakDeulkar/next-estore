@@ -51,8 +51,8 @@ function CheckoutModal({ popup, setPopup }) {
       <div className="modal-content-made">
         <p className="header-modal">
           {language == "ltr"
-            ? "Items Currently Unavailable"
-            : "العناصر غير متوفرة حاليا"}{" "}
+            ? "Items unavailable now"
+            : "العناصر غير متوفرة الآن"}{" "}
         </p>
         <p className="text-modal">
           {" "}

@@ -27,20 +27,13 @@ const SmallButtonSquare = ({
         ),
         padding: "8px",
         height: height,
-        color: varientColor(
-          varient,
-          homePageDetails?.vendor_data?.vendor_color
-        ),
+        color: varientColor(varient),
         fontWeight: fontWeight,
         fontSize: fontSize,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         whiteSpace: "nowrap",
-        border:
-          varient === "outline"
-            ? `1.5px solid rgba(255, 255, 255, 0.75)`
-            : null,
       }}
       onClick={handleClick}
     >
