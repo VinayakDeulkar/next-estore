@@ -75,7 +75,7 @@ html[dir="rtl"] .delivery-selected-address .right-arrow {
   position: -webkit-sticky;
   position: sticky;
   top: 48px;
-  z-index: 1000;
+  z-index: 0;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;

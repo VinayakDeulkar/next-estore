@@ -9,6 +9,7 @@ import DeliveryMapContainer from "@/components/DeliveryMap/DeliveryMapContainer"
 import NewAddressForm from "@/components/DeliveryMap/NewAddressForm";
 import InternationalAddress from "@/components/InternationalDelivery/InternationalAddress";
 import LeafletMap from "@/components/LeafletMap/leafletMap";
+import Spinner from "@/components/common/Spinner/spinner";
 import { mapArea } from "@/constants/areaConstant";
 import { tele } from "@/constants/constants";
 import { AppContext } from "@/context/AppContext";
@@ -693,6 +694,29 @@ const AddressDetails = ({
           {language === "ltr" ? "Next" : "متابعة"}
         </Box>
       ) : null}
+
+      {loading && (
+        <div
+          style={{
+            width: "100%",
+            height: "100vh",
+            position: "fixed",
+            top: "0",
+            left: "0",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: "8",
+          }}
+          className="order-spinner-background"
+        >
+          <Spinner
+            height="50px"
+            color={homePageDetails?.vendor_data?.vendor_color}
+            size="6px"
+          />
+        </div>
+      )}
     </Box>
   );
 };
