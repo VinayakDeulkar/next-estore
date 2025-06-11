@@ -68,6 +68,7 @@ const NewAddressForm = ({
       <SubHeadline
         enText={isEdit ? "Edit Address" : "Delivery Details"}
         arText={isEdit ? "تعديل العنوان" : "تفاصيل التوصيل"}
+        fontSize="18px"
       />
       <div className="delivery-address-address-select">
         <div className="delivery-address-type-select nav nav-tabs">

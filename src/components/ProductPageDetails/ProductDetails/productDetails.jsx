@@ -24,6 +24,7 @@ import AddToCartIcon from "@/SVGs/AddToCartIcon";
 import AddToBagIcon from "@/SVGs/AddToBagIcon";
 import SquareOptionBox from "@/components/assetBoxDesign/SquareOptionBox/squareOptionBox";
 import NumberCounter from "@/components/Animations/numberCounter";
+import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 
 const ProductDetails = ({
   product,
@@ -137,6 +138,7 @@ const ProductDetails = ({
     enqueueSnackbar({
       variant: "success",
       message: language == "ltr" ? message : message_ar,
+      autoHideDuration: 2000,
     });
 
   const onMinus = () => {
@@ -718,17 +720,34 @@ const ProductDetails = ({
               alignItems: "end",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-              <div>{renderLabelEmoji("1")}</div>
-              <NormalText
-                enText={/* product?.label */ "Most Ordered"}
-                arText={product?.label_ar}
-                color={"#333333"}
-                fontSize={"13px"}
-              />
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "3px" }}
+            >
+              <div>
+                {product?.offer_applied == 1 ? (
+                  <NormalText
+                    enText={product?.offer_msg}
+                    arText={product?.offer_msg_ar}
+                    color={product?.offer_color}
+                  />
+                ) : null}
+              </div>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "5px" }}
+              >
+                <div>{renderLabelEmoji("1")}</div>
+                <NormalText
+                  enText={/* product?.label */ "Most Ordered"}
+                  arText={product?.label_ar}
+                  color={"#333333"}
+                  fontSize={"13px"}
+                />
+              </div>
             </div>
             {product?.base_price != "" && product?.prodyct_type != 3 ? (
-              <Box>
+              <Box
+                sx={{ display: "flex", flexDirection: "column", gap: "3px" }}
+              >
                 {product &&
                   parseFloat(
                     product?.price_after_discount.split(",").join("")
@@ -737,9 +756,9 @@ const ProductDetails = ({
                     <div
                       style={{
                         fontSize: "12px",
-                        fontWeight: "500",
+                        fontWeight: "400",
                         textAlign: "end",
-                        color: "rgb(141, 141, 141)",
+                        color: "Red",
                       }}
                     >
                       <del>
@@ -776,13 +795,6 @@ const ProductDetails = ({
             ) : null}
           </Box>
 
-          {product?.offer_applied == 1 ? (
-            <NormalText
-              enText={product?.offer_msg}
-              arText={product?.offer_msg_ar}
-              color={product?.offer_color}
-            />
-          ) : null}
           {/* <SubHeadline
             enText={product.category_name}
             arText={product?.category_name_ar}
@@ -822,9 +834,8 @@ const ProductDetails = ({
               style={{
                 fontWeight: "300",
                 fontSize: "15px",
-                // color: "rgba(141, 141, 141, 1)",
-                // color: "rgb(141, 141, 141)",
                 color: "#333333",
+                marginTop: "15px",
               }}
             ></p>
           ) : null}
@@ -1094,16 +1105,6 @@ const ProductDetails = ({
                 </Box>
               </div>
             ))}
-          {product?.prodyct_type != 3 ? (
-            <TextInputField
-              label={"Add a note (Optional)"}
-              arLabel={"أضف ملاحظة (اختياري)"}
-              handleChange={(e) => onNoteChange(e)}
-              value={note}
-              color="rgb(141, 141, 141)"
-              fontWeight="300"
-            />
-          ) : null}
           {/* {product?.prodyct_type != 3 ? (
             <div className="details-container pt-2">
               <div className="product-outer-div">
@@ -1125,21 +1126,35 @@ const ProductDetails = ({
             </div>
           ) : null} */}
           {showQuantity ? <QuantityError errorMsg={errorMsg} /> : null}
-          {/* showRegister */true ? (
-            <ProductRegistrationModal
-              showRegister={showRegister}
-              handleClose={() => setShowRegister(false)}
-              product={product}
-              addon={addon}
-              addedAddons={addedAddons}
-              addedVariaton={addedVariaton}
-              productvariation={productvariation}
-              prodNumber={prodNumber}
-              note={note}
-            />
-          ) : null}
+          {
+            /* showRegister */ true ? (
+              <ProductRegistrationModal
+                showRegister={showRegister}
+                handleClose={() => setShowRegister(false)}
+                product={product}
+                addon={addon}
+                addedAddons={addedAddons}
+                addedVariaton={addedVariaton}
+                productvariation={productvariation}
+                prodNumber={prodNumber}
+                note={note}
+              />
+            ) : null
+          }
         </Box>
         <Box sx={{ width: "100%" }}>
+          {product?.prodyct_type != 3 ? (
+            <Box sx={{ marginBottom: "20px" }}>
+              <TextInputField
+                label={"Add a note (Optional)"}
+                arLabel={"أضف ملاحظة (اختياري)"}
+                handleChange={(e) => onNoteChange(e)}
+                value={note}
+                color="rgb(141, 141, 141)"
+                fontWeight="300"
+              />
+            </Box>
+          ) : null}
           {product?.prodyct_type != 3 ? (
             product?.prodyct_type == 2 ? (
               !showRegister ? (
@@ -1264,24 +1279,20 @@ const ProductDetails = ({
                       null}
                     </div>
                   </div>
-                  <div
-                    // className={`text-center checkout-button ${
-                    //   homePageDetails?.vendor_data?.home_page_type == "18"
-                    //     ? "fashion-checkout-page"
-                    //     : ""
-                    // }`}
-                    style={{
-                      padding: "15px 25px",
-                      backgroundColor:
-                        homePageDetails?.vendor_data?.vendor_color,
-                      color: "#fff",
-                      borderRadius: "50px",
-                      fontSize: language === "ltr" ? "17px" : "19px",
-                    }}
-                    onClick={(e) => checkApplication(e)}
-                  >
-                    {product?.quantity && product?.product_status != 0 ? (
-                      isRequired?.every((l) => l == true) &&
+                  {product?.quantity && product?.product_status != 0 ? (
+                    <div
+                      style={{
+                        padding: "15px 25px",
+                        backgroundColor:
+                          homePageDetails?.vendor_data?.vendor_color,
+                        color: "#fff",
+                        borderRadius: "50px",
+                        fontSize: language === "ltr" ? "17px" : "19px",
+                      }}
+                      onClick={(e) => checkApplication(e)}
+                    >
+                      {" "}
+                      {isRequired?.every((l) => l == true) &&
                       variationRequired?.every((l) => l == true) ? (
                         productvariation?.length == 0 ||
                         (productvariationPrice?.[getKey(addedVariaton)] &&
@@ -1347,15 +1358,18 @@ const ProductDetails = ({
                             ? "Select Required Addons"
                             : "حدد الإضافات المطلوبة"
                         }`
-                      )
-                    ) : (
-                      `${
-                        language === "ltr"
-                          ? product?.status_label
-                          : product?.status_label_ar
-                      }`
-                    )}
-                  </div>
+                      )}
+                    </div>
+                  ) : (
+                      <Box sx={{alignSelf: "flex-start"}}>
+                        <SubHeadline
+                        enText={product?.status_label}
+                        arText={product?.status_label_ar}
+                        color="red"
+                        fontSize="17px"
+                      />
+                      </Box>
+                  )}
                 </div>
               </div>
             )

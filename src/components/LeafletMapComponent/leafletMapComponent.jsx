@@ -24,7 +24,7 @@ const LeafletMapComponent = ({ branch }) => {
     <MapContainer
       center={{ lat, lng }}
       zoom={15}
-      style={{ height: window.innerWidth > 990 ? "450px" : "350px", width: "100%" }}
+      style={{ height: window.innerWidth > 990 ? "450px" : "350px", width: "100%", borderRadius: "8px" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

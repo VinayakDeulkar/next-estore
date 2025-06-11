@@ -45,9 +45,10 @@ const Homepage = () => {
         return (
           <Box
             sx={{
-              height: "100dvh",
-              overflow: checkSize() && "hidden",
-              width: "100%",
+              height: "100vh",
+              width: "100vw",
+              overflow: "hidden",
+              overflowY: "auto",
             }}
           >
             <Grid container sx={{ width: "100vw" }}>
@@ -56,7 +57,7 @@ const Homepage = () => {
                 <Box
                   sx={{
                     height: checkSize() ? "calc(100dvh - 50px)" : "100%",
-                    overflow: "scroll",
+                    overflow: "auto",
                     padding: checkSize() ? "0 40px" : "0 20px",
                     width: checkSize() ? "100%" : "100vw",
                   }}

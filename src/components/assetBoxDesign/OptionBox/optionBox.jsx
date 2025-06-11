@@ -75,7 +75,12 @@ const OptionBox = ({
             }}
           >
             {language === "rtl" ? "د.ك" : "KD"}{" "}
-            <span>{parseFloat(amount).toFixed(3)}</span>
+            <span>
+              {Number(amount).toLocaleString("en-KW", {
+                minimumFractionDigits: 3,
+                maximumFractionDigits: 3,
+              })}
+            </span>
           </Box>
         ) : null}
       </Box>

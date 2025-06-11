@@ -49,7 +49,13 @@ const ProductCard = ({ product, isLast }) => {
                   <>
                     <span className="order-status-product-discount">
                       {product?.stripe_amount
-                        ? parseFloat(product?.stripe_amount)?.toFixed(3)
+                        ? Number(product?.stripe_amount).toLocaleString(
+                            "en-KW",
+                            {
+                              minimumFractionDigits: 3,
+                              maximumFractionDigits: 3,
+                            }
+                          )
                         : 0}{" "}
                       {language === "rtl" ? "د.ك" : "KD"}
                     </span>
@@ -58,7 +64,13 @@ const ProductCard = ({ product, isLast }) => {
                 <div>
                   <span>
                     {product?.original_price
-                      ? parseFloat(product?.original_price).toFixed(3)
+                      ? Number(product?.original_price).toLocaleString(
+                          "en-KW",
+                          {
+                            minimumFractionDigits: 3,
+                            maximumFractionDigits: 3,
+                          }
+                        )
                       : 0}
                   </span>{" "}
                   {language === "rtl" ? "د.ك" : "KD"}

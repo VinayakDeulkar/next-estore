@@ -11,12 +11,13 @@ import { useSnackbar } from "notistack";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import Spinner from "../common/Spinner/spinner";
 import Title from "../common/Title/Title";
 import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import NumberCounter from "../Animations/numberCounter";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
   const {
@@ -35,6 +36,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
     enqueueSnackbar({
       variant: "success",
       message: language == "ltr" ? message : message_ar,
+      autoHideDuration: 2000,
     });
 
   const onMinusQuantityClick = (e) => {
@@ -181,6 +183,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
         })
       )
       .then((res) => {
+        console.log(res, "cart res");
         if (res.data.data.cartCount == 0) {
           handleCartChange({});
           router.push(`/`);
@@ -288,12 +291,23 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
               addClick={(e) => onAddQuantityClick(e)}
               removeClick={(e) => onMinusQuantityClick(e)}
             /> */}
-            <NumberCounter
-              loading={spinLoader}
-              count={product.quantity}
-              addClick={(e) => onAddQuantityClick(e)}
-              removeClick={(e) => onMinusQuantityClick(e)}
-            />
+            <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+              <NumberCounter
+                loading={spinLoader}
+                count={product.quantity}
+                addClick={(e) => onAddQuantityClick(e)}
+                removeClick={(e) => onMinusQuantityClick(e)}
+              />
+              <Box
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRemoveClick();
+                }}
+                sx={{ cursor: "pointer" }}
+              >
+                <DeleteIcon sx={{ color: "Red", fontSize: "20px" }} />
+              </Box>
+            </Box>
 
             <div className="cart-card-price-maindiv">
               <div>
@@ -303,7 +317,7 @@ const NewCartCard = ({ product, successPromocode, deliveryCharge }) => {
                   <>
                     <span
                       className="order-details-cart-disocunt"
-                      style={{ fontWeight: "300" }}
+                      style={{ fontWeight: "300", color: "red" }}
                     >
                       {product?.stripe_amount
                         ? Number(product.stripe_amount).toLocaleString(

@@ -528,7 +528,13 @@ const HorizontalCard = ({ product }) => {
                     >
                       <span>
                         {product?.product_price
-                          ? parseFloat(product?.product_price).toFixed(3)
+                          ? Number(product?.product_price).toLocaleString(
+                              "en-KW",
+                              {
+                                minimumFractionDigits: 3,
+                                maximumFractionDigits: 3,
+                              }
+                            )
                           : 0}
                         &nbsp;
                       </span>
@@ -605,12 +611,24 @@ const HorizontalCard = ({ product }) => {
                       varient={"dark"}
                       arText={`${
                         product?.product_price
-                          ? parseFloat(product?.product_price).toFixed(3)
+                          ? Number(product?.product_price).toLocaleString(
+                              "en-KW",
+                              {
+                                minimumFractionDigits: 3,
+                                maximumFractionDigits: 3,
+                              }
+                            )
                           : 0
                       } د.ك`}
                       enText={`${
                         product?.product_price
-                          ? parseFloat(product?.product_price).toFixed(3)
+                          ? Number(product?.product_price).toLocaleString(
+                              "en-KW",
+                              {
+                                minimumFractionDigits: 3,
+                                maximumFractionDigits: 3,
+                              }
+                            )
                           : 0
                       } KD`}
                       width="82px"

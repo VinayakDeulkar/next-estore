@@ -43,7 +43,11 @@ const OrderHistory = () => {
         if (response?.status) {
           setOrderData(response?.data);
         } else {
-          enqueueSnackbar({ variant: "error", message: response?.message });
+          enqueueSnackbar({
+            variant: "error",
+            message: response?.message,
+            autoHideDuration: 2000,
+          });
         }
       })();
     }
@@ -99,7 +103,7 @@ const OrderHistory = () => {
   return (
     <Box>
       <EstoreLayout1>
-        <BackComponent backClick={() =>  router.push("/")} />
+        <BackComponent backClick={() => router.push("/")} />
         <Box>
           <HeadLine enText="My Orders" arText="مشترياتي" />
           {orderData ? (
@@ -211,7 +215,13 @@ const OrderHistory = () => {
                                 }}
                               >
                                 <span>
-                                  {parseFloat(ele?.total_amount).toFixed(3)}
+                                  {Number(ele?.total_amount).toLocaleString(
+                                    "en-KW",
+                                    {
+                                      minimumFractionDigits: 3,
+                                      maximumFractionDigits: 3,
+                                    }
+                                  )}
                                   &nbsp;
                                 </span>
                                 {language === "rtl" ? "د.ك" : "KD"}

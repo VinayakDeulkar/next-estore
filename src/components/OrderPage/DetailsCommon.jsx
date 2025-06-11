@@ -88,10 +88,20 @@ const DetailsCommon = ({ data }) => {
             {data.is_amount ? (
               <NormalText
                 enText={`${
-                  data?.value ? parseFloat(data?.value).toFixed(3) : 0
+                  data?.value
+                    ? Number(data?.value).toLocaleString("en-KW", {
+                        minimumFractionDigits: 3,
+                        maximumFractionDigits: 3,
+                      })
+                    : 0
                 } KD`}
                 arText={`${
-                  data?.value ? parseFloat(data?.value).toFixed(3) : 0
+                  data?.value
+                    ? Number(data?.value).toLocaleString("en-KW", {
+                        minimumFractionDigits: 3,
+                        maximumFractionDigits: 3,
+                      })
+                    : 0
                 } د.ك`}
               />
             ) : data.is_payment_type ? (

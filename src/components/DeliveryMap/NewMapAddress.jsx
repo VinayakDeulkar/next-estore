@@ -118,6 +118,7 @@ const NewMapAddress = ({
           language === "ltr"
             ? `Please select inside area ${areaDetails.area}`
             : `الرجاء تحديد المنطقة الداخلية ${areaDetails.ar_area}`,
+        autoHideDuration: 2000,
       });
     }
   };

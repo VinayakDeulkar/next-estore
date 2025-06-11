@@ -8,9 +8,11 @@ import { useState } from "react";
 import "./branchPage.css";
 import BackComponent from "@/components/BackComponent";
 import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
+import { useRouter } from "next/navigation";
 
 const BranchesPage = () => {
   const [branchId, setBranchId] = useState("");
+  const router = useRouter();
 
   return (
     <EstoreLayout1>

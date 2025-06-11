@@ -20,7 +20,12 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
           />
           <div className="amount-sub-amount" style={{ fontWeight: "500" }}>
             <span>
-              {cart?.subTotal ? parseFloat(cart?.subTotal).toFixed(3) : 0}
+              {cart?.subTotal
+                ? Number(cart?.subTotal).toLocaleString("en-KW", {
+                    minimumFractionDigits: 3,
+                    maximumFractionDigits: 3,
+                  })
+                : 0}
             </span>{" "}
             {language === "rtl" ? "د.ك" : "KD"}
           </div>
@@ -33,7 +38,13 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
             <div className="amount-discount">
               <span>
                 {" "}
-                {parseFloat(-cart?.promo_code_discount_price).toFixed(3)}
+                {Number(-cart?.promo_code_discount_price).toLocaleString(
+                  "en-KW",
+                  {
+                    minimumFractionDigits: 3,
+                    maximumFractionDigits: 3,
+                  }
+                )}
               </span>{" "}
               {language === "rtl" ? "د.ك" : "KD"}
             </div>
@@ -51,7 +62,10 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
             <div className="amount-sub-amount" style={{ fontWeight: "500" }}>
               <span>
                 {cart?.deliveryCharge
-                  ? parseFloat(cart?.deliveryCharge).toFixed(3)
+                  ? Number(cart?.deliveryCharge).toLocaleString("en-KW", {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    })
                   : 0}
               </span>{" "}
               {language === "rtl" ? "د.ك" : "KD"}
@@ -67,21 +81,33 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
               {payment == 1 ? (
                 <span>
                   {cart?.knetServiceCharge
-                    ? parseFloat(cart?.knetServiceCharge).toFixed(3)
+                    ? Number(cart?.knetServiceCharge).toLocaleString("en-KW", {
+                        minimumFractionDigits: 3,
+                        maximumFractionDigits: 3,
+                      })
                     : 0}
                 </span>
               ) : null}
               {payment == 2 ? (
                 <span>
                   {cart?.creditCardServiceCharge
-                    ? parseFloat(cart?.creditCardServiceCharge).toFixed(3)
+                    ? Number(cart?.creditCardServiceCharge).toLocaleString(
+                        "en-KW",
+                        {
+                          minimumFractionDigits: 3,
+                          maximumFractionDigits: 3,
+                        }
+                      )
                     : 0}
                 </span>
               ) : null}
               {payment == 3 ? (
                 <span>
                   {cart?.codServiceCharge
-                    ? parseFloat(cart?.codServiceCharge).toFixed(3)
+                    ? Number(cart?.codServiceCharge).toLocaleString("en-KW", {
+                        minimumFractionDigits: 3,
+                        maximumFractionDigits: 3,
+                      })
                     : 0}
                 </span>
               ) : null}{" "}
@@ -153,23 +179,35 @@ const NewAmountDetails = ({ onConfirmOrder }) => {
           ? `Minimum Order is ${
               homePageDetails?.vendor_data?.minimum_charge != ""
                 ? homePageDetails?.vendor_data?.minimum_charge
-                  ? parseFloat(
+                  ? Number(
                       homePageDetails?.vendor_data?.minimum_charge
-                    ).toFixed(3)
+                    ).toLocaleString("en-KW", {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    })
                   : 0
                 : areaDetails?.minimum
-                ? parseFloat(areaDetails?.minimum).toFixed(3)
+                ? Number(areaDetails?.minimum).toLocaleString("en-KW", {
+                    minimumFractionDigits: 3,
+                    maximumFractionDigits: 3,
+                  })
                 : 0
             } KD`
           : `الحد الأدنى للطلب هو ${
               homePageDetails?.vendor_data?.minimum_charge != ""
                 ? homePageDetails?.vendor_data?.minimum_charge
-                  ? parseFloat(
+                  ? Number(
                       homePageDetails?.vendor_data?.minimum_charge
-                    ).toFixed(3)
+                    ).toLocaleString("en-KW", {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    })
                   : 0
                 : areaDetails?.minimum
-                ? parseFloat(areaDetails?.minimum).toFixed(3)
+                ? Number(areaDetails?.minimum).toLocaleString("en-KW", {
+                    minimumFractionDigits: 3,
+                    maximumFractionDigits: 3,
+                  })
                 : 0
             } د.ك`}
       </button>

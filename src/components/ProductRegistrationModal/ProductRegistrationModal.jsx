@@ -348,7 +348,7 @@ const ProductRegistrationModal = ({
     <>
       {/* <div
         id="termsmodal-container"
-        style={{ top: "-53px", height: "100vh", overflow: "hidden" }}
+        style={{ top: "-53px", height: "100dvh", overflow: "hidden" }}
       >
         <div
           className={"modal-background"}
@@ -761,7 +761,7 @@ const ProductRegistrationModal = ({
       >
         <Box
           sx={{
-            height: "calc(100vh - 50px)",
+            height: "calc(100dvh - 50px)",
             padding: "20px",
             width: window.innerWidth > 990 ? "560px" : "auto",
             display: "flex",

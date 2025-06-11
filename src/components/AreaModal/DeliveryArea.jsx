@@ -222,6 +222,7 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
       enqueueSnackbar({
         variant: "error",
         message: "something wents wrong!!",
+        autoHideDuration: 2000,
       });
     } finally {
       setLoading(false);
@@ -260,7 +261,7 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
           }
           className="delivery-area-search-input"
           value={areaSearch}
-          style={{fontSize: "16px"}}
+          style={{ fontSize: "16px" }}
         ></input>
       </div>
       <Box>

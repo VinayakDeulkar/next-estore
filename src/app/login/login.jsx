@@ -68,9 +68,16 @@ const Login = () => {
   });
 
   const [showGuestUser, setShowGuestUser] = useState(true);
+
   useEffect(() => {
     handleUserDetailsChange({ ...userDetails, is_guest: false });
   }, []);
+
+  useEffect(() => {
+    if (otp?.length === 4) {
+      handleNext();
+    }
+  }, [otp]);
 
   const getAddressData = async (userReponseAddress) => {
     if (userReponseAddress) {
@@ -412,6 +419,7 @@ const Login = () => {
 
       if (response?.status) {
         localStorage.setItem("token", response?.jwt_token);
+        setOtp("");
         setOpenOtpPage(false);
         const userReponse = await GetUserDetails({
           vendor_id: homePageDetails?.vendor_data.vendors_id,
@@ -483,15 +491,22 @@ const Login = () => {
             setShowGuestUser(false);
           }
         } else {
-          enqueueSnackbar({ variant: "error", message: userReponse?.message });
-
+          enqueueSnackbar({
+            variant: "error",
+            message: userReponse?.message,
+            autoHideDuration: 2000,
+          });
           localStorage.removeItem("token");
           localStorage.removeItem("contactInfo");
           resetUserDetails();
           router.push("/");
         }
       } else {
-        enqueueSnackbar({ variant: "error", message: response?.message });
+        enqueueSnackbar({
+          variant: "error",
+          message: response?.message,
+          autoHideDuration: 2000,
+        });
       }
     } else if (showNameEmailFields) {
       let name = nameValidation(contactDetails.name, setErrorContactDetails);
@@ -585,14 +600,22 @@ const Login = () => {
               router.push("/");
             }
           } else {
-            enqueueSnackbar({ variant: "error", message: response?.message });
+            enqueueSnackbar({
+              variant: "error",
+              message: response?.message,
+              autoHideDuration: 2000,
+            });
             localStorage.removeItem("token");
             localStorage.removeItem("contactInfo");
             resetUserDetails();
             router.push("/");
           }
         } else {
-          enqueueSnackbar({ variant: "error", message: response?.message });
+          enqueueSnackbar({
+            variant: "error",
+            message: response?.message,
+            autoHideDuration: 2000,
+          });
         }
       } else {
         console.log("validation failed");
@@ -644,11 +667,19 @@ const Login = () => {
 
           if (response?.data?.is_otp_sent) {
             localStorage.setItem("id", response?.data?.id);
-            enqueueSnackbar({ variant: "success", message: response?.message });
+            enqueueSnackbar({
+              variant: "success",
+              message: response?.message,
+              autoHideDuration: 2000,
+            });
             setOtpSent(true);
             setOpenOtpPage(true);
           } else {
-            enqueueSnackbar({ variant: "error", message: response?.message });
+            enqueueSnackbar({
+              variant: "error",
+              message: response?.message,
+              autoHideDuration: 2000,
+            });
           }
         }
       }

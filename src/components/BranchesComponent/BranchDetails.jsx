@@ -17,7 +17,7 @@ function BranchDetails({ branchId, setBranchId }) {
       setBranch(areaDetails.data.branch[branchId]);
     }
   }, [areaDetails.data.branch, branchId]);
-  console.log(areaDetails.data.branch, "areaDetails.data.branch");
+  
   return (
     <SwipeableDrawer
       anchor="bottom"

@@ -354,6 +354,7 @@ const AddressDetails = ({
                   enqueueSnackbar({
                     variant: "error",
                     message: response?.message,
+                    autoHideDuration: 2000,
                   });
                   localStorage.removeItem("token");
                   localStorage.removeItem("contactInfo");
@@ -364,6 +365,7 @@ const AddressDetails = ({
                 enqueueSnackbar({
                   variant: "error",
                   message: addResponse?.message,
+                  autoHideDuration: 2000,
                 });
               }
             }

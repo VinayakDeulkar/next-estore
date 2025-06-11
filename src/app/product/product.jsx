@@ -50,7 +50,8 @@ const Product = (props) => {
                 <Box
                   sx={{
                     height: "100dvh",
-                    overflow: "scroll",
+                    overflow: "hidden",
+                    overflowY: "auto",
                     width: checkSize() ? "100%" : "100vw",
                   }}
                 >

@@ -83,7 +83,7 @@ const OtpVerification = ({
     if (response?.status) {
       enqueueSnackbar({
         hideIconVariant: true,
-        autoHideDuration: 30000000,
+        autoHideDuration: 2000,
         variant: "success",
         message: response?.message,
         anchorOrigin: { horizontal: "left", vertical: "top" },
@@ -97,6 +97,7 @@ const OtpVerification = ({
         variant: "error",
         message: response?.message,
         anchorOrigin: { horizontal: "left", vertical: "top" },
+        autoHideDuration: 2000
       });
     }
   };

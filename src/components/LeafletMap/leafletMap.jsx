@@ -55,6 +55,7 @@ function HandleMapClick({
             language === "ltr"
               ? `Please select inside area ${areaDetails?.area}`
               : `الرجاء تحديد المنطقة الداخلية ${areaDetails?.ar_area}`,
+          autoHideDuration: 2000,
         });
       }
     },
@@ -101,7 +102,7 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
         maxBounds={bounds}
         maxBoundsViscosity={1.0}
         scrollWheelZoom={false}
-        style={{ height: "600px", width: "100%" }}
+        style={{ height: "500px", width: "100%", borderRadius: "8px" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -138,6 +139,7 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
                       language === "ltr"
                         ? `Please drag inside area ${areaDetails?.area}`
                         : `الرجاء السحب داخل المنطقة ${areaDetails?.ar_area}`,
+                    autoHideDuration: 2000,
                   });
                 }
               },
@@ -145,7 +147,7 @@ const LeafletMap = ({ markerPosition, setMarkerPosition, selectedBounds }) => {
           />
         )}
       </MapContainer>
-      <div style={{marginTop: "15px"}}>
+      <div style={{ marginTop: "15px" }}>
         <div
           style={{
             fontSize: language === "ltr" ? "16px" : "17px",

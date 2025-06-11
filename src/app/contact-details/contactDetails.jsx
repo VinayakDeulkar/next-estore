@@ -116,12 +116,15 @@ const ContactDetails = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "40px",
+            gap: stepper === 0 ? "40px" : "15px",
             position: "relative",
             height: "calc(100% - 50px)",
           }}
         >
-          <HeadLine enText={"Contact Details"} arText={"معلومات التواصل"} />
+          <HeadLine
+            enText={stepper === 0 ? "Contact Details" : "Pickup Details"}
+            arText={stepper === 0 ? "معلومات التواصل" : "تفاصيل الاستلام"}
+          />
           {stepper === 0 ? (
             <NewContactDetails
               errorContactDetails={errorContactDetails}
@@ -134,7 +137,7 @@ const ContactDetails = () => {
               homePageDetails?.vendor_data?.home_page_type === "18" &&
               "fashion-theme"
             }`}
-            style={{bottom: 0}}
+            style={{ bottom: 0 }}
           >
             <Box
               className="contact-details-next-button"

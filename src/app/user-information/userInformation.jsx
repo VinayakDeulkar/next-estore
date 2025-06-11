@@ -253,6 +253,7 @@ const UserInformation = () => {
             variant: "error",
             message: userReponse?.message,
             anchorOrigin: { horizontal: "left", vertical: "top" },
+            autoHideDuration: 2000,
           });
           localStorage.removeItem("token");
           localStorage.removeItem("contactInfo");
@@ -264,6 +265,7 @@ const UserInformation = () => {
           variant: "error",
           message: response?.message,
           anchorOrigin: { horizontal: "left", vertical: "top" },
+          autoHideDuration: 2000,
         });
       }
     } else {

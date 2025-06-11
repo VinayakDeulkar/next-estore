@@ -3,7 +3,7 @@ import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import React, { useContext } from "react";
 
-const SmallButtonRounded = ({ enText, arText, handleClick, varient }) => {
+const SmallButtonRounded = ({ enText, arText, handleClick, varient, fontWeight="500" }) => {
   const { language, homePageDetails } = useContext(AppContext);
 
   return (
@@ -22,7 +22,7 @@ const SmallButtonRounded = ({ enText, arText, handleClick, varient }) => {
           varient,
           homePageDetails?.vendor_data?.vendor_color
         ),
-        fontWeight: "500",
+        fontWeight: fontWeight,
         fontSize: "16px",
         display: "flex",
         justifyContent: "center",

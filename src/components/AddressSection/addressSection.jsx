@@ -27,7 +27,7 @@ const AddressSection = ({ setShowAddressForm, triggerPaymentMethod }) => {
     handleUserDetailsChange,
     resetUserDetails,
     addressDetails,
-    activeBackgroundColor
+    activeBackgroundColor,
   } = useContext(AppContext);
   const { enqueueSnackbar } = useSnackbar();
   const [addressData, setAddressData] = useState([]);
@@ -599,7 +599,11 @@ const AddressSection = ({ setShowAddressForm, triggerPaymentMethod }) => {
         });
       }
     } else {
-      enqueueSnackbar({ variant: "error", message: response?.message });
+      enqueueSnackbar({
+        variant: "error",
+        message: response?.message,
+        autoHideDuration: 2000,
+      });
       localStorage.removeItem("token");
       localStorage.removeItem("contactInfo");
       resetUserDetails();
@@ -621,7 +625,11 @@ const AddressSection = ({ setShowAddressForm, triggerPaymentMethod }) => {
       updateUserResponse();
     } else {
       setLoading(false);
-      enqueueSnackbar({ variant: "error", message: response?.message });
+      enqueueSnackbar({
+        variant: "error",
+        message: response?.message,
+        autoHideDuration: 2000,
+      });
     }
   };
 

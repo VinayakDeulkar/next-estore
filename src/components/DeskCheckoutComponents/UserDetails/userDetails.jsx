@@ -67,6 +67,12 @@ const UserDetails = ({
     }
   }, [userDetails?.name]);
 
+  useEffect(() => {
+    if (otp?.length === 4) {
+      handleOtpValidation();
+    }
+  }, [otp]);
+
   const [errorContactDetails, setErrorContactDetails] = useState({
     emailError: false,
     emailErrorMessage: "",
@@ -83,6 +89,7 @@ const UserDetails = ({
     modelError: "",
     colorError: "",
   });
+
   const renderContactType = () => {
     if (userDetails?.is_guest) {
       return (
@@ -130,6 +137,7 @@ const UserDetails = ({
     setLoading(false);
     if (response?.status) {
       localStorage.setItem("token", response?.jwt_token);
+      setOtp("");
       setOpenOtpPage(false);
       const userReponse = await GetUserDetails({
         vendor_id: homePageDetails?.vendor_data.vendors_id,
@@ -193,16 +201,25 @@ const UserDetails = ({
           setShowGuestUser(false);
         }
       } else {
-        enqueueSnackbar({ variant: "error", message: userReponse?.message });
+        enqueueSnackbar({
+          variant: "error",
+          message: userReponse?.message,
+          autoHideDuration: 2000,
+        });
         localStorage.removeItem("token");
         localStorage.removeItem("contactInfo");
         resetUserDetails();
         router.push("/");
       }
     } else {
-      enqueueSnackbar({ variant: "error", message: response?.message });
+      enqueueSnackbar({
+        variant: "error",
+        message: response?.message,
+        autoHideDuration: 2000,
+      });
     }
   };
+
   const handleOTPSend = async () => {
     const contactInfo = JSON.parse(localStorage.getItem("contactInfo") || "{}");
     let phone = phoneValidation(
@@ -248,11 +265,19 @@ const UserDetails = ({
 
         if (response?.data?.is_otp_sent) {
           localStorage.setItem("id", response?.data?.id);
-          enqueueSnackbar({ variant: "success", message: response?.message });
+          enqueueSnackbar({
+            variant: "success",
+            message: response?.message,
+            autoHideDuration: 2000,
+          });
           setOtpSent(true);
           setOpenOtpPage(true);
         } else {
-          enqueueSnackbar({ variant: "error", message: response?.message });
+          enqueueSnackbar({
+            variant: "error",
+            message: response?.message,
+            autoHideDuration: 2000,
+          });
         }
       }
     }
@@ -339,14 +364,22 @@ const UserDetails = ({
             setShowNameEmailFields(true);
           }
         } else {
-          enqueueSnackbar({ variant: "error", message: response?.message });
+          enqueueSnackbar({
+            variant: "error",
+            message: response?.message,
+            autoHideDuration: 2000,
+          });
           localStorage.removeItem("token");
           localStorage.removeItem("contactInfo");
           resetUserDetails();
           router.push("/");
         }
       } else {
-        enqueueSnackbar({ variant: "error", message: response?.message });
+        enqueueSnackbar({
+          variant: "error",
+          message: response?.message,
+          autoHideDuration: 2000,
+        });
       }
     }
   };
@@ -432,9 +465,20 @@ const UserDetails = ({
     }
   };
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: "30px" }}>
       {renderContactType()}
-      {showPickUpForm ? <PickupContainer pickupError={pickupError} /> : null}
+      {showPickUpForm ? (
+        <Box>
+          <Box sx={{ marginBottom: "10px" }}>
+            <SubHeadline
+              enText={"Pickup Details"}
+              arText={"تفاصيل الاستلام"}
+              fontSize="18px"
+            />
+          </Box>
+          <PickupContainer pickupError={pickupError} />
+        </Box>
+      ) : null}
       {!showAddressComponents ? (
         <Box
           className="contact-details-next-button"

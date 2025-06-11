@@ -15,7 +15,7 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
         border: "1px solid #e1e1e1",
         padding: "15px",
         borderRadius: "10px",
-        marginBottom: "10px"
+        marginBottom: "10px",
       }}
     >
       {orderDetails?.cartItems &&
@@ -31,12 +31,18 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
         <NormalText
           enText={`${
             orderDetails?.subTotal
-              ? parseFloat(orderDetails?.subTotal).toFixed(3)
+              ? Number(orderDetails?.subTotal).toLocaleString("en-KW", {
+                  minimumFractionDigits: 3,
+                  maximumFractionDigits: 3,
+                })
               : 0
           } KD`}
           arText={`${
             orderDetails?.subTotal
-              ? parseFloat(orderDetails?.subTotal).toFixed(3)
+              ? Number(orderDetails?.subTotal).toLocaleString("en-KW", {
+                  minimumFractionDigits: 3,
+                  maximumFractionDigits: 3,
+                })
               : 0
           } د.ك`}
         />
@@ -48,12 +54,24 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
           <NormalText
             enText={`${
               orderDetails?.delivery_charge
-                ? parseFloat(orderDetails?.delivery_charge).toFixed(3)
+                ? Number(orderDetails?.delivery_charge).toLocaleString(
+                    "en-KW",
+                    {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    }
+                  )
                 : 0
             } KD`}
             arText={`${
               orderDetails?.delivery_charge
-                ? parseFloat(orderDetails?.delivery_charge).toFixed(3)
+                ? Number(orderDetails?.delivery_charge).toLocaleString(
+                    "en-KW",
+                    {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    }
+                  )
                 : 0
             } د.ك`}
           />
@@ -68,12 +86,24 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
           <NormalText
             enText={`${
               orderDetails?.promo_code_price
-                ? parseFloat(orderDetails?.promo_code_price).toFixed(3)
+                ? Number(orderDetails?.promo_code_price).toLocaleString(
+                    "en-KW",
+                    {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    }
+                  )
                 : 0
             } KD`}
             arText={`${
               orderDetails?.promo_code_price
-                ? parseFloat(orderDetails?.promo_code_price).toFixed(3)
+                ? Number(orderDetails?.promo_code_price).toLocaleString(
+                    "en-KW",
+                    {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    }
+                  )
                 : 0
             } د.ك`}
           />
@@ -90,12 +120,18 @@ export const AccrodianOrderDetails = ({ orderDetails }) => {
         <SubHeadline
           enText={`${
             orderDetails?.total_amount
-              ? parseFloat(orderDetails?.total_amount).toFixed(3)
+              ? Number(orderDetails?.total_amount).toLocaleString("en-KW", {
+                  minimumFractionDigits: 3,
+                  maximumFractionDigits: 3,
+                })
               : 0
           } KD`}
           arText={`${
             orderDetails?.total_amount
-              ? parseFloat(orderDetails?.total_amount).toFixed(3)
+              ? Number(orderDetails?.total_amount).toLocaleString("en-KW", {
+                  minimumFractionDigits: 3,
+                  maximumFractionDigits: 3,
+                })
               : 0
           } د.ك`}
         />

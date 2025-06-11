@@ -24,7 +24,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
   const [spinLoader, setSpinLoader] = useState(false);
   const router = useRouter();
 
-  console.log(product, "productproductproduct")
+  console.log(product, "productproductproduct");
 
   const handleCardClick = () => {
     router.push(`/product?id=${product?.product_slug}`);
@@ -537,12 +537,24 @@ const ProductSquareCard = ({ product, imgHeight }) => {
                     varient={"dark"}
                     arText={`${
                       product?.product_price
-                        ? parseFloat(product?.product_price).toFixed(3)
+                        ? Number(product?.product_price).toLocaleString(
+                            "en-KW",
+                            {
+                              minimumFractionDigits: 3,
+                              maximumFractionDigits: 3,
+                            }
+                          )
                         : 0
                     } د.ك`}
                     enText={`${
                       product?.product_price
-                        ? parseFloat(product?.product_price).toFixed(3)
+                        ? Number(product?.product_price).toLocaleString(
+                            "en-KW",
+                            {
+                              minimumFractionDigits: 3,
+                              maximumFractionDigits: 3,
+                            }
+                          )
                         : 0
                     } KD`}
                     width="82px"

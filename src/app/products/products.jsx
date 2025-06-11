@@ -10,6 +10,8 @@ import { Box, Grid } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import "../../components/HomePageLayouts/layout.css";
+import BackComponent from "@/components/BackComponent";
+import HeadLine from "@/components/assetBoxDesign/Headline/headLine";
 
 const Products = (props) => {
   const [page, setPage] = useState(0);
@@ -139,22 +141,21 @@ const Products = (props) => {
   return (
     <EstoreLayout1>
       <div>
-        <Box sx={{ position: "relative", height: "74px" }}>
-          <BackButton
-            variant="dark"
-            arabic_title={
-              hasSubCategories
-                ? getCategoryName().ar
-                : productsData?.[0]?.category_name_ar
-            }
-            english_title={
+        <BackComponent />
+        <Box sx={{textAlign: "center"}}>
+          <HeadLine
+            enText={
               hasSubCategories
                 ? getCategoryName().eng
                 : productsData?.[0]?.category_name
             }
+            arText={
+              hasSubCategories
+                ? getCategoryName().ar
+                : productsData?.[0]?.category_name_ar
+            }
           />
         </Box>
-
         <>
           {(hasSubCategories && subCategoryData?.length) ||
           (!hasSubCategories && productsData?.length) ? (

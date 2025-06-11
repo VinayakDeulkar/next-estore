@@ -55,7 +55,7 @@ const NewContactDetails = ({ errorContactDetails }) => {
     <div style={{ position: "relative" }}>
       <div
         className="contact-details-form-maindiv"
-        style={{ display: "flex", flexDirection: "column", gap: "25px" }}
+        style={{ display: "flex", flexDirection: "column", gap: "15px" }}
       >
         <div>
           <div className="customerInputsFlex">

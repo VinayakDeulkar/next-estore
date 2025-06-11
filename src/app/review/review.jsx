@@ -183,11 +183,16 @@ const Review = () => {
               <SubHeadline
                 enText={"Sub Total"}
                 arText={"الإجمالي"}
-                fontWeight="300"
+                fontWeight="500"
               />
 
               <p className="newreview-text">
-                <span>{parseFloat(cart?.subTotal).toFixed(3)}</span>{" "}
+                <span>
+                  {Number(cart?.subTotal).toLocaleString("en-KW", {
+                    minimumFractionDigits: 3,
+                    maximumFractionDigits: 3,
+                  })}
+                </span>{" "}
                 {language === "rtl" ? "د.ك" : "KD"}
               </p>
             </div>
@@ -243,17 +248,29 @@ const Review = () => {
                 : language == "ltr"
                 ? `Minimum Order is ${
                     areaDetails?.minimum != ""
-                      ? parseFloat(areaDetails?.minimum).toFixed(3)
-                      : parseFloat(
+                      ? Number(areaDetails?.minimum).toLocaleString("en-KW", {
+                          minimumFractionDigits: 3,
+                          maximumFractionDigits: 3,
+                        })
+                      : Number(
                           homePageDetails?.vendor_data?.minimum_charge
-                        ).toFixed(3)
+                        ).toLocaleString("en-KW", {
+                          minimumFractionDigits: 3,
+                          maximumFractionDigits: 3,
+                        })
                   } KD`
                 : `الحد الأدنى للطلب هو ${
                     areaDetails?.minimum != ""
-                      ? parseFloat(areaDetails?.minimum).toFixed(3)
-                      : parseFloat(
+                      ? Number(areaDetails?.minimum).toLocaleString("en-KW", {
+                          minimumFractionDigits: 3,
+                          maximumFractionDigits: 3,
+                        })
+                      : Number(
                           homePageDetails?.vendor_data?.minimum_charge
-                        ).toFixed(3)
+                        ).toLocaleString("en-KW", {
+                          minimumFractionDigits: 3,
+                          maximumFractionDigits: 3,
+                        })
                   } د.ك`}
             </Link>
           </div>

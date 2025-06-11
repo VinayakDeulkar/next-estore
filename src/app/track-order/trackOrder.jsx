@@ -35,9 +35,7 @@ const TrackOrder = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
             >
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <HeadLine enText={"Orders Tracker"} arText={"تتبع الطلبات"} />
-              </Box>
+              <HeadLine enText={"Orders Tracker"} arText={"تتبع الطلبات"} />
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -84,7 +82,7 @@ const TrackOrder = () => {
                       ? "Tracking Number Goes Here"
                       : "ضع رقم الطلب هنا لتتبعه"
                   }
-                  style={{fontSize: "16px"}}
+                  style={{ fontSize: "16px" }}
                 />
               </div>
             </motion.div>
@@ -100,6 +98,7 @@ const TrackOrder = () => {
                   enText={"Track"}
                   arText={"تتبع الطلب"}
                   varient={"dark"}
+                  fontWeight="300"
                 />
               </Box>
             </motion.div>

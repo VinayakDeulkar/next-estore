@@ -14,7 +14,8 @@ const EstoreLayout1 = ({ children }) => {
           <Box
             sx={{
               height: "calc(100dvh - 50px)",
-              overflow: "scroll",
+              overflow: "hidden",
+              overflowY: "auto",
               padding: checkSize() ? "0 40px" : "0 20px",
               width: checkSize() ? "100%" : "100vw",
             }}
