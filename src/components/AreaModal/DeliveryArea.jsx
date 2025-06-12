@@ -26,7 +26,7 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
     handleAddressDetailsChange,
   } = useContext(AppContext);
   const [areaSearch, setAreaSearch] = useState("");
-  const [governarateActive, setGovernarateActive] = useState(null);
+  const [governarateActive, setGovernarateActive] = useState({});
   const [area, setArea] = useState([]);
   const [active, setActive] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,31 +36,34 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
   useEffect(() => {
     if (areaSearch == "") {
       if (areaDetails.data.governarate) {
-        let temp = Object.values(areaDetails?.data?.governarate)?.map(
-          (k, i) => {
-            return false;
-          }
-        );
+        let temp = {};
+        areaDetails?.data?.governarate?.forEach((_, i) => {
+          temp[i] = false; // Default all collapsed
+        });
         setGovernarateActive(temp);
         setArea(areaDetails?.data?.governarate);
       }
     } else {
       if (areaDetails.data.governarate) {
-        let gov_filter = areaDetails?.data?.governarate.map((k, i) => {
-          let filtered = k.area.filter(
-            (l, j) =>
-              l?.area_name?.toUpperCase().indexOf(areaSearch?.toUpperCase()) >
-                -1 ||
-              l?.area_name_ar
-                ?.toUpperCase()
-                .indexOf(areaSearch?.toUpperCase()) > -1
-          );
-          if (filtered.length != 0) return { ...k, area: [...filtered] };
-        });
-        gov_filter = gov_filter.filter((k, i) => k);
+        let gov_filter = areaDetails?.data?.governarate
+          .map((k, i) => {
+            let filtered = k.area.filter(
+              (l) =>
+                l?.area_name
+                  ?.toUpperCase()
+                  .includes(areaSearch?.toUpperCase()) ||
+                l?.area_name_ar
+                  ?.toUpperCase()
+                  .includes(areaSearch?.toUpperCase())
+            );
+            if (filtered.length != 0) return { ...k, area: [...filtered] };
+          })
+          .filter(Boolean);
+
         if (gov_filter.length != 0) {
-          let temp = gov_filter?.map((k, i) => {
-            return true;
+          let temp = {};
+          gov_filter.forEach((_, i) => {
+            temp[i] = true; // Auto-expand matching sections
           });
           setGovernarateActive(temp);
           setArea(gov_filter);
@@ -267,16 +270,20 @@ const DeliveryArea = ({ setMarkerPosition, handleClose }) => {
       <Box>
         {area?.length != 0
           ? area?.map((gov, k) => (
-              <Accordion key={k} sx={{ boxShadow: "none" }}>
+              <Accordion
+                key={k}
+                sx={{ boxShadow: "none" }}
+                expanded={governarateActive?.[k] || false}
+                onChange={() => {
+                  setGovernarateActive((prev) => ({
+                    ...prev,
+                    [k]: !prev[k],
+                  }));
+                }}
+              >
                 <AccordionSummary
                   aria-controls="panel1-content"
                   id="panel1-header"
-                  onClick={() => {
-                    setGovernarateActive({
-                      ...governarateActive,
-                      [k]: !governarateActive[k],
-                    });
-                  }}
                   sx={{
                     fontWeight: "500",
                     "&.Mui-expanded": {

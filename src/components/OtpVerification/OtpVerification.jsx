@@ -97,7 +97,7 @@ const OtpVerification = ({
         variant: "error",
         message: response?.message,
         anchorOrigin: { horizontal: "left", vertical: "top" },
-        autoHideDuration: 2000
+        autoHideDuration: 2000,
       });
     }
   };
@@ -205,16 +205,17 @@ const OtpVerification = ({
         <div
           className={"resendOtpText"}
           style={{ marginTop: "2px", color: timerStatus ? "#adb5bd" : "#000" }}
-          onClick={() => {
-            if (!timerStatus) {
-              resendOtpFunction(false);
-            }
-          }}
         >
-          <span>
+          <span
+            onClick={() => {
+              if (!timerStatus) {
+                resendOtpFunction(false);
+              }
+            }}
+          >
             {language === "ltr"
-              ? "Resend OTP"
-              : "إعادة إرسال كلمة المرور لمرة واحدة"}
+              ? "Resend via Whatsapp"
+              : "إعادة الإرسال عبر الواتساب"}
           </span>
         </div>
         {homePageDetails?.vendor_data?.checkout_method === "2" ? (
@@ -224,13 +225,14 @@ const OtpVerification = ({
               marginTop: "15px",
               color: timerStatus ? "#adb5bd" : "#000",
             }}
-            onClick={() => {
-              if (!timerStatus) {
-                resendOtpFunction(true);
-              }
-            }}
           >
-            <span>
+            <span
+              onClick={() => {
+                if (!timerStatus) {
+                  resendOtpFunction(true);
+                }
+              }}
+            >
               {language === "ltr"
                 ? "Resend via SMS"
                 : "إعادة الإرسال عبر الرسائل القصيرة"}

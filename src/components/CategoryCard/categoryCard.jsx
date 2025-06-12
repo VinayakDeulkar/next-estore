@@ -58,11 +58,20 @@ const CategoryCard = ({ category }) => {
               />
             </Box>
             <CardContent sx={{ padding: "0" }}>
-              <SubHeadline
-                enText={category?.category_name}
-                arText={category?.category_name_ar}
-                fontSize="21px"
-              />
+              <Box sx={{ textAlign: "center" }}>
+                <SubHeadline
+                  enText={category?.category_name}
+                  arText={category?.category_name_ar}
+                  fontSize="20px"
+                />
+              </Box>
+              <Box sx={{ textAlign: "center" }}>
+                <SubHeadline
+                  enText={"Category"}
+                  arText={"فئة"}
+                  fontSize="20px"
+                />
+              </Box>
             </CardContent>
           </Card>
         );
@@ -114,16 +123,22 @@ const CategoryCard = ({ category }) => {
             <CardContent
               sx={{
                 padding: "0",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
               }}
             >
-              <SubHeadline
-                enText={category?.category_name}
-                arText={category?.category_name_ar}
-                fontSize="21px"
-              />
+              <Box sx={{ textAlign: "center" }}>
+                <SubHeadline
+                  enText={category?.category_name}
+                  arText={category?.category_name_ar}
+                  fontSize="20px"
+                />
+              </Box>
+              <Box sx={{ textAlign: "center" }}>
+                <SubHeadline
+                  enText={"Category"}
+                  arText={"فئة"}
+                  fontSize="20px"
+                />
+              </Box>
             </CardContent>
           </Card>
         );

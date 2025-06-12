@@ -105,8 +105,7 @@ export default async function RootLayout({ children }) {
           deliveryResponse={deliveryResponse}
           estoreBranchesResponse={estoreBranchesResponse}
         >
-          <LoadingWrapper>{children}</LoadingWrapper>
-          {/* {children} */}
+          {children}
         </AppProvider>
       </body>
     </html>

@@ -1,10 +1,3 @@
-.branch-list-container .branch-list {
-  padding: 16px 0;
-}
-
-.branch-list-container .branch-list .branch-list-item:hover {
-  background-color: #f5f5f5;
-}
 
 .branch-list-container .branch-list .branch-list-item {
   display: -webkit-box;
@@ -22,13 +15,11 @@
   -moz-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 16px 40px;
+  padding: 15px 0;
   cursor: pointer;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: all;
   transition-duration: 0.5s;
-  border-bottom: 1px solid #f6f7fb;
-  margin: 0 -40px;
 }
 
 .branch-list-container .branch-list .branch-list-item:last-child {
@@ -45,7 +36,7 @@
   .branch-details
   .branch-name {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.33;
   color: black;
   overflow-wrap: break-word;

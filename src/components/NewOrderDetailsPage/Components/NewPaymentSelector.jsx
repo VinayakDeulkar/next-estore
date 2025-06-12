@@ -106,7 +106,8 @@ const NewPaymentSelector = ({
                 ? {
                     backgroundColor:
                       window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
-                    border: "2px solid #000",
+                    outline: "2px solid #000",
+                    border: "1px solid transparent",
                   }
                 : { backgroundColor: "#fff" }
             }
@@ -137,7 +138,8 @@ const NewPaymentSelector = ({
               ? {
                   backgroundColor:
                     window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
-                  border: "2px solid #000",
+                  outline: "2px solid #000",
+                  border: "1px solid transparent",
                 }
               : { backgroundColor: "#fff" }
           }
@@ -163,7 +165,8 @@ const NewPaymentSelector = ({
                 ? {
                     backgroundColor:
                       window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
-                    border: "2px solid #000",
+                    outline: "2px solid #000",
+                    border: "1px solid transparent",
                   }
                 : { backgroundColor: "#fff" }
             }
@@ -207,7 +210,8 @@ const NewPaymentSelector = ({
                 ? {
                     backgroundColor:
                       window.innerWidth > 990 ? "#fff" : activeBackgroundColor,
-                    border: "2px solid #000",
+                    outline: "2px solid #000",
+                    border: "1px solid transparent",
                   }
                 : { backgroundColor: "#fff" }
             }

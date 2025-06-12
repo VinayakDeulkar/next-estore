@@ -251,6 +251,7 @@ html[dir="rtl"] .delivery-company-delivery-text {
   border-radius: 8px;
   display: flex;
   align-items: center;
+  outline: 1px solid transparent;
 }
 
 .payment-details-holder .del-ic {
