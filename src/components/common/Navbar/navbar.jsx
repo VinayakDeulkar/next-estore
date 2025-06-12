@@ -8,16 +8,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
-const Navbar = () => {
+const Navbar = ({ isScrollingUp }) => {
   const {
     homePageDetails,
     language,
     handleLanguageChange,
     handleSideMenuDrawer,
   } = useContext(AppContext);
-  const [logo, setLogo] = useState(false);
   const pathname = usePathname();
-
   const renderGridNav = () => {
     switch (homePageDetails?.estoreLayout) {
       case "1":
@@ -40,19 +38,6 @@ const Navbar = () => {
         break;
     }
   };
-  const handleScroll = () => {
-    if (window.scrollY - 350 > (100 * 32) / window.innerHeight) {
-      setLogo((f) => true);
-    } else setLogo((f) => false);
-  };
-
-  useEffect(() => {
-    console.log("scroll");
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const navChidren = () => {
     return (
@@ -107,11 +92,12 @@ const Navbar = () => {
             justifyContent: "center",
           }}
         >
-          <Box>
-            {logo ? (
+          <Box sx={{ padding: "20px" }}>
+            {isScrollingUp ? (
               <Image
-                height={50}
-                width={50}
+                height={40}
+                width={40}
+                style={{ borderRadius: "5px" }}
                 src={
                   language === "ltr"
                     ? homePageDetails?.vendor_data?.english_new_background

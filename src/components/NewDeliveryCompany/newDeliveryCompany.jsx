@@ -7,7 +7,6 @@ import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 const NewDeliveryCompany = ({ companyData }) => {
   const { language, areaDetails } = useContext(AppContext);
   const [timeLeftToShow, setTimeLeftToShow] = useState();
-  console.log(areaDetails, "areaDetails");
 
   useEffect(() => {
     console.log("first");

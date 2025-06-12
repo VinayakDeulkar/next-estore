@@ -77,14 +77,10 @@ const ProductCarousel = ({ product, addedVariaton }) => {
     ...(product?.product_images || []),
   ].filter(Boolean);
 
-  const handleThumbnailClick = (index) => {
-    setActiveIndex(index);
-  };
-
   const handleCarouselChange = (index) => {
+    console.log(index, "index");
     setActiveIndex(index);
   };
-
   return (
     <Box sx={{ position: "relative" }}>
       {/* Main Carousel */}
@@ -97,10 +93,10 @@ const ProductCarousel = ({ product, addedVariaton }) => {
         showIndicators={false}
         showArrows={false}
         swipeable={allImages.length > 1}
-        infiniteLoop
+        infiniteLoop={true}
         interval={3000}
         transitionTime={700}
-        emulateTouch
+        emulateTouch={false}
         stopOnHover
         className="carouselImage"
         animationHandler={"fade"}
@@ -136,11 +132,14 @@ const ProductCarousel = ({ product, addedVariaton }) => {
             <Box
               key={index}
               sx={{
-                width: "30px",
-                height: "6px",
+                width: activeIndex === index ? "30px" : "15px",
+                height: activeIndex === index ? "6px" : "3px",
                 borderRadius: "5px",
                 backgroundColor: activeIndex === index ? "#000" : "#ccc",
                 transition: "background-color 0.3s ease",
+              }}
+              onClick={() => {
+                setActiveIndex(index);
               }}
             />
           ))}

@@ -20,7 +20,6 @@ const ReviewBar = () => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log(entry, "entryentry");
         setIsOverlappingFooter(entry.isIntersecting);
       },
       {
@@ -108,16 +107,21 @@ const ReviewBar = () => {
             />
           </Grid>
           <Grid item md={4} sm={4} lg={4} xs={4} sx={{ textAlign: "end" }}>
+            {console.log(cart?.subTotal.length, "cart?.subTotal")}
             <SubHeadline
-              enText={`${
-                cart?.subTotal
-                  ? Number(cart.subTotal).toLocaleString("en-KW", {
-                      minimumFractionDigits: 3,
-                      maximumFractionDigits: 3,
-                    })
-                  : "0.000"
+              enText={
+                cart?.subTotal.length > 3
+                  ? `${Number(cart.subTotal).toLocaleString("en-KW")} KD`
+                  : `${
+                      cart?.subTotal
+                        ? Number(cart.subTotal).toLocaleString("en-KW", {
+                            minimumFractionDigits: 3,
+                            maximumFractionDigits: 3,
+                          })
+                        : "0.000"
+                    }
+               KD`
               }
-               KD`}
               arText={`${
                 cart?.subTotal
                   ? Number(cart.subTotal).toLocaleString("en-KW", {

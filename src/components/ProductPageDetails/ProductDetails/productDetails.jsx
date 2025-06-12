@@ -73,8 +73,6 @@ const ProductDetails = ({
     return window != undefined && window?.innerWidth > 990;
   };
 
-  console.log(showRegister, "showRegister");
-
   useEffect(() => {
     if (showQuantity) {
       setTimeout(() => {
@@ -1287,7 +1285,7 @@ const ProductDetails = ({
                           homePageDetails?.vendor_data?.vendor_color,
                         color: "#fff",
                         borderRadius: "50px",
-                        fontSize: language === "ltr" ? "17px" : "19px",
+                        fontSize: language === "ltr" ? "15px" : "19px",
                       }}
                       onClick={(e) => checkApplication(e)}
                     >
@@ -1361,14 +1359,14 @@ const ProductDetails = ({
                       )}
                     </div>
                   ) : (
-                      <Box sx={{alignSelf: "flex-start"}}>
-                        <SubHeadline
+                    <Box sx={{ alignSelf: "flex-start" }}>
+                      <SubHeadline
                         enText={product?.status_label}
                         arText={product?.status_label_ar}
                         color="red"
                         fontSize="17px"
                       />
-                      </Box>
+                    </Box>
                   )}
                 </div>
               </div>

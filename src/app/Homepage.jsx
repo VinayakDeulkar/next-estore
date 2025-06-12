@@ -7,7 +7,7 @@ import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
 import HomePageLayouts from "@/components/HomePageLayouts";
 import { AppContext } from "@/context/AppContext";
 import { Box, Fab, Grid } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import BurgerIcon from "@/SVGs/BurgerIcon";
 import MenuDrawer from "@/components/common/MenuDrawer/menuDrawer";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
@@ -24,6 +24,8 @@ const Homepage = () => {
     handleSideMenuDrawer,
     handleLanguageChange,
   } = useContext(AppContext);
+  const scrollRef = useRef(null);
+  const [isScrollingUp, setIsScrollingUp] = useState(false);
 
   const checkDrawer = () =>
     homePageDetails?.vendor_data &&
@@ -39,6 +41,31 @@ const Homepage = () => {
     return window != undefined && window?.innerWidth > 990;
   };
 
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+
+  const handleScroll = () => {
+    const scrollTop = scrollRef.current.scrollTop;
+    const top = scrollRef.current.getBoundingClientRect();
+    console.log(scrollTop, "scrollTop");
+
+    if (top < 0) {
+      setIsScrollingUp(true); // User is scrolling up
+    } else {
+      setIsScrollingUp(false); // User is scrolling down
+    }
+
+    setLastScrollTop(scrollTop);
+  };
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    scrollContainer.addEventListener("scroll", handleScroll);
+
+    return () => {
+      scrollContainer.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollTop]);
+
   const estoreLayout = () => {
     switch (homePageDetails?.estoreLayout) {
       case "1":
@@ -53,7 +80,7 @@ const Homepage = () => {
           >
             <Grid container sx={{ width: "100vw" }}>
               <Grid item sm={12} md={12} lg={4.5}>
-                {checkSize() && <HeaderBox />}
+                {checkSize() && <HeaderBox isScrollingUp={isScrollingUp} />}
                 <Box
                   sx={{
                     height: checkSize() ? "calc(100dvh - 50px)" : "100%",
@@ -61,6 +88,7 @@ const Homepage = () => {
                     padding: checkSize() ? "0 40px" : "0 20px",
                     width: checkSize() ? "100%" : "100vw",
                   }}
+                  ref={scrollRef}
                 >
                   <Box
                     sx={{

@@ -24,8 +24,6 @@ const ProductSquareCard = ({ product, imgHeight }) => {
   const [spinLoader, setSpinLoader] = useState(false);
   const router = useRouter();
 
-  console.log(product, "productproductproduct");
-
   const handleCardClick = () => {
     router.push(`/product?id=${product?.product_slug}`);
   };
@@ -33,6 +31,7 @@ const ProductSquareCard = ({ product, imgHeight }) => {
   const onAddToCartClick = async (event, n) => {
     if (!spinLoader) {
       event.preventDefault();
+      event.stopPropagation();
       setSpinLoader(true);
       const temp = cart?.cartItems?.filter(
         (k, i) => product?.id == k?.product_id

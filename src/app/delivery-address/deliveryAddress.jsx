@@ -275,7 +275,7 @@ const DeliveryAddress = () => {
                     variant: "error",
                     message: response?.message,
                     anchorOrigin: { horizontal: "left", vertical: "top" },
-                    autoHideDuration: 2000
+                    autoHideDuration: 2000,
                   });
                   localStorage.removeItem("token");
                   localStorage.removeItem("contactInfo");
@@ -287,7 +287,7 @@ const DeliveryAddress = () => {
                   variant: "error",
                   message: addResponse?.message,
                   anchorOrigin: { horizontal: "left", vertical: "top" },
-                  autoHideDuration: 2000
+                  autoHideDuration: 2000,
                 });
               }
             }
@@ -513,7 +513,6 @@ const DeliveryAddress = () => {
               padding: window.innerWidth < 376 ? "20px 0 20px" : "20px 0 0",
             }}
           >
-            {console.log(window.innerWidth, "window.innerWidth")}
             <Box
               className="contact-details-next-button"
               sx={

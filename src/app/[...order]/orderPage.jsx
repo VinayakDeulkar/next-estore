@@ -54,7 +54,6 @@ const OrderPage = (props) => {
     const addressData = userDetails?.address?.find(
       (addr) => addr?.title === orderDetails?.customer_details?.title
     );
-    console.log(addressData, "addressData");
     if (addressData) {
       handleAddressDetailsChange((prev) => ({
         ...prev,
@@ -84,7 +83,6 @@ const OrderPage = (props) => {
           addedAddress.push(foundAddress);
         }
       });
-      console.log(addedAddress, "addedAddress");
       const changeAreaResponse = await changeArea({
         vendors_id: homePageDetails?.vendor_data?.vendors_id,
         area_id: addressData.area_id,

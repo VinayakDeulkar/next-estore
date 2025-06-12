@@ -10,7 +10,6 @@ const AreaModal = ({ showAreaModal, handleClose, setMarkerPosition, type }) => {
   const { areaDetails } = useContext(AppContext);
   useEffect(() => {}, [areaDetails]);
 
-  console.log(type, "typetype");
   return (
     <>
       <Dialog

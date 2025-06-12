@@ -629,7 +629,6 @@ const AddressDetails = ({
             errorState={errorState}
             setMarkerPosition={setMarkerPosition}
             setShowMap={async (area_details) => {
-              console.log(area_details, "area_details");
               await calculateBound(area_details);
               setShowMap(true);
             }}
