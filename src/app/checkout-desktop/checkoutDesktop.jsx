@@ -8,7 +8,7 @@ import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import MenuDrawer from "@/components/common/MenuDrawer/menuDrawer";
 import { AppContext } from "@/context/AppContext";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { LoadScript, useJsApiLoader } from "@react-google-maps/api";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
@@ -41,14 +41,8 @@ const CheckoutDesktop = () => {
         <Grid item xs={0} sm={2.1}>
           {/* For Aligment */}
         </Grid>
-        <Grid
-          item
-          xs={0}
-          sm={3.5}
-          className="checkoutScroll"
-          sx={{ padding: "15px 0 0 0" }}
-        >
-          <HeaderBox />
+        <Grid item xs={0} sm={3.5} className="checkoutScroll">
+          <HeaderBox hidePadding />
           <BackComponent
             backClick={() => {
               if (userDetails?.is_guest) {

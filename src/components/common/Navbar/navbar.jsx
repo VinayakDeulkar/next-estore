@@ -2,13 +2,12 @@ import GridLayout2 from "@/components/GridLayouts/gridLayout2";
 import { AppContext } from "@/context/AppContext";
 import BurgerIcon from "@/SVGs/BurgerIcon";
 import { Box, Grid, IconButton } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import SearchBox from "../SearchBox/searchBox";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { useContext } from "react";
 
-const Navbar = ({ isScrollingUp }) => {
+const Navbar = ({ isScrollingUp, hidePadding }) => {
   const {
     homePageDetails,
     language,
@@ -165,7 +164,7 @@ const Navbar = ({ isScrollingUp }) => {
         zIndex: 999,
         color: "blue",
         position: "sticky",
-        padding: window.innerWidth > 990 ? "0 32px" : "0",
+        padding: window.innerWidth > 990 && !hidePadding ? "0 32px" : "0",
       }}
     >
       {renderGridNav()}
