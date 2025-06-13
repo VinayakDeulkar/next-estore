@@ -2,6 +2,7 @@ import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
 import { AppContext } from "@/context/AppContext";
 import CrossIcon from "@/SVGs/CrossIcon";
 import axios from "axios";
+import { useEffect } from "react";
 import { useContext, useState } from "react";
 
 const NewPromocode = ({
@@ -22,6 +23,7 @@ const NewPromocode = ({
     activeBackgroundColor,
   } = useContext(AppContext);
   const [apiCalled, setApiCalled] = useState(false);
+  const [isPromoApplied, setIsPromoApplied] = useState(false);
 
   const onApplyClick = () => {
     if (!apiCalled) {
@@ -55,6 +57,13 @@ const NewPromocode = ({
       }
     }
   };
+
+  useEffect(() => {
+    if (!promocode) {
+      setApply("");
+    }
+  }, [promocode]);
+
   return (
     <div>
       <SubHeadline enText={"Promotion Code"} arText={"الرمز الترويجي"} />
@@ -63,8 +72,13 @@ const NewPromocode = ({
           homePageDetails?.vendor_data?.home_page_type === "18" &&
           "fashion-theme"
         }`}
+        style={
+          apply !== "" && apply
+            ? { gridTemplateColumns: "100%" }
+            : { width: "100%", gridTemplateColumns: "auto 72px", gap: "10px" }
+        }
       >
-        <div className="promocode-input-div1">
+        <div className="promocode-input-div1" style={{ width: "100%" }}>
           <input
             type="text"
             className={`form-control ${
@@ -82,6 +96,48 @@ const NewPromocode = ({
             value={promocode}
             onChange={(e) => setPromocode(e.target.value)}
           ></input>
+          {apply !== "" ? (
+            <p
+              className="error-text"
+              style={
+                language === "ltr"
+                  ? {
+                      color: apply ? "#02b201" : "red",
+                      position: "absolute",
+                      right: "45px",
+                      top: "14px",
+                      cursor: "pointer",
+                    }
+                  : {
+                      color: apply ? "#02b201" : "red",
+                      position: "absolute",
+                      right: "45px",
+                      top: "14px",
+                      cursor: "pointer",
+                      left: "45px",
+                    }
+              }
+            >
+              {apply ? (
+                <>
+                  <i
+                    style={{ fontSize: 15 }}
+                    className="fa fa-check-circle-o"
+                  ></i>
+                  &nbsp;
+                  {language == "ltr"
+                    ? "Promocode is applied"
+                    : "تم تفعيل الرمز الترويجي"}
+                </>
+              ) : (
+                <>
+                  {language == "ltr"
+                    ? "Invalid Promo code passed"
+                    : "الرمز الترويجي غير صحيح"}
+                </>
+              )}
+            </p>
+          ) : null}
           {promocode && (
             <div
               className="promocode-cross-button"
@@ -95,33 +151,14 @@ const NewPromocode = ({
             </div>
           )}
         </div>
-        <div className="apply-button" onClick={() => onApplyClick()}>
+        <div
+          className="apply-button"
+          onClick={() => onApplyClick()}
+          style={apply !== "" && apply ? { display: "none" } : {}}
+        >
           {language == "ltr" ? "Apply" : "تفعيل"}
         </div>
       </div>
-      {apply !== "" && (
-        <p
-          className="error-text"
-          style={{
-            marginTop: "10px",
-            color: apply ? "#02b201" : "red",
-          }}
-        >
-          {apply ? (
-            <>
-              <i style={{ fontSize: 15 }} className="fa fa-check-circle-o"></i>
-              &nbsp;
-              {language == "ltr"
-                ? "Promocode is applied"
-                : "تم تفعيل الرمز الترويجي"}
-            </>
-          ) : language == "ltr" ? (
-            "Invalid Promo code passed"
-          ) : (
-            "الرمز الترويجي غير صحيح"
-          )}
-        </p>
-      )}
     </div>
   );
 };

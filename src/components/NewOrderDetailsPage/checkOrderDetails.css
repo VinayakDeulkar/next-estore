@@ -337,8 +337,6 @@ html[dir="rtl"] .promocode-text.collapsed .right-arrow {
   vertical-align: middle;
   display: grid;
   align-items: center;
-  grid-template-columns: auto 72px;
-  gap: 10px;
 }
 
 .promocode-input-div .apply-button {
