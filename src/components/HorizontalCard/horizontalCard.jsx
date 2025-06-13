@@ -11,7 +11,7 @@ import NormalText from "../assetBoxDesign/NormalText/normalText";
 import MultipleItems from "../assetBoxDesign/MultipleItems/multipleItems";
 import SnapPixel from "react-snapchat-pixel";
 import TiktokPixel from "tiktok-pixel";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import TypographyConverter from "../common/typographyConveter/TypographyConverter";
 import NumberCounter from "../Animations/numberCounter";
 
 const HorizontalCard = ({ product }) => {

@@ -7,7 +7,7 @@ import { AppContext } from "@/context/AppContext";
 import { Box, Fab } from "@mui/material";
 import { useContext, useEffect, useRef, useState } from "react";
 import BurgerIcon from "@/SVGs/BurgerIcon";
-import MenuDrawer from "@/components/common/MenuDrawer/menuDrawer";
+import MenuDrawer from "@/components/common/menuDrawer/MenuDrawer";
 import HeaderBox from "@/components/common/HeaderBox/headerBox";
 import { motion } from "framer-motion";
 

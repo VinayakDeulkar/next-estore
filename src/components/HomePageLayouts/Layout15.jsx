@@ -1,3 +1,4 @@
+import { AppContext } from "@/context/AppContext";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Accordion,
@@ -6,12 +7,10 @@ import {
   Grid,
 } from "@mui/material";
 import { useContext, useState } from "react";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
-import { AppContext } from "@/context/AppContext";
-import "./layout.css";
-import ProductSquareCard from "../ProductSquareCard/productSquareCard";
 import HeadLine from "../assetBoxDesign/Headline/headLine";
 import CategoryCard from "../CategoryCard/categoryCard";
+import ProductSquareCard from "../ProductSquareCard/productSquareCard";
+import "./layout.css";
 
 const Layout15 = ({ categories }) => {
   const { language, homePageDetails } = useContext(AppContext);

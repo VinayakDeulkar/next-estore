@@ -6,15 +6,13 @@ import {
   Box,
   Grid,
 } from "@mui/material";
-import { useState } from "react";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
-import HorizontalCard from "../HorizontalCard/horizontalCard";
-import { useRouter } from "next/navigation";
-import HeadLine from "../assetBoxDesign/Headline/headLine";
-import CategoryCard from "../CategoryCard/categoryCard";
-import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
-import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSquare";
 import $ from "jquery";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import HeadLine from "../assetBoxDesign/Headline/headLine";
+import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSquare";
+import CategoryCard from "../CategoryCard/categoryCard";
+import HorizontalCard from "../HorizontalCard/horizontalCard";
 
 const Layout11 = ({
   categories,

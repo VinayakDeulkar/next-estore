@@ -1,7 +1,7 @@
 import { AppContext } from "@/context/AppContext";
 import React, { useContext } from "react";
 import "./vendorInfoLayouts.css";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import TypographyConverter from "../common/typographyConveter/TypographyConverter";
 
 const VerticalVendorInfo = () => {
   const { homePageDetails, language } = useContext(AppContext);

@@ -1206,56 +1206,56 @@ const ProductDetails = ({
             product?.prodyct_type == 2 ? (
               !showRegister ? (
                 <motion.div
-                initial={{ opacity: 0, y: "20px" }}
-                animate={{ opacity: 1, y: "0px" }}
-                transition={{ duration: 0.2, delay: 1.8 }}
-              >
-                <div
-                  className={`bottom-button ${
-                    homePageDetails?.vendor_data?.home_page_type == "18"
-                      ? "bottom-button-full"
-                      : "bottom-button-half"
-                  }`}
-                  style={{ width: "100%" }}
+                  initial={{ opacity: 0, y: "20px" }}
+                  animate={{ opacity: 1, y: "0px" }}
+                  transition={{ duration: 0.2, delay: 1.8 }}
                 >
-                  <Link
-                    href={``}
-                    className={`text-center checkout-button ${
+                  <div
+                    className={`bottom-button ${
                       homePageDetails?.vendor_data?.home_page_type == "18"
-                        ? "fashion-checkout-page"
-                        : ""
+                        ? "bottom-button-full"
+                        : "bottom-button-half"
                     }`}
-                    onClick={(e) => {
-                      if (
-                        product?.quantity &&
-                        product?.product_status != 0 &&
-                        isRequired?.every((l) => l == true) &&
-                        variationRequired?.every((l) => l == true)
-                      ) {
-                        e.preventDefault();
-                        setShowRegister(true);
-                      } else {
-                        e.preventDefault();
-                      }
-                    }}
+                    style={{ width: "100%" }}
                   >
-                    {product?.quantity &&
-                    product?.product_status != 0 &&
-                    isRequired?.every((l) => l == true) &&
-                    variationRequired?.every((l) => l == true)
-                      ? language === "ltr"
-                        ? "Register"
-                        : "يسجل"
-                      : product?.product_status != 0
-                      ? language === "ltr"
-                        ? "Select Required Addons"
-                        : "حدد الإضافات المطلوبة"
-                      : language === "ltr"
-                      ? "Product Not Available"
-                      : "المنتج غير متوفر"}
-                  </Link>
-                </div>
-              </motion.div>
+                    <Link
+                      href={``}
+                      className={`text-center checkout-button ${
+                        homePageDetails?.vendor_data?.home_page_type == "18"
+                          ? "fashion-checkout-page"
+                          : ""
+                      }`}
+                      onClick={(e) => {
+                        if (
+                          product?.quantity &&
+                          product?.product_status != 0 &&
+                          isRequired?.every((l) => l == true) &&
+                          variationRequired?.every((l) => l == true)
+                        ) {
+                          e.preventDefault();
+                          setShowRegister(true);
+                        } else {
+                          e.preventDefault();
+                        }
+                      }}
+                    >
+                      {product?.quantity &&
+                      product?.product_status != 0 &&
+                      isRequired?.every((l) => l == true) &&
+                      variationRequired?.every((l) => l == true)
+                        ? language === "ltr"
+                          ? "Register"
+                          : "يسجل"
+                        : product?.product_status != 0
+                        ? language === "ltr"
+                          ? "Select Required Addons"
+                          : "حدد الإضافات المطلوبة"
+                        : language === "ltr"
+                        ? "Product Not Available"
+                        : "المنتج غير متوفر"}
+                    </Link>
+                  </div>
+                </motion.div>
               ) : null
             ) : (
               <div

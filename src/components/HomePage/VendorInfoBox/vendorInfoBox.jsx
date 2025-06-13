@@ -1,4 +1,4 @@
-import TypographyConverter from "@/components/common/TypographyConveter/typographyConverter";
+import TypographyConverter from "@/components/common/typographyConveter/TypographyConverter";
 import { AppContext } from "@/context/AppContext";
 import { Box } from "@mui/material";
 import Image from "next/image";

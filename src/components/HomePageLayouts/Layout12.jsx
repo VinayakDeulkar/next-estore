@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
-import ProductSquareCard from "../ProductSquareCard/productSquareCard";
-import { Box, Grid } from "@mui/material";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
-import HeadLine from "../assetBoxDesign/Headline/headLine";
 import { AppContext } from "@/context/AppContext";
-import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
-import SmallButtonRounded from "../assetBoxDesign/SmallButtonRounded/smallButtonRounded";
+import { Box, Grid } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import HeadLine from "../assetBoxDesign/Headline/headLine";
+import SmallButtonRounded from "../assetBoxDesign/SmallButtonRounded/smallButtonRounded";
+import ProductSquareCard from "../ProductSquareCard/productSquareCard";
 
 const Layout12 = ({ categories }) => {
   const { language } = useContext(AppContext);

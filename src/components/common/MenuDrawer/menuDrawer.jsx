@@ -1,7 +1,7 @@
 import { Box, Drawer, IconButton } from "@mui/material";
 import React, { useContext, useState } from "react";
 import ClearIcon from "@mui/icons-material/Clear";
-import VendorInfoBox from "@/components/HomePage/VendorInfoBox/vendorInfoBox";
+import VendorInfoBox from "@/components/HomePage/vendorInfoBox/VendorInfoBox";
 import RestSideDrawerContent from "@/components/SideBar/RestSideDrawerContent";
 import SocialMedia from "../SocialMedia/socialMedia";
 import TermsModal from "@/components/TermsModal/termsModal";

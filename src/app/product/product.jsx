@@ -1,20 +1,17 @@
 "use client";
-import BackComponent from "@/components/BackComponent";
 import BackButton from "@/components/common/BackButton/BackButton";
-import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
 import VerticalProductGrid from "@/components/GridLayouts/verticalProductGrid";
-import ProductCarousel from "@/components/ProductPageDetails/ProductCarousel/productCarousel";
-import ProductDetails from "@/components/ProductPageDetails/ProductDetails/ProductDetails";
+import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
+import ProductCarousel from "@/components/ProductPageDetails/productCarousel/ProductCarousel";
+import ProductDetails from "@/components/ProductPageDetails/productDetails/ProductDetails";
 import { AppContext } from "@/context/AppContext";
-import { Box, Fab, Grid } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import ShareIcon from "@/SVGs/ShareIcon";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import UploadIcon from "@mui/icons-material/Upload";
-import { useRouter } from "next/navigation";
-import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
-import ShareIcon from "@/SVGs/ShareIcon";
+import { Box, Fab, Grid } from "@mui/material";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 
 const Product = (props) => {
   const { homePageDetails, language } = useContext(AppContext);

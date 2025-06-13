@@ -1,11 +1,14 @@
 import { AppContext } from "@/context/AppContext";
 import { Box, Skeleton } from "@mui/material";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useCallback, useContext, useRef, useState } from "react";
 import AreaModal from "../AreaModal/areaModal";
+import Footer from "../common/Footer/footer";
 import "../custom.css";
 import OrderType from "../HomePage/OrderType/orderType";
-import SearchBar from "../SeachBar/searchBar";
+import HomepageDesign from "../InternationalDelivery/HomepageDesign";
+import ReviewBar from "../ReviewBar/reviewBar";
 import SearchNone from "../SeachBar/searchNone";
 import SearchProductList from "../SeachBar/searchProductList";
 import Layout11 from "./Layout11";
@@ -13,12 +16,7 @@ import Layout12 from "./Layout12";
 import Layout13 from "./Layout13";
 import Layout14 from "./Layout14";
 import Layout15 from "./Layout15";
-import ReviewBar from "../ReviewBar/reviewBar";
-import HomepageDesign from "../InternationalDelivery/HomepageDesign";
 import Layout17 from "./Layout17";
-import SearchBox from "../common/SearchBox/searchBox";
-import Footer from "../common/Footer/footer";
-import { motion } from "framer-motion";
 
 const HomePageLayouts = () => {
   const {

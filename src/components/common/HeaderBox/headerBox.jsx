@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Navbar from "../Navbar/navbar";
-import MenuDrawer from "../MenuDrawer/menuDrawer";
+import MenuDrawer from "../menuDrawer/MenuDrawer";
 
 const HeaderBox = ({ isScrollingUp, hidePadding }) => {
   return (

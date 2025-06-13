@@ -11,7 +11,7 @@ import SmallButtonSquare from "../assetBoxDesign/SmallButtonSquare/smallButtonSq
 import SubTitle from "../common/SubTitle/subTitle";
 import "./productSquareCard.css";
 import TiktokPixel from "tiktok-pixel";
-import TypographyConverter from "../common/TypographyConveter/typographyConverter";
+import TypographyConverter from "../common/typographyConveter/TypographyConverter";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import NumberCounter from "../Animations/numberCounter";
 import { breakPoints } from "@/constants/constants";
