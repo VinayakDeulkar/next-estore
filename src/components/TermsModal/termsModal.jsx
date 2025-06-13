@@ -15,7 +15,7 @@ const TermsModal = ({ isOpen, handleClose, termsData, type }) => {
       sx={{
         "& .MuiDialog-container > .MuiPaper-root": {
           borderRadius: "16px",
-          minWidth: "400px",
+          minWidth: "340px",
           margin: "15px",
         },
         "& .MuiDialog-container": {
@@ -27,7 +27,7 @@ const TermsModal = ({ isOpen, handleClose, termsData, type }) => {
         sx={{
           height: "calc(100dvh - 50px)",
           padding: "20px",
-          width: window.innerWidth > 990 ? "560px" : "auto",
+          width: window.innerWidth > 990 ? "500px" : "auto",
           display: "flex",
           flexDirection: "column",
           gap: "20px",

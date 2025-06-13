@@ -1,11 +1,10 @@
 import ApparentIcon from "@/SVGs/ApparentIcon";
-import BoxSvg from "@/SVGs/BoxSvg";
 import GovernmentIcon from "@/SVGs/GovernmentIcon";
 import HomeIcon from "@/SVGs/HomeIcon";
 import MosqueIcon from "@/SVGs/MosqueIcon";
 import OfficeIcons from "@/SVGs/OfficeIcons";
+import PickUpIcon from "@/SVGs/PickUpIcon";
 import SchoolIcon from "@/SVGs/SchoolIcon";
-import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 
 export const nameValidation = (value, setErrorContactDetails) => {
   let pattern =
@@ -131,7 +130,7 @@ export function addCartTag(obj) {
 
 export const getAddressType = (addressType, color, height, isPickup) => {
   if (isPickup) {
-    return <LocalShippingOutlinedIcon sx={{ height: "30px", width: "30px" }} />;
+    return <PickUpIcon color={color} />;
   }
   switch (addressType) {
     case "1":

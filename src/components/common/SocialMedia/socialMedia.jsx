@@ -12,7 +12,7 @@ import { Box } from "@mui/material";
 import ContactIcon from "@/SVGs/MenuDrawerIcons/ContactIcon";
 import MailIcon from "@/SVGs/MenuDrawerIcons/MailIcon";
 
-const SocialMedia = ({ handleTermsClick }) => {
+const SocialMedia = ({ handleTermsClick, setIsOpenPolicy }) => {
   const { language, homePageDetails, vendorSlug } = useContext(AppContext);
 
   return (
@@ -130,7 +130,10 @@ const SocialMedia = ({ handleTermsClick }) => {
           </div>
         </div>
         <div className="privacy-policy-text">
-          <div style={{ textDecoration: "underline" }}>
+          <div
+            style={{ cursor: "pointer", textDecoration: "underline" }}
+            onClick={() => setIsOpenPolicy(true)}
+          >
             {language === "ltr" ? "Privacy Policy" : "سياسة الخصوصية"}
           </div>
           <div

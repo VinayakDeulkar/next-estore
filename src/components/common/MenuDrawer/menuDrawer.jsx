@@ -7,6 +7,7 @@ import SocialMedia from "../SocialMedia/socialMedia";
 import TermsModal from "@/components/TermsModal/termsModal";
 import { AppContext } from "@/context/AppContext";
 import { getTNC } from "@/apis/getTNC";
+import PrivacyPolicy from "@/components/PrivacyPolicy/PrivacyPolicy";
 
 const MenuDrawer = () => {
   const {
@@ -17,6 +18,7 @@ const MenuDrawer = () => {
     handleSideMenuDrawer,
   } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenPolicy, setIsOpenPolicy] = useState(false);
   const [termsData, setTermsData] = useState();
 
   const handleTermsClick = async () => {
@@ -93,11 +95,18 @@ const MenuDrawer = () => {
             </Box>
             <RestSideDrawerContent />
           </Box>
-          <SocialMedia handleTermsClick={handleTermsClick} />
+          <SocialMedia
+            handleTermsClick={handleTermsClick}
+            setIsOpenPolicy={setIsOpenPolicy}
+          />
           <TermsModal
             isOpen={isOpen}
             handleClose={() => setIsOpen(false)}
             termsData={termsData}
+          />
+          <PrivacyPolicy
+            isOpen={isOpenPolicy}
+            handleClose={() => setIsOpenPolicy(false)}
           />
         </div>
       </Box>
