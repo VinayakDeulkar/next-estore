@@ -39,8 +39,9 @@ const ProductCarousel = ({ productImages }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
+            key={index}
           >
-            <Box key={index} className="product-owl-img">
+            <Box className="product-owl-img">
               <img
                 loading="lazy"
                 style={{
@@ -72,9 +73,9 @@ const ProductCarousel = ({ productImages }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
+              key={index}
             >
               <Box
-                key={index}
                 sx={{
                   width: activeIndex === index ? "30px" : "15px",
                   height: activeIndex === index ? "6px" : "3px",

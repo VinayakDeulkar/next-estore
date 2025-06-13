@@ -191,9 +191,9 @@ const PrivacyPolicy = ({ isOpen, handleClose }) => {
               <p>
                 We may update this Privacy Policy from time to time. We will
                 notify you of any changes by posting the new policy on our
-                website and updating the "Last Updated" date. Your continued use
-                of our services after such changes indicates your acceptance of
-                the new policy.
+                website and updating the &quot;Last Updated&quot; date. Your
+                continued use of our services after such changes indicates your
+                acceptance of the new policy.
               </p>
 
               <p>10. Contact Us</p>
@@ -426,8 +426,9 @@ const PrivacyPolicy = ({ isOpen, handleClose }) => {
                     <span dir="RTL">
                       قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي
                       تغييرات من خلال نشر السياسة الجديدة على موقعنا الإلكتروني
-                      وتحديث تاريخ "تاريخ التحديث". استمرارك في استخدام خدماتنا
-                      بعد هذه التغييرات يشير إلى قبولك للسياسة الجديدة
+                      وتحديث تاريخ &quot;تاريخ التحديث&quot;. استمرارك في
+                      استخدام خدماتنا بعد هذه التغييرات يشير إلى قبولك للسياسة
+                      الجديدة
                     </span>
                     .
                   </span>

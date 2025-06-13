@@ -58,11 +58,9 @@ const CarouselImage = ({ mobile = false }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2, delay: 2 }}
+            key={image?.id}
           >
-            <Box
-              key={image?.id}
-              sx={{ borderRadius: mobile ? "0" : "13.81px" }}
-            >
+            <Box sx={{ borderRadius: mobile ? "0" : "13.81px" }}>
               <img
                 loading="lazy"
                 src={image?.image}
