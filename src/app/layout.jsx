@@ -11,6 +11,7 @@ import "../assets/Fonts/Orleen.css";
 import "../assets/Fonts/SFTfont.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import LoadingWrapper from "@/components/Animations/LoadingWrapper";
+import CaptchProvider from "@/components/Captcha/CaptchProvider";
 
 export async function generateMetadata({ params }) {
   const headersList = headers();
@@ -105,7 +106,7 @@ export default async function RootLayout({ children }) {
           deliveryResponse={deliveryResponse}
           estoreBranchesResponse={estoreBranchesResponse}
         >
-          {children}
+          <CaptchProvider>{children}</CaptchProvider>
         </AppProvider>
       </body>
     </html>
