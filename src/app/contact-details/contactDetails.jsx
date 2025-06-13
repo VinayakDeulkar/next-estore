@@ -58,7 +58,10 @@ const ContactDetails = () => {
         setErrorContactDetails,
         contactDetails
       );
-      let name = nameValidation(contactDetails.name, setErrorContactDetails);
+      let name = nameValidation(
+        contactDetails.name?.trim(),
+        setErrorContactDetails
+      );
       if (!email && !phone && !name) {
         let data = {
           email: contactDetails.email,

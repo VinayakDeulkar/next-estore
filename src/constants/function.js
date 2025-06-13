@@ -10,7 +10,7 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 export const nameValidation = (value, setErrorContactDetails) => {
   let pattern =
     /^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]*$/;
-  if (value == "") {
+  if (value == "" || !value) {
     setErrorContactDetails((errorContactDetails) => ({
       ...errorContactDetails,
       nameErrorMessage: "This field is compulsory",
@@ -131,7 +131,7 @@ export function addCartTag(obj) {
 
 export const getAddressType = (addressType, color, height, isPickup) => {
   if (isPickup) {
-    return <LocalShippingOutlinedIcon sx={{height: "30px", width: "30px"}} />;
+    return <LocalShippingOutlinedIcon sx={{ height: "30px", width: "30px" }} />;
   }
   switch (addressType) {
     case "1":

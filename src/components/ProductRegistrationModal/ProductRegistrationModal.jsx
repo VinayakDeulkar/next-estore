@@ -86,7 +86,7 @@ const ProductRegistrationModal = ({
   const nameValidation = (value) => {
     let pattern =
       /^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]*$/;
-    if (value == "") {
+    if (value == "" || !value) {
       setErrorContactDetails((errorContactDetails) => ({
         ...errorContactDetails,
         nameErrorMessage: "This field is compulsory",
@@ -259,7 +259,7 @@ const ProductRegistrationModal = ({
   const registerProduct = async (e) => {
     let email = emailValidation(contactDetails.email);
     let phone = phoneValidation(contactDetails.phone);
-    let name = nameValidation(contactDetails.name);
+    let name = nameValidation(contactDetails.name?.trim());
     if (!email && !phone && !name) {
       let data = {
         email: contactDetails.email,

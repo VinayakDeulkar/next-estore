@@ -47,7 +47,7 @@ const UserInformation = () => {
   const nameValidation = (value) => {
     let pattern =
       /^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]*$/;
-    if (value == "") {
+    if (value == "" || !value) {
       setErrorContactDetails((errorContactDetails) => ({
         ...errorContactDetails,
         nameErrorMessage: "This field is compulsory",
@@ -190,7 +190,7 @@ const UserInformation = () => {
   };
 
   const updateUserInfo = async () => {
-    let name = nameValidation(contactDetails.name);
+    let name = nameValidation(contactDetails.name?.trim());
     let email = emailValidation(contactDetails.email, true);
     let phone = phoneValidation(contactDetails.phone, true);
 

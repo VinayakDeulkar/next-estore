@@ -509,7 +509,10 @@ const Login = () => {
         });
       }
     } else if (showNameEmailFields) {
-      let name = nameValidation(contactDetails.name, setErrorContactDetails);
+      let name = nameValidation(
+        contactDetails.name?.trim(),
+        setErrorContactDetails
+      );
       let phone = phoneValidation(
         contactDetails.phone,
         true,
@@ -649,7 +652,7 @@ const Login = () => {
         if (
           areaDetails?.type === "pickup" &&
           contactDetails.name &&
-          nameValidation(contactDetails.name)
+          nameValidation(contactDetails.name?.trim())
         ) {
           setStepper(1);
         } else {

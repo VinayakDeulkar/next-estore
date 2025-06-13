@@ -247,7 +247,7 @@ const UserDetails = ({
       if (
         areaDetails?.type === "pickup" &&
         contactDetails.name &&
-        nameValidation(contactDetails.name)
+        nameValidation(contactDetails.name?.trim())
       ) {
         setshowPickUpForm(true);
       } else {
@@ -283,7 +283,10 @@ const UserDetails = ({
     }
   };
   const handleUserChange = async () => {
-    let name = nameValidation(contactDetails.name, setErrorContactDetails);
+    let name = nameValidation(
+      contactDetails.name?.trim(),
+      setErrorContactDetails
+    );
     let phone = phoneValidation(
       contactDetails.phone,
       true,
@@ -433,7 +436,10 @@ const UserDetails = ({
         setErrorContactDetails,
         contactDetails
       );
-      let name = nameValidation(contactDetails.name, setErrorContactDetails);
+      let name = nameValidation(
+        contactDetails.name?.trim(),
+        setErrorContactDetails
+      );
       if (!email && !phone && !name) {
         let data = {
           email: contactDetails.email,
