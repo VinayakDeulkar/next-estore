@@ -222,9 +222,9 @@ const UserInformation = () => {
         });
         if (userReponse?.status) {
           let data = {
-            name: userReponse?.data?.name,
-            phone: userReponse?.data?.phone,
-            email: userReponse?.data?.email,
+            name: userReponse?.data?.name ?? "",
+            phone: userReponse?.data?.phone ?? "",
+            email: userReponse?.data?.email ?? "",
             code:
               Object.keys(tele).find(
                 (ele) =>

@@ -172,9 +172,9 @@ const UserDetails = ({
           handleUserDetailsChange({ ...userReponse?.data });
           handleContactDetailsChange({
             ...contactDetails,
-            name: userReponse?.data?.name,
-            email: userReponse?.data?.email,
-            phone: userReponse?.data?.phone,
+            name: userReponse?.data?.name ?? "",
+            email: userReponse?.data?.email ?? "",
+            phone: userReponse?.data?.phone ?? "",
             phoneCode:
               Object.keys(tele).find(
                 (ele) =>
@@ -197,6 +197,17 @@ const UserDetails = ({
             setShowGuestUser(false);
           }
         } else {
+          handleContactDetailsChange({
+            ...contactDetails,
+            name: userReponse?.data?.name ?? "",
+            email: userReponse?.data?.email ?? "",
+            phone: userReponse?.data?.phone ?? "",
+            phoneCode:
+              Object.keys(tele).find(
+                (ele) =>
+                  tele[ele] == userReponse?.data?.country_code.replace("+", "")
+              ) ?? "KW",
+          });
           setShowNameEmailFields(true);
           setShowGuestUser(false);
         }
