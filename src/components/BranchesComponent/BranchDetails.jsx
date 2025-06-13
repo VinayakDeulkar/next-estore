@@ -11,13 +11,23 @@ const drawerBleeding = 56;
 function BranchDetails({ branchId, setBranchId }) {
   const { areaDetails, language } = useContext(AppContext);
   const [branch, setBranch] = useState({});
+  const [mapLink, setMapLink] = useState("");
 
   useEffect(() => {
     if (areaDetails.data.branch) {
       setBranch(areaDetails.data.branch[branchId]);
     }
   }, [areaDetails.data.branch, branchId]);
-  
+
+  useEffect(() => {
+    const isIOSDevice = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isIOSDevice) {
+      setMapLink(`maps://?q=${branch?.lat},${branch?.lng}`);
+    } else {
+      setMapLink(`https://www.google.com/maps?q=${branch?.lat},${branch?.lng}`);
+    }
+  }, [branch?.lat, branch?.lng]);
+
   return (
     <SwipeableDrawer
       anchor="bottom"
@@ -33,7 +43,6 @@ function BranchDetails({ branchId, setBranchId }) {
           left: 0,
           borderTopLeftRadius: 12,
           borderTopRightRadius: 12,
-          backgroundColor: "#f5f5f5",
         },
       }}
       container={
@@ -68,7 +77,7 @@ function BranchDetails({ branchId, setBranchId }) {
           padding: "20px",
         }}
       >
-        <DialogTitle sx={{ padding: "10px 0 16px", fontWeight: "600" }}>
+        <DialogTitle sx={{ padding: "10px 0 16px", fontWeight: "500" }}>
           {language === "ltr" ? branch?.address : branch?.arabic_address}
         </DialogTitle>
         <React.Fragment>
@@ -86,15 +95,13 @@ function BranchDetails({ branchId, setBranchId }) {
                   >
                     {language === "ltr" ? "Call Branch" : "الإتصال بالفرع"}
                   </a>
-                  {branch?.google_map_url && (
-                    <a
-                      href={branch?.google_map_url}
-                      className="text-center branch-call"
-                      target="_blank"
-                    >
-                      {language === "ltr" ? "Get Direction" : "العنوان"}
-                    </a>
-                  )}
+                  <a
+                    href={mapLink}
+                    className="text-center branch-call"
+                    target="_blank"
+                  >
+                    {language === "ltr" ? "Get Direction" : "العنوان"}
+                  </a>
                 </div>
               </div>
               <div className="details-container pt-2">
@@ -102,7 +109,7 @@ function BranchDetails({ branchId, setBranchId }) {
                   <p className="branch-big-text">
                     <span>
                       <i className="fa fa-circle"></i>{" "}
-                      {language === "ltr" ? "Open Till" : "مفتوح حتى"}{" "}
+                      {language === "ltr" ? "Open Till" : "مفتوح حتى"}&nbsp;&nbsp;
                     </span>
                     {moment(branch?.office_end_time, "HH:mm:ss")
                       .locale("en")
@@ -113,7 +120,7 @@ function BranchDetails({ branchId, setBranchId }) {
                   </p>
                 </div>
               </div>
-              <div className="details-container pt-2">
+              <div className="details-container">
                 <div className="branch-inner-div branch-text-flex">
                   <p className="branch-small-text">
                     {language === "ltr" ? "Sunday - Saturday" : "الأحد - السبت"}

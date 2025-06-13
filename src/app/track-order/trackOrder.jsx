@@ -14,6 +14,8 @@ import NormalText from "@/components/assetBoxDesign/NormalText/normalText";
 import SmallButtonRounded from "@/components/assetBoxDesign/SmallButtonRounded/smallButtonRounded";
 import BackComponent from "@/components/BackComponent";
 import { motion } from "framer-motion";
+import SmallButtonSquare from "@/components/assetBoxDesign/SmallButtonSquare/smallButtonSquare";
+import CrossIcon from "@/SVGs/CrossIcon";
 
 const TrackOrder = () => {
   const [trackingNumber, setTrackingNumber] = useState();
@@ -24,6 +26,8 @@ const TrackOrder = () => {
       router.push(`/order=${trackingNumber}`);
     }
   };
+
+  console.log(trackingNumber, "trackingNumbertrackingNumber")
   return (
     <Box>
       <EstoreLayout1>
@@ -37,25 +41,13 @@ const TrackOrder = () => {
             >
               <HeadLine enText={"Orders Tracker"} arText={"تتبع الطلبات"} />
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="tracker-order-center order-tracker-image">
-                <img
-                  src="images/delivery-packed-image.jpg"
-                  className="trackorder-image"
-                />
-              </div>
-            </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
             >
-              <div style={{ textAlign: "center", marginBottom: "20px" }}>
+              <div style={{ margin: "8px 0 20px" }}>
                 <NormalText
                   enText={
                     "Track shipments and orders by entering the tracking number."
@@ -70,36 +62,39 @@ const TrackOrder = () => {
               animate={{ opacity: 1, y: "0px" }}
               transition={{ duration: 0.2, delay: 0.2 }}
             >
-              <div className="tracker-order-center">
-                <input
-                  type="text"
-                  onChange={(e) => {
-                    setTrackingNumber(e.target.value);
-                  }}
-                  className="order-tracker-input-field"
-                  placeholder={
-                    language === "ltr"
-                      ? "Tracking Number Goes Here"
-                      : "ضع رقم الطلب هنا لتتبعه"
-                  }
-                  style={{ fontSize: "16px" }}
-                />
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: "20px" }}
-              animate={{ opacity: 1, y: "0px" }}
-              transition={{ duration: 0.2, delay: 0.4 }}
-            >
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <SmallButtonRounded
-                  handleClick={handleSubmit}
-                  enText={"Track"}
-                  arText={"تتبع الطلب"}
-                  varient={"dark"}
-                  fontWeight="300"
-                />
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  marginTop: "25px",
+                }}
+              >
+                <div className="tracker-order-center" style={{position: "relative"}}>
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      setTrackingNumber(e.target.value);
+                    }}
+                    className="order-tracker-input-field"
+                    placeholder={
+                      language === "ltr"
+                        ? "Tracking Number Goes Here"
+                        : "ضع رقم الطلب هنا لتتبعه"
+                    }
+                    style={{ fontSize: "16px", borderRadius: "5px" }}
+                  />
+                </div>
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <SmallButtonSquare
+                    handleClick={handleSubmit}
+                    enText={"Track"}
+                    arText={"تتبع الطلب"}
+                    varient={"dark"}
+                    fontWeight="300"
+                    width="85px"
+                  />
+                </Box>
               </Box>
             </motion.div>
           </div>

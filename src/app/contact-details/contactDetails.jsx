@@ -116,7 +116,7 @@ const ContactDetails = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: stepper === 0 ? "40px" : "15px",
+            gap: stepper === 0 ? "40px" : "8px",
             position: "relative",
             height: "calc(100% - 50px)",
           }}

@@ -905,7 +905,7 @@ html[dir="rtl"] .orderStatusDiv {
 .details-container .product-outer-div .product-inner-div,
 .branch-call-div,
 .details-container .branch-inner-div {
-  padding: 16px;
+  padding: 10px;
   background-color: white;
 }
 
