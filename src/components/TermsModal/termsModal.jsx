@@ -3,6 +3,7 @@ import { Box, Dialog, IconButton } from "@mui/material";
 import React, { useContext } from "react";
 import SubHeadline from "../assetBoxDesign/SubHeadline/subHeadline";
 import ClearIcon from "@mui/icons-material/Clear";
+import { motion } from "framer-motion";
 
 const TermsModal = ({ isOpen, handleClose, termsData, type }) => {
   const { language } = useContext(AppContext);
@@ -43,13 +44,19 @@ const TermsModal = ({ isOpen, handleClose, termsData, type }) => {
             },
           }}
         >
-          <IconButton onClick={handleClose}>
-            <ClearIcon
-              sx={{
-                fill: "#000",
-              }}
-            />
-          </IconButton>
+          <motion.div
+            initial={{ opacity: 0, y: "20px" }}
+            animate={{ opacity: 1, y: "0px" }}
+            transition={{ duration: 0.2, delay: 0.2 }}
+          >
+            <IconButton onClick={handleClose}>
+              <ClearIcon
+                sx={{
+                  fill: "#000",
+                }}
+              />
+            </IconButton>
+          </motion.div>
         </Box>
         <div
           style={{
@@ -59,12 +66,23 @@ const TermsModal = ({ isOpen, handleClose, termsData, type }) => {
             marginTop: "-5px",
           }}
         >
+          <motion.div
+            initial={{ opacity: 0, y: "20px" }}
+            animate={{ opacity: 1, y: "0px" }}
+            transition={{ duration: 0.2, delay: 0.4 }}
+          >
           <SubHeadline
             enText={termsData?.title}
             arText={termsData?.arabic_name}
             fontSize={"18px"}
           />
+          </motion.div>
         </div>
+        <motion.div
+            initial={{ opacity: 0, y: "20px" }}
+            animate={{ opacity: 1, y: "0px" }}
+            transition={{ duration: 0.2, delay: 0.6 }}
+          >
         <div
           dangerouslySetInnerHTML={{
             __html:
@@ -74,6 +92,7 @@ const TermsModal = ({ isOpen, handleClose, termsData, type }) => {
           }}
           style={{ textAlign: "start" }}
         ></div>
+          </motion.div>
       </Box>
     </Dialog>
   );

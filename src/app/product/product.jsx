@@ -14,6 +14,7 @@ import UploadIcon from "@mui/icons-material/Upload";
 import { useRouter } from "next/navigation";
 import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
 import ShareIcon from "@/SVGs/ShareIcon";
+import { motion } from "framer-motion";
 
 const Product = (props) => {
   const { homePageDetails, language } = useContext(AppContext);
@@ -78,25 +79,31 @@ const Product = (props) => {
                         zIndex: 50,
                       }}
                     >
-                      <Fab
-                        size="small"
-                        sx={{
-                          boxShadow: "none",
-                          backgroundColor: "white",
-                          color: "black",
-                        }}
-                        onClick={() => router.push("/")}
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.2 }}
                       >
-                        {language === "ltr" ? (
-                          <KeyboardArrowLeftIcon
-                            style={{ fontSize: "28px", color: "black" }}
-                          />
-                        ) : (
-                          <KeyboardArrowRightIcon
-                            style={{ fontSize: "28px", color: "black" }}
-                          />
-                        )}
-                      </Fab>
+                        <Fab
+                          size="small"
+                          sx={{
+                            boxShadow: "none",
+                            backgroundColor: "white",
+                            color: "black",
+                          }}
+                          onClick={() => router.push("/")}
+                        >
+                          {language === "ltr" ? (
+                            <KeyboardArrowLeftIcon
+                              style={{ fontSize: "28px", color: "black" }}
+                            />
+                          ) : (
+                            <KeyboardArrowRightIcon
+                              style={{ fontSize: "28px", color: "black" }}
+                            />
+                          )}
+                        </Fab>
+                      </motion.div>
                     </div>
                     {navigator.share && (
                       <div
@@ -109,18 +116,24 @@ const Product = (props) => {
                         }}
                         onClick={() => onShareClick()}
                       >
-                        <Fab
-                          size="small"
-                          sx={{
-                            boxShadow: "none",
-                            backgroundColor: "white",
-                            color: "black",
-                          }}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.2 }}
                         >
-                          <Box sx={{ margin: "0 0 0 2px" }}>
-                            <ShareIcon height={"21px"} width={"21px"} />
-                          </Box>
-                        </Fab>
+                          <Fab
+                            size="small"
+                            sx={{
+                              boxShadow: "none",
+                              backgroundColor: "white",
+                              color: "black",
+                            }}
+                          >
+                            <Box sx={{ margin: "0 0 0 2px" }}>
+                              <ShareIcon height={"21px"} width={"21px"} />
+                            </Box>
+                          </Fab>
+                        </motion.div>
                       </div>
                     )}
                     <Box

@@ -27,50 +27,41 @@ const TrackOrder = () => {
     }
   };
 
-  console.log(trackingNumber, "trackingNumbertrackingNumber")
+  console.log(trackingNumber, "trackingNumbertrackingNumber");
   return (
     <Box>
       <EstoreLayout1>
         <BackComponent backClick={() => router.push("/")} />
         <div className="trackOrder-whitebox">
           <div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-            >
-              <HeadLine enText={"Orders Tracker"} arText={"تتبع الطلبات"} />
-            </motion.div>
+            <HeadLine enText={"Orders Tracker"} arText={"تتبع الطلبات"} />
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div style={{ margin: "8px 0 20px" }}>
-                <NormalText
-                  enText={
-                    "Track shipments and orders by entering the tracking number."
-                  }
-                  arText={"تتبع الشحنات والطلبات عن طريق إدخال رقم التتبع."}
-                />
-              </div>
-            </motion.div>
+            <div style={{ margin: "8px 0 20px" }}>
+              <NormalText
+                enText={
+                  "Track shipments and orders by entering the tracking number."
+                }
+                arText={"تتبع الشحنات والطلبات عن طريق إدخال رقم التتبع."}
+              />
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: "20px" }}
-              animate={{ opacity: 1, y: "0px" }}
-              transition={{ duration: 0.2, delay: 0.2 }}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginTop: "25px",
+              }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  marginTop: "25px",
-                }}
+              <motion.div
+                initial={{ opacity: 0, y: "20px" }}
+                animate={{ opacity: 1, y: "0px" }}
+                transition={{ duration: 0.2, delay: 0.2 }}
               >
-                <div className="tracker-order-center" style={{position: "relative"}}>
+                <div
+                  className="tracker-order-center"
+                  style={{ position: "relative" }}
+                >
                   <input
                     type="text"
                     onChange={(e) => {
@@ -85,7 +76,14 @@ const TrackOrder = () => {
                     style={{ fontSize: "16px", borderRadius: "5px" }}
                   />
                 </div>
-                <Box sx={{ display: "flex", justifyContent: "center" }}>
+              </motion.div>
+
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <motion.div
+                  initial={{ opacity: 0, y: "20px" }}
+                  animate={{ opacity: 1, y: "0px" }}
+                  transition={{ duration: 0.2, delay: 0.4 }}
+                >
                   <SmallButtonSquare
                     handleClick={handleSubmit}
                     enText={"Track"}
@@ -94,9 +92,9 @@ const TrackOrder = () => {
                     fontWeight="300"
                     width="85px"
                   />
-                </Box>
+                </motion.div>
               </Box>
-            </motion.div>
+            </Box>
           </div>
         </div>
       </EstoreLayout1>

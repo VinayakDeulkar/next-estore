@@ -3,6 +3,7 @@ import { Box, IconButton } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import { motion } from "framer-motion";
 
 function BranchList({ setBranchId }) {
   const [branchs, setBranchs] = useState([]);
@@ -26,33 +27,40 @@ function BranchList({ setBranchId }) {
         <ul className="branch-list">
           {branchs?.map((branch, i) => (
             <div style={{ margin: "0 15px" }} key={i}>
-              <li className="branch-list-item">
-                <Box
-                  component="a"
-                  onClick={() => setBranchId(i)}
-                  className="branch-details"
-                >
-                  <h2 className="branch-name">
-                    {language === "ltr" ? branch?.name : branch?.arabic_name}
-                  </h2>
-                  <p className="branch-address">
-                    {language === "ltr"
-                      ? branch?.address
-                      : branch?.arabic_address}
-                  </p>
-                </Box>
-                <Box component="a" onClick={() => setBranchId(i)}>
-                  {vendorSlug?.data?.ecom_url_slug === "cube-aroma" ? (
-                    <IconButton>
-                      <InfoOutlinedIcon sx={{ color: "#000" }} />
-                    </IconButton>
-                  ) : (
-                    <ArrowForwardIosOutlinedIcon
-                      sx={{ height: "17px", width: "17px" }}
-                    />
-                  )}
-                </Box>
-              </li>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                <li className="branch-list-item">
+                  <Box
+                    component="a"
+                    onClick={() => setBranchId(i)}
+                    className="branch-details"
+                  >
+                    <h2 className="branch-name">
+                      {language === "ltr" ? branch?.name : branch?.arabic_name}
+                    </h2>
+                    <p className="branch-address">
+                      {language === "ltr"
+                        ? branch?.address
+                        : branch?.arabic_address}
+                    </p>
+                  </Box>
+                  <Box component="a" onClick={() => setBranchId(i)}>
+                    {vendorSlug?.data?.ecom_url_slug === "cube-aroma" ? (
+                      <IconButton>
+                        <InfoOutlinedIcon sx={{ color: "#000" }} />
+                      </IconButton>
+                    ) : (
+                      <ArrowForwardIosOutlinedIcon
+                        sx={{ height: "17px", width: "17px" }}
+                      />
+                    )}
+                  </Box>
+                </li>
+              </motion.div>
+
               {i !== branchs?.length - 1 && (
                 <div
                   style={{

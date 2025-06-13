@@ -25,6 +25,7 @@ import AddToBagIcon from "@/SVGs/AddToBagIcon";
 import SquareOptionBox from "@/components/assetBoxDesign/SquareOptionBox/squareOptionBox";
 import NumberCounter from "@/components/Animations/numberCounter";
 import SubHeadline from "@/components/assetBoxDesign/SubHeadline/subHeadline";
+import { motion } from "framer-motion";
 
 const ProductDetails = ({
   product,
@@ -706,11 +707,17 @@ const ProductDetails = ({
             width: "100%",
           }}
         >
-          <HeadLine
-            enText={product?.name}
-            arText={product?.name_ar}
-            fontSize="24px"
-          />
+          <motion.div
+            initial={{ opacity: 0, y: "20px" }}
+            animate={{ opacity: 1, y: "0px" }}
+            transition={{ duration: 0.2, delay: 0.4 }}
+          >
+            <HeadLine
+              enText={product?.name}
+              arText={product?.name_ar}
+              fontSize="24px"
+            />
+          </motion.div>
           <Box
             sx={{
               display: "flex",
@@ -718,79 +725,91 @@ const ProductDetails = ({
               alignItems: "end",
             }}
           >
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "3px" }}
+            <motion.div
+              initial={{ opacity: 0, y: "20px" }}
+              animate={{ opacity: 1, y: "0px" }}
+              transition={{ duration: 0.2, delay: 0.6 }}
             >
-              <div>
-                {product?.offer_applied == 1 ? (
-                  <NormalText
-                    enText={product?.offer_msg}
-                    arText={product?.offer_msg_ar}
-                    color={product?.offer_color}
-                  />
-                ) : null}
-              </div>
               <div
-                style={{ display: "flex", alignItems: "center", gap: "5px" }}
+                style={{ display: "flex", flexDirection: "column", gap: "3px" }}
               >
-                <div>{renderLabelEmoji("1")}</div>
-                <NormalText
-                  enText={/* product?.label */ "Most Ordered"}
-                  arText={product?.label_ar}
-                  color={"#333333"}
-                  fontSize={"13px"}
-                />
-              </div>
-            </div>
-            {product?.base_price != "" && product?.prodyct_type != 3 ? (
-              <Box
-                sx={{ display: "flex", flexDirection: "column", gap: "3px" }}
-              >
-                {product &&
-                  parseFloat(
-                    product?.price_after_discount.split(",").join("")
-                  ) != parseFloat(product?.base_price) &&
-                  product?.base_price != "" && (
-                    <div
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: "400",
-                        textAlign: "end",
-                        color: "Red",
-                      }}
-                    >
-                      <del>
-                        <span>
-                          {language === "rtl" ? "د.ك" : "KD"}{" "}
-                          <span>
-                            {Number(product.base_price).toLocaleString(
-                              "en-KW",
-                              {
-                                minimumFractionDigits: 3,
-                                maximumFractionDigits: 3,
-                              }
-                            )}
-                          </span>
-                        </span>
-                      </del>
-                      <br></br>
-                    </div>
-                  )}
-                <span
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "500",
-                  }}
+                <div>
+                  {product?.offer_applied == 1 ? (
+                    <NormalText
+                      enText={product?.offer_msg}
+                      arText={product?.offer_msg_ar}
+                      color={product?.offer_color}
+                    />
+                  ) : null}
+                </div>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "5px" }}
                 >
-                  {product ? (
-                    <>
-                      {language === "rtl" ? "د.ك" : "KD"}{" "}
-                      <span>{product.price_after_discount}</span>
-                    </>
-                  ) : null}{" "}
-                </span>
-              </Box>
-            ) : null}
+                  <div>{renderLabelEmoji("1")}</div>
+                  <NormalText
+                    enText={/* product?.label */ "Most Ordered"}
+                    arText={product?.label_ar}
+                    color={"#333333"}
+                    fontSize={"13px"}
+                  />
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: "20px" }}
+              animate={{ opacity: 1, y: "0px" }}
+              transition={{ duration: 0.2, delay: 0.8 }}
+            >
+              {product?.base_price != "" && product?.prodyct_type != 3 ? (
+                <Box
+                  sx={{ display: "flex", flexDirection: "column", gap: "3px" }}
+                >
+                  {product &&
+                    parseFloat(
+                      product?.price_after_discount.split(",").join("")
+                    ) != parseFloat(product?.base_price) &&
+                    product?.base_price != "" && (
+                      <div
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: "400",
+                          textAlign: "end",
+                          color: "Red",
+                        }}
+                      >
+                        <del>
+                          <span>
+                            {language === "rtl" ? "د.ك" : "KD"}{" "}
+                            <span>
+                              {Number(product.base_price).toLocaleString(
+                                "en-KW",
+                                {
+                                  minimumFractionDigits: 3,
+                                  maximumFractionDigits: 3,
+                                }
+                              )}
+                            </span>
+                          </span>
+                        </del>
+                        <br></br>
+                      </div>
+                    )}
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {product ? (
+                      <>
+                        {language === "rtl" ? "د.ك" : "KD"}{" "}
+                        <span>{product.price_after_discount}</span>
+                      </>
+                    ) : null}{" "}
+                  </span>
+                </Box>
+              ) : null}
+            </motion.div>
           </Box>
 
           {/* <SubHeadline
@@ -801,8 +820,13 @@ const ProductDetails = ({
           {(product?.variation_id != "" &&
             productvariationPrice?.[addedVariaton.toString()]?.sku) ||
           (product?.sku != "" && product?.sku) ? (
-            <NormalText
-              enText={`SKU
+            <motion.div
+              initial={{ opacity: 0, y: "20px" }}
+              animate={{ opacity: 1, y: "0px" }}
+              transition={{ duration: 0.2, delay: 1 }}
+            >
+              <NormalText
+                enText={`SKU
               ${
                 product?.variation_id != ""
                   ? productvariationPrice?.[addedVariaton.toString()]?.sku
@@ -810,7 +834,7 @@ const ProductDetails = ({
                     : product?.sku
                   : product?.sku
               }`}
-              arText={`SKU
+                arText={`SKU
                 ${
                   product?.variation_id != ""
                     ? productvariationPrice?.[addedVariaton.toString()]?.sku
@@ -818,176 +842,194 @@ const ProductDetails = ({
                       : product?.sku
                     : product?.sku
                 }`}
-            />
+              />
+            </motion.div>
           ) : null}
 
           {product?.short_description ? (
-            <p
-              dangerouslySetInnerHTML={{
-                __html:
-                  language == "ltr"
-                    ? product?.short_description
-                    : product?.short_description_ar,
-              }}
-              style={{
-                fontWeight: "300",
-                fontSize: "15px",
-                color: "#333333",
-                marginTop: "15px",
-              }}
-            ></p>
+            <motion.div
+              initial={{ opacity: 0, y: "20px" }}
+              animate={{ opacity: 1, y: "0px" }}
+              transition={{ duration: 0.2, delay: 1.2 }}
+            >
+              <p
+                dangerouslySetInnerHTML={{
+                  __html:
+                    language == "ltr"
+                      ? product?.short_description
+                      : product?.short_description_ar,
+                }}
+                style={{
+                  fontWeight: "300",
+                  fontSize: "15px",
+                  color: "#333333",
+                  marginTop: "15px",
+                }}
+              ></p>
+            </motion.div>
           ) : null}
-          {product?.is_addons != 1 &&
-            product?.prodyct_type != 3 &&
-            product?.variation_id != "" &&
-            variation.map((variant, variantIndex) => (
-              <Box
-                sx={{ display: "flex", flexDirection: "column", gap: "20px" }}
-                key={variantIndex}
-              >
+          <motion.div
+            initial={{ opacity: 0, y: "20px" }}
+            animate={{ opacity: 1, y: "0px" }}
+            transition={{ duration: 0.2, delay: 1.4 }}
+          >
+            {product?.is_addons != 1 &&
+              product?.prodyct_type != 3 &&
+              product?.variation_id != "" &&
+              variation.map((variant, variantIndex) => (
                 <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "end",
-                    gap: "20px",
-                  }}
-                >
-                  <Box sx={{ fontSize: "16px", fontWeight: 500 }}>
-                    {language == "ltr" ? variant[0]?.name : variant[0]?.name_ar}
-                  </Box>
-                </Box>
-                <Box
-                  sx={
-                    variationChecked[variantIndex]?.length <= 2
-                      ? {
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          width: "100%",
-                        }
-                      : {
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "10px",
-                        }
-                  }
-                >
-                  {variationChecked[variantIndex]?.map(
-                    (variantOption, variantOptionIndex) =>
-                      variationChecked[variantIndex]?.length <= 2 ? (
-                        <SquareOptionBox
-                          key={variantOptionIndex}
-                          enText={variantOption?.english_name}
-                          arText={variantOption?.arabic_name}
-                          selected={
-                            variationChecked[variantIndex][variantOptionIndex]
-                              .isChecked
-                          }
-                          amount={
-                            productvariationPrice?.[
-                              variantOption.value.toString()
-                            ]?.price
-                          }
-                          disabled={checkIsDisabled(
-                            variationChecked[variantIndex][variantOptionIndex]
-                              .value,
-                            variantIndex
-                          )}
-                          handleClick={(e) => {
-                            e.stopPropagation();
-                            e.nativeEvent.stopPropagation();
-                            onVariationChecked(
-                              variantOption?.value,
-                              variantIndex
-                            );
-                          }}
-                        />
-                      ) : (
-                        <OptionBox
-                          key={variantOptionIndex}
-                          enText={variantOption?.english_name}
-                          arText={variantOption?.arabic_name}
-                          disabled={checkIsDisabled(
-                            variationChecked[variantIndex][variantOptionIndex]
-                              .value,
-                            variantIndex
-                          )}
-                          amount={
-                            productvariationPrice?.[
-                              variantOption.value.toString()
-                            ]?.price
-                          }
-                          selected={
-                            variationChecked[variantIndex][variantOptionIndex]
-                              .isChecked
-                          }
-                          handleClick={(e) => {
-                            e.stopPropagation();
-                            e.nativeEvent.stopPropagation();
-                            onVariationChecked(
-                              variantOption?.value,
-                              variantIndex
-                            );
-                          }}
-                        />
-                      )
-                  )}
-                </Box>
-              </Box>
-            ))}
-          {product?.is_addons == 1 &&
-            product?.prodyct_type != 3 &&
-            addons.map((addon, addonIndex) => (
-              <div className="details-container pt-2" key={addonIndex}>
-                <Box
-                  key={addonIndex}
                   sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
+                  key={variantIndex}
                 >
                   <Box
                     sx={{
                       display: "flex",
-                      justifyContent: "space-between",
+                      justifyContent: "start",
                       alignItems: "end",
+                      gap: "20px",
+                    }}
+                  >
+                    <Box sx={{ fontSize: "16px", fontWeight: 500 }}>
+                      {language == "ltr"
+                        ? variant[0]?.name
+                        : variant[0]?.name_ar}
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={
+                      variationChecked[variantIndex]?.length <= 2
+                        ? {
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            width: "100%",
+                          }
+                        : {
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "10px",
+                          }
+                    }
+                  >
+                    {variationChecked[variantIndex]?.map(
+                      (variantOption, variantOptionIndex) =>
+                        variationChecked[variantIndex]?.length <= 2 ? (
+                          <SquareOptionBox
+                            key={variantOptionIndex}
+                            enText={variantOption?.english_name}
+                            arText={variantOption?.arabic_name}
+                            selected={
+                              variationChecked[variantIndex][variantOptionIndex]
+                                .isChecked
+                            }
+                            amount={
+                              productvariationPrice?.[
+                                variantOption.value.toString()
+                              ]?.price
+                            }
+                            disabled={checkIsDisabled(
+                              variationChecked[variantIndex][variantOptionIndex]
+                                .value,
+                              variantIndex
+                            )}
+                            handleClick={(e) => {
+                              e.stopPropagation();
+                              e.nativeEvent.stopPropagation();
+                              onVariationChecked(
+                                variantOption?.value,
+                                variantIndex
+                              );
+                            }}
+                          />
+                        ) : (
+                          <OptionBox
+                            key={variantOptionIndex}
+                            enText={variantOption?.english_name}
+                            arText={variantOption?.arabic_name}
+                            disabled={checkIsDisabled(
+                              variationChecked[variantIndex][variantOptionIndex]
+                                .value,
+                              variantIndex
+                            )}
+                            amount={
+                              productvariationPrice?.[
+                                variantOption.value.toString()
+                              ]?.price
+                            }
+                            selected={
+                              variationChecked[variantIndex][variantOptionIndex]
+                                .isChecked
+                            }
+                            handleClick={(e) => {
+                              e.stopPropagation();
+                              e.nativeEvent.stopPropagation();
+                              onVariationChecked(
+                                variantOption?.value,
+                                variantIndex
+                              );
+                            }}
+                          />
+                        )
+                    )}
+                  </Box>
+                </Box>
+              ))}
+            {product?.is_addons == 1 &&
+              product?.prodyct_type != 3 &&
+              addons.map((addon, addonIndex) => (
+                <div className="details-container pt-2" key={addonIndex}>
+                  <Box
+                    key={addonIndex}
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
                     }}
                   >
                     <Box
                       sx={{
-                        fontSize: "16px",
-                        fontWeight: 500,
                         display: "flex",
-                        alignItems: "center",
                         justifyContent: "space-between",
-                        width: "100%",
+                        alignItems: "end",
                       }}
                     >
-                      <div>
-                        {language == "ltr"
-                          ? addon?.english_name
-                          : addon?.arabic_name}
-                      </div>
-                      <div
-                        style={{
-                          color: "#252525",
-                          fontSize: "14px",
-                          fontWeight: "300",
+                      <Box
+                        sx={{
+                          fontSize: "16px",
+                          fontWeight: 500,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          width: "100%",
                         }}
                       >
-                        {language == "ltr" ? "Max selection" : "اختيار ماكس"}
-                        <span>&nbsp;{addon.max_selection}</span>
-                      </div>
-                    </Box>
-                    <Box>
-                      {product?.quantity &&
-                        product?.product_status != 0 &&
-                        addon?.is_required == 1 && (
-                          <NormalText
-                            enText={"Required"}
-                            arText={"مطلوب"}
-                            color={"#252525"}
-                          />
-                        )}
-                      {/* {checked[addonIndex]?.some(
+                        <div>
+                          {language == "ltr"
+                            ? addon?.english_name
+                            : addon?.arabic_name}
+                        </div>
+                        <div
+                          style={{
+                            color: "#252525",
+                            fontSize: "14px",
+                            fontWeight: "300",
+                          }}
+                        >
+                          {language == "ltr" ? "Max selection" : "اختيار ماكس"}
+                          <span>&nbsp;{addon.max_selection}</span>
+                        </div>
+                      </Box>
+                      <Box>
+                        {product?.quantity &&
+                          product?.product_status != 0 &&
+                          addon?.is_required == 1 && (
+                            <NormalText
+                              enText={"Required"}
+                              arText={"مطلوب"}
+                              color={"#252525"}
+                            />
+                          )}
+                        {/* {checked[addonIndex]?.some(
                         (check, k) => check.isChecked
                       ) && (
                         <div
@@ -1002,107 +1044,108 @@ const ProductDetails = ({
                           {language == "ltr" ? "Clear All" : "مسح الإختيار"}
                         </div>
                       )} */}
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={
+                        checked[addonIndex]?.length <= 2
+                          ? {
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "start",
+                              gap: "20px",
+                              width: "100%",
+                            }
+                          : {
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: "10px",
+                            }
+                      }
+                    >
+                      {checked[addonIndex]?.map(
+                        (addonsOption, addonsOptionIndex) =>
+                          checked[addonIndex]?.length <= 2 ? (
+                            <SquareOptionBox
+                              key={addonsOptionIndex}
+                              enText={addonsOption?.english_name}
+                              arText={addonsOption?.arabic_name}
+                              selected={
+                                checked[addonIndex][addonsOptionIndex].isChecked
+                              }
+                              amount={addonsOption.price}
+                              disabled={
+                                addonsOption.disabled == 1 ||
+                                addonsOption.label != ""
+                              }
+                              handleClick={(e) => {
+                                e.stopPropagation();
+                                e.nativeEvent.stopPropagation();
+                                if (
+                                  addonsOption?.disabled == 0 &&
+                                  addonsOption.label == ""
+                                ) {
+                                  if (addon?.max_selection != 1)
+                                    onChecked(
+                                      addonsOption?.value,
+                                      addonsOption.price,
+                                      addon.max_selection,
+                                      addonIndex
+                                    );
+                                  else
+                                    onSelectChecked(
+                                      addonsOption?.value,
+                                      addonsOption.price,
+                                      addon.max_selection,
+                                      addonIndex
+                                    );
+                                }
+                              }}
+                            />
+                          ) : (
+                            <OptionBox
+                              key={addonsOptionIndex}
+                              enText={addonsOption?.english_name}
+                              arText={addonsOption?.arabic_name}
+                              selected={
+                                checked[addonIndex][addonsOptionIndex].isChecked
+                              }
+                              amount={addonsOption.price}
+                              disabled={
+                                addonsOption.disabled == 1 ||
+                                addonsOption.label != ""
+                              }
+                              handleClick={(e) => {
+                                e.stopPropagation();
+                                e.nativeEvent.stopPropagation();
+                                if (
+                                  addonsOption?.disabled == 0 &&
+                                  addonsOption.label == ""
+                                ) {
+                                  if (addon?.max_selection != 1)
+                                    onChecked(
+                                      addonsOption?.value,
+                                      addonsOption.price,
+                                      addon.max_selection,
+                                      addonIndex
+                                    );
+                                  else
+                                    onSelectChecked(
+                                      addonsOption?.value,
+                                      addonsOption.price,
+                                      addon.max_selection,
+                                      addonIndex
+                                    );
+                                }
+                              }}
+                            />
+                          )
+                      )}
                     </Box>
                   </Box>
-                  <Box
-                    sx={
-                      checked[addonIndex]?.length <= 2
-                        ? {
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "start",
-                            gap: "20px",
-                            width: "100%",
-                          }
-                        : {
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "10px",
-                          }
-                    }
-                  >
-                    {checked[addonIndex]?.map(
-                      (addonsOption, addonsOptionIndex) =>
-                        checked[addonIndex]?.length <= 2 ? (
-                          <SquareOptionBox
-                            key={addonsOptionIndex}
-                            enText={addonsOption?.english_name}
-                            arText={addonsOption?.arabic_name}
-                            selected={
-                              checked[addonIndex][addonsOptionIndex].isChecked
-                            }
-                            amount={addonsOption.price}
-                            disabled={
-                              addonsOption.disabled == 1 ||
-                              addonsOption.label != ""
-                            }
-                            handleClick={(e) => {
-                              e.stopPropagation();
-                              e.nativeEvent.stopPropagation();
-                              if (
-                                addonsOption?.disabled == 0 &&
-                                addonsOption.label == ""
-                              ) {
-                                if (addon?.max_selection != 1)
-                                  onChecked(
-                                    addonsOption?.value,
-                                    addonsOption.price,
-                                    addon.max_selection,
-                                    addonIndex
-                                  );
-                                else
-                                  onSelectChecked(
-                                    addonsOption?.value,
-                                    addonsOption.price,
-                                    addon.max_selection,
-                                    addonIndex
-                                  );
-                              }
-                            }}
-                          />
-                        ) : (
-                          <OptionBox
-                            key={addonsOptionIndex}
-                            enText={addonsOption?.english_name}
-                            arText={addonsOption?.arabic_name}
-                            selected={
-                              checked[addonIndex][addonsOptionIndex].isChecked
-                            }
-                            amount={addonsOption.price}
-                            disabled={
-                              addonsOption.disabled == 1 ||
-                              addonsOption.label != ""
-                            }
-                            handleClick={(e) => {
-                              e.stopPropagation();
-                              e.nativeEvent.stopPropagation();
-                              if (
-                                addonsOption?.disabled == 0 &&
-                                addonsOption.label == ""
-                              ) {
-                                if (addon?.max_selection != 1)
-                                  onChecked(
-                                    addonsOption?.value,
-                                    addonsOption.price,
-                                    addon.max_selection,
-                                    addonIndex
-                                  );
-                                else
-                                  onSelectChecked(
-                                    addonsOption?.value,
-                                    addonsOption.price,
-                                    addon.max_selection,
-                                    addonIndex
-                                  );
-                              }
-                            }}
-                          />
-                        )
-                    )}
-                  </Box>
-                </Box>
-              </div>
-            ))}
+                </div>
+              ))}
+          </motion.div>
           {/* {product?.prodyct_type != 3 ? (
             <div className="details-container pt-2">
               <div className="product-outer-div">
@@ -1143,19 +1186,30 @@ const ProductDetails = ({
         <Box sx={{ width: "100%" }}>
           {product?.prodyct_type != 3 ? (
             <Box sx={{ marginBottom: "20px" }}>
-              <TextInputField
-                label={"Add a note (Optional)"}
-                arLabel={"أضف ملاحظة (اختياري)"}
-                handleChange={(e) => onNoteChange(e)}
-                value={note}
-                color="rgb(141, 141, 141)"
-                fontWeight="300"
-              />
+              <motion.div
+                initial={{ opacity: 0, y: "20px" }}
+                animate={{ opacity: 1, y: "0px" }}
+                transition={{ duration: 0.2, delay: 1.6 }}
+              >
+                <TextInputField
+                  label={"Add a note (Optional)"}
+                  arLabel={"أضف ملاحظة (اختياري)"}
+                  handleChange={(e) => onNoteChange(e)}
+                  value={note}
+                  color="rgb(141, 141, 141)"
+                  fontWeight="300"
+                />
+              </motion.div>
             </Box>
           ) : null}
           {product?.prodyct_type != 3 ? (
             product?.prodyct_type == 2 ? (
               !showRegister ? (
+                <motion.div
+                initial={{ opacity: 0, y: "20px" }}
+                animate={{ opacity: 1, y: "0px" }}
+                transition={{ duration: 0.2, delay: 1.8 }}
+              >
                 <div
                   className={`bottom-button ${
                     homePageDetails?.vendor_data?.home_page_type == "18"
@@ -1201,6 +1255,7 @@ const ProductDetails = ({
                       : "المنتج غير متوفر"}
                   </Link>
                 </div>
+              </motion.div>
               ) : null
             ) : (
               <div
@@ -1224,114 +1279,125 @@ const ProductDetails = ({
                     margin: checkSize() ? "0 40px" : "0 20px",
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "start",
-                      gap: "3px",
-                    }}
+                  <motion.div
+                    initial={{ opacity: 0, y: "20px" }}
+                    animate={{ opacity: 1, y: "0px" }}
+                    transition={{ duration: 0.2, delay: 1.8 }}
                   >
                     <div
                       style={{
-                        fontSize: "18px",
-                        fontWeight: "500",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "start",
+                        gap: "3px",
                       }}
                     >
-                      {language === "rtl" ? "د.ك" : "KD"}{" "}
-                      <span>
-                        {(
-                          (price + addonsPrice + variationPrice) *
-                          prodNumber
-                        )?.toLocaleString("en-KW", {
-                          minimumFractionDigits: 3,
-                          maximumFractionDigits: 3,
-                        })}
-                      </span>
+                      <div
+                        style={{
+                          fontSize: "18px",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {language === "rtl" ? "د.ك" : "KD"}{" "}
+                        <span>
+                          {(
+                            (price + addonsPrice + variationPrice) *
+                            prodNumber
+                          )?.toLocaleString("en-KW", {
+                            minimumFractionDigits: 3,
+                            maximumFractionDigits: 3,
+                          })}
+                        </span>
+                      </div>
+                      <div>
+                        {product?.prodyct_type != 3 ? (
+                          // <div className="details-container pt-2">
+                          //   <div className="product-outer-div">
+                          //     <div className="product-inner-div item-count-div">
+                          <div>
+                            {product?.quantity &&
+                            product?.product_status != 0 &&
+                            isRequired?.every((l) => l == true) ? (
+                              // <MultipleItems
+                              //   count={prodNumber}
+                              //   removeClick={onMinus}
+                              //   addClick={onPlus}
+                              // />
+                              <NumberCounter
+                                count={prodNumber}
+                                removeClick={onMinus}
+                                addClick={onPlus}
+                                gap="6px"
+                              />
+                            ) : null}
+                          </div>
+                        ) : //     </div>
+                        //   </div>
+                        // </div>
+                        null}
+                      </div>
                     </div>
-                    <div>
-                      {product?.prodyct_type != 3 ? (
-                        // <div className="details-container pt-2">
-                        //   <div className="product-outer-div">
-                        //     <div className="product-inner-div item-count-div">
-                        <div>
-                          {product?.quantity &&
-                          product?.product_status != 0 &&
-                          isRequired?.every((l) => l == true) ? (
-                            // <MultipleItems
-                            //   count={prodNumber}
-                            //   removeClick={onMinus}
-                            //   addClick={onPlus}
-                            // />
-                            <NumberCounter
-                              count={prodNumber}
-                              removeClick={onMinus}
-                              addClick={onPlus}
-                              gap="6px"
-                            />
-                          ) : null}
-                        </div>
-                      ) : //     </div>
-                      //   </div>
-                      // </div>
-                      null}
-                    </div>
-                  </div>
-                  {product?.quantity && product?.product_status != 0 ? (
-                    <div
-                      style={{
-                        padding: "15px 25px",
-                        backgroundColor:
-                          homePageDetails?.vendor_data?.vendor_color,
-                        color: "#fff",
-                        borderRadius: "50px",
-                        fontSize: language === "ltr" ? "15px" : "19px",
-                      }}
-                      onClick={(e) => checkApplication(e)}
-                    >
-                      {" "}
-                      {isRequired?.every((l) => l == true) &&
-                      variationRequired?.every((l) => l == true) ? (
-                        productvariation?.length == 0 ||
-                        (productvariationPrice?.[getKey(addedVariaton)] &&
-                          (productvariationPrice?.[getKey(addedVariaton)]
-                            ?.quantity > 0 ||
-                            productvariationPrice?.[getKey(addedVariaton)]
-                              ?.quantity == null)) ? (
-                          spinLoader ? (
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                gap: "10px",
-                              }}
-                            >
-                              <Spinner height="16px" size="2.5px" />
-                              <div>
-                                {`${
-                                  language === "ltr" ? "Processing" : "يعالج"
-                                }`}
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: "20px" }}
+                    animate={{ opacity: 1, y: "0px" }}
+                    transition={{ duration: 0.2, delay: 2 }}
+                  >
+                    {product?.quantity && product?.product_status != 0 ? (
+                      <div
+                        style={{
+                          padding: "15px 25px",
+                          backgroundColor:
+                            homePageDetails?.vendor_data?.vendor_color,
+                          color: "#fff",
+                          borderRadius: "50px",
+                          fontSize: language === "ltr" ? "15px" : "19px",
+                        }}
+                        onClick={(e) => checkApplication(e)}
+                      >
+                        {" "}
+                        {isRequired?.every((l) => l == true) &&
+                        variationRequired?.every((l) => l == true) ? (
+                          productvariation?.length == 0 ||
+                          (productvariationPrice?.[getKey(addedVariaton)] &&
+                            (productvariationPrice?.[getKey(addedVariaton)]
+                              ?.quantity > 0 ||
+                              productvariationPrice?.[getKey(addedVariaton)]
+                                ?.quantity == null)) ? (
+                            spinLoader ? (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "10px",
+                                }}
+                              >
+                                <Spinner height="16px" size="2.5px" />
+                                <div>
+                                  {`${
+                                    language === "ltr" ? "Processing" : "يعالج"
+                                  }`}
+                                </div>
                               </div>
-                            </div>
-                          ) : (
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "7px",
-                                cursor: "pointer",
-                              }}
-                            >
-                              <AddToBagIcon />
-                              <div>
-                                {`${
-                                  language === "ltr"
-                                    ? "Add to bag"
-                                    : "أضف إلى الحقيبة"
-                                }`}
-                              </div>
-                              {/* <span className="span-s">
+                            ) : (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "7px",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                <AddToBagIcon />
+                                <div>
+                                  {`${
+                                    language === "ltr"
+                                      ? "Add to bag"
+                                      : "أضف إلى الحقيبة"
+                                  }`}
+                                </div>
+                                {/* <span className="span-s">
                               &nbsp;&nbsp;
                               {parseFloat(
                                 (price + addonsPrice + variationPrice) *
@@ -1341,33 +1407,34 @@ const ProductDetails = ({
                             </span>
                             {`
               ${language === "rtl" ? "د.ك" : "KD"}`} */}
-                            </div>
+                              </div>
+                            )
+                          ) : (
+                            `${
+                              language === "ltr"
+                                ? "Variation Out of Stock"
+                                : "إنتهت الكمية المعروضة"
+                            }`
                           )
                         ) : (
                           `${
                             language === "ltr"
-                              ? "Variation Out of Stock"
-                              : "إنتهت الكمية المعروضة"
+                              ? "Select Required Addons"
+                              : "حدد الإضافات المطلوبة"
                           }`
-                        )
-                      ) : (
-                        `${
-                          language === "ltr"
-                            ? "Select Required Addons"
-                            : "حدد الإضافات المطلوبة"
-                        }`
-                      )}
-                    </div>
-                  ) : (
-                    <Box sx={{ alignSelf: "flex-start" }}>
-                      <SubHeadline
-                        enText={product?.status_label}
-                        arText={product?.status_label_ar}
-                        color="red"
-                        fontSize="17px"
-                      />
-                    </Box>
-                  )}
+                        )}
+                      </div>
+                    ) : (
+                      <Box sx={{ alignSelf: "flex-start" }}>
+                        <SubHeadline
+                          enText={product?.status_label}
+                          arText={product?.status_label_ar}
+                          color="red"
+                          fontSize="17px"
+                        />
+                      </Box>
+                    )}
+                  </motion.div>
                 </div>
               </div>
             )

@@ -6,6 +6,7 @@ import MapContainer from "./MapContainer";
 import GoogleMapComponent from "../MapComponent/GoogleMapComponent";
 import LeafletMapComponent from "../LeafletMapComponent/leafletMapComponent";
 import ClearIcon from "@mui/icons-material/Clear";
+import { motion } from "framer-motion";
 
 const drawerBleeding = 56;
 function BranchDetails({ branchId, setBranchId }) {
@@ -85,69 +86,96 @@ function BranchDetails({ branchId, setBranchId }) {
             <>
               {branch?.lat && branch?.lng ? (
                 // <GoogleMapComponent lat={branch?.lat} lng={branch?.lng} />
-                <LeafletMapComponent branch={branch} />
+                <motion.div
+                  initial={{ opacity: 0, y: "20px" }}
+                  animate={{ opacity: 1, y: "0px" }}
+                  transition={{ duration: 0.2, delay: 0.2 }}
+                >
+                  <LeafletMapComponent branch={branch} />
+                </motion.div>
               ) : null}
               <div className="branch-call-div">
-                <div className="branch-call-flex">
-                  <a
-                    href={`tel:${branch?.phone_number}`}
-                    className="branch-call text-center"
-                  >
-                    {language === "ltr" ? "Call Branch" : "الإتصال بالفرع"}
-                  </a>
-                  <a
-                    href={mapLink}
-                    className="text-center branch-call"
-                    target="_blank"
-                  >
-                    {language === "ltr" ? "Get Direction" : "العنوان"}
-                  </a>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: "20px" }}
+                  animate={{ opacity: 1, y: "0px" }}
+                  transition={{ duration: 0.2, delay: 0.4 }}
+                >
+                  <div className="branch-call-flex">
+                    <a
+                      href={`tel:${branch?.phone_number}`}
+                      className="branch-call text-center"
+                    >
+                      {language === "ltr" ? "Call Branch" : "الإتصال بالفرع"}
+                    </a>
+                    <a
+                      href={mapLink}
+                      className="text-center branch-call"
+                      target="_blank"
+                    >
+                      {language === "ltr" ? "Get Direction" : "العنوان"}
+                    </a>
+                  </div>
+                </motion.div>
               </div>
               <div className="details-container pt-2">
                 <div className="branch-inner-div">
-                  <p className="branch-big-text">
-                    <span>
-                      <i className="fa fa-circle"></i>{" "}
-                      {language === "ltr" ? "Open Till" : "مفتوح حتى"}&nbsp;&nbsp;
-                    </span>
-                    {moment(branch?.office_end_time, "HH:mm:ss")
-                      .locale("en")
-                      .format("hh:mm") +
-                      moment(branch?.office_end_time, "HH:mm:ss")
-                        .locale(language == "ltr" ? "en" : "ar-sa")
-                        .format(" A")}
-                  </p>
+                  <motion.div
+                    initial={{ opacity: 0, y: "20px" }}
+                    animate={{ opacity: 1, y: "0px" }}
+                    transition={{ duration: 0.2, delay: 0.6 }}
+                  >
+                    <p className="branch-big-text">
+                      <span>
+                        <i className="fa fa-circle"></i>{" "}
+                        {language === "ltr" ? "Open Till" : "مفتوح حتى"}
+                        &nbsp;&nbsp;
+                      </span>
+                      {moment(branch?.office_end_time, "HH:mm:ss")
+                        .locale("en")
+                        .format("hh:mm") +
+                        moment(branch?.office_end_time, "HH:mm:ss")
+                          .locale(language == "ltr" ? "en" : "ar-sa")
+                          .format(" A")}
+                    </p>
+                  </motion.div>
                 </div>
               </div>
               <div className="details-container">
-                <div className="branch-inner-div branch-text-flex">
-                  <p className="branch-small-text">
-                    {language === "ltr" ? "Sunday - Saturday" : "الأحد - السبت"}
-                  </p>
-                  <p
-                    className="branch-small-text"
-                    style={{
-                      direction: "ltr",
-                    }}
-                  >
-                    {`${
-                      moment(branch?.office_start_time, "HH:mm:ss")
-                        .locale("en")
-                        .format("hh:mm") +
-                      moment(branch?.office_start_time, "HH:mm:ss")
-                        .locale(language == "ltr" ? "en" : "ar-sa")
-                        .format(" A")
-                    } - ${
-                      moment(branch?.office_end_time, "HH:mm:ss")
-                        .locale("en")
-                        .format("hh:mm") +
-                      moment(branch?.office_end_time, "HH:mm:ss")
-                        .locale(language == "ltr" ? "en" : "ar-sa")
-                        .format(" A")
-                    }`}
-                  </p>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: "20px" }}
+                  animate={{ opacity: 1, y: "0px" }}
+                  transition={{ duration: 0.2, delay: 0.8 }}
+                >
+                  <div className="branch-inner-div branch-text-flex">
+                    <p className="branch-small-text">
+                      {language === "ltr"
+                        ? "Sunday - Saturday"
+                        : "الأحد - السبت"}
+                    </p>
+                    <p
+                      className="branch-small-text"
+                      style={{
+                        direction: "ltr",
+                      }}
+                    >
+                      {`${
+                        moment(branch?.office_start_time, "HH:mm:ss")
+                          .locale("en")
+                          .format("hh:mm") +
+                        moment(branch?.office_start_time, "HH:mm:ss")
+                          .locale(language == "ltr" ? "en" : "ar-sa")
+                          .format(" A")
+                      } - ${
+                        moment(branch?.office_end_time, "HH:mm:ss")
+                          .locale("en")
+                          .format("hh:mm") +
+                        moment(branch?.office_end_time, "HH:mm:ss")
+                          .locale(language == "ltr" ? "en" : "ar-sa")
+                          .format(" A")
+                      }`}
+                    </p>
+                  </div>
+                </motion.div>
               </div>
               <div className="details-container cart-blank-space"></div>
             </>
