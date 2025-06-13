@@ -7,7 +7,7 @@ import ProductCarousel from "@/components/ProductPageDetails/ProductCarousel/pro
 import ProductDetails from "@/components/ProductPageDetails/ProductDetails/ProductDetails";
 import { AppContext } from "@/context/AppContext";
 import { Box, Fab, Grid } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import UploadIcon from "@mui/icons-material/Upload";
@@ -19,6 +19,7 @@ const Product = (props) => {
   const { homePageDetails, language } = useContext(AppContext);
   const [product, setProduct] = useState({});
   const [addedVariaton, setAddedVariation] = useState([]);
+  const [productImages, setProductImages] = useState([]);
   const router = useRouter();
 
   const checkSize = () => {
@@ -39,6 +40,18 @@ const Product = (props) => {
         });
     }
   };
+
+  useEffect(() => {
+    if (props?.data) {
+      setProductImages(
+        [
+          props?.data?.productvariationPrice?.[addedVariaton.toString()]
+            ?.image || props?.data?.image,
+          ...(props?.data?.product_images || []),
+        ].filter(Boolean)
+      );
+    }
+  }, [props?.data, addedVariaton]);
 
   const renderProductLayout = () => {
     switch (homePageDetails?.productLayout) {
@@ -119,10 +132,7 @@ const Product = (props) => {
                       }}
                     >
                       <Box sx={{ direction: "ltr" }}>
-                        <ProductCarousel
-                          product={props?.data}
-                          addedVariaton={addedVariaton}
-                        />
+                        <ProductCarousel productImages={productImages} />
                       </Box>
                       <Box
                         sx={{
@@ -163,10 +173,7 @@ const Product = (props) => {
           <>
             <VerticalProductGrid>
               <BackButton variant="dark" />
-              <ProductCarousel
-                product={props?.data}
-                addedVariaton={addedVariaton}
-              />
+              <ProductCarousel productImages={productImages} />
               <ProductDetails
                 product={props?.data}
                 addon={props?.addons}

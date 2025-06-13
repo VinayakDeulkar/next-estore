@@ -92,11 +92,11 @@ const Navbar = ({ isScrollingUp }) => {
             justifyContent: "center",
           }}
         >
-          <Box sx={{ padding: "20px" }}>
+          <Box sx={{ padding: "10px" }}>
             {isScrollingUp ? (
               <Image
-                height={40}
-                width={40}
+                height={30}
+                width={30}
                 style={{ borderRadius: "5px" }}
                 src={
                   language === "ltr"

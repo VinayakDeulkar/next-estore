@@ -70,7 +70,7 @@ const Layout11 = ({
           position: "sticky",
           background: "#fff",
           marginBottom: "20px",
-          padding: "20px 0",
+          padding: "10px 0",
           paddingBottom: "0",
           top: window.innerWidth < 990 ? "0" : "50px",
           zIndex: 100,

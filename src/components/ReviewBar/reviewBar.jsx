@@ -8,7 +8,7 @@ import EstoreBag from "@/SVGs/EstoreBag";
 import { motion } from "framer-motion";
 
 const ReviewBar = () => {
-  const { cart, homePageDetails } = useContext(AppContext);
+  const { cart, homePageDetails, language } = useContext(AppContext);
   const router = useRouter();
   const [isOverlappingFooter, setIsOverlappingFooter] = useState(false);
 
@@ -44,97 +44,109 @@ const ReviewBar = () => {
       <Box
         sx={{
           position: "fixed",
-          bottom: "20px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          zIndex: "100",
-          width:
-            window.innerWidth > 990
-              ? "calc(37.5% - 80px)"
-              : "calc(100% - 40px)",
+          bottom: "0px",
+          padding: window.innerWidth > 990 ? "20px" : "10px",
+          width: window.innerWidth > 990 ? "calc(37.5%)" : "calc(100% - 5px)",
           background: isOverlappingFooter
             ? "rgba(255, 255, 255, 0.6)"
-            : homePageDetails?.vendor_data?.vendor_color,
-          minHeight: "53px",
-          // color: isOverlappingFooter ? "#000" : "#fff",
-          borderRadius: "30px",
-          padding: "15px 25px",
+            : "transparent",
+          ...(language === "ltr"
+            ? { left: 0, paddingRight: "10px" }
+            : { right: 0, paddingLeft: "10px" }),
+          ...(window.innerWidth < 990 && {
+            paddingBottom: "20px",
+            paddingTop: "20px",
+          }),
         }}
-        component="button"
-        onClick={() => {
-          window.innerWidth > 990
-            ? router.push("/checkout-desktop")
-            : router.push("/review");
-        }}
-        id="reviewOrderButton"
       >
-        <Grid container>
-          <Grid
-            item
-            md={4}
-            sm={4}
-            lg={4}
-            xs={3}
-            sx={{
-              textAlign: "start",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            <Box
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            zIndex: "100",
+            width: "100%",
+            background: homePageDetails?.vendor_data?.vendor_color,
+            minHeight: "53px",
+            // color: isOverlappingFooter ? "#000" : "#fff",
+            borderRadius: "30px",
+            padding: "15px 25px",
+          }}
+          component="button"
+          onClick={() => {
+            window.innerWidth > 990
+              ? router.push("/checkout-desktop")
+              : router.push("/review");
+          }}
+          id="reviewOrderButton"
+        >
+          <Grid container>
+            <Grid
+              item
+              md={4}
+              sm={4}
+              lg={4}
+              xs={3}
               sx={{
-                width: "20px",
+                textAlign: "start",
                 display: "flex",
                 alignItems: "center",
-                textAlign: "center",
+                gap: "10px",
               }}
             >
+              <Box
+                sx={{
+                  width: "20px",
+                  display: "flex",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <SubHeadline
+                  enText={cart?.cartCount}
+                  arText={cart?.cartCount}
+                  color={"#fff"}
+                />
+              </Box>
+              <EstoreBag color={"#fff"} />
+            </Grid>
+            <Grid item md={4} sm={4} lg={4} xs={5}>
               <SubHeadline
-                enText={cart?.cartCount}
-                arText={cart?.cartCount}
-                color={isOverlappingFooter ? "#000" : "#fff"}
+                enText={"Review Order"}
+                arText={"مراجعة الطلب"}
+                color={"#fff"}
               />
-            </Box>
-            <EstoreBag color={isOverlappingFooter ? "#000" : "#fff"} />
-          </Grid>
-          <Grid item md={4} sm={4} lg={4} xs={5}>
-            <SubHeadline
-              enText={"Review Order"}
-              arText={"مراجعة الطلب"}
-              color={isOverlappingFooter ? "#000" : "#fff"}
-            />
-          </Grid>
-          <Grid item md={4} sm={4} lg={4} xs={4} sx={{ textAlign: "end" }}>
-            {console.log(cart?.subTotal.length, "cart?.subTotal")}
-            <SubHeadline
-              enText={
-                cart?.subTotal.length > 3
-                  ? `${Number(cart.subTotal).toLocaleString("en-KW")} KD`
-                  : `${
-                      cart?.subTotal
-                        ? Number(cart.subTotal).toLocaleString("en-KW", {
-                            minimumFractionDigits: 3,
-                            maximumFractionDigits: 3,
-                          })
-                        : "0.000"
-                    }
+            </Grid>
+            <Grid item md={4} sm={4} lg={4} xs={4} sx={{ textAlign: "end" }}>
+              {console.log(cart?.subTotal.length, "cart?.subTotal")}
+              <SubHeadline
+                enText={
+                  cart?.subTotal.length > 3
+                    ? `${Number(cart.subTotal).toLocaleString("en-KW")} KD`
+                    : `${
+                        cart?.subTotal
+                          ? Number(cart.subTotal).toLocaleString("en-KW", {
+                              minimumFractionDigits: 3,
+                              maximumFractionDigits: 3,
+                            })
+                          : "0.000"
+                      }
                KD`
-              }
-              arText={`${
-                cart?.subTotal
-                  ? Number(cart.subTotal).toLocaleString("en-KW", {
-                      minimumFractionDigits: 3,
-                      maximumFractionDigits: 3,
-                    })
-                  : "0.000"
-              }
+                }
+                arText={`${
+                  cart?.subTotal
+                    ? Number(cart.subTotal).toLocaleString("en-KW", {
+                        minimumFractionDigits: 3,
+                        maximumFractionDigits: 3,
+                      })
+                    : "0.000"
+                }
                د.ك`}
-              color={isOverlappingFooter ? "#000" : "#fff"}
-            />
+                color={"#fff"}
+              />
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Box>
     </motion.div>
   );

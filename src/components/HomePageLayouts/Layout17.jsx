@@ -17,6 +17,8 @@ import CategoryCard from "../CategoryCard/categoryCard";
 import HorizontalCard from "../HorizontalCard/horizontalCard";
 import { AppContext } from "@/context/AppContext";
 import $ from "jquery";
+import GridIcon from "@/assets/icons/GridIcon";
+import ListGoogleIcon from "@/assets/icons/ListGoogleIcon";
 
 const Layout17 = ({
   categories,
@@ -25,8 +27,11 @@ const Layout17 = ({
   categorynow,
 }) => {
   const router = useRouter();
-  const { layout17ToggleView, handleSetLayout17ToggleViewChange } =
-    useContext(AppContext);
+  const {
+    layout17ToggleView,
+    handleSetLayout17ToggleViewChange,
+    homePageDetails,
+  } = useContext(AppContext);
   const [expendedList, setExpendedList] = useState(
     categories.map((cate) => cate.category_id)
   );
@@ -78,7 +83,7 @@ const Layout17 = ({
           overflowX: "scroll",
           position: "sticky",
           background: "#fff",
-          padding: "20px 0",
+          padding: "10px 0",
           paddingBottom: "0",
           top: window.innerWidth < 990 ? "0" : "50px",
           zIndex: 100,
@@ -89,6 +94,7 @@ const Layout17 = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "end",
+            height: "35px",
             width: "auto",
           }}
         >
@@ -104,9 +110,11 @@ const Layout17 = ({
             }
           >
             {layout17ToggleView ? (
-              <WindowIcon />
+              <GridIcon fill={homePageDetails?.vendor_data?.vendor_color} />
             ) : (
-              <ListIcon sx={{ fontSize: 30 }} />
+              <ListGoogleIcon
+                fill={homePageDetails?.vendor_data?.vendor_color}
+              />
             )}
           </div>
         </div>

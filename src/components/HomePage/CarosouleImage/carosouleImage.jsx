@@ -35,7 +35,7 @@ const CarouselImage = ({ mobile = false }) => {
         },
         width: "100%",
         height: carouselHeight(),
-        overflow: "hidden",
+        overflowY: "hidden",
       }}
     >
       <Carousel

@@ -1,84 +1,14 @@
-// import { Box } from "@mui/material";
-// import { Carousel } from "react-responsive-carousel";
-
-// const ProductCarousel = ({ product, addedVariaton }) => {
-//   return (
-//     <Carousel
-//       autoPlay={product?.product_images?.length}
-//       showThumbs={false}
-//       showStatus={false}
-//       showIndicators={false}
-//       showArrows={false}
-//       swipeable={
-//         !(
-//           product?.product_images?.length != 0 &&
-//           !product?.productvariationPrice?.[addedVariaton.toString()]?.image
-//         )
-//       }
-//       infiniteLoop
-//       interval={3000}
-//       transitionTime={700}
-//       emulateTouch
-//       stopOnHover
-//       className="carouselImage"
-//       animationHandler={"fade"}
-//     >
-//       <Box
-//         className="product-owl-img"
-//       >
-//         <img
-//           loading="lazy"
-//           style={{
-//             height: "100%",
-//           }}
-//           src={`${
-//             product?.productvariationPrice?.[addedVariaton.toString()]?.image
-//               ? product?.productvariationPrice?.[addedVariaton.toString()]
-//                   ?.image
-//               : product?.image
-//           }`}
-//           alt={product?.image}
-//         />
-//       </Box>
-
-//       {product?.product_images?.length != 0 &&
-//       !product?.productvariationPrice?.[addedVariaton.toString()]?.image
-//         ? product?.product_images?.map((i, k) => (
-//             <Box key={k}>
-//               <img
-//                 src={`${i}`}
-//                 alt={i}
-//                 style={{
-//                   height: "100%",
-//                 }}
-//               />
-//             </Box>
-//           ))
-//         : null}
-//     </Carousel>
-//   );
-// };
-
-// export default ProductCarousel;
-
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Box } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const ProductCarousel = ({ product, addedVariaton }) => {
+const ProductCarousel = ({ productImages }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Get all images to display
-  const allImages = [
-    product?.productvariationPrice?.[addedVariaton.toString()]?.image ||
-      product?.image,
-    ...(product?.product_images || []),
-  ].filter(Boolean);
 
   const handleCarouselChange = (index) => {
-    console.log(index, "index");
     setActiveIndex(index);
   };
   return (
@@ -87,21 +17,23 @@ const ProductCarousel = ({ product, addedVariaton }) => {
       <Carousel
         selectedItem={activeIndex}
         onChange={handleCarouselChange}
-        autoPlay={allImages.length > 1}
+        autoPlay={productImages.length > 1}
         showThumbs={false}
         showStatus={false}
         showIndicators={false}
         showArrows={false}
-        swipeable={allImages.length > 1}
+        swipeable={false}
         infiniteLoop={true}
         interval={3000}
         transitionTime={700}
+        preventMovementUntilSwipeScrollTolerance
+        stopSwipingHandler={() => {}}
         emulateTouch={false}
         stopOnHover
         className="carouselImage"
         animationHandler={"fade"}
       >
-        {allImages.map((image, index) => (
+        {productImages.map((image, index) => (
           <Box key={index} className="product-owl-img">
             <img
               loading="lazy"
@@ -118,7 +50,7 @@ const ProductCarousel = ({ product, addedVariaton }) => {
       </Carousel>
 
       {/* Thumbnail Navigation */}
-      {allImages?.length > 1 && (
+      {productImages?.length > 1 && (
         <Box
           sx={{
             display: "flex",
@@ -128,7 +60,7 @@ const ProductCarousel = ({ product, addedVariaton }) => {
             gap: 1,
           }}
         >
-          {allImages.map((_, index) => (
+          {productImages.map((_, index) => (
             <Box
               key={index}
               sx={{

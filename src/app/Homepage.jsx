@@ -41,28 +41,28 @@ const Homepage = () => {
 
   const [lastScrollTop, setLastScrollTop] = useState(0);
 
-  const handleScroll = () => {
-    const scrollTop = scrollRef.current.scrollTop;
-    const top = scrollRef.current.getBoundingClientRect();
-    console.log(scrollTop, "scrollTop");
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // If not intersecting, show the logo
+        setIsScrollingUp(!entry.isIntersecting);
+      },
+      {
+        root: null, // viewport
+        threshold: 0, // trigger when even a small part is out of view
+      }
+    );
 
-    if (top < 0) {
-      setIsScrollingUp(true); // User is scrolling up
-    } else {
-      setIsScrollingUp(false); // User is scrolling down
+    if (scrollRef.current) {
+      observer.observe(scrollRef.current);
     }
 
-    setLastScrollTop(scrollTop);
-  };
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    scrollContainer.addEventListener("scroll", handleScroll);
-
     return () => {
-      scrollContainer.removeEventListener("scroll", handleScroll);
+      if (scrollRef.current) {
+        observer.unobserve(scrollRef.current);
+      }
     };
-  }, [lastScrollTop]);
+  }, []);
 
   return (
     <Box
@@ -77,7 +77,6 @@ const Homepage = () => {
             padding: checkSize() ? "0 40px" : "0 20px",
             width: checkSize() ? "100%" : "100vw",
           }}
-          ref={scrollRef}
         >
           <Box
             sx={{
@@ -85,8 +84,17 @@ const Homepage = () => {
             }}
           >
             {window?.innerWidth < 991 ? (
-              <Box sx={{ direction: "ltr", margin: "0 -22px" }}>
-                <Box sx={{ position: "relative" }}>
+              <Box
+                sx={{
+                  direction: "ltr",
+                  margin: "0 -22px",
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "relative",
+                  }}
+                >
                   <div
                     style={{
                       position: "absolute",
@@ -175,7 +183,9 @@ const Homepage = () => {
               </Box>
             ) : null}
             {checkDrawer() ? <BottomDrawer type={"home"} /> : null}
-            <VendorBox />
+            <Box ref={scrollRef}>
+              <VendorBox />
+            </Box>
             <HomePageLayouts />
           </Box>
         </Box>

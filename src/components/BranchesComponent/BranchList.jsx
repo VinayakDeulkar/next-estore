@@ -25,8 +25,8 @@ function BranchList({ setBranchId }) {
       >
         <ul className="branch-list">
           {branchs?.map((branch, i) => (
-            <div style={{ margin: "0 15px" }}>
-              <li className="branch-list-item" key={i}>
+            <div style={{ margin: "0 15px" }} key={i}>
+              <li className="branch-list-item">
                 <Box
                   component="a"
                   onClick={() => setBranchId(i)}
