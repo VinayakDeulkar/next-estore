@@ -78,7 +78,10 @@ const Layout17 = ({
           overflowX: "scroll",
           position: "sticky",
           background: "#fff",
-          marginBottom: "20px",
+          padding: "20px 0",
+          paddingBottom: "0",
+          top: window.innerWidth < 990 ? "0" : "50px",
+          zIndex: 100,
         }}
       >
         <div
@@ -87,7 +90,6 @@ const Layout17 = ({
             alignItems: "center",
             justifyContent: "end",
             width: "auto",
-            marginBottom: "25px",
           }}
         >
           <div
@@ -136,6 +138,9 @@ const Layout17 = ({
             padding: 0,
             "&.Mui-expanded": {
               margin: "25px 0",
+            },
+            "&.MuiPaper-elevation": {
+              marginTop: 0,
             },
           }}
           key={category?.category_id}

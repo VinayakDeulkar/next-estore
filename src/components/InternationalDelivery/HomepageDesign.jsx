@@ -26,8 +26,8 @@ const HomepageDesign = ({ handleCountryChange }) => {
     ) {
       (async () => {
         const response = await getVendorCountries({
-          vendor_id: homePageDetails?.vendor_data.vendors_id,
-          ecom_vendor_id: homePageDetails?.vendor_data.ecommerce_vendor_id,
+          vendor_id: homePageDetails?.vendor_data?.vendors_id,
+          ecom_vendor_id: homePageDetails?.vendor_data?.ecommerce_vendor_id,
           vendor_slug: vendorSlug?.data?.ecom_url_slug,
         });
         if (response.status) {

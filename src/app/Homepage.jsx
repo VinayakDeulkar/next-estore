@@ -1,12 +1,10 @@
 "use client";
 import VendorBox from "@/components/assetBoxDesign/vendorBox/vendorBox";
 import BottomDrawer from "@/components/BottomDrawer/bottomDrawer";
-import EstoreLayout1 from "@/components/EstoreLayouts/estoreLayout1";
-import EstoreLayout2 from "@/components/EstoreLayouts/estoreLayout2";
 import CarouselImage from "@/components/HomePage/CarosouleImage/carosouleImage";
 import HomePageLayouts from "@/components/HomePageLayouts";
 import { AppContext } from "@/context/AppContext";
-import { Box, Fab, Grid } from "@mui/material";
+import { Box, Fab } from "@mui/material";
 import { useContext, useEffect, useRef, useState } from "react";
 import BurgerIcon from "@/SVGs/BurgerIcon";
 import MenuDrawer from "@/components/common/MenuDrawer/menuDrawer";
@@ -66,162 +64,144 @@ const Homepage = () => {
     };
   }, [lastScrollTop]);
 
-  const estoreLayout = () => {
-    switch (homePageDetails?.estoreLayout) {
-      case "1":
-        return (
+  return (
+    <Box
+      sx={{
+        width: "100vw",
+      }}
+    >
+      <Box sx={checkSize() ? { width: "37.5%" } : {}}>
+        {checkSize() && <HeaderBox isScrollingUp={isScrollingUp} />}
+        <Box
+          sx={{
+            padding: checkSize() ? "0 40px" : "0 20px",
+            width: checkSize() ? "100%" : "100vw",
+          }}
+          ref={scrollRef}
+        >
           <Box
             sx={{
-              height: "100vh",
-              width: "100vw",
-              overflow: "hidden",
-              overflowY: "auto",
+              position: "relative",
             }}
           >
-            <Grid container sx={{ width: "100vw" }}>
-              <Grid item sm={12} md={12} lg={4.5}>
-                {checkSize() && <HeaderBox isScrollingUp={isScrollingUp} />}
-                <Box
-                  sx={{
-                    height: checkSize() ? "calc(100dvh - 50px)" : "100%",
-                    overflow: "auto",
-                    padding: checkSize() ? "0 40px" : "0 20px",
-                    width: checkSize() ? "100%" : "100vw",
-                  }}
-                  ref={scrollRef}
-                >
-                  <Box
-                    sx={{
-                      position: "relative",
+            {window?.innerWidth < 991 ? (
+              <Box sx={{ direction: "ltr", margin: "0 -22px" }}>
+                <Box sx={{ position: "relative" }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "16px",
+                      left: language === "ltr" && "16px",
+                      right: language !== "ltr" && "16px",
+                      zIndex: 50,
                     }}
                   >
-                    {window?.innerWidth < 991 ? (
-                      <Box sx={{ direction: "ltr", margin: "0 -22px" }}>
-                        <Box sx={{ position: "relative" }}>
-                          <div
-                            style={{
-                              position: "absolute",
-                              top: "16px",
-                              left: language === "ltr" && "16px",
-                              right: language !== "ltr" && "16px",
-                              zIndex: 50,
-                            }}
-                          >
-                            <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ duration: 0.2 }}
-                            >
-                              <Fab
-                                size="small"
-                                sx={{
-                                  boxShadow: "none",
-                                  backgroundColor: "white",
-                                  color: "black",
-                                }}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  handleSideMenuDrawer(true);
-                                }}
-                              >
-                                <BurgerIcon />
-                              </Fab>
-                            </motion.div>
-                          </div>
-                          <div
-                            style={{
-                              position: "absolute",
-                              top: "16px",
-                              right: language === "ltr" && "16px",
-                              left: language !== "ltr" && "16px",
-                              zIndex: 50,
-                            }}
-                          >
-                            <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ duration: 0.2 }}
-                            >
-                              <Fab
-                                size="small"
-                                sx={{
-                                  boxShadow: "none",
-                                  backgroundColor: "white",
-                                  fontFamily:
-                                    language === "rtl"
-                                      ? "SFT Schrifted Sans TRIAL Var"
-                                      : "Orleen",
-                                  color: "#000",
-                                  fontSize:
-                                    language === "ltr" ? "14px" : "12px",
-                                }}
-                                onClick={() => {
-                                  document
-                                    .getElementsByTagName("html")[0]
-                                    .setAttribute(
-                                      "dir",
-                                      language.split("").reverse().join("")
-                                    );
-                                  sessionStorage.setItem(
-                                    "language",
-                                    language.split("").reverse().join("")
-                                  );
-                                  handleLanguageChange(
-                                    language.split("").reverse().join("")
-                                  );
-                                }}
-                              >
-                                {language === "rtl" ? "En" : "عربي"}
-                              </Fab>
-                            </motion.div>
-                          </div>
-                        </Box>
-                        <MenuDrawer />
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <CarouselImage mobile={true} />
-                        </motion.div>
-                      </Box>
-                    ) : null}
-                    {checkDrawer() ? <BottomDrawer type={"home"} /> : null}
-                    <VendorBox />
-                    <HomePageLayouts />
-                  </Box>
-                </Box>
-              </Grid>
-              {window?.innerWidth > 990 ? (
-                <Grid
-                  item
-                  sm={12}
-                  md={12}
-                  lg={7.5}
-                  sx={{ padding: "10px", direction: "ltr" }}
-                >
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.2, delay: 0.8 }}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Fab
+                        size="small"
+                        sx={{
+                          boxShadow: "none",
+                          backgroundColor: "white",
+                          color: "black",
+                        }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleSideMenuDrawer(true);
+                        }}
+                      >
+                        <BurgerIcon />
+                      </Fab>
+                    </motion.div>
+                  </div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "16px",
+                      right: language === "ltr" && "16px",
+                      left: language !== "ltr" && "16px",
+                      zIndex: 50,
+                    }}
                   >
-                    <CarouselImage />
-                  </motion.div>
-                </Grid>
-              ) : null}
-            </Grid>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Fab
+                        size="small"
+                        sx={{
+                          boxShadow: "none",
+                          backgroundColor: "white",
+                          fontFamily:
+                            language === "rtl"
+                              ? "SFT Schrifted Sans TRIAL Var"
+                              : "Orleen",
+                          color: "#000",
+                          fontSize: language === "ltr" ? "14px" : "12px",
+                        }}
+                        onClick={() => {
+                          document
+                            .getElementsByTagName("html")[0]
+                            .setAttribute(
+                              "dir",
+                              language.split("").reverse().join("")
+                            );
+                          sessionStorage.setItem(
+                            "language",
+                            language.split("").reverse().join("")
+                          );
+                          handleLanguageChange(
+                            language.split("").reverse().join("")
+                          );
+                        }}
+                      >
+                        {language === "rtl" ? "En" : "عربي"}
+                      </Fab>
+                    </motion.div>
+                  </div>
+                </Box>
+                <MenuDrawer />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <CarouselImage mobile={true} />
+                </motion.div>
+              </Box>
+            ) : null}
+            {checkDrawer() ? <BottomDrawer type={"home"} /> : null}
+            <VendorBox />
+            <HomePageLayouts />
           </Box>
-        );
-
-      case "2":
-        return <EstoreLayout2 />;
-
-      default:
-        break;
-    }
-  };
-
-  return estoreLayout();
+        </Box>
+      </Box>
+      {window?.innerWidth > 990 ? (
+        <Box
+          sx={{
+            padding: "10px",
+            direction: "ltr",
+            position: "fixed",
+            width: "62.5%",
+            top: 0,
+            ...(language === "ltr" ? { right: 0 } : { left: 0 }),
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2, delay: 0.8 }}
+          >
+            <CarouselImage />
+          </motion.div>
+        </Box>
+      ) : null}
+    </Box>
+  );
 };
 
 export default Homepage;

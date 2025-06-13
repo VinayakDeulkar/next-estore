@@ -4,7 +4,7 @@ import MenuDrawer from "../MenuDrawer/menuDrawer";
 
 const HeaderBox = ({ isScrollingUp }) => {
   return (
-    <Box sx={{ position: "sticky" }}>
+    <Box sx={{ position: "sticky", top: 0, zIndex: 100 }}>
       <MenuDrawer />
       <Navbar isScrollingUp={isScrollingUp} />
     </Box>

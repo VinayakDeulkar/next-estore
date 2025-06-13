@@ -187,7 +187,7 @@ export default function NumberCounter({
   addClick,
   removeClick,
   loading = false,
-  gap = "2px"
+  gap = "2px",
 }) {
   const [direction, setDirection] = useState(1);
   const [prevCount, setPrevCount] = useState(count);
@@ -224,7 +224,10 @@ export default function NumberCounter({
     <div className="flex items-center justify-center">
       <motion.div
         className="flex items-center px-[5px] py-[1px] rounded-full relative"
-        style={{ backgroundColor: homePageDetails?.vendor_data?.vendor_color, gap: gap }}
+        style={{
+          backgroundColor: homePageDetails?.vendor_data?.vendor_color,
+          gap: gap,
+        }}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
@@ -248,11 +251,7 @@ export default function NumberCounter({
                 alignItems: "center",
               }}
             >
-              <Spinner
-                height="13px"
-                size="2px"
-                color={"#fff"}
-              />
+              <Spinner height="13px" size="2px" color={"#fff"} />
             </div>
           ) : (
             <AnimatePresence custom={direction} mode="popLayout">
