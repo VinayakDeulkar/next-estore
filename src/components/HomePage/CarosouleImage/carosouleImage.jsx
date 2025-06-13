@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { motion } from "framer-motion";
 
-const CarouselImage = ({ mobile = false }) => {
+const CarouselImage = ({ mobile = false, hasDelay }) => {
   const { homePageDetails } = useContext(AppContext);
 
   const carouselHeight = () => {
@@ -57,7 +57,7 @@ const CarouselImage = ({ mobile = false }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2, delay: 2 }}
+            transition={{ duration: 0.2, ...(hasDelay && { delay: 1 }) }}
             key={image?.id}
           >
             <Box sx={{ borderRadius: mobile ? "0" : "13.81px" }}>

@@ -174,7 +174,7 @@ const Product = (props) => {
                   lg={7.5}
                   sx={{ padding: "10px", direction: "ltr" }}
                 >
-                  <CarouselImage />
+                  <CarouselImage hasDelay={true} />
                 </Grid>
               ) : null}
             </Grid>
