@@ -13,7 +13,11 @@ const NoVendor = () => {
         alignItems: "center",
       }}
     >
-      <Image src={"images/underConstruction.png"} />
+      <Image
+        src={"/images/underConstruction.png"}
+        width={window.innerWidth - 50}
+        height={window.innerHeight - 50}
+      />
     </Box>
   );
 };

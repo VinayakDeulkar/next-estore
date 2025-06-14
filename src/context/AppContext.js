@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import { LoadScript } from "@react-google-maps/api";
 import NoVendor from "@/components/NoVendor/noVendor";
 import Customloader from "@/components/customLoader/customloader";
+import ErrorPage from "@/components/errorPage/ErrorPage";
 
 export const AppContext = createContext();
 
@@ -513,7 +514,11 @@ export const AppProvider = ({
             <SnackbarProvider
               anchorOrigin={{ horizontal: "left", vertical: "top" }}
             >
-              {children}
+              <ErrorPage
+                error={!(vendorSlugResponse.status && homePageResponse.status)}
+              >
+                {children}
+              </ErrorPage>
             </SnackbarProvider>
           </LoadScript>
         </Box>

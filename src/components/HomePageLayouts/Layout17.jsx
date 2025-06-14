@@ -33,7 +33,7 @@ const Layout17 = ({
     homePageDetails,
   } = useContext(AppContext);
   const [expendedList, setExpendedList] = useState(
-    categories.map((cate) => cate.category_id)
+    categories?.map((cate) => cate.category_id)
   );
   const [expanded, setExpanded] = useState(false);
 
@@ -46,7 +46,7 @@ const Layout17 = ({
   };
 
   useEffect(() => {
-    setcategorynow(() => categories[0]?.category_name);
+    setcategorynow(() => categories?.[0]?.category_name);
   }, []);
 
   const onCategorySelect = (category, k) => {

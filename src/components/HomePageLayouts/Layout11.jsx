@@ -22,7 +22,7 @@ const Layout11 = ({
 }) => {
   const router = useRouter();
   const [expendedList, setExpendedList] = useState(
-    categories.map((cate) => cate.category_id)
+    categories?.map((cate) => cate.category_id)
   );
 
   const handleAccordionClick = (category_id) => {
